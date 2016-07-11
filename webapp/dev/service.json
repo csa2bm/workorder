@@ -1,0 +1,8 @@
+{
+	"logon": true,
+	"host": "hcpms-s0009526197trial.hanatrial.ondemand.com",
+	"port": "443",
+	"https": "true",
+	"appID": "com.twobm.mobileworkorder",
+	"network": true
+}

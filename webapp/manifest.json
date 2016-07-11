@@ -1,0 +1,145 @@
+{
+	"_version": "1.1.0",
+	"sap.app": {
+		"_version": "1.1.0",
+		"id": "com.twobm.mobileworkorder",
+		"type": "application",
+		"resources": "resources.json",
+		"i18n": "i18n/messageBundle.properties",
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"ach": "ach",
+		"dataSources": {
+			"mainService": {
+				"uri": "/sap/opu/odata/tobmas/WORKORDER_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml"
+				}
+			}
+		},
+		"offline": true,
+		"sourceTemplate": {
+			"id": "fioritemplate.UI5masterDetailKapselOffline",
+			"version": "1.32.4"
+		}
+	},
+	"sap.ui": {
+		"_version": "1.1.0",
+		"technology": "UI5",
+		"icons": {
+			"icon": "sap-icon://detail-view",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": ["sap_hcb", "sap_bluecrystal"]
+	},
+	"sap.ui5": {
+		"_version": "1.1.0",
+		"rootView": {
+			"viewName": "com.twobm.mobileworkorder.components.app.App",
+			"type": "XML",
+			"id": "mobileWorkOrderApp"
+		},
+		"dependencies": {
+			"minUI5Version": "1.30.0",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {},
+				"sap.ushell": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "com.twobm.mobileworkorder.i18n.messageBundle"
+				}
+			}
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"controlId": "mobileWorkOrderApp",
+				"controlAggregation": "pages",
+				"transition": "slide",
+				"bypassed": {
+					"target": "notFound"
+				}
+			},
+			"routes": [{
+				"pattern": "",
+				"name": "workOrderList",
+				"target": "workOrderList"
+			}, {
+				"pattern": "workOrderDetails/{workOrderId}",
+				"name": "workOrderDetails",
+				"target": "workOrderDetails"
+			}],
+			"targets": {
+				"workOrderList": {
+					"viewPath": "com.twobm.mobileworkorder.components.workOrderList",
+					"viewName": "WorkOrderList",
+					"viewLevel": 1
+				},
+				"notFound": {
+					"viewPath": "com.twobm.mobileworkorder.components.app",
+					"viewName": "NotFound",
+					"transition": "show"
+				},
+				"workOrderDetails": {
+					"viewPath": "com.twobm.mobileworkorder.components.workOrderDetails",
+					"viewName": "WorkOrderDetails",
+					"viewLevel": 2
+				}
+			}
+		}
+	},
+	"sap.mobile": {
+		"_version": "1.1.0",
+		"definingRequests": {
+			"AttachmentsSet": {
+				"dataSource": "mainService",
+				"path": "/AttachmentsSet"
+			},
+			"ComponentsSet": {
+				"dataSource": "mainService",
+				"path": "/ComponentsSet"
+			},
+			"GoodsMovementsSet": {
+				"dataSource": "mainService",
+				"path": "/GoodsMovementsSet"
+			},
+			"ObjectsSet": {
+				"dataSource": "mainService",
+				"path": "/ObjectsSet"
+			},
+			"OperationsSet": {
+				"dataSource": "mainService",
+				"path": "/OperationsSet"
+			},
+			"OrderSet": {
+				"dataSource": "mainService",
+				"path": "/OrderSet"
+			}
+		}
+	}
+}
