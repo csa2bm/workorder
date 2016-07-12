@@ -1,58 +1,56 @@
-<core:View controllerName="com.twobm.mobileworkorder.components.workOrderList.WorkOrderList" xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml"
-	xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
-	<Page title="Work Orders">
+<core:View controllerName="com.twobm.mobileworkorder.components.workOrderList.WorkOrderList" xmlns:core="sap.ui.core"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+	<Page title="{i18n>WorkOrderListPageTitle}">
 		<customHeader>
 			<Bar>
-			<contentLeft>
-				<core:Icon src="sap-icon://overlay" color="green" class="sapUiTinyMarginBegin" />
-			</contentLeft>	
-		<contentMiddle>
-			<Text text="Work Orders" /> 
-		</contentMiddle>
-			<contentRight>
-			<Button icon="sap-icon://drop-down-list" press="handleViewSettingsDialogButtonPressed"/>	
-			</contentRight>
+				<!--
+				<contentLeft>
+					<core:Icon src="sap-icon://overlay" color="green" class="sapUiTinyMarginBegin"/>
+				</contentLeft>
+				-->
+				<contentMiddle>
+					<Text text="{i18n>WorkOrderListHeaderTitle}"/>
+				</contentMiddle>
+				<contentRight>
+					<Button icon="sap-icon://drop-down-list" press="handleViewSettingsDialogButtonPressed"/>
+				</contentRight>
 			</Bar>
 			<!--<Button icon="sap-icon://overlay" color="red" press="handleViewSettingsDialogButtonPressed"/>-->
-			
 		</customHeader>
-		
 		<content>
-			<Table itemPress="onItemPress" items="{/data}" noDataText="No Work Orders">
+			<Table itemPress="onItemPress" items="{/OrderSet}" noDataText="No Work Orders">
 				<columns>
-							<Column>
+					<Column>
 						<header>
-							<Label text="Date &amp; Time"/>
+							<Label text="{i18n>WorkOrderListColumnDateTimeHeaderLabel}"/>
 						</header>
 					</Column>
 					<Column>
 						<header>
-							<Label text="Work Order"/>
+							<Label text="{i18n>WorkOrderListColumnWorkOrderHeaderLabel}"/>
 						</header>
 					</Column>
 					<Column>
 						<header>
-							<Label text="Functional Location"/>
+							<Label text="{i18n>WorkOrderListColumnFunctionalLocationHeaderLabel}"/>
 						</header>
 					</Column>
 					<Column>
 						<header>
-							<Label text="Equipment"/>
+							<Label text="{i18n>WorkOrderListColumnEquipmentHeaderLabel}"/>
 						</header>
 					</Column>
-					<Column width="1.5em" vAlign="Middle">
-						</Column>
-			
-					
+					<Column width="1.5em" vAlign="Middle"></Column>
 				</columns>
 				<items>
 					<ColumnListItem type="Active">
 						<cells>
-							<ObjectIdentifier text="{End}" title="{Start}"/>
-							<ObjectIdentifier text="{Number}" title="{ShortText}"/>
-							<ObjectIdentifier text="{FunctionalLocationNumber}" title="{FunctionalLocationDescription}"/>
-							<ObjectIdentifier text="{EquipmentNumber}" title="{EquipmentDescription}"/>
-							<core:Icon src="{StatusIcon}" color="{StatusIconColor}" />
+							<ObjectIdentifier text="{path: 'FinishDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'medium' }}"
+								title="{path: 'StartDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'medium' }}"/>
+							<ObjectIdentifier text="{Orderid}" title="{ShortText}"/>
+							<ObjectIdentifier text="{FunctLoc}" title="{Funcldescr}"/>
+							<ObjectIdentifier text="{Equipment}" title="{Equidescr}"/>
+							<core:Icon src="{StatusIcon}" color="{StatusIconColor}"/>
 						</cells>
 					</ColumnListItem>
 				</items>
