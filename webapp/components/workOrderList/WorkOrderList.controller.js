@@ -64,6 +64,65 @@ sap.ui.define([
 				workOrderId: "1235"
 			});
 
+		},
+
+		// Pop-up for sorting and filter
+		handleViewSettingsDialogButtonPressed: function() {
+			if (!this._oDialog) {
+				this._oDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.workOrderList.controls.OrderFilterDialog", this);
+			}
+			// toggle compact style
+			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);
+			this._oDialog.open();
+		},
+
+		setInitialSorting: function() {
+
+			var oTable = this.getView().byId("orderList");
+			var oBinding = oTable.getBinding("items");
+
+			var aSorters = [];
+
+			var sortItem = "StartDate";
+			var sortDescending = true;
+			aSorters.push(new sap.ui.model.Sorter(sortItem, sortDescending));
+			oBinding.sort(aSorters);
+		},
+
+		// Start filter and sorting based on selected.
+		handleOrderFilterConfirm: function(oEvent) {
+			var oView = this.getView();
+			var oTable = oView.byId("workOrderTableId");
+
+			var mParams = oEvent.getParameters();
+			var oBinding = oTable.getBinding("items");
+
+			// apply sorter to binding
+			// (grouping comes before sorting)
+			var aSorters = [];
+			if (mParams.groupItem) {
+				var sPath = mParams.groupItem.getKey();
+				var bDescending = mParams.groupDescending;
+				var vGroup = this.orderGroupFunctions[sPath];
+				aSorters.push(new sap.ui.model.Sorter(sPath, bDescending, vGroup));
+			}
+
+			var sortItem = mParams.sortItem.getKey();
+			var sortDescending = mParams.sortDescending;
+			aSorters.push(new sap.ui.model.Sorter(sortItem, sortDescending));
+			oBinding.sort(aSorters);
+
+			// apply filters to binding
+			var aFilters = [];
+			oBinding.filter(aFilters);
+
+			// update filter bar
+			//oView.byId("vsdFilterBar").setVisible(aFilters.length > 0);
+			//oView.byId("vsdFilterLabel").setText(mParams.filterString);
+
+			//this.refreshData();
+			var model = this.getView().getModel();
+			model.refresh();
 		}
 	});
 });

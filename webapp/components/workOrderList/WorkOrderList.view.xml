@@ -18,9 +18,9 @@
 			<!--<Button icon="sap-icon://overlay" color="red" press="handleViewSettingsDialogButtonPressed"/>-->
 		</customHeader>
 		<content>
-			<Table itemPress="onItemPress" items="{/OrderSet}" noDataText="No Work Orders">
+			<Table id="workOrderTableId" itemPress="onItemPress" items="{/OrderSet}" noDataText="No Work Orders" showSeparators="true">
 				<columns>
-					<Column>
+					<Column width="8em">
 						<header>
 							<Label text="{i18n>WorkOrderListColumnDateTimeHeaderLabel}"/>
 						</header>
@@ -30,12 +30,12 @@
 							<Label text="{i18n>WorkOrderListColumnWorkOrderHeaderLabel}"/>
 						</header>
 					</Column>
-					<Column>
+					<Column minScreenWidth="Tablet">
 						<header>
 							<Label text="{i18n>WorkOrderListColumnFunctionalLocationHeaderLabel}"/>
 						</header>
 					</Column>
-					<Column>
+					<Column minScreenWidth="Tablet">
 						<header>
 							<Label text="{i18n>WorkOrderListColumnEquipmentHeaderLabel}"/>
 						</header>
@@ -43,14 +43,14 @@
 					<Column width="1.5em" vAlign="Middle"></Column>
 				</columns>
 				<items>
-					<ColumnListItem type="Active">
+					<ColumnListItem type="Navigation">
 						<cells>
-							<ObjectIdentifier text="{path: 'FinishDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'medium' }}"
-								title="{path: 'StartDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'medium' }}"/>
+							<ObjectIdentifier text="{path: 'FinishDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'short' }}"
+								title="{path: 'StartDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'short' }}"/>
 							<ObjectIdentifier text="{Orderid}" title="{ShortText}"/>
 							<ObjectIdentifier text="{FunctLoc}" title="{Funcldescr}"/>
 							<ObjectIdentifier text="{Equipment}" title="{Equidescr}"/>
-							<core:Icon src="{StatusIcon}" color="{StatusIconColor}"/>
+							<core:Icon src="sap-icon://message-error" color="red"/>
 						</cells>
 					</ColumnListItem>
 				</items>
