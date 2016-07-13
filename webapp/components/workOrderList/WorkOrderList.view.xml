@@ -1,60 +1,62 @@
 <core:View controllerName="com.twobm.mobileworkorder.components.workOrderList.WorkOrderList" xmlns:core="sap.ui.core"
 	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
-	<Page title="{i18n>WorkOrderListPageTitle}">
-		<customHeader>
-			<Bar>
-				<!--
+	<App class="wordOrderListClass">
+		<Page title="{i18n>WorkOrderListPageTitle}">
+			<customHeader>
+				<Bar>
+					<!--
 				<contentLeft>
 					<core:Icon src="sap-icon://overlay" color="green" class="sapUiTinyMarginBegin"/>
 				</contentLeft>
 				-->
-				<contentMiddle>
-					<Text text="{i18n>WorkOrderListHeaderTitle}"/>
-				</contentMiddle>
-				<contentRight>
-					<Button icon="sap-icon://drop-down-list" press="handleViewSettingsDialogButtonPressed"/>
-				</contentRight>
-			</Bar>
-			<!--<Button icon="sap-icon://overlay" color="red" press="handleViewSettingsDialogButtonPressed"/>-->
-		</customHeader>
-		<content>
-			<Table id="workOrderTableId" itemPress="onItemPress" items="{/OrderSet}" noDataText="No Work Orders" showSeparators="true">
-				<columns>
-					<Column width="8em">
-						<header>
-							<Label text="{i18n>WorkOrderListColumnDateTimeHeaderLabel}"/>
-						</header>
-					</Column>
-					<Column>
-						<header>
-							<Label text="{i18n>WorkOrderListColumnWorkOrderHeaderLabel}"/>
-						</header>
-					</Column>
-					<Column minScreenWidth="Tablet">
-						<header>
-							<Label text="{i18n>WorkOrderListColumnFunctionalLocationHeaderLabel}"/>
-						</header>
-					</Column>
-					<Column minScreenWidth="Tablet">
-						<header>
-							<Label text="{i18n>WorkOrderListColumnEquipmentHeaderLabel}"/>
-						</header>
-					</Column>
-					<Column width="1.5em" vAlign="Middle"></Column>
-				</columns>
-				<items>
-					<ColumnListItem type="Navigation">
-						<cells>
-							<ObjectIdentifier text="{path: 'FinishDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'short' }}"
-								title="{path: 'StartDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'short' }}"/>
-							<ObjectIdentifier text="{Orderid}" title="{ShortText}"/>
-							<ObjectIdentifier text="{FunctLoc}" title="{Funcldescr}"/>
-							<ObjectIdentifier text="{Equipment}" title="{Equidescr}"/>
-							<core:Icon src="sap-icon://message-error" color="red"/>
-						</cells>
-					</ColumnListItem>
-				</items>
-			</Table>
-		</content>
-	</Page>
+					<contentMiddle>
+						<Text text="{i18n>WorkOrderListHeaderTitle}"/>
+					</contentMiddle>
+					<contentRight>
+						<Button icon="sap-icon://drop-down-list" press="handleViewSettingsDialogButtonPressed"/>
+					</contentRight>
+				</Bar>
+				<!--<Button icon="sap-icon://overlay" color="red" press="handleViewSettingsDialogButtonPressed"/>-->
+			</customHeader>
+			<content>
+				<Table id="workOrderTableId" itemPress="onItemPress" items="{/OrderSet}" noDataText="No Work Orders" showSeparators="true" class="workOrderListTableClass">
+					<columns>
+						<Column width="8em">
+							<header>
+								<Label text="{i18n>WorkOrderListColumnDateTimeHeaderLabel}"/>
+							</header>
+						</Column>
+						<Column>
+							<header>
+								<Label text="{i18n>WorkOrderListColumnWorkOrderHeaderLabel}"/>
+							</header>
+						</Column>
+						<Column minScreenWidth="Tablet">
+							<header>
+								<Label text="{i18n>WorkOrderListColumnFunctionalLocationHeaderLabel}"/>
+							</header>
+						</Column>
+						<Column minScreenWidth="Tablet">
+							<header>
+								<Label text="{i18n>WorkOrderListColumnEquipmentHeaderLabel}"/>
+							</header>
+						</Column>
+						<Column width="1.5em" vAlign="Middle"></Column>
+					</columns>
+					<items>
+						<ColumnListItem type="Navigation">
+							<cells>
+								<ObjectIdentifier text="{path: 'FinishDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'short' }}"
+									title="{path: 'StartDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'short' }}"/>
+								<ObjectIdentifier text="{Orderid}" title="{ShortText}"/>
+								<ObjectIdentifier text="{FunctLoc}" title="{Funcldescr}"/>
+								<ObjectIdentifier text="{Equipment}" title="{Equidescr}"/>
+								<core:Icon src="sap-icon://message-error" color="red"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</content>
+		</Page>
+	</App>
 </core:View>

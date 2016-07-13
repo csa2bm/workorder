@@ -2,6 +2,7 @@
     margin-top: 2rem;
 }
 
-#workOrderTableId tbody tr:nth-child(even) {
+
+.wordOrderListClass .workOrderListTableClass.sapMList tbody tr:nth-child(even) {
 	background: rgb(245, 245, 245);
 }
