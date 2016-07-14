@@ -90,7 +90,7 @@
 				"name": "workOrderList",
 				"target": "workOrderList"
 			}, {
-				"pattern": "workOrderDetails/{workOrderId}",
+				"pattern": "workOrderDetails/{workOrderContext}",
 				"name": "workOrderDetails",
 				"target": "workOrderDetails"
 			}],

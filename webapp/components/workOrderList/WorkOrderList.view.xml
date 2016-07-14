@@ -19,7 +19,7 @@
 				<!--<Button icon="sap-icon://overlay" color="red" press="handleViewSettingsDialogButtonPressed"/>-->
 			</customHeader>
 			<content>
-				<Table id="workOrderTableId" itemPress="onItemPress" items="{/OrderSet}" noDataText="No Work Orders" showSeparators="true" class="workOrderListTableClass">
+				<Table id="workOrderTableId" items="{/OrderSet}" noDataText="No Work Orders" showSeparators="true" class="workOrderListTableClass">
 					<columns>
 						<Column width="8em">
 							<header>
@@ -44,7 +44,8 @@
 						<Column width="1.5em" vAlign="Middle"></Column>
 					</columns>
 					<items>
-						<ColumnListItem type="Navigation">
+						<ColumnListItem type="Navigation"
+						press="onWorkOrderItemPress">
 							<cells>
 								<ObjectIdentifier text="{path: 'FinishDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'short' }}"
 									title="{path: 'StartDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'short' }}"/>

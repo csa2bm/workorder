@@ -55,13 +55,10 @@ sap.ui.define([
 			this.getView().setModel(oModel);
 			*/
 		},
-		onItemPress: function(oEvent) {
-			//var app = sap.ui.getCore().byId("WorkOrder");  
-			//app.to("WorkOrderDetails");
-			//var oItem = oEvent.getSource();
-			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			oRouter.navTo("workOrderDetails", {
-				workOrderId: "1235"
+		onWorkOrderItemPress: function(oEvent) {
+			var oBindingContext = oEvent.getSource().getBindingContext(); 
+			this.getRouter().navTo("workOrderDetails",{
+				workOrderContext : oBindingContext.getPath().substr(1)
 			});
 
 		},
