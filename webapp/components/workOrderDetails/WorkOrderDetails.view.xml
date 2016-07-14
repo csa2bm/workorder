@@ -7,7 +7,7 @@
 				<ObjectPageHeader objectTitle="Section sample"></ObjectPageHeader>
 			</headerTitle>
 			<headerContent>
-				<m:ObjectAttribute title="" text="This example explains the rules for the rendering of sections"/>
+				<m:ObjectAttribute title="" text="{ShortText}"/>
 			</headerContent>
 			<sections>
 				<ObjectPageSection title="General">

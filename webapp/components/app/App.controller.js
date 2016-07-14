@@ -18,7 +18,7 @@ sap.ui.define([
 			this._sErrorText = this.getResourceBundle().getText("errorText");
 			
 			//Add Content Density Style Class
-			this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
+			//this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
 		
 		},
 

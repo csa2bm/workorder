@@ -1,8 +1,3 @@
 .spacerTop {
     margin-top: 2rem;
 }
-
-
-.wordOrderListClass .workOrderListTableClass tbody tr:nth-child(even) {
-	background: rgb(245, 245, 245);
-}
