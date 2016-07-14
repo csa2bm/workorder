@@ -115,7 +115,9 @@
       "selected": null,
       "androidSigning": "",
       "iosSigning": "",
-      "tiles": "single"
+      "tiles": "single",
+      "isFCE": false,
+      "applications": []
     },
     "msType": 0,
     "server": "",
@@ -396,7 +398,15 @@
           "cloudBuild": true
         }
       },
-      "custom": {}
+      "custom": {
+        "cordova-plugin-statusbar": {
+          "selected": true,
+          "registry": "cordova-plugin-statusbar",
+          "localBuild": true,
+          "cloudBuild": true,
+          "registered": true
+        }
+      }
     }
   }
 }

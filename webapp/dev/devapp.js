@@ -36,6 +36,13 @@ sap.ui.define([
 			if (window.sap_webide_FacadePreview) {
 				this.startApp();
 			} else {
+				//Making sure that the view doesn't overlap statusbar		
+				if (window.cordova.require("cordova/platform").id === "ios") {
+					StatusBar.backgroundColorByName("white");
+					StatusBar.styleDefault();
+					StatusBar.overlaysWebView(false);
+				}
+		
 				var that = this;
 
 				//get offline definingRequests

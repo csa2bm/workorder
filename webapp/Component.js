@@ -46,7 +46,7 @@ sap.ui.define([
 			oModel.setDefaultBindingMode("TwoWay");
 			this.setModel(oModel);
 			devapp.appModel = oModel;
-		
+
 			// set device model
 			var oDeviceModel = new JSONModel({
 				isTouch: Device.support.touch,
@@ -59,7 +59,7 @@ sap.ui.define([
 			});
 			oDeviceModel.setDefaultBindingMode("OneWay");
 			this.setModel(oDeviceModel, "device");
-	
+
 			if (window.cordova) {
 				devapp.deviceModel = oDeviceModel;
 			}
