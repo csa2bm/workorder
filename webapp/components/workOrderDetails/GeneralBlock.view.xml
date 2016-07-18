@@ -1,4 +1,31 @@
 <core:View  xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
 	xmlns:l="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns:vbm="sap.ui.vbm" xmlns="sap.m">
-<Text text="{ShortText}"></Text>	
+<f:SimpleForm columnsL="3" columnsM="3" editable="false" emptySpanL="0" emptySpanM="0" id="SimpleFormDisplay480" labelSpanL="4"
+		labelSpanM="4" layout="ResponsiveGridLayout" maxContainerCols="3" minWidth="1024" title="">
+		<f:content>
+			<core:Title text="{i18n>GeneralBlockColoumInformation}"/>
+			<Label text="{i18n>GeneralBlockColoumInformationLabelNumber}"/>
+			<Text text="{Orderid} "/>
+			<Label text="{i18n>GeneralBlockColoumInformationLabelType}"/>
+			<Text text="{OrderType}"/>
+			<Label text="{i18n>GeneralBlockColoumInformationLabelPriority}"/>
+			<Text text="{Priority} "/>
+			<Label text="{i18n>GeneralBlockColoumInformationLabelLongText}"/>
+			<Text text="{LongText} "/>
+			<core:Title text="{i18n>GeneralBlockColumnDateAndTime}"/>
+			<Label text="{i18n>GeneralBlockColumnDateAndTimeLabelStart}"/>
+			<Text text="{path: 'StartDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'short' }}"/>
+			<Label text="{i18n>GeneralBlockColumnDateAndTimeLabelEnd}"/>
+			<Text text="{path: 'FinishDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'short' }}"/>
+			<core:Title text="{i18n>GeneralBlockColumnEquipment}"/>
+			<Label text="{i18n>GeneralBlockColumnEquipmentLabelFLocNumber}"/>
+			<Text text="{FunctLoc}"/>
+			<Label text="{i18n>GeneralBlockColumnEquipmentLabelFLocShortText}"/>
+			<Text text="{Funcldescr}"/>
+			<Label text="{i18n>GeneralBlockColumnEquipmentLabelEQNumber}"/>
+			<Text text="{Equipment} "/>
+			<Label text="{i18n>GeneralBlockColumnEquipmentLabelEQShortText}"/>
+			<Text text="{Equidescr}"/>
+		</f:content>
+	</f:SimpleForm>
 </core:View>
