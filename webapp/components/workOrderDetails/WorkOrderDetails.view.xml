@@ -1,18 +1,46 @@
 <core:View controllerName="com.twobm.mobileworkorder.components.workOrderDetails.WorkOrderDetails" xmlns:core="sap.ui.core" xmlns="sap.uxap"
 	xmlns:layout="sap.ui.layout" xmlns:m="sap.m" xmlns:blocks="com.twobm.mobileworkorder.components.workOrderDetails.blocks"
 	height="100%">
-	<m:Page showNavButton="true" navButtonPress="onNavigationButtonPress" title="Work Order">
+	<m:Page showNavButton="true" navButtonPress="onNavigationButtonPress" title="{i18n>WorkOrderDetailsTitle}">
+		<layout:VerticalLayout class="sapUiContentPadding" width="100%">
+		<!-- Uncomment list below and make it dynamic
+		<m:List id="errorList" items="{ path: 'syncStatusModel>/Errors'}">
+		-->
+		<!--
+		And add formater for NotificationListItem for the property relavant for types: 
+		1. warning message
+		2. error message
+		-->
+		<m:NotificationListItem
+		title="Error from server"
+		description="Work order was blocked by SUJ"
+		authorPicture="sap-icon://message-error"
+		showCloseButton="false"
+		priority="High"
+		unread="true">
+		</m:NotificationListItem>
+		<m:NotificationListItem
+		title="Warning from server"
+		description="Used more materials than in stock"
+		authorPicture="sap-icon://alert"
+		showCloseButton="false"
+		priority="Medium"
+		unread="true">
+		</m:NotificationListItem>
+		<!--
+		</m:list>
+		-->
+		</layout:VerticalLayout>
 		<ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="false">
 			<headerTitle>
-				<ObjectPageHeader objectTitle="Section sample"></ObjectPageHeader>
+				<ObjectPageHeader objectTitle="Work Order: {Orderid} - {ShortText}">
+					
+				</ObjectPageHeader>
 			</headerTitle>
-			<headerContent>
-				<m:ObjectAttribute title="" text="{ShortText}"/>
-			</headerContent>
 			<sections>
-				<ObjectPageSection title="General">
+				<ObjectPageSection title="{i18n>General}">
 					<subSections>
-						<ObjectPageSubSection title="General">
+						<ObjectPageSubSection title="{i18n>General}">
 							<blocks>
 								<blocks:GeneralBlock/>
 							</blocks>
@@ -29,7 +57,6 @@
 			
 					</subSections>
 				</ObjectPageSection>
-
 			</sections>
 		</ObjectPageLayout>
 		<m:footer>
