@@ -60,7 +60,7 @@
 					<subSections>
 						<ObjectPageSubSection title="Attachments">
 							<blocks>
-								<blocks:OperationsBlock/>
+								<blocks:AttachmentsBlock/>
 							</blocks>
 						</ObjectPageSubSection>
 					</subSections>
