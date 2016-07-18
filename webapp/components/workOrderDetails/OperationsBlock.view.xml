@@ -1,4 +1,21 @@
 <core:View  xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
 	controllerName="com.twobm.mobileworkorder.components.workOrderDetails.OperationsBlock" xmlns:l="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns:vbm="sap.ui.vbm" xmlns="sap.m">
-<Text text="{ShortText}"></Text>	
+	<Table id="idOperationTable" items="{OrderOperation}">
+		<columns>
+		<Column>
+				<Text text="Operation"/>
+			</Column>
+			<Column hAlign="Right">
+				<Text text="Scheduled time "/>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem type="Navigation">
+				<cells>
+					<ObjectIdentifier text="{Description}" title="{Activity}"/>
+					<ObjectIdentifier text="{Funcldescr}" title="{WorkActivity} {Unit}" />
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
 </core:View>
