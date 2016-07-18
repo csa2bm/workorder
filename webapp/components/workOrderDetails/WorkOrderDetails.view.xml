@@ -19,17 +19,24 @@
 						</ObjectPageSubSection>
 					</subSections>
 				</ObjectPageSection>
-							<ObjectPageSection title="Operations">
+				<ObjectPageSection title="Operations">
 					<subSections>
 						<ObjectPageSubSection title="Operations">
 							<blocks>
 								<blocks:OperationsBlock/>
 							</blocks>
 						</ObjectPageSubSection>
-			
 					</subSections>
 				</ObjectPageSection>
-
+				<ObjectPageSection title="Attachments">
+					<subSections>
+						<ObjectPageSubSection title="Attachments">
+							<blocks>
+								<blocks:OperationsBlock/>
+							</blocks>
+						</ObjectPageSubSection>
+					</subSections>
+				</ObjectPageSection>
 			</sections>
 		</ObjectPageLayout>
 		<m:footer>
