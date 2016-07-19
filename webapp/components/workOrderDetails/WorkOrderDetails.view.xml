@@ -56,6 +56,15 @@
 						</ObjectPageSubSection>
 					</subSections>
 				</ObjectPageSection>
+				<ObjectPageSection title="Objects">
+					<subSections>
+						<ObjectPageSubSection title="Objects">
+							<blocks>
+								<blocks:EquipmentBlock/>
+							</blocks>
+						</ObjectPageSubSection>
+					</subSections>
+				</ObjectPageSection>
 				<ObjectPageSection title="Attachments">
 					<subSections>
 						<ObjectPageSubSection title="Attachments">
