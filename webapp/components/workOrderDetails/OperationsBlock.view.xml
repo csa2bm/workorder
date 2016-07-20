@@ -13,7 +13,11 @@
 			<ColumnListItem type="Navigation">
 				<cells>
 					<ObjectIdentifier text="{Description}" title="{Activity}"/>
-					<ObjectIdentifier text="{Funcldescr}" title="{WorkActivity} {Unit}" />
+					
+					<!--
+					<ObjectIdentifier text="" title="{WorkActivity} {Unit}"  />
+						-->
+					<ObjectNumber number="{WorkActivity}" unit="{Unit}" state="Success"/>
 				</cells>
 			</ColumnListItem>
 		</items>

@@ -11,7 +11,7 @@
 			<Label text="{i18n>GeneralBlockColoumInformationLabelPriority}"/>
 			<Text text="{Priority} "/>
 			<Label text="{i18n>GeneralBlockColoumInformationLabelLongText}"/>
-			<Text text="{LongText} "/>
+			<Text text="{LongText}"/>
 			<core:Title text="{i18n>GeneralBlockColumnDateAndTime}"/>
 			<Label text="{i18n>GeneralBlockColumnDateAndTimeLabelStart}"/>
 			<Text text="{path: 'StartDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'short' }}"/>
