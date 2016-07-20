@@ -19,6 +19,7 @@
 		priority="High"
 		unread="true">
 		</m:NotificationListItem>
+		<!--
 		<m:NotificationListItem
 		title="Warning from server"
 		description="Used more materials than in stock"
@@ -27,6 +28,7 @@
 		priority="Medium"
 		unread="true">
 		</m:NotificationListItem>
+			-->
 		<!--
 		</m:list>
 		-->

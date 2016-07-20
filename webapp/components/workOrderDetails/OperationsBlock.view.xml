@@ -2,22 +2,23 @@
 	controllerName="com.twobm.mobileworkorder.components.workOrderDetails.OperationsBlock" xmlns:l="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns:vbm="sap.ui.vbm" xmlns="sap.m">
 	<Table id="idOperationTable" items="{OrderOperation}">
 		<columns>
-		<Column>
+		<Column popinDisplay="Inline">
 				<Text text="Operation"/>
 			</Column>
-			<Column hAlign="Right">
-				<Text text="Scheduled time "/>
+			<Column demandPopin="false" minScreenWidth="Tablet">
+				<Text text="Work activity"/>
+			</Column>
+			<Column hAlign="Right" demandPopin="true">
+				<Text text="Completed"/>
 			</Column>
 		</columns>
 		<items>
 			<ColumnListItem type="Navigation">
 				<cells>
 					<ObjectIdentifier text="{Description}" title="{Activity}"/>
-					
-					<!--
-					<ObjectIdentifier text="" title="{WorkActivity} {Unit}"  />
-						-->
 					<ObjectNumber number="{WorkActivity}" unit="{Unit}" state="Success"/>
+					<core:Icon src="{parts:[{path:'Complete'}],formatter:'.formatter.operationStatus'}"
+								color="{parts:[{path:'Complete'}],formatter:'.formatter.opStatusColor'}"></core:Icon>
 				</cells>
 			</ColumnListItem>
 		</items>

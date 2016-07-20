@@ -10,17 +10,33 @@ sap.ui.define([], function() {
 		uppercaseFirstChar: function(sStr) {
 			return sStr.charAt(0).toUpperCase() + sStr.slice(1);
 		},
-		
+
 		/**
 		 * Returns false if a string is empty
 		 * param{String} sStr input string
 		 * @returns {Boolean}} the input string with the first uppercase character
 		 */
-		 isNotEmptyStr: function(sStr){
-			if (!sStr || sStr ==="") {
-		 		return false;
-			}else{
+		isNotEmptyStr: function(sStr) {
+			if (!sStr || sStr === "") {
+				return false;
+			} else {
 				return true;
+			}
+		},
+
+		operationStatus: function(sStatus) {
+			if (sStatus) {
+				return "sap-icon://accept";
+			} else {
+				return ""; // "sap-icon://message-warning";
+			}
+		},
+
+		opStatusColor: function(sStatus) {
+			if (sStatus) {
+				return "Green";
+			} else {
+				return "Red";
 			}
 		}
 	};
