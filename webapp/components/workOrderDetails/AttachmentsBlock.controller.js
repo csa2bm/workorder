@@ -40,6 +40,21 @@ sap.ui.define([
 		//
 		//	}
 
-	});
+		clickPreviewAttachment: function(oEvent) {
+			//self = this;
+			var currentObject = oEvent.getSource().getBindingContext().getObject();
 
+			// var localObjectUri = "";
+
+			// if (currentObject) {
+
+			// 	if (currentObject['@com.sap.vocabularies.Offline.v1.islocal']) {
+			// 		var serviceUrl = oEvent.getSource().getModel().sServiceUrl;
+			// 		localObjectUri = currentObject.__metadata.uri.replace(serviceUrl, "");
+			// 	}
+			// }
+			
+			window.open("data:image/jpeg;base64," + currentObject.Data, "_blank");
+		}
+	});
 });
