@@ -116,29 +116,9 @@
 	"sap.mobile": {
 		"_version": "1.1.0",
 		"definingRequests": {
-			"AttachmentsSet": {
-				"dataSource": "mainService",
-				"path": "/AttachmentsSet"
-			},
-			"ComponentsSet": {
-				"dataSource": "mainService",
-				"path": "/ComponentsSet"
-			},
-			"GoodsMovementsSet": {
-				"dataSource": "mainService",
-				"path": "/GoodsMovementsSet"
-			},
-			"ObjectsSet": {
-				"dataSource": "mainService",
-				"path": "/ObjectsSet"
-			},
-			"OperationsSet": {
-				"dataSource": "mainService",
-				"path": "/OperationsSet"
-			},
 			"OrderSet": {
 				"dataSource": "mainService",
-				"path": "/OrderSet"
+				"path": "/OrderSet?$expand=OrderOperation,OrderComponent,OrderObject,OrderAttachments,OrderGoodsMovements"
 			}
 		}
 	}
