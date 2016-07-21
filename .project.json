@@ -12,8 +12,8 @@
     }
   ],
   "mockpreview": {
-    "mockUri": "/sap/opu/odata/tobmas/WORKORDER_SRV",
-    "metadataFilePath": "",
+    "mockUri": "/sap/opu/odata/tobmas/WORKORDER_SRV/",
+    "metadataFilePath": "localService/metadata.xml",
     "loadJSONFiles": false,
     "loadCustomRequests": false,
     "mockRequestsFilePath": ""
