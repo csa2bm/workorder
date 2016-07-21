@@ -218,9 +218,14 @@ sap.ui.define([
 				var that = this;
 				this.appOfflineStore.store = sap.OData.createOfflineStore(properties);
 
+				// var busyDL = new BusyDialog();
+				// busyDL.setTitle("Open Offline Store");
+				// busyDL.setText("creating application offline store...");
+				// busyDL.open();
+				
 				var busyDL = new BusyDialog();
-				busyDL.setTitle("Open Offline Store");
-				busyDL.setText("creating application offline store...");
+				busyDL.setTitle("Downloading data from server");
+				busyDL.setText("Please wait...");
 				busyDL.open();
 
 				this.appOfflineStore.store.open(

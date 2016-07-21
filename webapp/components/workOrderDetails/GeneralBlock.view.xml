@@ -1,7 +1,20 @@
 <core:View controllerName="com.twobm.mobileworkorder.components.workOrderDetails.GeneralBlock" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
 	xmlns:l="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns:vbm="sap.ui.vbm" xmlns="sap.m">
-<f:SimpleForm columnsL="3" columnsM="3" editable="false" emptySpanL="0" emptySpanM="0" id="SimpleFormDisplay480" labelSpanL="4"
-		labelSpanM="4" layout="ResponsiveGridLayout" maxContainerCols="3" minWidth="1024" title="">
+<VBox class="sapUiSmallMargin">
+<f:SimpleForm maxContainerCols="3"
+			editable="false"
+			layout="ResponsiveGridLayout"
+			title=""
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="4"
+			emptySpanXL="0"
+			emptySpanL="0"
+			emptySpanM="0"
+			columnsXL="3"
+			columnsL="2"
+			columnsM="2"
+			>
 		<f:content>
 			<!--Column Description-->
 			<core:Title text="{i18n>GeneralBlockColoumInformation}"/>
@@ -20,9 +33,9 @@
 			<!--Column Time and Place-->
 			<core:Title text="{i18n>GeneralBlockColumnTimePlace}"/>
 			<Label text="{i18n>GeneralBlockColumnDateAndTimeLabelStart}"/>
-			<Text text="{path: 'StartDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'short' }}"/>
+			<Text text="{path: 'StartDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'medium' }}"/>
 			<Label text="{i18n>GeneralBlockColumnDateAndTimeLabelEnd}"/>
-			<Text text="{path: 'FinishDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'short' }}"/>
+			<Text text="{path: 'FinishDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'medium' }}"/>
 			<Label text="{i18n>GeneralBlockColumnEquipmentLabelStreet}"/>
 			<Text text="{Street}"/>
 			<Label text="{i18n>GeneralBlockColumnEquipmentLabelCity}"/>
@@ -39,4 +52,5 @@
 			<Text text="{Equidescr}"/>
 		</f:content>
 	</f:SimpleForm>
+	</VBox>
 </core:View>

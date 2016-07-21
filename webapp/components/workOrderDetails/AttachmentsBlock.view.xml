@@ -1,10 +1,51 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout"
 	controllerName="com.twobm.mobileworkorder.components.workOrderDetails.AttachmentsBlock" xmlns:html="http://www.w3.org/1999/xhtml">
-	<App>
-		<pages>
-			<Page title="Title">
-				<content></content>
-			</Page>
-		</pages>
-	</App>
+	<l:VerticalLayout class="sapUiSmallMarginEnd" width="100%">
+		<l:HorizontalLayout >
+			<!--class="rightAlign"-->
+			<!--<custom:CustomFileUploader id="customFileUploader" visible="false" icon="sap-icon://add" iconOnly="true" buttonOnly="true"
+					uploadOnChange="true" uploadComplete="onUploadComplete" class="sapUiSmallMarginEnd"/>-->
+			<Button id="cameraButton" visible="true" class="sapUiMediumMarginEnd" icon="sap-icon://camera" press="capturePhoto"></Button>
+		</l:HorizontalLayout>
+		<Table id="attachmentsList" titel="{i18n>attachments}" items="{ path: 'OrderAttachments', sorter: { path: 'CreateDate', descending: true}}"
+			noDataText="{i18n>noAttachmentsAdded}">
+			<columns>
+				<!-- Icon column -->
+				<Column demandPopin="true" popinDisplay="WithoutHeader" width="1rem"/>
+				<Column demandPopin="true" popinDisplay="WithoutHeader" width="3rem">
+					<header>
+						<Label text="{i18n>attachmentDescription}"/>
+					</header>
+				</Column>
+				<Column demandPopin="true" popinDisplay="WithoutHeader" minScreenWidth="Small" width="1rem">
+					<header>
+						<Label text="{i18n>attachmentCreateDate}"/>
+					</header>
+				</Column>
+				<Column demandPopin="true" popinDisplay="WithoutHeader" minScreenWidth="Small" width="1rem">
+					<header>
+						<Label text="{i18n>attachmentCreatedBy}"/>
+					</header>
+				</Column>
+				<Column demandPopin="true" popinDisplay="Inline" minScreenWidth="Small" width="0.5rem">
+					<header>
+						<Label text="{i18n>attachmentIncludedInReport}"/>
+					</header>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem type="Active" press="clickPreviewAttachment">
+					<cells>
+						<core:Icon id="attachmentListImageIcon" class="sapUiSmallMarginEnd" noTabStop="true" size="2em" src="sap-icon://picture"/>
+						<ObjectIdentifier text="{Description}"/>
+						<!--<Link text="{Filename}" press="clickPreviewAttachment"/>-->
+						<ObjectIdentifier text="{parts:[{path:'CreateDate'}],type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MMM-yyyy'}}"/>
+						<ObjectIdentifier text="{CreatedBy}"/>
+						<!--<core:Icon noTabStop="true" color="Green" src="{parts:[{path:'IncludeInReport'}],formatter:'com.twobm.wmoa.util.Formatter.isAttachmentIncludedInReport'}"/>-->
+						<!--<core:Icon class="sapUiSmallMarginEnd" color="DarkRed" noTabStop="true" press="onDeleteFile" size="1.5em" src="sap-icon://delete"/>-->
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+	</l:VerticalLayout>
 </mvc:View>

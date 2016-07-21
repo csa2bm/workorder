@@ -11,6 +11,8 @@
 		1. warning message
 		2. error message
 		-->
+		
+		<!--
 		<m:NotificationListItem
 		title="Error from server"
 		description="Work order was blocked by SUJ"
@@ -19,6 +21,7 @@
 		priority="High"
 		unread="true">
 		</m:NotificationListItem>
+		-->
 		<!--
 		<m:NotificationListItem
 		title="Warning from server"

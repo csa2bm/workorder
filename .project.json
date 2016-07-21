@@ -38,11 +38,13 @@
     "appIcon": {
       "defaultIcon": "",
       "ios": {
-        "ios8Iphone": "",
-        "ios7Iphone": "",
-        "ios7Ipad": "",
+        "ios8Iphone": "res/ios/industrial_worker-180.png",
+        "ios7Iphone": "res/ios/industrial_worker-60.png",
+        "ios7Ipad": "res/ios/industrial_worker-76.png",
         "ios61Iphone": "",
-        "ios61Ipad": ""
+        "ios61Ipad": "",
+        "ios7Ipad2x": "res/ios/industrial_worker-152.png",
+        "ios7Iphone2x": "res/ios/industrial_worker-120.png"
       },
       "android": {
         "ldpi": "",
@@ -209,7 +211,7 @@
           "cloudBuild": true
         },
         "camera": {
-          "selected": false,
+          "selected": true,
           "registry": "cordova-plugin-camera",
           "localBuild": true,
           "cloudBuild": true
@@ -331,7 +333,7 @@
           "cloudBuild": false
         },
         "barcode": {
-          "selected": false,
+          "selected": true,
           "registry": "kapsel-plugin-barcodescanner",
           "localBuild": true,
           "cloudBuild": true

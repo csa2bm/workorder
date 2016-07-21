@@ -55,11 +55,11 @@ sap.ui.define([], function() {
 		 * param{Date}  input string
 		 * @returns {Date}} with the corresponding format
 		 */
-		dateTimeShortType: function() {
-		var dateType = new sap.ui.model.type.Date({
+		dateTimeShortType: function(ddate) {
+		ddate = new sap.ui.model.type.Date({
 			pattern: "dd/MM/yyyy"
 		});
-		return dateType;
+		return ddate;
 	}
 	};
 });
