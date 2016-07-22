@@ -38,7 +38,7 @@
 		</layout:VerticalLayout>
 		<ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="false">
 			<headerTitle>
-				<ObjectPageHeader objectTitle="Work Order: {Orderid} - {ShortText}">
+				<ObjectPageHeader objectTitle="{parts:['i18n>HeaderTitle', {path:'Orderid'}, {path:'ShortText'}],formatter:'.getI18nTextReplace2'}">
 					
 				</ObjectPageHeader>
 			</headerTitle>
@@ -52,27 +52,27 @@
 						</ObjectPageSubSection>
 					</subSections>
 				</ObjectPageSection>
-				<ObjectPageSection title="Operations">
+				<ObjectPageSection title="{i18n>SubSectionTitleOperations}">
 					<subSections>
-						<ObjectPageSubSection title="Operations">
+						<ObjectPageSubSection title="{i18n>SubSectionTitleOperations}">
 							<blocks>
 								<blocks:OperationsBlock/>
 							</blocks>
 						</ObjectPageSubSection>
 					</subSections>
 				</ObjectPageSection>
-				<ObjectPageSection title="Objects">
+				<ObjectPageSection title="{i18n>SubSectionTitleObjects}">
 					<subSections>
-						<ObjectPageSubSection title="Objects">
+						<ObjectPageSubSection title="{i18n>SubSectionTitleObjects}">
 							<blocks>
 								<blocks:EquipmentBlock/>
 							</blocks>
 						</ObjectPageSubSection>
 					</subSections>
 				</ObjectPageSection>
-				<ObjectPageSection title="Attachments">
+				<ObjectPageSection title="{i18n>SubSectionTitleAttachments}">
 					<subSections>
-						<ObjectPageSubSection title="Attachments">
+						<ObjectPageSubSection title="{i18n>SubSectionTitleAttachments}">
 							<blocks>
 								<blocks:AttachmentsBlock/>
 							</blocks>

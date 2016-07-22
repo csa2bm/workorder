@@ -3,13 +3,13 @@
 	<Table id="idOperationTable" items="{OrderOperation}">
 		<columns>
 		<Column popinDisplay="Inline">
-				<Text text="Operation"/>
+				<Text text="{i18n>OperationBlockColoumOperation}"/>
 			</Column>
 			<Column demandPopin="false" minScreenWidth="Tablet">
-				<Text text="Work activity"/>
+				<Text text="{i18n>OperationBlockColoumWorkActivty}"/>
 			</Column>
 			<Column hAlign="Right" demandPopin="true">
-				<Text text="Completed"/>
+				<Text text="{i18n>OperationBlockColoumCompleted}"/>
 			</Column>
 		</columns>
 		<items>

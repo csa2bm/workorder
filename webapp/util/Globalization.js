@@ -37,7 +37,7 @@ com.twobm.mobileworkorder.util.Globalization = {
 			var text = this.geti18NResourceBundle().getProperty(key);
 			if (text !== null) {
 				var textWithReplacement = text.replace("{0}", replace1);
-				textWithReplacement = text.replace("{1}", replace2);
+				textWithReplacement = textWithReplacement.replace("{1}", replace2);
 				return textWithReplacement;
 			}
 		} else {
