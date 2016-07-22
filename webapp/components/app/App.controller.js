@@ -2,8 +2,9 @@ sap.ui.define([
 	"sap/ui/core/Fragment",
 	"sap/m/MessageBox",
 	"com/twobm/mobileworkorder/util/Controller",
-	"com/twobm/mobileworkorder/dev/devapp"
-], function(Fragment, MessageBox, Controller, devapp) {
+	"com/twobm/mobileworkorder/dev/devapp",
+	"com/twobm/mobileworkorder/util/SyncStateHandler"
+], function(Fragment, MessageBox, Controller, devapp, SyncStateHandler) {
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.app.App", {
@@ -12,38 +13,52 @@ sap.ui.define([
 		 */
 		onInit: function() {
 			var oEventBus = this.getEventBus();
-			oEventBus.subscribe("OfflineStore", "Refreshing", this.onRefreshing, this);
-			oEventBus.subscribe("OfflineStore", "Synced", this.synFinished, this);
+			//oEventBus.subscribe("OfflineStore", "Refreshing", this.onRefreshing, this);
+			oEventBus.subscribe("OfflineStore", "Synced", this.syncFinished, this);
+			oEventBus.subscribe("DeviceOnline", this.handleConnected, this);
+			oEventBus.subscribe("DeviceOffline", this.handleDisconnected, this);
+
+			oEventBus.subscribe("UpdateSyncState", this.handleSyncState, this);
+
 			oEventBus.subscribe("OfflineStore", "OpenErrDialog", this.openErrDialog, this);
 			this._sErrorText = this.getResourceBundle().getText("errorText");
-			
+
 			//Add Content Density Style Class
 			//this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
-		
 		},
 
 		/**
 		 * UI5 OfflineStore channel Refreshing event handler, refreshing the offline store data
 		 */
-		onRefreshing: function() {
-			if (devapp.isOnline) {
-				this.getView().setBusy(true);
-				//ask refreshing store after flush
-				devapp.refreshing = true;
-				if (devapp.devLogon) {
-					devapp.devLogon.flushAppOfflineStore();
-				}
-			} else {
-				this.getView().getModel().refresh();
-			}
-		},
+		// onRefreshing: function() {
+		// 	if (devapp.isOnline) {
+		// 		this.getView().setBusy(true);
+		// 		//ask refreshing store after flush
+		// 		devapp.refreshing = true;
+		// 		if (devapp.devLogon) {
+		// 			devapp.devLogon.flushAppOfflineStore();
+		// 		}
+		// 	} else {
+		// 		this.getView().getModel().refresh();
+		// 	}
+		// },
 
 		/**
 		 * UI5 OfflineStore channel Synced event handler, after refreshing offline store, refresh data model
 		 */
-		synFinished: function() {
+		syncFinished: function() {
 			this.getView().getModel().refresh();
-			this.getView().setBusy(false);
+			//this.getView().setBusy(false);
+
+			//Update syncStatusModel
+			var syncStatusModel = this.getView().getModel("syncStatusModel");
+			var d = new Date();
+			syncStatusModel.getData().LastSyncTime = d.toLocaleString();
+			syncStatusModel.refresh();
+
+			//Update sync state indicator
+			this.handleSyncState();
+
 			var errorNum = devapp.deviceModel.getProperty("/errorNum");
 			if (errorNum > 0) {
 				if (!this._errDlg) {
@@ -55,6 +70,26 @@ sap.ui.define([
 				MessageBox.alert(JSON.stringify(devapp.devLogon.appOfflineStore.callbackError));
 			}
 			devapp.devLogon.appOfflineStore.callbackError = null;
+		},
+
+		handleDisconnected: function() {
+			//Update syncStatusModel
+			var syncStatusModel = this.getView().getModel("syncStatusModel");
+			syncStatusModel.getData().NetworkConnection = this.getI18nText("offlineCaps");
+			syncStatusModel.refresh();
+		},
+
+		handleConnected: function() {
+			//Update syncStatusModel
+			var syncStatusModel = this.getView().getModel("syncStatusModel");
+			syncStatusModel.getData().NetworkConnection = this.getI18nText("onlineCaps");
+			syncStatusModel.refresh();
+
+			this.handleSyncState();
+		},
+
+		handleSyncState: function() {
+			SyncStateHandler.handleSyncState();
 		},
 
 		onNavtoErrDetail: function(oEvent) {

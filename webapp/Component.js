@@ -47,6 +47,17 @@ sap.ui.define([
 			this.setModel(oModel);
 			devapp.appModel = oModel;
 
+			//Create sync status model
+			var syncStatusModel = new sap.ui.model.json.JSONModel({
+				SyncState: "",
+				LastSyncTime: "",
+				NetworkConnection: "",
+				PendingLocalData: false,
+				Errors: []
+			});
+			syncStatusModel.setDefaultBindingMode("TwoWay");
+			this.setModel(syncStatusModel, "syncStatusModel");
+
 			// set device model
 			var oDeviceModel = new JSONModel({
 				isTouch: Device.support.touch,

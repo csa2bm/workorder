@@ -1,23 +1,18 @@
 <core:View controllerName="com.twobm.mobileworkorder.components.workOrderList.WorkOrderList" xmlns:core="sap.ui.core"
-	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
 	<App class="wordOrderListClass">
 		<Page title="{i18n>WorkOrderListPageTitle}">
-			<customHeader>
-				<Bar>
-					<!--
-				<contentLeft>
-					<core:Icon src="sap-icon://overlay" color="green" class="sapUiTinyMarginBegin"/>
-				</contentLeft>
-				-->
-					<contentMiddle>
-						<Text text="{i18n>WorkOrderListHeaderTitle}"/>
-					</contentMiddle>
-					<contentRight>
-						<Button icon="sap-icon://drop-down-list" press="handleViewSettingsDialogButtonPressed"/>
-					</contentRight>
-				</Bar>
-				<!--<Button icon="sap-icon://overlay" color="red" press="handleViewSettingsDialogButtonPressed"/>-->
-			</customHeader>
+		<headerContent>
+			<l:HorizontalLayout>
+				<!--<Label text="{i18n>testsystem}" visible="{parts:[{path:'syncStatusModel>/SyncState'}],formatter:'.showTestSystemIndicator'}" class="italicRed sapUiSmallMarginEnd headerBusyIndicatorTopMargin"/>-->
+				<BusyIndicator id="syncBusyIndicator" visible="false" class="sapUiSmallMarginEnd headerBusyIndicatorTopMargin"/>
+				<core:Icon id="syncIndicator" class="sapUiSmallMarginEnd"
+					color="{parts:[{path:'syncStatusModel>/PendingLocalData'}],formatter:'.getSyncStatusIconColor'}" noTabStop="true"
+					press="showSyncQuickview" src="sap-icon://overlay"
+					tooltip="Sync status"></core:Icon>
+				<core:Icon class="sapUiSmallMarginEnd" noTabStop="true" press="handleViewSettingsDialogButtonPressed" src="sap-icon://drop-down-list"/>
+			</l:HorizontalLayout>
+		</headerContent>
 			<content>
 				<Table id="workOrderTableId" items="{/OrderSet}" noDataText="No Work Orders" showSeparators="true" class="workOrderListTableClass">
 					<columns>

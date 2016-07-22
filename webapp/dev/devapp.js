@@ -42,7 +42,7 @@ sap.ui.define([
 					StatusBar.styleDefault();
 					StatusBar.overlaysWebView(false);
 				}
-		
+
 				var that = this;
 
 				//get offline definingRequests
@@ -66,6 +66,9 @@ sap.ui.define([
 								that.offline = true;
 								if (navigator.connection.type !== Connection.NONE) {
 									that.isOnline = true;
+
+									var eventBus = sap.ui.getCore().getEventBus();
+									eventBus.publish("DeviceOnline");
 								}
 							} else {
 								that.offline = false;
@@ -100,6 +103,9 @@ sap.ui.define([
 				this.deviceModel.setProperty("/isOffline", false);
 			}
 			this.isOnline = true;
+
+			var eventBus = sap.ui.getCore().getEventBus();
+			eventBus.publish("DeviceOnline");
 		},
 
 		//========================================================================
@@ -111,6 +117,9 @@ sap.ui.define([
 				this.deviceModel.setProperty("/isOffline", true);
 			}
 			this.isOnline = false;
+
+			var eventBus = sap.ui.getCore().getEventBus();
+			eventBus.publish("DeviceOffline");
 		},
 
 		/**
