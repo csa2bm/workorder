@@ -52,7 +52,7 @@ sap.ui.define([
 		},
 
 		setInitialSorting: function() {
-			var oTable = this.getView().byId("orderList");
+			var oTable = this.getView().byId("workOrderTableId");
 			var oBinding = oTable.getBinding("items");
 
 			var aSorters = [];
@@ -136,7 +136,7 @@ sap.ui.define([
 			self.setSyncIndicators(false);
 
 			//Update items in table
-			self.getView().byId("orderList").getBinding("items").refresh(true);
+			self.getView().byId("workOrderTableId").getBinding("items").refresh(true);
 		},
 
 		syncFailed: function() {
