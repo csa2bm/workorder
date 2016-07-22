@@ -7,8 +7,8 @@
 					uploadOnChange="true" uploadComplete="onUploadComplete" class="sapUiSmallMarginEnd"/>-->
 			<Button id="cameraButton" visible="true" class="sapUiMediumMarginEnd" icon="sap-icon://camera" press="capturePhoto"></Button>
 		</l:HorizontalLayout>
-		<Table id="attachmentsList" titel="{i18n>attachments}" items="{ path: 'OrderAttachments', sorter: { path: 'CreateDate', descending: true}}"
-			noDataText="{i18n>noAttachmentsAdded}">
+		<Table id="attachmentsList" delete="deleteAttachment" mode="Delete" titel="{i18n>attachments}" items="{ path: 'OrderAttachments'}" 
+			noDataText="{i18n>noAttachmentsAdded}"><!--, sorter: { path: 'CreateDate', descending: true} -->
 			<columns>
 				<!-- Icon column -->
 				<Column demandPopin="true" popinDisplay="WithoutHeader" width="1rem"/>
@@ -22,7 +22,6 @@
 						<Label text="{i18n>attachmentCreatedBy}"/>
 					</header>
 				</Column>
-				<Column demandPopin="true" popinDisplay="WithoutHeader" width="1rem"/>
 			</columns>
 			<items>
 				<ColumnListItem type="Active" press="clickPreviewAttachment">
@@ -30,8 +29,6 @@
 						<core:Icon id="attachmentListImageIcon" class="sapUiSmallMarginEnd" noTabStop="true" size="2em" src="sap-icon://picture"/>
 						<ObjectIdentifier text="{parts:[{path:'CreateDate'}],type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MMM-yyyy'}}"/>
 						<ObjectIdentifier text="{CreatedBy}"/>
-						<!--<core:Icon noTabStop="true" color="Green" src="{parts:[{path:'IncludeInReport'}],formatter:'com.twobm.wmoa.util.Formatter.isAttachmentIncludedInReport'}"/>-->
-						<core:Icon class="sapUiSmallMarginEnd" color="DarkRed" noTabStop="true" press="onDeleteFile" size="1.5em" src="sap-icon://delete"/>
 					</cells>
 				</ColumnListItem>
 			</items>

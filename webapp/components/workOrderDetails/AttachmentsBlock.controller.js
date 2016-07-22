@@ -28,8 +28,7 @@ sap.ui.define([
 				}, {
 					quality: 20,
 					destinationType: oNav.DestinationType.DATA_URL, //Base64
-					saveToPhotoAlbum: false,
-					allowEdit: true
+					saveToPhotoAlbum: false
 				});
 		},
 
@@ -54,6 +53,38 @@ sap.ui.define([
 			var createPath = "/OrderSet(Orderid='" + orderNo + "')/OrderAttachments";
 
 			self.getView().getModel().create(createPath, dataCreate, parameters);
+		},
+		deleteAttachment: function(e) {
+			var deletePath = e.getParameter('listItem').getBindingContext().getPath();
+
+			var message = this.getI18nText("deleteAttachmentMessageText");// + " " + e.getSource().getBindingContext().getObject().Filename;
+			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+
+			var that = this;
+			sap.m.MessageBox.show(message, {
+				icon: sap.m.MessageBox.Icon.None,
+				title: this.getI18nText("deleteAttachmentMessageHeader"),
+				actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+				defaultAction: sap.m.MessageBox.Action.NO,
+				styleClass: bCompact ? "sapUiSizeCompact" : "",
+				onClose: function(oAction, object) {
+					if (oAction === sap.m.MessageBox.Action.YES) {
+
+						var oModel = that.getView().getModel();
+
+						var parameters = {
+							//context: context,
+							eTag: "*",
+							success: function(oData, response) {
+								that.getView().byId("attachmentsList").getBinding("items").refresh(true);
+							},
+							error: this.errorCallBackShowInPopUp
+						};
+
+						oModel.remove(deletePath, parameters);
+					}
+				}
+			});
 		}
 	});
 });

@@ -3,7 +3,7 @@ jQuery.sap.declare("com.twobm.mobileworkorder.util.Globalization");
 com.twobm.mobileworkorder.util.Globalization = {
 
 	geti18NResourceBundle: function() {
-		var bundleUrl = "i18n/i18n.properties";
+		var bundleUrl = "i18n/messageBundle.properties";
 
 		var i18nModel = new sap.ui.model.resource.ResourceModel({
 			bundleUrl: bundleUrl
