@@ -12,8 +12,8 @@
 		<items>
 			<ColumnListItem type="Navigation">
 				<cells>
-					<ObjectIdentifier text="{Equidescr}" title="{Equipment}"/>
 					<ObjectIdentifier text="{Funcldescr}" title="{FunclocDisp}"/>
+					<ObjectIdentifier text="{ShortText}" title="{Equipment}"/>
 				</cells>
 			</ColumnListItem>
 		</items>
