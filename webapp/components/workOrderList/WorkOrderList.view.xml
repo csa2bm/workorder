@@ -23,7 +23,7 @@
 					<columns>
 						<Column width="8em">
 							<header>
-								<Label text="{i18n>WorkOrderListColumnDateTimeHeaderLabel}"/>
+								<Label text="{i18n>WorkOrderListColumnDateHeaderLabel}"/>
 							</header>
 						</Column>
 						<Column>
