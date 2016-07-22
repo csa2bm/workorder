@@ -2,17 +2,15 @@
 	xmlns:layout="sap.ui.layout" xmlns:m="sap.m" xmlns:blocks="com.twobm.mobileworkorder.components.workOrderDetails.blocks"
 	height="100%">
 	<m:Page showNavButton="true" navButtonPress="onNavigationButtonPress" title="{i18n>WorkOrderDetailsTitle}">
-		<layout:VerticalLayout class="sapUiContentPadding" width="100%">
-		<!-- Uncomment list below and make it dynamic
-		<m:List id="errorList" items="{ path: 'syncStatusModel>/Errors'}">
-		-->
 		<!--
+		<layout:VerticalLayout class="sapUiContentPadding" width="100%">
+		Uncomment list below and make it dynamic
+		<m:List id="errorList" items="{ path: 'syncStatusModel>/Errors'}">
+		
 		And add formater for NotificationListItem for the property relavant for types: 
 		1. warning message
 		2. error message
-		-->
 		
-		<!--
 		<m:NotificationListItem
 		title="Error from server"
 		description="Work order was blocked by SUJ"
@@ -21,8 +19,7 @@
 		priority="High"
 		unread="true">
 		</m:NotificationListItem>
-		-->
-		<!--
+	
 		<m:NotificationListItem
 		title="Warning from server"
 		description="Used more materials than in stock"
@@ -31,11 +28,10 @@
 		priority="Medium"
 		unread="true">
 		</m:NotificationListItem>
-			-->
-		<!--
+	
 		</m:list>
-		-->
 		</layout:VerticalLayout>
+		-->
 		<ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="false">
 			<headerTitle>
 				<ObjectPageHeader objectTitle="{parts:['i18n>HeaderTitle', {path:'Orderid'}, {path:'ShortText'}],formatter:'.getI18nTextReplace2'}">
