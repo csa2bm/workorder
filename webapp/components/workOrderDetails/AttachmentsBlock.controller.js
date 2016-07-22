@@ -1,5 +1,5 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller"
+	"com/twobm/mobileworkorder/util/Controller"
 ], function(Controller) {
 	"use strict";
 
@@ -14,47 +14,46 @@ sap.ui.define([
 		//
 		//	},
 
-		/**
-		 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
-		 * (NOT before the first rendering! onInit() is used for that one!).
-		 * @memberOf com.twobm.mobileworkorder.components.workOrderDetails.view.AttachmentsBlock
-		 */
-		//	onBeforeRendering: function() {
-		//
-		//	},
-
-		/**
-		 * Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.
-		 * This hook is the same one that SAPUI5 controls get after being rendered.
-		 * @memberOf com.twobm.mobileworkorder.components.workOrderDetails.view.AttachmentsBlock
-		 */
-		//	onAfterRendering: function() {
-		//
-		//	},
-
-		/**
-		 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
-		 * @memberOf com.twobm.mobileworkorder.components.workOrderDetails.view.AttachmentsBlock
-		 */
-		//	onExit: function() {
-		//
-		//	}
-
 		clickPreviewAttachment: function(oEvent) {
-			//self = this;
 			var currentObject = oEvent.getSource().getBindingContext().getObject();
 
-			// var localObjectUri = "";
-
-			// if (currentObject) {
-
-			// 	if (currentObject['@com.sap.vocabularies.Offline.v1.islocal']) {
-			// 		var serviceUrl = oEvent.getSource().getModel().sServiceUrl;
-			// 		localObjectUri = currentObject.__metadata.uri.replace(serviceUrl, "");
-			// 	}
-			// }
-			
 			window.open("data:image/jpeg;base64," + currentObject.Data, "_blank");
+		},
+
+		capturePhoto: function() {
+			self = this;
+			var oNav = navigator.camera;
+			oNav.getPicture(this.onPhotoCaptureSuccess,
+				function() { //Nothing happens when cancel photo input
+				}, {
+					quality: 20,
+					destinationType: oNav.DestinationType.DATA_URL, //Base64
+					saveToPhotoAlbum: false,
+					allowEdit: true
+				});
+		},
+
+		onPhotoCaptureSuccess: function(file) {
+			var orderNo = self.getView().getBindingContext().getObject().Orderid;
+
+			var parameters = {
+				success: function(oData, response) {
+					var X = 0;
+					self.getView().byId("attachmentsList").getBinding("items").refresh(true);
+				},
+				error: self.errorCallBackShowInPopUp
+			};
+
+			var dataCreate = {
+				Orderid: orderNo,
+				Data: file,
+				CreateDate: new Date(),
+				CreatedBy: "current user"
+			};
+
+			var createPath = "/OrderSet(Orderid='" + orderNo + "')/OrderAttachments";
+
+			self.getView().getModel().create(createPath, dataCreate, parameters);
 		}
 	});
 });

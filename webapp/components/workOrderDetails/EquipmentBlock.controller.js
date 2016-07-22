@@ -1,5 +1,5 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller"
+	"com/twobm/mobileworkorder/util/Controller"
 ], function(Controller) {
 	"use strict";
 

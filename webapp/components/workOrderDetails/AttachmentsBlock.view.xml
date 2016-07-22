@@ -12,11 +12,6 @@
 			<columns>
 				<!-- Icon column -->
 				<Column demandPopin="true" popinDisplay="WithoutHeader" width="1rem"/>
-				<Column demandPopin="true" popinDisplay="WithoutHeader" width="3rem">
-					<header>
-						<Label text="{i18n>attachmentDescription}"/>
-					</header>
-				</Column>
 				<Column demandPopin="true" popinDisplay="WithoutHeader" minScreenWidth="Small" width="1rem">
 					<header>
 						<Label text="{i18n>attachmentCreateDate}"/>
@@ -27,22 +22,16 @@
 						<Label text="{i18n>attachmentCreatedBy}"/>
 					</header>
 				</Column>
-				<Column demandPopin="true" popinDisplay="Inline" minScreenWidth="Small" width="0.5rem">
-					<header>
-						<Label text="{i18n>attachmentIncludedInReport}"/>
-					</header>
-				</Column>
+				<Column demandPopin="true" popinDisplay="WithoutHeader" width="1rem"/>
 			</columns>
 			<items>
 				<ColumnListItem type="Active" press="clickPreviewAttachment">
 					<cells>
 						<core:Icon id="attachmentListImageIcon" class="sapUiSmallMarginEnd" noTabStop="true" size="2em" src="sap-icon://picture"/>
-						<ObjectIdentifier text="{Description}"/>
-						<!--<Link text="{Filename}" press="clickPreviewAttachment"/>-->
 						<ObjectIdentifier text="{parts:[{path:'CreateDate'}],type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MMM-yyyy'}}"/>
 						<ObjectIdentifier text="{CreatedBy}"/>
 						<!--<core:Icon noTabStop="true" color="Green" src="{parts:[{path:'IncludeInReport'}],formatter:'com.twobm.wmoa.util.Formatter.isAttachmentIncludedInReport'}"/>-->
-						<!--<core:Icon class="sapUiSmallMarginEnd" color="DarkRed" noTabStop="true" press="onDeleteFile" size="1.5em" src="sap-icon://delete"/>-->
+						<core:Icon class="sapUiSmallMarginEnd" color="DarkRed" noTabStop="true" press="onDeleteFile" size="1.5em" src="sap-icon://delete"/>
 					</cells>
 				</ColumnListItem>
 			</items>
