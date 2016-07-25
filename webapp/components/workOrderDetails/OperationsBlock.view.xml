@@ -8,17 +8,19 @@
 			<Column demandPopin="false" minScreenWidth="Tablet">
 				<Text text="{i18n>OperationBlockColoumWorkActivty}"/>
 			</Column>
-			<Column hAlign="Right" demandPopin="true">
+			<Column hAlign="Center" demandPopin="true">
 				<Text text="{i18n>OperationBlockColoumCompleted}"/>
 			</Column>
+			<Column width="1.5em" vAlign="Middle"></Column>
 		</columns>
 		<items>
-			<ColumnListItem type="Navigation">
+			<ColumnListItem type="Active">
 				<cells>
 					<ObjectIdentifier text="{Description}" title="{Activity}"/>
 					<ObjectNumber number="{WorkActivity}" unit="{Unit}" state="Success"/>
 					<core:Icon src="{parts:[{path:'Complete'}],formatter:'.formatter.operationStatus'}"
 								color="{parts:[{path:'Complete'}],formatter:'.formatter.opStatusColor'}"></core:Icon>
+					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 				</cells>
 			</ColumnListItem>
 		</items>
