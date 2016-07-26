@@ -11,10 +11,9 @@
 			<Column>
 				<Text text="{i18n>ComponentsBlockColoumWithdrawn}"/>
 			</Column>
-			<Column width="1.5em" vAlign="Middle"></Column>
 		</columns>
 		<items>
-			<ColumnListItem type="Active">
+			<ColumnListItem>
 				<cells>
 					<ObjectIdentifier text="{MaterialDescription}" title="{Material}"/>
 					<Text text="{ReqQuantity}"/>
