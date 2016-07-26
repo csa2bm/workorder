@@ -34,7 +34,7 @@
 		-->
 		<ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="false">
 			<headerTitle>
-				<ObjectPageHeader objectTitle="{parts:['i18n>HeaderTitle', {path:'Orderid'}, {path:'ShortText'}],formatter:'.getI18nTextReplace2'}">
+				<ObjectPageHeader headerDesign="Dark" objectTitle="{parts:['i18n>HeaderTitle', {path:'Orderid'}, {path:'ShortText'}],formatter:'.getI18nTextReplace2'}">
 					
 				</ObjectPageHeader>
 			</headerTitle>
@@ -62,6 +62,15 @@
 						<ObjectPageSubSection title="{i18n>SubSectionTitleObjects}">
 							<blocks>
 								<blocks:EquipmentBlock/>
+							</blocks>
+						</ObjectPageSubSection>
+					</subSections>
+				</ObjectPageSection>
+					<ObjectPageSection title="{i18n>SubSectionTitleComponents}">
+					<subSections>
+						<ObjectPageSubSection title="{i18n>SubSectionTitleComponents}">
+							<blocks>
+								<blocks:ComponentsBlock/>
 							</blocks>
 						</ObjectPageSubSection>
 					</subSections>
