@@ -13,7 +13,6 @@ sap.ui.define([
 		 */
 		onInit: function() {
 			var oEventBus = this.getEventBus();
-			//oEventBus.subscribe("OfflineStore", "Refreshing", this.onRefreshing, this);
 			oEventBus.subscribe("OfflineStore", "Synced", this.syncFinished, this);
 			oEventBus.subscribe("DeviceOnline", this.handleConnected, this);
 			oEventBus.subscribe("DeviceOffline", this.handleDisconnected, this);
@@ -28,27 +27,12 @@ sap.ui.define([
 		},
 
 		/**
-		 * UI5 OfflineStore channel Refreshing event handler, refreshing the offline store data
-		 */
-		// onRefreshing: function() {
-		// 	if (devapp.isOnline) {
-		// 		this.getView().setBusy(true);
-		// 		//ask refreshing store after flush
-		// 		devapp.refreshing = true;
-		// 		if (devapp.devLogon) {
-		// 			devapp.devLogon.flushAppOfflineStore();
-		// 		}
-		// 	} else {
-		// 		this.getView().getModel().refresh();
-		// 	}
-		// },
-
-		/**
 		 * UI5 OfflineStore channel Synced event handler, after refreshing offline store, refresh data model
 		 */
 		syncFinished: function() {
+			sap.m.MessageToast.show("Sync fin 1");
+			
 			this.getView().getModel().refresh();
-			//this.getView().setBusy(false);
 
 			//Update syncStatusModel
 			var syncStatusModel = this.getView().getModel("syncStatusModel");
@@ -73,18 +57,9 @@ sap.ui.define([
 		},
 
 		handleDisconnected: function() {
-			//Update syncStatusModel
-			var syncStatusModel = this.getView().getModel("syncStatusModel");
-			syncStatusModel.getData().NetworkConnection = this.getI18nText("offlineCaps");
-			syncStatusModel.refresh();
 		},
 
 		handleConnected: function() {
-			//Update syncStatusModel
-			var syncStatusModel = this.getView().getModel("syncStatusModel");
-			syncStatusModel.getData().NetworkConnection = this.getI18nText("onlineCaps");
-			syncStatusModel.refresh();
-
 			this.handleSyncState();
 		},
 

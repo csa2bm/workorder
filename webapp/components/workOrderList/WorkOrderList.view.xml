@@ -7,7 +7,7 @@
 				<!--<Label text="{i18n>testsystem}" visible="{parts:[{path:'syncStatusModel>/SyncState'}],formatter:'.showTestSystemIndicator'}" class="italicRed sapUiSmallMarginEnd headerBusyIndicatorTopMargin"/>-->
 				<BusyIndicator id="syncBusyIndicator" visible="false" class="sapUiSmallMarginEnd headerBusyIndicatorTopMargin"/>
 				<core:Icon id="syncIndicator" class="sapUiSmallMarginEnd"
-					color="{parts:[{path:'syncStatusModel>/PendingLocalData'}],formatter:'.getSyncStatusIconColor'}" noTabStop="true"
+					color="{'syncStatusModel>/SyncColor'}" noTabStop="true"
 					press="showSyncQuickview" src="sap-icon://overlay"
 					tooltip="Sync status"></core:Icon>
 				<core:Icon class="sapUiSmallMarginEnd" noTabStop="true" press="handleViewSettingsDialogButtonPressed" src="sap-icon://drop-down-list"/>

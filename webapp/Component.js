@@ -49,9 +49,8 @@ sap.ui.define([
 
 			//Create sync status model
 			var syncStatusModel = new sap.ui.model.json.JSONModel({
-				SyncState: "",
+				SyncColor: "",
 				LastSyncTime: "",
-				NetworkConnection: "",
 				PendingLocalData: false,
 				Errors: []
 			});

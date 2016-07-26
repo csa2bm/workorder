@@ -5,7 +5,13 @@ sap.ui.define([
 
 	return {
 		handleSyncState: function() {
+			var syncStatusModel = sap.ui.getCore().getComponent("__component0").getModel("syncStatusModel");
+
 			if (window.sap_webide_FacadePreview) {
+
+				syncStatusModel.getData().SyncColor = "green"; //Always online
+				syncStatusModel.refresh();
+
 				//Not sync when online in webide
 				return;
 			}
@@ -22,7 +28,6 @@ sap.ui.define([
 
 				OData.read(request,
 					function(data, response) {
-						var syncStatusModel = sap.ui.getCore().getComponent("__component0").getModel("syncStatusModel");
 
 						var inErrorState = false;
 
@@ -32,9 +37,6 @@ sap.ui.define([
 							inErrorState = true;
 
 							//var errorMessage = JSON.parse(data.results[0].Message);
-
-							//Errors has occured in sync with server
-							syncStatusModel.getData().SyncState = self.getI18nText("syncError");
 
 							data.results.forEach(function(entry) {
 
@@ -72,21 +74,18 @@ sap.ui.define([
 								if (!status.isEmpty) {
 									//There is data pending sync in db
 
-									//Do not overwrite error state if that is present
-									//Error state is most important
-									if (!inErrorState) {
-										//Data created offline is awaiting sync with server
-										syncStatusModel.getData().SyncState = self.getI18nText("syncDataPending");
-									}
 									syncStatusModel.getData().PendingLocalData = true;
+									syncStatusModel.getData().SyncColor = "yellow";
 								} else {
 									syncStatusModel.getData().PendingLocalData = false;
 
-									if (!inErrorState) {
-										//Everything is ok
-										syncStatusModel.getData().SyncState = self.getI18nText("syncOk");
+									if (devApp.isOnline) {
+										syncStatusModel.getData().SyncColor = "green";
+									} else {
+										syncStatusModel.getData().SyncColor = "grey";
 									}
 								}
+								syncStatusModel.refresh();
 							},
 							function(e) {
 								//var x = 0;

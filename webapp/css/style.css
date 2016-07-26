@@ -1,3 +1,7 @@
 .spacerTop {
     margin-top: 2rem;
 }
+
+.headerBusyIndicatorTopMargin {
+    margin-top: 1.5rem !important;
+}

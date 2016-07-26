@@ -218,11 +218,6 @@ sap.ui.define([
 				var that = this;
 				this.appOfflineStore.store = sap.OData.createOfflineStore(properties);
 
-				// var busyDL = new BusyDialog();
-				// busyDL.setTitle("Open Offline Store");
-				// busyDL.setText("creating application offline store...");
-				// busyDL.open();
-				
 				var busyDL = new BusyDialog();
 				busyDL.setTitle("Downloading data from server");
 				busyDL.setText("Please wait...");
@@ -258,22 +253,38 @@ sap.ui.define([
 			var oEventBus = sap.ui.getCore().getEventBus();
 			var that = this;
 			if (this.devapp.isOnline) {
-				//this.appOfflineStore.startTimeRefresh = new Date();
-				this.appOfflineStore.store.refresh(
-					function() {
-						//reset
-						that.devapp.refreshing = false;
-						//publish ui5 offlineStore Synced event
-						oEventBus.publish("OfflineStore", "Synced");
-					},
-					function(e) {
-						//reset
-						that.devapp.refreshing = false;
-						//save the error
-						that.appOfflineStore.callbackError = e;
-						//publish ui5 offlineStore Synced event
-						oEventBus.publish("OfflineStore", "Synced");
-					});
+				if (!this.refreshing) {
+					this.refreshing = true;
+
+					//this.appOfflineStore.startTimeRefresh = new Date();
+					this.appOfflineStore.store.refresh(
+						function() {
+							//reset
+							that.refreshing = false;
+							//publish ui5 offlineStore Synced event
+							oEventBus.publish("OfflineStore", "Synced");
+						},
+						function(e) {
+							//reset
+							that.refreshing = false;
+							//save the error
+							that.appOfflineStore.callbackError = e;
+							
+							console.log(e);
+							
+							//publish ui5 offlineStore Synced event
+							oEventBus.publish("OfflineStore", "Synced");
+
+							sap.m.MessageBox.show(
+								"Possible reasons:\n- Network connection were lost while communicating\n- Your user is locked or not active on the server\n- The password you entered in the application configuration is different from your user password on the server\n\nIf this continue to occur contact your solution administrator.", {
+									icon: sap.m.MessageBox.Icon.Error,
+									title: "Error occured while communicating with server",
+									actions: [sap.m.MessageBox.Action.OK]
+								}
+							);
+
+						});
+				}
 			}
 		},
 
@@ -286,20 +297,33 @@ sap.ui.define([
 			if (!this.appOfflineStore.store) {
 				return;
 			}
+
 			if (this.devapp.isOnline) {
-				var that = this;
-				//this.appOfflineStore.startTimeRefresh = new Date();
-				this.appOfflineStore.store.flush(
-					function() {
-						//check offline error
-						that.readOfflineErrorArchieve();
-					},
-					function(e) {
-						//save the error
-						that.appOfflineStore.callbackError = e;
-						//check offline error
-						that.readOfflineErrorArchieve();
-					});
+				if (!this.isFlushing) {
+					this.isFlushing = true;
+
+					var that = this;
+					//this.appOfflineStore.startTimeRefresh = new Date();
+					this.appOfflineStore.store.flush(
+						function() {
+							that.isFlushing = false;
+
+							that.refreshAppOfflineStore();
+
+							//check offline error
+							that.readOfflineErrorArchieve();
+						},
+						function(e) {
+							that.isFlushing = false;
+							
+							that.refreshAppOfflineStore();
+
+							//save the error
+							that.appOfflineStore.callbackError = e;
+							//check offline error
+							that.readOfflineErrorArchieve();
+						});
+				}
 			}
 		},
 

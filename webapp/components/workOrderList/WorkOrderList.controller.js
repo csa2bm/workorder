@@ -14,11 +14,10 @@ sap.ui.define([
 			var sName = oEvent.getParameter("name");
 
 			//Is it this page we have navigated to?
-			if (sName !== "workorderlist") {
+			if (sName !== "workOrderList") {
 				//We navigated to another page - unsubscribe to events for this page
 				this.getEventBus().unsubscribe("OfflineStore", "Synced", this.syncCompleted, this);
 				this.getEventBus().unsubscribe("DeviceOnline", this.deviceWentOnline, this);
-				this.getEventBus().unsubscribe("OfflineStore", "Refreshing", this.flushAndRefresh, this);
 				return;
 			}
 
@@ -26,7 +25,6 @@ sap.ui.define([
 
 			this.getEventBus().subscribe("OfflineStore", "Synced", this.syncCompleted, this);
 			this.getEventBus().subscribe("DeviceOnline", this.deviceWentOnline, this);
-			this.getEventBus().subscribe("OfflineStore", "Refreshing", this.flushAndRefresh, this);
 
 			this.getEventBus().publish("UpdateSyncState");
 
@@ -127,6 +125,8 @@ sap.ui.define([
 		},
 
 		syncCompleted: function() {
+			sap.m.MessageToast.show("Sync fin 2");
+
 			if (window.sap_webide_FacadePreview) {
 				self.unSubscribeToOnlineSyncEvents();
 			} else {
@@ -161,9 +161,10 @@ sap.ui.define([
 						//Show sync busy indicator
 						self.setSyncIndicators(true);
 
-						this.getEventBus().publish("OfflineStore", "Refreshing");
+						self.flushAndRefresh();
+						//this.getEventBus().publish("OfflineStore", "Refreshing");
 					} else {
-						sap.m.MessageToast.show("Offline: not able to sync");
+						//sap.m.MessageToast.show("Offline: not able to sync");
 						model.refresh();
 					}
 				} else {
@@ -174,9 +175,10 @@ sap.ui.define([
 					if (devApp.isOnline) {
 						self.setSyncIndicators(true);
 
-						this.getEventBus().publish("OfflineStore", "Refreshing");
+						self.flushAndRefresh();
+						//this.getEventBus().publish("OfflineStore", "Refreshing");
 					} else {
-						sap.m.MessageToast.show("Offline: not able to sync");
+						//sap.m.MessageToast.show("Device is ");
 						model.refresh();
 					}
 				} else {
@@ -201,7 +203,7 @@ sap.ui.define([
 			if (devApp.isOnline) {
 				//console.log("refreshing oData Model with offline store");
 				//ask refreshing store after flush
-				devApp.refreshing = true;
+				//devApp.refreshing = true;
 				if (devApp.devLogon) {
 					//console.log("refreshing offline store");
 					devApp.devLogon.flushAppOfflineStore();
@@ -210,29 +212,6 @@ sap.ui.define([
 				//Update data in views
 				this.getView().getModel().refresh();
 			}
-		},
-
-		getSyncStatusIconColor: function(pendingLocalData) {
-
-			if (pendingLocalData) {
-				return "yellow";
-			} else {
-				if (devApp.isOnline) {
-						return "green";
-				} else {
-					return "grey";
-				}
-
-			}
-
-			// if (state === Globalization.geti18NText("syncDataPending")) {
-			// 	return "orange";
-			// }
-			// if (state === Globalization.geti18NText("syncError")) {
-			// 	return "red";
-			// } else {
-			// 	return "black";
-			// }
 		}
 	});
 });
