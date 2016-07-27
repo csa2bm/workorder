@@ -1,0 +1,28 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns="sap.m">
+	<ResponsivePopover class="sapUiPopupWithPadding" placement="Left" title="{i18n>dataSyncPopupHeader}">
+		<content>
+			<l:VerticalLayout>
+				<l:HorizontalLayout class="sapUiTinyMarginTopBottom">
+				<core:Icon class="sapUiSmallMarginEnd"
+					color="{syncStatusModel>/SyncColor}" size="3em" noTabStop="true" src="sap-icon://overlay"></core:Icon><VBox>
+						<Label class="syncStatusTextBig" text="{syncStatusModel>/SyncState}"/>
+					</VBox>
+				</l:HorizontalLayout>
+				<l:HorizontalLayout>
+					<Label class="syncStatusText sapUiSmallMarginEnd" text="{i18n>lastSyncLabel}"/>
+					<Label class="syncStatusTextBold" id="lastSyncTime" text="{syncStatusModel>/LastSyncTime}"/>
+				</l:HorizontalLayout>
+				<l:HorizontalLayout>
+					<Label class="syncStatusText sapUiSmallMarginEnd" text="{i18n>networkConnectionLabel}"/>
+					<Label class="syncStatusTextBold" id="connectionState" text="{syncStatusModel>/NetworkConnection}"/>
+				</l:HorizontalLayout>
+				<l:HorizontalLayout>
+					<Label class="syncStatusText sapUiSmallMarginEnd" text="{i18n>pendingDataLabel}"/>
+					<Label class="syncStatusTextBold" id="localDataSyncState" text="{syncStatusModel>/PendingLocalData}"/>
+				</l:HorizontalLayout>
+        		<Button text="Error list" press="openErrorsView"></Button>
+        		<Button text="Synchronize" press="synchronizeData"></Button>
+			</l:VerticalLayout>
+		</content>
+	</ResponsivePopover>
+</core:FragmentDefinition>

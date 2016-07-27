@@ -125,8 +125,6 @@ sap.ui.define([
 		},
 
 		syncCompleted: function() {
-			sap.m.MessageToast.show("Sync fin 2");
-
 			if (window.sap_webide_FacadePreview) {
 				self.unSubscribeToOnlineSyncEvents();
 			} else {
@@ -212,6 +210,39 @@ sap.ui.define([
 				//Update data in views
 				this.getView().getModel().refresh();
 			}
+		},
+
+		showSyncQuickview: function(oEvent) {
+			//if (!window.sap_webide_FacadePreview) {
+				this.createPopover();
+
+				// delay because addDependent will do a async rerendering and the actionSheet will immediately close without it.
+				var oButton = oEvent.getSource();
+				jQuery.sap.delayedCall(0, this, function() {
+					this._syncQuickView.openBy(oButton);
+				});
+		//	}
+		},
+
+		createPopover: function() {
+			if (!this._syncQuickView) {
+				this._syncQuickView = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.workOrderList.controls.SyncQuickView", this);
+				this.getView().addDependent(this._syncQuickView);
+			}
+		},
+
+		synchronizeData: function() {
+			if (!this._syncQuickView) {
+				this._syncQuickView.close();
+			}
+
+			if (window.sap_webide_FacadePreview) {
+				this.subscribeToOnlineSyncEvents();
+			}
+
+			this.setSyncIndicators(true);
+
+			this.flushAndRefresh();
 		}
 	});
 });

@@ -17,7 +17,7 @@ sap.ui.define([
 			oEventBus.subscribe("DeviceOnline", this.handleConnected, this);
 			oEventBus.subscribe("DeviceOffline", this.handleDisconnected, this);
 
-			oEventBus.subscribe("UpdateSyncState", this.handleSyncState, this);
+			oEventBus.subscribe("UpdateSyncState", SyncStateHandler.handleSyncState, this);
 
 			oEventBus.subscribe("OfflineStore", "OpenErrDialog", this.openErrDialog, this);
 			this._sErrorText = this.getResourceBundle().getText("errorText");
@@ -30,8 +30,6 @@ sap.ui.define([
 		 * UI5 OfflineStore channel Synced event handler, after refreshing offline store, refresh data model
 		 */
 		syncFinished: function() {
-			sap.m.MessageToast.show("Sync fin 1");
-			
 			this.getView().getModel().refresh();
 
 			//Update syncStatusModel
@@ -41,7 +39,7 @@ sap.ui.define([
 			syncStatusModel.refresh();
 
 			//Update sync state indicator
-			this.handleSyncState();
+			SyncStateHandler.handleSyncState();
 
 			var errorNum = devapp.deviceModel.getProperty("/errorNum");
 			if (errorNum > 0) {
@@ -57,13 +55,10 @@ sap.ui.define([
 		},
 
 		handleDisconnected: function() {
+			SyncStateHandler.handleSyncState();
 		},
 
 		handleConnected: function() {
-			this.handleSyncState();
-		},
-
-		handleSyncState: function() {
 			SyncStateHandler.handleSyncState();
 		},
 

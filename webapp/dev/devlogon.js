@@ -269,9 +269,9 @@ sap.ui.define([
 							that.refreshing = false;
 							//save the error
 							that.appOfflineStore.callbackError = e;
-							
+
 							console.log(e);
-							
+
 							//publish ui5 offlineStore Synced event
 							oEventBus.publish("OfflineStore", "Synced");
 
@@ -315,7 +315,7 @@ sap.ui.define([
 						},
 						function(e) {
 							that.isFlushing = false;
-							
+
 							that.refreshAppOfflineStore();
 
 							//save the error
@@ -324,6 +324,14 @@ sap.ui.define([
 							that.readOfflineErrorArchieve();
 						});
 				}
+			}
+		},
+
+		isOfflineStoreOpen: function() {
+			if (this.appOfflineStore.store) {
+				return true;
+			} else {
+				return false;
 			}
 		},
 

@@ -8,9 +8,8 @@ sap.ui.define([
 			var syncStatusModel = sap.ui.getCore().getComponent("__component0").getModel("syncStatusModel");
 
 			if (window.sap_webide_FacadePreview) {
-
 				syncStatusModel.getData().SyncColor = "green"; //Always online
-				syncStatusModel.refresh();
+				syncStatusModel.refresh(true);
 
 				//Not sync when online in webide
 				return;
@@ -28,7 +27,6 @@ sap.ui.define([
 
 				OData.read(request,
 					function(data, response) {
-
 						var inErrorState = false;
 
 						syncStatusModel.getData().Errors = [];
@@ -68,6 +66,7 @@ sap.ui.define([
 							});
 						}
 
+
 						//Check if there is data pending sync in the offline db
 						devApp.devLogon.appOfflineStore.store.getRequestQueueStatus(
 							function(status) {
@@ -85,14 +84,15 @@ sap.ui.define([
 										syncStatusModel.getData().SyncColor = "grey";
 									}
 								}
-								syncStatusModel.refresh();
+								syncStatusModel.refresh(true);
 							},
 							function(e) {
 								//var x = 0;
+								syncStatusModel.refresh(true);
 							}
 						);
 
-						syncStatusModel.refresh();
+						syncStatusModel.refresh(true);
 					}, this.errorCallBack);
 			}
 		},
