@@ -55,10 +55,17 @@ sap.ui.define([
 		},
 
 		handleDisconnected: function() {
+			var syncStatusModel = this.getView().getModel("syncStatusModel");
+			syncStatusModel.getData().Online = false;
+			
 			SyncStateHandler.handleSyncState();
 		},
 
 		handleConnected: function() {
+			var syncStatusModel = this.getView().getModel("syncStatusModel");
+			syncStatusModel.getData().Online = true;
+			//syncStatusModel.refresh(true);
+			
 			SyncStateHandler.handleSyncState();
 		},
 

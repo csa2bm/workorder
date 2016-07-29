@@ -5,3 +5,17 @@
 .headerBusyIndicatorTopMargin {
     margin-top: 1.5rem !important;
 }
+.syncStatusTextBig {
+    margin-top: 10px;
+    font-size: 30px;
+    font-weight: bold;
+}
+.syncStatusText {
+    margin-top: 10px;
+    font-size: 12px;
+}
+.syncStatusTextBold {
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: bold;
+}

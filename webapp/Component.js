@@ -51,6 +51,7 @@ sap.ui.define([
 			var syncStatusModel = new sap.ui.model.json.JSONModel({
 				SyncColor: "",
 				LastSyncTime: "",
+				Online: false,
 				PendingLocalData: false,
 				Errors: []
 			});
@@ -80,6 +81,14 @@ sap.ui.define([
 			//check errorArchive count
 			if (devapp.isLoaded) {
 				devapp.devLogon.getErrorArchiveCount();
+				
+				if ((navigator.network.connection.type).toUpperCase() !== "NONE" &&
+					(navigator.network.connection.type).toUpperCase() !== "UNKNOWN") {
+					devapp.isOnline = true;
+
+					var eventBus = sap.ui.getCore().getEventBus();
+					eventBus.publish("DeviceOnline");
+				}
 			}
 		},
 
