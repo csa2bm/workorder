@@ -5,10 +5,10 @@
 		<Column popinDisplay="Inline">
 				<Text text="{i18n>OperationBlockColoumOperation}"/>
 			</Column>
-			<Column hAlign="Right" demandPopin="false" minScreenWidth="Tablet">
+			<Column hAlign="Center" demandPopin="false" minScreenWidth="Tablet" width="10em" vAlign="Middle">
 				<Text text="{i18n>OperationBlockColoumWorkActivty}"/>
 			</Column>
-			<Column hAlign="Right" demandPopin="true">
+			<Column hAlign="Center" demandPopin="true" width="5em" vAlign="Middle">
 				<Text text="{i18n>OperationBlockColoumCompleted}"/>
 			</Column>
 			<Column width="1.5em" vAlign="Middle"></Column>
