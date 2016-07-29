@@ -98,7 +98,6 @@ sap.ui.define([
 			//var oButton = oEvent.getSource();
 			var oContext = this.getView().getBindingContext();
 			var OrderStatus = this.getView().getModel().getProperty("orderStatus", oContext);
-			OrderStatus = "inProgress";
 			this.setUserStatusTaskStarted(OrderStatus);
 			
 			/*
@@ -176,7 +175,6 @@ sap.ui.define([
 			return btnText;
 		},
 		isOrderNotCompleted: function(sString){
-			sString="complete";
 			if(sString === this.getI18nText("orderStatusCompleted")){
 				return false;
 			}

@@ -5,10 +5,10 @@
 		<Column popinDisplay="Inline">
 				<Text text="{i18n>OperationBlockColoumOperation}"/>
 			</Column>
-			<Column demandPopin="false" minScreenWidth="Tablet">
+			<Column hAlign="Right" demandPopin="false" minScreenWidth="Tablet">
 				<Text text="{i18n>OperationBlockColoumWorkActivty}"/>
 			</Column>
-			<Column hAlign="Center" demandPopin="true">
+			<Column hAlign="Right" demandPopin="true">
 				<Text text="{i18n>OperationBlockColoumCompleted}"/>
 			</Column>
 			<Column width="1.5em" vAlign="Middle"></Column>
@@ -17,7 +17,7 @@
 			<ColumnListItem type="Active">
 				<cells>
 					<ObjectIdentifier text="{Description}" title="{Activity}"/>
-					<ObjectNumber number="{WorkActivity}" unit="{Unit}" state="Success"/>
+					<ObjectNumber number="{WorkActivity}" unit="{Unit}"/>
 					<core:Icon src="{parts:[{path:'Complete'}],formatter:'.formatter.operationStatus'}"
 								color="{parts:[{path:'Complete'}],formatter:'.formatter.opStatusColor'}"></core:Icon>
 					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>

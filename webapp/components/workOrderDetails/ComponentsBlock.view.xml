@@ -5,10 +5,10 @@
 			<Column>
 				<Text text="{i18n>ComponentsBlockColoumComponents}"/>
 			</Column>
-			<Column>
+			<Column hAlign="Right">
 				<Text text="{i18n>ComponentsBlockColoumReserved}"/>
 			</Column>
-			<Column>
+			<Column hAlign="Right">
 				<Text text="{i18n>ComponentsBlockColoumWithdrawn}"/>
 			</Column>
 		</columns>
