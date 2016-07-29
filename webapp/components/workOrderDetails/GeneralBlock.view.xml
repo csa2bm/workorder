@@ -28,8 +28,10 @@
 			<Text text="{OrderType}"/>
 			<Label text="{i18n>GeneralBlockColoumInformationLabelPriority}"/>
 			<Text text="{Priority} "/>
-			<Label text="{i18n>GeneralBlockColumnEquipmentLabelResponsible}"/>
+			<Label text="{i18n>GeneralBlockColumnInformationLabelResponsible}"/>
 			<Text text="{Respcctr} - {ChangedBy}"/>
+			<Label text="{i18n>GeneralBlockColumnInformationLabelOrderStatus}"/>
+			<Text text="{SysStatus}"/>
 			<!--Column Time and Place-->
 			<core:Title text="{i18n>GeneralBlockColumnTimePlace}"/>
 			<Label text="{i18n>GeneralBlockColumnDateAndTimeLabelStart}"/>
