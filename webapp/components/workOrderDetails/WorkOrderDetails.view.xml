@@ -87,10 +87,20 @@
 			</sections>
 		</ObjectPageLayout>
 		<m:footer>
-			<m:Toolbar>
-				<m:ToolbarSpacer/>
-				<m:Button text="Start" type="Emphasized"/>
-			</m:Toolbar>
+			<m:OverflowToolbar>
+				<m:content>
+					<m:ToolbarSpacer></m:ToolbarSpacer>
+					<m:Button id="orderStatusChangeButton" icon="sap-icon://accept" ariaDescribedBy="acceptButtonDescription genericButtonDescription"
+						press="orderStatusBtnPressed"
+						text="{path:'OrderStatus',formatter:'.getOrderStatusBtnText'}"
+						visible="{path:'OrderStatus',formatter:'.isOrderNotCompleted'}"
+						type="Emphasized">
+						<m:layoutData>
+							<m:OverflowToolbarLayoutData priority="NeverOverflow"/>
+						</m:layoutData>
+					</m:Button>
+				</m:content>
+			</m:OverflowToolbar>
 		</m:footer>
 	</m:Page>
 </core:View>

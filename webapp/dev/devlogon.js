@@ -247,6 +247,7 @@ sap.ui.define([
 		 * need to be online
 		 ********************************************************************/
 		refreshAppOfflineStore: function() {
+			sap.m.MessageToast.show("Enter refresh");
 			if (!this.appOfflineStore.store) {
 				return;
 			}
@@ -259,12 +260,15 @@ sap.ui.define([
 					//this.appOfflineStore.startTimeRefresh = new Date();
 					this.appOfflineStore.store.refresh(
 						function() {
+							sap.m.MessageToast.show("Refresh completed");
 							//reset
 							that.refreshing = false;
 							//publish ui5 offlineStore Synced event
 							oEventBus.publish("OfflineStore", "Synced");
 						},
 						function(e) {
+							sap.m.MessageToast.show("Refresh failed");
+							
 							//reset
 							that.refreshing = false;
 							//save the error
@@ -294,6 +298,7 @@ sap.ui.define([
 		 * application will continue to call refreshAppOfflineStore() to refresh the offline store.
 		 ********************************************************************/
 		flushAppOfflineStore: function() {
+			sap.m.MessageToast.show("Enter flush");
 			if (!this.appOfflineStore.store) {
 				return;
 			}
@@ -301,11 +306,15 @@ sap.ui.define([
 			if (this.devapp.isOnline) {
 				if (!this.isFlushing) {
 					this.isFlushing = true;
+					
+					sap.m.MessageToast.show("Flush Started");
 
 					var that = this;
 					//this.appOfflineStore.startTimeRefresh = new Date();
 					this.appOfflineStore.store.flush(
 						function() {
+							
+							sap.m.MessageToast.show("Flush Completed");
 							that.isFlushing = false;
 
 							that.refreshAppOfflineStore();
@@ -314,6 +323,8 @@ sap.ui.define([
 							that.readOfflineErrorArchieve();
 						},
 						function(e) {
+							sap.m.MessageToast.show("Flush failed");
+							
 							that.isFlushing = false;
 
 							that.refreshAppOfflineStore();

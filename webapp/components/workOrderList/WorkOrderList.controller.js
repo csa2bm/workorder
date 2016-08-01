@@ -127,6 +127,18 @@ sap.ui.define([
 		syncCompleted: function() {
 			if (window.sap_webide_FacadePreview) {
 				self.unSubscribeToOnlineSyncEvents();
+
+				//Update syncStatusModel
+				var syncStatusModel = self.getView().getModel("syncStatusModel");
+				var d = new Date();
+				syncStatusModel.getData().LastSyncTime = d.toLocaleString();
+				
+				syncStatusModel.getData().Online = true; //always online in webide
+				
+				syncStatusModel.refresh();
+
+				//Update sync state indicator
+				//SyncStateHandler.handleSyncState();
 			} else {
 				//sap.m.MessageToast.show("Data synchronized with server");
 			}
@@ -187,7 +199,7 @@ sap.ui.define([
 
 		setSyncIndicators: function(isSynching) {
 			//self.getView().byId("syncButton").setEnabled(!isSynching);
-			self.getView().byId("syncIndicator").setVisible(!isSynching);
+			//self.getView().byId("syncIndicator").setVisible(!isSynching);
 			self.getView().byId("syncBusyIndicator").setVisible(isSynching);
 		},
 
@@ -214,14 +226,14 @@ sap.ui.define([
 
 		showSyncQuickview: function(oEvent) {
 			//if (!window.sap_webide_FacadePreview) {
-				this.createPopover();
+			this.createPopover();
 
-				// delay because addDependent will do a async rerendering and the actionSheet will immediately close without it.
-				var oButton = oEvent.getSource();
-				jQuery.sap.delayedCall(0, this, function() {
-					this._syncQuickView.openBy(oButton);
-				});
-		//	}
+			// delay because addDependent will do a async rerendering and the actionSheet will immediately close without it.
+			var oButton = oEvent.getSource();
+			jQuery.sap.delayedCall(0, this, function() {
+				this._syncQuickView.openBy(oButton);
+			});
+			//	}
 		},
 
 		createPopover: function() {
@@ -232,17 +244,88 @@ sap.ui.define([
 		},
 
 		synchronizeData: function() {
-			if (!this._syncQuickView) {
+			if (this._syncQuickView) {
 				this._syncQuickView.close();
 			}
 
-			if (window.sap_webide_FacadePreview) {
-				this.subscribeToOnlineSyncEvents();
+			if (window.sap_webide_FacadePreview || devApp.isOnline) {
+
+				if (window.sap_webide_FacadePreview) {
+					this.subscribeToOnlineSyncEvents();
+				}
+
+				this.setSyncIndicators(true);
+
+				this.flushAndRefresh();
+			} else {
+				sap.m.MessageToast.show("Device is offline");
+			}
+		},
+
+		closeSyncPopup: function() {
+			if (this._syncQuickView) {
+				this._syncQuickView.close();
+			}
+		},
+
+		getSyncStateText: function(online, pendingdata) {
+			if (pendingdata) {
+				return "Pending Changes";
 			}
 
-			this.setSyncIndicators(true);
+			if (online) {
+				return "OK";
+			} else {
+				return "Offline";
+			}
+		},
 
-			this.flushAndRefresh();
-		}
+		getSyncStateIcon: function(online, pendingdata) {
+			if (pendingdata) {
+				return "sap-icon://system-exit-2";
+			}
+
+			if (online) {
+				return "sap-icon://overlay";
+			} else {
+				return "sap-icon://overlay";
+			}
+		},
+
+		getSyncStatusIconColor: function(online, pendingdata) {
+			if (pendingdata) {
+				return "orange";
+			}
+			if (online) {
+				return "green";
+			} else {
+				return "grey";
+			}
+		},
+
+		// getNetworkConnectionStatusColor: function(connection) {
+		// 	if (connection) {
+		// 		return "green";
+		// 	} else {
+		// 		return "grey";
+		// 	}
+		// },
+
+		// getNetworkConnectionStatusIcon: function(connection) {
+		// 	if (connection) {
+		// 		return "sap-icon://connected";
+		// 	} else {
+		// 		return "sap-icon://disconnected";
+		// 	}
+		// },
+
+		getNetworkConnectionStatusText: function(connection) {
+			if (connection) {
+				return "Online";
+			} else {
+				return "Offline";
+			}
+		},
+
 	});
 });

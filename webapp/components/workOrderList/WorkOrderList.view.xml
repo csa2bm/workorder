@@ -2,17 +2,11 @@
 	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
 	<App class="wordOrderListClass">
 		<Page title="{i18n>WorkOrderListPageTitle}">
-		<headerContent>
-			<l:HorizontalLayout>
-				<!--<Label text="{i18n>testsystem}" visible="{parts:[{path:'syncStatusModel>/SyncState'}],formatter:'.showTestSystemIndicator'}" class="italicRed sapUiSmallMarginEnd headerBusyIndicatorTopMargin"/>-->
-				<BusyIndicator id="syncBusyIndicator" visible="false" class="sapUiSmallMarginEnd headerBusyIndicatorTopMargin"/>
-				<core:Icon id="syncIndicator" class="sapUiSmallMarginEnd"
-					color="{syncStatusModel>/SyncColor}" noTabStop="true"
-					press="showSyncQuickview" src="sap-icon://overlay"
-					tooltip="Sync status"></core:Icon>
-				<core:Icon class="sapUiSmallMarginEnd" noTabStop="true" press="handleViewSettingsDialogButtonPressed" src="sap-icon://drop-down-list"/>
-			</l:HorizontalLayout>
-		</headerContent>
+			<headerContent>
+				<l:HorizontalLayout>
+					<core:Icon width="3em" height="3em" noTabStop="true" press="handleViewSettingsDialogButtonPressed" src="sap-icon://drop-down-list"/>
+				</l:HorizontalLayout>
+			</headerContent>
 			<content>
 				<Table id="workOrderTableId" items="{/OrderSet}" noDataText="No Work Orders" showSeparators="true" class="workOrderListTableClass">
 					<columns>
@@ -39,8 +33,7 @@
 						<Column width="1.5em" vAlign="Middle"></Column>
 					</columns>
 					<items>
-						<ColumnListItem type="Active"
-						press="onWorkOrderItemPress">
+						<ColumnListItem type="Active" press="onWorkOrderItemPress">
 							<cells>
 							<!--	<VBox>
 								<Label design="Bold" maxLines="1" text="asjhd ajkhd ajkhsd jkahd kjahds jkas djahs dkjas djkahs dkjah djkahs jd" />
@@ -57,6 +50,15 @@
 					</items>
 				</Table>
 			</content>
+			<footer>
+				<Toolbar id="detailToolbar">
+					<content>
+						<core:Icon id="syncIndicator" width="3em" height="3em" color="{parts:[{path:'syncStatusModel>/Online'}, {path:'syncStatusModel>/PendingLocalData'}],formatter:'.getSyncStatusIconColor'}" noTabStop="true" press="showSyncQuickview"
+							src="{parts:[{path:'syncStatusModel>/Online'}, {path:'syncStatusModel>/PendingLocalData'}],formatter:'.getSyncStateIcon'}" tooltip="Sync status"></core:Icon>
+						<BusyIndicator id="syncBusyIndicator" visible="false"/>
+					</content>
+				</Toolbar>
+			</footer>
 		</Page>
 	</App>
 </core:View>
