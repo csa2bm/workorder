@@ -6,7 +6,7 @@
 	<VBox class="sapUiSmallMargin">
 		<f:SimpleForm id="LongTextFragmentDisplayId"
 			minWidth="1024"
-			maxContainerCols="2"
+			maxContainerCols="1"
 			editable="false"
 			layout="ResponsiveGridLayout"
 			title=""
@@ -14,11 +14,16 @@
 			labelSpanM="4"
 			emptySpanL="1"
 			emptySpanM="1"
-			columnsL="1"
-			columnsM="1">
+			columnsL="12"
+			columnsM="12">
 			<f:content>
-				<Label text="Longtext" />
-				<Text text="{LongText}" />
+				<Text text="{LongText}" valueLiveUpdate="true">
+					<layoutData>
+						<l:GridData span="L12 M12 S12" />
+					</layoutData>
+					</Text>
+				<l:HorizontalLayout> 
+				</l:HorizontalLayout> 
 			</f:content>
 		</f:SimpleForm>
 	</VBox>
