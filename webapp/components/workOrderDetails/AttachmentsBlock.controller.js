@@ -19,7 +19,21 @@ sap.ui.define([
 
 			window.open("data:image/jpeg;base64," + currentObject.Data, "_blank");
 		},
-
+		imageDataToUrl: function(imageData){
+			return 'data:image/jpeg;base64,' + imageData;	
+		},
+		itemFactory: function(sId, oContext)
+		{
+			var imageData = oContext.getProperty("Data");
+			var image = new sap.m.Image();
+			image.setSrc('data:image/jpeg;base64,' + imageData);
+			image.setWidth("8em"); 
+			image.setHeight("8em"); 
+			image.addStyleClass("sapUiSmallMarginEnd");
+			image.addStyleClass("sapUiSmallMarginTop");
+			
+			return image;
+		},
 		capturePhoto: function() {
 			self = this;
 			var oNav = navigator.camera;
@@ -38,7 +52,8 @@ sap.ui.define([
 			var parameters = {
 				success: function(oData, response) {
 					var X = 0;
-					self.getView().byId("attachmentsList").getBinding("items").refresh(true);
+					that.getView().getModel().updateBindings();
+					//self.getView().byId("attachmentsList").getBinding("items").refresh();
 				},
 				error: self.errorCallBackShowInPopUp
 			};
