@@ -35,8 +35,12 @@
 					<items>
 						<ColumnListItem type="Active" press="onWorkOrderItemPress">
 							<cells>
+							<!--	<VBox>
+								<Label design="Bold" maxLines="1" text="asjhd ajkhd ajkhsd jkahd kjahds jkas djahs dkjas djkahs dkjah djkahs jd" />
+								<Label design="" maxLines="1" text="asjhd ajkhd ajkhsd jkahd kjahds jkas djahs dkjas djkahs dkjah djkahs jd" class="sapUiTinyMarginTop" />
+								</VBox>-->
 								<ObjectIdentifier text="{path: 'FinishDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"
-									title="{path: 'StartDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"/>
+									title="{path: 'StartDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}" />
 								<ObjectIdentifier text="{Orderid}" title="{ShortText}"/>
 								<ObjectIdentifier text="{FunctLoc}" title="{Funcldescr}"/>
 								<ObjectIdentifier text="{Equipment}" title="{Equidescr}"/>

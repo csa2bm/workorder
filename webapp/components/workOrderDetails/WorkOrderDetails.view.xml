@@ -34,7 +34,7 @@
 		-->
 		<ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="false">
 			<headerTitle>
-				<ObjectPageHeader headerDesign="Dark" objectTitle="{parts:['i18n>HeaderTitle', {path:'Orderid'}, {path:'ShortText'}],formatter:'.getI18nTextReplace2'}">
+				<ObjectPageHeader headerDesign="Dark" objectTitle="{path:'ShortText'}" objectSubtitle="{path:'Orderid'}">
 					
 				</ObjectPageHeader>
 			</headerTitle>
