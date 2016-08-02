@@ -99,6 +99,52 @@ sap.ui.define([
 				}
 			});
 		},
+		onDeleteFile: function(oEvent) {
+			var context = oEvent.getSource().getBindingContext();
+			var message = this.getI18nText("deleteAttachmentMessageText");
+			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+
+			var that = this;
+			sap.m.MessageBox.show(message, {
+				icon: sap.m.MessageBox.Icon.None,
+				title: this.getI18nText("deleteAttachmentMessageHeader"),
+				actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+				defaultAction: sap.m.MessageBox.Action.NO,
+				styleClass: bCompact ? "sapUiSizeCompact" : "",
+				onClose: function(oAction, object) {
+					if (oAction === sap.m.MessageBox.Action.YES) {
+
+					    var deletePath;
+
+					    var attachmentId = that._oPopover.getModel("ImageModel").getData().AttachmentID;
+					    if (attachmentId) {
+					        var orderNo = that._oPopover.getModel("ImageModel").getData().OrderNo;
+
+					        deletePath = "/AttachmentsSet(AttachmentID='" + attachmentId + "',OrderNo='" + orderNo + "')";
+					    } else {
+					        //Local db object
+					        deletePath = that._oPopover.getModel("ImageModel").getData().LocalObjectUri;
+					    }
+
+
+						var oModel = that.getView().getModel();
+
+						var parameters = {
+							context: context,
+							eTag: "*",
+							success: function(oData, response) {
+								that.getView().byId("attachmentsList").getBinding("items").refresh(true);
+							},
+							error: this.errorCallBackShowInPopUp
+						};
+
+						oModel.remove(deletePath, parameters);
+
+						that._oPopover.close();
+					}
+				}
+			});
+		},
 		clickPreviewAttachment: function (oEvent) {
 		    self = this;
 		    var currentObject = oEvent.getSource().getBindingContext().getObject();
