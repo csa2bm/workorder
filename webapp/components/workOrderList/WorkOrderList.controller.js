@@ -18,6 +18,7 @@ sap.ui.define([
 				//We navigated to another page - unsubscribe to events for this page
 				this.getEventBus().unsubscribe("OfflineStore", "Synced", this.syncCompleted, this);
 				this.getEventBus().unsubscribe("DeviceOnline", this.deviceWentOnline, this);
+				this.getEventBus().unsubscribe("DeviceOffline", this.deviceWentOffline, this);
 				return;
 			}
 
@@ -25,6 +26,7 @@ sap.ui.define([
 
 			this.getEventBus().subscribe("OfflineStore", "Synced", this.syncCompleted, this);
 			this.getEventBus().subscribe("DeviceOnline", this.deviceWentOnline, this);
+			this.getEventBus().subscribe("DeviceOffline", this.deviceWentOffline, this);
 
 			this.getEventBus().publish("UpdateSyncState");
 
@@ -207,6 +209,10 @@ sap.ui.define([
 			self.setSyncIndicators(true);
 
 			self.flushAndRefresh();
+		},
+		
+		deviceWentOffline: function() {
+			self.setSyncIndicators(false);
 		},
 
 		flushAndRefresh: function() {

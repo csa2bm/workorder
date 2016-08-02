@@ -39,11 +39,20 @@
 				</ObjectPageHeader>
 			</headerTitle>
 			<sections>
-				<ObjectPageSection title="{i18n>General}">
+				<ObjectPageSection title="{i18n>SubSectionTitleGeneral}">
 					<subSections>
-						<ObjectPageSubSection title="{i18n>General}">
+						<ObjectPageSubSection title="{i18n>SubSectionTitleGeneral}">
 							<blocks>
 								<blocks:GeneralBlock/>
+							</blocks>
+						</ObjectPageSubSection>
+					</subSections>
+				</ObjectPageSection>
+				<ObjectPageSection title="{i18n>SubSectionTitleNotes}">
+					<subSections>
+						<ObjectPageSubSection title="{i18n>SubSectionTitleNotes}">
+							<blocks>
+								<blocks:NotesBlock/>
 							</blocks>
 						</ObjectPageSubSection>
 					</subSections>
