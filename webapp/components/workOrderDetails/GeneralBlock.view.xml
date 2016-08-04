@@ -14,44 +14,45 @@
 			columnsXL="3"
 			columnsL="2"
 			columnsM="2"
+			class="sapUiTinyMarginBottom"
 			>
 		<f:content>
 			<!--Column Description-->
 			<core:Title text="{i18n>GeneralBlockColoumInformation}"/>
-			<Label text="{i18n>GeneralBlockColoumInformationLabelNumber}"/>
+			<!--<Label text="{i18n>GeneralBlockColoumInformationLabelNumber}"/>
 			<Text text="{Orderid} "/>
 			<Label text="{i18n>GeneralBlockColoumInformationLabelShortText}"/>
 			<Text text="{ShortText} "/>
 			<Label text="{i18n>GeneralBlockColoumInformationLabelLongText}"/>
 			<Text text="{LongText}" visible="{parts:[{path:'LongText'}],formatter:'.formatter.isNotEmptyStr'}"/>
+			-->
 			<Label text="{i18n>GeneralBlockColoumInformationLabelType}"/>
 			<Text text="{OrderType}"/>
 			<Label text="{i18n>GeneralBlockColoumInformationLabelPriority}"/>
 			<Text text="{Priority} "/>
-			<Label text="{i18n>GeneralBlockColumnInformationLabelResponsible}"/>
-			<Text text="{Respcctr} - {ChangedBy}"/>
+		<!--	<Label text="{i18n>GeneralBlockColumnInformationLabelResponsible}"/>
+			<Text text="{ChangedBy}\r\n({Respcctr})"/>-->
 			<Label text="{i18n>GeneralBlockColumnInformationLabelOrderStatus}"/>
 			<Text text="{SysStatus}"/>
-			<!--Column Time and Place-->
-			<core:Title text="{i18n>GeneralBlockColumnTimePlace}"/>
-			<Label text="{i18n>GeneralBlockColumnDateAndTimeLabelStart}"/>
+				<Label text="{i18n>GeneralBlockColumnDateAndTimeLabelStart}"/>
 			<Text text="{path: 'StartDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'medium' }}"/>
 			<Label text="{i18n>GeneralBlockColumnDateAndTimeLabelEnd}"/>
 			<Text text="{path: 'FinishDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'medium' }}"/>
+			<!--Column Time and Place-->
+			<core:Title text="{i18n>GeneralBlockColumnTimePlace}"/>
+		
+
+			<Label text="{i18n>GeneralBlockColumnEquipmentLabelFunctionalLocation}"/>
+			<Text text="{Funcldescr}\r\n({FunctLoc})"/>
+			<Label text="{i18n>GeneralBlockColumnEquipmentLabelEquipment}"/>
+			<Text text="{Equidescr}\r\n({Equipment})"/>
 			<Label text="{i18n>GeneralBlockColumnEquipmentLabelStreet}"/>
 			<Text text="{Street}"/>
 			<Label text="{i18n>GeneralBlockColumnEquipmentLabelCity}"/>
 			<Text text="{City}"/>
 			<!--Column Equipment-->
-			<core:Title text="{i18n>GeneralBlockColumnEquipment}"/>
-			<Label text="{i18n>GeneralBlockColumnEquipmentLabelFLocNumber}"/>
-			<Text text="{FunctLoc}"/>
-			<Label text="{i18n>GeneralBlockColumnEquipmentLabelFLocShortText}"/>
-			<Text text="{Funcldescr}"/>
-			<Label text="{i18n>GeneralBlockColumnEquipmentLabelEQNumber}"/>
-			<Text text="{Equipment} "/>
-			<Label text="{i18n>GeneralBlockColumnEquipmentLabelEQShortText}"/>
-			<Text text="{Equidescr}"/>
+	<!--		<core:Title text="{i18n>GeneralBlockColumnEquipment}"/>-->
+
 		</f:content>
 	</f:SimpleForm>
 	</VBox>
