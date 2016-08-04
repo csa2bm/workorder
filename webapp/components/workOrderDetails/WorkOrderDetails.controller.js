@@ -8,81 +8,84 @@ sap.ui.define([
 		onInit: function() {
 			var oRouter = this.getRouter();
 			oRouter.getRoute("workOrderDetails").attachMatched(this._onRouteMatched, this);
+			
+			//Subscribe to connection events
+			var eventBus = this.getEventBus();
+			eventBus.subscribe("BlockNavigation", this.performNavigationForBlocks, this);
 		},
 		_onRouteMatched: function(oEvent) {
-		/*	var oView = this.getView();
-			
-			this.getView().bindElement({
-				path: "/" + oEvent.getParameter("arguments").workOrderContext,
-				events: {
-					change: this._onBindingChange.bind(this),
-					dataRequested: function(oEvent) {
-						oView.setBusy(true);
-					},
-					dataReceived: function(oEvent) {
-						oView.setBusy(false);
+			/*	var oView = this.getView();
+				
+				this.getView().bindElement({
+					path: "/" + oEvent.getParameter("arguments").workOrderContext,
+					events: {
+						change: this._onBindingChange.bind(this),
+						dataRequested: function(oEvent) {
+							oView.setBusy(true);
+						},
+						dataReceived: function(oEvent) {
+							oView.setBusy(false);
+						}
 					}
-				}
-				
-				
-			});
-			*/
-				//Are we navigating to this view??
+					
+					
+				});
+				*/
+			//Are we navigating to this view??
 			//if not do nothing
 
-				var oArguments = oEvent.getParameter("arguments");
-				var contextPath = '/' + oArguments.workOrderContext;
-				var givenContext = new sap.ui.model.Context(this.getView().getModel(), contextPath);
+			var oArguments = oEvent.getParameter("arguments");
+			var contextPath = '/' + oArguments.workOrderContext;
+			var givenContext = new sap.ui.model.Context(this.getView().getModel(), contextPath);
 
-				//this.oContext is the current context of the view
-				//this context is the context that was set when the view was shown the last time
-				//therefore the new contextPath can be different from the contextPath/context
-				//that was shown the last time the view was shown
-				if (!this.getView().getBindingContext() || this.getView().getBindingContext().getPath() !== contextPath) {
-					//Reset model to the new context
-					this.ExpandLoaded = false;
-					//this.oContext = givenContext;
-					this.getView().setBindingContext(givenContext);
-					this.getView().bindElement(contextPath);
-				}
+			//this.oContext is the current context of the view
+			//this context is the context that was set when the view was shown the last time
+			//therefore the new contextPath can be different from the contextPath/context
+			//that was shown the last time the view was shown
+			if (!this.getView().getBindingContext() || this.getView().getBindingContext().getPath() !== contextPath) {
+				//Reset model to the new context
+				this.ExpandLoaded = false;
+				//this.oContext = givenContext;
+				this.getView().setBindingContext(givenContext);
+				this.getView().bindElement(contextPath);
+			}
 
-				//do we have this context loaded in our model? We should always have a timeregistration entry
-				if (this.ExpandLoaded) { //this.getView().getBindingContext().getObject()) {
+			//do we have this context loaded in our model? We should always have a timeregistration entry
+			if (this.ExpandLoaded) { //this.getView().getBindingContext().getObject()) {
 
-					//if yes, refresh the model to reflect in memory model any changes done remotely to the order
-					this.getView().getBindingContext().getModel().refresh(); //using true as argument got strange errors to arise
+				//if yes, refresh the model to reflect in memory model any changes done remotely to the order
+				this.getView().getBindingContext().getModel().refresh(); //using true as argument got strange errors to arise
 
-					//Update lists
-					//Fix to get the lists to update after coming back to page with the same context
-					//this.getEventBus().publish("ChecklistsUpdate");
-					//this.getEventBus().publish("AttachmentsUpdate");
+				//Update lists
+				//Fix to get the lists to update after coming back to page with the same context
+				//this.getEventBus().publish("ChecklistsUpdate");
+				//this.getEventBus().publish("AttachmentsUpdate");
 
-					//this.scrollToTop();
-				} else {
-					var that = this;
-					//if not, create the binding context with all the expands we need in this view
-					var aExpand = ["OrderOperation", "OrderComponent", "OrderObject", "OrderAttachments", "OrderGoodsMovements"];
+				//this.scrollToTop();
+			} else {
+				var that = this;
+				//if not, create the binding context with all the expands we need in this view
+				var aExpand = ["OrderOperation", "OrderComponent", "OrderObject", "OrderAttachments", "OrderGoodsMovements"];
 
-					this.getView().getModel().createBindingContext(contextPath, "", {
-							expand: aExpand.toString()
-						},
-						function(oEvent) {
-							var f = oEvent;
-							that.ExpandLoaded = true;
+				this.getView().getModel().createBindingContext(contextPath, "", {
+						expand: aExpand.toString()
+					},
+					function(oEvent) {
+						var f = oEvent;
+						that.ExpandLoaded = true;
 
-						}, true);
-				}
+					}, true);
+			}
 		},
-		
-		
+
 		_onBindingChange: function(oEvent) {
 			// No data for the binding
 			if (!this.getView().getBindingContext()) {
 				this.getRouter().getTargets().display("notFound");
 			}
 		},
-		
-		onNavigationButtonPress: function(oEvent){
+
+		onNavigationButtonPress: function(oEvent) {
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
 
@@ -91,15 +94,15 @@ sap.ui.define([
 			} else {
 				var oRouter = this.getRouter();
 				oRouter.navTo("workOrderList", true);
-			}	
+			}
 		},
-		
+
 		orderStatusBtnPressed: function(oEvent) {
 			//var oButton = oEvent.getSource();
 			var oContext = this.getView().getBindingContext();
 			var OrderStatus = this.getView().getModel().getProperty("orderStatus", oContext);
 			this.setUserStatusTaskStarted(OrderStatus);
-			
+
 			/*
 
 			// create menu only once
@@ -112,7 +115,7 @@ sap.ui.define([
 			this._orderStatusMenu.openBy(oButton); //.open(this._bKeyboard, oButton, eDock.BeginTop, eDock.BeginBottom, oButton);
 			*/
 		},
-		
+
 		setUserStatusTaskStarted: function(orderStatus) {
 			var message = this.getI18nText("orderStatusMessage" + orderStatus);
 			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
@@ -131,11 +134,9 @@ sap.ui.define([
 							console.log("Order status: Not started");
 						}
 						// Set the order status to "completed" and post it
-						else if(orderStatus === that.getI18nText("orderStatusInProgress")){
+						else if (orderStatus === that.getI18nText("orderStatusInProgress")) {
 							console.log("Order status: In progress");
-						}
-						
-						else {
+						} else {
 							return;
 							/*
 							var requiredMessage = that.getI18nText("messageBoxTextRequiredChecklistsNotCompleted");
@@ -151,35 +152,44 @@ sap.ui.define([
 						}
 						var oContext = that.getView().getBindingContext();
 						that.getView().getModel().setProperty("OrderStatus", orderStatus, oContext);
-						
+
 					}
 				}
 			});
 
 		},
-		getOrderStatusBtnText: function(sString){
+		getOrderStatusBtnText: function(sString) {
 			var btnText = this.getI18nText("orderStatusBtnTextNotStarted");
-			if(sString === this.getI18nText("orderStatusNotStarted")){
+			if (sString === this.getI18nText("orderStatusNotStarted")) {
 				btnText = this.getI18nText("orderStatusBtnTextNotStarted");
-			}
-			else if(sString === this.getI18nText("orderStatusInProgress")){
+			} else if (sString === this.getI18nText("orderStatusInProgress")) {
 				btnText = this.getI18nText("orderStatusBtnTextInProgress");
-			}/*
-			else if(sString === this.getI18nText("orderStatusCompleted")){
-				btnText = this.getI18nText("orderStatusBtnTextNotStarted");
 			}
-			*/
-			else{
-					btnText = this.getI18nText("orderStatusBtnTextCompleted");
+			/*
+						else if(sString === this.getI18nText("orderStatusCompleted")){
+							btnText = this.getI18nText("orderStatusBtnTextNotStarted");
+						}
+						*/
+			else {
+				btnText = this.getI18nText("orderStatusBtnTextCompleted");
 			}
 			return btnText;
 		},
-		isOrderNotCompleted: function(sString){
-			if(sString === this.getI18nText("orderStatusCompleted")){
+		isOrderNotCompleted: function(sString) {
+			if (sString === this.getI18nText("orderStatusCompleted")) {
 				return false;
-			}
-			else{
+			} else {
 				return true;
+			}
+		},
+
+		performNavigationForBlocks: function(a, b, data) {
+
+			if ('operation'.localeCompare(data.block) === 0) {
+
+				this.getRouter().navTo("operationDetails", {
+					operationContext: data.operationContext
+				}, false);
 			}
 		}
 

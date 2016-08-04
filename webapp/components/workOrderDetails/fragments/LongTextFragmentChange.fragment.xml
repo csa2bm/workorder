@@ -21,8 +21,6 @@
 						<l:GridData span="L12 M12 S12" />
 					</layoutData>
 					</TextArea>
-				<l:HorizontalLayout> 
-				</l:HorizontalLayout> 
 			</f:content>
 		</f:SimpleForm>
 </core:FragmentDefinition>
