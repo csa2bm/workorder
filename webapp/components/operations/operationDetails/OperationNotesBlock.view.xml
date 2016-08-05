@@ -1,0 +1,13 @@
+<core:View controllerName="com.twobm.mobileworkorder.components.operations.operationDetails.OperationNotesBlock" 
+xmlns:core="sap.ui.core"
+xmlns:f="sap.ui.layout.form" 
+xmlns:html="http://www.w3.org/1999/xhtml" 
+xmlns:mvc="sap.ui.core.mvc" 
+xmlns:vbm="sap.ui.vbm" xmlns="sap.m"
+xmlns:layout="sap.ui.layout">
+	<VBox class="sapUiSmallMargin">
+		<layout:VerticalLayout id="OperationNotesLayoutId" width="100%"></layout:VerticalLayout>
+	</VBox>
+	<Button id="editButton" visible="true" class="sapUiMediumMarginEnd" icon="sap-icon://edit" press="editLongText"></Button>
+	<Button id="saveButton" visible="false" class="sapUiMediumMarginEnd" icon="sap-icon://save" press="SaveLongText"></Button>
+</core:View>

@@ -1,33 +1,37 @@
-<core:View controllerName="com.twobm.mobileworkorder.components.operations.operationDetails.OperationDetails" xmlns:core="sap.ui.core"
-	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.ui.layout.form">
-	<Page showNavButton="true" navButtonPress="onNavigationButtonPress" title="{i18n>OperationDetailsTitle}">
-<f:SimpleForm maxContainerCols="1"
-			editable="false"
-			layout="ResponsiveGridLayout"
-			title=""
-			labelSpanXL="4"
-			labelSpanL="4"
-			labelSpanM="4"
-			emptySpanXL="0"
-			emptySpanL="0"
-			emptySpanM="0"
-			columnsXL="3"
-			columnsL="2"
-			columnsM="2"
-			>
-		<f:content>
-			<core:Title text="{i18n>GeneralBlockColoumInformation}"/>
-			<Label text="{i18n>operationDetailLabelActivity}"/>
-			<Text text="{Activity} "/>
-			<Label text="{i18n>operationDetailLabelShortText}"/>
-			<Text text="{Description} "/>
-			<Label text="{i18n>operationDetailLabelLongText}"/>
-			<Text text="{Langu}"/>
-			<Label text="{i18n>operationDetailLabelWorkActivity}"/>
-			<Text text="{WorkActivity} {Unit}"/>
-			<Label text="{i18n>operationDetailLabelWorkActual}"/>
-			<Text text="{WorkActual} {Unit}"/>
-		</f:content>
-	</f:SimpleForm>
-	</Page>
-</core:View>
+<core:View controllerName="com.twobm.mobileworkorder.components.operations.operationDetails.OperationDetails" 
+xmlns:core="sap.ui.core"
+xmlns:html="http://www.w3.org/1999/xhtml" 
+xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" 
+xmlns:m="sap.m" 
+xmlns="sap.uxap"
+xmlns:blocks="com.twobm.mobileworkorder.components.operations.operationDetails.blocks"
+height="100%">
+	
+	<m:Page showNavButton="true" navButtonPress="onNavigationButtonPress" title="{i18n>OperationDetailsTitle}" height="100%">
+		<ObjectPageLayout id="operationObjectPageId" enableLazyLoading="false">
+			<headerTitle>
+				<ObjectPageHeader headerDesign="Dark" objectTitle="{path:'Description'}" objectSubtitle="{path:'Activity'}"/>
+			</headerTitle>
+			<sections>
+				<ObjectPageSection title="{i18n>SubSectionTitleOperationInformation}">
+					<subSections>
+						<ObjectPageSubSection title="{i18n>SubSectionTitleOperationInformation}">
+							<blocks>
+								<blocks:OperationInformationBlock/>
+							</blocks>
+						</ObjectPageSubSection>
+					</subSections>
+				</ObjectPageSection>
+				<ObjectPageSection title="{i18n>SubSectionTitleOperationNotes}">
+					<subSections>
+						<ObjectPageSubSection title="{i18n>SubSectionTitleOperationNotes}">
+							<blocks>
+								<blocks:OperationNotesBlock/>
+							</blocks>
+						</ObjectPageSubSection>
+					</subSections>
+				</ObjectPageSection>
+				</sections>
+			</ObjectPageLayout>
+		</m:Page>
+	</core:View>
