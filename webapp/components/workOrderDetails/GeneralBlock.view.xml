@@ -23,14 +23,13 @@
 			<Text text="{Orderid} "/>
 			<Label text="{i18n>GeneralBlockColoumInformationLabelShortText}"/>
 			<Text text="{ShortText} "/>
-			<Label text="{i18n>GeneralBlockColoumInformationLabelLongText}"/>
-			<Text text="{LongText}" visible="{parts:[{path:'LongText'}],formatter:'.formatter.isNotEmptyStr'}"/>
-			-->
+<!-->
 			<Label text="{i18n>GeneralBlockColoumInformationLabelType}"/>
+
 			<Text text="{OrderType}"/>
 			<Label text="{i18n>GeneralBlockColoumInformationLabelPriority}"/>
 			<Text text="{Priority} "/>
-		<!--	<Label text="{i18n>GeneralBlockColumnInformationLabelResponsible}"/>
+	<!--		<Label text="{i18n>GeneralBlockColumnInformationLabelResponsible}"/>
 			<Text text="{ChangedBy}\r\n({Respcctr})"/>-->
 			<Label text="{i18n>GeneralBlockColumnInformationLabelOrderStatus}"/>
 			<Text text="{SysStatus}"/>

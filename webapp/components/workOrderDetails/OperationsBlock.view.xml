@@ -14,12 +14,11 @@
 			<Column width="1.5em" vAlign="Middle"></Column>
 		</columns>
 		<items>
-			<ColumnListItem type="Active">
+			<ColumnListItem type="Active" press="onOperationItemPress">
 				<cells>
 					<ObjectIdentifier text="{Description}" title="{Activity}"/>
 					<ObjectNumber number="{WorkActivity}" unit="{Unit}"/>
-					<core:Icon src="{parts:[{path:'Complete'}],formatter:'.formatter.operationStatus'}"
-								color="{parts:[{path:'Complete'}],formatter:'.formatter.opStatusColor'}"></core:Icon>
+					<core:Icon src="{parts:[{path:'Complete'}],formatter:'.operationStatus'}" color="{parts:[{path:'Complete'}],formatter:'.opStatusColor'}"/>
 					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 				</cells>
 			</ColumnListItem>
