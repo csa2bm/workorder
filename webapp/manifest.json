@@ -97,6 +97,10 @@
 				"pattern": "operationDetails/{operationContext}",
 				"name": "operationDetails",
 				"target": "operationDetails"
+			},{
+				"pattern": "equipmentDetails/{equipmentContext}",
+				"name": "equipmentDetails",
+				"target": "equipmentDetails"
 			}],
 			"targets": {
 				"workOrderList": {
@@ -117,6 +121,11 @@
 				"operationDetails": {
 					"viewPath": "com.twobm.mobileworkorder.components.operationDetails",
 					"viewName": "OperationDetails",
+					"viewLevel": 3
+				},
+				"equipmentDetails": {
+					"viewPath": "com.twobm.mobileworkorder.components.equipmentDetails",
+					"viewName": "EquipmentDetails",
 					"viewLevel": 3
 				}
 				

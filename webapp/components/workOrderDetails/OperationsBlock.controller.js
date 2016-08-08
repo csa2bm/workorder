@@ -78,7 +78,7 @@ sap.ui.define([
 			} else {
 				return "Red";
 			}
-		},
+		}
 
 	});
 

@@ -10,9 +10,9 @@ sap.ui.define([
 		 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
 		 * @memberOf com.twobm.mobileworkorder.components.workOrderDetails.view.AttachmentsBlock
 		 */
-		//	onInit: function() {
-		//
-		//	},
+			onInit: function() {
+		
+			},
 
 		/**
 		 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
@@ -39,6 +39,21 @@ sap.ui.define([
 		//	onExit: function() {
 		//
 		//	}
+		
+		onEquipmentItemPress: function(oEvent) {
+			var oBindingContext = oEvent.getSource().getBindingContext();
+
+			var data = {
+				"block": "equipment",
+				"equipmentContext": oBindingContext.getPath().substr(1)
+			};
+			this.gotoEquipmentDetailsPage(data);
+		},
+		gotoEquipmentDetailsPage: function(data) {
+
+			var eventBus = sap.ui.getCore().getEventBus();
+			eventBus.publish("BlockNavigation", data);
+		}
 
 	});
 

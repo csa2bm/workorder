@@ -191,6 +191,12 @@ sap.ui.define([
 					operationContext: data.operationContext
 				}, false);
 			}
+			else if ('equipment'.localeCompare(data.block) === 0) {
+
+				this.getRouter().navTo("equipmentDetails", {
+					equipmentContext: data.equipmentContext
+				}, false);
+			}
 		}
 
 	});

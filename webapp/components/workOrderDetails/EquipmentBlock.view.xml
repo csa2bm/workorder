@@ -11,7 +11,7 @@
 			<Column width="1.5em" vAlign="Middle"></Column>
 		</columns>
 		<items>
-			<ColumnListItem type="Active">
+			<ColumnListItem type="Active" press="onEquipmentItemPress">
 				<cells>
 					<ObjectIdentifier text="{Funcldescr}" title="{FunclocDisp}"/>
 					<ObjectIdentifier text="{ShortText}" title="{Equipment}"/>
