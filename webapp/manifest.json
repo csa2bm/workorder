@@ -115,7 +115,7 @@
 					"viewLevel": 2
 				},
 				"operationDetails": {
-					"viewPath": "com.twobm.mobileworkorder.components.operations.operationDetails",
+					"viewPath": "com.twobm.mobileworkorder.components.operationDetails",
 					"viewName": "OperationDetails",
 					"viewLevel": 3
 				}

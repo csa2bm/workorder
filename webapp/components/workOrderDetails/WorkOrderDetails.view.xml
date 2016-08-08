@@ -105,8 +105,8 @@ xmlns:blocks="com.twobm.mobileworkorder.components.workOrderDetails.blocks"
 					<m:ToolbarSpacer></m:ToolbarSpacer>
 					<m:Button id="orderStatusChangeButton" icon="sap-icon://accept" ariaDescribedBy="acceptButtonDescription genericButtonDescription"
 						press="orderStatusBtnPressed"
-						text="{path:'Userstatus',formatter:'.getOrderStatusBtnText'}"
-						visible="{path:'Userstatus',formatter:'.isOrderNotCompleted'}"
+						text="{path:'OrderStatus',formatter:'.getOrderStatusBtnText'}"
+						visible="{path:'OrderStatus',formatter:'.isOrderNotCompleted'}"
 						type="Emphasized">
 						<m:layoutData>
 							<m:OverflowToolbarLayoutData priority="NeverOverflow"/>

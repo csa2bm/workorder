@@ -100,7 +100,7 @@ sap.ui.define([
 		orderStatusBtnPressed: function(oEvent) {
 			//var oButton = oEvent.getSource();
 			var oContext = this.getView().getBindingContext();
-			var OrderStatus = this.getView().getModel().getProperty("orderStatus", oContext);
+			var OrderStatus = this.getView().getModel().getProperty("OrderStatus", oContext);
 			this.setUserStatusTaskStarted(OrderStatus);
 
 			/*

@@ -5,7 +5,7 @@ sap.ui.define([
 ], function(Controller, History, Formatter) {
 	"use strict";
 
-	return Controller.extend("com.twobm.mobileworkorder.components.operations.operationDetails.OperationDetails", {
+	return Controller.extend("com.twobm.mobileworkorder.components.operationDetails.OperationDetails", {
 		formatter:Formatter,
 		
 		onInit: function() {
