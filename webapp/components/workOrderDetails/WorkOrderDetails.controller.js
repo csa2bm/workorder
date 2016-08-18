@@ -117,7 +117,14 @@ sap.ui.define([
 		},
 
 		setUserStatusTaskStarted: function(orderStatus) {
-			var message = this.getI18nText("orderStatusMessage" + orderStatus);
+			var message = "";
+			if(orderStatus === this.getI18nText("orderStatusNotStarted")){
+				message = this.getI18nText("orderStatusMessageNotStarted");
+			}
+			else if (orderStatus === this.getI18nText("orderStatusInProgress")){
+				message = this.getI18nText("orderStatusMessageInProgress");
+			}
+		
 			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
 			var that = this;
 			sap.m.MessageBox.show(message, {
@@ -129,13 +136,21 @@ sap.ui.define([
 				onClose: function(oAction, object) {
 					if (oAction === sap.m.MessageBox.Action.YES) {
 						// Set the order status to "inProgress" and post it
+						var newStatus="";
 						if (orderStatus === that.getI18nText("orderStatusNotStarted")) {
 							//that.onNavBack();
-							console.log("Order status: Not started");
+							console.log("Order status changed to in progress");
+							newStatus = that.getI18nText("orderStatusInProgress");
+							
+							
+							
+							
 						}
 						// Set the order status to "completed" and post it
 						else if (orderStatus === that.getI18nText("orderStatusInProgress")) {
-							console.log("Order status: In progress");
+							console.log("Orderstatus changed to completed");
+							
+							newStatus = that.getI18nText("orderStatusCompleted");
 						} else {
 							return;
 							/*
@@ -150,13 +165,40 @@ sap.ui.define([
 							});
 							*/
 						}
+						
+						var oContext = that.getView().getBindingContext();
+						that.getView().getModel().setProperty("OrderStatus", newStatus, oContext);
+						that.updateOrderStatus();
+						
+						/*
 						var oContext = that.getView().getBindingContext();
 						that.getView().getModel().setProperty("OrderStatus", orderStatus, oContext);
+						*/
 
 					}
 				}
 			});
 
+		},
+		updateOrderStatus: function() {
+
+			var orderNo = this.getView().getBindingContext().getObject().Orderid;
+			var that = this;
+
+			var parameters = {
+				success: function(oData, response) {
+
+				},
+				error: that.errorCallBackShowInPopUp
+			};
+
+			var dataUpdate = {
+				OrderStatus: this.getView().getBindingContext().getObject().OrderStatus
+			};
+
+			var updatePath = "/OrderSet(Orderid='" + orderNo + "')";
+
+			this.getView().getModel().update(updatePath, dataUpdate, parameters);
 		},
 		getOrderStatusBtnText: function(sString) {
 			var btnText = this.getI18nText("orderStatusBtnTextNotStarted");
