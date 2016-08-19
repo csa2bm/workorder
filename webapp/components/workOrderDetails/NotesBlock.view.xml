@@ -4,6 +4,8 @@
 	<VBox class="sapUiSmallMargin">
 		<layout:VerticalLayout id="NotesLayoutId" width="100%"></layout:VerticalLayout>
 	</VBox>
+	<VBox class="sapUiSmallMargin" id="LongtextBtnView" visible="{parts:[{path:'OrderStatus'}],formatter:'.isOrderStatusNotCompleted'}">
 	<Button id="editButton" visible="true" class="sapUiMediumMarginEnd" icon="sap-icon://edit" press="editLongText"></Button>
 	<Button id="saveButton" visible="false" class="sapUiMediumMarginEnd" icon="sap-icon://save" press="SaveLongText"></Button>
+	</VBox>
 </core:View>

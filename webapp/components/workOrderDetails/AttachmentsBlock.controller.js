@@ -305,6 +305,15 @@ sap.ui.define([
 			return false;
 		}
 		return true;
-	}
+	},
+	isOrderStatusNotCompleted: function(OrderStatus){
+			if(OrderStatus === this.getI18nText("orderStatusCompleted")){
+				return false;
+			}
+			else{
+				return true;
+			}
+			
+		}
 	});
 });
