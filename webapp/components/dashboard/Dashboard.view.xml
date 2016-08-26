@@ -1,0 +1,152 @@
+<core:View controllerName="com.twobm.mobileworkorder.components.dashboard.Dashboard" xmlns:core="sap.ui.core"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	xmlns:mic="sap.suite.ui.microchart" height="100%">
+	<App class="dashboardClass">
+		<Page title="{i18n>DashboardPageTitle}">
+			<headerContent>
+				<l:HorizontalLayout>
+					<core:Icon width="3em" height="3em" noTabStop="true" press="handleViewSettingsDialogButtonPressed" src="sap-icon://settings"/>
+				</l:HorizontalLayout>
+			</headerContent>
+			<content>
+	<FlexBox alignItems="Left" justifyContent="Left">
+					<items>
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="John Johnson" subheader="Service technician"
+							headerImage="../webapp/localService/mockData/AugustFoto_2016_small_Round.png" frameType="TwoByOne" press="press">
+							<tileContent>
+								<TileContent footer="New Notifications">
+									<content>
+										<FeedContent contentText="Hello John, you are a key player for LEGO in the 4th. industrial revolution." subheader="Keep up the good work!"
+											value="24"></FeedContent>
+									</content>
+								</TileContent>
+							</tileContent>
+						</GenericTile>
+	</items>
+				</FlexBox>
+			
+				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Workorders" subheader="" size="S" frameType="OneByOne"
+					press="onPressOtherWorkorders">
+					<tileContent>
+						<TileContent footer="" size="S">
+							<content>
+								<NumericContent size="S" value="21 " valueColor="Error" icon="sap-icon://eam-work-order"/>
+							</content>
+						</TileContent>
+					</tileContent>
+				</GenericTile>
+				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Functional locations" size="S" frameType="OneByOne"
+					press="onPressFunctionalLocations">
+					<tileContent>
+						<TileContent>
+							<content>
+								<ImageContent src="sap-icon://functional-location"/>
+							</content>
+						</TileContent>
+					</tileContent>
+				</GenericTile>
+				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Create notification" size="S" frameType="OneByOne"
+					press="onPressCreateNotification">
+					<tileContent>
+						<TileContent size="S">
+							<content>
+								<ImageContent src="sap-icon://notification"/>
+							</content>
+						</TileContent>
+					</tileContent>
+				</GenericTile>
+				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Scan object" subheader="" size="S" frameType="OneByOne"
+					press="press">
+					<tileContent>
+						<TileContent>
+							<content>
+								<ImageContent src="sap-icon://bar-code"/>
+							</content>
+						</TileContent>
+					</tileContent>
+				</GenericTile>
+			
+	
+			
+				<!--<l:VerticalLayout>-->
+			<!--		<l:Grid class="sapUiTinyMarginBegin sapUiTinyMarginTop"  defaultSpan="L6 M6 S12" >
+						<l:content>	-->
+
+					<Table id="idnotificationsTable" class="sapUiTinyMarginBegin sapUiTinyMarginEnd sapUiTinyMarginTop" width="auto"
+						items="{ path : 'project>/Deals', sorter : { path : 'status', group : false } }">
+						<headerToolbar>
+							<Toolbar>
+								<Title text="{i18n>notifications}"/>
+								<ToolbarSpacer/>
+								<Button icon="sap-icon://add" press="onPress" ariaLabelledBy="editButtonLabel"/>
+								<!--                <SearchField width="50%" search="onFilterProjects" selectOnFocus="false" />  -->
+							</Toolbar>
+						</headerToolbar>
+						<columns >
+							<Column width="70%">
+								<Text text="{i18n>notificationListTitle}"/>
+							</Column>
+							<Column minScreenWidth="Tablet" demandPopin="true">
+								<Text text="Status"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem press="showTasksDetail" type="Navigation">
+								<!--  <ColumnListItem type="Navigation" press="onPress"> -->
+								<cells>
+									<ObjectIdentifier title="{project>name}"/>
+									<core:Icon color="{project>color}" src="{project>icon}"></core:Icon>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+					
+					
+				<!--	<Table id="idpurchaseRequisitionsTable" class="sapUiTinyMarginBegin sapUiTinyMarginEnd sapUiTinyMarginTop" width="auto"
+						items="{ path : 'project>/Deals', sorter : { path : 'status', group : false } }">
+						<headerToolbar>
+							<Toolbar>
+								<Title text="{i18n>purchaseRequisitions}"/>
+								<ToolbarSpacer/>
+								<Button icon="sap-icon://add" press="onPress" ariaLabelledBy="editButtonLabel"/>
+							</Toolbar>
+						</headerToolbar>
+						<columns >
+							<Column width="70%">
+								<Text text="{i18n>purchaseRequisitions}"/>
+							</Column>
+							<Column minScreenWidth="Tablet" demandPopin="true">
+								<Text text="Status"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem press="showTasksDetail" type="Navigation">
+								<cells>
+									<ObjectIdentifier title="{project>name}"/>
+									<core:Icon color="{project>color}" src="{project>icon}"></core:Icon>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>-->
+				<!--		</l:content>
+						</l:Grid>-->
+	
+				<!--</l:VerticalLayout>-->
+				
+			</content>
+			
+			<footer>
+				<Toolbar id="detailToolbar">
+					<content>
+						<core:Icon id="syncIndicator" width="3em" height="3em"
+							color="{parts:[{path:'syncStatusModel>/Online'}, {path:'syncStatusModel>/PendingLocalData'}],formatter:'.getSyncStatusIconColor'}"
+							noTabStop="true" press="showSyncQuickview"
+							src="{parts:[{path:'syncStatusModel>/Online'}, {path:'syncStatusModel>/PendingLocalData'}],formatter:'.getSyncStateIcon'}"
+							tooltip="Sync status"></core:Icon>
+						<BusyIndicator id="syncBusyIndicator" visible="false"/>
+					</content>
+				</Toolbar>
+			</footer>
+		</Page>
+	</App>
+</core:View>
