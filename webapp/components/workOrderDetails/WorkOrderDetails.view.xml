@@ -61,6 +61,15 @@ xmlns:blocks="com.twobm.mobileworkorder.components.workOrderDetails.blocks"
 						</ObjectPageSubSection>
 					</subSections>
 				</ObjectPageSection>
+					<ObjectPageSection title="{i18n>SubSectionTitleObjects}">
+					<subSections>
+						<ObjectPageSubSection title="{i18n>SubSectionTitleObjects}">
+							<blocks>
+								<blocks:EquipmentBlock/>
+							</blocks>
+						</ObjectPageSubSection>
+					</subSections>
+				</ObjectPageSection>
 				<ObjectPageSection title="{i18n>SubSectionTitleOperations}">
 					<subSections>
 						<ObjectPageSubSection title="{i18n>SubSectionTitleOperations}">
@@ -70,11 +79,11 @@ xmlns:blocks="com.twobm.mobileworkorder.components.workOrderDetails.blocks"
 						</ObjectPageSubSection>
 					</subSections>
 				</ObjectPageSection>
-				<ObjectPageSection title="{i18n>SubSectionTitleObjects}">
+				<ObjectPageSection title="{i18n>SubSectionTitleMesuringPoints}">
 					<subSections>
-						<ObjectPageSubSection title="{i18n>SubSectionTitleObjects}">
+						<ObjectPageSubSection title="{i18n>SubSectionTitleMesuringPoints}">
 							<blocks>
-								<blocks:EquipmentBlock/>
+								<blocks:MeasuringPointsBlock/>
 							</blocks>
 						</ObjectPageSubSection>
 					</subSections>
