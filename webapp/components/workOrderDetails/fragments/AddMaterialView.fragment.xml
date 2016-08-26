@@ -1,0 +1,86 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
+	<Dialog class="sapUiPopupWithPadding" stretch="true" showHeader="false" showCloseButton="true">
+		<NavContainer id="navCon">
+			<Page id="master" showNavButton="false" title="{i18n>MaterialSearchPageHeaderLabel}">
+				<content>
+					<SearchField search="searchMaterial" placeholder="{i18n>MaterialSearchFieldPlaceHolder}" width="90%" class="sapUiSmallMargin"/>
+					<List id="list" items="{/MaterialsSet}">
+						<StandardListItem title="{Description}" description="{Matnr}" info="{Quantity} {UOM}" type="Active" press="onProductSelected"/>
+					</List>
+				</content>
+				<footer>
+					<Toolbar>
+						<content>
+							<ToolbarSpacer></ToolbarSpacer>
+							<Button ariaDescribedBy="genericButtonDescription" press="closeAddMaterial" text="{i18n>MaterialIssueDialogClose}"></Button>
+						</content>
+					</Toolbar>
+				</footer>
+			</Page>
+			<Page id="detail" showNavButton="true" navButtonPress="onNavBack" title="{i18n>MaterialSearchSelectionPageHeaderLabel}">
+				<content>
+					<l:BlockLayout id="BlockLayout">
+						<l:BlockLayoutRow>
+							<l:BlockLayoutCell width="50%">
+								<VBox>
+									<Image id="materialImage" src="{MaterialDetailsModel>/SearchResult/ImagePath}" visible="false" width="300px"/>
+									<!--{MaterialDetailsModel>/SearchResult/ImagePath.hasPicture}-->
+									<Label text="{i18n>MaterialSearchResultMaterialDesription}"/>
+									<Text id="inpMatDescription" text="{Description}" class="sapUiSmallMarginBottom"/>
+									<Label text="{i18n>MaterialSearchResultMatNumberLabel}"/>
+									<Text text="{Matnr}" class="sapUiSmallMarginBottom"/>
+									<Label text="{i18n>MaterialSearchResultListPriceLabel}"/>
+									<Text id="inpListPrice" text="{ListPrice} {MaterialDetailsModel>/SearchResult/Currency}" class="sapUiSmallMarginBottom"/>
+									<Label text="{i18n>MaterialSearchResultCarStockLabel}"/>
+									<Text id="inpCarStock" text="{Quantity} {UOM}"/>
+								</VBox>
+							</l:BlockLayoutCell>
+						</l:BlockLayoutRow>
+					</l:BlockLayout>
+					<Panel>
+						<headerToolbar>
+							<Toolbar height="3rem">
+								<Title text="{i18n>MaterialIssuePanelHeader}"/>
+							</Toolbar>
+						</headerToolbar>
+						<Input id="inpPreviousQuantity" visible="false"/>
+						<l:Grid class="sapUiSmallMarginTop" hSpacing="2" defaultSpan="L6 M6 S10">
+							<l:content>
+							<!--	<Label text="{i18n>MaterialIssuePanelOrderNumber}"/>-->
+							<!--	<HBox class="sapUiSmallMarginBottom">-->
+							<!--		<Text id="inpOrderNo" text="{MaterialDetailsModel>/OrderNumber}"/>-->
+							<!--	</HBox>-->
+							<!--	<Label text="{i18n>MaterialIssuePanelMaterialNumber}"/>-->
+							<!--	<HBox class="sapUiSmallMarginBottom">-->
+							<!--		<Text id="inpMatNo" text="{MaterialDetailsModel>/SearchResult/MaterialNumber}"/>-->
+								<!--</HBox>-->
+								<Label text="{i18n>MaterialIssuePanelTotalQuantity}"/>
+								<HBox>
+									<Input id="inpQuantity" type="Number"
+										value="{ path : 'MaterialDetailsModel>/SelectedQuantity', type : 'sap.ui.model.type.Integer', formatOptions : { groupingEnabled : true }, constraints : { minimum : 0, maximum : 1000000 }}"
+										getValueLiveUpdate="true" valueStateText="{i18n>MaterialQuantityMustBeMoreThanZero}" change="recalculateTotal"/>
+									<Label text="" class="sapUiSmallMarginEnd"/>
+									<Button icon="sap-icon://less" press="decreaseMaterialToOrder" class="sapUiSmallMarginEnd"></Button>
+									<Button icon="sap-icon://add" press="increaseMaterialToOrder"></Button>
+								</HBox>
+								<!--<Label text="{i18n>MaterialIssuePanelTotalPrice}"/>-->
+								<!--<HBox class="sapUiSmallMarginBottom">-->
+								<!--	<Text id="totalPrice" text="{MaterialDetailsModel>/CalculatedTotalPrice} {MaterialDetailsModel>/SearchResult/Currency}"/>-->
+								<!--</HBox>-->
+							</l:content>
+						</l:Grid>
+					</Panel>
+				</content>
+				<footer>
+					<Toolbar>
+						<content>
+							<ToolbarSpacer></ToolbarSpacer>
+							<Button icon="sap-icon://receipt" ariaDescribedBy="acceptButtonDescription genericButtonDescription" press="issueMaterial" text="{i18n>MaterialIssueDialogSave}"
+								type="Accept"></Button>
+						</content>
+					</Toolbar>
+				</footer>
+			</Page>
+		</NavContainer>
+	</Dialog>
+</core:FragmentDefinition>

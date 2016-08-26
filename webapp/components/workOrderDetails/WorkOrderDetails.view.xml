@@ -1,10 +1,5 @@
-<core:View controllerName="com.twobm.mobileworkorder.components.workOrderDetails.WorkOrderDetails" 
-xmlns:core="sap.ui.core" 
-xmlns="sap.uxap"
-xmlns:layout="sap.ui.layout" 
-xmlns:m="sap.m" 
-xmlns:blocks="com.twobm.mobileworkorder.components.workOrderDetails.blocks"
-	height="100%">
+<core:View controllerName="com.twobm.mobileworkorder.components.workOrderDetails.WorkOrderDetails" xmlns:core="sap.ui.core" xmlns="sap.uxap"
+	xmlns:layout="sap.ui.layout" xmlns:m="sap.m" xmlns:blocks="com.twobm.mobileworkorder.components.workOrderDetails.blocks" height="100%">
 	<m:Page showNavButton="true" navButtonPress="onNavigationButtonPress" title="{i18n>WorkOrderDetailsTitle}">
 		<!--
 		<layout:VerticalLayout class="sapUiContentPadding" width="100%">
@@ -38,9 +33,7 @@ xmlns:blocks="com.twobm.mobileworkorder.components.workOrderDetails.blocks"
 		-->
 		<ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="false">
 			<headerTitle>
-				<ObjectPageHeader headerDesign="Dark" objectTitle="{path:'ShortText'}" objectSubtitle="{path:'Orderid'}">
-					
-				</ObjectPageHeader>
+				<ObjectPageHeader headerDesign="Dark" objectTitle="{path:'ShortText'}" objectSubtitle="{path:'Orderid'}"></ObjectPageHeader>
 			</headerTitle>
 			<sections>
 				<ObjectPageSection title="{i18n>SubSectionTitleGeneral}">
@@ -79,11 +72,20 @@ xmlns:blocks="com.twobm.mobileworkorder.components.workOrderDetails.blocks"
 						</ObjectPageSubSection>
 					</subSections>
 				</ObjectPageSection>
-					<ObjectPageSection title="{i18n>SubSectionTitleComponents}">
+				<ObjectPageSection title="{i18n>SubSectionTitleComponents}">
 					<subSections>
 						<ObjectPageSubSection title="{i18n>SubSectionTitleComponents}">
 							<blocks>
 								<blocks:ComponentsBlock/>
+							</blocks>
+						</ObjectPageSubSection>
+					</subSections>
+				</ObjectPageSection>
+				<ObjectPageSection title="Materials">
+					<subSections>
+						<ObjectPageSubSection title="Materials">
+							<blocks>
+								<blocks:GoodsMovementsBlock/>
 							</blocks>
 						</ObjectPageSubSection>
 					</subSections>
@@ -104,10 +106,8 @@ xmlns:blocks="com.twobm.mobileworkorder.components.workOrderDetails.blocks"
 				<m:content>
 					<m:ToolbarSpacer></m:ToolbarSpacer>
 					<m:Button id="orderStatusChangeButton" icon="sap-icon://accept" ariaDescribedBy="acceptButtonDescription genericButtonDescription"
-						press="orderStatusBtnPressed"
-						text="{path:'OrderStatus',formatter:'.getOrderStatusBtnText'}"
-						visible="{path:'OrderStatus',formatter:'.isOrderNotCompleted'}"
-						type="Emphasized">
+						press="orderStatusBtnPressed" text="{path:'OrderStatus',formatter:'.getOrderStatusBtnText'}"
+						visible="{path:'OrderStatus',formatter:'.isOrderNotCompleted'}" type="Emphasized">
 						<m:layoutData>
 							<m:OverflowToolbarLayoutData priority="NeverOverflow"/>
 						</m:layoutData>
