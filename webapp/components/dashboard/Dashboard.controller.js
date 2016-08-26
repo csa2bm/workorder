@@ -1,12 +1,13 @@
 sap.ui.define([
 	"com/twobm/mobileworkorder/util/Controller",
-	"com/twobm/mobileworkorder/dev/devapp",
-	"com/twobm/mobileworkorder/util/Globalization",
-	"sap/ui/core/routing/History"
-], function(Controller, devApp, Globalization, History) {
+	"sap/ui/core/routing/History",
+	"com/twobm/mobileworkorder/util/Formatter"
+], function(Controller, History, Formatter) {
 	"use strict";
 
-	return Controller.extend("com.twobm.mobileworkorder.components.workOrderList.WorkOrderList", {
+	return Controller.extend("com.twobm.mobileworkorder.components.dashboard.Dashboard", {
+		formatter:Formatter,
+		
 		onInit: function() {
 			this.getRouter().attachRoutePatternMatched(this.onRouteMatched, this);
 		},
@@ -15,7 +16,7 @@ sap.ui.define([
 			var sName = oEvent.getParameter("name");
 
 			//Is it this page we have navigated to?
-			if (sName !== "workOrderList") {
+			if (sName !== "Dashboard") {
 				//We navigated to another page - unsubscribe to events for this page
 				this.getEventBus().unsubscribe("OfflineStore", "Synced", this.syncCompleted, this);
 				this.getEventBus().unsubscribe("DeviceOnline", this.deviceWentOnline, this);
@@ -34,24 +35,20 @@ sap.ui.define([
 			//flush and refresh data
 			this.refresh();
 		},
+
+		onPressOtherWorkorders: function() {
 		
-		onNavigationButtonPress: function(oEvent) {
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
 
 			if (sPreviousHash !== undefined) {
 				window.history.go(-1);
 			} else {
-				var oRouter = this.getRouter();
-				oRouter.navTo("dashboard", true);
+				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+				//var oRouter = this.getRouter();
+				oRouter.navTo("workOrderList", true);
+			
 			}
-		},
-
-		onWorkOrderItemPress: function(oEvent) {
-			var oBindingContext = oEvent.getSource().getBindingContext();
-			this.getRouter().navTo("workOrderDetails", {
-				workOrderContext: oBindingContext.getPath().substr(1)
-			});
 		},
 
 		// Pop-up for sorting and filter
@@ -344,7 +341,6 @@ sap.ui.define([
 			} else {
 				return "Offline";
 			}
-		},
-
+		}
 	});
 });

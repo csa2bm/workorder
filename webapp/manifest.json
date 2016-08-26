@@ -87,26 +87,35 @@
 			},
 			"routes": [{
 				"pattern": "",
+				"name": "dashboard",
+				"target": "dashboard"
+			}, {
+				"pattern": "workOrderList",
 				"name": "workOrderList",
 				"target": "workOrderList"
 			}, {
 				"pattern": "workOrderDetails/{workOrderContext}",
 				"name": "workOrderDetails",
 				"target": "workOrderDetails"
-			},{
+			}, {
 				"pattern": "operationDetails/{operationContext}",
 				"name": "operationDetails",
 				"target": "operationDetails"
-			},{
+			}, {
 				"pattern": "equipmentDetails/{equipmentContext}",
 				"name": "equipmentDetails",
 				"target": "equipmentDetails"
 			}],
 			"targets": {
+				"dashboard": {
+					"viewPath": "com.twobm.mobileworkorder.components.dashboard",
+					"viewName": "Dashboard",
+					"viewLevel": 1
+				},
 				"workOrderList": {
 					"viewPath": "com.twobm.mobileworkorder.components.workOrderList",
 					"viewName": "WorkOrderList",
-					"viewLevel": 1
+					"viewLevel": 2
 				},
 				"notFound": {
 					"viewPath": "com.twobm.mobileworkorder.components.app",
@@ -116,19 +125,18 @@
 				"workOrderDetails": {
 					"viewPath": "com.twobm.mobileworkorder.components.workOrderDetails",
 					"viewName": "WorkOrderDetails",
-					"viewLevel": 2
+					"viewLevel": 3
 				},
 				"operationDetails": {
 					"viewPath": "com.twobm.mobileworkorder.components.operationDetails",
 					"viewName": "OperationDetails",
-					"viewLevel": 3
+					"viewLevel": 4
 				},
 				"equipmentDetails": {
 					"viewPath": "com.twobm.mobileworkorder.components.equipmentDetails",
 					"viewName": "EquipmentDetails",
-					"viewLevel": 3
+					"viewLevel": 4
 				}
-				
 			}
 		}
 	},
