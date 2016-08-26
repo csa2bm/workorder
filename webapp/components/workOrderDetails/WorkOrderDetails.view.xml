@@ -81,9 +81,9 @@
 						</ObjectPageSubSection>
 					</subSections>
 				</ObjectPageSection>
-				<ObjectPageSection title="Materials">
+				<ObjectPageSection title="{i18n>SubSectionTitleMaterials}">
 					<subSections>
-						<ObjectPageSubSection title="Materials">
+						<ObjectPageSubSection title="{i18n>SubSectionTitleMaterials}">
 							<blocks>
 								<blocks:GoodsMovementsBlock/>
 							</blocks>
