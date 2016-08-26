@@ -2,18 +2,35 @@
     margin-top: 2rem;
 }
 
+/* Force top blue line to not be shown  */
+.sapMShellBrandingBar {
+    height: 0px !important;
+}
+
+/* Force top blue line to not be show  */
+.sapMPageHeader::before {
+    border-top: 0.0rem !important;
+}
+
+/*.sapMShellBrandingBar {*/
+/*    background-color: rgb(224, 0, 64);*/
+/*}*/
+
 .headerBusyIndicatorTopMargin {
     margin-top: 1.5rem !important;
 }
+
 .syncStatusTextBig {
     margin-top: 10px;
     font-size: 30px;
     font-weight: bold;
 }
+
 .syncStatusText {
     margin-top: 10px;
     font-size: 12px;
 }
+
 .syncStatusTextBold {
     margin-top: 10px;
     font-size: 12px;

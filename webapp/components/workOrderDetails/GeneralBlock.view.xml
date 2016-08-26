@@ -45,10 +45,10 @@
 			<Text text="{Funcldescr}\r\n({FunctLoc})"/>
 			<Label text="{i18n>GeneralBlockColumnEquipmentLabelEquipment}"/>
 			<Text text="{Equidescr}\r\n({Equipment})"/>
-			<Label text="{i18n>GeneralBlockColumnEquipmentLabelStreet}"/>
-			<Text text="{Street}"/>
-			<Label text="{i18n>GeneralBlockColumnEquipmentLabelCity}"/>
-			<Text text="{City}"/>
+			<Label text="{i18n>GeneralBlockColumnEquipmentLabelAddress}"/>
+			<Text text="{Street}\r\n{City}"/>
+			<!--<Label text="{i18n>GeneralBlockColumnEquipmentLabelCity}"/>-->
+			<!--<Text text=""/>-->
 			<!--Column Equipment-->
 	<!--		<core:Title text="{i18n>GeneralBlockColumnEquipment}"/>-->
 

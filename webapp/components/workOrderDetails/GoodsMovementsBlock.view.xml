@@ -1,0 +1,32 @@
+<core:View controllerName="com.twobm.mobileworkorder.components.workOrderDetails.GoodsMovementsBlock" xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+	<l:VerticalLayout class="sapUiSmallMarginEnd" width="100%">
+		<l:HorizontalLayout >
+			<Button class="sapUiSmallMarginEnd" icon="sap-icon://add" press="addMaterial"></Button>
+			<Button class="sapUiSmallMarginEnd" icon="sap-icon://bar-code" press="scanBarcode"></Button>
+		</l:HorizontalLayout>
+		<Table items="{ path: 'OrderGoodsMovements', sorter: { path: 'Material', descending: false}}"
+			noDataText="{i18n>ComponentsBlockNoComponentsAdded}">
+			<columns>
+				<Column>
+					<Text text="{i18n>ComponentsBlockColoumComponents}"/>
+				</Column>
+				<Column width="5em" vAlign="Middle" hAlign="Center">
+					<Text text="{i18n>ComponentsBlockColoumReserved}"/>
+				</Column>
+				<Column width="5em" vAlign="Middle" hAlign="Center">
+					<Text text="{i18n>ComponentsBlockColoumWithdrawn}"/>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem>
+					<cells>
+						<ObjectIdentifier text="{MaterialDescription}" title="{Material}"/>
+						<Text text="{ReqQuantity}"/>
+						<Text text="{WithdQuan}"/>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+	</l:VerticalLayout>
+</core:View>
