@@ -3,13 +3,13 @@
 	xmlns:mic="sap.suite.ui.microchart" height="100%">
 	<App class="dashboardClass">
 		<Page title="{i18n>DashboardPageTitle}">
-			<headerContent>
-				<l:HorizontalLayout>
-					<core:Icon width="3em" height="3em" noTabStop="true" press="handleViewSettingsDialogButtonPressed" src="sap-icon://settings"/>
-				</l:HorizontalLayout>
-			</headerContent>
+			<!--<headerContent>-->
+			<!--	<l:HorizontalLayout>-->
+			<!--		<core:Icon width="3em" height="3em" noTabStop="true" press="handleViewSettingsDialogButtonPressed" src="sap-icon://settings"/>-->
+			<!--	</l:HorizontalLayout>-->
+			<!--</headerContent>-->
 			<content>
-	<FlexBox alignItems="Left" justifyContent="Left">
+				<FlexBox alignItems="Left" justifyContent="Left">
 					<items>
 						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="John Johnson" subheader="Service technician"
 							headerImage="../webapp/localService/mockData/AugustFoto_2016_small_Round.png" frameType="TwoByOne" press="press">
@@ -22,9 +22,8 @@
 								</TileContent>
 							</tileContent>
 						</GenericTile>
-	</items>
+					</items>
 				</FlexBox>
-			
 				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Workorders" subheader="" size="S" frameType="OneByOne"
 					press="onPressOtherWorkorders">
 					<tileContent>
@@ -65,43 +64,37 @@
 						</TileContent>
 					</tileContent>
 				</GenericTile>
-			
-	
-			
 				<!--<l:VerticalLayout>-->
-			<!--		<l:Grid class="sapUiTinyMarginBegin sapUiTinyMarginTop"  defaultSpan="L6 M6 S12" >
+				<!--		<l:Grid class="sapUiTinyMarginBegin sapUiTinyMarginTop"  defaultSpan="L6 M6 S12" >
 						<l:content>	-->
-
-					<Table id="idnotificationsTable" class="sapUiTinyMarginBegin sapUiTinyMarginEnd sapUiTinyMarginTop" width="auto"
-						items="{ path : 'project>/Deals', sorter : { path : 'status', group : false } }">
-						<headerToolbar>
-							<Toolbar>
-								<Title text="{i18n>notifications}"/>
-								<ToolbarSpacer/>
-								<Button icon="sap-icon://add" press="onPress" ariaLabelledBy="editButtonLabel"/>
-								<!--                <SearchField width="50%" search="onFilterProjects" selectOnFocus="false" />  -->
-							</Toolbar>
-						</headerToolbar>
-						<columns >
-							<Column width="70%">
-								<Text text="{i18n>notificationListTitle}"/>
-							</Column>
-							<Column minScreenWidth="Tablet" demandPopin="true">
-								<Text text="Status"/>
-							</Column>
-						</columns>
-						<items>
-							<ColumnListItem press="showTasksDetail" type="Navigation">
-								<!--  <ColumnListItem type="Navigation" press="onPress"> -->
-								<cells>
-									<ObjectIdentifier title="{project>name}"/>
-									<core:Icon color="{project>color}" src="{project>icon}"></core:Icon>
-								</cells>
-							</ColumnListItem>
-						</items>
-					</Table>
-					
-					
+				<Table id="idnotificationsTable" class="sapUiTinyMarginBegin sapUiTinyMarginEnd sapUiTinyMarginTop" width="auto"
+					items="{ path : 'project>/Deals', sorter : { path : 'status', group : false } }">
+					<headerToolbar>
+						<Toolbar>
+							<Title text="{i18n>notifications}"/>
+							<ToolbarSpacer/>
+							<Button icon="sap-icon://add" press="onPress" ariaLabelledBy="editButtonLabel"/>
+							<!--                <SearchField width="50%" search="onFilterProjects" selectOnFocus="false" />  -->
+						</Toolbar>
+					</headerToolbar>
+					<columns >
+						<Column width="70%">
+							<Text text="{i18n>notificationListTitle}"/>
+						</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true">
+							<Text text="Status"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem press="showTasksDetail" type="Navigation">
+							<!--  <ColumnListItem type="Navigation" press="onPress"> -->
+							<cells>
+								<ObjectIdentifier title="{project>name}"/>
+								<core:Icon color="{project>color}" src="{project>icon}"></core:Icon>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
 				<!--	<Table id="idpurchaseRequisitionsTable" class="sapUiTinyMarginBegin sapUiTinyMarginEnd sapUiTinyMarginTop" width="auto"
 						items="{ path : 'project>/Deals', sorter : { path : 'status', group : false } }">
 						<headerToolbar>
@@ -130,11 +123,8 @@
 					</Table>-->
 				<!--		</l:content>
 						</l:Grid>-->
-	
 				<!--</l:VerticalLayout>-->
-				
 			</content>
-			
 			<footer>
 				<Toolbar id="detailToolbar">
 					<content>

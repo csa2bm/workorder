@@ -1,8 +1,9 @@
 sap.ui.define([
 	"com/twobm/mobileworkorder/util/Controller",
 	"com/twobm/mobileworkorder/dev/devapp",
-	"com/twobm/mobileworkorder/util/Globalization"
-], function(Controller, devApp, Globalization) {
+	"com/twobm/mobileworkorder/util/Globalization",
+	"sap/ui/core/routing/History"
+], function(Controller, devApp, Globalization, History) {
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.workOrderList.WorkOrderList", {
@@ -32,6 +33,18 @@ sap.ui.define([
 
 			//flush and refresh data
 			this.refresh();
+		},
+		
+		onNavigationButtonPress: function(oEvent) {
+			var oHistory = History.getInstance();
+			var sPreviousHash = oHistory.getPreviousHash();
+
+			if (sPreviousHash !== undefined) {
+				window.history.go(-1);
+			} else {
+				var oRouter = this.getRouter();
+				oRouter.navTo("dashboard", true);
+			}
 		},
 
 		onWorkOrderItemPress: function(oEvent) {

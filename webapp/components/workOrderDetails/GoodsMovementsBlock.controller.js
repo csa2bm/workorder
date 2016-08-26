@@ -226,7 +226,7 @@ sap.ui.define([
 		},
 
 		closeAddMaterial: function() {
-			this._oPopover.open();
+			this._oPopover.close();
 		},
 
 		issueMaterial: function(oEvent) {
