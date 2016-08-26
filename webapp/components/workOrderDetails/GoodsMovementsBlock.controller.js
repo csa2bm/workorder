@@ -1,7 +1,9 @@
 sap.ui.define([
 	"com/twobm/mobileworkorder/util/Controller",
-	"com/twobm/mobileworkorder/util/Formatter"
-], function(Controller, Formatter) {
+	"com/twobm/mobileworkorder/util/Formatter",
+	"sap/m/MessageBox",
+	"sap/ui/core/ValueState"
+], function(Controller, Formatter, MessageBox, ValueState) {
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.workOrderDetails.GoodsMovementsBlock", {
@@ -16,6 +18,7 @@ sap.ui.define([
 					"com.twobm.mobileworkorder.components.workOrderDetails.fragments.AddMaterialView", this);
 
 				this._oPopover.setModel(this.getView().getModel());
+				this._oPopover.setModel(this.getView().getModel("device"), "device");
 
 				//this._oPopover.attachAfterOpen(this.resizePopup);
 
@@ -137,80 +140,6 @@ sap.ui.define([
 					sap.m.MessageToast.show("Scanning failed");
 				}
 			);
-		},
-
-		issueMaterial: function(oEvent) {
-
-			if (!this.onValidate(this.getView())) {
-				sap.m.MessageToast.show("Save not possible. Invalid input fields");
-				return;
-			}
-
-			var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
-
-			var matnr = materialDetailsModel.getData().SearchResult.MaterialNumber;
-			var description = materialDetailsModel.getData().SearchResult.MaterialDescription;
-			var unit = materialDetailsModel.getData().SearchResult.Unit;
-			var quantity = Number(materialDetailsModel.getData().SelectedQuantity);
-			var discount = materialDetailsModel.getData().CustomerDiscount;
-			var ordernr = materialDetailsModel.getData().OrderNumber;
-
-			var that = this;
-
-			var previouslyIssuedQuantity = Number(materialDetailsModel.getData().PreviousQuantity);
-
-			if (previouslyIssuedQuantity === quantity) {
-				sap.m.MessageBox.error(this.getI18nTextReplace4("MaterialQuantityAlreadyRegistered", quantity, materialDetailsModel.getData().SearchResult
-					.Unit, matnr, ordernr));
-				return;
-			}
-
-			//Calculate the quantity to issue
-			var valueToIssue = this.getIssueValue(quantity, previouslyIssuedQuantity);
-
-			//Determine whether this is an issue of return of quantity
-			var returnValue = this.getReturnValue(quantity, previouslyIssuedQuantity);
-
-			// Create material on order
-			var parameters = {
-				success: function(oData, response) {
-					that.updateDiscountInInternalComment(ordernr, matnr, discount);
-
-					//If running in cordova we are using offlinestore and then
-					//we need to make sure that we update correctly in local db if offline
-					if (window.cordova) {
-						that.updateLocalStorageStock(matnr, quantity, previouslyIssuedQuantity);
-						that.updateMaterialSummary(ordernr, matnr, unit, description, valueToIssue, returnValue);
-					}
-
-					that.onNavBack();
-				},
-				error: this.errorCallBackShowInPopUp
-			};
-
-			var data = {
-				OrderNo: ordernr,
-				Matnr: matnr,
-				Quantity: valueToIssue.toString(),
-				Type: this.getMaterialDocumentStateText(returnValue),
-				Description: description,
-				Unit: unit,
-				Return: returnValue
-			};
-
-			var sPath = "/OrderSet(OrderNo='" + ordernr + "')/Materials";
-
-			var localStorageStock = Number(materialDetailsModel.getData().SearchResult.LocalStock);
-
-			if (!returnValue) { // this is an issue of quantity
-				// Check if quantity is available in local stock
-				if (localStorageStock < valueToIssue) {
-					sap.m.MessageBox.error(this.getI18nText("MaterialQuantityNotInLocalStorage"));
-					return;
-				}
-			}
-
-			this.getView().getModel().create(sPath, data, parameters);
 		},
 
 		getMaterialNrFromBarcode: function(barcode) {
@@ -348,70 +277,6 @@ sap.ui.define([
 
 		},
 
-		updateDiscountInInternalComment: function(ordernr, matnr, discount) {
-			var oModel = this.getView().getModel();
-
-			var parameters = {
-				success: function(oData, response) {
-
-				},
-				error: this.errorCallBackShowInPopUp
-			};
-
-			var sPath;
-
-			if (window.sap_webide_FacadePreview) {
-				sPath = "/OrderSet('" + ordernr + "')";
-			} else {
-				sPath = "/OrderSet(OrderNo='" + ordernr + "')";
-			}
-
-			var order = oModel.getProperty(sPath);
-
-			//Only possible if access to service
-			if (order) {
-				var newCommentText = "";
-				if (order.WorkOrderInternalComments.indexOf(matnr + " -") > -1) {
-
-					var str = order.WorkOrderInternalComments;
-					var substring = matnr;
-					var substring2 = "%";
-
-					var index = str.indexOf(substring);
-					index = index + substring.length + 3;
-					var procentSignIndex = str.indexOf(substring2, [index]) - 1;
-					if (discount > 0) {
-						String.prototype.replaceBetween = function(start, end, newValue) {
-							return this.substring(0, start) + newValue + this.substring(end);
-						};
-					} else {
-						String.prototype.replaceBetween = function(start, end, newValue) {
-							//return this.substring(0, "start") + "None" + this.substring(end);
-							return this.substring(0, start) + newValue + this.substring(end);
-						};
-					}
-
-					newCommentText = str.replaceBetween(index, procentSignIndex, discount);
-
-				} else if (!order.WorkOrderInternalComments) {
-
-					newCommentText = order.WorkOrderInternalComments + this.getI18nText("MaterialDiscountInternalCommentLabel") + ": " + matnr +
-						" - " + discount + " \%";
-
-				} else {
-
-					newCommentText = order.WorkOrderInternalComments + "\n" + this.getI18nText("MaterialDiscountInternalCommentLabel") + ": " + matnr +
-						" - " + discount + " \%";
-
-				}
-				var data = {
-					"WorkOrderInternalComments": newCommentText
-				};
-
-				oModel.update(sPath, data, parameters);
-			}
-		},
-
 		/*  This method is necessary when offline, in order to maintain the correct summarized 
 		    value of the issued material in the material  summary entity.
 		    Posts to MaterialSummaary is ignored on the online odata service.
@@ -505,18 +370,7 @@ sap.ui.define([
 				return -difference;
 			}
 		},
-
-		calculateDiscount: function() {
-			var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
-			var listPrice = materialDetailsModel.getData().SearchResult.ListPrice;
-			var discount = Number(materialDetailsModel.getData().CustomerDiscount);
-			var newPrice = listPrice - ((listPrice / 100) * discount);
-			newPrice = Math.round((newPrice + 0.00001) * 100) / 100;
-			materialDetailsModel.getData().CalculatedCustomerPrice = newPrice;
-			materialDetailsModel.refresh();
-			this.recalculateTotal();
-		},
-
+		
 		increaseMaterialToOrder: function() {
 			var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
 			var oldValue = materialDetailsModel.getData().SelectedQuantity;
@@ -573,13 +427,12 @@ sap.ui.define([
 				return;
 			}
 
-			var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
+			//var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
 			var newPrice = Number(materialDetailsModel.getData().SelectedQuantity) * Number(materialDetailsModel.getData().CalculatedCustomerPrice);
 			newPrice = Math.round((newPrice + 0.00001) * 100) / 100;
 			materialDetailsModel.getData().CalculatedTotalPrice = newPrice;
 			materialDetailsModel.refresh();
 		}
-
 	});
 
 });

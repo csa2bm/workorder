@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
-	<Dialog class="sapUiPopupWithPadding" stretch="true" showHeader="false" showCloseButton="true">
+	<Dialog class="sapUiPopupWithPadding" stretch="{device>/isPhone}" contentHeight="600px" showHeader="false" showCloseButton="true">
 		<NavContainer id="navCon">
 			<Page id="master" showNavButton="false" title="{i18n>MaterialSearchPageHeaderLabel}">
 				<content>
@@ -29,8 +29,6 @@
 									<Text id="inpMatDescription" text="{Description}" class="sapUiSmallMarginBottom"/>
 									<Label text="{i18n>MaterialSearchResultMatNumberLabel}"/>
 									<Text text="{Matnr}" class="sapUiSmallMarginBottom"/>
-									<Label text="{i18n>MaterialSearchResultListPriceLabel}"/>
-									<Text id="inpListPrice" text="{ListPrice} {MaterialDetailsModel>/SearchResult/Currency}" class="sapUiSmallMarginBottom"/>
 									<Label text="{i18n>MaterialSearchResultCarStockLabel}"/>
 									<Text id="inpCarStock" text="{Quantity} {UOM}"/>
 								</VBox>
