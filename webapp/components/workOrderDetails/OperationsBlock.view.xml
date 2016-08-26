@@ -5,20 +5,24 @@
 		<Column popinDisplay="Inline">
 				<Text text="{i18n>OperationBlockColoumOperation}"/>
 			</Column>
+			<!--
 			<Column hAlign="Center" demandPopin="false" minScreenWidth="Tablet" width="10em" vAlign="Middle">
 				<Text text="{i18n>OperationBlockColoumWorkActivty}"/>
 			</Column>
 			<Column hAlign="Center" demandPopin="true" width="5em" vAlign="Middle">
 				<Text text="{i18n>OperationBlockColoumCompleted}"/>
-			</Column>
+			</Column>-->
+			<Column width="5em" vAlign="Middle"></Column>
 			<Column width="1.5em" vAlign="Middle"></Column>
 		</columns>
 		<items>
 			<ColumnListItem type="Active" press="onOperationItemPress">
 				<cells>
 					<ObjectIdentifier text="{Description}" title="{Activity}"/>
+					<!--
 					<ObjectNumber number="{WorkActivity}" unit="{Unit}"/>
-					<core:Icon src="{parts:[{path:'Complete'}],formatter:'.operationStatus'}" color="{parts:[{path:'Complete'}],formatter:'.opStatusColor'}"/>
+					<core:Icon src="{parts:[{path:'Complete'}],formatter:'.operationStatus'}" color="{parts:[{path:'Complete'}],formatter:'.opStatusColor'}"/>-->
+					<Button id="readingButton" visible="{parts:[{path:'OrderStatus'}],formatter:'.isOrderStatusNotCompleted'}" class="sapUiMediumMarginEnd" icon="sap-icon://complete" press=""></Button>
 					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 				</cells>
 			</ColumnListItem>
