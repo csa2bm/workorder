@@ -89,19 +89,19 @@
 				"pattern": "",
 				"name": "dashboard",
 				"target": "dashboard"
-			},{
-				"pattern": "",
+			}, {
+				"pattern": "workOrderList",
 				"name": "workOrderList",
 				"target": "workOrderList"
 			}, {
 				"pattern": "workOrderDetails/{workOrderContext}",
 				"name": "workOrderDetails",
 				"target": "workOrderDetails"
-			},{
+			}, {
 				"pattern": "operationDetails/{operationContext}",
 				"name": "operationDetails",
 				"target": "operationDetails"
-			},{
+			}, {
 				"pattern": "equipmentDetails/{equipmentContext}",
 				"name": "equipmentDetails",
 				"target": "equipmentDetails"
@@ -137,7 +137,6 @@
 					"viewName": "EquipmentDetails",
 					"viewLevel": 4
 				}
-				
 			}
 		}
 	},
