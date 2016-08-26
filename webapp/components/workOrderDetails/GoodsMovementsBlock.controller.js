@@ -9,7 +9,47 @@ sap.ui.define([
 	return Controller.extend("com.twobm.mobileworkorder.components.workOrderDetails.GoodsMovementsBlock", {
 
 		onInit: function() {
+			this.createMaterialDetailsModel();
+
 			this.createMaterialSelectionPopover();
+		},
+
+		createMaterialDetailsModel: function() {
+
+			var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
+
+			if (!materialDetailsModel) {
+				materialDetailsModel = new sap.ui.model.json.JSONModel();
+				materialDetailsModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
+				this.getView().setModel(materialDetailsModel, "MaterialDetailsModel");
+			}
+
+			this.clearMaterialDetailsModel();
+		},
+
+		clearMaterialDetailsModel: function() {
+
+			var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
+
+			//Clear data
+			var data = {
+				SearchString: "",
+				SearchResult: {
+					//Fields from search result
+					MaterialNumber: "",
+					MaterialDescription: "",
+					LocalStock: "",
+					Unit: "",
+					ImagePath: ""
+				},
+				OrderNumber: materialDetailsModel.getData().OrderNumber, //Do not clear this. Has to be kept between searches
+				PreviousQuantity: "0",
+				SelectedQuantity: "0",
+				LocalDbObject: false,
+				LocalDbObjectUri: ""
+			};
+
+			materialDetailsModel.setData(data);
 		},
 
 		createMaterialSelectionPopover: function() {
@@ -18,7 +58,7 @@ sap.ui.define([
 					"com.twobm.mobileworkorder.components.workOrderDetails.fragments.AddMaterialView", this);
 
 				this._oPopover.setModel(this.getView().getModel());
-				this._oPopover.setModel(this.getView().getModel("device"), "device");
+				//this._oPopover.setModel(this.getView().getModel("device"), "device");
 
 				//this._oPopover.attachAfterOpen(this.resizePopup);
 
@@ -37,6 +77,20 @@ sap.ui.define([
 			var oDetailPage = sap.ui.core.Fragment.byId("MaterialSelectPopUp", "detail");
 			oNavCon.to(oDetailPage);
 			oDetailPage.bindElement(oCtx.getPath());
+		},
+
+		//Called as a result of selecting material from select dialog
+		setMaterialOnDialogSelect: function(oEvent) {
+			var selectedItem = oEvent.getParameter("selectedItem");
+
+			this.clearMaterialDetailsModel();
+
+			var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
+
+			materialDetailsModel.getData().SearchString = selectedItem.data("ID");
+			materialDetailsModel.refresh();
+
+			this.searchForMaterial();
 		},
 
 		searchMaterial: function(oEvent) {
@@ -370,7 +424,7 @@ sap.ui.define([
 				return -difference;
 			}
 		},
-		
+
 		increaseMaterialToOrder: function() {
 			var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
 			var oldValue = materialDetailsModel.getData().SelectedQuantity;
