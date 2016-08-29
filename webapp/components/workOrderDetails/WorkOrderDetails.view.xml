@@ -99,6 +99,15 @@
 						</ObjectPageSubSection>
 					</subSections>
 				</ObjectPageSection>
+				<ObjectPageSection title="{i18n>SubSectionTitleTimeRegistrations}">
+					<subSections>
+						<ObjectPageSubSection title="{i18n>SubSectionTitleTimeRegistrations}">
+							<blocks>
+								<blocks:TimeRegistrationsBlock/>
+							</blocks>
+						</ObjectPageSubSection>
+					</subSections>
+				</ObjectPageSection>
 				<ObjectPageSection title="{i18n>SubSectionTitleAttachments}">
 					<subSections>
 						<ObjectPageSubSection title="{i18n>SubSectionTitleAttachments}">
