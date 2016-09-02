@@ -51,6 +51,21 @@ sap.ui.define([
 			}
 		},
 
+		onPressNotifications : function() {
+		
+			var oHistory = History.getInstance();
+			var sPreviousHash = oHistory.getPreviousHash();
+
+			if (sPreviousHash !== undefined) {
+				window.history.go(-1);
+			} else {
+				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+				//var oRouter = this.getRouter();
+				oRouter.navTo("notificationList", true);
+			
+			}
+		},
+
 		// Pop-up for sorting and filter
 		handleViewSettingsDialogButtonPressed: function() {
 			if (!this._oDialog) {

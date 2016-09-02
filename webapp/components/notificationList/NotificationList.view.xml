@@ -8,7 +8,7 @@
 				</l:HorizontalLayout>
 			</headerContent>
 			<content>
-				<Table id="notificationTableId" items="{/NotificationSet}" noDataText="No Notifications" showSeparators="true" class="notificationListTableClass">
+				<Table id="notificationTableId" items="{/NotificationsSet}" noDataText="No Notifications" showSeparators="true" class="notificationListTableClass">
 					<columns>
 						<Column width="8em">
 							<header>
@@ -17,7 +17,7 @@
 						</Column>
 						<Column>
 							<header>
-								<Label text="{i18n>NotificationListColumnWorkOrderHeaderLabel}"/>
+								<Label text="{i18n>NotificationListColumnNotificationHeaderLabel}"/>
 							</header>
 						</Column>
 						<Column minScreenWidth="Tablet">
@@ -39,10 +39,10 @@
 								<Label design="Bold" maxLines="1" text="asjhd ajkhd ajkhsd jkahd kjahds jkas djahs dkjas djkahs dkjah djkahs jd" />
 								<Label design="" maxLines="1" text="asjhd ajkhd ajkhsd jkahd kjahds jkas djahs dkjas djkahs dkjah djkahs jd" class="sapUiTinyMarginTop" />
 								</VBox>-->
-								<ObjectIdentifier text="{path: 'FinishDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"
+								<ObjectIdentifier text="{path: 'NotifDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"
 									title="{path: 'StartDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}" />
-								<ObjectIdentifier text="{Orderid}" title="{ShortText}"/>
-								<ObjectIdentifier text="{FunctLoc}" title="{Funcldescr}"/>
+								<ObjectIdentifier text="{NotifNo}" title="{ShortText}"/>
+								<ObjectIdentifier text="{FunctionalLoc}" title="{Funcldescr}"/>
 								<ObjectIdentifier text="{Equipment}" title="{Equidescr}"/>
 								<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 							</cells>
