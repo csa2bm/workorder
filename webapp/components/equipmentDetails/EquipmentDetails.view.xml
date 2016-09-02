@@ -10,7 +10,7 @@ height="100%">
 	<m:Page showNavButton="true" navButtonPress="onNavigationButtonPress" title="{i18n>EquipmentDetailsTitle}" height="100%">
 		<ObjectPageLayout id="equipmentObjectPage" enableLazyLoading="false">
 			<headerTitle>
-				<ObjectPageHeader headerDesign="Dark" objectTitle="{path:'ShortText'}" objectSubtitle="{path:'Equipment'}"/>
+				<ObjectPageHeader headerDesign="Dark" objectTitle="{path:'Equidescr'}" objectSubtitle="{path:'Equipment'}"/>
 			</headerTitle>
 			<sections>
 				

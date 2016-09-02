@@ -105,6 +105,11 @@
 				"pattern": "equipmentDetails/{equipmentContext}",
 				"name": "equipmentDetails",
 				"target": "equipmentDetails"
+			}, {
+				"name": "notificationList",
+				"pattern": "notificationList",
+				"greedy": false,
+				"target": ["notificationList"]
 			}],
 			"targets": {
 				"dashboard": {
@@ -136,6 +141,14 @@
 					"viewPath": "com.twobm.mobileworkorder.components.equipmentDetails",
 					"viewName": "EquipmentDetails",
 					"viewLevel": 4
+				},
+				"notificationList": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewName": "NotificationList",
+					"viewLevel": 2,
+					"viewPath": "com.twobm.mobileworkorder.components.notificationList"
 				}
 			}
 		}
