@@ -11,17 +11,63 @@
 			<content>
 				<FlexBox alignItems="Left" justifyContent="Left">
 					<items>
-						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="John Johnson" subheader="Service technician"
-							headerImage="../webapp/localService/mockData/AugustFoto_2016_small_Round.png" frameType="TwoByOne" press="press">
+					<!--	<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="John Johnson" subheader="Service technician"
+							frameType="TwoByOne" press="press">
 							<tileContent>
-								<TileContent footer="New Notifications">
+								<TileContent>
 									<content>
 										<FeedContent contentText="Hello John, you are a key player for LEGO in the 4th. industrial revolution." subheader="Keep up the good work!"
 											value="24"></FeedContent>
+										<ImageContent src="../webapp/localService/mockData/AugustFoto_2016_small_Round.png"/>
+									</content>
+								</TileContent>
+							</tileContent>
+						</GenericTile>-->
+					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="John Johnson" subheader="Service technician"
+							headerImage="../webapp/localService/mockData/AugustFoto_2016_small_Round.png" frameType="TwoByOne" press="press">
+							<tileContent>
+								<TileContent footer="">
+									<content>
+										<FeedContent contentText="Hello John, you are a key player for us in the 4th. industrial revolution." subheader="Keep up the good work!"
+											value=""></FeedContent>
 									</content>
 								</TileContent>
 							</tileContent>
 						</GenericTile>
+					
+			<!--			<SlideTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout">
+		<tiles>-->
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
+				backgroundImage="../webapp/localService/mockData/2bmTileLogo7.png"
+				frameType="TwoByOne" press="press">
+				<tileContent>
+					<TileContent footer="">
+						<content>
+					
+								<FeedContent contentText="" subheader=""
+											value=""></FeedContent>
+						
+						</content>
+					</TileContent>
+				</tileContent>
+			</GenericTile>
+<!--			<GenericTile
+				backgroundImage="../webapp/localService/mockData/LegoLogoTileBackgr5.png"
+				frameType="TwoByOne" press="press">
+				<tileContent>
+					<TileContent footer="August 21, 2016">
+						<content>
+							<NewsContent
+								contentText="SAP Unveils Powerful New Player Comparision Tool Exclusively on NFL.com"
+								subheader="Today, SAP News">
+							</NewsContent>
+						</content>
+					</TileContent>
+				</tileContent>
+			</GenericTile>-->
+	<!--	</tiles>
+	</SlideTile>-->
+						
 					</items>
 				</FlexBox>
 				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Workorders" subheader="" size="S" frameType="OneByOne"
@@ -29,7 +75,27 @@
 					<tileContent>
 						<TileContent footer="" size="S">
 							<content>
-								<NumericContent size="S" value="21 " valueColor="Error" icon="sap-icon://eam-work-order"/>
+								<NumericContent size="S" value="21 " valueColor="" icon="sap-icon://eam-work-order"/>
+							</content>
+						</TileContent>
+					</tileContent>
+				</GenericTile>
+				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Notifications" subheader="" size="S" frameType="OneByOne"
+					press="onPressNotifications">
+					<tileContent>
+						<TileContent footer="" size="S">
+							<content>
+								<NumericContent size="S" value="9 " valueColor="" icon="sap-icon://notification"/>
+							</content>
+						</TileContent>
+					</tileContent>
+				</GenericTile>
+					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Create notification" size="S" frameType="OneByOne"
+					press="onPressCreateNotification">
+					<tileContent>
+						<TileContent size="S">
+							<content>
+								<ImageContent src="sap-icon://add"/>
 							</content>
 						</TileContent>
 					</tileContent>
@@ -44,16 +110,7 @@
 						</TileContent>
 					</tileContent>
 				</GenericTile>
-				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Create notification" size="S" frameType="OneByOne"
-					press="onPressCreateNotification">
-					<tileContent>
-						<TileContent size="S">
-							<content>
-								<ImageContent src="sap-icon://notification"/>
-							</content>
-						</TileContent>
-					</tileContent>
-				</GenericTile>
+			
 				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Scan object" subheader="" size="S" frameType="OneByOne"
 					press="press">
 					<tileContent>
@@ -67,14 +124,13 @@
 				<!--<l:VerticalLayout>-->
 				<!--		<l:Grid class="sapUiTinyMarginBegin sapUiTinyMarginTop"  defaultSpan="L6 M6 S12" >
 						<l:content>	-->
-				<Table id="idnotificationsTable" class="sapUiTinyMarginBegin sapUiTinyMarginEnd sapUiTinyMarginTop" width="auto"
+			<!--	<Table id="idnotificationsTable" class="sapUiTinyMarginBegin sapUiTinyMarginEnd sapUiTinyMarginTop" width="auto"
 					items="{ path : 'project>/Deals', sorter : { path : 'status', group : false } }">
 					<headerToolbar>
 						<Toolbar>
 							<Title text="{i18n>notifications}"/>
 							<ToolbarSpacer/>
 							<Button icon="sap-icon://add" press="onPress" ariaLabelledBy="editButtonLabel"/>
-							<!--                <SearchField width="50%" search="onFilterProjects" selectOnFocus="false" />  -->
 						</Toolbar>
 					</headerToolbar>
 					<columns >
@@ -87,14 +143,13 @@
 					</columns>
 					<items>
 						<ColumnListItem press="showTasksDetail" type="Navigation">
-							<!--  <ColumnListItem type="Navigation" press="onPress"> -->
 							<cells>
 								<ObjectIdentifier title="{project>name}"/>
 								<core:Icon color="{project>color}" src="{project>icon}"></core:Icon>
 							</cells>
 						</ColumnListItem>
 					</items>
-				</Table>
+				</Table>-->
 				<!--	<Table id="idpurchaseRequisitionsTable" class="sapUiTinyMarginBegin sapUiTinyMarginEnd sapUiTinyMarginTop" width="auto"
 						items="{ path : 'project>/Deals', sorter : { path : 'status', group : false } }">
 						<headerToolbar>

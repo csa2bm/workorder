@@ -14,7 +14,8 @@
 			data-sap-ui-xx-bindingSyntax="complex"
 			data-sap-ui-compatVersion="edge"
 			data-sap-ui-preload="async"
-			data-sap-ui-resourceroots='{"com.twobm.mobileworkorder": "./"}'>
+			data-sap-ui-resourceroots='{"com.twobm.mobileworkorder": "./"}'
+			data-sap-ui-xx-supportedLanguages="">
 		</script>
 
 		<script type="text/javascript" src="../cordova.js"></script>
@@ -40,7 +41,45 @@
 					else {
 						devapp.startApp();
 					}
-				})
+				});
+					//Load modules a component-preload.js file should be created instead, Please note that the supportet language is set to: data-sap-ui-xx-supportedLanguages="" this need to be deleted aswell.
+				
+				sap.ui.require([
+						"com/twobm/mobileworkorder/components/workOrderDetails/AttachmentsBlock.controller",
+						"com/twobm/mobileworkorder/components/workOrderDetails/ComponentsBlock.controller",
+						"com/twobm/mobileworkorder/components/workOrderDetails/EquipmentBlock.controller",
+						"com/twobm/mobileworkorder/components/workOrderDetails/GeneralBlock.controller",
+						"com/twobm/mobileworkorder/components/workOrderDetails/GoodsMovementsBlock.controller",
+						"com/twobm/mobileworkorder/components/workOrderDetails/MeasuringPointsBlock.controller",
+						"com/twobm/mobileworkorder/components/workOrderDetails/NotesBlock.controller",
+						"com/twobm/mobileworkorder/components/workOrderDetails/OperationsBlock.controller",
+						"com/twobm/mobileworkorder/components/workOrderDetails/TimeRegistrationsBlock.controller",
+						"com/twobm/mobileworkorder/components/workOrderDetails/WorkOrderDetails.controller",
+						"sap/uxap/ObjectPageLayout",
+						"sap/uxap/ObjectPageSubSection",
+						"sap/uxap/ObjectPageSectionBase",
+						"sap/uxap/library",
+						"sap/uxap/BlockBase",
+						"sap/uxap/BlockBaseMetadata",
+						"sap/uxap/ModelMapping",
+						"sap/uxap/ObjectPageLazyLoader",
+						"sap/uxap/LazyLoading",
+						"sap/uxap/ObjectPageLayoutABHelper",
+						"sap/uxap/AnchorBar",
+						"sap/uxap/HierarchicalSelect",
+						"sap/uxap/ObjectPageHeader",
+						"sap/uxap/ObjectPageHeaderActionButton",
+						"sap/uxap/ObjectPageSection",
+						"sap/uxap/ObjectPageLayoutRenderer",
+						"sap/uxap/ObjectPageHeaderRenderer",
+						"sap/uxap/ObjectPageHeaderContent",
+						"sap/uxap/HierarchicalSelectRenderer",
+						"sap/uxap/AnchorBarRenderer",
+						"sap/uxap/BlockBaseRenderer",
+						"sap/uxap/ObjectPageSectionRenderer",
+						"sap/uxap/ObjectPageSubSectionRenderer"
+					]);
+			
 			}
 		
 		</script>
