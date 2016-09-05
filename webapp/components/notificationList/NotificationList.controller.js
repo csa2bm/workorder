@@ -1,13 +1,12 @@
 sap.ui.define([
 	"com/twobm/mobileworkorder/util/Controller",
-	"sap/ui/core/routing/History",
-	"com/twobm/mobileworkorder/util/Formatter"
-], function(Controller, History, Formatter) {
+	"com/twobm/mobileworkorder/dev/devapp",
+	"com/twobm/mobileworkorder/util/Globalization",
+	"sap/ui/core/routing/History"
+], function(Controller, devApp, Globalization, History) {
 	"use strict";
 
-	return Controller.extend("com.twobm.mobileworkorder.components.dashboard.Dashboard", {
-		formatter:Formatter,
-		
+	return Controller.extend("com.twobm.mobileworkorder.components.notificationList.NotificationList", {
 		onInit: function() {
 			this.getRouter().attachRoutePatternMatched(this.onRouteMatched, this);
 		},
@@ -16,7 +15,7 @@ sap.ui.define([
 			var sName = oEvent.getParameter("name");
 
 			//Is it this page we have navigated to?
-			if (sName !== "Dashboard") {
+			if (sName !== "notificationList") {
 				//We navigated to another page - unsubscribe to events for this page
 				this.getEventBus().unsubscribe("OfflineStore", "Synced", this.syncCompleted, this);
 				this.getEventBus().unsubscribe("DeviceOnline", this.deviceWentOnline, this);
@@ -35,41 +34,30 @@ sap.ui.define([
 			//flush and refresh data
 			this.refresh();
 		},
-
-		onPressOtherWorkorders: function() {
 		
+		onNavigationButtonPress: function(oEvent) {
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
 
 			if (sPreviousHash !== undefined) {
 				window.history.go(-1);
 			} else {
-				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-				//var oRouter = this.getRouter();
-				oRouter.navTo("workOrderList", true);
-			
+				var oRouter = this.getRouter();
+				oRouter.navTo("dashboard", true);
 			}
 		},
 
-		onPressNotifications : function() {
-		
-			var oHistory = History.getInstance();
-			var sPreviousHash = oHistory.getPreviousHash();
-
-			if (sPreviousHash !== undefined) {
-				window.history.go(-1);
-			} else {
-				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-				//var oRouter = this.getRouter();
-				oRouter.navTo("notificationList", true);
-			
-			}
+		onWorkOrderItemPress: function(oEvent) {
+			var oBindingContext = oEvent.getSource().getBindingContext();
+			this.getRouter().navTo("notificationDetails", {
+				workOrderContext: oBindingContext.getPath().substr(1)
+			});
 		},
 
 		// Pop-up for sorting and filter
 		handleViewSettingsDialogButtonPressed: function() {
 			if (!this._oDialog) {
-				this._oDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.workOrderList.controls.OrderFilterDialog", this);
+				this._oDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.notificationList.controls.NotificationFilterDialog", this);
 			}
 			// toggle compact style
 			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);
@@ -77,7 +65,7 @@ sap.ui.define([
 		},
 
 		setInitialSorting: function() {
-			var oTable = this.getView().byId("workOrderTableId");
+			var oTable = this.getView().byId("notificationTableId");
 			var oBinding = oTable.getBinding("items");
 
 			var aSorters = [];
@@ -89,9 +77,9 @@ sap.ui.define([
 		},
 
 		// Start filter and sorting based on selected.
-		handleOrderFilterConfirm: function(oEvent) {
+		handleNotificationFilterConfirm: function(oEvent) {
 			var oView = this.getView();
-			var oTable = oView.byId("workOrderTableId");
+			var oTable = oView.byId("notificationTableId");
 
 			var mParams = oEvent.getParameters();
 			var oBinding = oTable.getBinding("items");
@@ -173,7 +161,7 @@ sap.ui.define([
 			self.setSyncIndicators(false);
 
 			//Update items in table
-			self.getView().byId("workOrderTableId").getBinding("items").refresh(true);
+			self.getView().byId("notificationTableId").getBinding("items").refresh(true);
 		},
 
 		syncFailed: function() {
@@ -269,7 +257,7 @@ sap.ui.define([
 
 		createPopover: function() {
 			if (!this._syncQuickView) {
-				this._syncQuickView = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.workOrderList.controls.SyncQuickView", this);
+				this._syncQuickView = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.notificationList.controls.SyncQuickView", this);
 				this.getView().addDependent(this._syncQuickView);
 			}
 		},

@@ -1,0 +1,64 @@
+<core:View controllerName="com.twobm.mobileworkorder.components.notificationList.NotificationList" xmlns:core="sap.ui.core"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+	<App class="notificationListClass">
+		<Page showNavButton="true" navButtonPress="onNavigationButtonPress" title="{i18n>NotificationListPageTitle}">
+			<headerContent>
+				<l:HorizontalLayout>
+					<core:Icon width="3em" height="3em" noTabStop="true" press="handleViewSettingsDialogButtonPressed" src="sap-icon://drop-down-list"/>
+				</l:HorizontalLayout>
+			</headerContent>
+			<content>
+				<Table id="notificationTableId" items="{/NotificationsSet}" noDataText="No Notifications" showSeparators="true" class="notificationListTableClass">
+					<columns>
+						<Column width="8em">
+							<header>
+								<Label text="{i18n>NotificationListColumnDateHeaderLabel}"/>
+							</header>
+						</Column>
+						<Column>
+							<header>
+								<Label text="{i18n>NotificationListColumnNotificationHeaderLabel}"/>
+							</header>
+						</Column>
+						<Column minScreenWidth="Tablet">
+							<header>
+								<Label text="{i18n>NotificationListColumnFunctionalLocationHeaderLabel}"/>
+							</header>
+						</Column>
+						<Column minScreenWidth="Tablet">
+							<header>
+								<Label text="{i18n>NotificationListColumnEquipmentHeaderLabel}"/>
+							</header>
+						</Column>
+						<Column width="1.5em" vAlign="Middle"></Column>
+					</columns>
+					<items>
+						<ColumnListItem type="Active" press="onNotificationItemPress">
+							<cells>
+							<!--	<VBox>
+								<Label design="Bold" maxLines="1" text="asjhd ajkhd ajkhsd jkahd kjahds jkas djahs dkjas djkahs dkjah djkahs jd" />
+								<Label design="" maxLines="1" text="asjhd ajkhd ajkhsd jkahd kjahds jkas djahs dkjas djkahs dkjah djkahs jd" class="sapUiTinyMarginTop" />
+								</VBox>-->
+								<ObjectIdentifier text="{path: 'NotifDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"
+									title="{path: 'StartDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}" />
+								<ObjectIdentifier text="{NotifNo}" title="{ShortText}"/>
+								<ObjectIdentifier text="{FunctionalLoc}" title="{Funcldescr}"/>
+								<ObjectIdentifier text="{Equipment}" title="{Equidescr}"/>
+								<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</content>
+			<footer>
+				<Toolbar id="detailToolbar">
+					<content>
+						<core:Icon id="syncIndicator" width="3em" height="3em" color="{parts:[{path:'syncStatusModel>/Online'}, {path:'syncStatusModel>/PendingLocalData'}],formatter:'.getSyncStatusIconColor'}" noTabStop="true" press="showSyncQuickview"
+							src="{parts:[{path:'syncStatusModel>/Online'}, {path:'syncStatusModel>/PendingLocalData'}],formatter:'.getSyncStateIcon'}" tooltip="Sync status"></core:Icon>
+						<BusyIndicator id="syncBusyIndicator" visible="false"/>
+					</content>
+				</Toolbar>
+			</footer>
+		</Page>
+	</App>
+</core:View>
