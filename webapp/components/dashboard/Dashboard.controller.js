@@ -10,6 +10,12 @@ sap.ui.define([
 		
 		onInit: function() {
 			this.getRouter().attachRoutePatternMatched(this.onRouteMatched, this);
+			
+		//	this.setNotificationModel(this);
+				this.ImageNotificationModel = new sap.ui.model.json.JSONModel();
+		
+	
+		
 		},
 
 		onRouteMatched: function(oEvent) {
@@ -34,6 +40,14 @@ sap.ui.define([
 
 			//flush and refresh data
 			this.refresh();
+		},
+		
+		setNotificationModel: function(oEvent){
+				var notificationModel = new sap.ui.model.json.JSONModel();
+				notificationModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
+				oEvent.getview().setModel(notificationModel, "NotificationModel");
+				
+			
 		},
 
 		onPressOtherWorkorders: function() {
@@ -65,77 +79,73 @@ sap.ui.define([
 			
 			}
 		},
+		
 
-		// Pop-up for sorting and filter
-		handleViewSettingsDialogButtonPressed: function() {
-			if (!this._oDialog) {
-				this._oDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.workOrderList.controls.OrderFilterDialog", this);
+		
+		
+			onPressCreateNotification: function(){
+				if (!this._oDialog) {
+				this._oDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.notificationList.controls.CreateNotificationDialog", this);
+				this.getView().addDependent(this._oDialog);
 			}
 			// toggle compact style
 			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);
 			this._oDialog.open();
 		},
+		
+			/*	onPressCreateNotification: function(oEvent){
+		
+		
+			
+			if (!this._oPopover) {
+				this._oPopover = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.notificationList.controls.CreateNotificationDialog", this);
 
-		setInitialSorting: function() {
-			var oTable = this.getView().byId("workOrderTableId");
-			var oBinding = oTable.getBinding("items");
-
-			var aSorters = [];
-
-			var sortItem = "StartDate";
-			var sortDescending = true;
-			aSorters.push(new sap.ui.model.Sorter(sortItem, sortDescending));
-			oBinding.sort(aSorters);
-		},
-
-		// Start filter and sorting based on selected.
-		handleOrderFilterConfirm: function(oEvent) {
-			var oView = this.getView();
-			var oTable = oView.byId("workOrderTableId");
-
-			var mParams = oEvent.getParameters();
-			var oBinding = oTable.getBinding("items");
-
-			// apply sorter to binding
-			// (grouping comes before sorting)
-			var aSorters = [];
-			if (mParams.groupItem) {
-				var sPath = mParams.groupItem.getKey();
-				var bDescending = mParams.groupDescending;
-				var vGroup = this.orderGroupFunctions[sPath];
-				aSorters.push(new sap.ui.model.Sorter(sPath, bDescending, vGroup));
+				this._oPopover.setModel(this.CreateNotificationModel, "CreateNotificationModel");
+				this.getView().addDependent(this._oPopover);
 			}
+			
+			this._oPopover.getModel("CreateNotificationModel").refresh();
+			
 
-			var sortItem = mParams.sortItem.getKey();
-			var sortDescending = mParams.sortDescending;
-			aSorters.push(new sap.ui.model.Sorter(sortItem, sortDescending));
-			oBinding.sort(aSorters);
 
-			// apply filters to binding
-			var aFilters = [];
-			oBinding.filter(aFilters);
+			this._oPopover.openBy(oEvent.getSource());
+	
+			
+		},*/
+		
 
-			// update filter bar
-			//oView.byId("vsdFilterBar").setVisible(aFilters.length > 0);
-			//oView.byId("vsdFilterLabel").setText(mParams.filterString);
+		handleSaveNotification: function(oEvent) {
+			//Handles that Finish is also changed. StartDate is handled with twoway binding
 
-			var model = this.getView().getModel();
-			model.refresh();
-		},
+			var oContext = oEvent.getSource().getBindingContext();
+			var newStartDateString = this._oPopover.getModel("CreateNotificationModel").getData().Date;
+			
+			var dateFormat = sap.ui.core.format.DateFormat.getDateInstance({pattern : "dd-MM-yyyy" });     
+			var newStartDate = dateFormat.parse(newStartDateString,true,true);  
+			
+			if(newStartDate){
+				//Date is valid
+				this.getView().getModel().setProperty("Date", newStartDate, oContext);
+	
 
-		refresh: function() {
-			//Subscribe to sync events
-			if (window.sap_webide_FacadePreview) {
-				//model.attachRequestCompleted(this.syncCompleted);
-				//model.attachRequestFailed(this.syncFailed);
-				this.subscribeToOnlineSyncEvents();
-			} else {
-				//When not in webide 
+				oEvent.oDialog.close();
 			}
-
-			this.refreshData();
 		},
+		
+			handleCloseNotificationDialog: function() {
+			if (this._oDialog) {
+				this._oDialog.close();
+			}
+		},
+		
 
+		
+		 
+		
+	
+		
+
+	
 		//These event are event from the odata service
 		//In offline scenario we are not interesting in these
 		//as it is more important that the data has been synced to the backend
