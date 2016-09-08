@@ -13,8 +13,10 @@
 				<Input placeholder="" value="{CreateNotificationModel>/Equipment}"/>
 				<Label text="Functional location"/>
 				<Input placeholder="" value="{CreateNotificationModel>/FunctionalLoc}"/>
-				<Label text="Type"/>
+				<Label text="Notification Type"/>
 				<Input placeholder="" value="{CreateNotificationModel>/NotifType}"/>
+				<Label text="Priority"/>
+				<Input placeholder="" value="{CreateNotificationModel>/Priority}"/>
 				<Label text="Short text"/>
 				<TextArea placeholder="" value="{CreateNotificationModel>/ShortText}" rows="4"/>
 			<!--</VBox>-->

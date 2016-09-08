@@ -71,7 +71,8 @@
 					<tileContent>
 						<TileContent footer="" size="S">
 							<content>
-								<NumericContent size="S" value="21" valueColor="" icon="sap-icon://eam-work-order"/>
+								<NumericContent size="S" value="{DashBoardModel>/orderCount}" valueColor="" icon="sap-icon://eam-work-order"/>
+			
 							</content>
 						</TileContent>
 					</tileContent>
@@ -81,7 +82,7 @@
 					<tileContent>
 						<TileContent footer="" size="S">
 							<content>
-								<NumericContent size="S" value="9 " valueColor="" icon="sap-icon://notification"/>
+								<NumericContent size="S" value="{DashBoardModel>/notificationCount}" valueColor="" icon="sap-icon://notification"/>
 							</content>
 						</TileContent>
 					</tileContent>

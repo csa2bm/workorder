@@ -12,7 +12,11 @@ sap.ui.define([
 			this.getRouter().attachRoutePatternMatched(this.onRouteMatched, this);
 
 			//	this.setNotificationModel(this);
-			this.ImageNotificationModel = new sap.ui.model.json.JSONModel();
+			this.DashBoardModel = new sap.ui.model.json.JSONModel({
+				notificationCount: 0,
+				orderCount: 0
+			});
+			this.getView().setModel(this.DashBoardModel,"DashBoardModel");
 
 		},
 
@@ -20,7 +24,7 @@ sap.ui.define([
 			var sName = oEvent.getParameter("name");
 
 			//Is it this page we have navigated to?
-			if (sName !== "Dashboard") {
+			if (sName !== "dashboard") {
 				//We navigated to another page - unsubscribe to events for this page
 				this.getEventBus().unsubscribe("OfflineStore", "Synced", this.syncCompleted, this);
 				this.getEventBus().unsubscribe("DeviceOnline", this.deviceWentOnline, this);
@@ -35,9 +39,41 @@ sap.ui.define([
 			this.getEventBus().subscribe("DeviceOffline", this.deviceWentOffline, this);
 
 			this.getEventBus().publish("UpdateSyncState");
+			
+		
 
-			//flush and refresh data
-			this.refresh();
+			this.setContentInTiles();
+
+		},
+		
+		setContentInTiles: function (){
+			self = this;
+			// Set Dashboard Tiles model
+			// if(!this.getView().getModel(self.DashBoardModel)){
+			// this.getView().setModel(self.DashBoardModel,"DashBoardModel");
+			// }	
+					
+			var parametersOrder = {
+				success: function(oData, oResponse) {
+
+					self.DashBoardModel.getData().orderCount = oData;
+					self.DashBoardModel.refresh();
+
+				},
+				error: this.errorCallBackShowInPopUp
+			};
+			var parametersNotif = {
+				success: function(oData, oResponse) {
+
+					self.DashBoardModel.getData().notificationCount = oData;
+					self.DashBoardModel.refresh();
+
+				},
+				error: this.errorCallBackShowInPopUp
+			};
+
+			this.getView().getModel().read("/OrderSet/$count", parametersOrder);
+			this.getView().getModel().read("/NotificationsSet/$count", parametersNotif);
 		},
 
 		setNotificationModel: function(oEvent) {
@@ -77,18 +113,33 @@ sap.ui.define([
 			}
 		},
 
+	/*	onPressCreateNotification: function() {
+			if (!this._oDialog) {
+				this._oDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.notificationList.controls.CreateNotificationDialog",
+					this);
+				this.getView().addDependent(this._oDialog);
+			}
+			// toggle compact style
+			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);
+			this._oDialog.open();
+		},*/
+		
 		onPressCreateNotification: function() {
-			var oRouter = this.getRouter();
-			oRouter.navTo("notificationCreate", true);
-			
-			// if (!this._oDialog) {
-			// 	this._oDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.notificationList.controls.CreateNotificationDialog", this);
-			// 	this.getView().addDependent(this._oDialog);
-			// }
-			// // toggle compact style
-			// jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);
-			// this._oDialog.open();
-		},
+
+			var oHistory = History.getInstance();
+			var sPreviousHash = oHistory.getPreviousHash();
+
+			if (sPreviousHash !== undefined) {
+				window.history.go(-1);
+			} else {
+				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+				//var oRouter = this.getRouter();
+				oRouter.navTo("NotificationCreate", true);
+
+			}
+			},
+	
+		
 
 		/*	onPressCreateNotification: function(oEvent){
 		
@@ -355,6 +406,13 @@ sap.ui.define([
 			} else {
 				return "Offline";
 			}
+		},
+		dataCount: function(oValue) {
+			//read the number of data entities returned
+			if (oValue) {
+				return oValue.length;
+			}
+
 		}
 	});
 });
