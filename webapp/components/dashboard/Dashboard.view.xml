@@ -72,7 +72,6 @@
 						<TileContent footer="" size="S">
 							<content>
 								<NumericContent size="S" value="{DashBoardModel>/orderCount}" valueColor="" icon="sap-icon://eam-work-order"/>
-			
 							</content>
 						</TileContent>
 					</tileContent>

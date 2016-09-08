@@ -113,7 +113,7 @@ sap.ui.define([
 			}
 		},
 
-		onPressCreateNotification: function() {
+	/*	onPressCreateNotification: function() {
 			if (!this._oDialog) {
 				this._oDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.notificationList.controls.CreateNotificationDialog",
 					this);
@@ -122,7 +122,24 @@ sap.ui.define([
 			// toggle compact style
 			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);
 			this._oDialog.open();
-		},
+		},*/
+		
+		onPressCreateNotification: function() {
+
+			var oHistory = History.getInstance();
+			var sPreviousHash = oHistory.getPreviousHash();
+
+			if (sPreviousHash !== undefined) {
+				window.history.go(-1);
+			} else {
+				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+				//var oRouter = this.getRouter();
+				oRouter.navTo("notificationCreate", true);
+
+			}
+			},
+	
+		
 
 		/*	onPressCreateNotification: function(oEvent){
 		
