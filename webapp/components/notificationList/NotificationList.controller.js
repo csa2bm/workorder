@@ -34,7 +34,7 @@ sap.ui.define([
 			//flush and refresh data
 			this.refresh();
 		},
-		
+
 		onNavigationButtonPress: function(oEvent) {
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
@@ -147,9 +147,9 @@ sap.ui.define([
 				var syncStatusModel = self.getView().getModel("syncStatusModel");
 				var d = new Date();
 				syncStatusModel.getData().LastSyncTime = d.toLocaleString();
-				
+
 				syncStatusModel.getData().Online = true; //always online in webide
-				
+
 				syncStatusModel.refresh();
 
 				//Update sync state indicator
@@ -223,7 +223,7 @@ sap.ui.define([
 
 			self.flushAndRefresh();
 		},
-		
+
 		deviceWentOffline: function() {
 			self.setSyncIndicators(false);
 		},
@@ -344,6 +344,11 @@ sap.ui.define([
 			} else {
 				return "Offline";
 			}
+		},
+
+		createNewNotification: function() {
+			var oRouter = this.getRouter();
+			oRouter.navTo("notificationCreate", true);
 		}
 	});
 });
