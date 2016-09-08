@@ -4,100 +4,58 @@
 	<Page id="createPage" showNavButton="true" navButtonPress="goBack" title="{i18n>NotificationCreateTitle}"
 		class="sapUiFioriObjectPage appBackgroundColor">
 		<content>
-			<!-- Generelle data -->
-			<layout:form.SimpleForm minWidth="1024" title="{i18n.salesopportunities>GENERALDATA}" maxContainerCols="2" editable="true"
-				layout="ResponsiveGridLayout" labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
+			<!-- General data -->
+			<layout:form.SimpleForm minWidth="1024" title="{i18n>generalData}" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
+				labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
 				<layout:content>
-					<Label text="att1"></Label>
-					<Input id="desc" value="" maxLength="40" placeholder="*" liveChange="descriptionChanged"></Input>
-					<Label text="att2"></Label>
-					<Input id="customer" liveChange="onAccountInputFieldChanged" value="{account}" placeholder="*"
-						suggestionItemSelected="onAccountSuggestItemSelected" valueHelpRequest="showAccountF4" valueHelpOnly="false" showValueHelp="true"></Input>
-					<Label text="att3"></Label>
-					<Input id="inputMainContact" liveChange="onContactInputFieldChanged" value="{contact}" suggestionItemSelected="onContactSuggestItemSelected"
-						valueHelpRequest="showContactF4" valueHelpOnly="false" showValueHelp="true"></Input>
-					<Label text="att4"></Label>
-					<Input id="inputEmpResponsible_S5" placeholder="*" liveChange="onEmployeeInputFieldChanged" value="{employee}"
-						suggestionItemSelected="onEmployeeSuggestItemSelected" valueHelpRequest="showEmployeeF4" valueHelpOnly="false" showValueHelp="true"></Input>
+					<Label text="{i18n>type}"></Label>
+					<Select id="type" value="{NotifType}" items="{NotificationCreateModel>/type}" class="pos_input">
+						<items>
+							<core:Item key="{NotificationCreateModel>typeKey}" text="{NotificationCreateModel>typeValue}"></core:Item>
+						</items>
+					</Select>
+					<Label text="{i18n>shortDescription}"></Label>
+					<Input id="shortDescription" value="{ShortText}" valueHelpRequest="showAccountF4" valueHelpOnly="false" showValueHelp="false"></Input>
+					<Label text="{i18n>remark}"></Label>
+					<TextArea id="remark" liveChange="onContactInputFieldChanged" value="{LongText}" suggestionItemSelected="onContactSuggestItemSelected"
+						valueHelpRequest="showContactF4" valueHelpOnly="false" showValueHelp="true"></TextArea>
+					<Label text="{i18n>priority}"></Label>
+					<Select id="priority" value="{Priority}" items="{NotificationCreateModel>/priority}" class="pos_input">
+						<items>
+							<core:Item key="{NotificationCreateModel>priorityKey}" text="{NotificationCreateModel>priorityValue}"></core:Item>
+						</items>
+					</Select>
+					<Label text="{i18n>endDate}"></Label>
+					<DatePicker id="endDate"></DatePicker>
 				</layout:content>
 			</layout:form.SimpleForm>
-			<!-- Prognose -->
-			<layout:form.SimpleForm minWidth="1024" title="{i18n.salesopportunities>PROGNOSE}" maxContainerCols="2" editable="true"
-				layout="ResponsiveGridLayout" labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
+			<!-- Object -->
+			<layout:form.SimpleForm minWidth="1024" title="{i18n>objects}" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
+				labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
 				<layout:content>
-					<Label id="opportunityWhtdVolume_Label" text="{i18n.salesopportunities>UNWEIGHTED_VOLUME}"></Label>
-					<Input id="volume" value="" maxLength="13" placeholder="*" liveChange="volumeChanged"></Input>
-					<Input id="currency" value="{curr}" placeholder="{i18n.salesopportunities>CURRENCY}" showValueHelp="true" showSuggestion="true"
-						valueHelpRequest="showCurrencyF4" liveChange="onCurrencyInputFieldChanged" suggestionItemSelected="onCurrencySuggestItemSelected"
-						valueHelpOnly="false" suggestionItems="{json>/Currencies}">
-						<suggestionItems>
-							<core:Item text="{json>CurrencyKey}"></core:Item>
-						</suggestionItems>
-					</Input>
-					<Label id="opportunityWhtdDepotTransfer_Label" text="{i18n.salesopportunities>UNWEIGHTED_DEPOTTRANSFER}"></Label>
-					<Input id="depotTransfer" value="" maxLength="13" liveChange="depotTransferChanged"></Input>
+					<Label text="{i18n>functionalLocation}"></Label>
+					<Input id="functionalLocation" liveChange="" value="{FunctionalLoc}" suggestionItemSelected="onfunctionalLocationItemSelected"
+						valueHelpRequest="showAccountF4" valueHelpOnly="false" showValueHelp="true"></Input>
+					<Label text="{i18n>equipment}"></Label>
+					<Input id="equipment" liveChange="" value="{Equipment}" suggestionItemSelected="onEquipmentItemSelected" valueHelpRequest="showAccountF4"
+						valueHelpOnly="false" showValueHelp="true"></Input>
 				</layout:content>
 			</layout:form.SimpleForm>
-			<!-- Tidspunkter -->
-			<layout:form.SimpleForm minWidth="1024" title="{i18n.salesopportunities>DATES}" maxContainerCols="2" editable="true"
-				layout="ResponsiveGridLayout" labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
+			<!-- Picture -->
+			<layout:form.SimpleForm minWidth="1024" title="{i18n>pictureArea}" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
+				labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
+				<layout:toolbar>
+					<Toolbar id="pictureToolbar">
+						<Title text="{i18n>pictureArea}" level="H4" titleStyle="H4"/>
+						<ToolbarSpacer/>
+						<Button icon="sap-icon://camera"/>
+					</Toolbar>
+				</layout:toolbar>
 				<layout:content>
-					<Label id="opportunityStrtDate_Label" text="{i18n.salesopportunities>START_DATE}"/>
-					<DatePicker id="datePickerStartDate"></DatePicker>
-					<Label id="opportunityClsDate_Label" text="{i18n.salesopportunities>CLOSE_DATE}"/>
-					<DatePicker id="datePickerCloseDate" placeholder="*"></DatePicker>
-					<Label id="opportunitySignDate_Label" text="{i18n.salesopportunities>SIGNATUREDATE}"/>
-					<DatePicker id="datePickerSignDate" placeholder=""></DatePicker>
-				</layout:content>
-			</layout:form.SimpleForm>
-			<!-- Salgsfase -->
-			<layout:form.SimpleForm minWidth="1024" title="{i18n.salesopportunities>SALESCYCLE}" maxContainerCols="2" editable="true"
-				layout="ResponsiveGridLayout" labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
-				<layout:content>
-					<Label id="opportunityStage_Label" text="{i18n.salesopportunities>STAGE}"></Label>
-					<Select id="stagedropdown" items="{json>/SalesStages}" class="pos_input">
-						<items>
-							<core:Item key="{json>SalesStageCode}" text="{json>SalesStageDescription}"></core:Item>
-						</items>
-					</Select>
-					<Label id="opportunityCos_Label" text="{i18n.salesopportunities>CHANCE_OF_SUCCESS_%}"></Label>
-					<Input id="chanceofSuccess" value="" liveChange="chanceOfSuccessChanged"></Input>
-					<Label id="opportunityStatus_Label" text="{i18n.salesopportunities>STATUS}"></Label>
-					<Select id="statusdropdown" items="{json>/UserStatuses}" class="pos_input">
-						<items>
-							<core:Item key="{json>UserStatusCode}" text="{json>UserStatusText}"></core:Item>
-						</items>
-					</Select>
-				</layout:content>
-			</layout:form.SimpleForm>
-			<!-- Leverandørskifte -->
-			<layout:form.SimpleForm minWidth="1024" title="{i18n.salesopportunities>SUPPLIERCHANGE}" maxContainerCols="2"
-				editable="true" layout="ResponsiveGridLayout" labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1"
-				class="editableForm">
-				<layout:content>
-					<Label id="opportunityEmployeeList_Label" text="{i18n.salesopportunities>EMPLOYEELIST}"></Label>
-					<Select id="opportunityEmployeeListDropdown" items="{yesNo>/Select}" class="pos_input">
-						<items>
-							<core:Item key="{yesNo>Key}" text="{yesNo>Text}"></core:Item>
-						</items>
-					</Select>
-					<Label id="opportunityCoverPlan_Label" text="{i18n.salesopportunities>COVERPLAN}"></Label>
-					<Select id="opportunityCoverPlandDropdown" items="{yesNo>/Select}" class="pos_input">
-						<items>
-							<core:Item key="{yesNo>Key}" text="{yesNo>Text}"></core:Item>
-						</items>
-					</Select>
-					<Label id="opportunityCedingCompany_Label" text="{i18n.salesopportunities>CEDINGCOMPANY}"/>
-					<Input id="inputCedingCompany" liveChange="onCedingCompanyInputFieldChanged" value="{employee}"
-						suggestionItemSelected="onCedingCompanySuggestItemSelected" showValueHelp="true"></Input>
-					<Label id="opportunityAMPEmplyees_Label" text="{i18n.salesopportunities>AMPEMPLOYEES}"></Label>
-					<Select id="opportunityAMPEmplyeesDropdown" items="{yesNo>/Select}" class="pos_input">
-						<items>
-							<core:Item key="{yesNo>Key}" text="{yesNo>Text}"></core:Item>
-						</items>
-					</Select>
-					<Label id="opportunityAMPDATE_Label" text="{i18n.salesopportunities>AMPDATE}"/>
-					<DatePicker id="datePickerAMPDate"></DatePicker>
+					<layout:VerticalLayout class="sapUiSmallMarginEnd" width="100%">
+						<FlexBox id="notificationAttachmentsList" items="{ path: 'NotificationAttachments', factory: '.itemFactory'}" wrap="Wrap"/>
+						<layout:HorizontalLayout ></layout:HorizontalLayout>
+					</layout:VerticalLayout>
 				</layout:content>
 			</layout:form.SimpleForm>
 		</content>
@@ -105,6 +63,11 @@
 			<OverflowToolbar>
 				<content>
 					<ToolbarSpacer></ToolbarSpacer>
+					<Button ariaDescribedBy="cancelButtonDescription genericButtonDescription" press="goBack" text="{i18n>NotificationCreateCancelButton}">
+						<layoutData>
+							<OverflowToolbarLayoutData priority="NeverOverflow"/>
+						</layoutData>
+					</Button>
 					<Button ariaDescribedBy="acceptButtonDescription genericButtonDescription" press="handleSaveNotification"
 						text="{i18n>NotificationCreateSaveButton}">
 						<layoutData>
