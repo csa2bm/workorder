@@ -111,7 +111,7 @@ sap.ui.define([
 			}
 		},
 
-<<<<<<< HEAD
+
 	/*	onPressCreateNotification: function() {
 			if (!this._oDialog) {
 				this._oDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.notificationList.controls.CreateNotificationDialog",
@@ -159,20 +159,8 @@ sap.ui.define([
 	
 			
 		},*/
-=======
-		onPressCreateNotification: function() {
-			var oRouter = this.getRouter();
-			oRouter.navTo("notificationCreate", true);
 
-			// if (!this._oDialog) {
-			// 	this._oDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.notificationList.controls.CreateNotificationDialog", this);
-			// 	this.getView().addDependent(this._oDialog);
-			// }
-			// // toggle compact style
-			// jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);
-			// this._oDialog.open();
-		},
->>>>>>> branch 'master' of https://bitbucket.org/2bm/com.twobm.mobileworkorder.git
+
 
 		handleSaveNotification: function(oEvent) {
 			//Handles that Finish is also changed. StartDate is handled with twoway binding
