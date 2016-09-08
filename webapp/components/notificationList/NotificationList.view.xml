@@ -8,7 +8,8 @@
 				</l:HorizontalLayout>
 			</headerContent>
 			<content>
-				<Table id="notificationTableId" items="{/NotificationsSet}" noDataText="No Notifications" showSeparators="true" class="notificationListTableClass">
+				<Table id="notificationTableId" items="{/NotificationsSet}" noDataText="No Notifications" showSeparators="true"
+					class="notificationListTableClass">
 					<columns>
 						<Column width="8em">
 							<header>
@@ -35,12 +36,12 @@
 					<items>
 						<ColumnListItem type="Active" press="onNotificationItemPress">
 							<cells>
-							<!--	<VBox>
+								<!--	<VBox>
 								<Label design="Bold" maxLines="1" text="asjhd ajkhd ajkhsd jkahd kjahds jkas djahs dkjas djkahs dkjah djkahs jd" />
 								<Label design="" maxLines="1" text="asjhd ajkhd ajkhsd jkahd kjahds jkas djahs dkjas djkahs dkjah djkahs jd" class="sapUiTinyMarginTop" />
 								</VBox>-->
 								<ObjectIdentifier text="{path: 'NotifDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"
-									title="{path: 'StartDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}" />
+									title="{path: 'StartDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"/>
 								<ObjectIdentifier text="{NotifNo}" title="{ShortText}"/>
 								<ObjectIdentifier text="{FunctionalLoc}" title="{Funcldescr}"/>
 								<ObjectIdentifier text="{Equipment}" title="{Equidescr}"/>
@@ -51,13 +52,23 @@
 				</Table>
 			</content>
 			<footer>
-				<Toolbar id="detailToolbar">
+				<OverflowToolbar id="detailToolbar">
 					<content>
-						<core:Icon id="syncIndicator" width="3em" height="3em" color="{parts:[{path:'syncStatusModel>/Online'}, {path:'syncStatusModel>/PendingLocalData'}],formatter:'.getSyncStatusIconColor'}" noTabStop="true" press="showSyncQuickview"
-							src="{parts:[{path:'syncStatusModel>/Online'}, {path:'syncStatusModel>/PendingLocalData'}],formatter:'.getSyncStateIcon'}" tooltip="Sync status"></core:Icon>
+						<core:Icon id="syncIndicator" width="3em" height="3em"
+							color="{parts:[{path:'syncStatusModel>/Online'}, {path:'syncStatusModel>/PendingLocalData'}],formatter:'.getSyncStatusIconColor'}"
+							noTabStop="true" press="showSyncQuickview"
+							src="{parts:[{path:'syncStatusModel>/Online'}, {path:'syncStatusModel>/PendingLocalData'}],formatter:'.getSyncStateIcon'}"
+							tooltip="Sync status"></core:Icon>
 						<BusyIndicator id="syncBusyIndicator" visible="false"/>
+						<ToolbarSpacer></ToolbarSpacer>
+						<Button id="notificationCreateButton" icon="sap-icon://add" ariaDescribedBy="acceptButtonDescription genericButtonDescription"
+							press="createNewNotification" text="{i18n>NotificationListCreateNew}">
+							<layoutData>
+								<OverflowToolbarLayoutData priority="NeverOverflow"/>
+							</layoutData>
+						</Button>
 					</content>
-				</Toolbar>
+				</OverflowToolbar>
 			</footer>
 		</Page>
 	</App>

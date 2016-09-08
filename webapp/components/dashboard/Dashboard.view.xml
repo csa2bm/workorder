@@ -71,7 +71,7 @@
 					<tileContent>
 						<TileContent footer="" size="S">
 							<content>
-								<NumericContent size="S" value="21 " valueColor="" icon="sap-icon://eam-work-order"/>
+								<NumericContent size="S" value="21" valueColor="" icon="sap-icon://eam-work-order"/>
 							</content>
 						</TileContent>
 					</tileContent>

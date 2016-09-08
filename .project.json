@@ -425,5 +425,8 @@
     "max_preserve_newlines": "2",
     "wrap_line_length": "140",
     "brace_style": "collapse"
+  },
+  "hybrid.facadeconfig": {
+    "bFacade": true
   }
 }

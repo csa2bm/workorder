@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:u="sap.ui.unified" xmlns:l="sap.ui.layout">
+	<!--<u:Menu>-->
+	<!--	<u:MenuItem text="My Orders" select="handleMenuItemPress"/>-->
+	<!--	<u:MenuItem text="Unassigned Orders" select="handleMenuItemPress"/>-->
+	<!--</u:Menu>-->
+	<Popover placement="Top" modal="false" showHeader="false">
+		<content>
+			<l:VerticalLayout class="sapUiTinyMarginEnd">
+				<Button class="sapUiTinyMarginTop
+sapUiTinyMarginBegin
+sapUiTinyMarginEnd" width="100%" ariaDescribedBy="acceptButtonDescription genericButtonDescription" press="setUserStatusInvoiceReady" text="My Orders"
+					type="Emphasized"></Button>
+				<Button class="sapUiTinyMarginBottom
+sapUiTinyMarginBegin
+sapUiTinyMarginEnd" width="100%" ariaDescribedBy="acceptButtonDescription genericButtonDescription" press="setUserStatusTaskFinished"
+					text="Unassigned Orders" type="Emphasized"></Button>
+			</l:VerticalLayout>
+		</content>
+	</Popover>
+</core:FragmentDefinition>
