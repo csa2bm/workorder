@@ -6,16 +6,14 @@ sap.ui.define([
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.dashboard.Dashboard", {
-		formatter:Formatter,
-		
+		formatter: Formatter,
+
 		onInit: function() {
 			this.getRouter().attachRoutePatternMatched(this.onRouteMatched, this);
-			
-		//	this.setNotificationModel(this);
-				this.ImageNotificationModel = new sap.ui.model.json.JSONModel();
-		
-	
-		
+
+			//	this.setNotificationModel(this);
+			this.ImageNotificationModel = new sap.ui.model.json.JSONModel();
+
 		},
 
 		onRouteMatched: function(oEvent) {
@@ -41,17 +39,16 @@ sap.ui.define([
 			//flush and refresh data
 			this.refresh();
 		},
-		
-		setNotificationModel: function(oEvent){
-				var notificationModel = new sap.ui.model.json.JSONModel();
-				notificationModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
-				oEvent.getview().setModel(notificationModel, "NotificationModel");
-				
-			
+
+		setNotificationModel: function(oEvent) {
+			var notificationModel = new sap.ui.model.json.JSONModel();
+			notificationModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
+			oEvent.getview().setModel(notificationModel, "NotificationModel");
+
 		},
 
 		onPressOtherWorkorders: function() {
-		
+
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
 
@@ -61,12 +58,12 @@ sap.ui.define([
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 				//var oRouter = this.getRouter();
 				oRouter.navTo("workOrderList", true);
-			
+
 			}
 		},
 
-		onPressNotifications : function() {
-		
+		onPressNotifications: function() {
+
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
 
@@ -76,24 +73,24 @@ sap.ui.define([
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 				//var oRouter = this.getRouter();
 				oRouter.navTo("notificationList", true);
-			
-			}
-		},
-		
 
-		
-		
-			onPressCreateNotification: function(){
-				if (!this._oDialog) {
-				this._oDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.notificationList.controls.CreateNotificationDialog", this);
-				this.getView().addDependent(this._oDialog);
 			}
-			// toggle compact style
-			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);
-			this._oDialog.open();
 		},
-		
-			/*	onPressCreateNotification: function(oEvent){
+
+		onPressCreateNotification: function() {
+			var oRouter = this.getRouter();
+			oRouter.navTo("notificationCreate", true);
+			
+			// if (!this._oDialog) {
+			// 	this._oDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.notificationList.controls.CreateNotificationDialog", this);
+			// 	this.getView().addDependent(this._oDialog);
+			// }
+			// // toggle compact style
+			// jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);
+			// this._oDialog.open();
+		},
+
+		/*	onPressCreateNotification: function(oEvent){
 		
 		
 			
@@ -112,40 +109,32 @@ sap.ui.define([
 	
 			
 		},*/
-		
 
 		handleSaveNotification: function(oEvent) {
 			//Handles that Finish is also changed. StartDate is handled with twoway binding
 
 			var oContext = oEvent.getSource().getBindingContext();
 			var newStartDateString = this._oPopover.getModel("CreateNotificationModel").getData().Date;
-			
-			var dateFormat = sap.ui.core.format.DateFormat.getDateInstance({pattern : "dd-MM-yyyy" });     
-			var newStartDate = dateFormat.parse(newStartDateString,true,true);  
-			
-			if(newStartDate){
+
+			var dateFormat = sap.ui.core.format.DateFormat.getDateInstance({
+				pattern: "dd-MM-yyyy"
+			});
+			var newStartDate = dateFormat.parse(newStartDateString, true, true);
+
+			if (newStartDate) {
 				//Date is valid
 				this.getView().getModel().setProperty("Date", newStartDate, oContext);
-	
 
 				oEvent.oDialog.close();
 			}
 		},
-		
-			handleCloseNotificationDialog: function() {
+
+		handleCloseNotificationDialog: function() {
 			if (this._oDialog) {
 				this._oDialog.close();
 			}
 		},
-		
 
-		
-		 
-		
-	
-		
-
-	
 		//These event are event from the odata service
 		//In offline scenario we are not interesting in these
 		//as it is more important that the data has been synced to the backend
@@ -169,9 +158,9 @@ sap.ui.define([
 				var syncStatusModel = self.getView().getModel("syncStatusModel");
 				var d = new Date();
 				syncStatusModel.getData().LastSyncTime = d.toLocaleString();
-				
+
 				syncStatusModel.getData().Online = true; //always online in webide
-				
+
 				syncStatusModel.refresh();
 
 				//Update sync state indicator
@@ -245,7 +234,7 @@ sap.ui.define([
 
 			self.flushAndRefresh();
 		},
-		
+
 		deviceWentOffline: function() {
 			self.setSyncIndicators(false);
 		},
