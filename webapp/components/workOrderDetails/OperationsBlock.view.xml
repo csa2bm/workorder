@@ -22,7 +22,7 @@
 					<!--
 					<ObjectNumber number="{WorkActivity}" unit="{Unit}"/>
 					<core:Icon src="{parts:[{path:'Complete'}],formatter:'.operationStatus'}" color="{parts:[{path:'Complete'}],formatter:'.opStatusColor'}"/>-->
-					<Button id="readingButton" visible="{parts:[{path:'OrderStatus'}],formatter:'.isOrderStatusNotCompleted'}" class="sapUiMediumMarginEnd" icon="sap-icon://complete" press=""></Button>
+					<Button id="readingButton" visible="{parts:[{path:'OrderStatus'}],formatter:'.isOrderStatusNotCompleted'}" class="sapUiMediumMarginEnd" icon="sap-icon://complete" press="onCompleOperationbtnPressed"></Button>
 					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 				</cells>
 			</ColumnListItem>
