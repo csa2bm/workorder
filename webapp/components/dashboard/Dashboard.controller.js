@@ -1,8 +1,9 @@
 sap.ui.define([
 	"com/twobm/mobileworkorder/util/Controller",
 	"sap/ui/core/routing/History",
-	"com/twobm/mobileworkorder/util/Formatter"
-], function(Controller, History, Formatter) {
+	"com/twobm/mobileworkorder/util/Formatter",
+	"com/twobm/mobileworkorder/dev/devapp"
+], function(Controller, History, Formatter, devApp) {
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.dashboard.Dashboard", {
