@@ -16,7 +16,7 @@ sap.ui.define([
 				notificationCount: 0,
 				orderCount: 0
 			});
-			this.getView().setModel(this.DashBoardModel,"DashBoardModel");
+			this.getView().setModel(this.DashBoardModel, "DashBoardModel");
 
 		},
 
@@ -39,20 +39,18 @@ sap.ui.define([
 			this.getEventBus().subscribe("DeviceOffline", this.deviceWentOffline, this);
 
 			this.getEventBus().publish("UpdateSyncState");
-			
-		
 
 			this.setContentInTiles();
 
 		},
-		
-		setContentInTiles: function (){
+
+		setContentInTiles: function() {
 			self = this;
 			// Set Dashboard Tiles model
 			// if(!this.getView().getModel(self.DashBoardModel)){
 			// this.getView().setModel(self.DashBoardModel,"DashBoardModel");
 			// }	
-					
+
 			var parametersOrder = {
 				success: function(oData, oResponse) {
 
@@ -113,6 +111,7 @@ sap.ui.define([
 			}
 		},
 
+<<<<<<< HEAD
 	/*	onPressCreateNotification: function() {
 			if (!this._oDialog) {
 				this._oDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.notificationList.controls.CreateNotificationDialog",
@@ -160,6 +159,20 @@ sap.ui.define([
 	
 			
 		},*/
+=======
+		onPressCreateNotification: function() {
+			var oRouter = this.getRouter();
+			oRouter.navTo("notificationCreate", true);
+
+			// if (!this._oDialog) {
+			// 	this._oDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.notificationList.controls.CreateNotificationDialog", this);
+			// 	this.getView().addDependent(this._oDialog);
+			// }
+			// // toggle compact style
+			// jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);
+			// this._oDialog.open();
+		},
+>>>>>>> branch 'master' of https://bitbucket.org/2bm/com.twobm.mobileworkorder.git
 
 		handleSaveNotification: function(oEvent) {
 			//Handles that Finish is also changed. StartDate is handled with twoway binding

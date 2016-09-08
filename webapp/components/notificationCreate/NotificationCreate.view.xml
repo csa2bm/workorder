@@ -5,7 +5,7 @@
 		class="sapUiFioriObjectPage appBackgroundColor">
 		<content>
 			<!-- Generelle data -->
-			<layout:form.SimpleForm id="form1" minWidth="1024" title="{i18n.salesopportunities>GENERALDATA}" maxContainerCols="2" editable="true"
+			<layout:form.SimpleForm minWidth="1024" title="{i18n.salesopportunities>GENERALDATA}" maxContainerCols="2" editable="true"
 				layout="ResponsiveGridLayout" labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
 				<layout:content>
 					<Label text="att1"></Label>
@@ -22,7 +22,7 @@
 				</layout:content>
 			</layout:form.SimpleForm>
 			<!-- Prognose -->
-			<layout:form.SimpleForm id="formPrognose" minWidth="1024" title="{i18n.salesopportunities>PROGNOSE}" maxContainerCols="2" editable="true"
+			<layout:form.SimpleForm minWidth="1024" title="{i18n.salesopportunities>PROGNOSE}" maxContainerCols="2" editable="true"
 				layout="ResponsiveGridLayout" labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
 				<layout:content>
 					<Label id="opportunityWhtdVolume_Label" text="{i18n.salesopportunities>UNWEIGHTED_VOLUME}"></Label>
@@ -39,7 +39,7 @@
 				</layout:content>
 			</layout:form.SimpleForm>
 			<!-- Tidspunkter -->
-			<layout:form.SimpleForm id="formDates" minWidth="1024" title="{i18n.salesopportunities>DATES}" maxContainerCols="2" editable="true"
+			<layout:form.SimpleForm minWidth="1024" title="{i18n.salesopportunities>DATES}" maxContainerCols="2" editable="true"
 				layout="ResponsiveGridLayout" labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
 				<layout:content>
 					<Label id="opportunityStrtDate_Label" text="{i18n.salesopportunities>START_DATE}"/>
@@ -51,7 +51,7 @@
 				</layout:content>
 			</layout:form.SimpleForm>
 			<!-- Salgsfase -->
-			<layout:form.SimpleForm id="form3" minWidth="1024" title="{i18n.salesopportunities>SALESCYCLE}" maxContainerCols="2" editable="true"
+			<layout:form.SimpleForm minWidth="1024" title="{i18n.salesopportunities>SALESCYCLE}" maxContainerCols="2" editable="true"
 				layout="ResponsiveGridLayout" labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
 				<layout:content>
 					<Label id="opportunityStage_Label" text="{i18n.salesopportunities>STAGE}"></Label>
@@ -71,7 +71,7 @@
 				</layout:content>
 			</layout:form.SimpleForm>
 			<!-- Leverandørskifte -->
-			<layout:form.SimpleForm id="formSupplierChange" minWidth="1024" title="{i18n.salesopportunities>SUPPLIERCHANGE}" maxContainerCols="2"
+			<layout:form.SimpleForm minWidth="1024" title="{i18n.salesopportunities>SUPPLIERCHANGE}" maxContainerCols="2"
 				editable="true" layout="ResponsiveGridLayout" labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1"
 				class="editableForm">
 				<layout:content>
@@ -100,16 +100,6 @@
 					<DatePicker id="datePickerAMPDate"></DatePicker>
 				</layout:content>
 			</layout:form.SimpleForm>
-			<!--<layout:VerticalLayout class="sapUiSmallMarginEnd" width="100%">-->
-			<!--	<FlexBox id="attachmentsList" items="" wrap="Wrap"/>-->
-			<!--	<layout:HorizontalLayout >-->
-					<!--class="rightAlign"-->
-					<!--<custom:CustomFileUploader id="customFileUploader" visible="false" icon="sap-icon://add" iconOnly="true" buttonOnly="true"
-			<!--		uploadOnChange="true" uploadComplete="onUploadComplete" class="sapUiSmallMarginEnd"/>-->-->
-			<!--		<Button id="cameraButton" class="sapUiMediumMarginEnd"-->
-			<!--			icon="sap-icon://camera" press="capturePhoto"></Button>-->
-			<!--	</layout:HorizontalLayout>-->
-			<!--</layout:VerticalLayout>-->
 		</content>
 		<footer id="footer">
 			<OverflowToolbar>
