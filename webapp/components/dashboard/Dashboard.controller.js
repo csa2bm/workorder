@@ -16,7 +16,7 @@ sap.ui.define([
 				notificationCount: 0,
 				orderCount: 0
 			});
-			this.getView().setModel(this.DashBoardModel,"DashBoardModel");
+			this.getView().setModel(this.DashBoardModel, "DashBoardModel");
 
 		},
 
@@ -39,20 +39,18 @@ sap.ui.define([
 			this.getEventBus().subscribe("DeviceOffline", this.deviceWentOffline, this);
 
 			this.getEventBus().publish("UpdateSyncState");
-			
-		
 
 			this.setContentInTiles();
 
 		},
-		
-		setContentInTiles: function (){
+
+		setContentInTiles: function() {
 			self = this;
 			// Set Dashboard Tiles model
 			// if(!this.getView().getModel(self.DashBoardModel)){
 			// this.getView().setModel(self.DashBoardModel,"DashBoardModel");
 			// }	
-					
+
 			var parametersOrder = {
 				success: function(oData, oResponse) {
 
@@ -113,53 +111,18 @@ sap.ui.define([
 			}
 		},
 
-	/*	onPressCreateNotification: function() {
-			if (!this._oDialog) {
-				this._oDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.notificationList.controls.CreateNotificationDialog",
-					this);
-				this.getView().addDependent(this._oDialog);
-			}
-			// toggle compact style
-			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);
-			this._oDialog.open();
-		},*/
-		
 		onPressCreateNotification: function() {
+			var oRouter = this.getRouter();
+			oRouter.navTo("notificationCreate", true);
 
-			var oHistory = History.getInstance();
-			var sPreviousHash = oHistory.getPreviousHash();
-
-			if (sPreviousHash !== undefined) {
-				window.history.go(-1);
-			} else {
-				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-				//var oRouter = this.getRouter();
-				oRouter.navTo("NotificationCreate", true);
-
-			}
-			},
-	
-		
-
-		/*	onPressCreateNotification: function(oEvent){
-		
-		
-			
-			if (!this._oPopover) {
-				this._oPopover = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.notificationList.controls.CreateNotificationDialog", this);
-
-				this._oPopover.setModel(this.CreateNotificationModel, "CreateNotificationModel");
-				this.getView().addDependent(this._oPopover);
-			}
-			
-			this._oPopover.getModel("CreateNotificationModel").refresh();
-			
-
-
-			this._oPopover.openBy(oEvent.getSource());
-	
-			
-		},*/
+			// if (!this._oDialog) {
+			// 	this._oDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.notificationList.controls.CreateNotificationDialog", this);
+			// 	this.getView().addDependent(this._oDialog);
+			// }
+			// // toggle compact style
+			// jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);
+			// this._oDialog.open();
+		},
 
 		handleSaveNotification: function(oEvent) {
 			//Handles that Finish is also changed. StartDate is handled with twoway binding

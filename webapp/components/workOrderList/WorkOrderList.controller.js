@@ -344,7 +344,7 @@ sap.ui.define([
 			} else {
 				return "Offline";
 			}
-		}
+		},
 
 		orderFilterSelectPopUp: function(oEvent) {
 			var oButton = oEvent.getSource();
