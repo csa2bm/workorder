@@ -171,7 +171,15 @@
 		"definingRequests": {
 			"OrderSet": {
 				"dataSource": "mainService",
-				"path": "/OrderSet?$expand=OrderOperation,OrderComponent,OrderObject,OrderAttachments,OrderGoodsMovements"
+				"path": "/OrderSet?$expand=OrderOperation,OrderComponent,OrderObject,OrderAttachments,OrderGoodsMovements,OrderTimeRegistration,OrderMaterialSummary"
+			},
+			"MaterialsSet": {
+				"dataSource": "mainService",
+				"path": "/MaterialsSet"
+			},
+			"EquipmentsSet": {
+				"dataSource": "mainService",
+				"path": "/EquipmentsSet"
 			}
 		}
 	}
