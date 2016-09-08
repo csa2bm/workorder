@@ -34,7 +34,7 @@ sap.ui.define([
 			//flush and refresh data
 			this.refresh();
 		},
-		
+
 		onNavigationButtonPress: function(oEvent) {
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
@@ -147,9 +147,9 @@ sap.ui.define([
 				var syncStatusModel = self.getView().getModel("syncStatusModel");
 				var d = new Date();
 				syncStatusModel.getData().LastSyncTime = d.toLocaleString();
-				
+
 				syncStatusModel.getData().Online = true; //always online in webide
-				
+
 				syncStatusModel.refresh();
 
 				//Update sync state indicator
@@ -223,7 +223,7 @@ sap.ui.define([
 
 			self.flushAndRefresh();
 		},
-		
+
 		deviceWentOffline: function() {
 			self.setSyncIndicators(false);
 		},
@@ -344,6 +344,27 @@ sap.ui.define([
 			} else {
 				return "Offline";
 			}
+		},
+
+		orderFilterSelectPopUp: function(oEvent) {
+			var oButton = oEvent.getSource();
+
+			// create menu only once
+			if (!this._orderFilterMenu) {
+				this._orderFilterMenu = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.workOrderList.controls.OrderFilterSelect", this);
+				this.getView().addDependent(this._orderFilterMenu);
+			}
+
+			//var eDock = sap.ui.core.Popup.Dock;
+			this._orderFilterMenu.openBy(oButton); //.open(this._bKeyboard, oButton, eDock.BeginTop, eDock.BeginBottom, oButton);
+		},
+
+		isInErrorState: function(woMatObjIsInErrorState) {
+			if (woMatObjIsInErrorState === true) {
+				return true;
+
+			}
+			return false;
 		},
 
 	});

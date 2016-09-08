@@ -6,23 +6,25 @@ sap.ui.define([
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.dashboard.Dashboard", {
-		formatter:Formatter,
-		
+		formatter: Formatter,
+
 		onInit: function() {
 			this.getRouter().attachRoutePatternMatched(this.onRouteMatched, this);
-			
-		//	this.setNotificationModel(this);
-				this.ImageNotificationModel = new sap.ui.model.json.JSONModel();
-		
-	
-		
+
+			//	this.setNotificationModel(this);
+			this.DashBoardModel = new sap.ui.model.json.JSONModel({
+				notificationCount: 0,
+				orderCount: 0
+			});
+			this.getView().setModel(this.DashBoardModel, "DashBoardModel");
+
 		},
 
 		onRouteMatched: function(oEvent) {
 			var sName = oEvent.getParameter("name");
 
 			//Is it this page we have navigated to?
-			if (sName !== "Dashboard") {
+			if (sName !== "dashboard") {
 				//We navigated to another page - unsubscribe to events for this page
 				this.getEventBus().unsubscribe("OfflineStore", "Synced", this.syncCompleted, this);
 				this.getEventBus().unsubscribe("DeviceOnline", this.deviceWentOnline, this);
@@ -38,20 +40,49 @@ sap.ui.define([
 
 			this.getEventBus().publish("UpdateSyncState");
 
-			//flush and refresh data
-			this.refresh();
+			this.setContentInTiles();
+
 		},
-		
-		setNotificationModel: function(oEvent){
-				var notificationModel = new sap.ui.model.json.JSONModel();
-				notificationModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
-				oEvent.getview().setModel(notificationModel, "NotificationModel");
-				
-			
+
+		setContentInTiles: function() {
+			self = this;
+			// Set Dashboard Tiles model
+			// if(!this.getView().getModel(self.DashBoardModel)){
+			// this.getView().setModel(self.DashBoardModel,"DashBoardModel");
+			// }	
+
+			var parametersOrder = {
+				success: function(oData, oResponse) {
+
+					self.DashBoardModel.getData().orderCount = oData;
+					self.DashBoardModel.refresh();
+
+				},
+				error: this.errorCallBackShowInPopUp
+			};
+			var parametersNotif = {
+				success: function(oData, oResponse) {
+
+					self.DashBoardModel.getData().notificationCount = oData;
+					self.DashBoardModel.refresh();
+
+				},
+				error: this.errorCallBackShowInPopUp
+			};
+
+			this.getView().getModel().read("/OrderSet/$count", parametersOrder);
+			this.getView().getModel().read("/NotificationsSet/$count", parametersNotif);
+		},
+
+		setNotificationModel: function(oEvent) {
+			var notificationModel = new sap.ui.model.json.JSONModel();
+			notificationModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
+			oEvent.getview().setModel(notificationModel, "NotificationModel");
+
 		},
 
 		onPressOtherWorkorders: function() {
-		
+
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
 
@@ -61,12 +92,12 @@ sap.ui.define([
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 				//var oRouter = this.getRouter();
 				oRouter.navTo("workOrderList", true);
-			
+
 			}
 		},
 
-		onPressNotifications : function() {
-		
+		onPressNotifications: function() {
+
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
 
@@ -76,24 +107,40 @@ sap.ui.define([
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 				//var oRouter = this.getRouter();
 				oRouter.navTo("notificationList", true);
-			
+
 			}
 		},
-		
 
-		
-		
-			onPressCreateNotification: function(){
-				if (!this._oDialog) {
-				this._oDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.notificationList.controls.CreateNotificationDialog", this);
+
+	/*	onPressCreateNotification: function() {
+			if (!this._oDialog) {
+				this._oDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.notificationList.controls.CreateNotificationDialog",
+					this);
 				this.getView().addDependent(this._oDialog);
 			}
 			// toggle compact style
 			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);
 			this._oDialog.open();
-		},
+		},*/
 		
-			/*	onPressCreateNotification: function(oEvent){
+		onPressCreateNotification: function() {
+
+			var oHistory = History.getInstance();
+			var sPreviousHash = oHistory.getPreviousHash();
+
+			if (sPreviousHash !== undefined) {
+				window.history.go(-1);
+			} else {
+				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+				//var oRouter = this.getRouter();
+				oRouter.navTo("notificationCreate", true);
+
+			}
+			},
+	
+		
+
+		/*	onPressCreateNotification: function(oEvent){
 		
 		
 			
@@ -112,40 +159,34 @@ sap.ui.define([
 	
 			
 		},*/
-		
+
+
 
 		handleSaveNotification: function(oEvent) {
 			//Handles that Finish is also changed. StartDate is handled with twoway binding
 
 			var oContext = oEvent.getSource().getBindingContext();
 			var newStartDateString = this._oPopover.getModel("CreateNotificationModel").getData().Date;
-			
-			var dateFormat = sap.ui.core.format.DateFormat.getDateInstance({pattern : "dd-MM-yyyy" });     
-			var newStartDate = dateFormat.parse(newStartDateString,true,true);  
-			
-			if(newStartDate){
+
+			var dateFormat = sap.ui.core.format.DateFormat.getDateInstance({
+				pattern: "dd-MM-yyyy"
+			});
+			var newStartDate = dateFormat.parse(newStartDateString, true, true);
+
+			if (newStartDate) {
 				//Date is valid
 				this.getView().getModel().setProperty("Date", newStartDate, oContext);
-	
 
 				oEvent.oDialog.close();
 			}
 		},
-		
-			handleCloseNotificationDialog: function() {
+
+		handleCloseNotificationDialog: function() {
 			if (this._oDialog) {
 				this._oDialog.close();
 			}
 		},
-		
 
-		
-		 
-		
-	
-		
-
-	
 		//These event are event from the odata service
 		//In offline scenario we are not interesting in these
 		//as it is more important that the data has been synced to the backend
@@ -169,9 +210,9 @@ sap.ui.define([
 				var syncStatusModel = self.getView().getModel("syncStatusModel");
 				var d = new Date();
 				syncStatusModel.getData().LastSyncTime = d.toLocaleString();
-				
+
 				syncStatusModel.getData().Online = true; //always online in webide
-				
+
 				syncStatusModel.refresh();
 
 				//Update sync state indicator
@@ -245,7 +286,7 @@ sap.ui.define([
 
 			self.flushAndRefresh();
 		},
-		
+
 		deviceWentOffline: function() {
 			self.setSyncIndicators(false);
 		},
@@ -366,6 +407,13 @@ sap.ui.define([
 			} else {
 				return "Offline";
 			}
+		},
+		dataCount: function(oValue) {
+			//read the number of data entities returned
+			if (oValue) {
+				return oValue.length;
+			}
+
 		}
 	});
 });

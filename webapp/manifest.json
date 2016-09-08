@@ -110,6 +110,11 @@
 				"pattern": "notificationList",
 				"greedy": false,
 				"target": ["notificationList"]
+			}, {
+				"name": "notificationCreate",
+				"pattern": "notificationCreate",
+				"greedy": false,
+				"target": ["notificationCreate"]
 			}],
 			"targets": {
 				"dashboard": {
@@ -149,6 +154,14 @@
 					"viewName": "NotificationList",
 					"viewLevel": 2,
 					"viewPath": "com.twobm.mobileworkorder.components.notificationList"
+				},
+				"notificationCreate": {
+					"viewType": "XML",
+					"transition": "show",
+					"clearAggregation": true,
+					"viewName": "NotificationCreate",
+					"viewPath": "com.twobm.mobileworkorder.components.notificationCreate",
+					"viewLevel": 2
 				}
 			}
 		}
