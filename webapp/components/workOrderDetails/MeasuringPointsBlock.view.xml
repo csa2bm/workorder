@@ -26,13 +26,14 @@
 					<ObjectIdentifier text="{ShortText}" title="{Equipment}"/>
 					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 					-->
-					
 					<ObjectIdentifier text="Engine" title="483293484"/>
-					<ObjectIdentifier text="Oil preasure" title="12382382938"/>
-					<ObjectIdentifier text="14,5" title="PSI"/>
-					<ObjectIdentifier text="-" title="PSI"/>
-						<Button id="readingButton" visible="{parts:[{path:'OrderStatus'}],formatter:'.isOrderStatusNotCompleted'}" class="sapUiMediumMarginEnd" icon="sap-icon://measure" press="addMeasurement"></Button>
+						<ObjectIdentifier text="{Descriptn}" title="{Measpos}"/>
+					<ObjectIdentifier text="{Counter}" title="{MeasUnit}"/>
+					<ObjectIdentifier text="-" title="{MeasUnit}"/>
+						<Button id="readingButton" class="sapUiMediumMarginEnd" icon="sap-icon://measure" press="addMeasurement"></Button>
 						<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
+						
+					
 				</cells>
 			</ColumnListItem>
 		</items>

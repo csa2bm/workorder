@@ -5,41 +5,47 @@ sap.ui.define([
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.equipmentDetails.MeasuringPointsBlock", {
-		formatter:Formatter
-		/**
-		 * Called when a controller is instantiated and its View controls (if available) are already created.
-		 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
-		 * @memberOf com.twobm.mobileworkorder.components.workOrderDetails.view.AttachmentsBlock
-		 */
-		//	onInit: function() {
-		//
-		//	},
+		formatter:Formatter,
+		
+		onInit: function() {
+				
+				// Databind to measuring points from object
+			
+				
+				this.readingModel = new sap.ui.model.json.JSONModel();
+				this.createAttachmentViewerPopover();
+			},
+		
+			createAttachmentViewerPopover: function() {
+			if (!this._oPopover) {
+				this._oPopover = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.workOrderDetails.fragments.CreateMeasurementPopover",
+					this);
 
-		/**
-		 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
-		 * (NOT before the first rendering! onInit() is used for that one!).
-		 * @memberOf com.twobm.mobileworkorder.components.workOrderDetails.view.AttachmentsBlock
-		 */
-		//	onBeforeRendering: function() {
-		//
-		//	},
+				this._oPopover.setModel(this.readingModel, "ViewModel");
 
-		/**
-		 * Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.
-		 * This hook is the same one that SAPUI5 controls get after being rendered.
-		 * @memberOf com.twobm.mobileworkorder.components.workOrderDetails.view.AttachmentsBlock
-		 */
-		//	onAfterRendering: function() {
-		//
-		//	},
+				//this._oPopover.attachAfterOpen(this.resizePopup);
 
-		/**
-		 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
-		 * @memberOf com.twobm.mobileworkorder.components.workOrderDetails.view.AttachmentsBlock
-		 */
-		//	onExit: function() {
-		//
-		//	}
+				this._oPopover.attachBeforeClose(function() {
+					//Just make sure that the control minimized
+					//sap.ui.getCore().byId("popupImageControl").setWidth(null);
+				});
+
+				this.getView().addDependent(this._oPopover);
+			}
+		},
+		addMeasurement: function(oEvent) {
+			var currentObject = oEvent.getSource().getBindingContext().getObject();
+			
+			
+			
+			this._oPopover.getModel("ViewModel").setData(currentObject);
+			this._oPopover.getModel("ViewModel").refresh();                         
+			
+			this._oPopover.open();
+		},
+		closeAddMeasurement: function() {
+			this._oPopover.close();
+		}
 
 	});
 
