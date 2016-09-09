@@ -111,6 +111,11 @@
 				"greedy": false,
 				"target": ["notificationList"]
 			}, {
+				"name": "notificationDetails",
+				"pattern": "notificationDetails",
+				"greedy": false,
+				"target": ["notificationDetails"]
+			}, {
 				"name": "notificationCreate",
 				"pattern": "notificationCreate",
 				"greedy": false,
@@ -154,6 +159,14 @@
 					"viewName": "NotificationList",
 					"viewLevel": 2,
 					"viewPath": "com.twobm.mobileworkorder.components.notificationList"
+				},
+				"notificationDetails": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewName": "NotificationDetails",
+					"viewLevel": 2,
+					"viewPath": "com.twobm.mobileworkorder.components.notificationDetails"
 				},
 				"notificationCreate": {
 					"viewType": "XML",
