@@ -1,0 +1,84 @@
+<core:View controllerName="com.twobm.mobileworkorder.components.notificationDetails.NotificationDetails" xmlns:core="sap.ui.core" xmlns="sap.uxap"
+	xmlns:layout="sap.ui.layout" xmlns:m="sap.m" xmlns:blocks="com.twobm.mobileworkorder.components.notificationDetails.blocks" height="100%">
+	<m:Page showNavButton="true" navButtonPress="onNavigationButtonPress" title="{i18n>notificationDetailsTitle}">
+		<!--
+		<layout:VerticalLayout class="sapUiContentPadding" width="100%">
+		Uncomment list below and make it dynamic
+		<m:List id="errorList" items="{ path: 'syncStatusModel>/Errors'}">
+		
+		And add formater for NotificationListItem for the property relavant for types: 
+		1. warning message
+		2. error message
+		
+		<m:NotificationListItem
+		title="Error from server"
+		description="Work order was blocked by SUJ"
+		authorPicture="sap-icon://message-error"
+		showCloseButton="false"
+		priority="High"
+		unread="true">
+		</m:NotificationListItem>
+	
+		<m:NotificationListItem
+		title="Warning from server"
+		description="Used more materials than in stock"
+		authorPicture="sap-icon://alert"
+		showCloseButton="false"
+		priority="Medium"
+		unread="true">
+		</m:NotificationListItem>
+	
+		</m:list>
+		</layout:VerticalLayout>
+		-->
+		<ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="false">
+			<headerTitle>
+				<ObjectPageHeader headerDesign="Dark" objectTitle="{path:'ShortText'}" objectSubtitle="{path:'NotifNo'}"></ObjectPageHeader>
+			</headerTitle>
+			<sections>
+				<ObjectPageSection title="{i18n>SubSectionTitleGeneral}">
+					<subSections>
+						<ObjectPageSubSection title="{i18n>SubSectionTitleGeneral}">
+							<blocks>
+								<blocks:GeneralBlock/>
+							</blocks>
+						</ObjectPageSubSection>
+					</subSections>
+				</ObjectPageSection>
+				<ObjectPageSection title="{i18n>SubSectionTitleNotes}">
+					<subSections>
+						<ObjectPageSubSection title="{i18n>SubSectionTitleNotes}">
+							<blocks>
+								<blocks:NotesBlock/>
+							</blocks>
+						</ObjectPageSubSection>
+					</subSections>
+				</ObjectPageSection>
+					
+				<ObjectPageSection title="{i18n>SubSectionTitleAttachments}">
+					<subSections>
+						<ObjectPageSubSection title="{i18n>SubSectionTitleAttachments}">
+							<blocks>
+								<blocks:AttachmentsBlock/>
+							</blocks>
+						</ObjectPageSubSection>
+					</subSections>
+				</ObjectPageSection>
+			</sections>
+		</ObjectPageLayout>
+		<m:footer>
+			<m:OverflowToolbar>
+				<m:content>
+					<m:ToolbarSpacer></m:ToolbarSpacer>
+					<m:Button id="orderStatusChangeButton" icon="sap-icon://accept" ariaDescribedBy="acceptButtonDescription genericButtonDescription"
+						press="orderStatusBtnPressed" text="{path:'OrderStatus',formatter:'.getOrderStatusBtnText'}"
+						visible="{path:'OrderStatus',formatter:'.isOrderNotCompleted'}" type="Emphasized">
+						<m:layoutData>
+							<m:OverflowToolbarLayoutData priority="NeverOverflow"/>
+						</m:layoutData>
+					</m:Button>
+				</m:content>
+			</m:OverflowToolbar>
+		</m:footer>
+	</m:Page>
+</core:View>
