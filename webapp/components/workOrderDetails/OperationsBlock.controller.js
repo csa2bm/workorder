@@ -134,7 +134,7 @@ sap.ui.define([
 			}
 		},
 		
-		isOrderNotCompleted: function(str){
+		orderStatusCompleted: function(str){
 			var orderStatus = this.getView().getBindingContext().getObject.OrderStatus;
 			
 			if(orderStatus === this.getI18nText("orderStatusCompleted")){
