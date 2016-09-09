@@ -54,13 +54,43 @@ sap.ui.define([
 			};
 			this.gotoOperationDetailsPage(data);
 		},
-		
-		onCompleOperationbtnPressed:function(oEvent){
-			
-			var oContext = this.getView().getBindingContext();
-			this.getView().getModel().setProperty("Complete", true, oContext);
-			var that = this;
 
+		onCompleOperationbtnPressed: function(oEvent) {
+
+			var operationStatus = oEvent.getSource().getBindingContext().getObject().Complete;
+			//var oContext = this.getView().getBindingContext();
+
+			var that = this;
+			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+
+			if (operationStatus) {
+
+				sap.m.MessageBox.show(this.getI18nText("OperationBlockCancelCompletionAlertMsg"), {
+					icon: sap.m.MessageBox.Icon.None,
+					title: this.getI18nText("orderStatusTitle"),
+					actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+					defaultAction: sap.m.MessageBox.Action.NO,
+					styleClass: bCompact ? "sapUiSizeCompact" : "",
+					onClose: function(oAction, object) {
+
+						if (oAction === sap.m.MessageBox.Action.YES) {
+							that.updateOperationStatus(oEvent);
+
+						} else {
+							return;
+						}
+
+					}
+
+				});
+
+			} else {
+				this.updateOperationStatus(oEvent);
+			}
+		},
+
+		updateOperationStatus: function(oEvent) {
+			var that = this;
 			var parameters = {
 				success: function(oData, response) {
 
@@ -69,14 +99,14 @@ sap.ui.define([
 			};
 
 			var dataUpdate = {
-				Complete: this.getView().getBindingContext().getObject().Complete
+				Complete: !oEvent.getSource().getBindingContext().getObject().Complete
 			};
-			
+
 			var updatePath = oEvent.getSource().getBindingContext().getPath();
 
 			this.getView().getModel().update(updatePath, dataUpdate, parameters);
 		},
-		
+
 		/**
 		 * If operationStatus is true use icon
 		 * param{Boolean} sStatus input string
@@ -89,7 +119,7 @@ sap.ui.define([
 				return ""; // "sap-icon://message-warning";
 			}
 		},
-		
+
 		/**
 		 * Based on the value of operationstatus use different colors
 		 * param{Boolean} sStatus input string
@@ -97,9 +127,9 @@ sap.ui.define([
 		 */
 		opStatusColor: function(sStatus) {
 			if (sStatus) {
-				return "Green";
+				return "Accept";
 			} else {
-				return "Red";
+				return "Default";
 			}
 		}
 
