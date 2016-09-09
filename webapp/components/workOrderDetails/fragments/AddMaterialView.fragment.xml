@@ -23,14 +23,14 @@
 						<l:BlockLayoutRow>
 							<l:BlockLayoutCell width="50%">
 								<VBox>
-									<Image id="materialImage" src="{MaterialDetailsModel>/SearchResult/ImagePath}" visible="false" width="300px"/>
+									<Image id="materialImage" src="{MaterialDetailsModel>/SelectedMaterial/ImagePath}" visible="false" width="300px"/>
 									<!--{MaterialDetailsModel>/SearchResult/ImagePath.hasPicture}-->
 									<Label text="{i18n>MaterialSearchResultMaterialDesription}"/>
-									<Text id="inpMatDescription" text="{Description}" class="sapUiSmallMarginBottom"/>
+									<Text id="inpMatDescription" text="{MaterialDetailsModel>/SelectedMaterial/MaterialDescription}" class="sapUiSmallMarginBottom"/>
 									<Label text="{i18n>MaterialSearchResultMatNumberLabel}"/>
-									<Text text="{Matnr}" class="sapUiSmallMarginBottom"/>
+									<Text text="{MaterialDetailsModel>/SelectedMaterial/MaterialNumber}" class="sapUiSmallMarginBottom"/>
 									<Label text="{i18n>MaterialSearchResultCarStockLabel}"/>
-									<Text id="inpCarStock" text="{Quantity} {UOM}"/>
+									<Text id="inpCarStock" text="{MaterialDetailsModel>/SelectedMaterial/LocalStock} {MaterialDetailsModel>/SelectedMaterial/Unit}"/>
 								</VBox>
 							</l:BlockLayoutCell>
 						</l:BlockLayoutRow>
@@ -42,8 +42,8 @@
 							</Toolbar>
 						</headerToolbar>
 						<Input id="inpPreviousQuantity" visible="false"/>
-						<l:Grid class="sapUiSmallMarginTop" hSpacing="2" defaultSpan="L6 M6 S10">
-							<l:content>
+						<!--<l:Grid class="sapUiSmallMarginTop" hSpacing="2" defaultSpan="L6 M6 S10">-->
+						<!--	<l:content>-->
 							<!--	<Label text="{i18n>MaterialIssuePanelOrderNumber}"/>-->
 							<!--	<HBox class="sapUiSmallMarginBottom">-->
 							<!--		<Text id="inpOrderNo" text="{MaterialDetailsModel>/OrderNumber}"/>-->
@@ -52,6 +52,7 @@
 							<!--	<HBox class="sapUiSmallMarginBottom">-->
 							<!--		<Text id="inpMatNo" text="{MaterialDetailsModel>/SearchResult/MaterialNumber}"/>-->
 								<!--</HBox>-->
+								<VBox class="sapUiSmallMarginBegin">
 								<Label text="{i18n>MaterialIssuePanelTotalQuantity}"/>
 								<HBox>
 									<Input id="inpQuantity" type="Number"
@@ -61,19 +62,20 @@
 									<Button icon="sap-icon://less" press="decreaseMaterialToOrder" class="sapUiSmallMarginEnd"></Button>
 									<Button icon="sap-icon://add" press="increaseMaterialToOrder"></Button>
 								</HBox>
+								</VBox>
 								<!--<Label text="{i18n>MaterialIssuePanelTotalPrice}"/>-->
 								<!--<HBox class="sapUiSmallMarginBottom">-->
 								<!--	<Text id="totalPrice" text="{MaterialDetailsModel>/CalculatedTotalPrice} {MaterialDetailsModel>/SearchResult/Currency}"/>-->
 								<!--</HBox>-->
-							</l:content>
-						</l:Grid>
+						<!--	</l:content>-->
+						<!--</l:Grid>-->
 					</Panel>
 				</content>
 				<footer>
 					<Toolbar>
 						<content>
 							<ToolbarSpacer></ToolbarSpacer>
-							<Button icon="sap-icon://receipt" ariaDescribedBy="acceptButtonDescription genericButtonDescription" press="issueMaterial" text="{i18n>MaterialIssueDialogSave}"
+							<Button icon="sap-icon://save" ariaDescribedBy="acceptButtonDescription genericButtonDescription" press="issueMaterial" text="{i18n>MaterialIssueDialogSave}"
 								type="Accept"></Button>
 						</content>
 					</Toolbar>
