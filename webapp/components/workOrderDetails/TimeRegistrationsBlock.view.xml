@@ -2,7 +2,7 @@
 	xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
 	<l:VerticalLayout class="sapUiSmallMarginEnd" width="100%">
 		<l:HorizontalLayout >
-			<Button class="sapUiSmallMarginEnd" icon="sap-icon://add" press="openAddTimeRegistrationPopover"></Button>
+			<Button class="sapUiSmallMarginEnd" icon="sap-icon://add" press="openTimeRegistrationPopoverCreate"></Button>
 		</l:HorizontalLayout>
 		<Table items="{ path: 'OrderTimeRegistration' , sorter:  [{path: 'RegistrationDate', descending: true}]}"
 			noDataText="{i18n>TimeRegistrationsBlockColumnNoTimeAdded}">
@@ -18,7 +18,7 @@
 				</Column>
 			</columns>
 			<items>
-				<ColumnListItem>
+				<ColumnListItem type="Active" press="openTimeRegistrationPopoverUpdate"> 
 					<cells>
 						<ObjectIdentifier title="{path:'RegistrationDate', type:'sap.ui.model.type.Date', formatOptions:'short'}"/>
 						<Text text="{Name}"/>
