@@ -23,7 +23,8 @@
 			<Text text="{Orderid} "/>
 			<Label text="{i18n>GeneralBlockColoumInformationLabelShortText}"/>
 			<Text text="{ShortText} "/>
-<!-->
+<!--><Label text="{i18n>GeneralBlockColumnInformationLabelOrderStatus}"/>
+			<Text text="{OrderStatus}"/>
 			<Label text="{i18n>GeneralBlockColoumInformationLabelType}"/>
 
 			<Text text="{OrderType}"/>
@@ -31,8 +32,7 @@
 			<Text text="{Priority} "/>
 	<!--		<Label text="{i18n>GeneralBlockColumnInformationLabelResponsible}"/>
 			<Text text="{ChangedBy}\r\n({Respcctr})"/>-->
-			<Label text="{i18n>GeneralBlockColumnInformationLabelOrderStatus}"/>
-			<Text text="{SysStatus}"/>
+			
 				<Label text="{i18n>GeneralBlockColumnDateAndTimeLabelStart}"/>
 			<Text text="{path: 'StartDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'medium' }}"/>
 			<Label text="{i18n>GeneralBlockColumnDateAndTimeLabelEnd}"/>

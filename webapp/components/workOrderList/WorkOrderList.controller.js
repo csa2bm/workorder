@@ -31,6 +31,8 @@ sap.ui.define([
 
 			this.getEventBus().publish("UpdateSyncState");
 
+			this.setInitialSorting();
+
 			//flush and refresh data
 			this.refresh();
 		},
