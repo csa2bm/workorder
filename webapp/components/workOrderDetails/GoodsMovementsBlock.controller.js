@@ -33,6 +33,7 @@ sap.ui.define([
 
 			//Clear data
 			var data = {
+				NavigatedFromSearchResult: false,
 				SearchString: "",
 				SelectedMaterial: {
 					//Fields from search result
@@ -40,6 +41,7 @@ sap.ui.define([
 					MaterialDescription: "",
 					LocalStock: "",
 					Unit: "",
+					HasImage: false,
 					ImagePath: ""
 				},
 				OrderNumber: materialDetailsModel.getData().OrderNumber, //Do not clear this. Has to be kept between searches
@@ -58,10 +60,10 @@ sap.ui.define([
 					"com.twobm.mobileworkorder.components.workOrderDetails.fragments.AddMaterialView", this);
 
 				this._oPopover.setModel(this.getView().getModel());
-				
+
 				var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
 				this._oPopover.setModel(materialDetailsModel, "MaterialDetailsModel");
-				
+
 				//this._oPopover.setModel(this.getView().getModel("device"), "device");
 
 				//this._oPopover.attachAfterOpen(this.resizePopup);
@@ -84,20 +86,25 @@ sap.ui.define([
 		// },
 
 		//Called as a result of selecting material from select dialog
-		onProductSelected: function(oEvent) {
+		onProductSelectedFromSearchResult: function(oEvent) {
 			var selectedItem = this.getView().getModel().getProperty(oEvent.getSource().getBindingContext().getPath());
 
+			this.presentSelectedMaterial(selectedItem, true);
+		},
+
+		presentSelectedMaterial: function(selectedItem, navigatedFromSearchResult) {
 			this.clearMaterialDetailsModel();
 
 			if (selectedItem) {
 
 				var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
 
+				materialDetailsModel.getData().NavigatedFromSearchResult = navigatedFromSearchResult;
 				materialDetailsModel.getData().SelectedMaterial.MaterialNumber = selectedItem.Matnr;
 				materialDetailsModel.getData().SelectedMaterial.MaterialDescription = selectedItem.Description;
 				materialDetailsModel.getData().SelectedMaterial.LocalStock = selectedItem.Quantity;
 				materialDetailsModel.getData().SelectedMaterial.Unit = selectedItem.UOM;
-
+				materialDetailsModel.getData().SelectedMaterial.HasImage = selectedItem.HasPicture;
 				if (selectedItem.HasPicture) {
 					materialDetailsModel.getData().SelectedMaterial.ImagePath = selectedItem.__metadata.media_src;
 				}
@@ -139,6 +146,8 @@ sap.ui.define([
 				//get amount from local
 				this.getAmountFromLocalMaterialSummary();
 			}
+
+			materialDetailsModel.refresh();
 		},
 
 		getAmountFromLocalMaterialSummary: function() {
@@ -174,32 +183,32 @@ sap.ui.define([
 			this.getView().getModel().read(sPath4, parameters);
 		},
 
-		searchForMaterial: function() {
-			var that = this;
+		// searchForMaterial: function() {
+		// 	var that = this;
 
-			var materialInput = this.getView().byId("materialInput");
+		// 	var materialInput = this.getView().byId("materialInput");
 
-			//Remove any previous error state
-			materialInput.setValueState(sap.ui.core.ValueState.None);
+		// 	//Remove any previous error state
+		// 	materialInput.setValueState(sap.ui.core.ValueState.None);
 
-			var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
+		// 	var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
 
-			var oFilter = new sap.ui.model.Filter("Matstring", sap.ui.model.FilterOperator.Contains,
-				encodeURIComponent(materialDetailsModel.getData().SearchString));
+		// 	var oFilter = new sap.ui.model.Filter("Matstring", sap.ui.model.FilterOperator.Contains,
+		// 		encodeURIComponent(materialDetailsModel.getData().SearchString));
 
-			var parameters = {
-				success: function(oData, oResponse) {
-					var materialData = jQuery.parseJSON(JSON.stringify(oData));
-					if (that.handleSearchResult) {
-						that.handleSearchResult.call(that, materialData.results);
-					}
-				},
-				error: this.errorCallBackShowInPopUp,
-				filters: [oFilter]
-			};
+		// 	var parameters = {
+		// 		success: function(oData, oResponse) {
+		// 			var materialData = jQuery.parseJSON(JSON.stringify(oData));
+		// 			if (that.handleSearchResult) {
+		// 				that.handleSearchResult.call(that, materialData.results);
+		// 			}
+		// 		},
+		// 		error: this.errorCallBackShowInPopUp,
+		// 		filters: [oFilter]
+		// 	};
 
-			this.getView().getModel().read("/MaterialsSet", parameters);
-		},
+		// 	this.getView().getModel().read("/MaterialsSet", parameters);
+		// },
 
 		searchMaterial: function(oEvent) {
 			var sValue = oEvent.getParameter("query");
@@ -267,15 +276,15 @@ sap.ui.define([
 			}
 		},
 
-		onNavBack: function(oEvent) {
+		onNavBackMaterialSelectPopUp: function(oEvent) {
 			var oNavCon = sap.ui.core.Fragment.byId("MaterialSelectPopUp", "navCon");
 			oNavCon.back();
 		},
 
 		addMaterial: function(oEvent) {
 			var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
-
 			materialDetailsModel.getData().OrderNumber = oEvent.getSource().getBindingContext().getObject().Orderid;
+			materialDetailsModel.refresh();
 
 			this._oPopover.open();
 		},
@@ -321,6 +330,14 @@ sap.ui.define([
 		},
 
 		closeAddMaterial: function() {
+			var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
+
+			this.onNavBackMaterialSelectPopUp();
+
+			//Reset value
+			materialDetailsModel.getData().NavigatedFromSearchResult = false;
+			materialDetailsModel.refresh();
+
 			this._oPopover.close();
 		},
 
@@ -362,12 +379,16 @@ sap.ui.define([
 
 					//If running in cordova we are using offlinestore and then
 					//we need to make sure that we update correctly in local db if offline
-					if (window.cordova) {
+					if (window.cordova && !window.sap_webide_FacadePreview && !window.sap_webide_companion) {
 						that.updateLocalStorageStock(matnr, quantity, previouslyIssuedQuantity);
 						that.updateMaterialSummary(ordernr, matnr, unit, description, valueToIssue, returnValue);
+					} else {
+						that.getView().byId("MaterialsSummaryList").getBinding("items").refresh(true);
+						//that.getView().byId("MaterialsLists").getBinding("items").refresh(true);
 					}
 
-					that.onNavBack();
+					//that.onNavBack();
+					that.closeAddMaterial();
 				},
 				error: this.errorCallBackShowInPopUp
 			};
@@ -453,11 +474,14 @@ sap.ui.define([
 			//If existing, update quantity
 			//If not, create material with quantity
 
+			var that = this;
+
 			var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
 
 			var parameters = {
 				success: function(oData, response) {
-
+					that.getView().byId("MaterialsSummaryList").getBinding("items").refresh(true);
+					//that.getView().byId("MaterialsLists").getBinding("items").refresh(true);
 				},
 				error: this.errorCallBackShowInPopUp
 			};
@@ -565,32 +589,48 @@ sap.ui.define([
 
 			materialDetailsModel.getData().SelectedQuantity = newValue;
 			materialDetailsModel.refresh();
-			this.recalculateTotal();
 		},
 
-		recalculateTotal: function() {
 
-			// this.getView().byId("inpQuantity").setValueState(ValueState.None);
+		goToMaterialDetailForSelectedMaterial: function(oEvent) {
+			var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
+			materialDetailsModel.getData().OrderNumber = oEvent.getSource().getBindingContext().getObject().Orderid;
+			materialDetailsModel.refresh();
+			
+			var selectedItem = oEvent.getSource().getBindingContext().getObject();
 
-			// var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
-			// var newValue = this.getView().byId("inpQuantity")._lastValue;
-			// if ("e".indexOf(newValue) > -1) {
-			// 	this.getView().byId("inpQuantity").setValue(0);
-			// 	return;
-			// } 
-			// if (newValue < 0 || (newValue > 0 && newValue < 1)) {
-			// 	var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
-			// 	sap.m.MessageBox.show(this.getI18nText("MaterialQuantityCannotBeNagative"), {
-			// 		icon: MessageBox.Icon.INFORMATION,
-			// 		title: "Quantity negative",
-			// 		actions: [MessageBox.Action.OK],
-			// 		defaultAction: MessageBox.Action.OK,
-			// 		styleClass: bCompact ? "sapUiSizeCompact" : ""
-			// 	});
-			// 	materialDetailsModel.getData().SelectedQuantity = 0;
-			// 	this.getView().byId("inpQuantity").setValueState(ValueState.Error);
-			// 	return;
-			// }
+			this.searchForMaterial(selectedItem.Matnr);
+		},
+
+		searchForMaterial: function(matNr) {
+			var that = this;
+
+			 var oFilter = new sap.ui.model.Filter("Matnr", sap.ui.model.FilterOperator.EQ,
+			 	encodeURIComponent(matNr));
+
+			//var oFilter = new sap.ui.model.Filter("Matstring", sap.ui.model.FilterOperator.Contains,
+			//	encodeURIComponent(matNr));
+
+			var parameters = {
+				success: function(oData, oResponse) {
+					var materialData = jQuery.parseJSON(JSON.stringify(oData));
+
+					if (materialData && materialData.results.length > 0) {
+						var selectedItem = materialData.results[0];
+
+						that.presentSelectedMaterial(selectedItem, false);
+
+						that._oPopover.open();
+					} else {
+						//Material not found
+					}
+				},
+				error: this.errorCallBackShowInPopUp,
+				filters: [oFilter]
+			};
+
+			this.getView().getModel().read("/MaterialsSet", parameters);
 		}
+
 	});
 });
