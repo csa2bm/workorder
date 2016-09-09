@@ -63,6 +63,7 @@ sap.ui.define([
 				isTouch: Device.support.touch,
 				isNoTouch: !Device.support.touch,
 				isPhone: Device.system.phone,
+				isNotPhone: !Device.system.phone,
 				listMode: Device.system.phone ? "None" : "SingleSelectMaster",
 				listItemType: Device.system.phone ? "Active" : "Inactive",
 				isOffline: Device.system.phone ? !devapp.isOnline : false,

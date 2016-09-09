@@ -36,7 +36,7 @@
 						</GenericTile>
 						<!--			<SlideTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout">
 		<tiles>-->
-						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginEnd sapUiTinyMarginTop tileLayout"
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginEnd sapUiTinyMarginTop tileLayout" visible="{device>/isNotPhone}"
 							backgroundImage="../webapp/localService/mockData/2bmTileLogo7.png" frameType="TwoByOne" press="press">
 							<tileContent>
 								<TileContent footer="" class="sapUiSmallMargin">
