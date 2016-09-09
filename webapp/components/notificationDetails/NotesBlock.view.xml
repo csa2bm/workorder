@@ -1,0 +1,19 @@
+<core:View controllerName="com.twobm.mobileworkorder.components.workOrderDetails.NotesBlock" xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns:vbm="sap.ui.vbm" xmlns="sap.m"
+	xmlns:l="sap.ui.layout">
+	<VBox class="sapUiSmallMargin">
+		<l:VerticalLayout id="NotesLayoutId" class="sapUiTinyMargin" width="100%"></l:VerticalLayout>
+	</VBox>
+	<VBox  id="LongtextBtnView" visible="{parts:[{path:'sysStatus'}],formatter:'.isNotificationStatusNotCompleted'}">
+	<Button id="editButton" class="sapUiMediumMarginEnd" visible="true" icon="sap-icon://edit" press="editLongText"></Button>
+	<!--<Button id="saveButton" visible="false" class="sapUiMediumMarginEnd" icon="sap-icon://save" press="SaveLongText"></Button>-->
+	</VBox>
+</core:View>
+
+
+<!--	<l:VerticalLayout class="sapUiSmallMarginEnd" width="100%">
+		<FlexBox id="NotesLayoutId" items="{ path: 'NotificationAttachments', factory: '.itemFactory'}" wrap="Wrap" />
+		<l:HorizontalLayout >
+			<Button id="cameraButton" visible="{parts:[{path:'SysStatus'}],formatter:'.isNotificationStatusNotCompleted'}" class="sapUiMediumMarginEnd" icon="sap-icon://camera" press="capturePhoto"></Button>
+		</l:HorizontalLayout>
+	</l:VerticalLayout>-->

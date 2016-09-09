@@ -220,7 +220,7 @@ sap.ui.define([
 
 				var busyDL = new BusyDialog();
 				busyDL.setTitle("Downloading data from server");
-				busyDL.setText("Please wait...");
+				busyDL.setText("Please wait");
 				busyDL.open();
 
 				this.appOfflineStore.store.open(

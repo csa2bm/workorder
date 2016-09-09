@@ -50,8 +50,18 @@ sap.ui.define([
 				window.history.go(-1);
 			} else {
 				var oRouter = this.getRouter();
-				oRouter.navTo("workOrderList", true);
+				oRouter.navTo("notificationList", true);
 			}
+		},
+				isNotificationNotCompleted: function(sString) {
+			if (sString === this.getI18nText("notificationStatusCompleted")) {
+				return false;
+			} else {
+				return true;
+			}
+		},
+		editNotificationPressed: function(){
+			
 		}
 
 	
