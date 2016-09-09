@@ -5,15 +5,38 @@ sap.ui.define([
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.workOrderDetails.MeasuringPointsBlock", {
-		formatter:Formatter
+		formatter:Formatter,
 		/**
 		 * Called when a controller is instantiated and its View controls (if available) are already created.
 		 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
 		 * @memberOf com.twobm.mobileworkorder.components.workOrderDetails.view.AttachmentsBlock
 		 */
-		//	onInit: function() {
-		//
-		//	},
+			onInit: function() {
+				this.createAttachmentViewerPopover();
+			},
+			createAttachmentViewerPopover: function() {
+			if (!this._oPopover) {
+				this._oPopover = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.workOrderDetails.fragments.CreateMeasurementPopover",
+					this);
+
+				this._oPopover.setModel(this.ImageModel, "ImageModel");
+
+				//this._oPopover.attachAfterOpen(this.resizePopup);
+
+				this._oPopover.attachBeforeClose(function() {
+					//Just make sure that the control minimized
+					//sap.ui.getCore().byId("popupImageControl").setWidth(null);
+				});
+
+				this.getView().addDependent(this._oPopover);
+			}
+		},
+		addMeasurement: function() {
+			this._oPopover.open();
+		},
+		closeAddMeasurement: function() {
+			this._oPopover.close();
+		}
 
 		/**
 		 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered

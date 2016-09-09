@@ -1,0 +1,35 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Dialog id="CreateNotificationDialog" title="Create Notification" class="sapUiPopupWithPadding" modal="true" afterOpen="refreshInputFields">
+		<!--<Dialog	  id="CreateNotificationDialog" showCloseButton="true" title="Create Notification" class="sapUiPopupWithPadding"  modal="true" afterOpen="refreshInputFields"/>-->
+
+		
+		<content>
+				<form:SimpleForm editable="true">
+			<!--<VBox class="sapUiSmallMargin">-->
+				<Label text="Select date" labelFor="DP3"/>
+				<DatePicker id="dateInput" class="sapUiSmallMarginBottom" change="handleChangeDate" valueStateText="Date" displayFormat="dd-MM-yyyy"
+					valueFormat="dd-MM-yyyy" value="{CreateNotificationModel>/Date}"/>
+				<Label text="Equipment"/>
+				<Input placeholder="" value="{CreateNotificationModel>/Equipment}"/>
+				<Label text="Functional location"/>
+				<Input placeholder="" value="{CreateNotificationModel>/FunctionalLoc}"/>
+				<Label text="Notification Type"/>
+				<Input placeholder="" value="{CreateNotificationModel>/NotifType}"/>
+				<Label text="Priority"/>
+				<Input placeholder="" value="{CreateNotificationModel>/Priority}"/>
+				<Label text="Short text"/>
+				<TextArea placeholder="" value="{CreateNotificationModel>/ShortText}" rows="4"/>
+			<!--</VBox>-->
+				</form:SimpleForm>
+		</content>
+			<beginButton>
+					<Button id="closeCNDialog" text="Close" press="handleCloseNotificationDialog"/>
+			
+		</beginButton>
+		<endButton>
+		
+		<Button text="{i18n>createNotificationSaveButton}" press="handleSaveNotification"/>
+		</endButton>
+	
+	</Dialog>
+</core:FragmentDefinition>

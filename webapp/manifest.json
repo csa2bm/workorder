@@ -105,6 +105,21 @@
 				"pattern": "equipmentDetails/{equipmentContext}",
 				"name": "equipmentDetails",
 				"target": "equipmentDetails"
+			}, {
+				"name": "notificationList",
+				"pattern": "notificationList",
+				"greedy": false,
+				"target": ["notificationList"]
+			}, {
+				"name": "notificationDetails",
+				"pattern": "notificationDetails",
+				"greedy": false,
+				"target": ["notificationDetails"]
+			}, {
+				"name": "notificationCreate",
+				"pattern": "notificationCreate",
+				"greedy": false,
+				"target": ["notificationCreate"]
 			}],
 			"targets": {
 				"dashboard": {
@@ -136,6 +151,30 @@
 					"viewPath": "com.twobm.mobileworkorder.components.equipmentDetails",
 					"viewName": "EquipmentDetails",
 					"viewLevel": 4
+				},
+				"notificationList": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewName": "NotificationList",
+					"viewLevel": 2,
+					"viewPath": "com.twobm.mobileworkorder.components.notificationList"
+				},
+				"notificationDetails": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewName": "NotificationDetails",
+					"viewLevel": 2,
+					"viewPath": "com.twobm.mobileworkorder.components.notificationDetails"
+				},
+				"notificationCreate": {
+					"viewType": "XML",
+					"transition": "show",
+					"clearAggregation": true,
+					"viewName": "NotificationCreate",
+					"viewPath": "com.twobm.mobileworkorder.components.notificationCreate",
+					"viewLevel": 2
 				}
 			}
 		}
@@ -145,7 +184,15 @@
 		"definingRequests": {
 			"OrderSet": {
 				"dataSource": "mainService",
-				"path": "/OrderSet?$expand=OrderOperation,OrderComponent,OrderObject,OrderAttachments,OrderGoodsMovements"
+				"path": "/OrderSet?$expand=OrderOperation,OrderComponent,OrderObject,OrderAttachments,OrderGoodsMovements,OrderTimeRegistration,OrderMaterialSummary"
+			},
+			"MaterialsSet": {
+				"dataSource": "mainService",
+				"path": "/MaterialsSet"
+			},
+			"EquipmentsSet": {
+				"dataSource": "mainService",
+				"path": "/EquipmentsSet"
 			}
 		}
 	}

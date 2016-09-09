@@ -1,0 +1,81 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:ca="sap.ca.ui" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout"
+	controllerName="com.twobm.mobileworkorder.components.notificationCreate.NotificationCreate">
+	<Page id="createPage" showNavButton="true" navButtonPress="goBack" title="{i18n>NotificationCreateTitle}"
+		class="sapUiFioriObjectPage appBackgroundColor">
+		<content>
+			<!-- General data -->
+			<layout:form.SimpleForm minWidth="1024" title="{i18n>generalData}" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
+				labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
+				<layout:content>
+					<Label text="{i18n>type}"></Label>
+					<Select id="type" value="{NotifType}" items="{NotificationCreateModel>/type}" class="pos_input">
+						<items>
+							<core:Item key="{NotificationCreateModel>typeKey}" text="{NotificationCreateModel>typeValue}"></core:Item>
+						</items>
+					</Select>
+					<Label text="{i18n>shortDescription}"></Label>
+					<Input id="shortDescription" value="{ShortText}" valueHelpRequest="showAccountF4" valueHelpOnly="false" showValueHelp="false"></Input>
+					<Label text="{i18n>remark}"></Label>
+					<TextArea id="remark" liveChange="onContactInputFieldChanged" value="{LongText}" suggestionItemSelected="onContactSuggestItemSelected"
+						valueHelpRequest="showContactF4" valueHelpOnly="false" showValueHelp="true"></TextArea>
+					<Label text="{i18n>priority}"></Label>
+					<Select id="priority" value="{Priority}" items="{NotificationCreateModel>/priority}" class="pos_input">
+						<items>
+							<core:Item key="{NotificationCreateModel>priorityKey}" text="{NotificationCreateModel>priorityValue}"></core:Item>
+						</items>
+					</Select>
+					<Label text="{i18n>endDate}"></Label>
+					<DatePicker id="endDate"></DatePicker>
+				</layout:content>
+			</layout:form.SimpleForm>
+			<!-- Object -->
+			<layout:form.SimpleForm minWidth="1024" title="{i18n>objects}" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
+				labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
+				<layout:content>
+					<Label text="{i18n>functionalLocation}"></Label>
+					<Input id="functionalLocation" liveChange="" value="{FunctionalLoc}" suggestionItemSelected="onfunctionalLocationItemSelected"
+						valueHelpRequest="showAccountF4" valueHelpOnly="false" showValueHelp="true"></Input>
+					<Label text="{i18n>equipment}"></Label>
+					<Input id="equipment" liveChange="" value="{Equipment}" suggestionItemSelected="onEquipmentItemSelected" valueHelpRequest="showAccountF4"
+						valueHelpOnly="false" showValueHelp="true"></Input>
+				</layout:content>
+			</layout:form.SimpleForm>
+			<!-- Picture -->
+			<layout:form.SimpleForm minWidth="1024" title="{i18n>pictureArea}" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
+				labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
+				<layout:toolbar>
+					<Toolbar id="pictureToolbar">
+						<Title text="{i18n>pictureArea}" level="H4" titleStyle="H4"/>
+						<ToolbarSpacer/>
+						<Button icon="sap-icon://camera"/>
+					</Toolbar>
+				</layout:toolbar>
+				<layout:content>
+					<layout:VerticalLayout class="sapUiSmallMarginEnd" width="100%">
+						<FlexBox id="notificationAttachmentsList" items="{ path: 'NotificationAttachments', factory: '.itemFactory'}" wrap="Wrap"/>
+						<layout:HorizontalLayout ></layout:HorizontalLayout>
+					</layout:VerticalLayout>
+				</layout:content>
+			</layout:form.SimpleForm>
+		</content>
+		<footer id="footer">
+			<OverflowToolbar>
+				<content>
+					<ToolbarSpacer></ToolbarSpacer>
+					<Button ariaDescribedBy="cancelButtonDescription genericButtonDescription" press="goBack" text="{i18n>NotificationCreateCancelButton}">
+						<layoutData>
+							<OverflowToolbarLayoutData priority="NeverOverflow"/>
+						</layoutData>
+					</Button>
+					<Button ariaDescribedBy="acceptButtonDescription genericButtonDescription" press="handleSaveNotification"
+						text="{i18n>NotificationCreateSaveButton}">
+						<layoutData>
+							<OverflowToolbarLayoutData priority="NeverOverflow"/>
+						</layoutData>
+					</Button>
+				</content>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</core:View>

@@ -54,6 +54,29 @@ sap.ui.define([
 			};
 			this.gotoOperationDetailsPage(data);
 		},
+		
+		onCompleOperationbtnPressed:function(oEvent){
+			
+			var oContext = this.getView().getBindingContext();
+			this.getView().getModel().setProperty("Complete", true, oContext);
+			var that = this;
+
+			var parameters = {
+				success: function(oData, response) {
+
+				},
+				error: that.errorCallBackShowInPopUp
+			};
+
+			var dataUpdate = {
+				Complete: this.getView().getBindingContext().getObject().Complete
+			};
+			
+			var updatePath = oEvent.getSource().getBindingContext().getPath();
+
+			this.getView().getModel().update(updatePath, dataUpdate, parameters);
+		},
+		
 		/**
 		 * If operationStatus is true use icon
 		 * param{Boolean} sStatus input string

@@ -1,31 +1,21 @@
 sap.ui.define([
 	"com/twobm/mobileworkorder/util/Controller",
-	"sap/ui/core/routing/History",
-	"com/twobm/mobileworkorder/util/Formatter",
-	"com/twobm/mobileworkorder/dev/devapp"
-], function(Controller, History, Formatter, devApp) {
+	"com/twobm/mobileworkorder/dev/devapp",
+	"com/twobm/mobileworkorder/util/Globalization",
+	"sap/ui/core/routing/History"
+], function(Controller, devApp, Globalization, History) {
 	"use strict";
 
-	return Controller.extend("com.twobm.mobileworkorder.components.dashboard.Dashboard", {
-		formatter: Formatter,
-
+	return Controller.extend("com.twobm.mobileworkorder.components.notificationList.NotificationList", {
 		onInit: function() {
 			this.getRouter().attachRoutePatternMatched(this.onRouteMatched, this);
-
-			//	this.setNotificationModel(this);
-			this.DashBoardModel = new sap.ui.model.json.JSONModel({
-				notificationCount: 0,
-				orderCount: 0
-			});
-			this.getView().setModel(this.DashBoardModel, "DashBoardModel");
-
 		},
 
 		onRouteMatched: function(oEvent) {
 			var sName = oEvent.getParameter("name");
 
 			//Is it this page we have navigated to?
-			if (sName !== "dashboard") {
+			if (sName !== "notificationList") {
 				//We navigated to another page - unsubscribe to events for this page
 				this.getEventBus().unsubscribe("OfflineStore", "Synced", this.syncCompleted, this);
 				this.getEventBus().unsubscribe("DeviceOnline", this.deviceWentOnline, this);
@@ -41,151 +31,97 @@ sap.ui.define([
 
 			this.getEventBus().publish("UpdateSyncState");
 
-			this.setContentInTiles();
-
+			//flush and refresh data
+			this.refresh();
 		},
 
-		setContentInTiles: function() {
-			self = this;
-			// Set Dashboard Tiles model
-			// if(!this.getView().getModel(self.DashBoardModel)){
-			// this.getView().setModel(self.DashBoardModel,"DashBoardModel");
-			// }	
-
-			var parametersOrder = {
-				success: function(oData, oResponse) {
-
-					self.DashBoardModel.getData().orderCount = oData;
-					self.DashBoardModel.refresh();
-
-				},
-				error: this.errorCallBackShowInPopUp
-			};
-			var parametersNotif = {
-				success: function(oData, oResponse) {
-
-					self.DashBoardModel.getData().notificationCount = oData;
-					self.DashBoardModel.refresh();
-
-				},
-				error: this.errorCallBackShowInPopUp
-			};
-
-			this.getView().getModel().read("/OrderSet/$count", parametersOrder);
-			this.getView().getModel().read("/NotificationsSet/$count", parametersNotif);
-		},
-
-		setNotificationModel: function(oEvent) {
-			var notificationModel = new sap.ui.model.json.JSONModel();
-			notificationModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
-			oEvent.getview().setModel(notificationModel, "NotificationModel");
-
-		},
-
-		onPressOtherWorkorders: function() {
-
+		onNavigationButtonPress: function(oEvent) {
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
 
 			if (sPreviousHash !== undefined) {
 				window.history.go(-1);
 			} else {
-				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-				//var oRouter = this.getRouter();
-				oRouter.navTo("workOrderList", true);
-
+				var oRouter = this.getRouter();
+				oRouter.navTo("dashboard", true);
 			}
 		},
 
-		onPressNotifications: function() {
-
-			var oHistory = History.getInstance();
-			var sPreviousHash = oHistory.getPreviousHash();
-
-			if (sPreviousHash !== undefined) {
-				window.history.go(-1);
-			} else {
-				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-				//var oRouter = this.getRouter();
-				oRouter.navTo("notificationList", true);
-
-			}
+		onNotificationItemPress: function(oEvent) {
+			var oBindingContext = oEvent.getSource().getBindingContext();
+			this.getRouter().navTo("notificationDetails", {
+				notificationContext: oBindingContext.getPath().substr(1)
+			});
 		},
 
-
-	/*	onPressCreateNotification: function() {
+		// Pop-up for sorting and filter
+		handleViewSettingsDialogButtonPressed: function() {
 			if (!this._oDialog) {
-				this._oDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.notificationList.controls.CreateNotificationDialog",
-					this);
-				this.getView().addDependent(this._oDialog);
+				this._oDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.notificationList.controls.NotificationFilterDialog", this);
 			}
 			// toggle compact style
 			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);
 			this._oDialog.open();
-		},*/
-		
-		onPressCreateNotification: function() {
-
-			var oHistory = History.getInstance();
-			var sPreviousHash = oHistory.getPreviousHash();
-
-			if (sPreviousHash !== undefined) {
-				window.history.go(-1);
-			} else {
-				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-				//var oRouter = this.getRouter();
-				oRouter.navTo("notificationCreate", true);
-
-			}
-			},
-	
-		
-
-		/*	onPressCreateNotification: function(oEvent){
-		
-		
-			
-			if (!this._oPopover) {
-				this._oPopover = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.notificationList.controls.CreateNotificationDialog", this);
-
-				this._oPopover.setModel(this.CreateNotificationModel, "CreateNotificationModel");
-				this.getView().addDependent(this._oPopover);
-			}
-			
-			this._oPopover.getModel("CreateNotificationModel").refresh();
-			
-
-
-			this._oPopover.openBy(oEvent.getSource());
-	
-			
-		},*/
-
-
-
-		handleSaveNotification: function(oEvent) {
-			//Handles that Finish is also changed. StartDate is handled with twoway binding
-
-			var oContext = oEvent.getSource().getBindingContext();
-			var newStartDateString = this._oPopover.getModel("CreateNotificationModel").getData().Date;
-
-			var dateFormat = sap.ui.core.format.DateFormat.getDateInstance({
-				pattern: "dd-MM-yyyy"
-			});
-			var newStartDate = dateFormat.parse(newStartDateString, true, true);
-
-			if (newStartDate) {
-				//Date is valid
-				this.getView().getModel().setProperty("Date", newStartDate, oContext);
-
-				oEvent.oDialog.close();
-			}
 		},
 
-		handleCloseNotificationDialog: function() {
-			if (this._oDialog) {
-				this._oDialog.close();
+		setInitialSorting: function() {
+			var oTable = this.getView().byId("notificationTableId");
+			var oBinding = oTable.getBinding("items");
+
+			var aSorters = [];
+
+			var sortItem = "StartDate";
+			var sortDescending = true;
+			aSorters.push(new sap.ui.model.Sorter(sortItem, sortDescending));
+			oBinding.sort(aSorters);
+		},
+
+		// Start filter and sorting based on selected.
+		handleNotificationFilterConfirm: function(oEvent) {
+			var oView = this.getView();
+			var oTable = oView.byId("notificationTableId");
+
+			var mParams = oEvent.getParameters();
+			var oBinding = oTable.getBinding("items");
+
+			// apply sorter to binding
+			// (grouping comes before sorting)
+			var aSorters = [];
+			if (mParams.groupItem) {
+				var sPath = mParams.groupItem.getKey();
+				var bDescending = mParams.groupDescending;
+				var vGroup = this.orderGroupFunctions[sPath];
+				aSorters.push(new sap.ui.model.Sorter(sPath, bDescending, vGroup));
 			}
+
+			var sortItem = mParams.sortItem.getKey();
+			var sortDescending = mParams.sortDescending;
+			aSorters.push(new sap.ui.model.Sorter(sortItem, sortDescending));
+			oBinding.sort(aSorters);
+
+			// apply filters to binding
+			var aFilters = [];
+			oBinding.filter(aFilters);
+
+			// update filter bar
+			//oView.byId("vsdFilterBar").setVisible(aFilters.length > 0);
+			//oView.byId("vsdFilterLabel").setText(mParams.filterString);
+
+			var model = this.getView().getModel();
+			model.refresh();
+		},
+
+		refresh: function() {
+			//Subscribe to sync events
+			if (window.sap_webide_FacadePreview) {
+				//model.attachRequestCompleted(this.syncCompleted);
+				//model.attachRequestFailed(this.syncFailed);
+				this.subscribeToOnlineSyncEvents();
+			} else {
+				//When not in webide 
+			}
+
+			this.refreshData();
 		},
 
 		//These event are event from the odata service
@@ -225,7 +161,7 @@ sap.ui.define([
 			self.setSyncIndicators(false);
 
 			//Update items in table
-			self.getView().byId("workOrderTableId").getBinding("items").refresh(true);
+			self.getView().byId("notificationTableId").getBinding("items").refresh(true);
 		},
 
 		syncFailed: function() {
@@ -321,7 +257,7 @@ sap.ui.define([
 
 		createPopover: function() {
 			if (!this._syncQuickView) {
-				this._syncQuickView = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.workOrderList.controls.SyncQuickView", this);
+				this._syncQuickView = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.notificationList.controls.SyncQuickView", this);
 				this.getView().addDependent(this._syncQuickView);
 			}
 		},
@@ -409,12 +345,10 @@ sap.ui.define([
 				return "Offline";
 			}
 		},
-		dataCount: function(oValue) {
-			//read the number of data entities returned
-			if (oValue) {
-				return oValue.length;
-			}
 
+		createNewNotification: function() {
+			var oRouter = this.getRouter();
+			oRouter.navTo("notificationCreate", true);
 		}
 	});
 });
