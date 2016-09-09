@@ -22,7 +22,7 @@ sap.ui.define([
 			var param = {
 				"json": true,
 				loadMetadataAsync: true,
-				useBatch: true,
+				useBatch: false,
 				refreshAfterChange: true
 			};
 
