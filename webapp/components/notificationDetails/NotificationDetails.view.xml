@@ -36,7 +36,7 @@
 				<ObjectPageHeader headerDesign="Dark" objectTitle="{path:'ShortText'}" objectSubtitle="{path:'NotifNo'}"></ObjectPageHeader>
 			</headerTitle>
 			<sections>
-				<ObjectPageSection title="{i18n>SubSectionTitleGeneral}">
+			<ObjectPageSection title="{i18n>SubSectionTitleGeneral}">
 					<subSections>
 						<ObjectPageSubSection title="{i18n>SubSectionTitleGeneral}">
 							<blocks>
@@ -45,6 +45,7 @@
 						</ObjectPageSubSection>
 					</subSections>
 				</ObjectPageSection>
+			
 				<ObjectPageSection title="{i18n>SubSectionTitleNotes}">
 					<subSections>
 						<ObjectPageSubSection title="{i18n>SubSectionTitleNotes}">
@@ -70,9 +71,8 @@
 			<m:OverflowToolbar>
 				<m:content>
 					<m:ToolbarSpacer></m:ToolbarSpacer>
-					<m:Button id="orderStatusChangeButton" icon="sap-icon://accept" ariaDescribedBy="acceptButtonDescription genericButtonDescription"
-						press="orderStatusBtnPressed" text="{path:'OrderStatus',formatter:'.getOrderStatusBtnText'}"
-						visible="{path:'OrderStatus',formatter:'.isOrderNotCompleted'}" type="Emphasized">
+			<m:Button id="editNotificationButton" icon="sap-icon://sap-icon://edit" ariaDescribedBy="genericButtonDescription"
+						press="editNotificationPressed" >
 						<m:layoutData>
 							<m:OverflowToolbarLayoutData priority="NeverOverflow"/>
 						</m:layoutData>
