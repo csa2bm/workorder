@@ -111,6 +111,11 @@
 				"greedy": false,
 				"target": ["notificationList"]
 			}, {
+				"name": "notificationDetails",
+				"pattern": "notificationDetails",
+				"greedy": false,
+				"target": ["notificationDetails"]
+			}, {
 				"name": "notificationCreate",
 				"pattern": "notificationCreate",
 				"greedy": false,
@@ -155,6 +160,14 @@
 					"viewLevel": 2,
 					"viewPath": "com.twobm.mobileworkorder.components.notificationList"
 				},
+				"notificationDetails": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewName": "NotificationDetails",
+					"viewLevel": 2,
+					"viewPath": "com.twobm.mobileworkorder.components.notificationDetails"
+				},
 				"notificationCreate": {
 					"viewType": "XML",
 					"transition": "show",
@@ -171,7 +184,15 @@
 		"definingRequests": {
 			"OrderSet": {
 				"dataSource": "mainService",
-				"path": "/OrderSet?$expand=OrderOperation,OrderComponent,OrderObject,OrderAttachments,OrderGoodsMovements"
+				"path": "/OrderSet?$expand=OrderOperation,OrderComponent,OrderObject,OrderAttachments,OrderGoodsMovements,OrderTimeRegistration,OrderMaterialSummary"
+			},
+			"MaterialsSet": {
+				"dataSource": "mainService",
+				"path": "/MaterialsSet"
+			},
+			"EquipmentsSet": {
+				"dataSource": "mainService",
+				"path": "/EquipmentsSet"
 			}
 		}
 	}

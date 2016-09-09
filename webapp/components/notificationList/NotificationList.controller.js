@@ -47,10 +47,10 @@ sap.ui.define([
 			}
 		},
 
-		onWorkOrderItemPress: function(oEvent) {
+		onNotificationItemPress: function(oEvent) {
 			var oBindingContext = oEvent.getSource().getBindingContext();
 			this.getRouter().navTo("notificationDetails", {
-				workOrderContext: oBindingContext.getPath().substr(1)
+				notificationContext: oBindingContext.getPath().substr(1)
 			});
 		},
 
