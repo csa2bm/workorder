@@ -132,6 +132,19 @@ sap.ui.define([
 			} else {
 				return "Default";
 			}
+		},
+		
+		isOrderNotCompleted: function(str){
+			var orderStatus = this.getView().getBindingContext().getObject.OrderStatus;
+			
+			if(orderStatus === this.getI18nText("orderStatusCompleted")){
+				return !true;
+				
+			}
+			else{
+				return !false;
+			}
+			
 		}
 
 	});
