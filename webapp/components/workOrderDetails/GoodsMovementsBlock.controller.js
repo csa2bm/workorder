@@ -34,7 +34,7 @@ sap.ui.define([
 			//Clear data
 			var data = {
 				SearchString: "",
-				SearchResult: {
+				SelectedMaterial: {
 					//Fields from search result
 					MaterialNumber: "",
 					MaterialDescription: "",
@@ -43,8 +43,8 @@ sap.ui.define([
 					ImagePath: ""
 				},
 				OrderNumber: materialDetailsModel.getData().OrderNumber, //Do not clear this. Has to be kept between searches
-				PreviousQuantity: "0",
-				SelectedQuantity: "0",
+				PreviousQuantity: 0,
+				SelectedQuantity: 0,
 				LocalDbObject: false,
 				LocalDbObjectUri: ""
 			};
@@ -58,6 +58,10 @@ sap.ui.define([
 					"com.twobm.mobileworkorder.components.workOrderDetails.fragments.AddMaterialView", this);
 
 				this._oPopover.setModel(this.getView().getModel());
+				
+				var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
+				this._oPopover.setModel(materialDetailsModel, "MaterialDetailsModel");
+				
 				//this._oPopover.setModel(this.getView().getModel("device"), "device");
 
 				//this._oPopover.attachAfterOpen(this.resizePopup);
@@ -89,24 +93,85 @@ sap.ui.define([
 
 				var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
 
-				materialDetailsModel.getData().SearchResult.MaterialNumber = oMaterial.Matnr;
-				materialDetailsModel.getData().SearchResult.MaterialDescription = oMaterial.Description;
-				materialDetailsModel.getData().SearchResult.LocalStock = oMaterial.Quantity;
-				materialDetailsModel.getData().SearchResult.Unit = oMaterial.UOM;
+				materialDetailsModel.getData().SelectedMaterial.MaterialNumber = selectedItem.Matnr;
+				materialDetailsModel.getData().SelectedMaterial.MaterialDescription = selectedItem.Description;
+				materialDetailsModel.getData().SelectedMaterial.LocalStock = selectedItem.Quantity;
+				materialDetailsModel.getData().SelectedMaterial.Unit = selectedItem.UOM;
+
 				if (selectedItem.HasPicture) {
-					materialDetailsModel.getData().SearchResult.ImagePath = oMaterial.__metadata.media_src;
+					materialDetailsModel.getData().SelectedMaterial.ImagePath = selectedItem.__metadata.media_src;
 				}
 				materialDetailsModel.refresh();
 
-				this.showMaterialSearchResultPanels(true);
+				//this.showMaterialSearchResultPanels(true);
+				//var oCtx = oEvent.getSource().getBindingContext();
+				var oNavCon = sap.ui.core.Fragment.byId("MaterialSelectPopUp", "navCon");
+				var oDetailPage = sap.ui.core.Fragment.byId("MaterialSelectPopUp", "detail");
+				oNavCon.to(oDetailPage);
+				//oDetailPage.bindElement(oCtx.getPath());
 
 				//Find the quantity already issued if any?
-				this.getMaterialSummaryForMaterial(oMaterial.Matnr);
+				this.getMaterialSummaryForMaterial(selectedItem.Matnr);
 			} else {
-				this.byId('materialInput').setValueState(sap.ui.core.ValueState.Error);
-				this.showMaterialSearchResultPanels(false);
-				sap.m.MessageToast.show(this.getI18nText("MaterialNotFound"));
+				// this.byId('materialInput').setValueState(sap.ui.core.ValueState.Error);
+				// this.showMaterialSearchResultPanels(false);
+				// sap.m.MessageToast.show(this.getI18nText("MaterialNotFound"));
 			}
+		},
+
+		getMaterialSummaryForMaterial: function(matnr) {
+			var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
+
+			var sPath = "/MaterialsSummarySet(Matnr='" + matnr + "',Orderid='" + materialDetailsModel.getData().OrderNumber + "')";
+
+			var materialSummary = this.getView().getModel().getProperty(sPath);
+
+			if (materialSummary) {
+				materialDetailsModel.getData().SelectedQuantity = materialSummary.Quantity;
+				materialDetailsModel.getData().PreviousQuantity = materialSummary.Quantity;
+
+				//this.calculateDiscount();
+			} else {
+				materialDetailsModel.getData().SelectedQuantity = 0;
+				materialDetailsModel.getData().PreviousQuantity = 0;
+
+				//Object might be local
+				//get amount from local
+				this.getAmountFromLocalMaterialSummary();
+			}
+		},
+
+		getAmountFromLocalMaterialSummary: function() {
+			var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
+
+			var that = this;
+
+			var parameters = {
+				success: function(oData, response) {
+
+					oData.results.some(function myFunction(item) {
+
+						if (item['@com.sap.vocabularies.Offline.v1.islocal'] && item.Matnr === materialDetailsModel.getData().SearchResult.MaterialNumber) {
+
+							materialDetailsModel.getData().LocalDbObject = true;
+							materialDetailsModel.getData().LocalDbObjectUri = item.__metadata.uri.replace(that.getView().getModel().sServiceUrl, "");
+
+							materialDetailsModel.getData().SelectedQuantity = item.Quantity;
+							materialDetailsModel.getData().PreviousQuantity = item.Quantity;
+							materialDetailsModel.refresh();
+							return true; //break the loop
+						}
+					});
+
+					//that.calculateDiscount();
+
+				},
+				error: this.errorCallBackShowInPopUp
+			};
+
+			var sPath4 = "/OrderSet(Orderid='" + materialDetailsModel.getData().OrderNumber + "')/OrderMaterialSummary?$filter=sap.islocal()";
+
+			this.getView().getModel().read(sPath4, parameters);
 		},
 
 		searchForMaterial: function() {
@@ -208,13 +273,17 @@ sap.ui.define([
 		},
 
 		addMaterial: function(oEvent) {
+			var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
+
+			materialDetailsModel.getData().OrderNumber = oEvent.getSource().getBindingContext().getObject().Orderid;
+
 			this._oPopover.open();
 		},
 
 		scanBarcode: function(oEvent) {
 			self = this;
 
-			var orderNr = oEvent.getSource().getBindingContext().getObject().OrderNo;
+			var orderNr = oEvent.getSource().getBindingContext().getObject().Orderid;
 
 			cordova.plugins.barcodeScanner.scan(
 				function(result) {
@@ -257,18 +326,18 @@ sap.ui.define([
 
 		issueMaterial: function(oEvent) {
 
-			if (!this.onValidate(this.getView())) {
-				sap.m.MessageToast.show("Save not possible. Invalid input fields");
-				return;
-			}
+			// if (!this.onValidate(this.getView())) {
+			// 	sap.m.MessageToast.show("Save not possible. Invalid input fields");
+			// 	return;
+			// }
 
 			var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
 
-			var matnr = materialDetailsModel.getData().SearchResult.MaterialNumber;
-			var description = materialDetailsModel.getData().SearchResult.MaterialDescription;
-			var unit = materialDetailsModel.getData().SearchResult.Unit;
+			var matnr = materialDetailsModel.getData().SelectedMaterial.MaterialNumber;
+			var description = materialDetailsModel.getData().SelectedMaterial.MaterialDescription;
+			var unit = materialDetailsModel.getData().SelectedMaterial.Unit;
 			var quantity = Number(materialDetailsModel.getData().SelectedQuantity);
-			var discount = materialDetailsModel.getData().CustomerDiscount;
+			// discount = materialDetailsModel.getData().CustomerDiscount;
 			var ordernr = materialDetailsModel.getData().OrderNumber;
 
 			var that = this;
@@ -276,7 +345,7 @@ sap.ui.define([
 			var previouslyIssuedQuantity = Number(materialDetailsModel.getData().PreviousQuantity);
 
 			if (previouslyIssuedQuantity === quantity) {
-				sap.m.MessageBox.error(this.getI18nTextReplace4("MaterialQuantityAlreadyRegistered", quantity, materialDetailsModel.getData().SearchResult
+				sap.m.MessageBox.error(this.getI18nTextReplace4("MaterialQuantityAlreadyRegistered", quantity, materialDetailsModel.getData().SelectedMaterial
 					.Unit, matnr, ordernr));
 				return;
 			}
@@ -290,7 +359,6 @@ sap.ui.define([
 			// Create material on order
 			var parameters = {
 				success: function(oData, response) {
-					that.updateDiscountInInternalComment(ordernr, matnr, discount);
 
 					//If running in cordova we are using offlinestore and then
 					//we need to make sure that we update correctly in local db if offline
@@ -305,7 +373,7 @@ sap.ui.define([
 			};
 
 			var data = {
-				OrderNo: ordernr,
+				Orderid: ordernr,
 				Matnr: matnr,
 				Quantity: valueToIssue.toString(),
 				Type: this.getMaterialDocumentStateText(returnValue),
@@ -314,9 +382,9 @@ sap.ui.define([
 				Return: returnValue
 			};
 
-			var sPath = "/OrderSet(OrderNo='" + ordernr + "')/Materials";
+			var sPath = "/OrderSet(Orderid='" + ordernr + "')/OrderGoodsMovements";
 
-			var localStorageStock = Number(materialDetailsModel.getData().SearchResult.LocalStock);
+			var localStorageStock = Number(materialDetailsModel.getData().SelectedMaterial.LocalStock);
 
 			if (!returnValue) { // this is an issue of quantity
 				// Check if quantity is available in local stock
@@ -350,7 +418,7 @@ sap.ui.define([
 			};
 
 			var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
-			var localStorageStock = Number(materialDetailsModel.getData().SearchResult.LocalStock);
+			var localStorageStock = Number(materialDetailsModel.getData().SelectedMaterial.LocalStock);
 
 			//Calculate the quantity to issue
 			var valueToIssue = this.getIssueValue(quantity, previouslyIssuedQuantity);
@@ -398,7 +466,7 @@ sap.ui.define([
 			if (materialDetailsModel.getData().LocalDbObject) {
 				sPath = materialDetailsModel.getData().LocalDbObjectUri;
 			} else {
-				sPath = "/MaterialsSummarySet(Matnr='" + matnr + "',OrderNo='" + ordernr + "')";
+				sPath = "/MaterialsSummarySet(Matnr='" + matnr + "',Orderid='" + ordernr + "')";
 			}
 
 			var materialSummary = this.getView().getModel().getProperty(sPath);
@@ -437,9 +505,9 @@ sap.ui.define([
 				var createPath;
 
 				if (window.sap_webide_FacadePreview) {
-					createPath = "/OrderSet('" + ordernr + "')/MaterialsSummarySet";
+					createPath = "/OrderSet('" + ordernr + "')/OrderMaterialSummary";
 				} else {
-					createPath = "/OrderSet(OrderNo='" + ordernr + "')/MaterialsSummarySet";
+					createPath = "/OrderSet(Orderid='" + ordernr + "')/OrderMaterialSummary";
 				}
 
 				this.getView().getModel().create(createPath, data, parameters);
@@ -501,35 +569,28 @@ sap.ui.define([
 		},
 
 		recalculateTotal: function() {
-			//  this.onValidate("materialsPage");
-			this.getView().byId("inpQuantity").setValueState(ValueState.None);
 
-			var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
-			var newValue = this.getView().byId("inpQuantity")._lastValue;
-			if ("e".indexOf(newValue) > -1) {
-				this.getView().byId("inpQuantity").setValue(0);
-				return;
-			} // parseInt(materialDetailsModel.getData().SelectedQuantity);
-			if (newValue < 0 || (newValue > 0 && newValue < 1)) {
-				var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
-				sap.m.MessageBox.show(this.getI18nText("MaterialQuantityCannotBeNagative"), {
-					icon: MessageBox.Icon.INFORMATION,
-					title: "Quantity negative",
-					actions: [MessageBox.Action.OK],
-					defaultAction: MessageBox.Action.OK,
-					styleClass: bCompact ? "sapUiSizeCompact" : ""
-				});
-				materialDetailsModel.getData().SelectedQuantity = 0;
-				this.getView().byId("inpQuantity").setValueState(ValueState.Error);
-				return;
-			}
+			// this.getView().byId("inpQuantity").setValueState(ValueState.None);
 
-			//var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
-			var newPrice = Number(materialDetailsModel.getData().SelectedQuantity) * Number(materialDetailsModel.getData().CalculatedCustomerPrice);
-			newPrice = Math.round((newPrice + 0.00001) * 100) / 100;
-			materialDetailsModel.getData().CalculatedTotalPrice = newPrice;
-			materialDetailsModel.refresh();
+			// var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
+			// var newValue = this.getView().byId("inpQuantity")._lastValue;
+			// if ("e".indexOf(newValue) > -1) {
+			// 	this.getView().byId("inpQuantity").setValue(0);
+			// 	return;
+			// } 
+			// if (newValue < 0 || (newValue > 0 && newValue < 1)) {
+			// 	var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+			// 	sap.m.MessageBox.show(this.getI18nText("MaterialQuantityCannotBeNagative"), {
+			// 		icon: MessageBox.Icon.INFORMATION,
+			// 		title: "Quantity negative",
+			// 		actions: [MessageBox.Action.OK],
+			// 		defaultAction: MessageBox.Action.OK,
+			// 		styleClass: bCompact ? "sapUiSizeCompact" : ""
+			// 	});
+			// 	materialDetailsModel.getData().SelectedQuantity = 0;
+			// 	this.getView().byId("inpQuantity").setValueState(ValueState.Error);
+			// 	return;
+			// }
 		}
 	});
-
 });

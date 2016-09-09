@@ -180,6 +180,10 @@
 			"EquipmentsSet": {
 				"dataSource": "mainService",
 				"path": "/EquipmentsSet"
+			},
+			"NotificationsSet": {
+				"dataSource": "mainService",
+				"path": "/NotificationsSet"
 			}
 		}
 	}
