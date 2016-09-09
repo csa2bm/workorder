@@ -59,6 +59,8 @@ sap.ui.define([
 
 			var operationStatus = oEvent.getSource().getBindingContext().getObject().Complete;
 			//var oContext = this.getView().getBindingContext();
+			
+			this.operationPath = oEvent.getSource().getBindingContext().getPath();
 
 			var that = this;
 			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
@@ -74,7 +76,7 @@ sap.ui.define([
 					onClose: function(oAction, object) {
 
 						if (oAction === sap.m.MessageBox.Action.YES) {
-							that.updateOperationStatus(oEvent);
+							that.updateOperationStatus(that.operationPath, false);
 
 						} else {
 							return;
@@ -85,26 +87,25 @@ sap.ui.define([
 				});
 
 			} else {
-				this.updateOperationStatus(oEvent);
+				this.updateOperationStatus(this.operationPath, true);
 			}
 		},
 
-		updateOperationStatus: function(oEvent) {
+		updateOperationStatus: function(operationPath, complete) {
 			var that = this;
 			var parameters = {
 				success: function(oData, response) {
+					
 
 				},
 				error: that.errorCallBackShowInPopUp
 			};
 
 			var dataUpdate = {
-				Complete: !oEvent.getSource().getBindingContext().getObject().Complete
+				Complete: complete
 			};
 
-			var updatePath = oEvent.getSource().getBindingContext().getPath();
-
-			this.getView().getModel().update(updatePath, dataUpdate, parameters);
+			this.getView().getModel().update(operationPath, dataUpdate, parameters);
 		},
 
 		/**
