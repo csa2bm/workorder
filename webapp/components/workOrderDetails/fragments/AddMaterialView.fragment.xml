@@ -4,7 +4,7 @@
 			<Page id="master" showNavButton="false" title="{i18n>MaterialSearchPageHeaderLabel}">
 				<content>
 					<SearchField search="searchMaterial" placeholder="{i18n>MaterialSearchFieldPlaceHolder}" class=""/>
-					<List id="list" items="{/MaterialsSet}">
+					<List id="materialSearchResultsList" items="{/MaterialsSet}">
 						<StandardListItem title="{Description}" description="{Matnr}" info="{Quantity} {UOM}" type="Active"
 							press="onProductSelectedFromSearchResult"/>
 					</List>

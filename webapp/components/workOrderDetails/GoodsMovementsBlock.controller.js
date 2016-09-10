@@ -255,8 +255,14 @@ sap.ui.define([
 					}
 				}
 			}
+			
+			
+			// update list binding
+			var list = sap.ui.getCore().byId("MaterialSelectPopUp--materialSearchResultsList");
+			var itemsBinding = list.getBinding("items");
+			//binding.filter(aFilters, "Application");
 
-			var itemsBinding = oEvent.getParameter("itemsBinding");
+			//var itemsBinding = oEvent.getParameter("itemsBinding");
 
 			if (itemsBinding) {
 				itemsBinding.aApplicationFilters = [];
@@ -605,11 +611,11 @@ sap.ui.define([
 		searchForMaterial: function(matNr) {
 			var that = this;
 
-			 var oFilter = new sap.ui.model.Filter("Matnr", sap.ui.model.FilterOperator.EQ,
-			 	encodeURIComponent(matNr));
+			 //var oFilter = new sap.ui.model.Filter("Matnr", sap.ui.model.FilterOperator.EQ,
+			 //	encodeURIComponent(matNr));
 
-			//var oFilter = new sap.ui.model.Filter("Matstring", sap.ui.model.FilterOperator.Contains,
-			//	encodeURIComponent(matNr));
+			var oFilter = new sap.ui.model.Filter("Matstring", sap.ui.model.FilterOperator.Contains,
+				encodeURIComponent(matNr));
 
 			var parameters = {
 				success: function(oData, oResponse) {
