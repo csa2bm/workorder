@@ -279,11 +279,11 @@ sap.ui.define([
 
 					var barcodeScanned = this.getMaterialNrFromBarcode(result.text);
 
-					var data = {
-						"block": "material",
-						"ordernr": orderNr,
-						"matnr": barcodeScanned
-					};
+					// var data = {
+					// 	"block": "material",
+					// 	"ordernr": orderNr,
+					// 	"matnr": barcodeScanned
+					// };
 
 					self.searchForMaterial(barcodeScanned);
 					//self.gotoMaterialDetailPage(data);
