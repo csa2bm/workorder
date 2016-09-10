@@ -54,7 +54,7 @@
 			"id": "mobileWorkOrderApp"
 		},
 		"dependencies": {
-			"minUI5Version": "1.30.0",
+			"minUI5Version": "1.32.4",
 			"libs": {
 				"sap.ui.core": {},
 				"sap.m": {},
@@ -106,18 +106,18 @@
 				"name": "equipmentDetails",
 				"target": "equipmentDetails"
 			}, {
-				"name": "notificationList",
 				"pattern": "notificationList",
+				"name": "notificationList",
 				"greedy": false,
 				"target": ["notificationList"]
 			}, {
+				"pattern": "notificationDetails/{notificationContext}",
 				"name": "notificationDetails",
-				"pattern": "notificationDetails",
 				"greedy": false,
 				"target": ["notificationDetails"]
 			}, {
-				"name": "notificationCreate",
 				"pattern": "notificationCreate",
+				"name": "notificationCreate",
 				"greedy": false,
 				"target": ["notificationCreate"]
 			}],
@@ -165,7 +165,7 @@
 					"transition": "slide",
 					"clearAggregation": true,
 					"viewName": "NotificationDetails",
-					"viewLevel": 2,
+					"viewLevel": 3,
 					"viewPath": "com.twobm.mobileworkorder.components.notificationDetails"
 				},
 				"notificationCreate": {
