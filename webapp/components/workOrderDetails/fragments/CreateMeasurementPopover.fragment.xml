@@ -1,8 +1,8 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
-	<Dialog title="Attachment" class="sapUiPopupWithPadding" stretch="false" showHeader="false" showCloseButton="true">
-		<beginButton>
-			<Button  type="Accept" text="{i18n>deleteAttachmentButtonText}" press="onDeleteFile" visible="{parts:[{path:'ImageModel>/AttachmentID'}],formatter:'.attachmentPopUpShowDeleteButton'}"></Button>
-		</beginButton>
+	<Dialog class="sapUiPopupWithPadding" stretch="false" showHeader="false" showCloseButton="true">
+		<!--<beginButton>-->
+		<!--	<Button  type="Accept" text="" press=""></Button>-->
+		<!--</beginButton>-->
 		<endButton>
 			<Button text="Close" press="closeAddMeasurement"/>
 		</endButton>
