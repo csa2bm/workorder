@@ -183,33 +183,6 @@ sap.ui.define([
 			this.getView().getModel().read(sPath4, parameters);
 		},
 
-		// searchForMaterial: function() {
-		// 	var that = this;
-
-		// 	var materialInput = this.getView().byId("materialInput");
-
-		// 	//Remove any previous error state
-		// 	materialInput.setValueState(sap.ui.core.ValueState.None);
-
-		// 	var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
-
-		// 	var oFilter = new sap.ui.model.Filter("Matstring", sap.ui.model.FilterOperator.Contains,
-		// 		encodeURIComponent(materialDetailsModel.getData().SearchString));
-
-		// 	var parameters = {
-		// 		success: function(oData, oResponse) {
-		// 			var materialData = jQuery.parseJSON(JSON.stringify(oData));
-		// 			if (that.handleSearchResult) {
-		// 				that.handleSearchResult.call(that, materialData.results);
-		// 			}
-		// 		},
-		// 		error: this.errorCallBackShowInPopUp,
-		// 		filters: [oFilter]
-		// 	};
-
-		// 	this.getView().getModel().read("/MaterialsSet", parameters);
-		// },
-
 		searchMaterial: function(oEvent) {
 			var sValue = oEvent.getParameter("query");
 			var aFilters = [];
@@ -255,8 +228,11 @@ sap.ui.define([
 					}
 				}
 			}
-
-			var itemsBinding = oEvent.getParameter("itemsBinding");
+			
+			
+			// update list binding
+			var list = sap.ui.getCore().byId("MaterialSelectPopUp--materialSearchResultsList");
+			var itemsBinding = list.getBinding("items");
 
 			if (itemsBinding) {
 				itemsBinding.aApplicationFilters = [];
@@ -303,13 +279,14 @@ sap.ui.define([
 
 					var barcodeScanned = this.getMaterialNrFromBarcode(result.text);
 
-					var data = {
-						"block": "material",
-						"ordernr": orderNr,
-						"matnr": barcodeScanned
-					};
+					// var data = {
+					// 	"block": "material",
+					// 	"ordernr": orderNr,
+					// 	"matnr": barcodeScanned
+					// };
 
-					self.gotoMaterialDetailPage(data);
+					self.searchForMaterial(barcodeScanned);
+					//self.gotoMaterialDetailPage(data);
 				},
 				function() {
 					sap.m.MessageToast.show("Scanning failed");
@@ -354,7 +331,6 @@ sap.ui.define([
 			var description = materialDetailsModel.getData().SelectedMaterial.MaterialDescription;
 			var unit = materialDetailsModel.getData().SelectedMaterial.Unit;
 			var quantity = Number(materialDetailsModel.getData().SelectedQuantity);
-			// discount = materialDetailsModel.getData().CustomerDiscount;
 			var ordernr = materialDetailsModel.getData().OrderNumber;
 
 			var that = this;
@@ -605,11 +581,11 @@ sap.ui.define([
 		searchForMaterial: function(matNr) {
 			var that = this;
 
-			 var oFilter = new sap.ui.model.Filter("Matnr", sap.ui.model.FilterOperator.EQ,
-			 	encodeURIComponent(matNr));
+			 //var oFilter = new sap.ui.model.Filter("Matnr", sap.ui.model.FilterOperator.EQ,
+			 //	encodeURIComponent(matNr));
 
-			//var oFilter = new sap.ui.model.Filter("Matstring", sap.ui.model.FilterOperator.Contains,
-			//	encodeURIComponent(matNr));
+			var oFilter = new sap.ui.model.Filter("Matstring", sap.ui.model.FilterOperator.Contains,
+				encodeURIComponent(matNr));
 
 			var parameters = {
 				success: function(oData, oResponse) {

@@ -1,16 +1,17 @@
 sap.ui.define([
 	"com/twobm/mobileworkorder/util/Controller",
 	"com/twobm/mobileworkorder/util/Formatter"
-], function(Controller,Formatter) {
+], function(Controller, Formatter) {
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.workOrderDetails.MeasuringPointsBlock", {
-		formatter:Formatter,
+		formatter: Formatter,
 		/**
 		 * Called when a controller is instantiated and its View controls (if available) are already created.
 		 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
 		 * @memberOf com.twobm.mobileworkorder.components.workOrderDetails.view.AttachmentsBlock
 		 */
+
 			onInit: function() {
 				
 				// Databind to measuring points from object
@@ -21,6 +22,7 @@ sap.ui.define([
 			},
 		
 			createAttachmentViewerPopover: function() {
+
 			if (!this._oPopover) {
 				this._oPopover = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.workOrderDetails.fragments.CreateMeasurementPopover",
 					this);
@@ -49,6 +51,14 @@ sap.ui.define([
 		},
 		closeAddMeasurement: function() {
 			this._oPopover.close();
+		},
+
+		isOrderStatusNotCompleted: function(OrderStatus) {
+			if (OrderStatus === this.getI18nText("orderStatusCompleted")) {
+				return false;
+			} else {
+				return true;
+			}
 		}
 
 		/**

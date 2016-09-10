@@ -4,7 +4,7 @@
 			<Page id="master" showNavButton="false" title="{i18n>MaterialSearchPageHeaderLabel}">
 				<content>
 					<SearchField search="searchMaterial" placeholder="{i18n>MaterialSearchFieldPlaceHolder}" class=""/>
-					<List id="list" items="{/MaterialsSet}">
+					<List id="materialSearchResultsList" items="{/MaterialsSet}">
 						<StandardListItem title="{Description}" description="{Matnr}" info="{Quantity} {UOM}" type="Active"
 							press="onProductSelectedFromSearchResult"/>
 					</List>
@@ -23,7 +23,7 @@
 				<content>
 					<l:BlockLayout id="BlockLayout">
 						<l:BlockLayoutRow>
-							<l:BlockLayoutCell width="60%">
+							<l:BlockLayoutCell width="50%">
 								<VBox>
 									<!--<Image id="materialImage" src="{MaterialDetailsModel>/SelectedMaterial/ImagePath}"-->
 									<!--	visible="{MaterialDetailsModel>/SelectedMaterial/HasImage}" width="300px"/>-->
@@ -36,7 +36,7 @@
 									<Text id="inpCarStock" text="{MaterialDetailsModel>/SelectedMaterial/LocalStock} {MaterialDetailsModel>/SelectedMaterial/Unit}"/>
 								</VBox>
 							</l:BlockLayoutCell>
-							<l:BlockLayoutCell width="40%" visible="{MaterialDetailsModel>/SelectedMaterial/HasImage}">
+							<l:BlockLayoutCell width="50%" visible="{MaterialDetailsModel>/SelectedMaterial/HasImage}">
 								<Image id="materialImage" src="{MaterialDetailsModel>/SelectedMaterial/ImagePath}"
 									visible="{MaterialDetailsModel>/SelectedMaterial/HasImage}" width="150px"/>
 							</l:BlockLayoutCell>

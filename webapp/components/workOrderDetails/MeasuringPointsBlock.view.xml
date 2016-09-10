@@ -1,6 +1,8 @@
-<core:View controllerName="com.twobm.mobileworkorder.components.workOrderDetails.MeasuringPointsBlock" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
-	xmlns:l="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns:vbm="sap.ui.vbm" xmlns="sap.m">
-	<Table id="idProductsTable" items="{ path: 'OrderObject', sorter: { path: 'FunclocDisp', descending: false}}" noDataText="{i18n>EquipmentBlockNoEquipmentAdded}">
+<core:View controllerName="com.twobm.mobileworkorder.components.workOrderDetails.MeasuringPointsBlock" xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:vbm="sap.ui.vbm" xmlns="sap.m">
+	<Table id="idProductsTable" items="{ path: 'OrderObject', sorter: { path: 'FunclocDisp', descending: false}}"
+		noDataText="{i18n>EquipmentBlockNoEquipmentAdded}">
 		<columns>
 			<Column>
 				<Text text="{i18n>MeasuringPointsBlockColoumEquipment}"/>
@@ -14,8 +16,7 @@
 			<Column>
 				<Text text="{i18n>MeasuringPointsBlockColoumReading}"/>
 			</Column>
-
-				<Column width="5em" vAlign="Middle"></Column>
+			<Column width="5em" vAlign="Middle"></Column>
 			<Column width="1.5em" vAlign="Middle"></Column>
 		</columns>
 		<items>
@@ -27,6 +28,7 @@
 					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 					-->
 					<ObjectIdentifier text="Engine" title="483293484"/>
+<!--
 						<ObjectIdentifier text="{Descriptn}" title="{Measpos}"/>
 					<ObjectIdentifier text="{Counter}" title="{MeasUnit}"/>
 					<ObjectIdentifier text="-" title="{MeasUnit}"/>
@@ -34,6 +36,14 @@
 						<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 						
 					
+-->
+					<ObjectIdentifier text="Oil preasure" title="12382382938"/>
+					<ObjectIdentifier text="14,5" title="PSI"/>
+					<ObjectIdentifier text="-" title="PSI"/>
+					<Button id="readingButton" visible="{parts:[{path:'OrderStatus'}],formatter:'.isOrderStatusNotCompleted'}" class="sapUiMediumMarginEnd"
+						icon="sap-icon://measure" press="addMeasurement"></Button>
+					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
+
 				</cells>
 			</ColumnListItem>
 		</items>
