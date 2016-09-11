@@ -8,28 +8,24 @@
 		<Table id="MaterialsSummaryList" titel="{i18n>SubSectionTitleMaterials}" templateShareable="true"
 			items="{ path: 'OrderMaterialSummary', sorter: { path: 'Matnr', descending: false}}" noDataText="{i18n>MaterialsBlockNoMaterialsAdded}">
 			<columns>
-				<Column demandPopin="true" popinDisplay="Inline" minScreenWidth="Small" width="1rem">
-					<header>
-						<Label text="{i18n>MaterialsBlockColoumQuantity}"/>
-					</header>
-				</Column>
-				<Column demandPopin="true" popinDisplay="WithoutHeader" minScreenWidth="Small" width="3rem">
+				<Column demandPopin="true" popinDisplay="WithoutHeader">
 					<header>
 						<Label text="{i18n>MaterialsBlockColoumDescription}"/>
 					</header>
 				</Column>
-				<Column demandPopin="true" popinDisplay="Inline" minScreenWidth="Small" width="1rem">
+				<Column demandPopin="true" popinDisplay="Inline" width="5em" vAlign="Middle">
 					<header>
-						<Label text="{i18n>MaterialsBlockColoumMaterialNo}"/>
+						<Label text="{i18n>MaterialsBlockColoumQuantity}"/>
 					</header>
 				</Column>
+				<Column demandPopin="false" width="1.5em" vAlign="Middle"></Column>
 			</columns>
 			<items>
 				<ColumnListItem type="Active" press="goToMaterialDetailForSelectedMaterial">
 					<cells>
-						<ObjectIdentifier text="{Quantity} {Unit}"/>
-						<Text text="{Description}"/>
-						<ObjectIdentifier text="{Matnr}"/>
+						<ObjectIdentifier text="{Description}" title="{Matnr}"/>
+						<ObjectIdentifier text="{Quantity} {Unit}"/><core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
+						<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 					</cells>
 				</ColumnListItem>
 			</items>
