@@ -184,11 +184,14 @@
 		"definingRequests": {
 			"OrderSet": {
 				"dataSource": "mainService",
-				"path": "/OrderSet?$expand=OrderOperation,OrderComponent,OrderObject,OrderAttachments,OrderGoodsMovements,OrderTimeRegistration,OrderMaterialSummary"
+				"path": "/OrderSet?$expand=OrderOperation,OrderComponent,OrderObject,OrderAttachments,OrderGoodsMovements,OrderTimeRegistration,OrderMaterialSummary,OrderEquipments,OrderMeasPoint"
 			},
 			"MaterialsSet": {
 				"dataSource": "mainService",
-				"path": "/MaterialsSet"
+				"path": {
+					"url": "/MaterialsSet",
+					"retrieveStreams": true
+				}
 			},
 			"EquipmentsSet": {
 				"dataSource": "mainService",

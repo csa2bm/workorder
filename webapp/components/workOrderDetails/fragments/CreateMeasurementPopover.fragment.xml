@@ -5,7 +5,7 @@
 		</beginButton>
 
 		<endButton>
-			<Button  type="Emphasized" text="Submit" press="onDeleteFile"></Button>
+			<Button  type="Emphasized" text="Submit" press="onSubmitMeasurement"></Button>
 		</endButton>
 		<buttons></buttons>
 		<content>
@@ -13,11 +13,11 @@
 				<!--class="sapUiSmallMargin"-->
 				<!--<Label text="Select new work date" labelFor="DP3"/>-->
 				<Label text="Measuring Point" design="Bold" class="sapUiTinyMarginBottom"/>
-				<Label text="Tire preasure (1329384)" class="sapUiSmallMarginBottom" />
+				<Label text="{ViewModel>/Measpoint}" class="sapUiSmallMarginBottom" />
 				<Label text="Enter reading" design="Bold" class="sapUiTinyMarginBottom"/>
 				<HBox alignItems="Center">
-				<Input type="Text" width="16em" />
-				<Label text="PSI" width="3em" class="sapUiSmallMarginBegin" />
+				<Input type="Text" width="16em" value="{ViewModel>/RecordedValue}" />
+				<Label text="{ViewModel>/MeasUnit}" width="3em" class="sapUiSmallMarginBegin" />
 				</HBox>
 			</VBox>
 		</content>

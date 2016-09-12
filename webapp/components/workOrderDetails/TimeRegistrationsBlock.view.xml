@@ -7,23 +7,24 @@
 		<Table items="{ path: 'OrderTimeRegistration' , sorter: [{path: 'RegistrationDate', descending: true}]}"
 			noDataText="{i18n>TimeRegistrationsBlockColumnNoTimeAdded}">
 			<columns>
-				<Column demandPopin="true" popinDisplay="Inline" minScreenWidth="Small" width="1rem">
+				<Column demandPopin="true" popinDisplay="Inline">
 					<Text text="{i18n>TimeRegistrationsBlockColumnDate}"/>
 				</Column>
-				<Column demandPopin="true" popinDisplay="WithoutHeader" minScreenWidth="Small" width="3rem">
+				<Column demandPopin="true" popinDisplay="WithoutHeader">
 					<Text text="{i18n>TimeRegistrationsBlockColumnPerson}"/>
 				</Column>
-				<!--<Column width="5em" vAlign="End" hAlign="Center">-->
-				<Column demandPopin="true" popinDisplay="Inline" minScreenWidth="Small" width="1rem">
+				<Column demandPopin="true" popinDisplay="Inline" width="5em" vAlign="Middle">
 					<Text text="{i18n>TimeRegistrationsBlockColumnTime}"/>
 				</Column>
+				<Column demandPopin="false" width="1.5em" vAlign="Middle"></Column>
 			</columns>
 			<items>
 				<ColumnListItem type="Active" press="openTimeRegistrationPopoverUpdate">
 					<cells>
 						<ObjectIdentifier title="{path:'RegistrationDate', type:'sap.ui.model.type.Date', formatOptions:'short'}"/>
 						<Text text="{Name}"/>
-						<Text text="{WorkTime}"/>
+						<Text text="{WorkTime} {i18n>TimeRegistrationsBlockHours}"/>
+						<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 					</cells>
 				</ColumnListItem>
 			</items>

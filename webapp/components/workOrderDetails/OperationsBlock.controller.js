@@ -95,7 +95,7 @@ sap.ui.define([
 			var that = this;
 			var parameters = {
 				success: function(oData, response) {
-					
+					that.getView().byId("idOperationTable").getBinding("items").refresh();
 
 				},
 				error: that.errorCallBackShowInPopUp

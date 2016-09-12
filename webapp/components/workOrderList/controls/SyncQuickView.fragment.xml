@@ -56,6 +56,8 @@
 					<Label class="syncStatusTextBold" id="lastSyncTime" text="{syncStatusModel>/LastSyncTime}"/>
 				</l:HorizontalLayout>
 				<Button class="sapUiSmallMarginTop" text="Synchronize Now" press="synchronizeData"></Button>
+				<Button class="sapUiSmallMarginTop" text="Reset" press="resetStore"></Button>
+				
 			</l:VerticalLayout>
 		</content>
 	</ResponsivePopover>

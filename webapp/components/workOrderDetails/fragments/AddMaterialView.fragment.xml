@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
-	<Dialog class="sapUiPopupWithPadding" stretch="{device>/isPhone}" contentHeight="600px" contentWidth="700px" showHeader="false" showCloseButton="true">
+	<Dialog class="sapUiPopupWithPadding" type="Message" stretch="{device>/isPhone}" contentHeight="600px" contentWidth="700px" showHeader="false" showCloseButton="false">
 		<NavContainer id="navCon">
 			<Page id="master" showNavButton="false" title="{i18n>MaterialSearchPageHeaderLabel}">
 				<content>

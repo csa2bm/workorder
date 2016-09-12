@@ -434,9 +434,8 @@ sap.ui.define([
 			};
 
 			if (newStock >= 0) {
-				this.getView().getModel().update("/MaterialsSet(Matnr='" + matnr + "')", matData, parameters);
+				this.getView().getModel().update("/MaterialsSet(Matnr='" + matnr + "',Plant='1000',Sloc='0020')", matData, parameters);
 			}
-
 		},
 
 		/*  This method is necessary when offline, in order to maintain the correct summarized 

@@ -198,6 +198,25 @@ sap.ui.define([
 				}, theKey);
 		},
 
+			  reset : function() {
+				var self  = this;
+                this.appOfflineStore.store.close(function() {
+                	
+                	 sap.OData.removeHttpClient();
+                	 self.appOfflineStore.store.clear(function(){
+                	 	self.openAppOfflineStore();
+                	 }, function(e)
+                {
+                		MessageBox.alert("Failed close store: " + JSON.stringify(e));
+                });
+                	
+                }, function(e)
+                {
+                		MessageBox.alert("Failed close store: " + JSON.stringify(e));
+                });
+            },
+
+
 		/********************************************************************
 		 * Creates a new OfflineStore object.
 		 * Need to be online in the first time when the store is created.
