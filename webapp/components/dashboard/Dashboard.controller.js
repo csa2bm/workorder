@@ -73,6 +73,7 @@ sap.ui.define([
 
 			this.getView().getModel().read("/OrderSet/$count", parametersOrder);
 			this.getView().getModel().read("/NotificationsSet/$count", parametersNotif);
+			
 		},
 
 		setNotificationModel: function(oEvent) {
@@ -128,16 +129,19 @@ sap.ui.define([
 
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
-
+			var bindingPath = "/NotificationSet";
 			if (sPreviousHash !== undefined) {
 				window.history.go(-1);
 			} else {
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 				//var oRouter = this.getRouter();
-				oRouter.navTo("notificationCreate", true);
+				oRouter.navTo("notificationCreate", {
+				entity: bindingPath.substr(1)
+			});
 
 			}
 			},
+	
 	
 		
 
