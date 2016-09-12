@@ -2,7 +2,7 @@
 	xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
 	<l:VerticalLayout class="sapUiSmallMarginEnd" width="100%">
 		<l:HorizontalLayout >
-			<Button class="sapUiSmallMarginEnd" icon="sap-icon://add" press="openTimeRegistrationPopoverCreate"></Button>
+			<Button class="sapUiSmallMarginEnd" icon="sap-icon://add" press="openTimeRegistrationPopoverCreate" visible="{parts:[{path:'OrderStatus'}],formatter:'.orderStatusValid'}"></Button>
 		</l:HorizontalLayout>
 		<Table items="{ path: 'OrderTimeRegistration' , sorter: [{path: 'RegistrationDate', descending: true}]}"
 			noDataText="{i18n>TimeRegistrationsBlockColumnNoTimeAdded}">

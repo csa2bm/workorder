@@ -126,7 +126,14 @@ sap.ui.define([
 					throw new ValidateException("'" + oValue + "' is not a valid Time Entry");
 				}
 			}
-		})
+		}),
+		orderStatusValid: function(str){
+			
+			var oContext = this.getView().getBindingContext();
+			var model = this.getView().getModel();
+			
+			return !this.readOnly(oContext, model);
+		}
 
  
 		

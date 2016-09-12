@@ -605,6 +605,13 @@ sap.ui.define([
 			};
 
 			this.getView().getModel().read("/MaterialsSet", parameters);
+		},
+			orderStatusValid: function(str){
+			
+			var oContext = this.getView().getBindingContext();
+			var model = this.getView().getModel();
+			
+			return !this.readOnly(oContext, model);
 		}
 
 	});

@@ -135,28 +135,12 @@ sap.ui.define([
 			}
 		},
 		
-		orderStatusCompleted: function(str){
+		orderStatusValid: function(str){
 			
 			var oContext = this.getView().getBindingContext();
+			var model = this.getView().getModel();
 			
-			var OrderStatus = this.getView().getModel().getProperty("OrderStatus", oContext);
-			
-			
-			
-			//var model = this.getView().getModel();
-			
-			//TODO
-			//return !this.readOnly(oContext, model);       
-			
-			//var orderStatus = this.getView().getBindingContext().getObject.OrderStatus;
-			
-			if(OrderStatus === this.getI18nText("orderStatusCompleted") || OrderStatus === this.getI18nText("orderStatusNotStarted")){
-				return !true;
-				
-			}
-			else{
-				return !false;
-			}
+			return !this.readOnly(oContext, model);
 		}
 
 	});
