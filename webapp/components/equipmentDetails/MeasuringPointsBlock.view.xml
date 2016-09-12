@@ -29,7 +29,7 @@
 					<ObjectIdentifier text="{Descriptn}" title="{Measpos}"/>
 					<ObjectIdentifier text="{Counter}" title="{MeasUnit}"/>
 					<ObjectIdentifier text="-" title="{MeasUnit}"/>
-						<Button id="readingButton" class="sapUiMediumMarginEnd" icon="sap-icon://measure" press=""></Button>
+						<Button id="readingButton" class="sapUiMediumMarginEnd" icon="sap-icon://measure" press="addMeasurement"></Button>
 						<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 				</cells>
 			</ColumnListItem>

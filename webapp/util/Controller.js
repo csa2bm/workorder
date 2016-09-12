@@ -78,6 +78,19 @@ sap.ui.define([
 					sap.m.MessageBox.error("Error: " + oError.message);
 				}
 			}
+		},
+		readOnly: function(oContext, oModel){
+			
+			var orderStatus = oModel.getProperty("OrderStatus", oContext);
+			
+			if(orderStatus === this.getI18nText("orderStatusCompleted") || orderStatus === this.getI18nText("orderStatusNotStarted")){
+				return true;
+				
+			}
+			else{
+				return false;
+			}
+			
 		}
 	});
 });

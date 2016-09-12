@@ -1,19 +1,18 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
 	<Dialog title="Attachment" class="sapUiPopupWithPadding" stretch="{device>/isPhone}" showHeader="false" showCloseButton="true">
 		<buttons>
-			<Button icon="sap-icon://delete" type="Reject" text="{i18n>TimeRegistrationPopUpButtonDelete}" press="deleteTimeRegistration" visible="{/deletable}"></Button>
+			<Button icon="sap-icon://delete" type="Reject" text="{i18n>TimeRegistrationPopUpButtonDelete}" press="deleteTimeRegistration"
+				visible="{/deletable}"></Button>
 			<Button icon="sap-icon://add" type="Emphasized" text="{i18n>TimeRegistrationPopUpButtonSubmit}" press="postTimeRegistration"></Button>
 			<Button text="{i18n>TimeRegistrationPopUpButtonClose}" press="closeAddTimeRegistrationPopover"/>
 		</buttons>
 		<content>
 			<VBox>
-						<Label text="{i18n>TimeRegistrationPopUpTime}" design="Bold"/>
-				<Input id="__WorkTimeField" placeholder="{i18n>TimeRegistrationPopUpTimeTextPlaceHolder}" value="{path:'WorkTime' , type:'.typeTimeFormat'}" focus="true" />
-			
-					<Label text="{i18n>TimeRegistrationPopUpDate}" design="Bold"/>
+				<Label text="{i18n>TimeRegistrationPopUpTime}" design="Bold"/>
+				<Input id="__WorkTimeField" placeholder="{i18n>TimeRegistrationPopUpTimeTextPlaceHolder}" value="{path:'WorkTime' , type:'.typeTimeFormat'}"
+					focus="true"/>
+				<Label text="{i18n>TimeRegistrationPopUpDate}" design="Bold"/>
 				<DatePicker dateValue="{RegistrationDate}"></DatePicker>
-			
-			
 			</VBox>
 		</content>
 	</Dialog>

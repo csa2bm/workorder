@@ -5,31 +5,27 @@
 			<Button class="sapUiSmallMarginEnd" icon="sap-icon://add" press="addMaterial"></Button>
 			<Button class="sapUiSmallMarginEnd" icon="sap-icon://bar-code" press="scanBarcode"></Button>
 		</l:HorizontalLayout>
-		<Table id="MaterialsSummaryList" titel="{i18n>materials}" templateShareable="true"
-			items="{ path: 'OrderMaterialSummary', sorter: { path: 'Matnr', descending: false}}" noDataText="{i18n>noMaterialsAdded}">
+		<Table id="MaterialsSummaryList" titel="{i18n>SubSectionTitleMaterials}" templateShareable="true"
+			items="{ path: 'OrderMaterialSummary', sorter: { path: 'Matnr', descending: false}}" noDataText="{i18n>MaterialsBlockNoMaterialsAdded}">
 			<columns>
-				<Column demandPopin="true" popinDisplay="WithoutHeader" minScreenWidth="Small" width="2rem">
+				<Column demandPopin="true" popinDisplay="WithoutHeader">
 					<header>
-						<Label text="{i18n>description}"/>
+						<Label text="{i18n>MaterialsBlockColoumDescription}"/>
 					</header>
 				</Column>
-				<Column demandPopin="true" popinDisplay="Inline" minScreenWidth="Small" width="1rem">
+				<Column demandPopin="true" popinDisplay="Inline" width="5em" vAlign="Middle">
 					<header>
-						<Label text="{i18n>matNo}"/>
+						<Label text="{i18n>MaterialsBlockColoumQuantity}"/>
 					</header>
 				</Column>
-				<Column demandPopin="true" popinDisplay="Inline" minScreenWidth="Small" width="1rem">
-					<header>
-						<Label text="{i18n>quantity}"/>
-					</header>
-				</Column>
+				<Column demandPopin="false" width="1.5em" vAlign="Middle"></Column>
 			</columns>
 			<items>
 				<ColumnListItem type="Active" press="goToMaterialDetailForSelectedMaterial">
 					<cells>
-						<Text text="{Description}"/>
-						<ObjectIdentifier text="{Matnr}"/>
-						<ObjectIdentifier text="{Quantity} {Unit}"/>
+						<ObjectIdentifier text="{Description}" title="{Matnr}"/>
+						<ObjectIdentifier text="{Quantity} {Unit}"/><core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
+						<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 					</cells>
 				</ColumnListItem>
 			</items>
@@ -58,11 +54,11 @@
 		<!--					<Label text="{i18n>quantity}"/>-->
 		<!--				</header>-->
 		<!--			</Column>-->
-					<!--<Column demandPopin="true" popinDisplay="Block" minScreenWidth="Small" width="1rem">-->
-					<!--	<header>-->
-					<!--		<Label text=""/>-->
-					<!--	</header>-->
-					<!--</Column>-->
+		<!--<Column demandPopin="true" popinDisplay="Block" minScreenWidth="Small" width="1rem">-->
+		<!--	<header>-->
+		<!--		<Label text=""/>-->
+		<!--	</header>-->
+		<!--</Column>-->
 		<!--		</columns>-->
 		<!--		<items>-->
 		<!--			<ColumnListItem>-->
@@ -71,8 +67,8 @@
 		<!--					<Text text="{Matnr}"/>-->
 		<!--					<ObjectIdentifier text="{Type}"/>-->
 		<!--					<ObjectIdentifier text="{Quantity} {Unit}"/>-->
-							<!--<core:Icon visible="{parts:[{path:'@com.sap.vocabularies.Offline.v1.islocal'}],formatter:'com.twobm.wmoa.util.Formatter.isLocal'}"-->
-							<!--	class="sapUiSmallMarginEnd" color="DarkRed" noTabStop="true" press="deleteMaterialsRow" size="1.5em" src="sap-icon://delete"></core:Icon>-->
+		<!--<core:Icon visible="{parts:[{path:'@com.sap.vocabularies.Offline.v1.islocal'}],formatter:'com.twobm.wmoa.util.Formatter.isLocal'}"-->
+		<!--	class="sapUiSmallMarginEnd" color="DarkRed" noTabStop="true" press="deleteMaterialsRow" size="1.5em" src="sap-icon://delete"></core:Icon>-->
 		<!--				</cells>-->
 		<!--			</ColumnListItem>-->
 		<!--		</items>-->

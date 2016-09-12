@@ -31,6 +31,8 @@ sap.ui.define([
 
 			this.getEventBus().publish("UpdateSyncState");
 
+			this.setInitialSorting();
+
 			//flush and refresh data
 			this.refresh();
 		},
@@ -280,7 +282,10 @@ sap.ui.define([
 				sap.m.MessageToast.show("Device is offline");
 			}
 		},
-
+		resetStore : function(){
+			 sap.m.MessageToast.show("Resetting store");
+			devApp.devLogon.reset();
+		},
 		closeSyncPopup: function() {
 			if (this._syncQuickView) {
 				this._syncQuickView.close();

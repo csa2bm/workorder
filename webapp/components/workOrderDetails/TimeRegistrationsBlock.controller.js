@@ -11,22 +11,7 @@ sap.ui.define([
 
 		onInit: function() {
 			this.createTimeRegistrationPopover();
-			//Create Event Handling for timeTypeErrors
-				sap.ui.getCore().attachValidationError(function (evt) {
-				var control = evt.getParameter("element");
-				if (control && control.setValueState) {
-					control.setValueState("Error");
-				}
-				var errorMessage = evt.getParameter("message");
-				MessageToast.show(errorMessage);
-			});
-			
-						sap.ui.getCore().attachValidationSuccess(function (evt) {
-				var control = evt.getParameter("element");
-				if (control && control.setValueState) {
-					control.setValueState("None");
-				}
-			});
+
 		
 		},
 
@@ -39,7 +24,17 @@ sap.ui.define([
 
 				this.getView().addDependent(this._oPopover);
 
-			sap.ui.getCore().attachValidationSuccess(function (evt) {
+						//Create Event Handling for timeTypeErrors
+			this._oPopover.attachValidationError(function (evt) {
+				var control = evt.getParameter("element");
+				if (control && control.setValueState) {
+					control.setValueState("Error");
+				}
+				var errorMessage = evt.getParameter("message");
+				MessageToast.show(errorMessage);
+			});
+			
+					this._oPopover.attachValidationSuccess(function (evt) {
 				var control = evt.getParameter("element");
 				if (control && control.setValueState) {
 					control.setValueState("None");
@@ -77,6 +72,7 @@ sap.ui.define([
 
 		closeAddTimeRegistrationPopover: function() {
 				if (this._oPopover) {
+				this.getView().getModel().refresh();	
 				this._oPopover.close();
 			}
 		},
@@ -101,11 +97,16 @@ sap.ui.define([
 			else{
 			var oTimeData = this._oPopover.getModel().getData();
 			//Fix Problem with post 00:00:00 as time on date
-			oTimeData.RegistrationDate.setHours(15);
-			delete oTimeData["deletable"];
-			delete oTimeData["type"];
+		    var registrationDate =	new Date(oTimeData.RegistrationDate.setHours(15));
+			
+			//Create Post object
+			var oTimeDataPost = JSON.parse(JSON.stringify(oTimeData));
+			delete oTimeDataPost["deletable"];
+			delete oTimeDataPost["type"];
+			//use date instead of string.
+			oTimeDataPost.RegistrationDate= registrationDate;
 			var oModel= this.getView().getModel();	
-			oModel.create("/TimeRegistrationsSet", oTimeData, {success:successCallBack,error:this.errorCallBackShowInPopUp});
+			oModel.create("/TimeRegistrationsSet", oTimeDataPost, {success:successCallBack,error:this.errorCallBackShowInPopUp});
 			}
 			
 			}

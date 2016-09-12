@@ -10,6 +10,7 @@ sap.ui.define([
 		 * @memberOf com.twobm.mobileworkorder.components.workOrderDetails.view.AttachmentsBlock
 		 */
 		onInit: function() {
+			
 
 		},
 
@@ -95,7 +96,7 @@ sap.ui.define([
 			var that = this;
 			var parameters = {
 				success: function(oData, response) {
-					
+					that.getView().byId("idOperationTable").getBinding("items").refresh();
 
 				},
 				error: that.errorCallBackShowInPopUp
@@ -135,16 +136,27 @@ sap.ui.define([
 		},
 		
 		orderStatusCompleted: function(str){
-			var orderStatus = this.getView().getBindingContext().getObject.OrderStatus;
 			
-			if(orderStatus === this.getI18nText("orderStatusCompleted")){
+			var oContext = this.getView().getBindingContext();
+			
+			var OrderStatus = this.getView().getModel().getProperty("OrderStatus", oContext);
+			
+			
+			
+			//var model = this.getView().getModel();
+			
+			//TODO
+			//return !this.readOnly(oContext, model);       
+			
+			//var orderStatus = this.getView().getBindingContext().getObject.OrderStatus;
+			
+			if(OrderStatus === this.getI18nText("orderStatusCompleted") || OrderStatus === this.getI18nText("orderStatusNotStarted")){
 				return !true;
 				
 			}
 			else{
 				return !false;
 			}
-			
 		}
 
 	});
