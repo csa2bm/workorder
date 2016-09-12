@@ -63,12 +63,14 @@
 							tooltip="Sync status"></core:Icon>
 						<BusyIndicator id="syncBusyIndicator" visible="false"/>
 						<ToolbarSpacer></ToolbarSpacer>
+
 						<!--<Button id="orderStatusChangeButton" icon="sap-icon://filter" ariaDescribedBy="acceptButtonDescription genericButtonDescription"-->
 						<!--	press="orderFilterSelectPopUp" text="My Orders" type="Emphasized">-->
 						<!--	<layoutData>-->
 						<!--		<OverflowToolbarLayoutData priority="NeverOverflow"/>-->
 						<!--	</layoutData>-->
 						<!--</Button>-->
+
 					</content>
 				</OverflowToolbar>
 			</footer>

@@ -41,9 +41,7 @@ sap.ui.define([
 		},
 		addMeasurement: function(oEvent) {
 			var currentObject = oEvent.getSource().getBindingContext().getObject();
-			
-			
-			
+			currentObject.RecordedValue = null;
 			this._oPopover.getModel("ViewModel").setData(currentObject);
 			this._oPopover.getModel("ViewModel").refresh();                         
 			
@@ -51,6 +49,32 @@ sap.ui.define([
 		},
 		closeAddMeasurement: function() {
 			this._oPopover.close();
+		},
+		
+		onSubmitMeasurement : function()
+		{
+			var that = this;
+			
+			var parameters = {
+				success: function(oData, response) {
+					that.getView().byId("idMeasuringPointTable").getBinding("items").refresh();
+					that.closeAddMeasurement();
+				},
+				error: that.errorCallBackShowInPopUp
+			};
+
+			var viewModel = this._oPopover.getModel("ViewModel").getData();
+
+			var dataCreate = {
+				Measpoint : viewModel.Measpoint,
+			    ReadingDate: new Date(),
+			//	ReadingTime: new Date(),
+				RecordedValue : viewModel.RecordedValue
+			};
+
+			var createPath = "/MeasurementDocsSet";
+
+			this.getView().getModel().create(createPath, dataCreate, parameters);	
 		},
 
 		isOrderStatusNotCompleted: function(OrderStatus) {
