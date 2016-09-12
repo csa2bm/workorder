@@ -11,22 +11,7 @@ sap.ui.define([
 
 		onInit: function() {
 			this.createTimeRegistrationPopover();
-			//Create Event Handling for timeTypeErrors
-				sap.ui.getCore().attachValidationError(function (evt) {
-				var control = evt.getParameter("element");
-				if (control && control.setValueState) {
-					control.setValueState("Error");
-				}
-				var errorMessage = evt.getParameter("message");
-				MessageToast.show(errorMessage);
-			});
-			
-						sap.ui.getCore().attachValidationSuccess(function (evt) {
-				var control = evt.getParameter("element");
-				if (control && control.setValueState) {
-					control.setValueState("None");
-				}
-			});
+
 		
 		},
 
@@ -39,7 +24,17 @@ sap.ui.define([
 
 				this.getView().addDependent(this._oPopover);
 
-			sap.ui.getCore().attachValidationSuccess(function (evt) {
+						//Create Event Handling for timeTypeErrors
+			this._oPopover.attachValidationError(function (evt) {
+				var control = evt.getParameter("element");
+				if (control && control.setValueState) {
+					control.setValueState("Error");
+				}
+				var errorMessage = evt.getParameter("message");
+				MessageToast.show(errorMessage);
+			});
+			
+					this._oPopover.attachValidationSuccess(function (evt) {
 				var control = evt.getParameter("element");
 				if (control && control.setValueState) {
 					control.setValueState("None");
