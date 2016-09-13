@@ -2,8 +2,8 @@
 	xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
 	<l:VerticalLayout class="sapUiSmallMarginEnd" width="100%">
 		<l:HorizontalLayout>
-			<Button class="sapUiSmallMarginEnd" icon="sap-icon://add" press="addMaterial" enabled="{parts:[{path:'Parent/OrderStatus'}],formatter:'.orderStatusValid'}"></Button>
-			<Button class="sapUiSmallMarginEnd" icon="sap-icon://bar-code" press="scanBarcode" enabled="{parts:[{path:'Parent/OrderStatus'}],formatter:'.orderStatusValid'}"></Button>
+			<Button class="sapUiSmallMarginEnd" icon="sap-icon://add" press="addMaterial" enabled="{parts:[{path:'OrderStatus'}],formatter:'.orderStatusValid'}"></Button>
+			<Button class="sapUiSmallMarginEnd" icon="sap-icon://bar-code" press="scanBarcode" enabled="{parts:[{path:'OrderStatus'}],formatter:'.orderStatusValid'}"></Button>
 		</l:HorizontalLayout>
 		<Table id="MaterialsSummaryList" titel="{i18n>SubSectionTitleMaterials}" templateShareable="true"
 			items="{ path: 'OrderMaterialSummary', sorter: { path: 'Matnr', descending: false}}" noDataText="{i18n>MaterialsBlockNoMaterialsAdded}">
@@ -21,11 +21,11 @@
 				<Column demandPopin="false" width="1.5em" vAlign="Middle"></Column>
 			</columns>
 			<items>
-				<ColumnListItem type="{parts:[{path:'Parent/OrderStatus'}],formatter:'.checkOrderStatusForType'}" press="goToMaterialDetailForSelectedMaterial">
+				<ColumnListItem type="{parts:[{path:'OrderStatus'}],formatter:'.checkOrderStatusForType'}" press="goToMaterialDetailForSelectedMaterial">
 					<cells>
 						<ObjectIdentifier text="{Description}" title="{Matnr}"/>
 						<ObjectIdentifier text="{Quantity} {Unit}"/>
-						<core:Icon src="{parts:[{path:'Parent/OrderStatus'}],formatter:'.showArrow'}" color="Gray"/>
+						<core:Icon src="{parts:[{path:'OrderStatus'}],formatter:'.showArrow'}" color="Gray"/>
 					</cells>
 				</ColumnListItem>
 			</items>

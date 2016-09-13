@@ -36,6 +36,10 @@ sap.ui.define([
 			var syncStatusModel = this.getView().getModel("syncStatusModel");
 			var d = new Date();
 			syncStatusModel.getData().LastSyncTime = d.toLocaleString();
+
+			if (window.sap_webide_FacadePreview) {
+				syncStatusModel.getData().Online = true; //always online in webide
+			}
 			syncStatusModel.refresh();
 
 			//Update sync state indicator
@@ -57,7 +61,7 @@ sap.ui.define([
 		handleDisconnected: function() {
 			var syncStatusModel = this.getView().getModel("syncStatusModel");
 			syncStatusModel.getData().Online = false;
-			
+
 			SyncStateHandler.handleSyncState();
 		},
 
@@ -65,7 +69,7 @@ sap.ui.define([
 			var syncStatusModel = this.getView().getModel("syncStatusModel");
 			syncStatusModel.getData().Online = true;
 			//syncStatusModel.refresh(true);
-			
+
 			SyncStateHandler.handleSyncState();
 		},
 
