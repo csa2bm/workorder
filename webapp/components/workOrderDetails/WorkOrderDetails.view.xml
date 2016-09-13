@@ -125,7 +125,7 @@
 					<m:ToolbarSpacer></m:ToolbarSpacer>
 					<m:Button id="orderStatusChangeButton" icon="sap-icon://accept" ariaDescribedBy="acceptButtonDescription genericButtonDescription"
 						press="orderStatusBtnPressed" text="{path:'OrderStatus',formatter:'.getOrderStatusBtnText'}"
-						visible="{path:'OrderStatus',formatter:'.isOrderNotCompleted'}" type="Emphasized">
+						visible="{path:'OrderStatus',formatter:'.isOrderNotCompleted'}" type="{path:'OrderStatus',formatter:'.isOrderNotCompletedType'}">
 						<m:layoutData>
 							<m:OverflowToolbarLayoutData priority="NeverOverflow"/>
 						</m:layoutData>
