@@ -135,14 +135,8 @@ sap.ui.define([
 			return !this.readOnly(oContext, model);
 		},
 		// Function that shows right arrow appear/disappear based on read-only rules
-		showArrow: function(str) {
-
-			var oContext = this.getView().getBindingContext();
-			var model = this.getView().getModel();
-
-			var isReadOnly = this.readOnly(oContext, model);
-
-			if (!isReadOnly) {
+		showArrow: function(show) {
+			if (show) {
 				return "sap-icon://slim-arrow-right";
 			} else {
 				return "";
@@ -150,13 +144,8 @@ sap.ui.define([
 
 		},
 		// Function that makes listItem Active/inactive based on read-only rules
-		checkOrderStatusForType: function() {
-			var oContext = this.getView().getBindingContext();
-			var model = this.getView().getModel();
-
-			var isReadOnly = this.readOnly(oContext, model);
-
-			if (isReadOnly) {
+		checkOrderStatusForType: function(editable) {
+			if (!editable) {
 				return "Inactive";
 			} else {
 				return "Active";

@@ -10,7 +10,9 @@ sap.ui.define([
 		 * @memberOf com.twobm.mobileworkorder.components.workOrderDetails.view.AttachmentsBlock
 		 */
 		onInit: function() {
-			
+			//Subscribe to connection events
+			var eventBus = this.getEventBus();
+			eventBus.subscribe("updateTableModel", this.updateModel, this);
 
 		},
 
@@ -128,8 +130,14 @@ sap.ui.define([
 			var model = this.getView().getModel();
 			
 			return !this.readOnly(oContext, model);
+		},
+		updateModel:function(){
+			this.getView().byId("idOperationTable").getBinding("items").refresh(true);
+			
+			//var table = this.getView().byId("idOperationTable");
+			//table.getModel().refresh();
+			
 		}
-
 	});
 
 });

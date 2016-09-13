@@ -12,25 +12,36 @@ sap.ui.define([
 			//Subscribe to connection events
 			var eventBus = this.getEventBus();
 			eventBus.subscribe("BlockNavigation", this.performNavigationForBlocks, this);
+
+			this.createEditModeModel();
 		},
+
+		createEditModeModel: function() {
+
+			var editModeModel = this.getView().getModel("EditModeModel");
+
+			if (!editModeModel) {
+				editModeModel = new sap.ui.model.json.JSONModel();
+				editModeModel.setDefaultBindingMode(sap.ui.model.BindingMode.OneWay);
+				this.getView().setModel(editModeModel, "EditModeModel");
+			}
+
+			this.clearEditModeModel();
+		},
+
+		clearEditModeModel: function() {
+
+			var editModeModel = this.getView().getModel("EditModeModel");
+
+			//Clear data
+			var data = {
+				EditMode: false
+			};
+
+			editModeModel.setData(data);
+		},
+
 		_onRouteMatched: function(oEvent) {
-			/*	var oView = this.getView();
-				
-				this.getView().bindElement({
-					path: "/" + oEvent.getParameter("arguments").workOrderContext,
-					events: {
-						change: this._onBindingChange.bind(this),
-						dataRequested: function(oEvent) {
-							oView.setBusy(true);
-						},
-						dataReceived: function(oEvent) {
-							oView.setBusy(false);
-						}
-					}
-					
-					
-				});
-				*/
 			//Are we navigating to this view??
 			//if not do nothing
 
@@ -48,6 +59,7 @@ sap.ui.define([
 				//this.oContext = givenContext;
 				this.getView().setBindingContext(givenContext);
 				this.getView().bindElement(contextPath);
+
 			}
 
 			//do we have this context loaded in our model? We should always have a timeregistration entry
@@ -55,6 +67,9 @@ sap.ui.define([
 
 				//if yes, refresh the model to reflect in memory model any changes done remotely to the order
 				this.getView().getBindingContext().getModel().refresh(); //using true as argument got strange errors to arise
+
+				//Set edit mode
+				this.updateEditModeModel(this.getView().getBindingContext().getObject().OrderStatus);
 
 				//Update lists
 				//Fix to get the lists to update after coming back to page with the same context
@@ -73,6 +88,10 @@ sap.ui.define([
 					function(oEvent) {
 						var f = oEvent;
 						that.ExpandLoaded = true;
+
+						//Set edit mode
+						var orderStatus = that.getView().getBindingContext().getObject().OrderStatus;
+						that.updateEditModeModel(orderStatus);
 
 					}, true);
 			}
@@ -183,7 +202,11 @@ sap.ui.define([
 
 			var parameters = {
 				success: function(oData, response) {
+					//var eventBus = sap.ui.getCore().getEventBus();
+					//eventBus.publish("updateTableModel");
+					var orderStatus = that.getView().getBindingContext().getObject().OrderStatus;
 
+					that.updateEditModeModel(orderStatus);
 				},
 				error: that.errorCallBackShowInPopUp
 			};
@@ -196,6 +219,20 @@ sap.ui.define([
 
 			this.getView().getModel().update(updatePath, dataUpdate, parameters);
 		},
+
+		updateEditModeModel: function(orderStatus) {
+			var orderStatusBool = false;
+			if (orderStatus === this.getI18nText("orderStatusCompleted") || orderStatus === this.getI18nText("orderStatusNotStarted")) {
+				orderStatusBool = false;
+			} else {
+				orderStatusBool = true;
+			}
+
+			var editModeModel = this.getView().getModel("EditModeModel");
+			editModeModel.getData().EditMode = orderStatusBool;
+			editModeModel.refresh();
+		},
+
 		getOrderStatusBtnText: function(sString) {
 			var btnText = this.getI18nText("orderStatusBtnTextNotStarted");
 			if (sString === this.getI18nText("orderStatusNotStarted")) {
@@ -213,7 +250,7 @@ sap.ui.define([
 			}
 			return btnText;
 		},
-		
+
 		isOrderNotCompleted: function(sString) {
 			if (sString === this.getI18nText("orderStatusCompleted")) {
 				return false;
