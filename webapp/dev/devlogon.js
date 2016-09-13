@@ -21,7 +21,7 @@ sap.ui.define([
 		doLogonInit: function(context, appId) {
 			//set offline store attribute first
 			this.appOfflineStore.appID = appId;
-			this.appOfflineStore.interval = 300000; //5 minutes
+			this.appOfflineStore.interval = 30000; //5 minutes
 
 			//Make call to Logon's Init method to get things registered and all setup
 			if (this.devapp.definedStore && this.devapp.offline) {
