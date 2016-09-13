@@ -110,19 +110,6 @@ sap.ui.define([
 		},
 
 		/**
-		 * If operationStatus is true use icon
-		 * param{Boolean} sStatus input string
-		 * @returns {String}} for SAP icon
-		 */
-		operationStatus: function(sStatus) {
-			if (sStatus) {
-				return "sap-icon://accept";
-			} else {
-				return ""; // "sap-icon://message-warning";
-			}
-		},
-
-		/**
 		 * Based on the value of operationstatus use different colors
 		 * param{Boolean} sStatus input string
 		 * @returns {String}} for SAP icon color

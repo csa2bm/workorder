@@ -304,14 +304,6 @@ sap.ui.define([
 			}
 			return true;
 		},
-		isOrderStatusNotCompleted: function(OrderStatus) {
-			if (OrderStatus === this.getI18nText("orderStatusCompleted")) {
-				return false;
-			} else {
-				return true;
-			}
-
-		},
 		orderStatusValid: function(str){
 			
 			var oContext = this.getView().getBindingContext();
