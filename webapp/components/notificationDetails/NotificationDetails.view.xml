@@ -61,6 +61,7 @@
 						<ObjectPageSubSection title="{i18n>SubSectionTitleAttachments}">
 							<blocks>
 								<blocks:AttachmentsBlock/>
+								
 							</blocks>
 						</ObjectPageSubSection>
 					</subSections>

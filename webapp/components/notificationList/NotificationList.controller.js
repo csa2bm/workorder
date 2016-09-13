@@ -360,13 +360,13 @@ sap.ui.define([
 		
 			switch (value) {
 				case "1":
-					return "black";
+					return "green";
 				case  "2":
 					return "blue";
 				case  "3":
 					return "red";
 				default:
-					return "green";
+					return "grey";
 			}
 			}
 			

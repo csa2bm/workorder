@@ -8,5 +8,9 @@
 					uploadOnChange="true" uploadComplete="onUploadComplete" class="sapUiSmallMarginEnd"/>-->
 			<Button id="cameraButton" visible="{parts:[{path:'SysStatus'}],formatter:'.isNotificationStatusNotCompleted'}" class="sapUiMediumMarginEnd" icon="sap-icon://camera" press="capturePhoto"></Button>
 		</l:HorizontalLayout>
+			<l:BlockLayoutCell width="50%" visible="true">
+								<Image id="materialImage" src="{/$value}"
+									visible="true" width="150px"/>
+							</l:BlockLayoutCell>
 	</l:VerticalLayout>
 </mvc:View>
