@@ -107,15 +107,12 @@ sap.ui.define([
 			oPage.removeAllContent();
 			oPage.insertContent(this._getFormFragment(sFragmentName));
 		},
-		
-		isOrderStatusNotCompleted: function(OrderStatus){
-			if(OrderStatus === this.getI18nText("orderStatusCompleted")){
-				return false;
-			}
-			else{
-				return true;
-			}
+		orderStatusValid: function(str){
 			
+			var oContext = this.getView().getBindingContext();
+			var model = this.getView().getModel();
+			
+			return !this.readOnly(oContext, model);
 		}
 
 	});

@@ -73,7 +73,7 @@ sap.ui.define([
 
 			this.getView().getModel().read("/OrderSet/$count", parametersOrder);
 			this.getView().getModel().read("/NotificationsSet/$count", parametersNotif);
-			
+
 		},
 
 		setNotificationModel: function(oEvent) {
@@ -113,18 +113,17 @@ sap.ui.define([
 			}
 		},
 
+		/*	onPressCreateNotification: function() {
+				if (!this._oDialog) {
+					this._oDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.notificationList.controls.CreateNotificationDialog",
+						this);
+					this.getView().addDependent(this._oDialog);
+				}
+				// toggle compact style
+				jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);
+				this._oDialog.open();
+			},*/
 
-	/*	onPressCreateNotification: function() {
-			if (!this._oDialog) {
-				this._oDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.notificationList.controls.CreateNotificationDialog",
-					this);
-				this.getView().addDependent(this._oDialog);
-			}
-			// toggle compact style
-			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);
-			this._oDialog.open();
-		},*/
-		
 		onPressCreateNotification: function() {
 
 			var oHistory = History.getInstance();
@@ -136,14 +135,11 @@ sap.ui.define([
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 				//var oRouter = this.getRouter();
 				oRouter.navTo("notificationCreate", {
-				entity: bindingPath.substr(1)
-			});
+					entity: bindingPath.substr(1)
+				});
 
 			}
-			},
-	
-	
-		
+		},
 
 		/*	onPressCreateNotification: function(oEvent){
 		
@@ -164,8 +160,6 @@ sap.ui.define([
 	
 			
 		},*/
-
-
 
 		handleSaveNotification: function(oEvent) {
 			//Handles that Finish is also changed. StartDate is handled with twoway binding
@@ -212,13 +206,13 @@ sap.ui.define([
 				self.unSubscribeToOnlineSyncEvents();
 
 				//Update syncStatusModel
-				var syncStatusModel = self.getView().getModel("syncStatusModel");
-				var d = new Date();
-				syncStatusModel.getData().LastSyncTime = d.toLocaleString();
+				// var syncStatusModel = self.getView().getModel("syncStatusModel");
+				// var d = new Date();
+				// syncStatusModel.getData().LastSyncTime = d.toLocaleString();
 
-				syncStatusModel.getData().Online = true; //always online in webide
+				// syncStatusModel.getData().Online = true; //always online in webide
 
-				syncStatusModel.refresh();
+				// syncStatusModel.refresh();
 
 				//Update sync state indicator
 				//SyncStateHandler.handleSyncState();
@@ -229,7 +223,7 @@ sap.ui.define([
 			self.setSyncIndicators(false);
 
 			//Update items in table
-			self.getView().byId("workOrderTableId").getBinding("items").refresh(true);
+			//self.getView().byId("workOrderTableId").getBinding("items").refresh(true);
 		},
 
 		syncFailed: function() {

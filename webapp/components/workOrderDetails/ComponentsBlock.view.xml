@@ -13,7 +13,7 @@
 			</Column>
 		</columns>
 		<items>
-			<ColumnListItem press="onOperationItemPress">
+			<ColumnListItem>
 				<cells>
 					<ObjectIdentifier text="{MaterialDescription}" title="{Material}"/>
 					<Text text="{ReqQuantity}"/>

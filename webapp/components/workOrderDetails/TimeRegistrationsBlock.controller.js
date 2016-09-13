@@ -126,7 +126,42 @@ sap.ui.define([
 					throw new ValidateException("'" + oValue + "' is not a valid Time Entry");
 				}
 			}
-		})
+		}),
+		orderStatusValid: function(str){
+			
+			var oContext = this.getView().getBindingContext();
+			var model = this.getView().getModel();
+			
+			return !this.readOnly(oContext, model);
+		},
+		// Function that shows right arrow appear/disappear based on read-only rules
+		showArrow: function(str) {
+
+			var oContext = this.getView().getBindingContext();
+			var model = this.getView().getModel();
+
+			var isReadOnly = this.readOnly(oContext, model);
+
+			if (!isReadOnly) {
+				return "sap-icon://slim-arrow-right";
+			} else {
+				return "";
+			}
+
+		},
+		// Function that makes listItem Active/inactive based on read-only rules
+		checkOrderStatusForType: function() {
+			var oContext = this.getView().getBindingContext();
+			var model = this.getView().getModel();
+
+			var isReadOnly = this.readOnly(oContext, model);
+
+			if (isReadOnly) {
+				return "Inactive";
+			} else {
+				return "Active";
+			}
+		}
 
  
 		

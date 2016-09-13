@@ -6,7 +6,7 @@
 			<!--class="rightAlign"-->
 			<!--<custom:CustomFileUploader id="customFileUploader" visible="false" icon="sap-icon://add" iconOnly="true" buttonOnly="true"
 					uploadOnChange="true" uploadComplete="onUploadComplete" class="sapUiSmallMarginEnd"/>-->
-			<Button id="cameraButton" visible="{parts:[{path:'OrderStatus'}],formatter:'.isOrderStatusNotCompleted'}" class="sapUiMediumMarginEnd" icon="sap-icon://camera" press="capturePhoto"></Button>
+			<Button id="cameraButton" visible="{parts:[{path:'OrderStatus'}],formatter:'.orderStatusValid'}" class="sapUiMediumMarginEnd" icon="sap-icon://camera" press="capturePhoto"></Button>
 		</l:HorizontalLayout>
 	</l:VerticalLayout>
 </mvc:View>
