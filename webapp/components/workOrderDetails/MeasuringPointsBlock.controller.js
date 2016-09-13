@@ -42,6 +42,7 @@ sap.ui.define([
 		addMeasurement: function(oEvent) {
 			var currentObject = oEvent.getSource().getBindingContext().getObject();
 			currentObject.RecordedValue = null;
+			currentObject.Path = oEvent.getSource().getBindingContext().getPath();
 			this._oPopover.getModel("ViewModel").setData(currentObject);
 			this._oPopover.getModel("ViewModel").refresh();                         
 			
@@ -54,16 +55,24 @@ sap.ui.define([
 		onSubmitMeasurement : function()
 		{
 			var that = this;
+			var viewModel = this._oPopover.getModel("ViewModel").getData();
 			
 			var parameters = {
 				success: function(oData, response) {
-					that.getView().byId("idMeasuringPointTable").getBinding("items").refresh();
+					
+					if (window.cordova && !window.sap_webide_FacadePreview && !window.sap_webide_companion) 
+					{
+						that.updateLocalMeasurementPoint(viewModel);
+					}
+					else
+					{
+						that.getView().byId("idMeasuringPointTable").getBinding("items").refresh();	
+					}
+					
 					that.closeAddMeasurement();
 				},
 				error: that.errorCallBackShowInPopUp
 			};
-
-			var viewModel = this._oPopover.getModel("ViewModel").getData();
 
 			var dataCreate = {
 				Measpoint : viewModel.Measpoint,
@@ -76,6 +85,24 @@ sap.ui.define([
 
 			this.getView().getModel().create(createPath, dataCreate, parameters);	
 		},
+		updateLocalMeasurementPoint : function(viewModel)
+		{
+			var that = this;
+			var parameters = {
+				success: function(oData, response) {
+					that.getView().byId("idMeasuringPointTable").getBinding("items").refresh();
+				},
+				error: that.errorCallBackShowInPopUp
+			};
+
+			var dataUpdate = {
+				LastReadingBy : "Lau Lautrup",
+				LastReading : viewModel.RecordedValue
+			};
+
+			this.getView().getModel().update(viewModel.Path, dataUpdate, parameters);
+		},
+		
 		orderStatusValid: function(str){
 			
 			var oContext = this.getView().getBindingContext();

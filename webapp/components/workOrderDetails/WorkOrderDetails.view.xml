@@ -63,6 +63,15 @@
 						</ObjectPageSubSection>
 					</subSections>
 				</ObjectPageSection>
+				<ObjectPageSection title="{i18n>SubSectionTitleComponents}">
+					<subSections>
+						<ObjectPageSubSection title="{i18n>SubSectionTitleComponents}">
+							<blocks>
+								<blocks:ComponentsBlock/>
+							</blocks>
+						</ObjectPageSubSection>
+					</subSections>
+				</ObjectPageSection>
 				<ObjectPageSection title="{i18n>SubSectionTitleOperations}">
 					<subSections>
 						<ObjectPageSubSection title="{i18n>SubSectionTitleOperations}">
@@ -77,15 +86,6 @@
 						<ObjectPageSubSection title="{i18n>SubSectionTitleMesuringPoints}">
 							<blocks>
 								<blocks:MeasuringPointsBlock/>
-							</blocks>
-						</ObjectPageSubSection>
-					</subSections>
-				</ObjectPageSection>
-				<ObjectPageSection title="{i18n>SubSectionTitleComponents}">
-					<subSections>
-						<ObjectPageSubSection title="{i18n>SubSectionTitleComponents}">
-							<blocks>
-								<blocks:ComponentsBlock/>
 							</blocks>
 						</ObjectPageSubSection>
 					</subSections>
