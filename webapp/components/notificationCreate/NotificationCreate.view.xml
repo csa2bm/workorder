@@ -9,9 +9,9 @@
 				labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
 				<layout:content>
 					<Label text="{i18n>type}"></Label>
-					<Select id="type" value="{NotifType}" items="{NotificationCreateModel>/type}" class="pos_input">
+					<Select id="type" value="{NotifType}" items="{NotificationDropdownsModel>/type}" class="pos_input">
 						<items>
-							<core:Item key="{NotificationCreateModel>typeKey}" text="{NotificationCreateModel>typeValue}"></core:Item>
+							<core:Item key="{NotificationDropdownsModel>typeKey}" text="{NotificationDropdownsModel>typeValue}"></core:Item>
 						</items>
 					</Select>
 					<Label text="{i18n>shortDescription}"></Label>
@@ -20,17 +20,17 @@
 					<TextArea id="remark" liveChange="onContactInputFieldChanged" value="{LongText}" suggestionItemSelected="onContactSuggestItemSelected"
 						valueHelpRequest="showContactF4" valueHelpOnly="false" showValueHelp="true"></TextArea>
 					<Label text="{i18n>priority}"></Label>
-					<Select id="priority" value="{Priority}" items="{NotificationCreateModel>/priority}" class="pos_input">
+					<Select id="priority" value="{Priority}" items="{NotificationDropdownsModel>/priority}" class="pos_input">
 						<items>
-							<core:Item key="{NotificationCreateModel>priorityKey}" text="{NotificationCreateModel>priorityValue}"></core:Item>
+							<core:Item key="{NotificationDropdownsModel>priorityKey}" text="{NotificationDropdownsModel>priorityValue}"> </core:Item>
 						</items>
 					</Select>
 					<Label text="{i18n>endDate}"></Label>
-					<DatePicker id="endDate"></DatePicker>
+					<DatePicker id="endDate" value="{NotifDate}">  </DatePicker>
 				</layout:content>
 			</layout:form.SimpleForm>
 			<!-- Object -->
-			<layout:form.SimpleForm minWidth="1024" title="{i18n>objects}" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
+			<layout:form.SimpleForm minWidth="1024" title="{i18n>locations}" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
 				labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
 				<layout:content>
 					<Label text="{i18n>functionalLocation}"></Label>

@@ -10,6 +10,7 @@ sap.ui.define([
 		 * @memberOf com.twobm.mobileworkorder.components.workOrderDetails.view.AttachmentsBlock
 		 */
 		onInit: function() {
+			
 
 		},
 
@@ -109,19 +110,6 @@ sap.ui.define([
 		},
 
 		/**
-		 * If operationStatus is true use icon
-		 * param{Boolean} sStatus input string
-		 * @returns {String}} for SAP icon
-		 */
-		operationStatus: function(sStatus) {
-			if (sStatus) {
-				return "sap-icon://accept";
-			} else {
-				return ""; // "sap-icon://message-warning";
-			}
-		},
-
-		/**
 		 * Based on the value of operationstatus use different colors
 		 * param{Boolean} sStatus input string
 		 * @returns {String}} for SAP icon color
@@ -134,17 +122,12 @@ sap.ui.define([
 			}
 		},
 		
-		orderStatusCompleted: function(str){
-			var orderStatus = this.getView().getBindingContext().getObject.OrderStatus;
+		orderStatusValid: function(str){
 			
-			if(orderStatus === this.getI18nText("orderStatusCompleted")){
-				return !true;
-				
-			}
-			else{
-				return !false;
-			}
+			var oContext = this.getView().getBindingContext();
+			var model = this.getView().getModel();
 			
+			return !this.readOnly(oContext, model);
 		}
 
 	});

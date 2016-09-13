@@ -2,8 +2,9 @@ sap.ui.define([
 	"com/twobm/mobileworkorder/util/Controller",
 	"com/twobm/mobileworkorder/dev/devapp",
 	"com/twobm/mobileworkorder/util/Globalization",
-	"sap/ui/core/routing/History"
-], function(Controller, devApp, Globalization, History) {
+	"sap/ui/core/routing/History",
+	"sap/m/MessageBox"
+], function(Controller, devApp, Globalization, History, MessageBox) {
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.notificationCreate.NotificationCreate", {
@@ -14,8 +15,9 @@ sap.ui.define([
 			this.createAttachmentViewerPopover();
 			
 			
-			//	this.setNotificationModel(this);
-			this.NotificationCreateModel = new sap.ui.model.json.JSONModel({
+			//	Notification popUps
+			this.NotificationDropdownsModel = new sap.ui.model.json.JSONModel({
+
 				type: [{
 					typeKey: 1 ,
 					typeValue: ""
@@ -34,22 +36,79 @@ sap.ui.define([
 					priorityValue: "High"
 				}]
 			});
-			this.getView().setModel(this.NotificationCreateModel, "NotificationCreateModel");
+			
+			this.getView().setModel(this.NotificationDropdownsModel, "NotificationDropdownsModel");
 		},
 
 		onRouteMatched: function(oEvent) {
-			var sName = oEvent.getParameter("name");
+		var oParameters = oEvent.getParameters();
+		
+		/*	var parametersNotif = {
+				success: function(oData, oResponse) {
 
-			//Is it this page we have navigated to?
-			if (sName !== "notificationCreate") {
-				//We navigated to another page
-				return;
-			}
+					self.DashBoardModel.getData().notificationCount = oData;
+					self.DashBoardModel.refresh();
+
+				},
+				error: this.errorCallBackShowInPopUp
+			};
+
+		
+			this.getView().getModel().read("/NotificationsSet/$metadata", parametersNotif);*/
+
+			jQuery.when(this.oInitialLoadFinishedDeferred).then(jQuery.proxy(function() {
+				var oView = this.getView();
+
+				// when detail navigation occurs, update the binding context
+				if (oParameters.name !== "notificationCreate") {
+					return;
+				}
+			
+		//	var oArguments = oEvent.getParameter("arguments");
+		//	var contextPath = '/' + oArguments.workOrderContext;
+			
+				//var sEntityPath = "/" + oParameters.arguments.entity;
+		
+				var sEntityPath = "/NotificationsSet";
+
+			//	if (oParameters.arguments.tab === "AddItem") {
+					var model = this.getView().getModel();
+				//	var newEntry = model.createEntry(sEntityPath);
+				var newEntry = model.createEntry(sEntityPath);
+					
+					model.newEntryContext = newEntry;
+					//clean bounded data object
+					oView.unbindObject();
+					//now set new binding context
+					oView.setBindingContext(newEntry);
+			/*	} else {
+					this.switchMode(this._sMode);
+					this.bindView(sEntityPath);
+
+					var oIconTabBar = sap.ui.core.Fragment.byId(this._fragmentName, "idIconTabBar");
+					if (oIconTabBar) {
+						oIconTabBar.getItems().forEach(function(oItem) {
+							oItem.bindElement(Formatter.uppercaseFirstChar(oItem.getKey()));
+						});
+
+						// Which tab?
+						var sTabKey = oParameters.arguments.tab;
+						this.getEventBus().publish("Detail", "TabChanged", {
+							sTabKey: sTabKey
+						});
+
+						if (oIconTabBar.getSelectedKey() !== sTabKey) {
+							oIconTabBar.setSelectedKey(sTabKey);
+						}
+					}
+				}*/
+			}, this));
 		},
 
 		goBack: function(oEvent) {
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
+			this.getView().setBindingContext(null);
 
 			if (sPreviousHash !== undefined) {
 				window.history.go(-1);
@@ -59,9 +118,44 @@ sap.ui.define([
 			}
 		},
 		
-		handleSaveNotification : function(){
 
-			this.goBack();
+		/**
+		 * detai view save button handler
+		 */
+		handleSaveNotification: function() {
+			var model = this.getView().getModel();
+			//if (model.hasPendingChanges() || model.newEntryContext) {
+					if ( model.newEntryContext) {
+				this.getView().setBusy(true);
+
+				model.submitChanges(
+					jQuery.proxy(function(oData, oResponse) {
+						this.getView().setBusy(false);
+						this.openDialog("i18n>saveSuccess");
+						this.switchMode("read");
+						if (oResponse && oResponse.statusCode === 201) { // 201 == Created
+						/*	if (oData && oData.__metadata && oData.__metadata.id) {
+								var idx = oData.__metadata.id.lastIndexOf("/");
+								var bindingPath = oData.__metadata.id.substring(idx);
+								this.getRouter().navTo("detail", {
+									entity: bindingPath.substr(1)
+								}, true);
+							}*/
+								this.goBack();
+						}
+					}, this),
+					jQuery.proxy(function(error) {
+						this.getView().setBusy(false);
+						//this.openDialog("i18n>saveFailed");
+						var msg = error;
+						if (typeof(error) === "object" && error.response && error.response.body) {
+							msg = error.response.body;
+						}
+						this._showServiceError(msg);
+					}, this)
+				);
+						this.goBack();
+			}
 		},
 		
 		imageDataToUrl: function(imageData) {
@@ -268,12 +362,12 @@ sap.ui.define([
 
 			var parameters = {
 				success: function(oData, response) {
-					var X = 0;
+					//var X = 0;
 					self.getView().byId("attachmentsList").getBinding("items").refresh(true);
 
 				},
 				error: function(oError) {
-					var X = 0;
+				//	var X = 0;
 				}
 			};
 
@@ -321,6 +415,22 @@ sap.ui.define([
 				return false;
 			}
 			return true;
+		},
+		/**
+		 * Shows a {@link sap.m.MessageBox} when a service call has failed.
+		 * Only the first error message will be display.
+		 * @param {string} sDetails a technical error to be displayed on request
+		 * @private
+		 */
+		_showServiceError: function(sDetails) {
+			MessageBox.error(
+				this._sErrorText, {
+					id: "serviceErrorMessageBox",
+					details: sDetails,
+					styleClass: this.getOwnerComponent().getContentDensityClass(),
+					actions: [MessageBox.Action.CLOSE]
+				}
+			);
 		}
 	});
 });

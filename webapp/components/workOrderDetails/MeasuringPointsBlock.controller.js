@@ -76,13 +76,12 @@ sap.ui.define([
 
 			this.getView().getModel().create(createPath, dataCreate, parameters);	
 		},
-
-		isOrderStatusNotCompleted: function(OrderStatus) {
-			if (OrderStatus === this.getI18nText("orderStatusCompleted")) {
-				return false;
-			} else {
-				return true;
-			}
+		orderStatusValid: function(str){
+			
+			var oContext = this.getView().getBindingContext();
+			var model = this.getView().getModel();
+			
+			return !this.readOnly(oContext, model);
 		}
 
 		/**

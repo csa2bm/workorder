@@ -34,9 +34,9 @@
 			<Label text="{i18n>GeneralBlockColumnInformationLabelOrderStatus}"/>
 			<Text text="{SysStatus}"/>
 				<Label text="{i18n>GeneralBlockColumnDateAndTimeLabelStart}"/>
-			<Text text="{path: 'Strmlfndate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'medium' }}"/>
+			<Text text="{path: 'RequiredStartDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'medium' }}"/>
 			<Label text="{i18n>GeneralBlockColumnDateAndTimeLabelEnd}"/>
-			<Text text="{path: 'Endmlfndate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'medium' }}"/>
+			<Text text="{path: 'RequiredEndDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'medium' }}"/>
 			<!--Column Time and Place-->
 			<core:Title text="{i18n>GeneralBlockColumnTimePlace}"/>
 		
