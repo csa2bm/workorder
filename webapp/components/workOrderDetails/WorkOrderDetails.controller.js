@@ -258,6 +258,15 @@ sap.ui.define([
 				return true;
 			}
 		},
+		
+		isOrderNotCompletedType: function(sString) {
+			if (sString === this.getI18nText("orderStatusNotStarted")) {
+				return "Emphasized";
+			} else {
+				return "Accept";
+			}
+		},
+		
 
 		performNavigationForBlocks: function(a, b, data) {
 

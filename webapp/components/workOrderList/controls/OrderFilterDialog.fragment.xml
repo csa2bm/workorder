@@ -2,7 +2,10 @@
 	<ViewSettingsDialog title="Sort orders" confirm="handleOrderFilterConfirm">
 		<sortItems text="f" title="js">
 			<ViewSettingsItem text="Start Date" key="StartDate" selected="true"/>
-			<ViewSettingsItem text="ShortText" key="ShortText"/>
+			<ViewSettingsItem text="Short Text" key="ShortText"/>
+			<ViewSettingsItem text="Functional Location" key="Funcldescr"/>
+			<ViewSettingsItem text="Equipment" key="Equidescr"/>
+			
 			<!--<ViewSettingsItem text="Priority" key="Priority" />
 			<ViewSettingsItem text="Status" key="HerdStatus" />
 			<ViewSettingsItem text="Ordertype" key="Ordertype" />
@@ -12,7 +15,8 @@
 		</sortItems>
 		<groupItems>
 			<ViewSettingsItem text="Start Date" key="StartDate"/>
-			<ViewSettingsItem text="Ordertype" key="Ordertype"/>
+			<ViewSettingsItem text="Functional Location" key="Funcldescr"/>
+			<ViewSettingsItem text="Equipment" key="Equidescr"/>
 		</groupItems>
 	</ViewSettingsDialog>
 </core:FragmentDefinition>

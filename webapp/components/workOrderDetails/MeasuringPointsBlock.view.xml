@@ -4,7 +4,7 @@
 	<Table id="idMeasuringPointTable" items="{ path: 'OrderMeasPoint', sorter: { path: 'Measpos', descending: false}}"
 		noDataText="{i18n>EquipmentBlockNoEquipmentAdded}">
 		<columns>
-			<Column>
+			<Column minScreenWidth="Tablet">
 				<Text text="{i18n>MeasuringPointsBlockColoumEquipment}"/>
 			</Column>
 			<Column>
