@@ -72,12 +72,12 @@ sap.ui.define([
 
 		closeAddTimeRegistrationPopover: function() {
 				if (this._oPopover) {
-				this.getView().getModel().refresh();	
+				//this.getView().getModel().refresh();	
 				this._oPopover.close();
 			}
 		},
 		deleteTimeRegistration: function(oEvent){
-			var successCallBack = (function(){this.closeAddTimeRegistrationPopover();}).bind(this);
+			var successCallBack = (function(){this.closeAddTimeRegistrationPopover();this.getView().getModel().refresh();}).bind(this);
 			var	sbindingContextPath = oEvent.getSource().getBindingContext().getPath();
 			var oModel = oEvent.getSource().getModel();
 			oModel.remove(sbindingContextPath,{success:successCallBack,error:this.errorCallBackShowInPopUp});
@@ -89,7 +89,7 @@ sap.ui.define([
 			//Check to see if time entry validated properly
 			if (workTimeField.getValueState()!=="Error") {
 				
-			var successCallBack = (function(){this.closeAddTimeRegistrationPopover();}).bind(this);
+			var successCallBack = (function(){this.closeAddTimeRegistrationPopover();this.getView().getModel().refresh();}).bind(this);
 			//Check to see if the time registration is create or update
 			if(oEvent.getSource().getModel().getProperty("/deletable")===undefined){
 				oEvent.getSource().getModel().submitChanges({success:successCallBack,error:this.errorCallBackShowInPopUp});

@@ -16,6 +16,19 @@
 								<Label text="{i18n>NotificationListColumnDateHeaderLabel}"/>
 							</header>
 						</Column>
+						
+				
+						
+						<Column width="4em">
+							<header>
+								<Label text="{i18n>NotificationListColumnPriorityHeaderLabel}"/>
+							</header>
+						</Column>
+							<Column width="6em">
+							<header>
+								<Label text="{i18n>NotificationListColumnTypeHeaderLabel}"/>
+							</header>
+						</Column>
 						<Column>
 							<header>
 								<Label text="{i18n>NotificationListColumnNotificationHeaderLabel}"/>
@@ -40,11 +53,15 @@
 								<Label design="Bold" maxLines="1" text="asjhd ajkhd ajkhsd jkahd kjahds jkas djahs dkjas djkahs dkjah djkahs jd" />
 								<Label design="" maxLines="1" text="asjhd ajkhd ajkhsd jkahd kjahds jkas djahs dkjas djkahs dkjah djkahs jd" class="sapUiTinyMarginTop" />
 								</VBox>-->
-								<ObjectIdentifier text="{path: 'NotifDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"
-									title="{path: 'StartDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"/>
+								<ObjectIdentifier text="{path: 'RequiredEndDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"
+									title="{path: 'NotifDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"/>
+								
+								<core:Icon text="{NotifType}" src="sap-icon://flag" color="{parts:[{path:'Priority'}],formatter:'.priorityValueConvert'}"
+								class="size1"/>
+									<ObjectIdentifier text="{NotifType}" title="{SysStatus}"/>
 								<ObjectIdentifier text="{NotifNo}" title="{ShortText}"/>
-								<ObjectIdentifier text="{FunctionalLoc}" title="{Funcldescr}"/>
-								<ObjectIdentifier text="{Equipment}" title="{Equidescr}"/>
+								<ObjectIdentifier text="{FunctionalLoc}" title="{FuncLocDesc}"/>
+								<ObjectIdentifier text="{Equipment}" title="{EquipmentDesc}"/>
 								<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 							</cells>
 						</ColumnListItem>
