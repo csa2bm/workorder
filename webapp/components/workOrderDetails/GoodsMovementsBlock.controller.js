@@ -635,19 +635,17 @@ sap.ui.define([
 
 		},
 		// Function that makes listItem Active/inactive based on read-only rules
-		checkOrderStatusForType: function(){
+		checkOrderStatusForType: function() {
 			var oContext = this.getView().getBindingContext();
 			var model = this.getView().getModel();
 
 			var isReadOnly = this.readOnly(oContext, model);
-			
-			if(isReadOnly){
-				return "Inactive"; 
-			}
-			else{
+
+			if (isReadOnly) {
+				return "Inactive";
+			} else {
 				return "Active";
 			}
 		}
-
 	});
 });
