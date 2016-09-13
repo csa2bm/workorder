@@ -116,8 +116,6 @@ sap.ui.define([
 		refresh: function() {
 			//Subscribe to sync events
 			if (window.sap_webide_FacadePreview) {
-				//model.attachRequestCompleted(this.syncCompleted);
-				//model.attachRequestFailed(this.syncFailed);
 				this.subscribeToOnlineSyncEvents();
 			} else {
 				//When not in webide 
@@ -144,15 +142,6 @@ sap.ui.define([
 		syncCompleted: function() {
 			if (window.sap_webide_FacadePreview) {
 				self.unSubscribeToOnlineSyncEvents();
-
-				//Update syncStatusModel
-				var syncStatusModel = self.getView().getModel("syncStatusModel");
-				var d = new Date();
-				syncStatusModel.getData().LastSyncTime = d.toLocaleString();
-
-				syncStatusModel.getData().Online = true; //always online in webide
-
-				syncStatusModel.refresh();
 
 				//Update sync state indicator
 				//SyncStateHandler.handleSyncState();
@@ -325,6 +314,28 @@ sap.ui.define([
 			} else {
 				return "grey";
 			}
+		},
+		
+			getOrderStatusIcon: function(orderStatus) {
+		
+			if (orderStatus === this.getI18nText("orderStatusNotStarted")) {
+					return "sap-icon://system-exit-2";
+			} else if (orderStatus === this.getI18nText("orderStatusInProgress")) {
+					return "sap-icon://system-exit-2";
+			}
+			
+				return "sap-icon://system-exit-2";
+		},
+
+		getOrderStatusIconColor: function(orderStatus) {
+					if (orderStatus === this.getI18nText("orderStatusNotStarted")) {
+					return "#DBDBDB";
+			} else if (orderStatus === this.getI18nText("orderStatusInProgress")) {
+					return "#3AACF2";
+			} else if (orderStatus === this.getI18nText("orderStatusCompleted")) {
+				return "#30D130";
+			}
+			
 		},
 
 		// getNetworkConnectionStatusColor: function(connection) {

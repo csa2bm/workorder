@@ -21,11 +21,11 @@
 				<Column demandPopin="false" width="1.5em" vAlign="Middle"></Column>
 			</columns>
 			<items>
-				<ColumnListItem type="{parts:[{path:'OrderStatus'}],formatter:'.checkOrderStatusForType'}" press="goToMaterialDetailForSelectedMaterial">
+				<ColumnListItem type="{parts:[{path:'EditModeModel>/EditMode'}],formatter:'.checkOrderStatusForType'}" press="goToMaterialDetailForSelectedMaterial">
 					<cells>
 						<ObjectIdentifier text="{Description}" title="{Matnr}"/>
 						<ObjectIdentifier text="{Quantity} {Unit}"/>
-						<core:Icon src="{parts:[{path:'OrderStatus'}],formatter:'.showArrow'}" color="Gray"/>
+						<core:Icon src="{parts:[{path:'EditModeModel>/EditMode'}],formatter:'.showArrow'}" color="Gray"/>
 					</cells>
 				</ColumnListItem>
 			</items>

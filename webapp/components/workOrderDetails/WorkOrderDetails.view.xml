@@ -38,7 +38,7 @@
 			<sections>
 				<ObjectPageSection title="{i18n>SubSectionTitleGeneral}">
 					<subSections>
-						<ObjectPageSubSection title="{i18n>SubSectionTitleGeneral}">
+						<ObjectPageSubSection id="generalSubSection" title="{i18n>SubSectionTitleGeneral}">
 							<blocks>
 								<blocks:GeneralBlock/>
 							</blocks>
@@ -63,6 +63,15 @@
 						</ObjectPageSubSection>
 					</subSections>
 				</ObjectPageSection>
+				<ObjectPageSection title="{i18n>SubSectionTitleComponents}">
+					<subSections>
+						<ObjectPageSubSection title="{i18n>SubSectionTitleComponents}">
+							<blocks>
+								<blocks:ComponentsBlock/>
+							</blocks>
+						</ObjectPageSubSection>
+					</subSections>
+				</ObjectPageSection>
 				<ObjectPageSection title="{i18n>SubSectionTitleOperations}">
 					<subSections>
 						<ObjectPageSubSection title="{i18n>SubSectionTitleOperations}">
@@ -77,15 +86,6 @@
 						<ObjectPageSubSection title="{i18n>SubSectionTitleMesuringPoints}">
 							<blocks>
 								<blocks:MeasuringPointsBlock/>
-							</blocks>
-						</ObjectPageSubSection>
-					</subSections>
-				</ObjectPageSection>
-				<ObjectPageSection title="{i18n>SubSectionTitleComponents}">
-					<subSections>
-						<ObjectPageSubSection title="{i18n>SubSectionTitleComponents}">
-							<blocks>
-								<blocks:ComponentsBlock/>
 							</blocks>
 						</ObjectPageSubSection>
 					</subSections>
@@ -125,7 +125,7 @@
 					<m:ToolbarSpacer></m:ToolbarSpacer>
 					<m:Button id="orderStatusChangeButton" icon="sap-icon://accept" ariaDescribedBy="acceptButtonDescription genericButtonDescription"
 						press="orderStatusBtnPressed" text="{path:'OrderStatus',formatter:'.getOrderStatusBtnText'}"
-						visible="{path:'OrderStatus',formatter:'.isOrderNotCompleted'}" type="Emphasized">
+						visible="{path:'OrderStatus',formatter:'.isOrderNotCompleted'}" type="{path:'OrderStatus',formatter:'.isOrderNotCompletedType'}">
 						<m:layoutData>
 							<m:OverflowToolbarLayoutData priority="NeverOverflow"/>
 						</m:layoutData>

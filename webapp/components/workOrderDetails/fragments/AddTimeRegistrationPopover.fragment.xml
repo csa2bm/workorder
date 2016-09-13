@@ -1,7 +1,7 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
 	<Dialog title="Time Registration" class="sapUiPopupWithPadding" stretch="{device>/isPhone}" showHeader="true" showCloseButton="true">
 		<beginButton>
-			<Button icon="sap-icon://add" type="Emphasized" text="{i18n>TimeRegistrationPopUpButtonCreate}" press="postTimeRegistration"></Button>
+			<Button type="Emphasized" text="{i18n>TimeRegistrationPopUpButtonCreate}" press="postTimeRegistration"></Button>
 		</beginButton>
 		<endButton>
 			<Button text="{i18n>TimeRegistrationPopUpButtonClose}" press="closeAddTimeRegistrationPopover"/>

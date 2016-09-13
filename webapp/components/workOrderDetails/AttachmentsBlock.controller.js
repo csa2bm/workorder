@@ -246,7 +246,7 @@ sap.ui.define([
 			var image = this._oPopover.getModel("ImageModel").getData().ImagePath;
 			var attachmentId = this._oPopover.getModel("ImageModel").getData().AttachmentID;
 			var orderNo = this._oPopover.getModel("ImageModel").getData().OrderNo;
-			var localObjectUri = this._oPopover.getModel("ImageModel").getData().LocalObjectUri
+			var localObjectUri = this._oPopover.getModel("ImageModel").getData().LocalObjectUri;
 
 			var parameters = {
 				success: function(oData, response) {

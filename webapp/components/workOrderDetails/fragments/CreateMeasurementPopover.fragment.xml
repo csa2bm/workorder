@@ -1,11 +1,11 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
-	<Dialog class="sapUiPopupWithPadding" stretch="false" showHeader="false" showCloseButton="true">
+	<Dialog title="Take Measurement" class="sapUiPopupWithPadding" stretch="false" showHeader="true" showCloseButton="true">
 		<beginButton>
-			<Button text="Cancel" press="closeAddMeasurement"/>
+			<Button  type="Emphasized" text="Submit" press="onSubmitMeasurement"></Button>
 		</beginButton>
 
 		<endButton>
-			<Button  type="Emphasized" text="Submit" press="onSubmitMeasurement"></Button>
+			<Button text="Close" press="closeAddMeasurement"/>
 		</endButton>
 		<buttons></buttons>
 		<content>
@@ -13,7 +13,7 @@
 				<!--class="sapUiSmallMargin"-->
 				<!--<Label text="Select new work date" labelFor="DP3"/>-->
 				<Label text="Measuring Point" design="Bold" class="sapUiTinyMarginBottom"/>
-				<Label text="{ViewModel>/Measpoint}" class="sapUiSmallMarginBottom" />
+				<Label text="{ViewModel>/Descriptn}" class="sapUiSmallMarginBottom" />
 				<Label text="Enter reading" design="Bold" class="sapUiTinyMarginBottom"/>
 				<HBox alignItems="Center">
 				<Input type="Text" width="16em" value="{ViewModel>/RecordedValue}" />

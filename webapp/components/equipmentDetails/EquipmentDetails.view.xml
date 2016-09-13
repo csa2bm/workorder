@@ -63,5 +63,19 @@ height="100%">
 				</ObjectPageSection>
 				</sections>
 			</ObjectPageLayout>
+				<m:footer>
+			<m:OverflowToolbar>
+				<m:content>
+					<m:ToolbarSpacer></m:ToolbarSpacer>
+					<m:Button id="createNotification" 
+						press="onPressCreateNotification" text="Create Notification"
+						 type="Emphasized">
+						<m:layoutData>
+							<m:OverflowToolbarLayoutData priority="NeverOverflow"/>
+						</m:layoutData>
+					</m:Button>
+				</m:content>
+			</m:OverflowToolbar>
+		</m:footer>
 		</m:Page>
 	</core:View>

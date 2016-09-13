@@ -2,35 +2,27 @@
 	xmlns:l="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns:vbm="sap.ui.vbm" xmlns="sap.m">
 	<Table id="idProductsTable" items="{ObjectMeasurementPoint}" noDataText="{i18n>EquipmentBlockNoEquipmentAdded}">
 		<columns>
-		
+					<Column>
+				<Text text="{i18n>MeasuringPointsBlockColoumEquipment}"/>
+			</Column>
 			<Column>
 				<Text text="{i18n>MeasuringPointsBlockColoumMeasuringPoint}"/>
 			</Column>
 			<Column>
 				<Text text="{i18n>MeasuringPointsBlockColoumPreviousReading}"/>
 			</Column>
-			<Column>
-				<Text text="{i18n>MeasuringPointsBlockColoumReading}"/>
-			</Column>
-
-				<Column width="5em" vAlign="Middle"></Column>
+			<Column width="5em" vAlign="Middle"></Column>
 			<Column width="1.5em" vAlign="Middle"></Column>
 		</columns>
 		<items>
 			<ColumnListItem type="Active" press="onEquipmentItemPress">
 				<cells>
-					<!--
-					<ObjectIdentifier text="{Funcldescr}" title="{FunclocDisp}"/>
-					<ObjectIdentifier text="{ShortText}" title="{Equipment}"/>
+				<ObjectIdentifier text="WV Golf 1.6 diesel" title="10000000"/>
+					<ObjectIdentifier text="{Descriptn}" title="{Measpoint}"/>
+					<ObjectIdentifier text="{LastReading}" title="{LastReadingBy}"/>
+					<Button id="readingButton" enabled="{parts:[{path:'OrderStatus'}],formatter:'.orderStatusValid'}" class="sapUiMediumMarginEnd"
+						icon="sap-icon://measure" press="addMeasurement"></Button>
 					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
-					-->
-					
-				
-					<ObjectIdentifier text="{Descriptn}" title="{Measpos}"/>
-					<ObjectIdentifier text="{Counter}" title="{MeasUnit}"/>
-					<ObjectIdentifier text="-" title="{MeasUnit}"/>
-						<Button id="readingButton" class="sapUiMediumMarginEnd" icon="sap-icon://measure" press="addMeasurement"></Button>
-						<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 				</cells>
 			</ColumnListItem>
 		</items>

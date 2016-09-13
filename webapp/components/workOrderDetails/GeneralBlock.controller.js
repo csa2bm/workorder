@@ -40,7 +40,17 @@ sap.ui.define([
 		//	onExit: function() {
 		//
 		//	}
-
+,
+			getOrderStatusIconColor: function(orderStatus) {
+				if (orderStatus === this.getI18nText("orderStatusNotStarted")) {
+					return "#DBDBDB";
+			} else if (orderStatus === this.getI18nText("orderStatusInProgress")) {
+					return "#3AACF2";
+			} else if (orderStatus === this.getI18nText("orderStatusCompleted")) {
+				return "#30D130";
+			}
+			
+		}
 	});
 
 });

@@ -76,8 +76,8 @@
 					<Toolbar>
 						<content>
 							<ToolbarSpacer></ToolbarSpacer>
-							<Button icon="sap-icon://save" ariaDescribedBy="acceptButtonDescription genericButtonDescription" press="issueMaterial"
-								text="{i18n>MaterialIssueDialogSave}" type="Accept"></Button>
+							<Button ariaDescribedBy="acceptButtonDescription genericButtonDescription" press="issueMaterial"
+								text="Emphasized" type="Emphasized"></Button>
 							<Button ariaDescribedBy="genericButtonDescription" press="closeAddMaterial" text="{i18n>MaterialIssueDialogClose}"></Button>
 						</content>
 					</Toolbar>
