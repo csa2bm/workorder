@@ -566,21 +566,14 @@ sap.ui.define([
 		},
 
 		goToMaterialDetailForSelectedMaterial: function(oEvent) {
+			var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
+			materialDetailsModel.getData().OrderNumber = oEvent.getSource().getBindingContext().getObject().Orderid;
+			materialDetailsModel.refresh();
 
-			var oContext = this.getView().getBindingContext();
-			var model = this.getView().getModel();
+			var selectedItem = oEvent.getSource().getBindingContext().getObject();
 
-			var isReadOnly = this.readOnly(oContext, model);
+			this.searchForMaterial(selectedItem.Matnr);
 
-			if (!isReadOnly) {
-				var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
-				materialDetailsModel.getData().OrderNumber = oEvent.getSource().getBindingContext().getObject().Orderid;
-				materialDetailsModel.refresh();
-
-				var selectedItem = oEvent.getSource().getBindingContext().getObject();
-
-				this.searchForMaterial(selectedItem.Matnr);
-			}
 		},
 
 		searchForMaterial: function(matNr) {
