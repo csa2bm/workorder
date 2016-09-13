@@ -10,6 +10,11 @@
 			<content>
 				<Table id="workOrderTableId" items="{/OrderSet}" noDataText="No Work Orders" showSeparators="true" class="workOrderListTableClass">
 					<columns>
+							<Column width=".5rem" hAlign="Center" vAlign="Middle" minScreenWidth="Tablet">
+							<header>
+								<Label text="Status"/>
+							</header>
+						</Column>
 						<Column width="2rem">
 							<header>
 								<Label text="{i18n>WorkOrderListColumnDateHeaderLabel}"/>
@@ -30,6 +35,7 @@
 								<Label text="{i18n>WorkOrderListColumnEquipmentHeaderLabel}"/>
 							</header>
 						</Column>
+						
 						<Column demandPopin="true" id="errorColumn" minScreenWidth="Small" width="1rem"/>
 						<Column demandPopin="false" id="navigationColumn" minScreenWidth="Small" width="1rem"/>
 					</columns>
@@ -40,11 +46,13 @@
 								<Label design="Bold" maxLines="1" text="asjhd ajkhd ajkhsd jkahd kjahds jkas djahs dkjas djkahs dkjah djkahs jd" />
 								<Label design="" maxLines="1" text="asjhd ajkhd ajkhsd jkahd kjahds jkas djahs dkjas djkahs dkjah djkahs jd" class="sapUiTinyMarginTop" />
 								</VBox>-->
+								<core:Icon class="" src="sap-icon://circle-task-2" color="{parts:[{path:'OrderStatus'}],formatter:'.getOrderStatusIconColor'}"/>
 								<ObjectIdentifier text="{path: 'FinishDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"
 									title="{path: 'StartDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"/>
 								<ObjectIdentifier text="{Orderid}" title="{ShortText}"/>
 								<ObjectIdentifier text="{FunctLoc}" title="{Funcldescr}"/>
 								<ObjectIdentifier text="{Equipment}" title="{Equidescr}"/>
+								
 								<core:Icon visible="{parts:[{path:'@com.sap.vocabularies.Offline.v1.inErrorState'}],formatter:'.isInErrorState'}" color="red"
 									useIconTooltip="false" size="2rem" src="sap-icon://alert"></core:Icon>
 								<core:Icon class="sapUiTinyMarginTop" src="sap-icon://slim-arrow-right" color="Gray"/>

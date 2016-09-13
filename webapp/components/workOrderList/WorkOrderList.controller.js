@@ -326,6 +326,28 @@ sap.ui.define([
 				return "grey";
 			}
 		},
+		
+			getOrderStatusIcon: function(orderStatus) {
+		
+			if (orderStatus === this.getI18nText("orderStatusNotStarted")) {
+					return "sap-icon://system-exit-2";
+			} else if (orderStatus === this.getI18nText("orderStatusInProgress")) {
+					return "sap-icon://system-exit-2";
+			}
+			
+				return "sap-icon://system-exit-2";
+		},
+
+		getOrderStatusIconColor: function(orderStatus) {
+					if (orderStatus === this.getI18nText("orderStatusNotStarted")) {
+					return "#DBDBDB";
+			} else if (orderStatus === this.getI18nText("orderStatusInProgress")) {
+					return "#3ED8F0";
+			} else if (orderStatus === this.getI18nText("orderStatusCompleted")) {
+				return "#39E339";
+			}
+			
+		},
 
 		// getNetworkConnectionStatusColor: function(connection) {
 		// 	if (connection) {

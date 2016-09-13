@@ -23,12 +23,12 @@
 								</TileContent>
 							</tileContent>
 						</GenericTile>-->
-						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="John Johnson" subheader="Service technician"
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Lau Lautrup" subheader="Service technician"
 							headerImage="../webapp/localService/mockData/AugustFoto_2016_small_Round.png" frameType="TwoByOne" press="press">
 							<tileContent>
 								<TileContent footer="">
 									<content>
-										<FeedContent contentText="Hello John, you are a key player for us in the 4th. industrial revolution." subheader="Keep up the good work!"
+										<FeedContent contentText="Hello Lau, Welcome to 2BM Mobile Work Order." subheader="Have a great day!"
 											value=""></FeedContent>
 									</content>
 								</TileContent>
