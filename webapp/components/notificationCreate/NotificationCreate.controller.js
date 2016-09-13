@@ -109,6 +109,7 @@ sap.ui.define([
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
 			this.getView().setBindingContext(null);
+		//	this.getView().unbindObject();
 
 			if (sPreviousHash !== undefined) {
 				window.history.go(-1);

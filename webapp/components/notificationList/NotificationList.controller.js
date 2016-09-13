@@ -304,7 +304,7 @@ sap.ui.define([
 				case "3":
 					return "red";
 				default:
-					return "green";
+					return "grey";
 			}
 		},
 
