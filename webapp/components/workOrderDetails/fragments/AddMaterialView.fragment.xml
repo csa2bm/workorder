@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
-	<Dialog class="sapUiPopupWithPadding" type="Message" stretch="{device>/isPhone}" contentHeight="600px" contentWidth="700px" showHeader="false" showCloseButton="false">
+	<Dialog class="sapUiPopupWithPadding" type="Message" stretch="{device>/isPhone}" contentWidth="100%" contentHeight="100%" showHeader="false" showCloseButton="false">
 		<NavContainer id="navCon">
 			<Page id="master" showNavButton="false" title="{i18n>MaterialSearchPageHeaderLabel}">
 				<content>
@@ -77,7 +77,7 @@
 						<content>
 							<ToolbarSpacer></ToolbarSpacer>
 							<Button ariaDescribedBy="acceptButtonDescription genericButtonDescription" press="issueMaterial"
-								text="Emphasized" type="Emphasized"></Button>
+								text="Submit" type="Emphasized"></Button>
 							<Button ariaDescribedBy="genericButtonDescription" press="closeAddMaterial" text="{i18n>MaterialIssueDialogClose}"></Button>
 						</content>
 					</Toolbar>

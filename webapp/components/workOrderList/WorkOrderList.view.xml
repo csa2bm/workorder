@@ -65,9 +65,9 @@
 				<OverflowToolbar id="detailToolbar">
 					<content>
 						<core:Icon id="syncIndicator" width="3em" height="3em"
-							color="{parts:[{path:'syncStatusModel>/Online'}, {path:'syncStatusModel>/PendingLocalData'}],formatter:'.getSyncStatusIconColor'}"
+							color="{syncStatusModel>/SyncColor}"
 							noTabStop="true" press="showSyncQuickview"
-							src="{parts:[{path:'syncStatusModel>/Online'}, {path:'syncStatusModel>/PendingLocalData'}],formatter:'.getSyncStateIcon'}"
+							src="{syncStatusModel>/SyncIcon}"
 							tooltip="Sync status"></core:Icon>
 						<BusyIndicator id="syncBusyIndicator" visible="false"/>
 						<ToolbarSpacer></ToolbarSpacer>

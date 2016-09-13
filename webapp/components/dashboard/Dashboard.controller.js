@@ -98,6 +98,21 @@ sap.ui.define([
 			}
 		},
 
+		onPressScanObject: function() {
+			cordova.plugins.barcodeScanner.scan(
+				function(result) {
+
+					if (result.cancelled === "true") {
+						return;
+					}
+
+				},
+				function() {
+					sap.m.MessageToast.show("Scanning failed");
+				}
+			);
+		},
+
 		onPressNotifications: function() {
 
 			var oHistory = History.getInstance();
@@ -275,8 +290,6 @@ sap.ui.define([
 		},
 
 		setSyncIndicators: function(isSynching) {
-			//self.getView().byId("syncButton").setEnabled(!isSynching);
-			//self.getView().byId("syncIndicator").setVisible(!isSynching);
 			self.getView().byId("syncBusyIndicator").setVisible(isSynching);
 		},
 
@@ -349,70 +362,49 @@ sap.ui.define([
 			}
 		},
 
-		getSyncStateText: function(online, pendingdata) {
-			if (pendingdata) {
-				return "Pending Changes";
-			}
-
-			if (online) {
-				return "OK";
-			} else {
-				return "Offline";
-			}
-		},
-
-		getSyncStateIcon: function(online, pendingdata) {
-			if (pendingdata) {
-				return "sap-icon://system-exit-2";
-			}
-
-			if (online) {
-				return "sap-icon://overlay";
-			} else {
-				return "sap-icon://overlay";
-			}
-		},
-
-		getSyncStatusIconColor: function(online, pendingdata) {
-			if (pendingdata) {
-				return "orange";
-			}
-			if (online) {
-				return "green";
-			} else {
-				return "grey";
-			}
-		},
-
-		// getNetworkConnectionStatusColor: function(connection) {
-		// 	if (connection) {
-		// 		return "green";
-		// 	} else {
-		// 		return "grey";
-		// 	}
-		// },
-
-		// getNetworkConnectionStatusIcon: function(connection) {
-		// 	if (connection) {
-		// 		return "sap-icon://connected";
-		// 	} else {
-		// 		return "sap-icon://disconnected";
-		// 	}
-		// },
-
-		getNetworkConnectionStatusText: function(connection) {
-			if (connection) {
-				return "Online";
-			} else {
-				return "Offline";
-			}
-		},
 		dataCount: function(oValue) {
 			//read the number of data entities returned
 			if (oValue) {
 				return oValue.length;
 			}
 
-		}
+		},
+
+		resetStore: function() {
+			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+			sap.m.MessageBox.show("Are you sure that you want to reset the offline database and login again?", {
+				icon: sap.m.MessageBox.Icon.None,
+				title: "Reset database",
+				actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+				defaultAction: sap.m.MessageBox.Action.NO,
+				styleClass: bCompact ? "sapUiSizeCompact" : "",
+				onClose: function(oAction, object) {
+					if (oAction === sap.m.MessageBox.Action.YES) {
+
+						sap.m.MessageToast.show("Resetting store");
+						devApp.devLogon.reset();
+					}
+				}
+			});
+		},
+
+		openErrorsView: function(oEvent) {
+			if (!this._errorsView) {
+				this._errorsView = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.app.ErrorArchive", this);
+				this.getView().addDependent(this._errorsView);
+			}
+
+			// delay because addDependent will do a async rerendering and the actionSheet will immediately close without it.
+			var oButton = oEvent.getSource();
+			jQuery.sap.delayedCall(0, this, function() {
+				this._errorsView.open();
+			});
+		},
+
+		closeErrorListPopupButton: function() {
+			if (this._errorsView) {
+				this._errorsView.close();
+			}
+		},
 	});
 });

@@ -8,13 +8,12 @@ sap.ui.define([
 		onInit: function() {
 			var oRouter = this.getRouter();
 			oRouter.getRoute("notificationDetails").attachMatched(this._onRouteMatched, this);
-			
+
 			//Subscribe to connection events
 			var eventBus = this.getEventBus();
 			eventBus.subscribe("BlockNavigation", this.performNavigationForBlocks, this);
 		},
 		_onRouteMatched: function(oEvent) {
-		
 
 			var oArguments = oEvent.getParameter("arguments");
 			var contextPath = '/' + oArguments.notificationContext;
@@ -32,7 +31,6 @@ sap.ui.define([
 				this.getView().bindElement(contextPath);
 			}
 
-		
 		},
 
 		_onBindingChange: function(oEvent) {
@@ -53,20 +51,16 @@ sap.ui.define([
 				oRouter.navTo("notificationList", true);
 			}
 		},
-				isNotificationNotCompleted: function(sString) {
+		isNotificationNotCompleted: function(sString) {
 			if (sString === this.getI18nText("notificationStatusCompleted")) {
 				return false;
 			} else {
 				return true;
 			}
 		},
-		editNotificationPressed: function(){
-			
+		editNotificationPressed: function() {
+
 		}
-
-	
-
-		
 
 	});
 });

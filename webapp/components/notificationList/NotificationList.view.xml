@@ -72,13 +72,13 @@
 				<OverflowToolbar id="detailToolbar">
 					<content>
 						<core:Icon id="syncIndicator" width="3em" height="3em"
-							color="{parts:[{path:'syncStatusModel>/Online'}, {path:'syncStatusModel>/PendingLocalData'}],formatter:'.getSyncStatusIconColor'}"
+							color="{syncStatusModel>/SyncColor}"
 							noTabStop="true" press="showSyncQuickview"
-							src="{parts:[{path:'syncStatusModel>/Online'}, {path:'syncStatusModel>/PendingLocalData'}],formatter:'.getSyncStateIcon'}"
+							src="{syncStatusModel>/SyncIcon}"
 							tooltip="Sync status"></core:Icon>
 						<BusyIndicator id="syncBusyIndicator" visible="false"/>
 						<ToolbarSpacer></ToolbarSpacer>
-						<Button id="notificationCreateButton" icon="sap-icon://add" ariaDescribedBy="acceptButtonDescription genericButtonDescription"
+						<Button id="notificationCreateButton" type="Emphasized" ariaDescribedBy="acceptButtonDescription genericButtonDescription"
 							press="createNewNotification" text="{i18n>NotificationListCreateNew}">
 							<layoutData>
 								<OverflowToolbarLayoutData priority="NeverOverflow"/>
