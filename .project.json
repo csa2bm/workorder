@@ -81,7 +81,7 @@
         "portIpad": "",
         "portIpad2x": "",
         "landIpad": "",
-        "landIpad2x": "",
+        "landIpad2x": "res/ios/splash_ipad_landscape_2x.png",
         "iphone52x": "",
         "iphone6": "",
         "iphone6plus": ""
