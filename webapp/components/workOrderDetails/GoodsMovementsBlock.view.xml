@@ -21,11 +21,11 @@
 				<Column demandPopin="false" width="1.5em" vAlign="Middle"></Column>
 			</columns>
 			<items>
-				<ColumnListItem type="Active" press="goToMaterialDetailForSelectedMaterial">
+				<ColumnListItem type="{parts:[{path:'Parent/OrderStatus'}],formatter:'.checkOrderStatusForType'}" press="goToMaterialDetailForSelectedMaterial">
 					<cells>
 						<ObjectIdentifier text="{Description}" title="{Matnr}"/>
-						<ObjectIdentifier text="{Quantity} {Unit}"/><core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
-						<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
+						<ObjectIdentifier text="{Quantity} {Unit}"/>
+						<core:Icon src="{parts:[{path:'Parent/OrderStatus'}],formatter:'.showArrow'}" color="Gray"/>
 					</cells>
 				</ColumnListItem>
 			</items>

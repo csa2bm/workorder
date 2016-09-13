@@ -228,8 +228,7 @@ sap.ui.define([
 					}
 				}
 			}
-			
-			
+
 			// update list binding
 			var list = sap.ui.getCore().byId("MaterialSelectPopUp--materialSearchResultsList");
 			var itemsBinding = list.getBinding("items");
@@ -566,22 +565,29 @@ sap.ui.define([
 			materialDetailsModel.refresh();
 		},
 
-
 		goToMaterialDetailForSelectedMaterial: function(oEvent) {
-			var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
-			materialDetailsModel.getData().OrderNumber = oEvent.getSource().getBindingContext().getObject().Orderid;
-			materialDetailsModel.refresh();
-			
-			var selectedItem = oEvent.getSource().getBindingContext().getObject();
 
-			this.searchForMaterial(selectedItem.Matnr);
+			var oContext = this.getView().getBindingContext();
+			var model = this.getView().getModel();
+
+			var isReadOnly = this.readOnly(oContext, model);
+
+			if (!isReadOnly) {
+				var materialDetailsModel = this.getView().getModel("MaterialDetailsModel");
+				materialDetailsModel.getData().OrderNumber = oEvent.getSource().getBindingContext().getObject().Orderid;
+				materialDetailsModel.refresh();
+
+				var selectedItem = oEvent.getSource().getBindingContext().getObject();
+
+				this.searchForMaterial(selectedItem.Matnr);
+			}
 		},
 
 		searchForMaterial: function(matNr) {
 			var that = this;
 
-			 //var oFilter = new sap.ui.model.Filter("Matnr", sap.ui.model.FilterOperator.EQ,
-			 //	encodeURIComponent(matNr));
+			//var oFilter = new sap.ui.model.Filter("Matnr", sap.ui.model.FilterOperator.EQ,
+			//	encodeURIComponent(matNr));
 
 			var oFilter = new sap.ui.model.Filter("Matstring", sap.ui.model.FilterOperator.Contains,
 				encodeURIComponent(matNr));
@@ -606,12 +612,39 @@ sap.ui.define([
 
 			this.getView().getModel().read("/MaterialsSet", parameters);
 		},
-			orderStatusValid: function(str){
-			
+		orderStatusValid: function(str) {
+
 			var oContext = this.getView().getBindingContext();
 			var model = this.getView().getModel();
-			
+
 			return !this.readOnly(oContext, model);
+		},
+		showArrow: function(str) {
+
+			var oContext = this.getView().getBindingContext();
+			var model = this.getView().getModel();
+
+			var isReadOnly = this.readOnly(oContext, model);
+
+			if (!isReadOnly) {
+				return "sap-icon://slim-arrow-right";
+			} else {
+				return "";
+			}
+
+		},
+		checkOrderStatusForType: function(){
+			var oContext = this.getView().getBindingContext();
+			var model = this.getView().getModel();
+
+			var isReadOnly = this.readOnly(oContext, model);
+			
+			if(isReadOnly){
+				return "Inactive"; 
+			}
+			else{
+				return "Active";
+			}
 		}
 
 	});

@@ -41,7 +41,7 @@
 					<!--<ObjectIdentifier text="Oil preasure" title="12382382938"/>
 					<ObjectIdentifier text="14,5" title="PSI"/>
 					<ObjectIdentifier text="{/OrderStatus}" title="PSI"/>-->
-					<Button id="readingButton" visible="{parts:[{path:'Parent/OrderStatus'}],formatter:'.orderStatusValid'}" class="sapUiMediumMarginEnd"
+					<Button id="readingButton" enabled="{parts:[{path:'Parent/OrderStatus'}],formatter:'.orderStatusValid'}" class="sapUiMediumMarginEnd"
 						icon="sap-icon://measure" press="addMeasurement"></Button>
 					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 
