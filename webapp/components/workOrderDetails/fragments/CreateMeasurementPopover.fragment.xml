@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
-	<Dialog class="sapUiPopupWithPadding" stretch="false" showHeader="false" showCloseButton="true">
+	<Dialog title="Measurement" class="sapUiPopupWithPadding" stretch="false" showHeader="true" showCloseButton="true">
 		<beginButton>
 			<Button text="Cancel" press="closeAddMeasurement"/>
 		</beginButton>
