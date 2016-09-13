@@ -43,6 +43,11 @@ sap.ui.define([
 				var oRouter = this.getRouter();
 				oRouter.navTo("workOrderDetails", false);
 			}	
+		},
+		onPressCreateNotification: function() {
+
+		var oRouter = this.getRouter();
+			oRouter.navTo("notificationCreate", true);
 		}
 	});
 });

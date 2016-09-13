@@ -170,11 +170,11 @@
 				},
 				"notificationCreate": {
 					"viewType": "XML",
-					"transition": "show",
+					"transition": "slide",
 					"clearAggregation": true,
 					"viewName": "NotificationCreate",
 					"viewPath": "com.twobm.mobileworkorder.components.notificationCreate",
-					"viewLevel": 2
+					"viewLevel": 5
 				}
 			}
 		}
