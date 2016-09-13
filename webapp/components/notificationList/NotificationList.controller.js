@@ -2,9 +2,11 @@ sap.ui.define([
 	"com/twobm/mobileworkorder/util/Controller",
 	"com/twobm/mobileworkorder/dev/devapp",
 	"com/twobm/mobileworkorder/util/Globalization",
+	"com/twobm/mobileworkorder/util/Formatter",
 	"sap/ui/core/routing/History"
-], function(Controller, devApp, Globalization, History) {
+], function(Controller, devApp, Globalization, Formatter, History) {
 	"use strict";
+	
 
 	return Controller.extend("com.twobm.mobileworkorder.components.notificationList.NotificationList", {
 		onInit: function() {
@@ -30,6 +32,9 @@ sap.ui.define([
 			this.getEventBus().subscribe("DeviceOffline", this.deviceWentOffline, this);
 
 			this.getEventBus().publish("UpdateSyncState");
+			
+			this.setInitialSorting();
+
 
 			//flush and refresh data
 			this.refresh();
@@ -70,7 +75,7 @@ sap.ui.define([
 
 			var aSorters = [];
 
-			var sortItem = "StartDate";
+			var sortItem = "Priority";
 			var sortDescending = true;
 			aSorters.push(new sap.ui.model.Sorter(sortItem, sortDescending));
 			oBinding.sort(aSorters);
@@ -345,10 +350,26 @@ sap.ui.define([
 				return "Offline";
 			}
 		},
+		
 
 		createNewNotification: function() {
 			var oRouter = this.getRouter();
 			oRouter.navTo("notificationCreate", true);
-		}
+		},
+			priorityValueConvert: function(value) {
+		
+			switch (value) {
+				case "1":
+					return "black";
+				case  "2":
+					return "blue";
+				case  "3":
+					return "red";
+				default:
+					return "green";
+			}
+			}
+			
+
 	});
 });
