@@ -14,6 +14,7 @@ sap.ui.define([
 			eventBus.subscribe("BlockNavigation", this.performNavigationForBlocks, this);
 		},
 		_onRouteMatched: function(oEvent) {
+			this.getView().setBindingContext(null);
 			/*	var oView = this.getView();
 				
 				this.getView().bindElement({
@@ -183,6 +184,9 @@ sap.ui.define([
 
 			var parameters = {
 				success: function(oData, response) {
+					var eventBus = sap.ui.getCore().getEventBus();
+					eventBus.publish("updateTableModel");
+					
 
 				},
 				error: that.errorCallBackShowInPopUp
