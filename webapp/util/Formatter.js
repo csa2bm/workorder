@@ -34,6 +34,23 @@ sap.ui.define([], function() {
 			pattern: "dd/MM/yyyy"
 		});
 		return ddate;
+	},
+
+	
+	priorityValueConvert: function(value) {
+		
+			switch (value) {
+				case "1":
+					return "green";
+				case  "2":
+					return "yellow";
+				case  "3":
+					return "red";
+				default:
+					return "blue";
+			}
+		
 	}
+	
 	};
 });
