@@ -59,7 +59,10 @@ sap.ui.define([
 				//this.oContext = givenContext;
 				this.getView().setBindingContext(givenContext);
 				this.getView().bindElement(contextPath);
-
+				
+				if(!this.getView().getBindingContext()){
+					this.scrollToTop();
+				}
 			}
 
 			//do we have this context loaded in our model? We should always have a timeregistration entry
@@ -114,6 +117,8 @@ sap.ui.define([
 				var oRouter = this.getRouter();
 				oRouter.navTo("workOrderList", true);
 			}
+
+			this.scrollToTop();
 		},
 
 		orderStatusBtnPressed: function(oEvent) {
@@ -258,7 +263,7 @@ sap.ui.define([
 				return true;
 			}
 		},
-		
+
 		isOrderNotCompletedType: function(sString) {
 			if (sString === this.getI18nText("orderStatusNotStarted")) {
 				return "Emphasized";
@@ -266,7 +271,6 @@ sap.ui.define([
 				return "Accept";
 			}
 		},
-		
 
 		performNavigationForBlocks: function(a, b, data) {
 
@@ -281,7 +285,14 @@ sap.ui.define([
 					equipmentContext: data.equipmentContext
 				}, false);
 			}
-		}
+		},
+
+		scrollToTop: function() {
+			var generalSection = this.getView().byId("generalSubSection").getId();
+			if (generalSection) {
+				this.getView().byId("ObjectPageLayout").scrollToSection(generalSection, 0, -500);
+			}
+		},
 
 	});
 });

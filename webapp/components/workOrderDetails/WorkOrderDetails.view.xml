@@ -38,7 +38,7 @@
 			<sections>
 				<ObjectPageSection title="{i18n>SubSectionTitleGeneral}">
 					<subSections>
-						<ObjectPageSubSection title="{i18n>SubSectionTitleGeneral}">
+						<ObjectPageSubSection id="generalSubSection" title="{i18n>SubSectionTitleGeneral}">
 							<blocks>
 								<blocks:GeneralBlock/>
 							</blocks>
