@@ -19,12 +19,12 @@
 				<Column demandPopin="false" width="1.5em" vAlign="Middle"></Column>
 			</columns>
 			<items>
-				<ColumnListItem type="{parts:[{path:'Parent/OrderStatus'}],formatter:'.checkOrderStatusForType'}" press="openTimeRegistrationPopoverUpdate">
+				<ColumnListItem type="{parts:[{path:'EditModeModel>/EditMode'}],formatter:'.checkOrderStatusForType'}" press="openTimeRegistrationPopoverUpdate">
 					<cells>
 						<ObjectIdentifier title="{path:'RegistrationDate', type:'sap.ui.model.type.Date', formatOptions:'short'}"/>
 						<Text text="{Name}"/>
 						<Text text="{WorkTime} {=${WorkTime} === '1' ? ${i18n>TimeRegistrationsBlockHour} : ${i18n>TimeRegistrationsBlockHours}}"/>
-						<core:Icon src="{parts:[{path:'Parent/OrderStatus'}],formatter:'.showArrow'}" color="Gray"/>
+						<core:Icon src="{parts:[{path:'EditModeModel>/EditMode'}],formatter:'.showArrow'}" color="Gray"/>
 					</cells>
 				</ColumnListItem>
 			</items>
