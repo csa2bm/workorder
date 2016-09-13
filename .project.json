@@ -67,7 +67,8 @@
         "s150": "",
         "s50": "",
         "w310": ""
-      }
+      },
+      "defaultIconData": ""
     },
     "appSplash": {
       "enable": true,
@@ -104,7 +105,10 @@
         "s100": "",
         "s140": "",
         "s240": ""
-      }
+      },
+      "defaultLSplashData": "",
+      "defaultPortraitSplash": "",
+      "defaultPSplashData": ""
     },
     "kapselLogon": {
       "type": "",
@@ -124,12 +128,13 @@
       "iosSigning": "",
       "tiles": "single",
       "isFCE": false,
-      "applications": []
+      "applications": [],
+      "clearCache": false
     },
     "msType": 0,
     "server": "",
     "port": "",
-    "hcpmsServer": "hcpms-s0009526197trial.hanatrial.ondemand.com",
+    "hcpmsServer": "mobile-a061a6900.hana.ondemand.com",
     "hybridRevision": "1",
     "mime": {
       "path": "",
@@ -287,6 +292,11 @@
           "registry": "cordova-plugin-statusbar",
           "localBuild": false,
           "cloudBuild": true
+        },
+        "compass": {
+          "selected": false,
+          "registry": "cordova-plugin-device-orientation",
+          "localBuild": true
         }
       },
       "kapsel": {
