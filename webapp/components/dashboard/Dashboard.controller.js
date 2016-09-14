@@ -367,7 +367,6 @@ sap.ui.define([
 			if (oValue) {
 				return oValue.length;
 			}
-
 		},
 
 		resetStore: function() {
@@ -390,7 +389,7 @@ sap.ui.define([
 
 		openErrorsView: function(oEvent) {
 			if (!this._errorsView) {
-				this._errorsView = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.app.ErrorArchive", this);
+				this._errorsView = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.app.fragments.ErrorsListPopover", this);
 				this.getView().addDependent(this._errorsView);
 			}
 

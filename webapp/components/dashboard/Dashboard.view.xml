@@ -248,6 +248,8 @@
 							src="{syncStatusModel>/SyncIcon}"
 							tooltip="Sync status"></core:Icon>
 						<BusyIndicator id="syncBusyIndicator" visible="false"/>
+						<ToolbarSpacer></ToolbarSpacer>
+						<Button type="Reject" visible="{syncStatusModel>/InErrorState}" text="Errors" press="openErrorsView"></Button>
 					</content>
 				</Toolbar>
 			</footer>
