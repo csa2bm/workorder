@@ -19,7 +19,7 @@
 		</columns>
 		<items>
 			
-			<ColumnListItem type="Inactive" press="onEquipmentItemPress">
+			<ColumnListItem type="Active" press="onEquipmentItemPress">
 				<cells>
 					<ObjectIdentifier text="Completed" title="13/08/2016 10:55"/>
 					<ObjectIdentifier text="Breakdown Maintenance" title="PM01"/>
@@ -27,7 +27,7 @@
 					<ObjectIdentifier text="Olav Rask" title="132123"/>
 				</cells>
 				</ColumnListItem>
-				<ColumnListItem type="Inactive" press="onEquipmentItemPress">
+				<ColumnListItem type="Active" press="onEquipmentItemPress">
 				<cells>
 					<ObjectIdentifier text="Completed" title="24/01/2016 15:46"/>
 					<ObjectIdentifier text="Preventive Maintenance" title="PM02"/>

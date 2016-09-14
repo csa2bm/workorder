@@ -13,7 +13,7 @@
 			</Column>
 		</columns>
 		<items>
-			<ColumnListItem type="Inactive" press="onEquipmentItemPress">
+			<ColumnListItem type="Active" press="onEquipmentItemPress">
 				<cells>
 					<ObjectIdentifier text="Closed" title="22/11/2016 13:23"/>
 					<ObjectIdentifier text="Maintenance required" title="13291329"/>
