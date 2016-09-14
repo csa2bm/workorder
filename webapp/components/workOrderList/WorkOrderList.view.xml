@@ -69,7 +69,7 @@
 							noTabStop="true" press="showSyncQuickview"
 							src="{syncStatusModel>/SyncIcon}"
 							tooltip="Sync status"></core:Icon>
-						<BusyIndicator id="syncBusyIndicator" visible="false"/>
+						<BusyIndicator id="syncBusyIndicator" visible="{syncStatusModel>/IsSynching}"/>
 						<ToolbarSpacer></ToolbarSpacer>
 
 						<!--<Button id="orderStatusChangeButton" icon="sap-icon://filter" ariaDescribedBy="acceptButtonDescription genericButtonDescription"-->

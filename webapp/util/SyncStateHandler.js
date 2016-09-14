@@ -5,6 +5,8 @@ sap.ui.define([
 
 	return {
 		handleSyncState: function() {
+			
+			//sap.m.MessageBox.show("handleSyncState");
 
 			var that = this;
 
@@ -86,6 +88,8 @@ sap.ui.define([
 								that.setSyncStateIcon(syncStatusModel, devApp.isOnline);
 								that.setNetworkConnectionStatusText(syncStatusModel, devApp.isOnline);
 								that.setSyncStateText(syncStatusModel, devApp.isOnline);
+								
+								//sap.m.MessageBox.show("SyncIcon: " + syncStatusModel.getData().SyncIcon);
 
 								syncStatusModel.refresh(true);
 							},

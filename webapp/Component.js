@@ -54,7 +54,8 @@ sap.ui.define([
 				Online: false,
 				PendingLocalData: false,
 				Errors: [],
-				InErrorState : false
+				InErrorState : false,
+				IsSynching : false
 			});
 			syncStatusModel.setDefaultBindingMode("TwoWay");
 			this.setModel(syncStatusModel, "syncStatusModel");
