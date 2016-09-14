@@ -218,7 +218,12 @@ sap.ui.define([
 		setSyncIndicators: function(isSynching) {
 			//self.getView().byId("syncButton").setEnabled(!isSynching);
 			//self.getView().byId("syncIndicator").setVisible(!isSynching);
-			self.getView().byId("syncBusyIndicator").setVisible(isSynching);
+			//self.getView().byId("syncBusyIndicator").setVisible(isSynching);
+			
+						
+			var syncStatusModel = this.getView().getModel("syncStatusModel");
+			syncStatusModel.getData().IsSynching = isSynching;
+			syncStatusModel.refresh();
 		},
 
 		deviceWentOnline: function() {

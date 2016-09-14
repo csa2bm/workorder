@@ -2,8 +2,9 @@ sap.ui.define([
 	"com/twobm/mobileworkorder/util/Controller",
 	"com/twobm/mobileworkorder/dev/devapp",
 	"com/twobm/mobileworkorder/util/Globalization",
-	"sap/ui/core/routing/History"
-], function(Controller, devApp, Globalization, History) {
+	"sap/ui/core/routing/History",
+	"com/twobm/mobileworkorder/util/SyncStateHandler"
+], function(Controller, devApp, Globalization, History, SyncStateHandler) {
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.workOrderList.WorkOrderList", {
@@ -29,7 +30,9 @@ sap.ui.define([
 			this.getEventBus().subscribe("DeviceOnline", this.deviceWentOnline, this);
 			this.getEventBus().subscribe("DeviceOffline", this.deviceWentOffline, this);
 
-			this.getEventBus().publish("UpdateSyncState");
+			//sap.m.MessageBox.show("UpdateSyncState");
+			SyncStateHandler.handleSyncState();
+			//this.getEventBus().publish("UpdateSyncState");
 
 			this.setInitialSorting();
 
@@ -197,7 +200,11 @@ sap.ui.define([
 		setSyncIndicators: function(isSynching) {
 			//self.getView().byId("syncButton").setEnabled(!isSynching);
 			//self.getView().byId("syncIndicator").setVisible(!isSynching);
-			self.getView().byId("syncBusyIndicator").setVisible(isSynching);
+			//self.getView().byId("syncBusyIndicator").setVisible(isSynching);
+						
+			var syncStatusModel = this.getView().getModel("syncStatusModel");
+			syncStatusModel.getData().IsSynching = isSynching;
+			syncStatusModel.refresh();
 		},
 
 		deviceWentOnline: function() {

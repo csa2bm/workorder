@@ -34,11 +34,19 @@
 				labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
 				<layout:content>
 					<Label text="{i18n>functionalLocation}"></Label>
-					<Input id="functionalLocation" liveChange="" value="{FunctionalLoc}" suggestionItemSelected="onfunctionalLocationItemSelected"
-						valueHelpRequest="showAccountF4" valueHelpOnly="false" showValueHelp="true"></Input>
+					<Input id="functionalLocation" value="{FunctionalLoc}" showSuggestion="true" showValueHelp="false"
+						valueHelpRequest="handleValueHelpFunctionalLocation" suggestionItems="{/FunctionalLocationsSet}">
+						<suggestionItems>
+							<core:Item text="{FunctionalLocation}"/>
+						</suggestionItems>
+					</Input>
 					<Label text="{i18n>equipment}"></Label>
-					<Input id="equipment" liveChange="" value="{Equipment}" suggestionItemSelected="onEquipmentItemSelected" valueHelpRequest="showAccountF4"
-						valueHelpOnly="false" showValueHelp="true"></Input>
+					<Input id="equipment" value="{Equipment}" showSuggestion="true" showValueHelp="false"
+						valueHelpRequest="handleValueHelpEquipment" suggestionItems="{/EquipmentsSet}">
+						<suggestionItems>
+							<core:Item text="{Equipment}"/>
+						</suggestionItems>
+					</Input>
 				</layout:content>
 			</layout:form.SimpleForm>
 			<!-- Picture -->

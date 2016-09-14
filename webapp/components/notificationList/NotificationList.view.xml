@@ -8,15 +8,15 @@
 				</l:HorizontalLayout>
 			</headerContent>
 			<content>
-				<Table id="notificationTableId" items="{/NotificationsSet}" noDataText="No Notifications" showSeparators="true"
-					class="notificationListTableClass">
+				<Table id="notificationTableId" items="{path: '/NotificationsSet', sorter: [{path: 'Priority', descending: false}]}" noDataText="No Notifications" showSeparators="false"
+					class="notificationListTableClass" >
 					<columns>
-						<Column width="4em">
-							<header>
+						<Column demandPopin="true" popinDisplay="Inline" width="5em">
+							<header>	
 								<Label text="{i18n>NotificationListColumnPriorityHeaderLabel}"/>
 							</header>
 						</Column>
-						<Column width="8em">
+						<Column  demandPopin="true" popinDisplay="Inline">
 							<header>
 								<Label text="{i18n>NotificationListColumnDateHeaderLabel}"/>
 							</header>
@@ -35,12 +35,12 @@
 								<Label text="{i18n>NotificationListColumnNotificationHeaderLabel}"/>
 							</header>
 						</Column>
-						<Column minScreenWidth="Tablet">
+						<Column demandPopin="true" popinDisplay="Inline">
 							<header>
 								<Label text="{i18n>NotificationListColumnFunctionalLocationHeaderLabel}"/>
 							</header>
 						</Column>
-						<Column minScreenWidth="Tablet">
+						<Column demandPopin="true" popinDisplay="Inline">
 							<header>
 								<Label text="{i18n>NotificationListColumnEquipmentHeaderLabel}"/>
 							</header>
@@ -78,7 +78,7 @@
 							noTabStop="true" press="showSyncQuickview"
 							src="{syncStatusModel>/SyncIcon}"
 							tooltip="Sync status"></core:Icon>
-						<BusyIndicator id="syncBusyIndicator" visible="false"/>
+						<BusyIndicator id="syncBusyIndicator" visible="{syncStatusModel>/IsSynching}"/>
 						<ToolbarSpacer></ToolbarSpacer>
 						<Button id="notificationCreateButton" type="Emphasized" ariaDescribedBy="acceptButtonDescription genericButtonDescription"
 							press="createNewNotification" text="{i18n>NotificationListCreateNew}">

@@ -114,7 +114,7 @@ sap.ui.define([
 			}
 		},
 
-		onNavigationButtonPress: function(oEvent) {
+		navigateBack : function(oEvent) {
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
 
@@ -217,6 +217,11 @@ sap.ui.define([
 					var orderStatus = that.getView().getBindingContext().getObject().OrderStatus;
 
 					that.updateEditModeModel(orderStatus);
+					
+					if(orderStatus == that.getI18nText("orderStatusCompleted")){
+						//Go back to list
+						that.navigateBack();
+					}
 				},
 				error: that.errorCallBackShowInPopUp
 			};

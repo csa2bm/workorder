@@ -247,7 +247,9 @@
 							noTabStop="true" press="showSyncQuickview"
 							src="{syncStatusModel>/SyncIcon}"
 							tooltip="Sync status"></core:Icon>
-						<BusyIndicator id="syncBusyIndicator" visible="false"/>
+						<BusyIndicator id="syncBusyIndicator" visible="{syncStatusModel>/IsSynching}"/>
+						<ToolbarSpacer></ToolbarSpacer>
+						<Button type="Reject" visible="{syncStatusModel>/InErrorState}" text="Errors" press="openErrorsView"></Button>
 					</content>
 				</Toolbar>
 			</footer>

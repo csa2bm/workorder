@@ -15,6 +15,8 @@ sap.ui.define([
 			//Subscribe to connection events
 			var eventBus = this.getEventBus();
 			eventBus.subscribe("longTextDisplayMode", this.setLongTextInDisplayMode, this);
+			this._showFormFragment("LongTextFragmentDisplay");
+			
 			
 
 		},

@@ -2,8 +2,9 @@ sap.ui.define([
 	"com/twobm/mobileworkorder/util/Controller",
 	"sap/ui/core/routing/History",
 	"com/twobm/mobileworkorder/util/Formatter",
-	"com/twobm/mobileworkorder/dev/devapp"
-], function(Controller, History, Formatter, devApp) {
+	"com/twobm/mobileworkorder/dev/devapp",
+	"com/twobm/mobileworkorder/util/SyncStateHandler"
+], function(Controller, History, Formatter, devApp, SyncStateHandler) {
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.dashboard.Dashboard", {
@@ -39,7 +40,8 @@ sap.ui.define([
 			this.getEventBus().subscribe("DeviceOnline", this.deviceWentOnline, this);
 			this.getEventBus().subscribe("DeviceOffline", this.deviceWentOffline, this);
 
-			this.getEventBus().publish("UpdateSyncState");
+			//this.getEventBus().publish("UpdateSyncState");
+			SyncStateHandler.handleSyncState();
 
 			this.setContentInTiles();
 
@@ -290,7 +292,11 @@ sap.ui.define([
 		},
 
 		setSyncIndicators: function(isSynching) {
-			self.getView().byId("syncBusyIndicator").setVisible(isSynching);
+			//self.getView().byId("syncBusyIndicator").setVisible(isSynching);
+			
+			var syncStatusModel = this.getView().getModel("syncStatusModel");
+			syncStatusModel.getData().IsSynching = isSynching;
+			syncStatusModel.refresh();
 		},
 
 		deviceWentOnline: function() {
@@ -367,7 +373,6 @@ sap.ui.define([
 			if (oValue) {
 				return oValue.length;
 			}
-
 		},
 
 		resetStore: function() {
@@ -390,7 +395,7 @@ sap.ui.define([
 
 		openErrorsView: function(oEvent) {
 			if (!this._errorsView) {
-				this._errorsView = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.app.ErrorArchive", this);
+				this._errorsView = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.app.fragments.ErrorsListPopover", this);
 				this.getView().addDependent(this._errorsView);
 			}
 
