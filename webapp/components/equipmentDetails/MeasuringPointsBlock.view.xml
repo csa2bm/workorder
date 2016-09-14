@@ -15,7 +15,7 @@
 			<Column width="1.5em" vAlign="Middle"></Column>
 		</columns>
 		<items>
-			<ColumnListItem type="Active" press="onEquipmentItemPress">
+			<ColumnListItem type="Inactive" press="onEquipmentItemPress">
 				<cells>
 				<ObjectIdentifier text="WV Golf 1.6 diesel" title="10000000"/>
 					<ObjectIdentifier text="{Descriptn}" title="{Measpoint}"/>
