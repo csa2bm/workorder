@@ -80,7 +80,7 @@ sap.ui.define([
 								} else {
 									syncStatusModel.getData().PendingLocalData = false;
 								}
-								sap.m.MessageBox.show("PendingLocalData: " + syncStatusModel.getData().PendingLocalData);
+								//sap.m.MessageBox.show("PendingLocalData: " + syncStatusModel.getData().PendingLocalData);
 
 								that.setSyncIndicatorColor(syncStatusModel, devApp.isOnline);
 								that.setSyncStateIcon(syncStatusModel, devApp.isOnline);
@@ -116,7 +116,7 @@ sap.ui.define([
 			if (syncStatusModel.getData().InErrorState) {
 				syncStatusModel.getData().SyncIcon = "sap-icon://overlay";
 			} else if (syncStatusModel.getData().PendingLocalData) {
-				syncStatusModel.getData().SyncIcon = "sap-icon://system-exit-2";
+				//syncStatusModel.getData().SyncIcon = "sap-icon://system-exit-2";
 				sap.m.MessageBox.show("SyncIcon: sap-icon://system-exit-2");
 			} else {
 				syncStatusModel.getData().SyncIcon = "sap-icon://overlay";
