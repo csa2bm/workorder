@@ -10,7 +10,7 @@
 			<content>
 				<Table id="workOrderTableId" items="{/OrderSet}" noDataText="No Work Orders" showSeparators="true" class="workOrderListTableClass">
 					<columns>
-							<Column width="1rem" hAlign="Center" vAlign="Middle" minScreenWidth="Tablet">
+						<Column width="1rem" hAlign="Center" vAlign="Middle" minScreenWidth="Tablet">
 							<header>
 								<Label text="Status"/>
 							</header>
@@ -35,7 +35,6 @@
 								<Label text="{i18n>WorkOrderListColumnEquipmentHeaderLabel}"/>
 							</header>
 						</Column>
-						
 						<!--<Column demandPopin="true" id="errorColumn" minScreenWidth="Small" width="1rem"/>-->
 						<Column demandPopin="false" id="navigationColumn" width="0.5rem"/>
 					</columns>
@@ -52,7 +51,6 @@
 								<ObjectIdentifier text="{Orderid}" title="{ShortText}"/>
 								<ObjectIdentifier text="{FunctLoc}" title="{Funcldescr}"/>
 								<ObjectIdentifier text="{Equipment}" title="{Equidescr}"/>
-								
 								<!--<core:Icon visible="{parts:[{path:'@com.sap.vocabularies.Offline.v1.inErrorState'}],formatter:'.isInErrorState'}" color="red"
 									useIconTooltip="false" size="2rem" src="sap-icon://alert"></core:Icon>-->
 								<core:Icon class="sapUiTinyMarginTop" src="sap-icon://slim-arrow-right" color="Gray"/>
@@ -64,21 +62,17 @@
 			<footer>
 				<OverflowToolbar id="detailToolbar">
 					<content>
-						<core:Icon id="syncIndicator" width="3em" height="3em"
-							color="{syncStatusModel>/SyncColor}"
-							noTabStop="true" press="showSyncQuickview"
-							src="{syncStatusModel>/SyncIcon}"
-							tooltip="Sync status"></core:Icon>
+						<core:Icon id="syncIndicator" width="3em" height="3em" color="{syncStatusModel>/SyncColor}" noTabStop="true" press="showSyncQuickview"
+							src="{syncStatusModel>/SyncIcon}" tooltip="Sync status"></core:Icon>
 						<BusyIndicator id="syncBusyIndicator" visible="{syncStatusModel>/IsSynching}"/>
 						<ToolbarSpacer></ToolbarSpacer>
-
+						<Button type="Reject" visible="{syncStatusModel>/InErrorState}" text="Errors" press="openErrorsView"></Button>
 						<!--<Button id="orderStatusChangeButton" icon="sap-icon://filter" ariaDescribedBy="acceptButtonDescription genericButtonDescription"-->
 						<!--	press="orderFilterSelectPopUp" text="My Orders" type="Emphasized">-->
 						<!--	<layoutData>-->
 						<!--		<OverflowToolbarLayoutData priority="NeverOverflow"/>-->
 						<!--	</layoutData>-->
 						<!--</Button>-->
-
 					</content>
 				</OverflowToolbar>
 			</footer>

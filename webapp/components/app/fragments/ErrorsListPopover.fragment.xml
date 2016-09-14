@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
-	<Dialog title="Errors"  stretch="{device>/isPhone}" class="sapUiPopupWithPadding">
+	<Dialog title="Errors"  stretch="{device>/isPhone}">
 		<endButton>
 			<Button text="Close" press="closeErrorListPopupButton"/>
 		</endButton>
