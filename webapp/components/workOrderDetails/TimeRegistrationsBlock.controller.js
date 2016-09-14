@@ -80,7 +80,8 @@ sap.ui.define([
 		deleteTimeRegistration: function(oEvent) {
 			var successCallBack = (function() {
 				this.closeAddTimeRegistrationPopover();
-				this.getView().getModel().refresh();
+				this.getView().byId("TimeRegistrationsList").getBinding("items").refresh(true);
+				//this.getView().getModel().refresh();
 			}).bind(this);
 			var sbindingContextPath = oEvent.getSource().getBindingContext().getPath();
 			var oModel = oEvent.getSource().getModel();

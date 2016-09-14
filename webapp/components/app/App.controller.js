@@ -45,17 +45,17 @@ sap.ui.define([
 			//Update sync state indicator
 			SyncStateHandler.handleSyncState();
 
-			var errorNum = devapp.deviceModel.getProperty("/errorNum");
-			if (errorNum > 0) {
-				if (!this._errDlg) {
-					this._errDlg = sap.ui.xmlfragment("errorArchiveDialog", "com.2bm.mobileworkorder.components.app.ErrorArchive", this);
-					this.getView().addDependent(this._errDlg);
-				}
-				this._errDlg.open();
-			} else if (devapp.devLogon.appOfflineStore.callbackError) {
-				MessageBox.alert(JSON.stringify(devapp.devLogon.appOfflineStore.callbackError));
-			}
-			devapp.devLogon.appOfflineStore.callbackError = null;
+			// var errorNum = devapp.deviceModel.getProperty("/errorNum");
+			// if (errorNum > 0) {
+			// 	if (!this._errDlg) {
+			// 		this._errDlg = sap.ui.xmlfragment("errorArchiveDialog", "com.2bm.mobileworkorder.components.app.ErrorArchive", this);
+			// 		this.getView().addDependent(this._errDlg);
+			// 	}
+			// 	this._errDlg.open();
+			// } else if (devapp.devLogon.appOfflineStore.callbackError) {
+			// 	MessageBox.alert(JSON.stringify(devapp.devLogon.appOfflineStore.callbackError));
+			// }
+			// devapp.devLogon.appOfflineStore.callbackError = null;
 		},
 
 		handleDisconnected: function() {

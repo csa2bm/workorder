@@ -105,10 +105,6 @@ sap.ui.define([
 			var aFilters = [];
 			oBinding.filter(aFilters);
 
-			// update filter bar
-			//oView.byId("vsdFilterBar").setVisible(aFilters.length > 0);
-			//oView.byId("vsdFilterLabel").setText(mParams.filterString);
-
 			var model = this.getView().getModel();
 			model.refresh();
 		},
@@ -142,11 +138,6 @@ sap.ui.define([
 		syncCompleted: function() {
 			if (window.sap_webide_FacadePreview) {
 				self.unSubscribeToOnlineSyncEvents();
-
-				//Update sync state indicator
-				//SyncStateHandler.handleSyncState();
-			} else {
-				//sap.m.MessageToast.show("Data synchronized with server");
 			}
 
 			self.setSyncIndicators(false);
@@ -271,9 +262,22 @@ sap.ui.define([
 				sap.m.MessageToast.show("Device is offline");
 			}
 		},
-		resetStore : function(){
-			 sap.m.MessageToast.show("Resetting store");
-			devApp.devLogon.reset();
+		resetStore: function() {
+			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+			sap.m.MessageBox.show("Are you sure that you want to reset the offline database and login again?", {
+				icon: sap.m.MessageBox.Icon.None,
+				title: "Reset database",
+				actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+				defaultAction: sap.m.MessageBox.Action.NO,
+				styleClass: bCompact ? "sapUiSizeCompact" : "",
+				onClose: function(oAction, object) {
+					if (oAction === sap.m.MessageBox.Action.YES) {
+
+						sap.m.MessageToast.show("Resetting store");
+						devApp.devLogon.reset();
+					}
+				}
+			});
 		},
 		closeSyncPopup: function() {
 			if (this._syncQuickView) {
@@ -281,85 +285,26 @@ sap.ui.define([
 			}
 		},
 
-		getSyncStateText: function(online, pendingdata) {
-			if (pendingdata) {
-				return "Pending Changes";
-			}
+		getOrderStatusIcon: function(orderStatus) {
 
-			if (online) {
-				return "OK";
-			} else {
-				return "Offline";
-			}
-		},
-
-		getSyncStateIcon: function(online, pendingdata) {
-			if (pendingdata) {
-				return "sap-icon://system-exit-2";
-			}
-
-			if (online) {
-				return "sap-icon://overlay";
-			} else {
-				return "sap-icon://overlay";
-			}
-		},
-
-		getSyncStatusIconColor: function(online, pendingdata) {
-			if (pendingdata) {
-				return "orange";
-			}
-			if (online) {
-				return "green";
-			} else {
-				return "grey";
-			}
-		},
-		
-			getOrderStatusIcon: function(orderStatus) {
-		
 			if (orderStatus === this.getI18nText("orderStatusNotStarted")) {
-					return "sap-icon://system-exit-2";
-			} else if (orderStatus === this.getI18nText("orderStatusInProgress")) {
-					return "sap-icon://system-exit-2";
-			}
-			
 				return "sap-icon://system-exit-2";
+			} else if (orderStatus === this.getI18nText("orderStatusInProgress")) {
+				return "sap-icon://system-exit-2";
+			}
+
+			return "sap-icon://system-exit-2";
 		},
 
 		getOrderStatusIconColor: function(orderStatus) {
-					if (orderStatus === this.getI18nText("orderStatusNotStarted")) {
-					return "#DBDBDB";
+			if (orderStatus === this.getI18nText("orderStatusNotStarted")) {
+				return "#DBDBDB";
 			} else if (orderStatus === this.getI18nText("orderStatusInProgress")) {
-					return "#3AACF2";
+				return "#3AACF2";
 			} else if (orderStatus === this.getI18nText("orderStatusCompleted")) {
 				return "#30D130";
 			}
-			
-		},
 
-		// getNetworkConnectionStatusColor: function(connection) {
-		// 	if (connection) {
-		// 		return "green";
-		// 	} else {
-		// 		return "grey";
-		// 	}
-		// },
-
-		// getNetworkConnectionStatusIcon: function(connection) {
-		// 	if (connection) {
-		// 		return "sap-icon://connected";
-		// 	} else {
-		// 		return "sap-icon://disconnected";
-		// 	}
-		// },
-
-		getNetworkConnectionStatusText: function(connection) {
-			if (connection) {
-				return "Online";
-			} else {
-				return "Offline";
-			}
 		},
 
 		orderFilterSelectPopUp: function(oEvent) {
@@ -381,7 +326,26 @@ sap.ui.define([
 
 			}
 			return false;
-		}
+		},
+
+		openErrorsView: function(oEvent) {
+			if (!this._errorsView) {
+				this._errorsView = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.app.fragments.ErrorsListPopover", this);
+				this.getView().addDependent(this._errorsView);
+			}
+
+			// delay because addDependent will do a async rerendering and the actionSheet will immediately close without it.
+			var oButton = oEvent.getSource();
+			jQuery.sap.delayedCall(0, this, function() {
+				this._errorsView.open();
+			});
+		},
+
+		closeErrorListPopupButton: function() {
+			if (this._errorsView) {
+				this._errorsView.close();
+			}
+		},
 
 	});
 });

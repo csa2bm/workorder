@@ -1,0 +1,12 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="Errors"  stretch="{device>/isPhone}" class="sapUiPopupWithPadding">
+		<endButton>
+			<Button text="Close" press="closeErrorListPopupButton"/>
+		</endButton>
+		<content>
+			<List items="{ path: 'syncStatusModel>/Errors' }">
+				<StandardListItem title="{syncStatusModel>message}" description="{syncStatusModel>requestUrl}" iconDensityAware="false" iconInset="false"/>
+			</List>
+		</content>
+	</Dialog>
+</core:FragmentDefinition>

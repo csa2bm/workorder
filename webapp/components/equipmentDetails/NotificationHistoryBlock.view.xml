@@ -1,6 +1,6 @@
 <core:View controllerName="com.twobm.mobileworkorder.components.equipmentDetails.NotificationHistoryBlock" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
 	xmlns:l="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns:vbm="sap.ui.vbm" xmlns="sap.m">
-	<Table id="idNotificationTable" items="" noDataText="{i18n>EquipmentBlockNoEquipmentAdded}">
+	<Table id="idNotificationTable" items="" noDataText="{i18n>OrderHistoryBlockNoHistory}">
 		<columns>
 			<Column>
 				<Text text="{i18n>OrderHistoryBlockColoumTimeAndStatus}"/>

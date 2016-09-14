@@ -6,7 +6,6 @@ sap.ui.define([
 	"sap/ui/core/routing/History"
 ], function(Controller, devApp, Globalization, Formatter, History) {
 	"use strict";
-	
 
 	return Controller.extend("com.twobm.mobileworkorder.components.notificationList.NotificationList", {
 		onInit: function() {
@@ -32,9 +31,8 @@ sap.ui.define([
 			this.getEventBus().subscribe("DeviceOffline", this.deviceWentOffline, this);
 
 			this.getEventBus().publish("UpdateSyncState");
-			
-			this.setInitialSorting();
 
+			this.setInitialSorting();
 
 			//flush and refresh data
 			this.refresh();
@@ -292,84 +290,42 @@ sap.ui.define([
 			}
 		},
 
-		getSyncStateText: function(online, pendingdata) {
-			if (pendingdata) {
-				return "Pending Changes";
-			}
-
-			if (online) {
-				return "OK";
-			} else {
-				return "Offline";
-			}
-		},
-
-		getSyncStateIcon: function(online, pendingdata) {
-			if (pendingdata) {
-				return "sap-icon://system-exit-2";
-			}
-
-			if (online) {
-				return "sap-icon://overlay";
-			} else {
-				return "sap-icon://overlay";
-			}
-		},
-
-		getSyncStatusIconColor: function(online, pendingdata) {
-			if (pendingdata) {
-				return "orange";
-			}
-			if (online) {
-				return "green";
-			} else {
-				return "grey";
-			}
-		},
-
-		// getNetworkConnectionStatusColor: function(connection) {
-		// 	if (connection) {
-		// 		return "green";
-		// 	} else {
-		// 		return "grey";
-		// 	}
-		// },
-
-		// getNetworkConnectionStatusIcon: function(connection) {
-		// 	if (connection) {
-		// 		return "sap-icon://connected";
-		// 	} else {
-		// 		return "sap-icon://disconnected";
-		// 	}
-		// },
-
-		getNetworkConnectionStatusText: function(connection) {
-			if (connection) {
-				return "Online";
-			} else {
-				return "Offline";
-			}
-		},
-		
-
 		createNewNotification: function() {
 			var oRouter = this.getRouter();
 			oRouter.navTo("notificationCreate", true);
 		},
-			priorityValueConvert: function(value) {
-		
+		priorityValueConvert: function(value) {
+
 			switch (value) {
 				case "1":
 					return "black";
-				case  "2":
+				case "2":
 					return "blue";
-				case  "3":
+				case "3":
 					return "red";
 				default:
-					return "green";
+					return "grey";
 			}
+		},
+
+		openErrorsView: function(oEvent) {
+			if (!this._errorsView) {
+				this._errorsView = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.app.fragments.ErrorsListPopover", this);
+				this.getView().addDependent(this._errorsView);
 			}
-			
+
+			// delay because addDependent will do a async rerendering and the actionSheet will immediately close without it.
+			var oButton = oEvent.getSource();
+			jQuery.sap.delayedCall(0, this, function() {
+				this._errorsView.open();
+			});
+		},
+
+		closeErrorListPopupButton: function() {
+			if (this._errorsView) {
+				this._errorsView.close();
+			}
+		},
 
 	});
 });
