@@ -11,7 +11,11 @@ sap.ui.define([
 		 * @memberOf com.twobm.mobileworkorder.components.workOrderDetails.view.AttachmentsBlock
 		 */
 		onInit: function() {
-			this._showFormFragment("LongTextFragmentDisplay");
+			
+			//Subscribe to connection events
+			var eventBus = this.getEventBus();
+			eventBus.subscribe("longTextDisplayMode", this.setLongTextInDisplayMode, this);
+			
 
 		},
 
@@ -113,6 +117,10 @@ sap.ui.define([
 			var model = this.getView().getModel();
 			
 			return !this.readOnly(oContext, model);
+		},
+		setLongTextInDisplayMode: function(){
+			this._showFormFragment("LongTextFragmentDisplay");
+			this.toggleButtonsAndView(false);
 		}
 
 	});
