@@ -59,8 +59,8 @@ sap.ui.define([
 				//this.oContext = givenContext;
 				this.getView().setBindingContext(givenContext);
 				this.getView().bindElement(contextPath);
-				
-				if(!this.getView().getBindingContext()){
+
+				if (!this.getView().getBindingContext()) {
 					this.scrollToTop();
 				}
 			}
@@ -98,6 +98,13 @@ sap.ui.define([
 
 					}, true);
 			}
+
+			var eventBus = sap.ui.getCore().getEventBus();
+			var data = {
+				noteLongTextField: ""
+
+			};
+			eventBus.publish("longTextDisplayMode", data);
 		},
 
 		_onBindingChange: function(oEvent) {
@@ -107,7 +114,7 @@ sap.ui.define([
 			}
 		},
 
-		onNavigationButtonPress: function(oEvent) {
+		navigateBack : function(oEvent) {
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
 
@@ -207,11 +214,14 @@ sap.ui.define([
 
 			var parameters = {
 				success: function(oData, response) {
-					//var eventBus = sap.ui.getCore().getEventBus();
-					//eventBus.publish("updateTableModel");
 					var orderStatus = that.getView().getBindingContext().getObject().OrderStatus;
 
 					that.updateEditModeModel(orderStatus);
+					
+					if(orderStatus == that.getI18nText("orderStatusCompleted")){
+						//Go back to list
+						that.navigateBack();
+					}
 				},
 				error: that.errorCallBackShowInPopUp
 			};
@@ -292,7 +302,7 @@ sap.ui.define([
 			if (generalSection) {
 				this.getView().byId("ObjectPageLayout").scrollToSection(generalSection, 0, -500);
 			}
-		},
+		}
 
 	});
 });

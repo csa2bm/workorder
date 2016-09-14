@@ -5,6 +5,8 @@ sap.ui.define([
 
 	return {
 		handleSyncState: function() {
+			
+			//sap.m.MessageBox.show("handleSyncState");
 
 			var that = this;
 
@@ -44,21 +46,15 @@ sap.ui.define([
 								var message;
 								//var errorCode = "";
 								try {
-									console.log(entry);
-									console.log(entry.Message);
 									var parsedJSON = JSON.parse(entry.Message);
-
-									// sap.m.MessageBox.show(parsedJSON, {
-									// 	icon: sap.m.MessageBox.Icon.INFORMATION,
-									// 	title: "!",
-									// 	actions: [sap.m.MessageBox.Action.OK]
-									// });
+									
+									//sap.m.MessageBox.show("RequestURL:" + entry.RequestURL);
 
 									var errorJSON = {
 										message: parsedJSON.error.message.value,
 										errorCode: parsedJSON.error.code,
 										requestId: entry.RequestID,
-										requestBody: JSON.parse(entry.RequestBody),
+										//requestBody: JSON.parse(entry.RequestBody)
 										requestMethod: entry.RequestMethod,
 										requestUrl: entry.RequestURL
 									};
@@ -70,7 +66,7 @@ sap.ui.define([
 
 									sap.m.MessageBox.show(message, {
 										icon: sap.m.MessageBox.Icon.ERROR,
-										title: "Error from SAP",
+										title: "OData Service Error",
 										actions: [sap.m.MessageBox.Action.OK]
 									});
 								}
@@ -86,11 +82,14 @@ sap.ui.define([
 								} else {
 									syncStatusModel.getData().PendingLocalData = false;
 								}
+								//sap.m.MessageBox.show("PendingLocalData: " + syncStatusModel.getData().PendingLocalData);
 
 								that.setSyncIndicatorColor(syncStatusModel, devApp.isOnline);
 								that.setSyncStateIcon(syncStatusModel, devApp.isOnline);
 								that.setNetworkConnectionStatusText(syncStatusModel, devApp.isOnline);
 								that.setSyncStateText(syncStatusModel, devApp.isOnline);
+								
+								//sap.m.MessageBox.show("SyncIcon: " + syncStatusModel.getData().SyncIcon);
 
 								syncStatusModel.refresh(true);
 							},
@@ -107,7 +106,7 @@ sap.ui.define([
 
 		setSyncIndicatorColor: function(syncStatusModel, isOnline) {
 			if (syncStatusModel.getData().InErrorState) {
-				syncStatusModel.getData().SyncColor = "red";
+				syncStatusModel.getData().SyncColor = "#CC1919"; //Same color as Reject type button
 			} else if (syncStatusModel.getData().PendingLocalData) {
 				syncStatusModel.getData().SyncColor = "orange";
 			} else if (isOnline) {
@@ -122,6 +121,7 @@ sap.ui.define([
 				syncStatusModel.getData().SyncIcon = "sap-icon://overlay";
 			} else if (syncStatusModel.getData().PendingLocalData) {
 				syncStatusModel.getData().SyncIcon = "sap-icon://system-exit-2";
+				//sap.m.MessageBox.show("SyncIcon: sap-icon://system-exit-2");
 			} else {
 				syncStatusModel.getData().SyncIcon = "sap-icon://overlay";
 			}

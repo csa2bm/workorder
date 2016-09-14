@@ -78,7 +78,7 @@
 							noTabStop="true" press="showSyncQuickview"
 							src="{syncStatusModel>/SyncIcon}"
 							tooltip="Sync status"></core:Icon>
-						<BusyIndicator id="syncBusyIndicator" visible="false"/>
+						<BusyIndicator id="syncBusyIndicator" visible="{syncStatusModel>/IsSynching}"/>
 						<ToolbarSpacer></ToolbarSpacer>
 						<Button id="notificationCreateButton" type="Emphasized" ariaDescribedBy="acceptButtonDescription genericButtonDescription"
 							press="createNewNotification" text="{i18n>NotificationListCreateNew}">
