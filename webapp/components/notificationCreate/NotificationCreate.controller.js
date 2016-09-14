@@ -522,6 +522,11 @@ sap.ui.define([
              //this._valueHelpDialog.destroy();
              thisDialog.destroy();
             
-         }   
+         },
+         
+         orderStatusValid: function(str){
+			
+			return true;
+		}
 	});
 });

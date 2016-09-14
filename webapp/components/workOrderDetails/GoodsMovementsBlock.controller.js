@@ -276,7 +276,7 @@ sap.ui.define([
 						return;
 					}
 
-					var barcodeScanned = this.getMaterialNrFromBarcode(result.text);
+					//var barcodeScanned = this.getMaterialNrFromBarcode(result.text);
 
 					// var data = {
 					// 	"block": "material",
@@ -284,7 +284,7 @@ sap.ui.define([
 					// 	"matnr": barcodeScanned
 					// };
 
-					self.searchForMaterial(barcodeScanned);
+					//self.searchForMaterial(barcodeScanned);
 					//self.gotoMaterialDetailPage(data);
 				},
 				function() {
