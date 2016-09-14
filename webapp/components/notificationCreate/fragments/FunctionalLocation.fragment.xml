@@ -1,0 +1,17 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<SelectDialog
+		id = "FunctionalsLocationsDialog"
+		title="Functional Locations"
+		class="sapUiPopupWithPadding"
+		items="{/FunctionalLocationsSet}"
+		search="_handleValueHelpSearchFunctionalLocation"
+		confirm="_handleValueHelpClose"
+		cancel="_handleValueHelpClose"
+		afterClose="_handleValueHelpAfterClose">
+		<StandardListItem
+			title="{FunctionalLocation}"
+			description="{Description}" />
+	</SelectDialog>
+</core:FragmentDefinition>

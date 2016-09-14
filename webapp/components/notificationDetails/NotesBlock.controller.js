@@ -106,9 +106,9 @@ sap.ui.define([
 
 			oPage.removeAllContent();
 			oPage.insertContent(this._getFormFragment(sFragmentName));
-		},
+		}
 		
-		isNotificationStatusNotCompleted: function(NotificationStatus){
+/*		isNotificationStatusNotCompleted: function(NotificationStatus){
 			if(OrderStatus === this.getI18nText("notificationStatusCompleted")){
 				return false;
 			}
@@ -116,7 +116,7 @@ sap.ui.define([
 				return true;
 			}
 			
-		}
+		}*/
 
 	});
 });

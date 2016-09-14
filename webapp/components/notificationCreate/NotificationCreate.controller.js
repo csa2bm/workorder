@@ -3,58 +3,59 @@ sap.ui.define([
 	"com/twobm/mobileworkorder/dev/devapp",
 	"com/twobm/mobileworkorder/util/Globalization",
 	"sap/ui/core/routing/History",
-	"sap/m/MessageBox"
-], function(Controller, devApp, Globalization, History, MessageBox) {
+	"sap/m/MessageBox",
+	"sap/ui/model/Filter",
+	'sap/ui/core/Fragment'
+], function(Controller, devApp, Globalization, History, MessageBox, Filter, Fragment) {
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.notificationCreate.NotificationCreate", {
 		onInit: function() {
 			this.getRouter().attachRoutePatternMatched(this.onRouteMatched, this);
-			
-				this.ImageModel = new sap.ui.model.json.JSONModel();
+
+			this.ImageModel = new sap.ui.model.json.JSONModel();
 			this.createAttachmentViewerPopover();
-			
-			
+
 			//	Notification popUps
 			this.NotificationDropdownsModel = new sap.ui.model.json.JSONModel({
 
 				type: [{
-					typeKey: 1 ,
+					typeKey: 1,
 					typeValue: ""
-				},{
-					typeKey: 2 ,
+				}, {
+					typeKey: 2,
 					typeValue: "Malfunction repair"
-				},{
-					typeKey: 3 ,
+				}, {
+					typeKey: 3,
 					typeValue: "Leak repair"
 				}],
 				priority: [{
-					priorityKey: 1 ,
+					priorityKey: 1,
 					priorityValue: "Medium"
-				},{
-					priorityKey: 2 ,
+				}, {
+					priorityKey: 2,
 					priorityValue: "High"
 				}]
 			});
-			
+
 			this.getView().setModel(this.NotificationDropdownsModel, "NotificationDropdownsModel");
 		},
 
 		onRouteMatched: function(oEvent) {
-		var oParameters = oEvent.getParameters();
+			var oParameters = oEvent.getParameters();
+
+			/*	var parametersNotif = {
+					success: function(oData, oResponse) {
+
+						self.DashBoardModel.getData().notificationCount = oData;
+						self.DashBoardModel.refresh();
+
+					},
+					error: this.errorCallBackShowInPopUp
+				};
+
 		
-		/*	var parametersNotif = {
-				success: function(oData, oResponse) {
-
-					self.DashBoardModel.getData().notificationCount = oData;
-					self.DashBoardModel.refresh();
-
-				},
-				error: this.errorCallBackShowInPopUp
-			};
-
-		
-			this.getView().getModel().read("/NotificationsSet/$metadata", parametersNotif);*/
+				this.getView().getModel().read("/NotificationsSet/$metadata", parametersNotif);*/
 
 			jQuery.when(this.oInitialLoadFinishedDeferred).then(jQuery.proxy(function() {
 				var oView = this.getView();
@@ -63,45 +64,45 @@ sap.ui.define([
 				if (oParameters.name !== "notificationCreate") {
 					return;
 				}
-			
-		//	var oArguments = oEvent.getParameter("arguments");
-		//	var contextPath = '/' + oArguments.workOrderContext;
-			
+
+				//	var oArguments = oEvent.getParameter("arguments");
+				//	var contextPath = '/' + oArguments.workOrderContext;
+
 				//var sEntityPath = "/" + oParameters.arguments.entity;
-		
+
 				var sEntityPath = "/NotificationsSet";
 
-			//	if (oParameters.arguments.tab === "AddItem") {
-					var model = this.getView().getModel();
+				//	if (oParameters.arguments.tab === "AddItem") {
+				var model = this.getView().getModel();
 				//	var newEntry = model.createEntry(sEntityPath);
 				var newEntry = model.createEntry(sEntityPath);
-					
-					model.newEntryContext = newEntry;
-					//clean bounded data object
-					oView.unbindObject();
-					//now set new binding context
-					oView.setBindingContext(newEntry);
-			/*	} else {
-					this.switchMode(this._sMode);
-					this.bindView(sEntityPath);
 
-					var oIconTabBar = sap.ui.core.Fragment.byId(this._fragmentName, "idIconTabBar");
-					if (oIconTabBar) {
-						oIconTabBar.getItems().forEach(function(oItem) {
-							oItem.bindElement(Formatter.uppercaseFirstChar(oItem.getKey()));
-						});
+				model.newEntryContext = newEntry;
+				//clean bounded data object
+				oView.unbindObject();
+				//now set new binding context
+				oView.setBindingContext(newEntry);
+				/*	} else {
+						this.switchMode(this._sMode);
+						this.bindView(sEntityPath);
 
-						// Which tab?
-						var sTabKey = oParameters.arguments.tab;
-						this.getEventBus().publish("Detail", "TabChanged", {
-							sTabKey: sTabKey
-						});
+						var oIconTabBar = sap.ui.core.Fragment.byId(this._fragmentName, "idIconTabBar");
+						if (oIconTabBar) {
+							oIconTabBar.getItems().forEach(function(oItem) {
+								oItem.bindElement(Formatter.uppercaseFirstChar(oItem.getKey()));
+							});
 
-						if (oIconTabBar.getSelectedKey() !== sTabKey) {
-							oIconTabBar.setSelectedKey(sTabKey);
+							// Which tab?
+							var sTabKey = oParameters.arguments.tab;
+							this.getEventBus().publish("Detail", "TabChanged", {
+								sTabKey: sTabKey
+							});
+
+							if (oIconTabBar.getSelectedKey() !== sTabKey) {
+								oIconTabBar.setSelectedKey(sTabKey);
+							}
 						}
-					}
-				}*/
+					}*/
 			}, this));
 		},
 
@@ -109,7 +110,7 @@ sap.ui.define([
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
 			this.getView().setBindingContext(null);
-		//	this.getView().unbindObject();
+			//	this.getView().unbindObject();
 
 			if (sPreviousHash !== undefined) {
 				window.history.go(-1);
@@ -118,7 +119,6 @@ sap.ui.define([
 				oRouter.navTo("dashboard", true);
 			}
 		},
-		
 
 		/**
 		 * detai view save button handler
@@ -126,7 +126,7 @@ sap.ui.define([
 		handleSaveNotification: function() {
 			var model = this.getView().getModel();
 			//if (model.hasPendingChanges() || model.newEntryContext) {
-					if ( model.newEntryContext) {
+			if (model.newEntryContext) {
 				this.getView().setBusy(true);
 
 				model.submitChanges(
@@ -135,14 +135,14 @@ sap.ui.define([
 						this.openDialog("i18n>saveSuccess");
 						this.switchMode("read");
 						if (oResponse && oResponse.statusCode === 201) { // 201 == Created
-						/*	if (oData && oData.__metadata && oData.__metadata.id) {
-								var idx = oData.__metadata.id.lastIndexOf("/");
-								var bindingPath = oData.__metadata.id.substring(idx);
-								this.getRouter().navTo("detail", {
-									entity: bindingPath.substr(1)
-								}, true);
-							}*/
-								this.goBack();
+							/*	if (oData && oData.__metadata && oData.__metadata.id) {
+									var idx = oData.__metadata.id.lastIndexOf("/");
+									var bindingPath = oData.__metadata.id.substring(idx);
+									this.getRouter().navTo("detail", {
+										entity: bindingPath.substr(1)
+									}, true);
+								}*/
+							this.goBack();
 						}
 					}, this),
 					jQuery.proxy(function(error) {
@@ -155,10 +155,10 @@ sap.ui.define([
 						this._showServiceError(msg);
 					}, this)
 				);
-						this.goBack();
+				this.goBack();
 			}
 		},
-		
+
 		imageDataToUrl: function(imageData) {
 			return 'data:image/jpeg;base64,' + imageData;
 		},
@@ -345,7 +345,6 @@ sap.ui.define([
 			var windowWidth = window.innerWidth;
 			var windowHeight = window.innerHeight;
 
-	
 		},
 
 		closeAttachmentPopupButton: function() {
@@ -368,7 +367,7 @@ sap.ui.define([
 
 				},
 				error: function(oError) {
-				//	var X = 0;
+					//	var X = 0;
 				}
 			};
 
@@ -432,6 +431,97 @@ sap.ui.define([
 					actions: [MessageBox.Action.CLOSE]
 				}
 			);
-		}
+		},
+
+		handleValueHelpFunctionalLocation: function(oEvent) {
+			var sInputValue = oEvent.getSource().getValue();
+
+			this.inputId = oEvent.getSource().getId();
+			var x = 0;
+			// create value help dialog
+	/*		if (this._valueHelpDialog) {
+				this._valueHelpDialog.destroy();
+			}*/
+			if (!this._valueHelpDialog) {
+				this._valueHelpDialog = sap.ui.xmlfragment(
+					"com.twobm.mobileworkorder.components.notificationCreate.fragments.FunctionalLocation",
+					this
+				);
+				this.getView().addDependent(this._valueHelpDialog);
+			}
+
+			// create a filter for the binding
+			this._valueHelpDialog.getBinding("items").filter([new Filter(
+				"FunctionalLocation",
+				sap.ui.model.FilterOperator.Contains, sInputValue
+			)]);
+
+			// open value help dialog filtered by the input value
+			this._valueHelpDialog.open(sInputValue);
+		},
+
+		handleValueHelpEquipment: function(oEvent) {
+			var sInputValue = oEvent.getSource().getValue();
+
+			this.inputId = oEvent.getSource().getId();
+			var x = 0;
+			// create value help 
+		/*	if (this._valueHelpDialog) {
+				this._valueHelpDialog.destroy();
+			}*/
+			if (!this._valueHelpDialog) {
+				this._valueHelpDialog = sap.ui.xmlfragment(
+					"com.twobm.mobileworkorder.components.notificationCreate.fragments.Equipment",
+					this
+				);
+				this.getView().addDependent(this._valueHelpDialog);
+			}
+
+			// create a filter for the binding
+			this._valueHelpDialog.getBinding("items").filter([new Filter(
+				"Equipment",
+				sap.ui.model.FilterOperator.Contains, sInputValue
+			)]);
+
+			// open value help dialog filtered by the input value
+			this._valueHelpDialog.open(sInputValue);
+		},
+
+		_handleValueHelpSearchFunctionalLocation: function(evt) {
+			var sValue = evt.getParameter("value");
+			var oFilter = new Filter(
+				"FunctionalLocation",
+				sap.ui.model.FilterOperator.Contains, sValue
+			);
+			evt.getSource().getBinding("items").filter([oFilter]);
+		},
+		_handleValueHelpSearchEquipment: function(evt) {
+			var sValue = evt.getParameter("value");
+			var oFilter = new Filter(
+				"Equipment",
+				sap.ui.model.FilterOperator.Contains, sValue
+			);
+			evt.getSource().getBinding("items").filter([oFilter]);
+		},
+
+		_handleValueHelpClose: function(evt) {
+			var oSelectedItem = evt.getParameter("selectedItem");
+			if (oSelectedItem) {
+				var productInput = this.getView().byId(this.inputId);
+				productInput.setValue(oSelectedItem.getTitle());
+			}
+			evt.getSource().getBinding("items").filter([]);
+			var thisDialog=evt.getParameter("id");
+			 thisDialog.close();
+		
+
+		},
+		  _handleValueHelpAfterClose : function(evt){
+             //Destroy the ValueHelpDialog
+             var thisDialog=evt.getParameter("id");
+             //this._valueHelpDialog.destroy();
+             thisDialog.destroy();
+            
+         }   
 	});
 });

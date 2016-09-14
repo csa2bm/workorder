@@ -1,0 +1,17 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<SelectDialog
+		id = "EquipmentsLocationsDialog"
+		title="Equipments"
+		class="sapUiPopupWithPadding"
+		items="{/EquipmentsSet}"
+		search="_handleValueHelpSearchEquipment"
+		confirm="_handleValueHelpClose"
+		cancel="_handleValueHelpClose"
+		afterClose="_handleValueHelpAfterClose">
+		<StandardListItem
+			title="{Equipment}"
+			description="{Description}" />
+	</SelectDialog>
+</core:FragmentDefinition>
