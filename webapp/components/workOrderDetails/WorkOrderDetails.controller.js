@@ -292,7 +292,7 @@ sap.ui.define([
 			if (generalSection) {
 				this.getView().byId("ObjectPageLayout").scrollToSection(generalSection, 0, -500);
 			}
-		},
+		}
 
 	});
 });
