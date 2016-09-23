@@ -106,17 +106,17 @@ sap.ui.define([
 
 			oPage.removeAllContent();
 			oPage.insertContent(this._getFormFragment(sFragmentName));
-		}
+		},
 		
-/*		isNotificationStatusNotCompleted: function(NotificationStatus){
-			if(OrderStatus === this.getI18nText("notificationStatusCompleted")){
+		isNotificationStatusNotCompleted: function(NotificationStatus){
+			if(NotificationStatus === this.getI18nText("notificationStatusCompleted")){
 				return false;
 			}
 			else{
 				return true;
 			}
 			
-		}*/
+		}
 
 	});
 });

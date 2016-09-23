@@ -11,14 +11,31 @@ sap.ui.define([
 		 * @memberOf com.twobm.mobileworkorder.components.workOrderDetails.view.AttachmentsBlock
 		 */
 		onInit: function() {
-			
+
 			//Subscribe to connection events
 			var eventBus = this.getEventBus();
 			eventBus.subscribe("longTextDisplayMode", this.setLongTextInDisplayMode, this);
 			this._showFormFragment("LongTextFragmentDisplay");
-			
-			
 
+			//setup edit note model
+			var editNoteModel = this.getView().getModel("EditNoteModel");
+			editNoteModel = new sap.ui.model.json.JSONModel();
+			editNoteModel.setDefaultBindingMode(sap.ui.model.BindingMode.OneWay);
+			this.getView().setModel(editNoteModel, "EditNoteModel");
+			
+			this.clearEditNoteModel();
+		},
+
+		clearEditNoteModel: function() {
+
+			var editNoteModel = this.getView().getModel("EditNoteModel");
+
+			//Clear data
+			var data = {
+				Editable: false
+			};
+
+			editNoteModel.setData(data);
 		},
 
 		editLongText: function() {
@@ -49,38 +66,20 @@ sap.ui.define([
 		},
 
 		toggleButtonsAndView: function(bEdit) {
-			var oView = this.getView();
+			//var oView = this.getView();
+			
+			var editNoteModel = this.getView().getModel("EditNoteModel");
+			editNoteModel.getData().Editable = bEdit;
+			editNoteModel.refresh();
 
 			// Show the appropriate action buttons
-			oView.byId("editButton").setVisible(!bEdit);
-			oView.byId("saveButton").setVisible(bEdit);
+			//oView.byId("editButton").setVisible(!bEdit);
+			//oView.byId("saveButton").setVisible(bEdit);
 
 			// Set the right form type
 			this._showFormFragment(bEdit ? "LongTextFragmentChange" : "LongTextFragmentDisplay");
 		},
 
-		/**
-		 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
-		 * (NOT before the first rendering! onInit() is used for that one!).
-		 * @memberOf com.twobm.mobileworkorder.components.workOrderDetails.view.AttachmentsBlock
-		 */
-		//	onBeforeRendering: function() {
-		//
-		//	},
-
-		/**
-		 * Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.
-		 * This hook is the same one that SAPUI5 controls get after being rendered.
-		 * @memberOf com.twobm.mobileworkorder.components.workOrderDetails.view.AttachmentsBlock
-		 */
-		//	onAfterRendering: function() {
-		//
-		//	},
-
-		/**
-		 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
-		 * @memberOf com.twobm.mobileworkorder.components.workOrderDetails.view.AttachmentsBlock
-		 */
 		onExit: function() {
 			for (var sPropertyName in this._formFragments) {
 				if (!this._formFragments.hasOwnProperty(sPropertyName)) {
@@ -113,17 +112,20 @@ sap.ui.define([
 			oPage.removeAllContent();
 			oPage.insertContent(this._getFormFragment(sFragmentName));
 		},
-		orderStatusValid: function(str){
-			
+		orderStatusValid: function(str) {
+
 			var oContext = this.getView().getBindingContext();
 			var model = this.getView().getModel();
-			
+
 			return !this.readOnly(oContext, model);
 		},
-		setLongTextInDisplayMode: function(){
+		setLongTextInDisplayMode: function() {
 			this._showFormFragment("LongTextFragmentDisplay");
 			this.toggleButtonsAndView(false);
+		},
+		
+		getNotEditableNote : function (editable){
+			return !editable;
 		}
-
 	});
 });

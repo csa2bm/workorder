@@ -1,22 +1,21 @@
 sap.ui.define([
 	"com/twobm/mobileworkorder/util/Controller",
 	"com/twobm/mobileworkorder/util/Formatter"
-], function(Controller,Formatter) {
+], function(Controller, Formatter) {
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.equipmentDetails.MeasuringPointsBlock", {
-		formatter:Formatter,
-		
+		formatter: Formatter,
+
 		onInit: function() {
-				
-				// Databind to measuring points from object
-			
-				
-				this.readingModel = new sap.ui.model.json.JSONModel();
-				this.createAttachmentViewerPopover();
-			},
-		
-			createAttachmentViewerPopover: function() {
+
+			// Databind to measuring points from object
+
+			this.readingModel = new sap.ui.model.json.JSONModel();
+			this.createAttachmentViewerPopover();
+		},
+
+		createAttachmentViewerPopover: function() {
 			if (!this._oPopover) {
 				this._oPopover = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.workOrderDetails.fragments.CreateMeasurementPopover",
 					this);
@@ -35,16 +34,18 @@ sap.ui.define([
 		},
 		addMeasurement: function(oEvent) {
 			var currentObject = oEvent.getSource().getBindingContext().getObject();
-			
-			
-			
+
 			this._oPopover.getModel("ViewModel").setData(currentObject);
-			this._oPopover.getModel("ViewModel").refresh();                         
-			
+			this._oPopover.getModel("ViewModel").refresh();
+
 			this._oPopover.open();
 		},
 		closeAddMeasurement: function() {
 			this._oPopover.close();
+		},
+		
+		orderStatusValid : function(){
+			return true;
 		}
 
 	});

@@ -61,7 +61,7 @@
 				</layout:toolbar>
 				<layout:content>
 					<layout:VerticalLayout class="sapUiSmallMarginEnd" width="100%">
-						<FlexBox id="notificationAttachmentsList" items="{ path: 'NotificationAttachments', factory: '.itemFactory'}" wrap="Wrap"/>
+						<!--<FlexBox id="notificationAttachmentsList" items="{ path: 'NotificationAttachments', factory: '.itemFactory'}" wrap="Wrap"/>-->
 						<layout:HorizontalLayout ></layout:HorizontalLayout>
 					</layout:VerticalLayout>
 				</layout:content>
