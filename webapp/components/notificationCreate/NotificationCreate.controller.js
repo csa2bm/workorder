@@ -28,12 +28,18 @@ sap.ui.define([
 				}, {
 					typeKey: 3,
 					typeValue: "Leak repair"
+				}, {
+					typeKey: 4,
+					typeValue: "periodic Maintenance"
 				}],
 				priority: [{
 					priorityKey: 1,
-					priorityValue: "Medium"
+					priorityValue: "Low"
 				}, {
 					priorityKey: 2,
+					priorityValue: "Medium"
+				}, {
+					priorityKey: 3,
 					priorityValue: "High"
 				}]
 			});
@@ -125,6 +131,10 @@ sap.ui.define([
 		 */
 		handleSaveNotification: function() {
 			var model = this.getView().getModel();
+			
+		
+			model.newEntryContext.getProperty().Priority = this.priorityValueConvert(model.newEntryContext.getProperty().Priority);
+			
 			//if (model.hasPendingChanges() || model.newEntryContext) {
 			if (model.newEntryContext) {
 				this.getView().setBusy(true);
@@ -158,6 +168,21 @@ sap.ui.define([
 				this.goBack();
 			}
 		},
+			priorityValueConvert: function(value) {
+		
+			switch (value) {
+				case "Low":
+					return 1;
+				case  "Medium":
+					return 2;
+				case  "High":
+					return 3 ;
+				default:
+					return null;
+			}
+				
+			},
+		
 
 		imageDataToUrl: function(imageData) {
 			return 'data:image/jpeg;base64,' + imageData;
@@ -522,6 +547,11 @@ sap.ui.define([
              //this._valueHelpDialog.destroy();
              thisDialog.destroy();
             
-         }   
+         },
+         
+         orderStatusValid: function(str){
+			
+			return true;
+		}
 	});
 });
