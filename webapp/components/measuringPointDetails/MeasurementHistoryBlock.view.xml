@@ -1,7 +1,7 @@
 <core:View controllerName="com.twobm.mobileworkorder.components.measuringPointDetails.MeasurementHistoryBlock" xmlns:core="sap.ui.core"
 	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
 	xmlns:vbm="sap.ui.vbm" xmlns="sap.m">
-	<Table id="idMeasuringHistoryTable" items="{ path: 'OrderMeasPoint', sorter: { path: 'Measpos', descending: false}}"
+	<Table id="idMeasuringHistoryTable" items="{ path: 'MeasPointMeasDoc', sorter: { path: 'Reader', descending: false}}"
 		noDataText="{i18n>EquipmentBlockNoEquipmentAdded}">
 		<columns>
 			<Column minScreenWidth="Tablet">
@@ -27,10 +27,10 @@
 					<ObjectIdentifier text="{ShortText}" title="{Equipment}"/>
 					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 					-->
-					<ObjectIdentifier text="11/12/2016" title="Test"/>
-					<ObjectIdentifier text="" title=""/>
-					<ObjectIdentifier text="" title=""/>
-					<ObjectIdentifier text="" title=""/>
+					<ObjectIdentifier text="{path: 'ReadingDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'short' }}" title=""/>
+					<ObjectIdentifier text="{ShortText}" title="{Measpoint}"/>
+					<ObjectIdentifier text="{Fullname}" title="{Reader}"/>
+					<ObjectIdentifier text="{RecordedValue} {RecordedUnit}" title=""/>
 					<!--<ObjectIdentifier text="Oil preasure" title="12382382938"/>
 					<ObjectIdentifier text="14,5" title="PSI"/>
 					<ObjectIdentifier text="{/OrderStatus}" title="PSI"/>-->
