@@ -71,7 +71,8 @@ sap.ui.define([
 			} else {
 				var oRouter = this.getRouter();
 				oRouter.navTo("workOrderDetails", false);
-			}	
+			}
+			this.scrollToTop();
 		},
 		scrollToTop: function() {
 			var generalSection = this.getView().byId("generalSectionId").getId();
