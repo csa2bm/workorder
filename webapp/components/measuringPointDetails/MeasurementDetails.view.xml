@@ -26,7 +26,7 @@ height="100%">
 				-->
 				<ObjectPageSection title="{i18n>SubSectionTitleMeasuringPointGeneral}">
 					<subSections>
-						<ObjectPageSubSection title="{i18n>SubSectionTitleMeasuringPointGeneral}">
+						<ObjectPageSubSection id="generalSectionId" title="{i18n>SubSectionTitleMeasuringPointGeneral}">
 							<blocks>
 								<blocks:MeasurementGeneralBlock/>
 							</blocks>

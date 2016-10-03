@@ -72,6 +72,12 @@ sap.ui.define([
 				var oRouter = this.getRouter();
 				oRouter.navTo("workOrderDetails", false);
 			}	
+		},
+		scrollToTop: function() {
+			var generalSection = this.getView().byId("generalSectionId").getId();
+			if (generalSection) {
+				this.getView().byId("MeasuringObjectPageId").scrollToSection(generalSection, 0, -500);
+			}
 		}
 	});
 });
