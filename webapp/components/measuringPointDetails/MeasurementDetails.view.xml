@@ -24,11 +24,20 @@ height="100%">
 					</subSections>
 				</ObjectPageSection>
 				-->
-				<ObjectPageSection title="{i18n>SubSectionTitleMeasuringPointnGeneral}">
+				<ObjectPageSection title="{i18n>SubSectionTitleMeasuringPointGeneral}">
 					<subSections>
-						<ObjectPageSubSection title="{i18n>SubSectionTitleMeasuringPointnGeneral}">
+						<ObjectPageSubSection title="{i18n>SubSectionTitleMeasuringPointGeneral}">
 							<blocks>
 								<blocks:MeasurementGeneralBlock/>
+							</blocks>
+						</ObjectPageSubSection>
+					</subSections>
+				</ObjectPageSection>
+				<ObjectPageSection title="{i18n>SubSectionTitleMeasuringPointHistory}">
+					<subSections>
+						<ObjectPageSubSection title="{i18n>SubSectionTitleMeasuringPointHistory}">
+							<blocks>
+								<blocks:MeasurementHistoryBlock/>
 							</blocks>
 						</ObjectPageSubSection>
 					</subSections>
