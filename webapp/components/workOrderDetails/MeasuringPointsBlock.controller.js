@@ -109,8 +109,21 @@ sap.ui.define([
 			var model = this.getView().getModel();
 			
 			return !this.readOnly(oContext, model);
-		}
+		},
+		onMeasuringPointItemPress: function(oEvent){
+			var oBindingContext = oEvent.getSource().getBindingContext();
+			
+			var data = {
+				"block": "measurement",
+				"measurementContext": oBindingContext.getPath().substr(1)
+			};
+			this.gotoMeasurementDetailsPage(data);
+		},
+		gotoMeasurementDetailsPage: function(data) {
 
+			var eventBus = sap.ui.getCore().getEventBus();
+			eventBus.publish("BlockNavigation", data);
+		}
 		/**
 		 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
 		 * (NOT before the first rendering! onInit() is used for that one!).

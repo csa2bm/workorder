@@ -20,7 +20,7 @@
 			<Column width="1.5em" vAlign="Middle"></Column>
 		</columns>
 		<items>
-			<ColumnListItem type="Active" press="onEquipmentItemPress">
+			<ColumnListItem type="Active" press="onMeasuringPointItemPress">
 				<cells>
 					<!--
 					<ObjectIdentifier text="{Funcldescr}" title="{FunclocDisp}"/>

@@ -294,6 +294,11 @@ sap.ui.define([
 				this.getRouter().navTo("equipmentDetails", {
 					equipmentContext: data.equipmentContext
 				}, false);
+			} else if("measurement".localeCompare(data.block) === 0){
+				
+				this.getRouter().navTo("measurementPointDetails", {
+					measurementContext: data.measurementContext
+				}, false);
 			}
 		},
 

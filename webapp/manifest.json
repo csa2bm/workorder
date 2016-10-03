@@ -106,6 +106,10 @@
 				"name": "equipmentDetails",
 				"target": "equipmentDetails"
 			}, {
+				"pattern": "measurementPointDetails/{measurementContext}",
+				"name": "measurementPointDetails",
+				"target": "measurementPointDetails"
+			},{
 				"pattern": "notificationList",
 				"name": "notificationList",
 				"greedy": false,
@@ -150,6 +154,11 @@
 				"equipmentDetails": {
 					"viewPath": "com.twobm.mobileworkorder.components.equipmentDetails",
 					"viewName": "EquipmentDetails",
+					"viewLevel": 4
+				},
+				"measurementPointDetails": {
+					"viewPath": "com.twobm.mobileworkorder.components.measuringPointDetails",
+					"viewName": "MeasurementDetails",
 					"viewLevel": 4
 				},
 				"notificationList": {
