@@ -26,7 +26,7 @@ sap.ui.define([
 				refreshAfterChange: true
 			};
 
-			if (window.cordova && !window.sap_webide_FacadePreview && !window.sap_webide_companion) {
+			if (window.cordova && window.cordova.platformId !== "browser" && !window.sap_webide_FacadePreview && !window.sap_webide_companion) {
 				if (devapp.devLogon) {
 					appContext = devapp.devLogon.appContext;
 				}

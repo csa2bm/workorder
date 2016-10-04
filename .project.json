@@ -438,5 +438,10 @@
   },
   "hybrid.facadeconfig": {
     "bFacade": true
+  },
+  "hcpdeploy": {
+    "account": "s0008749115trial",
+    "name": "comtwobmmobileworkorder",
+    "lastVersionWeTriedToDeploy": "1.0.9"
   }
 }

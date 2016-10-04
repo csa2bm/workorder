@@ -8,6 +8,11 @@ sap.ui.define([
 			
 			//sap.m.MessageBox.show("handleSyncState");
 
+			if (!window.cordova || window.cordova.platformId === "browser")
+			{
+				return;
+			}
+
 			var that = this;
 
 			var syncStatusModel = sap.ui.getCore().getComponent("__component0").getModel("syncStatusModel");
