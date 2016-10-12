@@ -58,7 +58,7 @@
 					<subSections>
 						<ObjectPageSubSection id="objectsSubSection" title="{i18n>SubSectionTitleObjects}">
 							<blocks>
-								<blocks:EquipmentBlock/>
+								<blocks:ObjectsBlock/>
 							</blocks>
 						</ObjectPageSubSection>
 					</subSections>

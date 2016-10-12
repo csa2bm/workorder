@@ -4,7 +4,7 @@ sap.ui.define([
 ], function(Controller, Formatter) {
 	"use strict";
 
-	return Controller.extend("com.twobm.mobileworkorder.components.equipmentDetails.blocks.MeasuringPointsBlock", {
+	return Controller.extend("com.twobm.mobileworkorder.components.objectDetails.blocks.MeasuringPointsBlock", {
 		formatter: Formatter,
 
 		onInit: function() {

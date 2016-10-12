@@ -4,7 +4,7 @@ sap.ui.define([
 ], function(Controller,Formatter) {
 	"use strict";
 
-	return Controller.extend("com.twobm.mobileworkorder.components.equipmentDetails.blocks.NotificationHistoryBlock", {
+	return Controller.extend("com.twobm.mobileworkorder.components.objectDetails.blocks.NotificationHistoryBlock", {
 		formatter:Formatter
 	
 	});

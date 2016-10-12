@@ -102,9 +102,9 @@
 				"name": "operationDetails",
 				"target": "operationDetails"
 			}, {
-				"pattern": "equipmentDetails/{equipmentContext}",
-				"name": "equipmentDetails",
-				"target": "equipmentDetails"
+				"pattern": "objectDetails/{objectContext}",
+				"name": "objectDetails",
+				"target": "objectDetails"
 			}, {
 				"pattern": "measurementPointDetails/{measurementContext}",
 				"name": "measurementPointDetails",
@@ -157,9 +157,9 @@
 					"viewName": "OperationDetails",
 					"viewLevel": 4
 				},
-				"equipmentDetails": {
-					"viewPath": "com.twobm.mobileworkorder.components.equipmentDetails",
-					"viewName": "EquipmentDetails",
+				"objectDetails": {
+					"viewPath": "com.twobm.mobileworkorder.components.objectDetails",
+					"viewName": "WorkOrderObjectDetails",
 					"viewLevel": 4
 				},
 				"measurementPointDetails": {

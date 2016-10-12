@@ -3,14 +3,14 @@ sap.ui.define([
 ], function(Controller) {
 	"use strict";
 
-	return Controller.extend("com.twobm.mobileworkorder.components.workOrderDetails.blocks.EquipmentBlock", {
+	return Controller.extend("com.twobm.mobileworkorder.components.workOrderDetails.blocks.ObjectsBlock", {
 		
 		onEquipmentItemPress: function(oEvent) {
 			var oBindingContext = oEvent.getSource().getBindingContext();
 
 			var data = {
-				"block": "equipment",
-				"equipmentContext": oBindingContext.getPath().substr(1)
+				"block": "object",
+				"objectContext": oBindingContext.getPath().substr(1)
 			};
 			this.gotoEquipmentDetailsPage(data);
 		},

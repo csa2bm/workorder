@@ -5,7 +5,7 @@ sap.ui.define([
 ], function(Controller, History, Formatter) {
 	"use strict";
 
-	return Controller.extend("com.twobm.mobileworkorder.components.equipmentDetails.EquipmentDetails", {
+	return Controller.extend("com.twobm.mobileworkorder.components.objectDetails.WorkOrderObjectDetails", {
 		formatter:Formatter,
 		
 		onInit: function() {
@@ -14,7 +14,7 @@ sap.ui.define([
 		
 		onRouteMatched: function(oEvent) {
 			var oArguments = oEvent.getParameter("arguments");
-			var contextPath = '/' + oArguments.equipmentContext;
+			var contextPath = '/' + oArguments.objectContext;
 			var givenContext = new sap.ui.model.Context(this.getView().getModel(), contextPath);
 			
 			//this.oContext is the current context of the view
