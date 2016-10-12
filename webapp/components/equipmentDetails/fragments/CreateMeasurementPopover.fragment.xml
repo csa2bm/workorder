@@ -4,17 +4,15 @@
 			<Button text="Close" press="closeAddMeasurement"/>
 		</beginButton>
 		<endButton>
-			<Button  type="Accept" text="{i18n>deleteAttachmentButtonText}" press="onDeleteFile"></Button>
+			<Button type="Accept" text="{i18n>deleteAttachmentButtonText}" press="onDeleteFile"></Button>
 		</endButton>
 		<buttons></buttons>
 		<content>
 			<VBox>
-				<!--class="sapUiSmallMargin"-->
-				<!--<Label text="Select new work date" labelFor="DP3"/>-->
-				<Label text="Enter reading" />
+				<Label text="Enter reading"/>
 				<HBox>
-				<Input type="Text" />
-				<Label text="{ViewModel/MeasUnit}" />
+					<Input type="Text"/>
+					<Label text="{ViewModel/MeasUnit}"/>
 				</HBox>
 			</VBox>
 		</content>

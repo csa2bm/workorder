@@ -1,0 +1,35 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:table="sap.ui.table"
+	controllerName="com.twobm.mobileworkorder.components.objectTreeList.objectTreeList" xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page title="Title">
+				<content>
+					<table:TreeTable id="treeTable" selectionMode="Single" enableColumnReordering="false" expandFirstLevel="false" rows="{
+            path : '/FunctionalLocationsSet',
+            parameters : {
+                countMode: 'Inline',
+                treeAnnotationProperties : {
+                    hierarchyLevelFor : 'HierarchyLevel',
+                    hierarchyNodeFor : 'FunctionalLocation',
+                    hierarchyParentNodeFor : 'ParentFuncLoc'
+                }
+            }
+        }">
+						<table:columns>
+							<table:Column label=" FunctionalLocation">
+								<table:template>
+									<Text text="{FunctionalLocation}"/>
+								</table:template>
+							</table:Column>
+							<table:Column label="ParentFuncLoc">
+								<table:template>
+									<Text text="{ParentFuncLoc}"/>
+								</table:template>
+							</table:Column>
+						</table:columns>
+					</table:TreeTable>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

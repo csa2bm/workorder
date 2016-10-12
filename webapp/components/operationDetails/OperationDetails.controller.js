@@ -25,12 +25,9 @@ sap.ui.define([
 			if (!this.getView().getBindingContext() || this.getView().getBindingContext().getPath() !== contextPath) {
 				//Reset model to the new context
 				this.ExpandLoaded = false;
-				//this.oContext = givenContext;
 				this.getView().setBindingContext(givenContext);
 				this.getView().bindElement(contextPath);
 			}
-			
-			
 		},
 		
 		onNavigationButtonPress: function(oEvent){

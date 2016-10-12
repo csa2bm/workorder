@@ -8,28 +8,14 @@
 				</l:HorizontalLayout>
 			</headerContent>
 			<content>
-				<Table id="notificationTableId" items="{path: '/NotificationsSet', sorter: [{path: 'Priority', descending: false}]}" noDataText="No Notifications" showSeparators="false"
+				<Table id="notificationTableId" items="{path: '/NotificationsSet', sorter: [{path: 'NotifDate', descending: true}]}" noDataText="No Notifications" showSeparators="false"
 					class="notificationListTableClass" >
 					<columns>
-						<Column demandPopin="true" popinDisplay="Inline" width="5em">
-							<header>	
-								<Label text="{i18n>NotificationListColumnPriorityHeaderLabel}"/>
-							</header>
-						</Column>
 						<Column  demandPopin="true" popinDisplay="Inline">
 							<header>
 								<Label text="{i18n>NotificationListColumnDateHeaderLabel}"/>
 							</header>
 						</Column>
-						
-				
-						
-					
-						<!--	<Column width="6em">
-							<header>
-								<Label text="{i18n>NotificationListColumnTypeHeaderLabel}"/>
-							</header>
-						</Column>-->
 						<Column>
 							<header>
 								<Label text="{i18n>NotificationListColumnNotificationHeaderLabel}"/>
@@ -50,17 +36,8 @@
 					<items>
 						<ColumnListItem type="Active" press="onNotificationItemPress">
 							<cells>
-								<!--	<VBox>
-								<Label design="Bold" maxLines="1" text="asjhd ajkhd ajkhsd jkahd kjahds jkas djahs dkjas djkahs dkjah djkahs jd" />
-								<Label design="" maxLines="1" text="asjhd ajkhd ajkhsd jkahd kjahds jkas djahs dkjas djkahs dkjah djkahs jd" class="sapUiTinyMarginTop" />
-								</VBox>-->
-								<core:Icon  src="sap-icon://flag" color="{parts:[{path:'Priority'}],formatter:'.priorityValueConvert'}"
-								class="size1"/>
 								<ObjectIdentifier text="{path: 'RequiredEndDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"
 									title="{path: 'NotifDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"/>
-								
-								
-									<!--<ObjectIdentifier text="{NotifType}" title="{SysStatus}"/>-->
 								<ObjectIdentifier text="{NotifNo}" title="{ShortText}"/>
 								<ObjectIdentifier text="{FunctionalLoc}" title="{FuncLocDesc}"/>
 								<ObjectIdentifier text="{Equipment}" title="{EquipmentDesc}"/>

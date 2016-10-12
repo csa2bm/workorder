@@ -3,39 +3,19 @@
 	xmlns:mic="sap.suite.ui.microchart" height="100%">
 	<App class="dashboardClass">
 		<Page title="{i18n>DashboardPageTitle}">
-			<!--<headerContent>-->
-			<!--	<l:HorizontalLayout>-->
-			<!--		<core:Icon width="3em" height="3em" noTabStop="true" press="handleViewSettingsDialogButtonPressed" src="sap-icon://settings"/>-->
-			<!--	</l:HorizontalLayout>-->
-			<!--</headerContent>-->
 			<content>
 				<FlexBox alignItems="Left" justifyContent="Left">
 					<items>
-						<!--	<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="John Johnson" subheader="Service technician"
-							frameType="TwoByOne" press="press">
-							<tileContent>
-								<TileContent>
-									<content>
-										<FeedContent contentText="Hello John, you are a key player for LEGO in the 4th. industrial revolution." subheader="Keep up the good work!"
-											value="24"></FeedContent>
-										<ImageContent src="../webapp/localService/mockData/AugustFoto_2016_small_Round.png"/>
-									</content>
-								</TileContent>
-							</tileContent>
-						</GenericTile>-->
 						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Lau Lautrup" subheader="Service technician"
 							headerImage="../webapp/localService/mockData/AugustFoto_2016_small_Round.png" frameType="TwoByOne" press="press">
 							<tileContent>
 								<TileContent footer="">
 									<content>
-										<FeedContent contentText="Hello Lau, Welcome to 2BM Mobile Work Order." subheader="Have a great day!"
-											value=""></FeedContent>
+										<FeedContent contentText="Hello Lau, Welcome to 2BM Mobile Work Order." subheader="Have a great day!" value=""></FeedContent>
 									</content>
 								</TileContent>
 							</tileContent>
 						</GenericTile>
-						<!--			<SlideTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout">
-		<tiles>-->
 						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginEnd sapUiTinyMarginTop tileLayout" visible="{device>/isNotPhone}"
 							backgroundImage="../webapp/localService/mockData/2bmTileLogo7.png" frameType="TwoByOne" press="press">
 							<tileContent>
@@ -46,26 +26,8 @@
 								</TileContent>
 							</tileContent>
 						</GenericTile>
-						
-						<!--			<GenericTile
-				backgroundImage="../webapp/localService/mockData/LegoLogoTileBackgr5.png"
-				frameType="TwoByOne" press="press">
-				<tileContent>
-					<TileContent footer="August 21, 2016">
-						<content>
-							<NewsContent
-								contentText="SAP Unveils Powerful New Player Comparision Tool Exclusively on NFL.com"
-								subheader="Today, SAP News">
-							</NewsContent>
-						</content>
-					</TileContent>
-				</tileContent>
-			</GenericTile>-->
-						<!--	</tiles>
-	</SlideTile>-->
 					</items>
 				</FlexBox>
-			
 				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Workorders" subheader="" size="S" frameType="OneByOne"
 					press="onPressOtherWorkorders">
 					<tileContent>
@@ -96,7 +58,7 @@
 						</TileContent>
 					</tileContent>
 				</GenericTile>
-					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Scan object" subheader="" size="S" frameType="OneByOne"
+				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Scan object" subheader="" size="S" frameType="OneByOne"
 					press="onPressScanObject">
 					<tileContent>
 						<TileContent>
@@ -116,137 +78,12 @@
 						</TileContent>
 					</tileContent>
 				</GenericTile>
-				<!--	<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="PREVENTIVE maintenance orders this month" press="press">
-					<tileContent>
-						<TileContent unit="">
-							<content>
-								<NumericContent scale="%" value="2" valueColor="Error" indicator="Down"/>
-							</content>
-						</TileContent>
-					</tileContent>
-				</GenericTile> 
-					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="PREDICTIVE maintenance orders this month " press="press">
-					<tileContent>
-						<TileContent unit="">
-							<content>
-								<NumericContent scale="%" value="12" valueColor="Good" indicator="Up"/>
-							</content>
-						</TileContent>
-					</tileContent>
-				</GenericTile>
-				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="CORRECTIVE maintenance orders this month" press="press">
-					<tileContent>
-						<TileContent unit="">
-							<content>
-								<NumericContent scale="%" value="10" valueColor="Good" indicator="Down"/>
-							</content>
-						</TileContent>
-					</tileContent>
-				</GenericTile> -->
-			
-				
-				
-				<!--	<FlexBox alignItems="Left" justifyContent="Left">
-					<items>
-				
-				
-			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="PREVENTIVE maintenance orders this month" press="press">
-					<tileContent>
-						<TileContent unit="">
-							<content>
-								<NumericContent scale="%" value="2" valueColor="Error" indicator="Down"/>
-							</content>
-						</TileContent>
-					</tileContent>
-				</GenericTile> 
-					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="PREDICTIVE maintenance orders this month " press="press">
-					<tileContent>
-						<TileContent unit="">
-							<content>
-								<NumericContent scale="%" value="12" valueColor="Good" indicator="Up"/>
-							</content>
-						</TileContent>
-					</tileContent>
-				</GenericTile>
-				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="CORRECTIVE maintenance orders this month" press="press">
-					<tileContent>
-						<TileContent unit="">
-							<content>
-								<NumericContent scale="%" value="10" valueColor="Good" indicator="Down"/>
-							</content>
-						</TileContent>
-					</tileContent>
-				</GenericTile> 
-					</items>
-				</FlexBox>-->
-				
-				<!--<l:VerticalLayout>-->
-				<!--		<l:Grid class="sapUiTinyMarginBegin sapUiTinyMarginTop"  defaultSpan="L6 M6 S12" >
-						<l:content>	-->
-				<!--	<Table id="idnotificationsTable" class="sapUiTinyMarginBegin sapUiTinyMarginEnd sapUiTinyMarginTop" width="auto"
-					items="{ path : 'project>/Deals', sorter : { path : 'status', group : false } }">
-					<headerToolbar>
-						<Toolbar>
-							<Title text="{i18n>notifications}"/>
-							<ToolbarSpacer/>
-							<Button icon="sap-icon://add" press="onPress" ariaLabelledBy="editButtonLabel"/>
-						</Toolbar>
-					</headerToolbar>
-					<columns >
-						<Column width="70%">
-							<Text text="{i18n>notificationListTitle}"/>
-						</Column>
-						<Column minScreenWidth="Tablet" demandPopin="true">
-							<Text text="Status"/>
-						</Column>
-					</columns>
-					<items>
-						<ColumnListItem press="showTasksDetail" type="Navigation">
-							<cells>
-								<ObjectIdentifier title="{project>name}"/>
-								<core:Icon color="{project>color}" src="{project>icon}"></core:Icon>
-							</cells>
-						</ColumnListItem>
-					</items>
-				</Table>-->
-				<!--	<Table id="idpurchaseRequisitionsTable" class="sapUiTinyMarginBegin sapUiTinyMarginEnd sapUiTinyMarginTop" width="auto"
-						items="{ path : 'project>/Deals', sorter : { path : 'status', group : false } }">
-						<headerToolbar>
-							<Toolbar>
-								<Title text="{i18n>purchaseRequisitions}"/>
-								<ToolbarSpacer/>
-								<Button icon="sap-icon://add" press="onPress" ariaLabelledBy="editButtonLabel"/>
-							</Toolbar>
-						</headerToolbar>
-						<columns >
-							<Column width="70%">
-								<Text text="{i18n>purchaseRequisitions}"/>
-							</Column>
-							<Column minScreenWidth="Tablet" demandPopin="true">
-								<Text text="Status"/>
-							</Column>
-						</columns>
-						<items>
-							<ColumnListItem press="showTasksDetail" type="Navigation">
-								<cells>
-									<ObjectIdentifier title="{project>name}"/>
-									<core:Icon color="{project>color}" src="{project>icon}"></core:Icon>
-								</cells>
-							</ColumnListItem>
-						</items>
-					</Table>-->
-				<!--		</l:content>
-						</l:Grid>-->
-				<!--</l:VerticalLayout>-->
 			</content>
 			<footer>
 				<Toolbar id="detailToolbar">
 					<content>
-						<core:Icon id="syncIndicator" width="3em" height="3em"
-							color="{syncStatusModel>/SyncColor}"
-							noTabStop="true" press="showSyncQuickview"
-							src="{syncStatusModel>/SyncIcon}"
-							tooltip="Sync status"></core:Icon>
+						<core:Icon id="syncIndicator" width="3em" height="3em" color="{syncStatusModel>/SyncColor}" noTabStop="true" press="showSyncQuickview"
+							src="{syncStatusModel>/SyncIcon}" tooltip="Sync status"></core:Icon>
 						<BusyIndicator id="syncBusyIndicator" visible="{syncStatusModel>/IsSynching}"/>
 						<ToolbarSpacer></ToolbarSpacer>
 						<Button type="Reject" visible="{syncStatusModel>/InErrorState}" text="Errors" press="openErrorsView"></Button>

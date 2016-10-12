@@ -13,7 +13,6 @@ sap.ui.define([
 		},
 		
 		onRouteMatched: function(oEvent) {
-			
 			var oArguments = oEvent.getParameter("arguments");
 			var contextPath = '/' + oArguments.equipmentContext;
 			var givenContext = new sap.ui.model.Context(this.getView().getModel(), contextPath);
@@ -29,8 +28,6 @@ sap.ui.define([
 				this.getView().setBindingContext(givenContext);
 				this.getView().bindElement(contextPath);
 			}
-			
-			
 		},
 		
 		onNavigationButtonPress: function(){
@@ -44,6 +41,7 @@ sap.ui.define([
 				oRouter.navTo("workOrderDetails", false);
 			}	
 		},
+		
 		onPressCreateNotification: function() {
 
 		var oRouter = this.getRouter();

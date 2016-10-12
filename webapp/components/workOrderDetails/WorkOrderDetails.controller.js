@@ -7,9 +7,9 @@ sap.ui.define([
 	return Controller.extend("com.twobm.mobileworkorder.components.workOrderDetails.WorkOrderDetails", {
 		onInit: function() {
 			var oRouter = this.getRouter();
-			oRouter.getRoute("workOrderDetails").attachMatched(this._onRouteMatched, this);
+			oRouter.getRoute("workOrderDetails").attachMatched(this.onRouteMatched, this);
 
-			//Subscribe to connection events
+			//Subscribe to events
 			var eventBus = this.getEventBus();
 			eventBus.subscribe("BlockNavigation", this.performNavigationForBlocks, this);
 
@@ -17,7 +17,6 @@ sap.ui.define([
 		},
 
 		createEditModeModel: function() {
-
 			var editModeModel = this.getView().getModel("EditModeModel");
 
 			if (!editModeModel) {
@@ -30,10 +29,8 @@ sap.ui.define([
 		},
 
 		clearEditModeModel: function() {
-
 			var editModeModel = this.getView().getModel("EditModeModel");
 
-			//Clear data
 			var data = {
 				EditMode: false
 			};
@@ -41,10 +38,9 @@ sap.ui.define([
 			editModeModel.setData(data);
 		},
 
-		_onRouteMatched: function(oEvent) {
+		onRouteMatched: function(oEvent) {
 			//Are we navigating to this view??
 			//if not do nothing
-
 			var oArguments = oEvent.getParameter("arguments");
 			var contextPath = '/' + oArguments.workOrderContext;
 			var givenContext = new sap.ui.model.Context(this.getView().getModel(), contextPath);
@@ -74,12 +70,6 @@ sap.ui.define([
 				//Set edit mode
 				this.updateEditModeModel(this.getView().getBindingContext().getObject().OrderStatus);
 
-				//Update lists
-				//Fix to get the lists to update after coming back to page with the same context
-				//this.getEventBus().publish("ChecklistsUpdate");
-				//this.getEventBus().publish("AttachmentsUpdate");
-
-				//this.scrollToTop();
 			} else {
 				var that = this;
 				//if not, create the binding context with all the expands we need in this view
@@ -107,14 +97,7 @@ sap.ui.define([
 			eventBus.publish("longTextDisplayMode", data);
 		},
 
-		_onBindingChange: function(oEvent) {
-			// No data for the binding
-			if (!this.getView().getBindingContext()) {
-				this.getRouter().getTargets().display("notFound");
-			}
-		},
-
-		navigateBack : function(oEvent) {
+		navigateBack: function(oEvent) {
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
 
@@ -133,18 +116,6 @@ sap.ui.define([
 			var oContext = this.getView().getBindingContext();
 			var OrderStatus = this.getView().getModel().getProperty("OrderStatus", oContext);
 			this.setUserStatusTaskStarted(OrderStatus);
-
-			/*
-
-			// create menu only once
-			if (!this._orderStatusMenu) {
-				this._orderStatusMenu = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.workOrderDetails.controls.OrderStatusChangeMenu", this);
-				this.getView().addDependent(this._orderStatusMenu);
-			}
-
-			//var eDock = sap.ui.core.Popup.Dock;
-			this._orderStatusMenu.openBy(oButton); //.open(this._bKeyboard, oButton, eDock.BeginTop, eDock.BeginBottom, oButton);
-			*/
 		},
 
 		setUserStatusTaskStarted: function(orderStatus) {
@@ -168,47 +139,24 @@ sap.ui.define([
 						// Set the order status to "inProgress" and post it
 						var newStatus = "";
 						if (orderStatus === that.getI18nText("orderStatusNotStarted")) {
-							//that.onNavBack();
-							console.log("Order status changed to in progress");
 							newStatus = that.getI18nText("orderStatusInProgress");
-
 						}
 						// Set the order status to "completed" and post it
 						else if (orderStatus === that.getI18nText("orderStatusInProgress")) {
-							console.log("Orderstatus changed to completed");
-
 							newStatus = that.getI18nText("orderStatusCompleted");
 						} else {
 							return;
-							/*
-							var requiredMessage = that.getI18nText("messageBoxTextRequiredChecklistsNotCompleted");
-
-							sap.m.MessageBox.show(requiredMessage, {
-								icon: sap.m.MessageBox.Icon.INFORMATION,
-								title: that.getI18nText("messageBoxHeaderRequiredChecklistsNotCompleted"),
-								actions: [sap.m.MessageBox.Action.OK],
-								defaultAction: sap.m.MessageBox.Action.OK,
-								styleClass: bCompact ? "sapUiSizeCompact" : ""
-							});
-							*/
 						}
 
 						var oContext = that.getView().getBindingContext();
 						that.getView().getModel().setProperty("OrderStatus", newStatus, oContext);
 						that.updateOrderStatus();
-
-						/*
-						var oContext = that.getView().getBindingContext();
-						that.getView().getModel().setProperty("OrderStatus", orderStatus, oContext);
-						*/
-
 					}
 				}
 			});
-
 		},
+		
 		updateOrderStatus: function() {
-
 			var orderNo = this.getView().getBindingContext().getObject().Orderid;
 			var that = this;
 
@@ -217,9 +165,8 @@ sap.ui.define([
 					var orderStatus = that.getView().getBindingContext().getObject().OrderStatus;
 
 					that.updateEditModeModel(orderStatus);
-					
-					if(orderStatus == that.getI18nText("orderStatusCompleted")){
-						//Go back to list
+
+					if (orderStatus == that.getI18nText("orderStatusCompleted")) {
 						that.navigateBack();
 					}
 				},
@@ -255,11 +202,6 @@ sap.ui.define([
 			} else if (sString === this.getI18nText("orderStatusInProgress")) {
 				btnText = this.getI18nText("orderStatusBtnTextInProgress");
 			}
-			/*
-						else if(sString === this.getI18nText("orderStatusCompleted")){
-							btnText = this.getI18nText("orderStatusBtnTextNotStarted");
-						}
-						*/
 			else {
 				btnText = this.getI18nText("orderStatusBtnTextCompleted");
 			}
@@ -285,14 +227,16 @@ sap.ui.define([
 		performNavigationForBlocks: function(a, b, data) {
 
 			if ('operation'.localeCompare(data.block) === 0) {
-
 				this.getRouter().navTo("operationDetails", {
 					operationContext: data.operationContext
 				}, false);
 			} else if ('equipment'.localeCompare(data.block) === 0) {
-
 				this.getRouter().navTo("equipmentDetails", {
 					equipmentContext: data.equipmentContext
+				}, false);
+			} else if ("measurement".localeCompare(data.block) === 0) {
+				this.getRouter().navTo("measurementPointDetails", {
+					measurementContext: data.measurementContext
 				}, false);
 			}
 		},
@@ -303,6 +247,5 @@ sap.ui.define([
 				this.getView().byId("ObjectPageLayout").scrollToSection(generalSection, 0, -500);
 			}
 		}
-
 	});
 });

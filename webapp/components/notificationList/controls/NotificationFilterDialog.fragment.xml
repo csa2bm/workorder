@@ -1,13 +1,9 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
 	<ViewSettingsDialog title="Sort notifications" confirm="handleNotificationFilterConfirm">
 		<sortItems text="f" title="js">
+			<ViewSettingsItem text="Created date" key="NotifDate" selected="true"/>
 			<ViewSettingsItem text="End date" key="RequiredEndDate" />
-			<ViewSettingsItem text="Priority" key="Priority" selected="true"/>
-		<!--	<ViewSettingsItem text="Status" key="HerdStatus" />
-			<ViewSettingsItem text="Ordertype" key="Ordertype" />
-			<ViewSettingsItem text="CHR" key="Customer" />
-			<ViewSettingsItem text="Address" key="Address" />
-			-->
+			<ViewSettingsItem text="Priority" key="Priority"/>
 		</sortItems>
 		<groupItems>
 			<ViewSettingsItem text="End Date" key="RequiredEndDate"/>

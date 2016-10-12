@@ -5,13 +5,6 @@
 			<ViewSettingsItem text="Short Text" key="ShortText"/>
 			<ViewSettingsItem text="Functional Location" key="Funcldescr"/>
 			<ViewSettingsItem text="Equipment" key="Equidescr"/>
-			
-			<!--<ViewSettingsItem text="Priority" key="Priority" />
-			<ViewSettingsItem text="Status" key="HerdStatus" />
-			<ViewSettingsItem text="Ordertype" key="Ordertype" />
-			<ViewSettingsItem text="CHR" key="Customer" />
-			<ViewSettingsItem text="Address" key="Address" />
-			-->
 		</sortItems>
 		<groupItems>
 			<ViewSettingsItem text="Start Date" key="StartDate"/>

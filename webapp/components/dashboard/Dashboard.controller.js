@@ -19,7 +19,6 @@ sap.ui.define([
 				orderCount: 0
 			});
 			this.getView().setModel(this.DashBoardModel, "DashBoardModel");
-
 		},
 
 		onRouteMatched: function(oEvent) {
@@ -40,19 +39,13 @@ sap.ui.define([
 			this.getEventBus().subscribe("DeviceOnline", this.deviceWentOnline, this);
 			this.getEventBus().subscribe("DeviceOffline", this.deviceWentOffline, this);
 
-			//this.getEventBus().publish("UpdateSyncState");
 			SyncStateHandler.handleSyncState();
 
 			this.setContentInTiles();
-
 		},
 
 		setContentInTiles: function() {
 			self = this;
-			// Set Dashboard Tiles model
-			// if(!this.getView().getModel(self.DashBoardModel)){
-			// this.getView().setModel(self.DashBoardModel,"DashBoardModel");
-			// }	
 
 			var parametersOrder = {
 				success: function(oData, oResponse) {
@@ -75,14 +68,12 @@ sap.ui.define([
 
 			this.getView().getModel().read("/OrderSet/$count", parametersOrder);
 			this.getView().getModel().read("/NotificationsSet/$count", parametersNotif);
-
 		},
 
 		setNotificationModel: function(oEvent) {
 			var notificationModel = new sap.ui.model.json.JSONModel();
 			notificationModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
 			oEvent.getview().setModel(notificationModel, "NotificationModel");
-
 		},
 
 		onPressOtherWorkorders: function() {
@@ -96,27 +87,26 @@ sap.ui.define([
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 				//var oRouter = this.getRouter();
 				oRouter.navTo("workOrderList", true);
-
 			}
 		},
 
 		onPressScanObject: function() {
-			cordova.plugins.barcodeScanner.scan(
+				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+				//var oRouter = this.getRouter();
+				oRouter.navTo("objectTreeList", true);
+			/*cordova.plugins.barcodeScanner.scan(
 				function(result) {
-
 					if (result.cancelled === "true") {
 						return;
 					}
-
 				},
 				function() {
 					sap.m.MessageToast.show("Scanning failed");
 				}
-			);
+			);*/
 		},
 
 		onPressNotifications: function() {
-
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
 
@@ -129,17 +119,6 @@ sap.ui.define([
 
 			}
 		},
-
-		/*	onPressCreateNotification: function() {
-				if (!this._oDialog) {
-					this._oDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.notificationList.controls.CreateNotificationDialog",
-						this);
-					this.getView().addDependent(this._oDialog);
-				}
-				// toggle compact style
-				jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);
-				this._oDialog.open();
-			},*/
 
 		onPressCreateNotification: function() {
 
@@ -157,26 +136,6 @@ sap.ui.define([
 
 			}
 		},
-
-		/*	onPressCreateNotification: function(oEvent){
-		
-		
-			
-			if (!this._oPopover) {
-				this._oPopover = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.notificationList.controls.CreateNotificationDialog", this);
-
-				this._oPopover.setModel(this.CreateNotificationModel, "CreateNotificationModel");
-				this.getView().addDependent(this._oPopover);
-			}
-			
-			this._oPopover.getModel("CreateNotificationModel").refresh();
-			
-
-
-			this._oPopover.openBy(oEvent.getSource());
-	
-			
-		},*/
 
 		handleSaveNotification: function(oEvent) {
 			//Handles that Finish is also changed. StartDate is handled with twoway binding
@@ -221,26 +180,9 @@ sap.ui.define([
 		syncCompleted: function() {
 			if (window.sap_webide_FacadePreview) {
 				self.unSubscribeToOnlineSyncEvents();
-
-				//Update syncStatusModel
-				// var syncStatusModel = self.getView().getModel("syncStatusModel");
-				// var d = new Date();
-				// syncStatusModel.getData().LastSyncTime = d.toLocaleString();
-
-				// syncStatusModel.getData().Online = true; //always online in webide
-
-				// syncStatusModel.refresh();
-
-				//Update sync state indicator
-				//SyncStateHandler.handleSyncState();
-			} else {
-				//sap.m.MessageToast.show("Data synchronized with server");
-			}
+			} 
 
 			self.setSyncIndicators(false);
-
-			//Update items in table
-			//self.getView().byId("workOrderTableId").getBinding("items").refresh(true);
 		},
 
 		syncFailed: function() {
@@ -266,9 +208,7 @@ sap.ui.define([
 						self.setSyncIndicators(true);
 
 						self.flushAndRefresh();
-						//this.getEventBus().publish("OfflineStore", "Refreshing");
 					} else {
-						//sap.m.MessageToast.show("Offline: not able to sync");
 						model.refresh();
 					}
 				} else {
@@ -280,9 +220,7 @@ sap.ui.define([
 						self.setSyncIndicators(true);
 
 						self.flushAndRefresh();
-						//this.getEventBus().publish("OfflineStore", "Refreshing");
 					} else {
-						//sap.m.MessageToast.show("Device is ");
 						model.refresh();
 					}
 				} else {
@@ -292,8 +230,6 @@ sap.ui.define([
 		},
 
 		setSyncIndicators: function(isSynching) {
-			//self.getView().byId("syncBusyIndicator").setVisible(isSynching);
-			
 			var syncStatusModel = this.getView().getModel("syncStatusModel");
 			syncStatusModel.getData().IsSynching = isSynching;
 			syncStatusModel.refresh();
@@ -311,11 +247,8 @@ sap.ui.define([
 
 		flushAndRefresh: function() {
 			if (devApp.isOnline) {
-				//console.log("refreshing oData Model with offline store");
 				//ask refreshing store after flush
-				//devApp.refreshing = true;
 				if (devApp.devLogon) {
-					//console.log("refreshing offline store");
 					devApp.devLogon.flushAppOfflineStore();
 				}
 			} else {
@@ -325,7 +258,6 @@ sap.ui.define([
 		},
 
 		showSyncQuickview: function(oEvent) {
-			//if (!window.sap_webide_FacadePreview) {
 			this.createPopover();
 
 			// delay because addDependent will do a async rerendering and the actionSheet will immediately close without it.
@@ -333,7 +265,6 @@ sap.ui.define([
 			jQuery.sap.delayedCall(0, this, function() {
 				this._syncQuickView.openBy(oButton);
 			});
-			//	}
 		},
 
 		createPopover: function() {
@@ -349,7 +280,6 @@ sap.ui.define([
 			}
 
 			if (window.sap_webide_FacadePreview || devApp.isOnline) {
-
 				if (window.sap_webide_FacadePreview) {
 					this.subscribeToOnlineSyncEvents();
 				}
@@ -410,6 +340,6 @@ sap.ui.define([
 			if (this._errorsView) {
 				this._errorsView.close();
 			}
-		},
+		}
 	});
 });

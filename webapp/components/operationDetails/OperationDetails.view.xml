@@ -4,7 +4,7 @@ xmlns:html="http://www.w3.org/1999/xhtml"
 xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" 
 xmlns:m="sap.m" 
 xmlns="sap.uxap"
-xmlns:blocks="com.twobm.mobileworkorder.components.operationDetails.blocks"
+xmlns:blocks="com.twobm.mobileworkorder.components.operationDetails.blocks.configuration"
 height="100%">
 	
 	<m:Page showNavButton="true" navButtonPress="onNavigationButtonPress" title="{i18n>OperationDetailsTitle}" height="100%">
@@ -13,7 +13,6 @@ height="100%">
 				<ObjectPageHeader headerDesign="Dark" objectTitle="{path:'Description'}" objectSubtitle="{path:'Activity'}"/>
 			</headerTitle>
 			<sections>
-				<!--
 				<ObjectPageSection title="{i18n>SubSectionTitleOperationInformation}">
 					<subSections>
 						<ObjectPageSubSection title="{i18n>SubSectionTitleOperationInformation}">
@@ -23,7 +22,6 @@ height="100%">
 						</ObjectPageSubSection>
 					</subSections>
 				</ObjectPageSection>
-				-->
 				<ObjectPageSection title="{i18n>SubSectionTitleOperationNotes}">
 					<subSections>
 						<ObjectPageSubSection title="{i18n>SubSectionTitleOperationNotes}">

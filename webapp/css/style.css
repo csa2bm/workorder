@@ -2,10 +2,7 @@
     margin-top: 2rem;
 }
 
-/* Force top blue line to not be shown  */
-.sapMShellBrandingBar {
-    height: 0px !important;
-}
+
 
 /* Force top blue line to not be show  */
 .sapMPageHeader::before {

@@ -30,14 +30,12 @@ sap.ui.define([
 			this.getEventBus().subscribe("DeviceOnline", this.deviceWentOnline, this);
 			this.getEventBus().subscribe("DeviceOffline", this.deviceWentOffline, this);
 
-			//sap.m.MessageBox.show("UpdateSyncState");
 			SyncStateHandler.handleSyncState();
-			//this.getEventBus().publish("UpdateSyncState");
 
-			this.setInitialSorting();
+		//	this.setInitialSorting();
 
 			//flush and refresh data
-			this.refresh();
+		//	this.refresh();
 		},
 
 		onNavigationButtonPress: function(oEvent) {
@@ -198,10 +196,6 @@ sap.ui.define([
 		},
 
 		setSyncIndicators: function(isSynching) {
-			//self.getView().byId("syncButton").setEnabled(!isSynching);
-			//self.getView().byId("syncIndicator").setVisible(!isSynching);
-			//self.getView().byId("syncBusyIndicator").setVisible(isSynching);
-						
 			var syncStatusModel = this.getView().getModel("syncStatusModel");
 			syncStatusModel.getData().IsSynching = isSynching;
 			syncStatusModel.refresh();
@@ -219,9 +213,7 @@ sap.ui.define([
 
 		flushAndRefresh: function() {
 			if (devApp.isOnline) {
-				//console.log("refreshing oData Model with offline store");
 				//ask refreshing store after flush
-				//devApp.refreshing = true;
 				if (devApp.devLogon) {
 					//console.log("refreshing offline store");
 					devApp.devLogon.flushAppOfflineStore();
@@ -233,7 +225,6 @@ sap.ui.define([
 		},
 
 		showSyncQuickview: function(oEvent) {
-			//if (!window.sap_webide_FacadePreview) {
 			this.createPopover();
 
 			// delay because addDependent will do a async rerendering and the actionSheet will immediately close without it.
@@ -241,7 +232,6 @@ sap.ui.define([
 			jQuery.sap.delayedCall(0, this, function() {
 				this._syncQuickView.openBy(oButton);
 			});
-			//	}
 		},
 
 		createPopover: function() {
@@ -269,6 +259,7 @@ sap.ui.define([
 				sap.m.MessageToast.show("Device is offline");
 			}
 		},
+		
 		resetStore: function() {
 			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
 			sap.m.MessageBox.show("Are you sure that you want to reset the offline database and login again?", {
@@ -286,6 +277,7 @@ sap.ui.define([
 				}
 			});
 		},
+		
 		closeSyncPopup: function() {
 			if (this._syncQuickView) {
 				this._syncQuickView.close();
@@ -352,7 +344,6 @@ sap.ui.define([
 			if (this._errorsView) {
 				this._errorsView.close();
 			}
-		},
-
+		}
 	});
 });

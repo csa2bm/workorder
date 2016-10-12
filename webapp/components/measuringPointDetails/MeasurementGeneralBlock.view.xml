@@ -1,0 +1,34 @@
+<core:View controllerName="com.twobm.mobileworkorder.components.measuringPointDetails.MeasurementGeneralBlock" 
+xmlns:core="sap.ui.core" 
+xmlns:html="http://www.w3.org/1999/xhtml"
+xmlns:mvc="sap.ui.core.mvc" 
+xmlns="sap.m"
+xmlns:f="sap.ui.layout.form">
+	<VBox class="sapUiSmallMargin">
+		<f:SimpleForm maxContainerCols="3"
+			editable="false"
+			layout="ResponsiveGridLayout"
+			title=""
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="4"
+			emptySpanXL="0"
+			emptySpanL="0"
+			emptySpanM="0"
+			columnsXL="3"
+			columnsL="2"
+			columnsM="2"
+			class="sapUiTinyMarginBottom"
+			>
+			<f:content>
+				<!--Column Description-->
+				<core:Title text="Title of column"/>
+				<!--<Label text="{i18n>GeneralBlockColoumInformationLabelNumber}"/>
+				<Text text="{Orderid} "/>
+				<Label text="{i18n>GeneralBlockColoumInformationLabelShortText}"/>
+				<Text text="{ShortText} "/>
+				<!-->
+			</f:content>
+		</f:SimpleForm>
+	</VBox>
+</core:View>

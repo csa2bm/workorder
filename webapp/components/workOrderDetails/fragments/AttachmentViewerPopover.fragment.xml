@@ -9,10 +9,7 @@
 		<buttons></buttons>
 		<content>
 			<VBox>
-				<!--class="sapUiSmallMargin"-->
-				<!--<Label text="Select new work date" labelFor="DP3"/>-->
 				<Image src="{ImageModel>/ImagePath}" height="{ImageModel>/ImageHeight}"/>
-			
 			</VBox>
 		</content>
 	</Dialog>

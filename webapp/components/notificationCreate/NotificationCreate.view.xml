@@ -4,32 +4,7 @@
 	<Page id="createPage" showNavButton="true" navButtonPress="goBack" title="{i18n>NotificationCreateTitle}"
 		class="sapUiFioriObjectPage appBackgroundColor">
 		<content>
-			<!-- General data -->
-			<layout:form.SimpleForm minWidth="1024" title="{i18n>generalData}" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
-				labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
-				<layout:content>
-					<Label text="{i18n>type}"></Label>
-					<Select id="type" text="{NotifType}" items="{NotificationDropdownsModel>/type}" class="pos_input">
-						<items>
-							<core:Item key="{NotificationDropdownsModel>typeKey}" text="{NotificationDropdownsModel>typeValue}"></core:Item>
-						</items>
-					</Select>
-					<Label text="{i18n>shortDescription}"></Label>
-					<Input id="shortDescription" value="{ShortText}" valueHelpRequest="showAccountF4" valueHelpOnly="false" showValueHelp="false"></Input>
-					<Label text="{i18n>remark}"></Label>
-					<TextArea id="remark" liveChange="onContactInputFieldChanged" value="{LongText}" suggestionItemSelected="onContactSuggestItemSelected"
-						valueHelpRequest="showContactF4" valueHelpOnly="false" showValueHelp="true"></TextArea>
-					<Label text="{i18n>priority}"></Label>
-					<Select id="priority" text="{Priority}" items="{NotificationDropdownsModel>/priority}" class="pos_input">
-						<items>
-							<core:Item key="{NotificationDropdownsModel>priorityKey}" text="{NotificationDropdownsModel>priorityValue}"></core:Item>
-						</items>
-					</Select>
-					<Label text="{i18n>endDate}"></Label>
-					<DatePicker id="endDate" value="{NotifDate}"></DatePicker>
-				</layout:content>
-			</layout:form.SimpleForm>
-			<!-- Object -->
+				<!-- Object -->
 			<layout:form.SimpleForm minWidth="1024" title="{i18n>locations}" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
 				labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
 				<layout:content>
@@ -41,7 +16,7 @@
 						</suggestionItems>
 					</Input>
 					<Label text="{i18n>equipment}"></Label>
-					<Input id="equipment" text="{Equipment}" showSuggestion="true" showValueHelp="true"
+					<Input id="equipment" value="{Equipment}" showSuggestion="true" showValueHelp="true"
 						valueHelpRequest="handleValueHelpEquipment" suggestionItems="{/EquipmentsSet}">
 						<suggestionItems>
 							<core:Item text="{Equipment}"/>
@@ -49,21 +24,21 @@
 					</Input>
 				</layout:content>
 			</layout:form.SimpleForm>
-			<!-- Picture -->
-			<layout:form.SimpleForm minWidth="1024" title="{i18n>pictureArea}" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
+			<!-- General data -->
+			<layout:form.SimpleForm minWidth="1024" title="{i18n>generalData}" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
 				labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
-				<layout:toolbar>
-					<Toolbar id="pictureToolbar">
-						<Title text="{i18n>pictureArea}" level="H4" titleStyle="H4"/>
-						<ToolbarSpacer/>
-						<Button icon="sap-icon://camera"/>
-					</Toolbar>
-				</layout:toolbar>
 				<layout:content>
-					<layout:VerticalLayout class="sapUiSmallMarginEnd" width="100%">
-						<!--<FlexBox id="notificationAttachmentsList" items="{ path: 'NotificationAttachments', factory: '.itemFactory'}" wrap="Wrap"/>-->
-						<layout:HorizontalLayout ></layout:HorizontalLayout>
-					</layout:VerticalLayout>
+					<Label text="{i18n>shortDescription}"></Label>
+					<Input id="shortDescription" value="{ShortText}" valueHelpRequest="showAccountF4" valueHelpOnly="false" showValueHelp="false"></Input>
+					<Label text="{i18n>remark}"></Label>
+					<TextArea id="remark" liveChange="onContactInputFieldChanged" value="{LongText}" suggestionItemSelected="onContactSuggestItemSelected"
+						valueHelpRequest="showContactF4" valueHelpOnly="false" showValueHelp="true"></TextArea>
+					<Label text="{i18n>priority}"></Label>
+					<Select id="priority" text="{Priority}" items="{NotificationDropdownsModel>/priority}" class="pos_input">
+						<items>
+							<core:Item key="{NotificationDropdownsModel>priorityKey}" text="{NotificationDropdownsModel>priorityValue}"></core:Item>
+						</items>
+					</Select>
 				</layout:content>
 			</layout:form.SimpleForm>
 		</content>

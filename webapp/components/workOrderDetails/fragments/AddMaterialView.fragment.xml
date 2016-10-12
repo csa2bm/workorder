@@ -25,9 +25,6 @@
 						<l:BlockLayoutRow>
 							<l:BlockLayoutCell width="50%">
 								<VBox>
-									<!--<Image id="materialImage" src="{MaterialDetailsModel>/SelectedMaterial/ImagePath}"-->
-									<!--	visible="{MaterialDetailsModel>/SelectedMaterial/HasImage}" width="300px"/>-->
-									<!--{MaterialDetailsModel>/SearchResult/ImagePath.hasPicture}-->
 									<Label text="{i18n>MaterialSearchResultMaterialDesription}"/>
 									<Text id="inpMatDescription" text="{MaterialDetailsModel>/SelectedMaterial/MaterialDescription}" class="sapUiSmallMarginBottom"/>
 									<Label text="{i18n>MaterialSearchResultMatNumberLabel}"/>
@@ -49,16 +46,6 @@
 							</Toolbar>
 						</headerToolbar>
 						<Input id="inpPreviousQuantity" visible="false"/>
-						<!--<l:Grid class="sapUiSmallMarginTop" hSpacing="2" defaultSpan="L6 M6 S10">-->
-						<!--	<l:content>-->
-						<!--	<Label text="{i18n>MaterialIssuePanelOrderNumber}"/>-->
-						<!--	<HBox class="sapUiSmallMarginBottom">-->
-						<!--		<Text id="inpOrderNo" text="{MaterialDetailsModel>/OrderNumber}"/>-->
-						<!--	</HBox>-->
-						<!--	<Label text="{i18n>MaterialIssuePanelMaterialNumber}"/>-->
-						<!--	<HBox class="sapUiSmallMarginBottom">-->
-						<!--		<Text id="inpMatNo" text="{MaterialDetailsModel>/SearchResult/MaterialNumber}"/>-->
-						<!--</HBox>-->
 						<VBox class="sapUiSmallMarginBegin">
 							<Label text="{i18n>MaterialIssuePanelTotalQuantity}"/>
 							<HBox>

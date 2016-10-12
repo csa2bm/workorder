@@ -35,7 +35,7 @@ sap.ui.define([
 			this.setInitialSorting();
 
 			//flush and refresh data
-			this.refresh();
+		//	this.refresh();
 		},
 
 		onNavigationButtonPress: function(oEvent) {
@@ -73,7 +73,7 @@ sap.ui.define([
 
 			var aSorters = [];
 
-			var sortItem = "Priority";
+			var sortItem = "NotifDate";
 			var sortDescending = true;
 			aSorters.push(new sap.ui.model.Sorter(sortItem, sortDescending));
 			oBinding.sort(aSorters);
@@ -106,10 +106,6 @@ sap.ui.define([
 			var aFilters = [];
 			oBinding.filter(aFilters);
 
-			// update filter bar
-			//oView.byId("vsdFilterBar").setVisible(aFilters.length > 0);
-			//oView.byId("vsdFilterLabel").setText(mParams.filterString);
-
 			var model = this.getView().getModel();
 			model.refresh();
 		},
@@ -117,8 +113,6 @@ sap.ui.define([
 		refresh: function() {
 			//Subscribe to sync events
 			if (window.sap_webide_FacadePreview) {
-				//model.attachRequestCompleted(this.syncCompleted);
-				//model.attachRequestFailed(this.syncFailed);
 				this.subscribeToOnlineSyncEvents();
 			} else {
 				//When not in webide 
@@ -154,13 +148,8 @@ sap.ui.define([
 				syncStatusModel.getData().Online = true; //always online in webide
 
 				syncStatusModel.refresh();
-
-				//Update sync state indicator
-				//SyncStateHandler.handleSyncState();
-			} else {
-				//sap.m.MessageToast.show("Data synchronized with server");
 			}
-
+			
 			self.setSyncIndicators(false);
 
 			//Update items in table
@@ -190,9 +179,7 @@ sap.ui.define([
 						self.setSyncIndicators(true);
 
 						self.flushAndRefresh();
-						//this.getEventBus().publish("OfflineStore", "Refreshing");
 					} else {
-						//sap.m.MessageToast.show("Offline: not able to sync");
 						model.refresh();
 					}
 				} else {
@@ -204,9 +191,7 @@ sap.ui.define([
 						self.setSyncIndicators(true);
 
 						self.flushAndRefresh();
-						//this.getEventBus().publish("OfflineStore", "Refreshing");
 					} else {
-						//sap.m.MessageToast.show("Device is ");
 						model.refresh();
 					}
 				} else {
@@ -216,11 +201,6 @@ sap.ui.define([
 		},
 
 		setSyncIndicators: function(isSynching) {
-			//self.getView().byId("syncButton").setEnabled(!isSynching);
-			//self.getView().byId("syncIndicator").setVisible(!isSynching);
-			//self.getView().byId("syncBusyIndicator").setVisible(isSynching);
-			
-						
 			var syncStatusModel = this.getView().getModel("syncStatusModel");
 			syncStatusModel.getData().IsSynching = isSynching;
 			syncStatusModel.refresh();
@@ -240,7 +220,6 @@ sap.ui.define([
 			if (devApp.isOnline) {
 				//console.log("refreshing oData Model with offline store");
 				//ask refreshing store after flush
-				//devApp.refreshing = true;
 				if (devApp.devLogon) {
 					//console.log("refreshing offline store");
 					devApp.devLogon.flushAppOfflineStore();
@@ -252,7 +231,6 @@ sap.ui.define([
 		},
 
 		showSyncQuickview: function(oEvent) {
-			//if (!window.sap_webide_FacadePreview) {
 			this.createPopover();
 
 			// delay because addDependent will do a async rerendering and the actionSheet will immediately close without it.
@@ -260,7 +238,6 @@ sap.ui.define([
 			jQuery.sap.delayedCall(0, this, function() {
 				this._syncQuickView.openBy(oButton);
 			});
-			//	}
 		},
 
 		createPopover: function() {
@@ -299,6 +276,7 @@ sap.ui.define([
 			var oRouter = this.getRouter();
 			oRouter.navTo("notificationCreate", true);
 		},
+		
 		priorityValueConvert: function(value) {
 
 			switch (value) {
@@ -330,7 +308,6 @@ sap.ui.define([
 			if (this._errorsView) {
 				this._errorsView.close();
 			}
-		},
-
+		}
 	});
 });

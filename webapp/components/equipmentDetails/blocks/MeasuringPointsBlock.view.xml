@@ -1,0 +1,31 @@
+<core:View controllerName="com.twobm.mobileworkorder.components.equipmentDetails.blocks.MeasuringPointsBlock" xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:vbm="sap.ui.vbm" xmlns="sap.m">
+	<Table id="idProductsTable" items="{ObjectMeasurementPoint}" noDataText="{i18n>MeasuringPointsBlockNoMeasuringPointsAdded}">
+		<columns>
+			<Column>
+				<Text text="{i18n>MeasuringPointsBlockColoumEquipment}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>MeasuringPointsBlockColoumMeasuringPoint}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>MeasuringPointsBlockColoumPreviousReading}"/>
+			</Column>
+			<Column width="5em" vAlign="Middle"></Column>
+			<Column width="1.5em" vAlign="Middle"></Column>
+		</columns>
+		<items>
+			<ColumnListItem type="Active" press="onEquipmentItemPress">
+				<cells>
+					<ObjectIdentifier text="WV Golf 1.6 diesel" title="10000000"/>
+					<ObjectIdentifier text="{Descriptn}" title="{Measpoint}"/>
+					<ObjectIdentifier text="{LastReading}" title="{LastReadingBy}"/>
+					<Button id="readingButton" enabled="{parts:[{path:'OrderStatus'}],formatter:'.orderStatusValid'}" class="sapUiMediumMarginEnd"
+						icon="sap-icon://measure" press="addMeasurement"></Button>
+					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+</core:View>
