@@ -1,21 +1,21 @@
 <core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:ca="sap.ca.ui" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
 	xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout"
 	controllerName="com.twobm.mobileworkorder.components.notificationCreate.NotificationCreate">
-	<Page id="createPage" showNavButton="true" navButtonPress="goBack" title="{i18n>NotificationCreateTitle}"
+	<Page id="createPage" showNavButton="true" navButtonPress="goBack" title="{i18n>NotificationCreate-Title}"
 		class="sapUiFioriObjectPage appBackgroundColor">
 		<content>
 				<!-- Object -->
-			<layout:form.SimpleForm minWidth="1024" title="{i18n>locations}" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
+			<layout:form.SimpleForm minWidth="1024" title="{i18n>NotificationCreate-Location}" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
 				labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
 				<layout:content>
-					<Label text="{i18n>functionalLocation}"></Label>
+					<Label text="{i18n>NotificationCreate-FunctionalLocation}"></Label>
 					<Input id="functionalLocation" value="{FunctionalLoc}" showSuggestion="true" showValueHelp="true"
 						valueHelpRequest="handleValueHelpFunctionalLocation" suggestionItems="{/FunctionalLocationsSet}">
 						<suggestionItems>
 							<core:Item text="{FunctionalLocation}"/>
 						</suggestionItems>
 					</Input>
-					<Label text="{i18n>equipment}"></Label>
+					<Label text="{i18n>NotificationCreate-Equipment}"></Label>
 					<Input id="equipment" value="{Equipment}" showSuggestion="true" showValueHelp="true"
 						valueHelpRequest="handleValueHelpEquipment" suggestionItems="{/EquipmentsSet}">
 						<suggestionItems>
@@ -25,15 +25,15 @@
 				</layout:content>
 			</layout:form.SimpleForm>
 			<!-- General data -->
-			<layout:form.SimpleForm minWidth="1024" title="{i18n>generalData}" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
+			<layout:form.SimpleForm minWidth="1024" title="{i18n>NotificationCreate-General}" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
 				labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
 				<layout:content>
-					<Label text="{i18n>shortDescription}"></Label>
+					<Label text="{i18n>NotificationCreate-Description}"></Label>
 					<Input id="shortDescription" value="{ShortText}" valueHelpRequest="showAccountF4" valueHelpOnly="false" showValueHelp="false"></Input>
-					<Label text="{i18n>remark}"></Label>
+					<Label text="{i18n>NotificationCreate-Notes}"></Label>
 					<TextArea id="remark" liveChange="onContactInputFieldChanged" value="{LongText}" suggestionItemSelected="onContactSuggestItemSelected"
 						valueHelpRequest="showContactF4" valueHelpOnly="false" showValueHelp="true"></TextArea>
-					<Label text="{i18n>priority}"></Label>
+					<Label text="{i18n>NotificationCreate-Priority}"></Label>
 					<Select id="priority" text="{Priority}" items="{NotificationDropdownsModel>/priority}" class="pos_input">
 						<items>
 							<core:Item key="{NotificationDropdownsModel>priorityKey}" text="{NotificationDropdownsModel>priorityValue}"></core:Item>
@@ -47,12 +47,12 @@
 				<content>
 					<ToolbarSpacer></ToolbarSpacer>
 					<Button type="Emphasized" ariaDescribedBy="acceptButtonDescription genericButtonDescription" press="handleSaveNotification"
-						text="{i18n>NotificationCreateSaveButton}">
+						text="{i18n>NotificationCreate-SaveButton}">
 						<layoutData>
 							<OverflowToolbarLayoutData priority="NeverOverflow"/>
 						</layoutData>
 					</Button>
-					<Button ariaDescribedBy="cancelButtonDescription genericButtonDescription" press="goBack" text="{i18n>NotificationCreateCancelButton}">
+					<Button ariaDescribedBy="cancelButtonDescription genericButtonDescription" press="goBack" text="{i18n>NotificationCreate-CancelButton}">
 						<layoutData>
 							<OverflowToolbarLayoutData priority="NeverOverflow"/>
 						</layoutData>

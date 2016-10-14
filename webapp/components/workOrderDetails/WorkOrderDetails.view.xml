@@ -1,6 +1,6 @@
 <core:View controllerName="com.twobm.mobileworkorder.components.workOrderDetails.WorkOrderDetails" xmlns:core="sap.ui.core" xmlns="sap.uxap"
 	xmlns:layout="sap.ui.layout" xmlns:m="sap.m" xmlns:blocks="com.twobm.mobileworkorder.components.workOrderDetails.blocks.configuration" height="100%">
-	<m:Page showNavButton="true" navButtonPress="navigateBack" title="{i18n>WorkOrderDetailsTitle}">
+	<m:Page showNavButton="true" navButtonPress="navigateBack" title="{i18n>WorkOrderDetails-Title}">
 		<!--
 		<layout:VerticalLayout class="sapUiContentPadding" width="100%">
 		Uncomment list below and make it dynamic
@@ -36,81 +36,81 @@
 				<ObjectPageHeader headerDesign="Dark" objectTitle="{path:'ShortText'}" objectSubtitle="{path:'Orderid'}"></ObjectPageHeader>
 			</headerTitle>
 			<sections>
-				<ObjectPageSection id="generalSection" title="{i18n>SubSectionTitleGeneral}">
+				<ObjectPageSection>
 					<subSections>
-						<ObjectPageSubSection id="generalSubSection" title="{i18n>SubSectionTitleGeneral}">
+						<ObjectPageSubSection id="generalSubSection" title="{i18n>WorkOrderDetails-GeneralSubSection}">
 							<blocks>
 								<blocks:GeneralBlock/>
 							</blocks>
 						</ObjectPageSubSection>
 					</subSections>
 				</ObjectPageSection>
-				<ObjectPageSection id="notesSection" title="{i18n>SubSectionTitleNotes}">
+				<ObjectPageSection>
 					<subSections>
-						<ObjectPageSubSection id="notesSubSection" title="{i18n>SubSectionTitleNotes}">
+						<ObjectPageSubSection id="notesSubSection" title="{i18n>WorkOrderDetails-NotesSubSection}">
 							<blocks>
 								<blocks:NotesBlock/>
 							</blocks>
 						</ObjectPageSubSection>
 					</subSections>
 				</ObjectPageSection>
-					<ObjectPageSection id="objectsSection" title="{i18n>SubSectionTitleObjects}">
+					<ObjectPageSection>
 					<subSections>
-						<ObjectPageSubSection id="objectsSubSection" title="{i18n>SubSectionTitleObjects}">
+						<ObjectPageSubSection id="objectsSubSection" title="{i18n>WorkOrderDetails-ObjectsSubSection}">
 							<blocks>
 								<blocks:ObjectsBlock/>
 							</blocks>
 						</ObjectPageSubSection>
 					</subSections>
 				</ObjectPageSection>
-				<ObjectPageSection id="componentsSection" title="{i18n>SubSectionTitleComponents}">
+				<ObjectPageSection>
 					<subSections>
-						<ObjectPageSubSection id="componentsSunSection" title="{i18n>SubSectionTitleComponents}">
+						<ObjectPageSubSection id="componentsSunSection" title="{i18n>WorkOrderDetails-ComponentsSubSection}">
 							<blocks>
 								<blocks:ComponentsBlock/>
 							</blocks>
 						</ObjectPageSubSection>
 					</subSections>
 				</ObjectPageSection>
-				<ObjectPageSection id="operationsSection" title="{i18n>SubSectionTitleOperations}">
+				<ObjectPageSection>
 					<subSections>
-						<ObjectPageSubSection id="operationsSubSection" title="{i18n>SubSectionTitleOperations}">
+						<ObjectPageSubSection id="operationsSubSection" title="{i18n>WorkOrderDetails-OperationsSubSection}">
 							<blocks>
 								<blocks:OperationsBlock/>
 							</blocks>
 						</ObjectPageSubSection>
 					</subSections>
 				</ObjectPageSection>
-				<ObjectPageSection id="measuringPointsSection" title="{i18n>SubSectionTitleMesuringPoints}">
+				<ObjectPageSection>
 					<subSections>
-						<ObjectPageSubSection id="measuringPointsSubSection" title="{i18n>SubSectionTitleMesuringPoints}">
+						<ObjectPageSubSection id="measuringPointsSubSection" title="{i18n>WorkOrderDetails-MeasuringPointsSubSection}">
 							<blocks>
 								<blocks:MeasuringPointsBlock/>
 							</blocks>
 						</ObjectPageSubSection>
 					</subSections>
 				</ObjectPageSection>
-				<ObjectPageSection id="materialsSection" title="{i18n>SubSectionTitleMaterials}">
+				<ObjectPageSection>
 					<subSections>
-						<ObjectPageSubSection id="materialsSubSection" title="{i18n>SubSectionTitleMaterials}">
+						<ObjectPageSubSection id="materialsSubSection" title="{i18n>WorkOrderDetails-MaterialsSubSection}">
 							<blocks>
 								<blocks:GoodsMovementsBlock/>
 							</blocks>
 						</ObjectPageSubSection>
 					</subSections>
 				</ObjectPageSection>
-				<ObjectPageSection id="timeRegistrationSection" title="{i18n>SubSectionTitleTimeRegistrations}">
+				<ObjectPageSection>
 					<subSections>
-						<ObjectPageSubSection id="timeRegistrationSubSection" title="{i18n>SubSectionTitleTimeRegistrations}">
+						<ObjectPageSubSection id="timeRegistrationSubSection" title="{i18n>WorkOrderDetails-TimeRegistrationsSubSection}">
 							<blocks>
 								<blocks:TimeRegistrationsBlock/>
 							</blocks>
 						</ObjectPageSubSection>
 					</subSections>
 				</ObjectPageSection>
-				<ObjectPageSection id="attachmentsSection" title="{i18n>SubSectionTitleAttachments}">
+				<ObjectPageSection>
 					<subSections>
-						<ObjectPageSubSection id="attachmentsSubSection" title="{i18n>SubSectionTitleAttachments}">
+						<ObjectPageSubSection id="attachmentsSubSection" title="{i18n>WorkOrderDetails-AttachmentsSubSection}">
 							<blocks>
 								<blocks:AttachmentsBlock/>
 							</blocks>

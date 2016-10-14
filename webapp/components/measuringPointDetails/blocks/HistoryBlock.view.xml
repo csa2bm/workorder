@@ -1,0 +1,27 @@
+<core:View controllerName="com.twobm.mobileworkorder.components.measuringPointDetails.blocks.GeneralBlock" xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:vbm="sap.ui.vbm" xmlns="sap.m">
+	<Table id="idMeasuringHistoryTable" items="{ path: 'MeasPointMeasDoc', sorter: { path: 'Reader', descending: false}}"
+		noDataText="{i18n>EquipmentBlockNoEquipmentAdded}">
+		<columns>
+			<Column minScreenWidth="Tablet">
+				<Text text="{i18n>MeasuringPointDetails-DateTimeColumn}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>MeasuringPointDetails-ReadByNameColumn}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>MeasuringPointDetails-ReadUnitColumn}"/>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem type="Active" press="onMeasuringPointItemPress">
+				<cells>
+					<ObjectIdentifier text="" title="{path: 'ReadingDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'short' }}"/>
+					<ObjectIdentifier text="{Reader}" title="{Fullname}"/>
+					<ObjectIdentifier text="{RecordedUnit}" title="{RecordedValue}"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+</core:View>

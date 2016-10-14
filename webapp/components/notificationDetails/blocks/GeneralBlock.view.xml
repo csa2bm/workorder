@@ -21,7 +21,7 @@
 			
 			
 			<!--Column Description-->
-			<core:Title text="{i18n>GeneralBlockColoumInformation}"/>
+			<core:Title text="{i18n>NotificationDetails-GeneralBlock-GeneralTitle}"/>
 			<!--<Label text="{i18n>GeneralBlockColoumInformationLabelNumber}"/>
 			<Text text="{Orderid} "/>
 			<Label text="{i18n>GeneralBlockColoumInformationLabelShortText}"/>

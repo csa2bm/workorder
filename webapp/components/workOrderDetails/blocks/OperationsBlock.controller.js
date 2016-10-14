@@ -32,7 +32,7 @@ sap.ui.define([
 
 			if (operationStatus) {
 
-				sap.m.MessageBox.show(this.getI18nText("OperationBlockCancelCompletionAlertMsg"), {
+				sap.m.MessageBox.show(this.getI18nText("WorkOrderDetails-OperationBlock-CancelCompletionAlertMsg"), {
 					icon: sap.m.MessageBox.Icon.None,
 					title: this.getI18nText("orderStatusTitle"),
 					actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],

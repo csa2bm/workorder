@@ -1,0 +1,21 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="{i18n>NotificationDetails-TaskPopover-Title}" class="sapUiPopupWithPadding" stretch="false" showHeader="true" showCloseButton="true">
+		<beginButton>
+			<Button  type="Emphasized" text="Submit" press="onSubmitMeasurement"></Button>
+		</beginButton>
+		<endButton>
+			<Button text="Close" press="closeAddMeasurement"/>
+		</endButton>
+		<buttons></buttons>
+		<content>
+			<VBox>
+				<Label text="{i18n>NotificationDetails-TaskPopover-CodeGroup}" design="Bold" class="sapUiTinyMarginBottom"/>
+				<Input type="Text" value="" showValueHelp="true"/>
+				<Label text="{i18n>NotificationDetails-TaskPopover-Code}" design="Bold" class="sapUiTinyMarginBottom sapUiTinyMarginTop"/>
+				<Input type="Text" value="" showValueHelp="true"/>
+				<Label text="{i18n>NotificationDetails-TaskPopover-Text}" design="Bold" class="sapUiTinyMarginBottom sapUiTinyMarginTop"/>
+				<Input type="Text" value="" />
+			</VBox>
+		</content>
+	</Dialog>
+</core:FragmentDefinition>

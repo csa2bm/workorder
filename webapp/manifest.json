@@ -44,7 +44,7 @@
 			"tablet": true,
 			"phone": true
 		},
-		"supportedThemes": ["sap_belize"]
+		"supportedThemes": ["sap_belize_plus"]
 	},
 	"sap.ui5": {
 		"_version": "1.1.0",
@@ -54,7 +54,7 @@
 			"id": "mobileWorkOrderApp"
 		},
 		"dependencies": {
-			"minUI5Version": "1.40.11",
+			"minUI5Version": "1.38.8",
 			"libs": {
 				"sap.ui.core": {},
 				"sap.m": {},
@@ -159,12 +159,12 @@
 				},
 				"objectDetails": {
 					"viewPath": "com.twobm.mobileworkorder.components.objectDetails",
-					"viewName": "WorkOrderObjectDetails",
+					"viewName": "ObjectDetails",
 					"viewLevel": 4
 				},
 				"measurementPointDetails": {
 					"viewPath": "com.twobm.mobileworkorder.components.measuringPointDetails",
-					"viewName": "MeasurementDetails",
+					"viewName": "MeasuringPointDetails",
 					"viewLevel": 4
 				},
 				"notificationList": {

@@ -2,37 +2,26 @@
 	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
 	xmlns:vbm="sap.ui.vbm" xmlns="sap.m">
 	<Table id="idMeasuringPointTable" items="{ path: 'OrderMeasPoint', sorter: { path: 'Measpos', descending: false}}"
-		noDataText="{i18n>EquipmentBlockNoEquipmentAdded}">
+		noDataText="{i18n>WorkOrderDetails-MeasuringPointsBlock-NoMeasuringPoints}">
 		<columns>
 			<Column minScreenWidth="Tablet">
-				<Text text="{i18n>MeasuringPointsBlockColoumEquipment}"/>
+				<Text text="{i18n>WorkOrderDetails-MeasuringPointsBlock-EquipmentColumn}"/>
 			</Column>
 			<Column>
-				<Text text="{i18n>MeasuringPointsBlockColoumMeasuringPoint}"/>
+				<Text text="{i18n>WorkOrderDetails-MeasuringPointsBlock-MeasuringPointColumn}"/>
 			</Column>
 			<Column>
-				<Text text="{i18n>MeasuringPointsBlockColoumPreviousReading}"/>
+				<Text text="{i18n>WorkOrderDetails-MeasuringPointsBlock-PreviousReadingColumn}"/>
 			</Column>
-			<!--		<Column>
-				<Text text="{i18n>MeasuringPointsBlockColoumReading}"/>
-			</Column>-->
 			<Column width="5em" vAlign="Middle"></Column>
 			<Column width="1.5em" vAlign="Middle"></Column>
 		</columns>
 		<items>
 			<ColumnListItem type="Active" press="onMeasuringPointItemPress">
 				<cells>
-					<!--
-					<ObjectIdentifier text="{Funcldescr}" title="{FunclocDisp}"/>
-					<ObjectIdentifier text="{ShortText}" title="{Equipment}"/>
-					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
-					-->
 					<ObjectIdentifier text="Engine" title="483293484"/>
 					<ObjectIdentifier text="{Descriptn}" title="{Measpoint}"/>
 					<ObjectIdentifier text="{LastReading}" title="{LastReadingBy}"/>
-					<!--<ObjectIdentifier text="Oil preasure" title="12382382938"/>
-					<ObjectIdentifier text="14,5" title="PSI"/>
-					<ObjectIdentifier text="{/OrderStatus}" title="PSI"/>-->
 					<Button id="readingButton" enabled="{EditModeModel>/EditMode}" class="sapUiMediumMarginEnd" icon="sap-icon://measure" press="addMeasurement"></Button>
 					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 				</cells>

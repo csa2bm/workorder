@@ -1,7 +1,7 @@
 <core:View controllerName="com.twobm.mobileworkorder.components.notificationList.NotificationList" xmlns:core="sap.ui.core"
 	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
 	<App class="notificationListClass">
-		<Page showNavButton="true" navButtonPress="onNavigationButtonPress" title="{i18n>NotificationListPageTitle}">
+		<Page showNavButton="true" navButtonPress="onNavigationButtonPress" title="{i18n>NotificationList-Title}">
 			<headerContent>
 				<l:HorizontalLayout>
 					<core:Icon width="3em" height="3em" noTabStop="true" press="handleViewSettingsDialogButtonPressed" src="sap-icon://drop-down-list"/>
@@ -11,24 +11,24 @@
 				<Table id="notificationTableId" items="{path: '/NotificationsSet', sorter: [{path: 'NotifDate', descending: true}]}" noDataText="No Notifications" showSeparators="false"
 					class="notificationListTableClass" >
 					<columns>
-						<Column  demandPopin="true" popinDisplay="Inline">
+						<Column id="dataColumn">
 							<header>
-								<Label text="{i18n>NotificationListColumnDateHeaderLabel}"/>
+								<Label text="{i18n>NotificationList-DateHeader}"/>
 							</header>
 						</Column>
-						<Column>
+						<Column id="notificationColumn">
 							<header>
-								<Label text="{i18n>NotificationListColumnNotificationHeaderLabel}"/>
+								<Label text="{i18n>NotificationList-NotificationHeader}"/>
 							</header>
 						</Column>
-						<Column demandPopin="true" popinDisplay="Inline">
+						<Column id="functionalLocationColumn" minScreenWidth="Tablet">
 							<header>
-								<Label text="{i18n>NotificationListColumnFunctionalLocationHeaderLabel}"/>
+								<Label text="{i18n>NotificationList-FunctionalLocationHeader}"/>
 							</header>
 						</Column>
-						<Column demandPopin="true" popinDisplay="Inline">
+						<Column id="equipmentColumn" minScreenWidth="Tablet">
 							<header>
-								<Label text="{i18n>NotificationListColumnEquipmentHeaderLabel}"/>
+								<Label text="{i18n>NotificationList-EquipmentHeader}"/>
 							</header>
 						</Column>
 						<Column width="1.5em" vAlign="Middle"></Column>
@@ -58,7 +58,7 @@
 						<BusyIndicator id="syncBusyIndicator" visible="{syncStatusModel>/IsSynching}"/>
 						<ToolbarSpacer></ToolbarSpacer>
 						<Button id="notificationCreateButton" type="Emphasized" ariaDescribedBy="acceptButtonDescription genericButtonDescription"
-							press="createNewNotification" text="{i18n>NotificationListCreateNew}">
+							press="createNewNotification" text="{i18n>NotificationList-CreateButton}">
 							<layoutData>
 								<OverflowToolbarLayoutData priority="NeverOverflow"/>
 							</layoutData>

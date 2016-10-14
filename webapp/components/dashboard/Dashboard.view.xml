@@ -6,8 +6,8 @@
 			<content>
 				<FlexBox alignItems="Left" justifyContent="Left">
 					<items>
-						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Lau Lautrup" subheader="Service technician"
-							headerImage="../webapp/localService/mockData/AugustFoto_2016_small_Round.png" frameType="TwoByOne" press="press">
+						<GenericTile id="userTile" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{DashBoardModel>/Fullname}" subheader="Service technician"
+							headerImage="{DashBoardModel>/ImagePath}" frameType="TwoByOne" press="press">
 							<tileContent>
 								<TileContent footer="">
 									<content>
@@ -87,6 +87,7 @@
 						<BusyIndicator id="syncBusyIndicator" visible="{syncStatusModel>/IsSynching}"/>
 						<ToolbarSpacer></ToolbarSpacer>
 						<Button type="Reject" visible="{syncStatusModel>/InErrorState}" text="Errors" press="openErrorsView"></Button>
+						 <mvc:XMLView viewName="com.twobm.mobileworkorder.components.offline.Status"/>
 					</content>
 				</Toolbar>
 			</footer>

@@ -6,16 +6,16 @@
 			<Button class="sapUiSmallMarginEnd" icon="sap-icon://bar-code" press="scanBarcode" enabled="{parts:[{path:'OrderStatus'}],formatter:'.orderStatusValid'}"></Button>
 		</l:HorizontalLayout>
 		<Table id="MaterialsSummaryList" titel="{i18n>SubSectionTitleMaterials}" templateShareable="true"
-			items="{ path: 'OrderMaterialSummary', sorter: { path: 'Matnr', descending: false}}" noDataText="{i18n>MaterialsBlockNoMaterialsAdded}">
+			items="{ path: 'OrderMaterialSummary', sorter: { path: 'Matnr', descending: false}}" noDataText="{i18n>WorkOrderDetails-MaterialsBlock-NoMaterials}">
 			<columns>
 				<Column demandPopin="true" popinDisplay="WithoutHeader">
 					<header>
-						<Label text="{i18n>MaterialsBlockColoumDescription}"/>
+						<Label text="{i18n>WorkOrderDetails-MaterialsBlock-MaterialColumn}"/>
 					</header>
 				</Column>
 				<Column demandPopin="true" popinDisplay="Inline" width="5em" vAlign="Middle">
 					<header>
-						<Label text="{i18n>MaterialsBlockColoumQuantity}"/>
+						<Label text="{i18n>WorkOrderDetails-MaterialsBlock-ColoumQuantity}"/>
 					</header>
 				</Column>
 				<Column demandPopin="false" width="1.5em" vAlign="Middle"></Column>

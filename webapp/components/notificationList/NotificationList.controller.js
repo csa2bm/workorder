@@ -144,7 +144,6 @@ sap.ui.define([
 				var syncStatusModel = self.getView().getModel("syncStatusModel");
 				var d = new Date();
 				syncStatusModel.getData().LastSyncTime = d.toLocaleString();
-
 				syncStatusModel.getData().Online = true; //always online in webide
 
 				syncStatusModel.refresh();
@@ -218,7 +217,6 @@ sap.ui.define([
 
 		flushAndRefresh: function() {
 			if (devApp.isOnline) {
-				//console.log("refreshing oData Model with offline store");
 				//ask refreshing store after flush
 				if (devApp.devLogon) {
 					//console.log("refreshing offline store");
@@ -242,7 +240,7 @@ sap.ui.define([
 
 		createPopover: function() {
 			if (!this._syncQuickView) {
-				this._syncQuickView = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.notificationList.controls.SyncQuickView", this);
+				this._syncQuickView = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.offline.fragments.SyncQuickView", this);
 				this.getView().addDependent(this._syncQuickView);
 			}
 		},
@@ -278,7 +276,6 @@ sap.ui.define([
 		},
 		
 		priorityValueConvert: function(value) {
-
 			switch (value) {
 				case "1":
 					return "black";

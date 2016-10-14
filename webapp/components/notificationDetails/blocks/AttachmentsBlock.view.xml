@@ -3,9 +3,6 @@
 	<l:VerticalLayout class="sapUiSmallMargin" width="100%">
 		<FlexBox id="attachmentsList" class="sapUiMediumMarginBegin" items="{ path: 'NotifAttachmentsSet', factory: '.itemFactory'}" wrap="Wrap" />
 		<l:HorizontalLayout >
-			<!--class="rightAlign"-->
-			<!--<custom:CustomFileUploader id="customFileUploader" visible="false" icon="sap-icon://add" iconOnly="true" buttonOnly="true"
-					uploadOnChange="true" uploadComplete="onUploadComplete" class="sapUiSmallMarginEnd"/>-->
 			<Button id="cameraButton" visible="true" class="sapUiMediumMarginEnd" icon="sap-icon://camera" press="capturePhoto"></Button>
 		</l:HorizontalLayout>
 	</l:VerticalLayout>

@@ -1,12 +1,12 @@
 <core:View controllerName="com.twobm.mobileworkorder.components.workOrderDetails.blocks.ObjectsBlock" xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml"
 	xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
-	<Table id="idProductsTable" items="{ path: 'OrderObject', sorter: { path: 'FunclocDisp', descending: false}}" noDataText="{i18n>EquipmentBlockNoEquipmentAdded}">
+	<Table id="idProductsTable" items="{ path: 'OrderObject', sorter: { path: 'FunclocDisp', descending: false}}" noDataText="{i18n>WorkOrderDetails-ObjectsBlock-NoEquipment}">
 		<columns>
 			<Column>
-				<Text text="{i18n>EquipmentBlockColoumFuncLoc}"/>
+				<Text text="{i18n>WorkOrderDetails-ObjectsBlock-FunctionalLocactionColumn}"/>
 			</Column>
 			<Column>
-				<Text text="{i18n>EquipmentBlockColoumEquipment}"/>
+				<Text text="{i18n>WorkOrderDetails-ObjectsBlock-EquipmentColumn}"/>
 			</Column>
 			<Column width="1.5em" vAlign="Middle"></Column>
 		</columns>

@@ -19,6 +19,8 @@ sap.ui.define([
 				orderCount: 0
 			});
 			this.getView().setModel(this.DashBoardModel, "DashBoardModel");
+		/*	var oInput = this.byId("userTile");
+			oInput.bindElement("/UserDetailsSet('LLA')");*/
 		},
 
 		onRouteMatched: function(oEvent) {
@@ -46,7 +48,16 @@ sap.ui.define([
 
 		setContentInTiles: function() {
 			self = this;
+			var parametersUserDetails = {
+				success: function(oData, oResponse) {
+					
+					self.DashBoardModel.getData().Fullname = oData.Fullname;
+					self.DashBoardModel.getData().ImagePath = oData.__metadata.media_src;
+					self.DashBoardModel.refresh();
 
+				},
+				error: this.errorCallBackShowInPopUp
+			};
 			var parametersOrder = {
 				success: function(oData, oResponse) {
 
@@ -68,6 +79,8 @@ sap.ui.define([
 
 			this.getView().getModel().read("/OrderSet/$count", parametersOrder);
 			this.getView().getModel().read("/NotificationsSet/$count", parametersNotif);
+			this.getView().getModel().read("/UserDetailsSet('LLA')", parametersUserDetails);
+			
 		},
 
 		setNotificationModel: function(oEvent) {
@@ -269,7 +282,7 @@ sap.ui.define([
 
 		createPopover: function() {
 			if (!this._syncQuickView) {
-				this._syncQuickView = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.workOrderList.controls.SyncQuickView", this);
+				this._syncQuickView = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.offline.fragments.SyncQuickView", this);
 				this.getView().addDependent(this._syncQuickView);
 			}
 		},

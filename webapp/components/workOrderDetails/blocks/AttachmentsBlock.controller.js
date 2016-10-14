@@ -68,13 +68,13 @@ sap.ui.define([
 		deleteAttachment: function(e) {
 			var deletePath = e.getParameter('listItem').getBindingContext().getPath();
 
-			var message = this.getI18nText("deleteAttachmentMessageText"); // + " " + e.getSource().getBindingContext().getObject().Filename;
+			var message = this.getI18nText("WorkOrderDetails-DeleteAttachmentMessageText"); 
 			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
 
 			var that = this;
 			sap.m.MessageBox.show(message, {
 				icon: sap.m.MessageBox.Icon.None,
-				title: this.getI18nText("deleteAttachmentMessageHeader"),
+				title: this.getI18nText("WorkOrderDetails-DeleteAttachmentMessageHeader"),
 				actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
 				defaultAction: sap.m.MessageBox.Action.NO,
 				styleClass: bCompact ? "sapUiSizeCompact" : "",
@@ -100,13 +100,13 @@ sap.ui.define([
 		
 		onDeleteFile: function(oEvent) {
 			var context = oEvent.getSource().getBindingContext();
-			var message = this.getI18nText("deleteAttachmentMessageText");
+			var message = this.getI18nText("WorkOrderDetails-DeleteAttachmentMessageText");
 			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
 
 			var that = this;
 			sap.m.MessageBox.show(message, {
 				icon: sap.m.MessageBox.Icon.None,
-				title: this.getI18nText("deleteAttachmentMessageHeader"),
+				title: this.getI18nText("WorkOrderDetails-DeleteAttachmentMessageHeader"),
 				actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
 				defaultAction: sap.m.MessageBox.Action.NO,
 				styleClass: bCompact ? "sapUiSizeCompact" : "",

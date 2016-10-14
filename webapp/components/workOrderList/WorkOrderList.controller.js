@@ -60,7 +60,7 @@ sap.ui.define([
 		// Pop-up for sorting and filter
 		handleViewSettingsDialogButtonPressed: function() {
 			if (!this._oDialog) {
-				this._oDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.workOrderList.controls.OrderFilterDialog", this);
+				this._oDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.workOrderList.fragments.OrderFilterDialog", this);
 			}
 			// toggle compact style
 			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);
@@ -236,7 +236,7 @@ sap.ui.define([
 
 		createPopover: function() {
 			if (!this._syncQuickView) {
-				this._syncQuickView = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.workOrderList.controls.SyncQuickView", this);
+				this._syncQuickView = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.offline.fragments.SyncQuickView", this);
 				this.getView().addDependent(this._syncQuickView);
 			}
 		},
@@ -311,7 +311,7 @@ sap.ui.define([
 
 			// create menu only once
 			if (!this._orderFilterMenu) {
-				this._orderFilterMenu = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.workOrderList.controls.OrderFilterSelect", this);
+				this._orderFilterMenu = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.workOrderList.fragments.OrderFilterSelect", this);
 				this.getView().addDependent(this._orderFilterMenu);
 			}
 

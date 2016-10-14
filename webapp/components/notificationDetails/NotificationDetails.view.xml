@@ -1,7 +1,7 @@
 <core:View controllerName="com.twobm.mobileworkorder.components.notificationDetails.NotificationDetails" xmlns:core="sap.ui.core"
 	xmlns="sap.uxap" xmlns:layout="sap.ui.layout" xmlns:m="sap.m" xmlns:blocks="com.twobm.mobileworkorder.components.notificationDetails.blocks.configuration"
 	height="100%">
-	<m:Page showNavButton="true" navButtonPress="onNavigationButtonPress" title="{i18n>notificationDetailsTitle}">
+	<m:Page showNavButton="true" navButtonPress="onNavigationButtonPress" title="{i18n>NotificationDetails-Title}">
 		<!--
 		<layout:VerticalLayout class="sapUiContentPadding" width="100%">
 		Uncomment list below and make it dynamic
@@ -37,30 +37,38 @@
 				<ObjectPageHeader headerDesign="Dark" objectTitle="{path:'ShortText'}" objectSubtitle="{path:'NotifNo'}"></ObjectPageHeader>
 			</headerTitle>
 			<sections>
-				<ObjectPageSection title="{i18n>SubSectionTitleGeneral}">
+				<ObjectPageSection>
 					<subSections>
-						<ObjectPageSubSection title="{i18n>SubSectionTitleGeneral}">
+						<ObjectPageSubSection id="notificationDetails-GeneralSubSection" title="{i18n>NotificationDetails-GeneralSubSection}">
 							<blocks>
 								<blocks:GeneralBlock/>
 							</blocks>
 						</ObjectPageSubSection>
 					</subSections>
 				</ObjectPageSection>
-				<ObjectPageSection title="{i18n>SubSectionTitleNotes}">
+				<ObjectPageSection>
 					<subSections>
-						<ObjectPageSubSection title="{i18n>SubSectionTitleNotes}">
+						<ObjectPageSubSection id="notificationDetails-NotesSubSection" title="{i18n>NotificationDetails-NotesSubSection}">
 							<blocks>
 								<blocks:NotesBlock/>
 							</blocks>
 						</ObjectPageSubSection>
 					</subSections>
 				</ObjectPageSection>
-				<ObjectPageSection title="{i18n>SubSectionTitleAttachments}">
+				<ObjectPageSection>
 					<subSections>
-						<ObjectPageSubSection title="{i18n>SubSectionTitleAttachments}">
+						<ObjectPageSubSection id="notificationDetails-TasksSubSection" title="{i18n>NotificationDetails-TasksSubSection}">
+							<blocks>
+								<blocks:TasksBlock/>
+							</blocks>
+						</ObjectPageSubSection>
+					</subSections>
+				</ObjectPageSection>
+				<ObjectPageSection>
+					<subSections>
+						<ObjectPageSubSection id="notificationDetails-AttachmentsSubSection" title="{i18n>NotificationDetails-AttachmentsSubSection}">
 							<blocks>
 								<blocks:AttachmentsBlock/>
-								
 							</blocks>
 						</ObjectPageSubSection>
 					</subSections>

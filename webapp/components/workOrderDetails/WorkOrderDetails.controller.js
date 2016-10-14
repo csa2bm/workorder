@@ -8,7 +8,7 @@ sap.ui.define([
 		onInit: function() {
 			var oRouter = this.getRouter();
 			oRouter.getRoute("workOrderDetails").attachMatched(this.onRouteMatched, this);
-
+			
 			//Subscribe to events
 			var eventBus = this.getEventBus();
 			eventBus.subscribe("BlockNavigation", this.performNavigationForBlocks, this);
