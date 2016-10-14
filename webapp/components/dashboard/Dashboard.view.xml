@@ -2,7 +2,7 @@
 	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
 	xmlns:mic="sap.suite.ui.microchart" height="100%">
 	<App class="dashboardClass">
-		<Page title="{i18n>DashboardPageTitle}">
+		<Page title="{i18n>Dashboard-Title}">
 			<content>
 				<FlexBox alignItems="Left" justifyContent="Left">
 					<items>
@@ -28,7 +28,7 @@
 						</GenericTile>
 					</items>
 				</FlexBox>
-				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Workorders" subheader="" size="S" frameType="OneByOne"
+				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-WorkOrdersTile-Header}" subheader="" size="S" frameType="OneByOne"
 					press="onPressOtherWorkorders">
 					<tileContent>
 						<TileContent footer="" size="S">
@@ -38,7 +38,7 @@
 						</TileContent>
 					</tileContent>
 				</GenericTile>
-				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Notifications" subheader="" size="S" frameType="OneByOne"
+				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-NotificationsTile-Header}" subheader="" size="S" frameType="OneByOne"
 					press="onPressNotifications">
 					<tileContent>
 						<TileContent footer="" size="S">
@@ -48,7 +48,7 @@
 						</TileContent>
 					</tileContent>
 				</GenericTile>
-				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Create notification" size="S" frameType="OneByOne"
+				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-CreateNotificationTile-Header}" size="S" frameType="OneByOne"
 					press="onPressCreateNotification">
 					<tileContent>
 						<TileContent size="S">
@@ -58,7 +58,7 @@
 						</TileContent>
 					</tileContent>
 				</GenericTile>
-				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Scan object" subheader="" size="S" frameType="OneByOne"
+				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-ScanObjectTile-Header}" subheader="" size="S" frameType="OneByOne"
 					press="onPressScanObject">
 					<tileContent>
 						<TileContent>
@@ -68,7 +68,7 @@
 						</TileContent>
 					</tileContent>
 				</GenericTile>
-				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Functional locations" size="S" frameType="OneByOne"
+				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-TechnicalObjectsTile-Header}" size="S" frameType="OneByOne"
 					press="onPressFunctionalLocations">
 					<tileContent>
 						<TileContent>

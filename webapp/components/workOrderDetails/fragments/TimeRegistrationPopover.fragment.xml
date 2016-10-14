@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
-	<Dialog title="Add Time Registration" class="sapUiPopupWithPadding" stretch="false" showHeader="true" showCloseButton="true">
+	<Dialog title="{i18n>WorkOrderDetails-TimeRegistrationPopover-Title}" class="sapUiPopupWithPadding" stretch="false" showHeader="true" showCloseButton="true">
 		<buttons>
 			<Button icon="sap-icon://delete" type="Reject" text="{i18n>WorkOrderDetails-TimeRegistrationPopover-DeleteButton}" press="deleteTimeRegistration"
 				visible="{/deletable}"></Button>
@@ -8,10 +8,10 @@
 		</buttons>
 		<content>
 			<VBox>
-				<Label text="{i18n>TimeRegistrationPopUpTime}" design="Bold"/>
-				<Input id="__WorkTimeField" placeholder="{i18n>TimeRegistrationPopUpTimeTextPlaceHolder}" value="{path:'WorkTime' , type:'.typeTimeFormat'}"
+				<Label text="{i18n>WorkOrderDetails-TimeRegistrationPopover-Time}" design="Bold"/>
+				<Input id="__WorkTimeField" placeholder="{i18n>WorkOrderDetails-TimeRegistrationPopover-TimeTextPlaceHolder}" value="{path:'WorkTime' , type:'.typeTimeFormat'}"
 					focus="true"/>
-				<Label text="{i18n>TimeRegistrationPopUpDate}" design="Bold"/>
+				<Label text="{i18n>WorkOrderDetails-TimeRegistrationPopover-Date}" design="Bold"/>
 				<DatePicker dateValue="{RegistrationDate}"></DatePicker>
 			</VBox>
 		</content>

@@ -121,16 +121,16 @@ sap.ui.define([
 		setUserStatusTaskStarted: function(orderStatus) {
 			var message = "";
 			if (orderStatus === this.getI18nText("orderStatusNotStarted")) {
-				message = this.getI18nText("orderStatusMessageNotStarted");
+				message = this.getI18nText("WorkOrderDetails-orderStatusMessageNotStarted");
 			} else if (orderStatus === this.getI18nText("orderStatusInProgress")) {
-				message = this.getI18nText("orderStatusMessageInProgress");
+				message = this.getI18nText("WorkOrderDetails-orderStatusMessageInProgress");
 			}
 
 			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
 			var that = this;
 			sap.m.MessageBox.show(message, {
 				icon: sap.m.MessageBox.Icon.None,
-				title: this.getI18nText("orderStatusTitle"),
+				title: this.getI18nText("WorkOrderDetails-orderStatusTitle"),
 				actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
 				defaultAction: sap.m.MessageBox.Action.NO,
 				styleClass: bCompact ? "sapUiSizeCompact" : "",
@@ -196,14 +196,14 @@ sap.ui.define([
 		},
 
 		getOrderStatusBtnText: function(sString) {
-			var btnText = this.getI18nText("orderStatusBtnTextNotStarted");
+			var btnText = this.getI18nText("WorkOrderDetails-orderStatusBtnTextNotStarted");
 			if (sString === this.getI18nText("orderStatusNotStarted")) {
-				btnText = this.getI18nText("orderStatusBtnTextNotStarted");
+				btnText = this.getI18nText("WorkOrderDetails-orderStatusBtnTextNotStarted");
 			} else if (sString === this.getI18nText("orderStatusInProgress")) {
-				btnText = this.getI18nText("orderStatusBtnTextInProgress");
+				btnText = this.getI18nText("WorkOrderDetails-orderStatusBtnTextInProgress");
 			}
 			else {
-				btnText = this.getI18nText("orderStatusBtnTextCompleted");
+				btnText = this.getI18nText("WorkOrderDetails-orderStatusBtnTextCompleted");
 			}
 			return btnText;
 		},
