@@ -55,11 +55,13 @@
 			<footer>
 				<OverflowToolbar id="detailToolbar">
 					<content>
-						<core:Icon id="syncIndicator" width="3em" height="3em" color="{syncStatusModel>/SyncColor}" noTabStop="true" press="showSyncQuickview"
-							src="{syncStatusModel>/SyncIcon}" tooltip="Sync status"></core:Icon>
-						<BusyIndicator id="syncBusyIndicator" visible="{syncStatusModel>/IsSynching}"/>
+						<!--<core:Icon id="syncIndicator" width="3em" height="3em" color="{syncStatusModel>/SyncColor}" noTabStop="true" press="showSyncQuickview"-->
+						<!--	src="{syncStatusModel>/SyncIcon}" tooltip="Sync status"></core:Icon>-->
+						<!--<BusyIndicator id="syncBusyIndicator" visible="{syncStatusModel>/IsSynching}"/>-->
+						<mvc:XMLView viewName="com.twobm.mobileworkorder.components.offline.Status"/>
 						<ToolbarSpacer></ToolbarSpacer>
-						<Button type="Reject" visible="{syncStatusModel>/InErrorState}" text="Errors" press="openErrorsView"></Button>
+						<mvc:XMLView viewName="com.twobm.mobileworkorder.components.offline.ErrorListControl"/>
+						<!--<Button type="Reject" visible="{syncStatusModel>/InErrorState}" text="Errors" press="openErrorsView"></Button>-->
 					</content>
 				</OverflowToolbar>
 			</footer>

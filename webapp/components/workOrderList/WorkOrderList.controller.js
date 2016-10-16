@@ -32,10 +32,10 @@ sap.ui.define([
 
 			SyncStateHandler.handleSyncState();
 
-		//	this.setInitialSorting();
+			//	this.setInitialSorting();
 
 			//flush and refresh data
-		//	this.refresh();
+			//	this.refresh();
 		},
 
 		onNavigationButtonPress: function(oEvent) {
@@ -170,9 +170,7 @@ sap.ui.define([
 						self.setSyncIndicators(true);
 
 						self.flushAndRefresh();
-						//this.getEventBus().publish("OfflineStore", "Refreshing");
 					} else {
-						//sap.m.MessageToast.show("Offline: not able to sync");
 						model.refresh();
 					}
 				} else {
@@ -184,9 +182,7 @@ sap.ui.define([
 						self.setSyncIndicators(true);
 
 						self.flushAndRefresh();
-						//this.getEventBus().publish("OfflineStore", "Refreshing");
 					} else {
-						//sap.m.MessageToast.show("Device is ");
 						model.refresh();
 					}
 				} else {
@@ -224,66 +220,6 @@ sap.ui.define([
 			}
 		},
 
-		showSyncQuickview: function(oEvent) {
-			this.createPopover();
-
-			// delay because addDependent will do a async rerendering and the actionSheet will immediately close without it.
-			var oButton = oEvent.getSource();
-			jQuery.sap.delayedCall(0, this, function() {
-				this._syncQuickView.openBy(oButton);
-			});
-		},
-
-		createPopover: function() {
-			if (!this._syncQuickView) {
-				this._syncQuickView = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.offline.fragments.SyncQuickView", this);
-				this.getView().addDependent(this._syncQuickView);
-			}
-		},
-
-		synchronizeData: function() {
-			if (this._syncQuickView) {
-				this._syncQuickView.close();
-			}
-
-			if (window.sap_webide_FacadePreview || devApp.isOnline) {
-
-				if (window.sap_webide_FacadePreview) {
-					this.subscribeToOnlineSyncEvents();
-				}
-
-				this.setSyncIndicators(true);
-
-				this.flushAndRefresh();
-			} else {
-				sap.m.MessageToast.show("Device is offline");
-			}
-		},
-		
-		resetStore: function() {
-			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
-			sap.m.MessageBox.show("Are you sure that you want to reset the offline database and login again?", {
-				icon: sap.m.MessageBox.Icon.None,
-				title: "Reset database",
-				actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
-				defaultAction: sap.m.MessageBox.Action.NO,
-				styleClass: bCompact ? "sapUiSizeCompact" : "",
-				onClose: function(oAction, object) {
-					if (oAction === sap.m.MessageBox.Action.YES) {
-
-						sap.m.MessageToast.show("Resetting store");
-						devApp.devLogon.reset();
-					}
-				}
-			});
-		},
-		
-		closeSyncPopup: function() {
-			if (this._syncQuickView) {
-				this._syncQuickView.close();
-			}
-		},
-
 		getOrderStatusIcon: function(orderStatus) {
 
 			if (orderStatus === this.getI18nText("orderStatusNotStarted")) {
@@ -303,7 +239,6 @@ sap.ui.define([
 			} else if (orderStatus === this.getI18nText("orderStatusCompleted")) {
 				return "#30D130";
 			}
-
 		},
 
 		orderFilterSelectPopUp: function(oEvent) {
@@ -325,25 +260,6 @@ sap.ui.define([
 
 			}
 			return false;
-		},
-
-		openErrorsView: function(oEvent) {
-			if (!this._errorsView) {
-				this._errorsView = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.app.fragments.ErrorsListPopover", this);
-				this.getView().addDependent(this._errorsView);
-			}
-
-			// delay because addDependent will do a async rerendering and the actionSheet will immediately close without it.
-			var oButton = oEvent.getSource();
-			jQuery.sap.delayedCall(0, this, function() {
-				this._errorsView.open();
-			});
-		},
-
-		closeErrorListPopupButton: function() {
-			if (this._errorsView) {
-				this._errorsView.close();
-			}
 		}
 	});
 });

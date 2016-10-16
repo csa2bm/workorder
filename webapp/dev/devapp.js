@@ -85,6 +85,7 @@ sap.ui.define([
 							};
 							//save it
 							that.devLogon.devapp = that;
+							that.devLogon.smpConfigData = data;
 							that.devLogon.doLogonInit(context, that.smpInfo.appID);
 						} else {
 							that.startApp();
@@ -148,7 +149,8 @@ sap.ui.define([
 					app: new ComponentContainer({
 						height: "100%",
 						name: "com.twobm.mobileworkorder"
-					})
+					}),
+					id: "appShell"
 				}).placeAt("content");
 			});
 		}

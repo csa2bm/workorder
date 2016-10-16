@@ -1,0 +1,4 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="com.twobm.mobileworkorder.components.offline.ErrorListControl" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Button type="Reject" visible="{syncStatusModel>/InErrorState}" text="{i18n>ErrorListControlButtonText}" press="openErrorsView"></Button>
+</mvc:View>

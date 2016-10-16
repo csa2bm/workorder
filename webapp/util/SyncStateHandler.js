@@ -5,11 +5,8 @@ sap.ui.define([
 
 	return {
 		handleSyncState: function() {
-			
-			//sap.m.MessageBox.show("handleSyncState");
 
-			if (!window.cordova || window.cordova.platformId === "browser")
-			{
+			if (!window.cordova || window.cordova.platformId === "browser") {
 				return;
 			}
 
@@ -44,57 +41,103 @@ sap.ui.define([
 
 							syncStatusModel.getData().InErrorState = true;
 
-							//var errorMessage = JSON.parse(data.results[0].Message);
+							var error;
 
-							data.results.forEach(function(entry) {
+							data.results.forEach(
+								function(item, index) {
+									var parsedJSONMessage = that.getMessageTextFromError(item.Message);
 
-								var message;
-								//var errorCode = "";
-								try {
-									var parsedJSON = JSON.parse(entry.Message);
-									
-									//sap.m.MessageBox.show("RequestURL:" + entry.RequestURL);
-
-									var errorJSON = {
-										message: parsedJSON.error.message.value,
-										errorCode: parsedJSON.error.code,
-										requestId: entry.RequestID,
-										//requestBody: JSON.parse(entry.RequestBody)
-										requestMethod: entry.RequestMethod,
-										requestUrl: entry.RequestURL
+									error = {
+										"Message": parsedJSONMessage,
+										"RequestObject": that.getRequestObjectName(item.RequestURL),
+										"RequestBody": item.RequestBody,
+										"RequestMethod": item.RequestMethod,
+										"HTTPStatusCode": item.HTTPStatusCode,
+										"RequestURL": item.RequestURL,
+										"RequestID": item.RequestID,
+										"ErrorUrl": data.results[index].__metadata.uri
 									};
 
-									syncStatusModel.getData().Errors.push(errorJSON);
+									syncStatusModel.getData().Errors.push(error);
+									//syncStatusModel.refresh();
 
-								} catch (e) {
-									message = entry.Message;
+									var affectedEntitysUrl = data.results[index].__metadata.uri + "/AffectedEntity";
 
-									sap.m.MessageBox.show(message, {
-										icon: sap.m.MessageBox.Icon.ERROR,
-										title: "OData Service Error",
-										actions: [sap.m.MessageBox.Action.OK]
-									});
+									var request = {
+										headers: {},
+										requestUri: affectedEntitysUrl,
+										method: "GET"
+									};
+
+									OData.read(request,
+										function(data, response) {
+											syncStatusModel.getData().Errors.forEach(
+												function(item, index) {
+
+													var responseUrl = response.requestUri.replace("/AffectedEntity", "");
+
+													if (responseUrl === item.ErrorUrl) {
+														syncStatusModel.getData().Errors[index].OrderNo = data.OrderNo;
+
+														var objectData = JSON.parse(JSON.stringify(data));
+														delete objectData['@com.sap.vocabularies.Offline.v1.inErrorState'];
+														delete objectData['@com.sap.vocabularies.Offline.v1.islocal'];
+														delete objectData.__metadata;
+														objectData.__proto__ = null;
+
+														syncStatusModel.getData().Errors[index].ObjectData = objectData;
+													}
+												}
+											);
+											syncStatusModel.refresh();
+										},
+										function(e) {
+											console.log("Error in read AffectedEntity");
+										}
+									);
 								}
-							});
+							);
 						}
 
 						//Check if there is data pending sync in the offline db
 						devApp.devLogon.appOfflineStore.store.getRequestQueueStatus(
 							function(status) {
+
+								// if (!status.isEmpty) {
+								// 	//There is data pending sync in db
+								// 	syncStatusModel.getData().PendingLocalData = true;
+								// } else {
+								// 	syncStatusModel.getData().PendingLocalData = false;
+								// }
+
+								// that.setSyncIndicatorColor(syncStatusModel, devApp.isOnline);
+								// that.setSyncStateIcon(syncStatusModel, devApp.isOnline);
+								// that.setNetworkConnectionStatusText(syncStatusModel, devApp.isOnline);
+								// that.setSyncStateText(syncStatusModel, devApp.isOnline);
+
 								if (!status.isEmpty) {
 									//There is data pending sync in db
+
+									//Do not overwrite error state if that is present
+									//Error state is most important
+									if (!syncStatusModel.getData().InErrorState) {
+										//Data created offline is awaiting sync with server
+										//syncStatusModel.getData().SyncState = self.getI18nText("syncDataPending");
+									}
 									syncStatusModel.getData().PendingLocalData = true;
 								} else {
 									syncStatusModel.getData().PendingLocalData = false;
+
+									// if (!syncStatusModel.getData().InErrorState) {
+									// 	//Everything is ok
+									// 	syncStatusModel.getData().SyncState = self.getI18nText("syncOk");
+									// }
 								}
-								//sap.m.MessageBox.show("PendingLocalData: " + syncStatusModel.getData().PendingLocalData);
 
 								that.setSyncIndicatorColor(syncStatusModel, devApp.isOnline);
 								that.setSyncStateIcon(syncStatusModel, devApp.isOnline);
 								that.setNetworkConnectionStatusText(syncStatusModel, devApp.isOnline);
 								that.setSyncStateText(syncStatusModel, devApp.isOnline);
-								
-								//sap.m.MessageBox.show("SyncIcon: " + syncStatusModel.getData().SyncIcon);
 
 								syncStatusModel.refresh(true);
 							},
@@ -123,10 +166,9 @@ sap.ui.define([
 
 		setSyncStateIcon: function(syncStatusModel, isOnline) {
 			if (syncStatusModel.getData().InErrorState) {
-				syncStatusModel.getData().SyncIcon = "sap-icon://overlay";
+				syncStatusModel.getData().SyncIcon = "sap-icon://alert";
 			} else if (syncStatusModel.getData().PendingLocalData) {
 				syncStatusModel.getData().SyncIcon = "sap-icon://system-exit-2";
-				//sap.m.MessageBox.show("SyncIcon: sap-icon://system-exit-2");
 			} else {
 				syncStatusModel.getData().SyncIcon = "sap-icon://overlay";
 			}
@@ -153,8 +195,70 @@ sap.ui.define([
 		},
 
 		errorCallback: function(e) {
-			//alert("An error occurred " + JSON.stringify(e));
 			console.log("An error occurred " + JSON.stringify(e));
+		},
+
+		//Formatting methods for ErrorArchieve handling - Start
+
+		getMessageTextFromError: function(message) {
+			try {
+				var parsedJSON = JSON.parse(message);
+
+				return parsedJSON.error.message.value;
+
+				//var errorJSON = {
+				//    message: parsedJSON.error.message.value,
+				//    errorCode: parsedJSON.error.code,
+				//    requestId: entry.RequestID,
+				//    requestBody: JSON.parse(entry.RequestBody),
+				//    requestMethod: entry.RequestMethod,
+				//    requestUrl: entry.RequestURL
+				//};
+
+			} catch (error) {
+				return message;
+			}
+		},
+
+		getRequestMethodTextFromError: function(requestMethod) {
+			var title = "Error";
+			if (requestMethod.toLowerCase() === "delete") {
+				title = "Warning";
+			}
+			return title;
+		},
+
+		getRequestObjectName: function(requestUrl) {
+			var orderURLPrefix = "/OrderSet";
+			var timeRegistrationURLPrefix = "/TimeRegistrationSet";
+			var AttachmentsURLPrefix = "/AttachmentsSet";
+			var MaterialsURLPrefix = "/MaterialsSet";
+			var MaterialsSummaryURLPrefix = "/MaterialsSummarySet";
+
+			if (requestUrl.startsWith(orderURLPrefix)) {
+				return "Order header";
+			}
+
+			if (requestUrl.startsWith(timeRegistrationURLPrefix)) {
+				return "Time registration";
+			}
+
+			if (requestUrl.startsWith(AttachmentsURLPrefix)) {
+				return "Attachment";
+			}
+
+			if (requestUrl.startsWith(MaterialsURLPrefix)) {
+				return "Materials";
+			}
+
+			if (requestUrl.startsWith(MaterialsSummaryURLPrefix)) {
+				return "Materials";
+			}
+
+			return "";
+
 		}
+
+		//Formatting methods for ErrorArchieve handling - End
 	};
 });
