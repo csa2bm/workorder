@@ -1,19 +1,19 @@
 <core:View controllerName="com.twobm.mobileworkorder.components.objectDetails.blocks.OrderHistoryBlock" xmlns:core="sap.ui.core"
 	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
 	xmlns:vbm="sap.ui.vbm" xmlns="sap.m">
-	<Table id="idOrderTable" items="" noDataText="{i18n>OrderHistoryBlockNoHistory}" class="sapUiSmallMarginBottom">
+	<Table id="idOrderTable" items="" noDataText="{i18n>ObjectDetails-OrderHistoryBlock-NoHistoricOrders}" class="sapUiSmallMarginBottom">
 		<columns>
 			<Column>
-				<Text text="{i18n>OrderHistoryBlockColoumTimeAndStatus}"/>
+				<Text text="{i18n>ObjectDetails-OrderHistoryBlock-TimeAndStatusColumn}"/>
 			</Column>
 			<Column>
 				<Text text="{i18n>OrderHistoryBlockColoumOrderType}"/>
 			</Column>
 			<Column>
-				<Text text="{i18n>OrderHistoryBlockColoumOrder}"/>
+				<Text text="{i18n>ObjectDetails-OrderHistoryBlock-OrderColumn}"/>
 			</Column>
 			<Column>
-				<Text text="{i18n>OrderHistoryBlockColoumUser}"/>
+				<Text text="{i18n>ObjectDetails-OrderHistoryBlock-UserColoumn}"/>
 			</Column>
 		</columns>
 		<items>

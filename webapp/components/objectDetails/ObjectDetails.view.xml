@@ -1,42 +1,42 @@
 <core:View controllerName="com.twobm.mobileworkorder.components.objectDetails.ObjectDetails" xmlns:core="sap.ui.core"
 	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns="sap.uxap"
 	xmlns:blocks="com.twobm.mobileworkorder.components.objectDetails.blocks.configuration" height="100%">
-	<m:Page showNavButton="true" navButtonPress="onNavigationButtonPress" title="{i18n>EquipmentDetailsTitle}" height="100%">
+	<m:Page showNavButton="true" navButtonPress="onNavigationButtonPress" title="{i18n>ObjectDetails-Title}" height="100%">
 		<ObjectPageLayout id="equipmentObjectPage" enableLazyLoading="false">
 			<headerTitle>
 				<ObjectPageHeader headerDesign="Dark" objectTitle="{path:'Equidescr'}" objectSubtitle="{path:'Equipment'}"/>
 			</headerTitle>
 			<sections>
-				<ObjectPageSection title="{i18n>SubSectionTitleOperationInformation}">
+				<ObjectPageSection>
 					<subSections>
-						<ObjectPageSubSection title="{i18n>SubSectionTitleOperationInformation}">
+						<ObjectPageSubSection title="{i18n>ObjectDetails-GeneralSubSection}">
 							<blocks>
 								<blocks:GeneralBlock/>
 							</blocks>
 						</ObjectPageSubSection>
 					</subSections>
 				</ObjectPageSection>
-				<ObjectPageSection title="{i18n>SubSectionTitleMesuringPoints}">
+				<ObjectPageSection>
 					<subSections>
-						<ObjectPageSubSection title="{i18n>SubSectionTitleMesuringPoints}">
+						<ObjectPageSubSection title="{i18n>ObjectDetails-MeasuringPointsSubSection}">
 							<blocks>
 								<blocks:MeasuringPointsBlock/>
 							</blocks>
 						</ObjectPageSubSection>
 					</subSections>
 				</ObjectPageSection>
-				<ObjectPageSection title="{i18n>SubSectionTitleOrderHistory}">
+				<ObjectPageSection>
 					<subSections>
-						<ObjectPageSubSection title="{i18n>SubSectionTitleOrderHistory}">
+						<ObjectPageSubSection title="{i18n>ObjectDetails-OrderHistorySubSection}">
 							<blocks>
 								<blocks:OrderHistoryBlock/>
 							</blocks>
 						</ObjectPageSubSection>
 					</subSections>
 				</ObjectPageSection>
-				<ObjectPageSection title="{i18n>SubSectionTitleNotificationHistory}">
+				<ObjectPageSection>
 					<subSections>
-						<ObjectPageSubSection title="{i18n>SubSectionTitleNotificationHistory}">
+						<ObjectPageSubSection title="{i18n>ObjectDetails-NotificationHistorySubSection}">
 							<blocks>
 								<blocks:NotificationHistoryBlock/>
 							</blocks>
@@ -49,7 +49,7 @@
 			<m:OverflowToolbar>
 				<m:content>
 					<m:ToolbarSpacer></m:ToolbarSpacer>
-					<m:Button id="createNotification" press="onPressCreateNotification" text="Create Notification" type="Emphasized">
+					<m:Button id="createNotification" press="onPressCreateNotification" text="ObjectDetails-CreateNotificationButton" type="Emphasized">
 						<m:layoutData>
 							<m:OverflowToolbarLayoutData priority="NeverOverflow"/>
 						</m:layoutData>
