@@ -19,8 +19,8 @@ sap.ui.define([
 				orderCount: 0
 			});
 			this.getView().setModel(this.DashBoardModel, "DashBoardModel");
-		/*	var oInput = this.byId("userTile");
-			oInput.bindElement("/UserDetailsSet('LLA')");*/
+			/*	var oInput = this.byId("userTile");
+				oInput.bindElement("/UserDetailsSet('LLA')");*/
 		},
 
 		onRouteMatched: function(oEvent) {
@@ -32,6 +32,7 @@ sap.ui.define([
 				this.getEventBus().unsubscribe("OfflineStore", "Synced", this.syncCompleted, this);
 				this.getEventBus().unsubscribe("DeviceOnline", this.deviceWentOnline, this);
 				this.getEventBus().unsubscribe("DeviceOffline", this.deviceWentOffline, this);
+				this.getEventBus().unsubscribe("OfflineStore", "DBReinitialized", this.dbHasBeenReinitialized, this);
 				return;
 			}
 
@@ -40,6 +41,7 @@ sap.ui.define([
 			this.getEventBus().subscribe("OfflineStore", "Synced", this.syncCompleted, this);
 			this.getEventBus().subscribe("DeviceOnline", this.deviceWentOnline, this);
 			this.getEventBus().subscribe("DeviceOffline", this.deviceWentOffline, this);
+			this.getEventBus().subscribe("OfflineStore", "DBReinitialized", this.dbHasBeenReinitialized, this);
 
 			SyncStateHandler.handleSyncState();
 
@@ -50,7 +52,7 @@ sap.ui.define([
 			self = this;
 			var parametersUserDetails = {
 				success: function(oData, oResponse) {
-					
+
 					self.DashBoardModel.getData().Fullname = oData.Fullname;
 					self.DashBoardModel.getData().ImagePath = oData.__metadata.media_src;
 					self.DashBoardModel.refresh();
@@ -80,7 +82,6 @@ sap.ui.define([
 			this.getView().getModel().read("/OrderSet/$count", parametersOrder);
 			this.getView().getModel().read("/NotificationsSet/$count", parametersNotif);
 			this.getView().getModel().read("/UserDetailsSet('LLA')", parametersUserDetails);
-			
 		},
 
 		setNotificationModel: function(oEvent) {
@@ -104,9 +105,9 @@ sap.ui.define([
 		},
 
 		onPressScanObject: function() {
-				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-				//var oRouter = this.getRouter();
-				oRouter.navTo("objectTreeList", true);
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			//var oRouter = this.getRouter();
+			oRouter.navTo("objectTreeList", true);
 			/*cordova.plugins.barcodeScanner.scan(
 				function(result) {
 					if (result.cancelled === "true") {
@@ -193,7 +194,7 @@ sap.ui.define([
 		syncCompleted: function() {
 			if (window.sap_webide_FacadePreview) {
 				self.unSubscribeToOnlineSyncEvents();
-			} 
+			}
 
 			self.setSyncIndicators(false);
 		},
@@ -270,23 +271,6 @@ sap.ui.define([
 			}
 		},
 
-		showSyncQuickview: function(oEvent) {
-			this.createPopover();
-
-			// delay because addDependent will do a async rerendering and the actionSheet will immediately close without it.
-			var oButton = oEvent.getSource();
-			jQuery.sap.delayedCall(0, this, function() {
-				this._syncQuickView.openBy(oButton);
-			});
-		},
-
-		createPopover: function() {
-			if (!this._syncQuickView) {
-				this._syncQuickView = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.offline.fragments.SyncQuickView", this);
-				this.getView().addDependent(this._syncQuickView);
-			}
-		},
-
 		synchronizeData: function() {
 			if (this._syncQuickView) {
 				this._syncQuickView.close();
@@ -305,12 +289,6 @@ sap.ui.define([
 			}
 		},
 
-		closeSyncPopup: function() {
-			if (this._syncQuickView) {
-				this._syncQuickView.close();
-			}
-		},
-
 		dataCount: function(oValue) {
 			//read the number of data entities returned
 			if (oValue) {
@@ -318,41 +296,12 @@ sap.ui.define([
 			}
 		},
 
-		resetStore: function() {
-			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
-			sap.m.MessageBox.show("Are you sure that you want to reset the offline database and login again?", {
-				icon: sap.m.MessageBox.Icon.None,
-				title: "Reset database",
-				actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
-				defaultAction: sap.m.MessageBox.Action.NO,
-				styleClass: bCompact ? "sapUiSizeCompact" : "",
-				onClose: function(oAction, object) {
-					if (oAction === sap.m.MessageBox.Action.YES) {
+		dbHasBeenReinitialized: function() {
+			sap.ui.getCore().byId("appShell").setVisible(true); //Show data with the new downloaded data
 
-						sap.m.MessageToast.show("Resetting store");
-						devApp.devLogon.reset();
-					}
-				}
-			});
-		},
+			this.getView().getModel().refresh(true);
 
-		openErrorsView: function(oEvent) {
-			if (!this._errorsView) {
-				this._errorsView = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.app.fragments.ErrorsListPopover", this);
-				this.getView().addDependent(this._errorsView);
-			}
-
-			// delay because addDependent will do a async rerendering and the actionSheet will immediately close without it.
-			var oButton = oEvent.getSource();
-			jQuery.sap.delayedCall(0, this, function() {
-				this._errorsView.open();
-			});
-		},
-
-		closeErrorListPopupButton: function() {
-			if (this._errorsView) {
-				this._errorsView.close();
-			}
+			this.getEventBus().publish("UpdateSyncState");
 		}
 	});
 });

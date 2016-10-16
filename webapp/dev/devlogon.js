@@ -6,9 +6,11 @@ sap.ui.define([
 	"use strict";
 
 	return {
+		smpConfigData: {},
 		appContext: null,
 		appOfflineStore: {},
 		devapp: null,
+		dbReinitialized: false,
 
 		/********************************************************************
 		 * Initialize the application
@@ -67,11 +69,48 @@ sap.ui.define([
 						that.appContext = null;
 						//reset the app to its original packaged version
 						//(remove all updates retrieved by the AppUpdate plugin)
-						sap.AppUpdate.reset();
+						//sap.AppUpdate.reset();
+
+						var smpInfo = {};
+
+						if (that.smpConfigData && that.smpConfigData.logon) {
+							smpInfo.server = that.smpConfigData.host;
+							smpInfo.port = that.smpConfigData.port;
+							smpInfo.system = that.smpConfigData.system;
+							smpInfo.appID = that.smpConfigData.appID;
+						}
+
+						if (smpInfo.server && smpInfo.server.length > 0) {
+							var context = {
+								"serverHost": smpInfo.server,
+								"https": that.smpConfigData.https,
+								"serverPort": smpInfo.port,
+								"system": smpInfo.system,
+								"appID": smpInfo.appID
+							};
+							//that.devLogon = new com.twobm.wmoa.dev.devlogon();
+							that.doLogonInit(context, smpInfo.appID);
+						}
 					},
-					function(errObj) {
-						if (errObj) {
-							MessageBox.alert(JSON.stringify(errObj));
+					function() {
+						var smpInfo = {};
+
+						if (that.smpConfigData && that.smpConfigData.logon) {
+							smpInfo.server = that.smpConfigData.host;
+							smpInfo.port = that.smpConfigData.port;
+							smpInfo.system = that.smpConfigData.system;
+							smpInfo.appID = that.smpConfigData.appID;
+						}
+
+						if (smpInfo.server && smpInfo.server.length > 0) {
+							var context = {
+								"serverHost": smpInfo.server,
+								"https": that.smpConfigData.https,
+								"serverPort": smpInfo.port,
+								"system": smpInfo.system,
+								"appID": smpInfo.appID
+							};
+							that.doLogonInit(context, smpInfo.appID);
 						}
 					});
 			}
@@ -198,24 +237,42 @@ sap.ui.define([
 				}, theKey);
 		},
 
-			  reset : function() {
-				var self  = this;
-                this.appOfflineStore.store.close(function() {
-                	
-                	 sap.OData.removeHttpClient();
-                	 self.appOfflineStore.store.clear(function(){
-                	 	self.openAppOfflineStore();
-                	 }, function(e)
-                {
-                		MessageBox.alert("Failed close store: " + JSON.stringify(e));
-                });
-                	
-                }, function(e)
-                {
-                		MessageBox.alert("Failed close store: " + JSON.stringify(e));
-                });
-            },
+		reset: function() {
+			var self = this;
+			this.appOfflineStore.store.close(function() {
 
+				sap.OData.removeHttpClient();
+				self.appOfflineStore.store.clear(function() {
+					self.appOfflineStore.store = null;
+					self.dbReinitialized = true;
+					self.doDeleteRegistration();
+				}, function(e) {
+					if (e.errorCode === "17") {
+						//The store could not be dropped because it was not found.
+						self.appOfflineStore.store = null;
+						if (!self.devapp.isLoaded) {
+							self.dbReinitialized = false; //Not initialized as it was never created and app did not load models(component)
+						} else {
+							self.dbReinitialized = true; //App has already been loaded and therefore odatamodel(component) is created.
+						}
+						self.doDeleteRegistration();
+					} else {
+						sap.m.MessageBox.alert("Failed to reset database : " + JSON.stringify(e));
+					}
+				});
+
+			}, function(e) {
+				//The store could not be dropped because it was not open.
+				self.appOfflineStore.store = null;
+				if (!self.devapp.isLoaded) {
+					self.dbReinitialized = false; //Not initialized as it was never created and app did not load models(component)
+				} else {
+					self.dbReinitialized = true; //App has already been loaded and therefore odatamodel(component) is created.
+				}
+				self.doDeleteRegistration();
+
+			});
+		},
 
 		/********************************************************************
 		 * Creates a new OfflineStore object.
@@ -227,7 +284,7 @@ sap.ui.define([
 				//this.appOfflineStore.startTime = new Date();
 				var reqObj = this.devapp.definedStore;
 				var properties = {
-					"name": "MasterDetailAppOfflineStore",
+					"name": "WorkOrderOfflineStore",
 					"host": this.appContext.registrationContext.serverHost,
 					"port": this.appContext.registrationContext.serverPort,
 					"https": this.appContext.registrationContext.https,
@@ -247,16 +304,32 @@ sap.ui.define([
 						busyDL.close();
 						//set offline client
 						sap.OData.applyHttpClient();
-						that.devapp.startApp();
+
+						if (!that.dbReinitialized) {
+							that.devapp.startApp();
+						} else {
+							that.dbReinitialized = false; //reset
+
+							//publish offlineStore DBReinitialized event
+							var oEventBus = sap.ui.getCore().getEventBus();
+							oEventBus.publish("OfflineStore", "DBReinitialized");
+						}
+
 						that.devapp.isLoaded = true;
 					},
 					function(e) {
 						busyDL.close();
-						if (e) {
-							MessageBox.alert("Failed to open offline store: " + JSON.stringify(e));
-						} else {
-							MessageBox.alert("Failed to open offline store.");
-						}
+						sap.m.MessageBox.alert("An error occurred: " + JSON.stringify(e));
+						
+						sap.m.MessageBox.show(
+							"Possible reasons:\n- Your user is locked or not active on the server\n- The password you entered in the application configuration is different from your user password on the server\n\nPlease verify your SAP user account is active and password is correct and log in again.", {
+								icon: sap.m.MessageBox.Icon.Error,
+								title: "Server communication failed",
+								actions: [sap.m.MessageBox.Action.OK],
+								onClose: function(oAction, object) {
+									//that.reset();
+								}
+							});
 					});
 			}
 		},
@@ -293,7 +366,7 @@ sap.ui.define([
 
 							console.log(e);
 
-							if (this.devapp.isOnline) {
+							if (that.devapp.isOnline) {
 								//We do not want to see error message if sync failed due to lost network connection
 
 								//save the error
@@ -305,7 +378,7 @@ sap.ui.define([
 								sap.m.MessageBox.show(
 									"Possible reasons:\n- Your user is locked or not active on the server\n- The password you entered in the application configuration is different from your user password on the server\n\nIf this continue to occur contact your solution administrator.", {
 										icon: sap.m.MessageBox.Icon.Error,
-										title: "Error occured while communicating with server",
+										title: "Server communication failed",
 										actions: [sap.m.MessageBox.Action.OK]
 									}
 								);

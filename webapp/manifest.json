@@ -223,6 +223,10 @@
 			"NotificationsSet": {
 				"dataSource": "mainService",
 				"path": "/NotificationsSet"
+			},
+			"UserDetailsSet": {
+				"dataSource": "mainService",
+				"path": "/UserDetailsSet"
 			}
 		}
 	},

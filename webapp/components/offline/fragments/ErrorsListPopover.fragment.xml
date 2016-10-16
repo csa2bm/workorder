@@ -1,0 +1,100 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog contentWidth="100%" contentHeight="100%" showHeader="false">
+		<content>
+			<NavContainer id="errorNav">
+				<Page title="{i18n>errorListPopupHeader}">
+					<Table items="{syncStatusModel>/Errors}" noDataText="{i18n>errorListPopupNoErrors}">
+						<columns>
+							<Column demandPopin="true" popinDisplay="Inline" minScreenWidth="Small" width="1rem">
+								<header>
+									<Label text="{i18n>errorListPopupListColumnOrder}"/>
+								</header>
+							</Column>
+							<Column demandPopin="true" popinDisplay="Inline" minScreenWidth="Small" width="1rem">
+								<header>
+									<Label text="{i18n>errorListPopupListColumnObject}"/>
+								</header>
+							</Column>
+							<Column demandPopin="true" popinDisplay="Inline" minScreenWidth="Small" width="5rem">
+								<header>
+									<Label text="{i18n>errorListPopupListColumnMessage}"/>
+								</header>
+							</Column>
+							<Column demandPopin="true" popinDisplay="Inline" minScreenWidth="Small" width="5rem">
+								<header>
+									<Label text="{i18n>errorListPopupListColumnID}"/>
+								</header>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem press="onNavtoErrDetail" type="Active">
+								<cells>
+									<ObjectIdentifier text="{syncStatusModel>OrderNo}"/>
+									<ObjectIdentifier text="{syncStatusModel>RequestObject}"/>
+									<ObjectIdentifier text="{syncStatusModel>Message}"/>
+									<ObjectIdentifier text="{syncStatusModel>RequestID}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+					<footer>
+						<Toolbar>
+							<content>
+								<ToolbarSpacer/>
+								<Button text="{i18n>errorListPopupCloseButtonText}" press="closeErrorListPopupButton"></Button>
+							</content>
+						</Toolbar>
+					</footer>
+				</Page>
+				<Page id="errorDetail" showNavButton="true" navButtonPress="onErrorNavBack" title="{i18n>errorListPopupDetailTitle}">
+					<Panel width="auto" class="sapUiResponsiveMargin">
+						<headerToolbar>
+							<Toolbar height="3rem">
+								<Title text="{i18n>errorListPopupDetailErrorTitle}"/>
+							</Toolbar>
+						</headerToolbar>
+						<content>
+							<VBox>
+								<Text text="{syncStatusModel>Message}"/>
+								<Text text="{i18n>errorListPopupDetailErrorOrder} {syncStatusModel>OrderNo}"/>
+								<Text text="{i18n>errorListPopupDetailErrorObject} {syncStatusModel>RequestObject}"/>
+							</VBox>
+						</content>
+					</Panel>
+					<Panel width="auto" class="sapUiResponsiveMargin">
+						<headerToolbar>
+							<Toolbar height="3rem">
+								<Title text="{i18n>errorListPopupDetailDataChangedHeader}"/>
+							</Toolbar>
+						</headerToolbar>
+						<content>
+							<Text text="{syncStatusModel>RequestBody}"/>
+						</content>
+					</Panel>
+					<Panel width="auto" class="sapUiResponsiveMargin">
+						<headerToolbar>
+							<Toolbar height="3rem">
+								<Title text="{i18n>errorListPopupDetailRequestDetailsHeader}"/>
+							</Toolbar>
+						</headerToolbar>
+						<content>
+							<VBox>
+								<Text text="{i18n>errorListPopupDetailRequestDetailsRequestMethod} {syncStatusModel>RequestMethod}"/>
+								<Text text="{i18n>errorListPopupDetailRequestDetailsHttpStatusCode} {syncStatusModel>HTTPStatusCode}"/>
+							</VBox>
+						</content>
+					</Panel>
+					<footer>
+						<Toolbar>
+							<content>
+								<Button text="{i18n>errorListPopupDetailDeleteButtonText}" press="onDeleteErrRecord" type="Reject"></Button>
+								<ToolbarSpacer/>
+								<Button text="{i18n>errorListPopupCloseButtonText}" press="closeErrorListPopupButton"></Button>
+							</content>
+						</Toolbar>
+					</footer>
+				</Page>
+			</NavContainer>
+		</content>
+	</Dialog>
+</core:FragmentDefinition>

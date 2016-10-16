@@ -19,9 +19,6 @@ sap.ui.define([
 
 			oEventBus.subscribe("UpdateSyncState", SyncStateHandler.handleSyncState, this);
 
-			oEventBus.subscribe("OfflineStore", "OpenErrDialog", this.openErrDialog, this);
-			this._sErrorText = this.getResourceBundle().getText("errorText");
-
 			//Add Content Density Style Class
 			//this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
 		},
@@ -44,18 +41,6 @@ sap.ui.define([
 
 			//Update sync state indicator
 			SyncStateHandler.handleSyncState();
-
-			// var errorNum = devapp.deviceModel.getProperty("/errorNum");
-			// if (errorNum > 0) {
-			// 	if (!this._errDlg) {
-			// 		this._errDlg = sap.ui.xmlfragment("errorArchiveDialog", "com.2bm.mobileworkorder.components.app.ErrorArchive", this);
-			// 		this.getView().addDependent(this._errDlg);
-			// 	}
-			// 	this._errDlg.open();
-			// } else if (devapp.devLogon.appOfflineStore.callbackError) {
-			// 	MessageBox.alert(JSON.stringify(devapp.devLogon.appOfflineStore.callbackError));
-			// }
-			// devapp.devLogon.appOfflineStore.callbackError = null;
 		},
 
 		handleDisconnected: function() {
@@ -71,64 +56,6 @@ sap.ui.define([
 			//syncStatusModel.refresh(true);
 
 			SyncStateHandler.handleSyncState();
-		},
-
-		onNavtoErrDetail: function(oEvent) {
-			var oCtx = oEvent.getSource().getBindingContext();
-			var oNavCon = Fragment.byId("errorArchiveDialog", "errorNav");
-			var oDetailPage = Fragment.byId("errorArchiveDialog", "errorDetail");
-			oNavCon.to(oDetailPage);
-			oDetailPage.bindElement(oCtx.getPath());
-		},
-
-		onErrorNavBack: function() {
-			var oNavCon = Fragment.byId("errorArchiveDialog", "errorNav");
-			oNavCon.back();
-		},
-
-		onDelBTVisible: function(errCount) {
-			var bShow = false;
-			if (errCount > 0) {
-				bShow = true;
-			}
-
-			return bShow;
-		},
-
-		onDeleteErrRecord: function() {
-			if (devapp.devLogon.appOfflineStore.errorArchiveRowURL) {
-				var model = this.getView().getModel();
-				model.remove(devapp.devLogon.appOfflineStore.errorArchiveRowURL, {
-					success: function() {
-						//clean errorNum
-						devapp.deviceModel.setProperty("/errorNum", 0);
-						devapp.devLogon.appOfflineStore.errorArchiveRowURL = null;
-					},
-					error: function(error) {
-						MessageBox.alert(JSON.stringify(error));
-					}
-				});
-			}
-		},
-
-		openErrDialog: function() {
-			if (!this._errDlg) {
-				this._errDlg = sap.ui.xmlfragment("errorArchiveDialog", "com.twobm.mobileworkorder.components.app.ErrorArchive", this);
-				this.getView().addDependent(this._errDlg);
-			}
-			this._errDlg.open();
-		},
-
-		onErrDlgClose: function() {
-			this._errDlg.close();
-		},
-
-		onFormatTitle: function(requestMethod) {
-			var title = "Error";
-			if (requestMethod.toLowerCase() === "delete") {
-				title = "Warning";
-			}
-			return title;
 		}
 	});
 });

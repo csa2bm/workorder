@@ -7,12 +7,7 @@ sap.ui.define([
 
 	return Controller.extend("com.twobm.mobileworkorder.components.offline.Status", {
 
-
-		//	onInit: function() {
-		//
-		//	},
-
-			refresh: function() {
+		refresh: function() {
 			//Subscribe to sync events
 			if (window.sap_webide_FacadePreview) {
 				this.subscribeToOnlineSyncEvents();
@@ -161,8 +156,12 @@ sap.ui.define([
 				sap.m.MessageToast.show("Device is offline");
 			}
 		},
-		
+
 		resetStore: function() {
+			var that = this;
+
+			this._syncQuickView.close();
+
 			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
 			sap.m.MessageBox.show("Are you sure that you want to reset the offline database and login again?", {
 				icon: sap.m.MessageBox.Icon.None,
@@ -172,14 +171,15 @@ sap.ui.define([
 				styleClass: bCompact ? "sapUiSizeCompact" : "",
 				onClose: function(oAction, object) {
 					if (oAction === sap.m.MessageBox.Action.YES) {
-
-						sap.m.MessageToast.show("Resetting store");
+						that.closeSyncPopup();
+						sap.ui.getCore().byId("appShell").setVisible(false); // hide app with data
+						sap.m.MessageToast.show("Resetting data and logging out");
 						DevApp.devLogon.reset();
 					}
 				}
 			});
 		},
-		
+
 		closeSyncPopup: function() {
 			if (this._syncQuickView) {
 				this._syncQuickView.close();

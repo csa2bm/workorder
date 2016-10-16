@@ -30,10 +30,10 @@
     "sap.watt.uitools.ide.fiori"
   ],
   "hybrid": {
-    "appname": "MobileWorkOrder",
+    "appname": "Mobile Work Order",
     "appid": "com.twobm.mobileworkorder",
-    "appdesc": "2BM Mobile Work Order",
-    "appversion": "0.0.1",
+    "appdesc": "Mobile Work Order by 2BM",
+    "appversion": "0.1.16",
     "debugMode": true,
     "appIcon": {
       "defaultIcon": "",
@@ -420,7 +420,6 @@
           "selected": true,
           "registry": "cordova-plugin-statusbar",
           "localBuild": true,
-          "cloudBuild": true,
           "registered": true
         }
       }
