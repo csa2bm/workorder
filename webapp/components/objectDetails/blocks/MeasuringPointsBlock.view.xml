@@ -18,7 +18,7 @@
 		<items>
 			<ColumnListItem type="Active" press="onEquipmentItemPress">
 				<cells>
-					<ObjectIdentifier text="WV Golf 1.6 diesel" title="10000000"/>
+					<ObjectIdentifier text="{ShorText}" title="{ObjnoMpo}"/>
 					<ObjectIdentifier text="{Descriptn}" title="{Measpoint}"/>
 					<ObjectIdentifier text="{LastReading}" title="{LastReadingBy}"/>
 					<Button id="readingButton" enabled="{parts:[{path:'OrderStatus'}],formatter:'.orderStatusValid'}" class="sapUiMediumMarginEnd"

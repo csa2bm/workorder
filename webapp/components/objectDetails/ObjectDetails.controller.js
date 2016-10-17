@@ -28,6 +28,32 @@ sap.ui.define([
 				this.getView().setBindingContext(givenContext);
 				this.getView().bindElement(contextPath);
 			}
+			
+			//do we have this context loaded in our model? We should always have a timeregistration entry
+			if (this.ExpandLoaded) { //this.getView().getBindingContext().getObject()) {
+
+				//if yes, refresh the model to reflect in memory model any changes done remotely to the order
+				this.getView().getBindingContext().getModel().refresh(); //using true as argument got strange errors to arise
+
+				//Update lists
+				//Fix to get the lists to update after coming back to page with the same context
+
+
+				//this.scrollToTop();
+			} else {
+				var that = this;
+				//if not, create the binding context with all the expands we need in this view
+				var aExpand = ["MeasPointMeasDoc"];
+
+				this.getView().getModel().createBindingContext(contextPath, "", {
+						expand: aExpand.toString()
+					},
+					function(oEvent) {
+						var f = oEvent;
+						that.ExpandLoaded = true;
+
+					}, true);
+			}
 		},
 		
 		onNavigationButtonPress: function(){
