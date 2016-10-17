@@ -9,7 +9,7 @@
 			<sections>
 				<ObjectPageSection title="{i18n>SubSectionTitleOperationInformation}">
 					<subSections>
-						<ObjectPageSubSection id="operationInformationSubsection" title="{i18n>SubSectionTitleOperationInformation}">
+						<ObjectPageSubSection id="objectDetails-InformationSubsection" title="{i18n>SubSectionTitleOperationInformation}">
 							<blocks>
 								<blocks:GeneralBlock/>
 							</blocks>
@@ -18,7 +18,7 @@
 				</ObjectPageSection>
 				<ObjectPageSection title="{i18n>SubSectionTitleMesuringPoints}">
 					<subSections>
-						<ObjectPageSubSection id="MeasuringPointsSubsection" title="{i18n>SubSectionTitleMesuringPoints}">
+						<ObjectPageSubSection id="objectDetails-MeasuringPointsSubsection" title="{i18n>SubSectionTitleMesuringPoints}">
 							<blocks>
 								<blocks:MeasuringPointsBlock/>
 							</blocks>
@@ -27,7 +27,7 @@
 				</ObjectPageSection>
 				<ObjectPageSection title="{i18n>SubSectionTitleOrderHistory}">
 					<subSections>
-						<ObjectPageSubSection id="orderHistroySubSection" title="{i18n>SubSectionTitleOrderHistory}">
+						<ObjectPageSubSection id="objectDetails-orderHistroySubSection" title="{i18n>SubSectionTitleOrderHistory}">
 							<blocks>
 								<blocks:OrderHistoryBlock/>
 							</blocks>
@@ -36,7 +36,7 @@
 				</ObjectPageSection>
 				<ObjectPageSection title="{i18n>SubSectionTitleNotificationHistory}">
 					<subSections>
-						<ObjectPageSubSection id="notificationHistorySubSection" title="{i18n>SubSectionTitleNotificationHistory}">
+						<ObjectPageSubSection id="objectDetails-notificationHistorySubSection" title="{i18n>SubSectionTitleNotificationHistory}">
 							<blocks>
 								<blocks:NotificationHistoryBlock/>
 							</blocks>
