@@ -43,7 +43,7 @@ sap.ui.define([
 			} else {
 				var that = this;
 				//if not, create the binding context with all the expands we need in this view
-				var aExpand = ["MeasPointMeasDoc"];
+				var aExpand = ["ObjectMeasurementPoint", "HistoricOrderSet", "HistoricNotifSet"];
 
 				this.getView().getModel().createBindingContext(contextPath, "", {
 						expand: aExpand.toString()
