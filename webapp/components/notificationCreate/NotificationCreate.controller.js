@@ -30,9 +30,36 @@ sap.ui.define([
 		},
 
 		onRouteMatched: function(oEvent) {
-			jQuery.when(this.oInitialLoadFinishedDeferred).then(jQuery.proxy(function() {
-				this.getView().setBindingContext(this.getView().getModel().createEntry("/NotificationsSet"));
-			}, this));
+			
+				var sName = oEvent.getParameter("name");
+
+			//Is it this page we have navigated to?
+			if (sName !== "notificationCreate") {
+				return;
+			}
+				var newEntry = this.getView().getModel().createEntry("/NotificationsSet", {
+				success: jQuery.proxy(function(oData, oResponse) {
+					this.getView().setBusy(false);
+
+					if (oData && oData.__metadata && oData.__metadata.id) {
+						var idx = oData.__metadata.id.lastIndexOf("/");
+						var bindingPath = oData.__metadata.id.substring(idx);
+						this.getRouter().navTo("notificationDetails", {
+							notificationContext: bindingPath.substr(1)
+						}, true);
+					}
+
+				}, this),
+				error: jQuery.proxy(function(error) {
+					this.getView().setBusy(false);
+					this.errorCallBackShowInPopUp(error);
+				}, this)
+			
+				}
+				);
+			
+			
+			this.getView().setBindingContext(newEntry);
 		},
 
 		goBack: function(oEvent) {
@@ -50,27 +77,7 @@ sap.ui.define([
 
 		handleSaveNotification: function() {
 			this.getView().setBusy(true);
-
-			var model = this.getView().getModel();
-			var data = model.getData(this.getView().getBindingContext().getPath());
-			model.create("/NotificationsSet", data, {
-				success: jQuery.proxy(function(oData, oResponse) {
-					this.getView().setBusy(false);
-
-					if (oData && oData.__metadata && oData.__metadata.id) {
-						var idx = oData.__metadata.id.lastIndexOf("/");
-						var bindingPath = oData.__metadata.id.substring(idx);
-						this.getRouter().navTo("notificationDetails", {
-							notificationContext: bindingPath.substr(1)
-						}, true);
-					}
-
-				}, this),
-				error: jQuery.proxy(function(error) {
-					this.getView().setBusy(false);
-					this.errorCallBackShowInPopUp(error);
-				}, this)
-			});
+			this.getView().getModel().submitChanges();
 		},
 		
 		priorityValueConvert: function(value) {
