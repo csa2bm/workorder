@@ -4,16 +4,16 @@
 	<Table id="idOrderTable" items="" noDataText="{i18n>OrderHistoryBlockNoHistory}" class="sapUiSmallMarginBottom">
 		<columns>
 			<Column>
-				<Text text="{i18n>OrderHistoryBlockColoumTimeAndStatus}"/>
+				<Text text="{i18n>ObjectDetails-OrderHistoryBlock-TimeAndStatus}"/>
 			</Column>
 			<Column>
-				<Text text="{i18n>OrderHistoryBlockColoumOrderType}"/>
+				<Text text="{i18n>ObjectDetails-OrderHistoryBlock-OrderType}"/>
 			</Column>
 			<Column>
-				<Text text="{i18n>OrderHistoryBlockColoumOrder}"/>
+				<Text text="{i18n>ObjectDetails-OrderHistoryBlock-Order}"/>
 			</Column>
 			<Column>
-				<Text text="{i18n>OrderHistoryBlockColoumUser}"/>
+				<Text text="{i18n>ObjectDetails-OrderHistoryBlockC-User}"/>
 			</Column>
 		</columns>
 		<items>

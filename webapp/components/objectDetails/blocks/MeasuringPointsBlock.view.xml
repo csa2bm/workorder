@@ -1,16 +1,16 @@
 <core:View controllerName="com.twobm.mobileworkorder.components.objectDetails.blocks.MeasuringPointsBlock" xmlns:core="sap.ui.core"
 	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
 	xmlns:vbm="sap.ui.vbm" xmlns="sap.m">
-	<Table id="idProductsTable" items="{ObjectMeasurementPoint}" noDataText="{i18n>MeasuringPointsBlockNoMeasuringPointsAdded}">
+	<Table id="idProductsTable" items="{ObjectMeasurementPoint}" noDataText="{i18n>ObjectDetails-MeasuringPointBlockNoMeasuringPoint}">
 		<columns>
 			<Column>
-				<Text text="{i18n>MeasuringPointsBlockColoumEquipment}"/>
+				<Text text="{i18n>ObjectDetails-MeasuringPointBlock-Equipment}"/>
 			</Column>
 			<Column>
-				<Text text="{i18n>MeasuringPointsBlockColoumMeasuringPoint}"/>
+				<Text text="{i18n>ObjectDetails-MeasuringPointBlock-MesuringPoint}"/>
 			</Column>
 			<Column>
-				<Text text="{i18n>MeasuringPointsBlockColoumPreviousReading}"/>
+				<Text text="{i18n>ObjectDetails-MeasuringPointBlock-Previous}"/>
 			</Column>
 			<Column width="5em" vAlign="Middle"></Column>
 			<Column width="1.5em" vAlign="Middle"></Column>
