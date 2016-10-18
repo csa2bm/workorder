@@ -44,7 +44,9 @@
 			"tablet": true,
 			"phone": true
 		},
-		"supportedThemes": ["sap_belize_plus"]
+		"supportedThemes": [
+			"sap_belize_plus"
+		]
 	},
 	"sap.ui5": {
 		"_version": "1.1.0",
@@ -85,52 +87,71 @@
 					"target": "notFound"
 				}
 			},
-			"routes": [{
-				"pattern": "",
-				"name": "dashboard",
-				"target": "dashboard"
-			}, {
-				"pattern": "workOrderList",
-				"name": "workOrderList",
-				"target": "workOrderList"
-			}, {
-				"pattern": "workOrderDetails/{workOrderContext}",
-				"name": "workOrderDetails",
-				"target": "workOrderDetails"
-			}, {
-				"pattern": "operationDetails/{operationContext}",
-				"name": "operationDetails",
-				"target": "operationDetails"
-			}, {
-				"pattern": "objectDetails/{objectContext}",
-				"name": "objectDetails",
-				"target": "objectDetails"
-			}, {
-				"pattern": "measurementPointDetails/{measurementContext}",
-				"name": "measurementPointDetails",
-				"target": "measurementPointDetails"
-			}, {
-				"pattern": "notificationList",
-				"name": "notificationList",
-				"greedy": false,
-				"target": ["notificationList"]
-			}, {
-				"pattern": "notificationDetails/{notificationContext}",
-				"name": "notificationDetails",
-				"greedy": false,
-				"target": ["notificationDetails"]
-			}, {
-				"pattern": "notificationCreate",
-				"name": "notificationCreate",
-				"greedy": false,
-				"target": ["notificationCreate"]
-			}, {
-				"name": "objectTreeList",
-				"pattern": "objectTreeList",
-				"titleTarget": "",
-				"greedy": false,
-				"target": ["objectTreeList"]
-			}],
+			"routes": [
+				{
+					"pattern": "",
+					"name": "dashboard",
+					"target": "dashboard"
+				},
+				{
+					"pattern": "workOrderList",
+					"name": "workOrderList",
+					"target": "workOrderList"
+				},
+				{
+					"pattern": "workOrderDetails/{workOrderContext}",
+					"name": "workOrderDetails",
+					"target": "workOrderDetails"
+				},
+				{
+					"pattern": "operationDetails/{operationContext}",
+					"name": "operationDetails",
+					"target": "operationDetails"
+				},
+				{
+					"pattern": "objectDetails/{objectContext}",
+					"name": "objectDetails",
+					"target": "objectDetails"
+				},
+				{
+					"pattern": "measurementPointDetails/{measurementContext}",
+					"name": "measurementPointDetails",
+					"target": "measurementPointDetails"
+				},
+				{
+					"pattern": "notificationList",
+					"name": "notificationList",
+					"greedy": false,
+					"target": [
+						"notificationList"
+					]
+				},
+				{
+					"pattern": "notificationDetails/{notificationContext}",
+					"name": "notificationDetails",
+					"greedy": false,
+					"target": [
+						"notificationDetails"
+					]
+				},
+				{
+					"pattern": "notificationCreate",
+					"name": "notificationCreate",
+					"greedy": false,
+					"target": [
+						"notificationCreate"
+					]
+				},
+				{
+					"name": "objectTreeList",
+					"pattern": "objectTreeList",
+					"titleTarget": "",
+					"greedy": false,
+					"target": [
+						"objectTreeList"
+					]
+				}
+			],
 			"targets": {
 				"dashboard": {
 					"viewPath": "com.twobm.mobileworkorder.components.dashboard",
