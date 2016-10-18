@@ -37,17 +37,12 @@ sap.ui.define([
 			if (sName !== "notificationCreate") {
 				return;
 			}
-			var newEntry = this.getView().getModel().createEntry("/NotificationsSet", {
+			this.newEntry = this.getView().getModel().createEntry("/NotificationsSet",{
 				success: jQuery.proxy(function(oData, oResponse) {
 					this.getView().setBusy(false);
-
-					if (oData && oData.__metadata && oData.__metadata.id) {
-						var idx = oData.__metadata.id.lastIndexOf("/");
-						var bindingPath = oData.__metadata.id.substring(idx);
-						this.getRouter().navTo("notificationDetails", {
-							notificationContext: bindingPath.substr(1)
+				this.getRouter().navTo("notificationDetails", {
+							notificationContext: this.newEntry.getPath().substr(1)
 						}, true);
-					}
 
 				}, this),
 				error: jQuery.proxy(function(error) {
@@ -60,7 +55,7 @@ sap.ui.define([
 				}, this)
 			});
 
-			this.getView().setBindingContext(newEntry);
+			this.getView().setBindingContext(this.newEntry);
 		},
 
 		goBack: function(oEvent) {
@@ -78,7 +73,15 @@ sap.ui.define([
 
 		handleSaveNotification: function() {
 			this.getView().setBusy(true);
-			this.getView().getModel().submitChanges();
+			this.getView().getModel().submitChanges({
+				success: jQuery.proxy(function(oData, oResponse) {
+					this.getView().setBusy(false);
+				}, this),
+				error: jQuery.proxy(function(error) {
+					this.getView().setBusy(false);
+					this.errorCallBackShowInPopUp(error);
+				}, this)
+			});
 		},
 
 		priorityValueConvert: function(value) {

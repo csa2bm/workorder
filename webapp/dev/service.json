@@ -1,6 +1,6 @@
 {
 	"logon": true,
-	"host": "mobile-a061a6900.hana.ondemand.com",
+	"host": "mobile-a2b30ffcb.hana.ondemand.com",
 	"port": "443",
 	"https": "true",
 	"appID": "com.twobm.mobileworkorder",

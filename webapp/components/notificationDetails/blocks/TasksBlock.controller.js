@@ -40,7 +40,7 @@ sap.ui.define([
 			// Create new entry with default values
 			this.newEntry = this.getView().getModel().createEntry(path, {
 				properties: {
-					TaskSortNo: "0000"
+					TaskSortNo: "0001"
 				}
 			});
 
