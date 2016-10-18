@@ -56,7 +56,7 @@ sap.ui.define([
 			};
 
 			var dataCreate = {
-				notifactionid: notiNo,
+				NotifNo: notiNo,
 				Data: file,
 				CreateDate: new Date(),
 				CreatedBy: "current user"

@@ -30,14 +30,14 @@ sap.ui.define([
 		},
 
 		onRouteMatched: function(oEvent) {
-			
-				var sName = oEvent.getParameter("name");
+
+			var sName = oEvent.getParameter("name");
 
 			//Is it this page we have navigated to?
 			if (sName !== "notificationCreate") {
 				return;
 			}
-				var newEntry = this.getView().getModel().createEntry("/NotificationsSet", {
+			var newEntry = this.getView().getModel().createEntry("/NotificationsSet", {
 				success: jQuery.proxy(function(oData, oResponse) {
 					this.getView().setBusy(false);
 
@@ -51,14 +51,15 @@ sap.ui.define([
 
 				}, this),
 				error: jQuery.proxy(function(error) {
+					if (error.statusCode === 0) {
+						return;
+					}
+
 					this.getView().setBusy(false);
 					this.errorCallBackShowInPopUp(error);
 				}, this)
-			
-				}
-				);
-			
-			
+			});
+
 			this.getView().setBindingContext(newEntry);
 		},
 
@@ -79,7 +80,7 @@ sap.ui.define([
 			this.getView().setBusy(true);
 			this.getView().getModel().submitChanges();
 		},
-		
+
 		priorityValueConvert: function(value) {
 
 			switch (value) {
@@ -159,7 +160,7 @@ sap.ui.define([
 			);
 			evt.getSource().getBinding("items").filter([oFilter]);
 		},
-		
+
 		_handleValueHelpSearchEquipment: function(evt) {
 			var sValue = evt.getParameter("value");
 			var oFilter = new Filter(
@@ -179,7 +180,7 @@ sap.ui.define([
 			var thisDialog = evt.getParameter("id");
 			thisDialog.close();
 		},
-		
+
 		_handleValueHelpAfterClose: function(evt) {
 			//Destroy the ValueHelpDialog
 			var thisDialog = evt.getParameter("id");

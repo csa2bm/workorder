@@ -15,14 +15,16 @@
 			<Column id="textColumn">
 				<Text text="{i18n>NotificationDetails-TasksBlock-TextHeader}"/>
 			</Column>
+			<Column width="1.5em" vAlign="Middle"></Column>
 		</columns>
 		<items>
-			<ColumnListItem>
+			<ColumnListItem type="Active" press="onTaskItemPress">
 				<cells>
 					<Text text="{TaskSortNo}"/>
-					<ObjectIdentifier text="{TaskSortNo}" title="{TxtTaskgrp}"/>
+					<ObjectIdentifier text="{TaskCodegrp}" title="{TxtTaskgrp}"/>
 					<ObjectIdentifier text="{TaskCode}" title="{TxtTaskcd}"/>
 					<Text text="{TaskText}"/>
+					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 				</cells>
 			</ColumnListItem>
 		</items>

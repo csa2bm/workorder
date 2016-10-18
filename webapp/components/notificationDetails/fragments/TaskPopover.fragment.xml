@@ -1,18 +1,16 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
 	<Dialog title="{i18n>NotificationDetails-TaskPopover-Title}" class="sapUiPopupWithPadding" stretch="false" showHeader="true" showCloseButton="true">
-		<beginButton>
+		<buttons>
+			<Button class="sapUiSmallMarginEnd" icon="sap-icon://delete" visible="{ViewModel>/isEditing}" press="onDeleteTask"/>
 			<Button  type="Emphasized" text="Submit" press="onSubmitTask"></Button>
-		</beginButton>
-		<endButton>
 			<Button text="Close" press="onPopopoverClose"/>
-		</endButton>
-		<buttons></buttons>
+		</buttons>
 		<content>
 			<VBox>
 				<Label text="{i18n>NotificationDetails-TaskPopover-CodeGroup}" design="Bold" class="sapUiTinyMarginBottom"/>
-				<Input type="Text" value="" showValueHelp="true"/>
+				<Input type="Text" value="{TaskCodegrp}" showValueHelp="true"/>
 				<Label text="{i18n>NotificationDetails-TaskPopover-Code}" design="Bold" class="sapUiTinyMarginBottom sapUiTinyMarginTop"/>
-				<Input type="Text" value="" showValueHelp="true"/>
+				<Input type="Text" value="{TaskCode}" showValueHelp="true"/>
 				<Label text="{i18n>NotificationDetails-TaskPopover-Text}" design="Bold" class="sapUiTinyMarginBottom sapUiTinyMarginTop"/>
 				<Input type="Text" value="{TaskText}" />
 			</VBox>
