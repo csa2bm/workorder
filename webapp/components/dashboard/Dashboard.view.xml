@@ -6,8 +6,8 @@
 			<content>
 				<FlexBox alignItems="Left" justifyContent="Left">
 					<items>
-						<GenericTile id="userTile" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{DashBoardModel>/Fullname}" subheader="Service technician"
-							headerImage="{DashBoardModel>/ImagePath}" frameType="TwoByOne" press="press">
+						<GenericTile id="userTile" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{DashBoardModel>/Fullname}"
+							subheader="Service technician" headerImage="{DashBoardModel>/ImagePath}" frameType="TwoByOne" press="press">
 							<tileContent>
 								<TileContent footer="">
 									<content>
@@ -28,8 +28,8 @@
 						</GenericTile>
 					</items>
 				</FlexBox>
-				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-WorkOrdersTile-Header}" subheader="" size="S" frameType="OneByOne"
-					press="onPressOtherWorkorders">
+				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-WorkOrdersTile-Header}" subheader=""
+					size="S" frameType="OneByOne" press="onPressOtherWorkorders">
 					<tileContent>
 						<TileContent footer="" size="S">
 							<content>
@@ -38,8 +38,8 @@
 						</TileContent>
 					</tileContent>
 				</GenericTile>
-				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-NotificationsTile-Header}" subheader="" size="S" frameType="OneByOne"
-					press="onPressNotifications">
+				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-NotificationsTile-Header}" subheader=""
+					size="S" frameType="OneByOne" press="onPressNotifications">
 					<tileContent>
 						<TileContent footer="" size="S">
 							<content>
@@ -48,8 +48,8 @@
 						</TileContent>
 					</tileContent>
 				</GenericTile>
-				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-CreateNotificationTile-Header}" size="S" frameType="OneByOne"
-					press="onPressCreateNotification">
+				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-CreateNotificationTile-Header}" size="S"
+					frameType="OneByOne" press="onPressCreateNotification">
 					<tileContent>
 						<TileContent size="S">
 							<content>
@@ -58,8 +58,8 @@
 						</TileContent>
 					</tileContent>
 				</GenericTile>
-				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-ScanObjectTile-Header}" subheader="" size="S" frameType="OneByOne"
-					press="onPressScanObject">
+				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-ScanObjectTile-Header}" subheader=""
+					size="S" frameType="OneByOne" press="onPressScanObject">
 					<tileContent>
 						<TileContent>
 							<content>
@@ -68,8 +68,8 @@
 						</TileContent>
 					</tileContent>
 				</GenericTile>
-				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-TechnicalObjectsTile-Header}" size="S" frameType="OneByOne"
-					press="onPressFunctionalLocations">
+				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-TechnicalObjectsTile-Header}" size="S"
+					frameType="OneByOne" press="onPressFunctionalLocations">
 					<tileContent>
 						<TileContent>
 							<content>
@@ -86,8 +86,8 @@
 						<!--	src="{syncStatusModel>/SyncIcon}" tooltip="Sync status"></core:Icon>-->
 						<!--<BusyIndicator id="syncBusyIndicator" visible="{syncStatusModel>/IsSynching}"/>-->
 						<mvc:XMLView viewName="com.twobm.mobileworkorder.components.offline.Status"/>
-						<ToolbarSpacer></ToolbarSpacer>
 						<mvc:XMLView viewName="com.twobm.mobileworkorder.components.offline.ErrorListControl"/>
+						<ToolbarSpacer></ToolbarSpacer>
 						<!--<Button type="Reject" visible="{syncStatusModel>/InErrorState}" text="Shows Errors" press="openErrorsView"></Button>-->
 					</content>
 				</Toolbar>

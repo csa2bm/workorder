@@ -195,6 +195,8 @@ sap.ui.define([
 			if (window.sap_webide_FacadePreview) {
 				self.unSubscribeToOnlineSyncEvents();
 			}
+			
+			self.setContentInTiles();
 
 			self.setSyncIndicators(false);
 		},
