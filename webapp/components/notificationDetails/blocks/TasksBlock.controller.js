@@ -19,7 +19,26 @@ sap.ui.define([
 		},
 		
 		onCreateTask: function(oEvent) {
+			this.newEntry = this.getView().getModel().createEntry(this.getView().getBindingContext().getPath() + "/NotifTasksSet", {
+				success: function () {
+					this.popover.close();
+				},
+				error: self.errorCallBackShowInPopUp
+			});
+			
+			this.newEntry.TaskSortNo = "123";
+			
+			this.popover.setBindingContext(this.newEntry);
 			this.popover.open();
+		},
+		
+		onSubmitTask: function(oEvent) {
+			this.getView().getModel().submitChanges();
+		},
+
+		onPopopoverClose : function(oEvent){
+			this.getView().getModel().deleteCreatedEntry(this.newEntry);
+			this.popover.close();
 		}
 	});
 });

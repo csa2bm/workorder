@@ -35,7 +35,7 @@ sap.ui.define([
 			this.setInitialSorting();
 
 			//flush and refresh data
-		//	this.refresh();
+			this.refresh();
 		},
 
 		onNavigationButtonPress: function(oEvent) {

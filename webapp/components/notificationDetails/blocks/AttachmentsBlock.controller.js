@@ -62,7 +62,7 @@ sap.ui.define([
 				CreatedBy: "current user"
 			};
 
-			var createPath = "/NotificationsSet(NotiNo='" + notiNo + "')/NotifAttachmentsSet";
+			var createPath = "/NotificationsSet(NotifNo='" + notiNo + "')/NotifAttachmentsSet";
 
 			self.getView().getModel().create(createPath, dataCreate, parameters);
 		},
@@ -259,26 +259,7 @@ sap.ui.define([
 				}
 			};
 
-			if (attachmentId || localObjectUri) {
-
-				//Update existing attachment with new description
-				var updateData = {
-					Description: this._oPopover.getModel("ImageModel").getData().Description,
-					IncludeInReport: this._oPopover.getModel("ImageModel").getData().IncludeInReport
-				};
-
-				var updatePath;
-
-				if (localObjectUri !== "") {
-					updatePath = localObjectUri;
-				} else {
-					updatePath = "/NotifAttachmentsSet(AttachmentID='" + attachmentId + "',NotifNo='" + notifNo + "')";
-				}
-
-				self.getView().getModel().update(updatePath, updateData, parameters);
-			} else {
-				//Create new attachment
-
+			
 				var imageWithoutBase64Prefix = image.replace("data:image/jpeg;base64,", "");
 
 				var dataCreate = {
@@ -293,7 +274,7 @@ sap.ui.define([
 				var createPath = "/NotificationsSet(NotifNo='" + notifNo + "')/NotifAttachmentsSet";
 
 				self.getView().getModel().create(createPath, dataCreate, parameters);
-			}
+			
 
 			self._oPopover.close();
 		},
