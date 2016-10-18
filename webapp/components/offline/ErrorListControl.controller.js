@@ -1,11 +1,12 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller"
+	"com/twobm/mobileworkorder/util/Controller"
 ], function(Controller) {
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.offline.ErrorListControl", {
 		openErrorsView: function(oEvent) {
 			if (!this._errorsView) {
+				
 				this._errorsView = sap.ui.xmlfragment("errorArchiveDialog", "com.twobm.mobileworkorder.components.offline.fragments.ErrorsListPopover", this);
 				this.getView().addDependent(this._errorsView);
 			}
@@ -52,7 +53,6 @@ sap.ui.define([
 			var deletePath = oEvent.getSource().getBindingContext("syncStatusModel").getObject().ErrorUrl;
 			var that = this;
 			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
-				sap.m.MessageBox.show("1");
 			
 			sap.m.MessageBox.show(this.getI18nText("errorListPopupDetailDeletePopupText"), {
 				icon: sap.m.MessageBox.Icon.None,
@@ -61,12 +61,11 @@ sap.ui.define([
 				defaultAction: sap.m.MessageBox.Action.NO,
 				styleClass: bCompact ? "sapUiSizeCompact" : "",
 				onClose: function(oAction, object) {
-						sap.m.MessageBox.show("2");
 					
 					if (oAction === sap.m.MessageBox.Action.YES) {
 
 						var deleteErrorsURL = deletePath.replace(that.getView().getModel().sServiceUrl, "");
-
+						sap.m.MessageBox.show(deleteErrorsURL);
 						var parameters = {
 							success: function(evt) {
 									sap.m.MessageBox.show("3");
@@ -78,7 +77,7 @@ sap.ui.define([
 							},
 							error: that.errorCallBackShowInPopUp
 						};
-
+						sap.m.MessageBox.show(that.getView().getModel().sServiceUrl);
 						that.getView().getModel().remove(deleteErrorsURL, parameters);
 					}
 				}

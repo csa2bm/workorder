@@ -21,7 +21,7 @@
 				</l:HorizontalLayout>
 				<Button class="sapUiMediumMarginTop" text="Synchronize Now" press="synchronizeData"></Button>
 				<Button class="sapUiMediumMarginTop" text="Reset database" press="resetStore"></Button>
-				<Button class="sapUiMediumMarginTop" type="Reject" visible="{syncStatusModel>/InErrorState}" text="Error list" press="openErrorsView"></Button>
+				<!--<Button class="sapUiMediumMarginTop" type="Reject" visible="{syncStatusModel>/InErrorState}" text="Error list" press="openErrorsView"></Button>-->
 			</l:VerticalLayout>
 		</content>
 	</ResponsivePopover>
