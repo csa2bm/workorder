@@ -7,7 +7,7 @@
 				<FlexBox alignItems="Left" justifyContent="Left">
 					<items>
 						<GenericTile id="userTile" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{DashBoardModel>/Fullname}"
-							subheader="Service technician" headerImage="{DashBoardModel>/ImagePath}" frameType="TwoByOne" press="press">
+							subheader="{DashBoardModel>/Position}" headerImage="{DashBoardModel>/ImagePath}" frameType="TwoByOne" press="press">
 							<tileContent>
 								<TileContent footer="">
 									<content>

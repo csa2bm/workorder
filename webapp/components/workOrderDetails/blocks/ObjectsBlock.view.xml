@@ -13,8 +13,8 @@
 		<items>
 			<ColumnListItem type="Active" press="onEquipmentItemPress">
 				<cells>
-					<ObjectIdentifier text="{Funcldescr}" title="{FunclocDisp}"/>
-					<ObjectIdentifier text="{Equidescr}" title="{Equipment}"/>
+					<ObjectIdentifier text="{FunclocDisp}" title="{Funcldescr}"/>
+					<ObjectIdentifier text="{Equipment}" title="{Equidescr}"/>
 					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 				</cells>
 			</ColumnListItem>

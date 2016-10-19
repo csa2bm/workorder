@@ -15,7 +15,7 @@
 		<items>
 			<ColumnListItem>
 				<cells>
-					<ObjectIdentifier text="{MaterialDescription}" title="{Material}"/>
+					<ObjectIdentifier text="{Material}" title="{MaterialDescription}"/>
 					<Text text="{ReqQuantity}"/>
 					<Text text="{WithdQuan}"/>
 				</cells>

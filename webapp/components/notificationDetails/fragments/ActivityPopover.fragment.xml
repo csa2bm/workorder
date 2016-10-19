@@ -8,9 +8,9 @@
 		<content>
 			<VBox>
 				<Label text="{i18n>NotificationDetails-ActivityPopover-CodeGroup}" design="Bold" class="sapUiTinyMarginBottom"/>
-				<Input type="Text" value="{ActCodegrp}" showValueHelp="true"/>
+				<Input type="Text" value="{ActCodegrp}" showValueHelp="true" valueHelpRequest="handleValueHelpCodeGroup"/>
 				<Label text="{i18n>NotificationDetails-ActivityPopover-Code}" design="Bold" class="sapUiTinyMarginBottom sapUiTinyMarginTop"/>
-				<Input type="Text" value="{ActCode}" showValueHelp="true"/>
+				<Input type="Text" value="{ActCode}" showValueHelp="true" valueHelpRequest="handleValueHelpCode" />
 				<Label text="{i18n>NotificationDetails-ActivityPopover-Text}" design="Bold" class="sapUiTinyMarginBottom sapUiTinyMarginTop"/>
 				<Input type="Text" value="{Acttext}" />
 			</VBox>

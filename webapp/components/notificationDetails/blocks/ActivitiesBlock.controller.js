@@ -1,6 +1,7 @@
 sap.ui.define([
-	"com/twobm/mobileworkorder/util/Controller"
-], function(Controller) {
+	"com/twobm/mobileworkorder/util/Controller",
+	"sap/ui/model/Filter"
+], function(Controller, Filter) {
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.notificationDetails.blocks.ActivitiesBlock", {
@@ -24,6 +25,9 @@ sap.ui.define([
 		},
 
 		onActivityItemPress: function(oEvent) {
+			// Compile the model path for the code group on the item for use later if the user wants to change the code
+			this.codeGroupBindingContext = "/CodeGroupsSet('A" + this.getView().getModel().getProperty(oEvent.getSource().getBindingContext() + "/ActCodegrp") + "')";
+			
 			// Update view model to indicate we are editing an existing item
 			this.getView().getModel("ViewModel").setProperty("/isEditing", true);
 			// Set binding context from list item on popover
@@ -104,6 +108,74 @@ sap.ui.define([
 			}
 			// Close the popup
 			this.popover.close();
+		},
+		
+		handleValueHelpCodeGroup: function(oEvent) {
+			if (!this.valueHelpCodeGroupDialog) {
+				this.valueHelpCodeGroupDialog = sap.ui.xmlfragment(
+					"com.twobm.mobileworkorder.components.notificationDetails.fragments.CodeGroupValueHelp",
+					this
+				);
+				this.getView().addDependent(this.valueHelpCodeGroupDialog);
+			}
+			this.valueHelpCodeGroupDialog.open();
+		},
+		
+		handleValueHelpCode: function(oEvent) {
+			if (!this.valueHelpCodeDialog) {
+				this.valueHelpCodeDialog = sap.ui.xmlfragment(
+					"com.twobm.mobileworkorder.components.notificationDetails.fragments.CodeValueHelp",
+					this
+				);
+				this.getView().addDependent(this.valueHelpCodeDialog);
+			}
+			
+			sap.ui.getCore().byId("CodeValueHelpDialog").bindElement(this.codeGroupBindingContext);
+			
+			this.valueHelpCodeDialog.open();
+		},
+		
+		
+		handleValueHelpSearchCodeGroup: function(oEvent) {
+			var sValue = oEvent.getParameter("value");
+			var oFilter = new Filter(
+				"Codegroup",
+				sap.ui.model.FilterOperator.Contains, sValue
+			);
+			oEvent.getSource().getBinding("items").filter([oFilter,
+			new Filter(
+				"CatalogType",
+				sap.ui.model.FilterOperator.EQ,  "2")]);
+				
+			oEvent.getSource().getBinding("items").refresh();
+		},
+		
+		handleValueHelpCloseCodeGroup: function(oEvent) {
+			var selectedItem = oEvent.getParameter("selectedItem");
+			if (selectedItem) {
+				this.getView().getModel().setProperty(this.popover.getBindingContext().getPath() + "/ActCodegrp", selectedItem.getDescription());
+				this.codeGroupBindingContext = selectedItem.getBindingContext().getPath();		
+				
+			}
+			oEvent.getSource().getBinding("items").filter([]);
+		},
+
+		handleValueHelpAfterCloseCodeGroup: function(evt) {
+			//Destroy the ValueHelpDialog
+			this.valueHelpCodeGroupDialog.destroy();
+		},
+		
+		handleValueHelpCloseCode: function(oEvent) {
+			var selectedItem = oEvent.getParameter("selectedItem");
+			if (selectedItem) {
+				this.getView().getModel().setProperty(this.popover.getBindingContext().getPath() + "/ActCode", selectedItem.getDescription());
+			}
+			oEvent.getSource().getBinding("items").filter([]);
+		},
+
+		handleValueHelpAfterCloseCode: function(evt) {
+			//Destroy the ValueHelpDialog
+			this.valueHelpCodeDialog.destroy();
 		}
 	});
 });

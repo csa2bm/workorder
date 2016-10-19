@@ -19,9 +19,9 @@
 		<items>
 			<ColumnListItem type="Active" press="onMeasuringPointItemPress">
 				<cells>
-					<ObjectIdentifier text="Engine" title="483293484"/>
-					<ObjectIdentifier text="{Descriptn}" title="{Measpoint}"/>
-					<ObjectIdentifier text="{LastReading}" title="{LastReadingBy}"/>
+					<ObjectIdentifier text="{Equipment}" title="{EquipmentDesc}"/>
+					<ObjectIdentifier text="{Measpoint}" title="{Descriptn}"/>
+					<ObjectIdentifier text="{LastReadingBy}" title="{LastReading} {MeasUnit}"/>
 					<Button id="readingButton" enabled="{EditModeModel>/EditMode}" class="sapUiMediumMarginEnd" icon="sap-icon://measure" press="addMeasurement"></Button>
 					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 				</cells>

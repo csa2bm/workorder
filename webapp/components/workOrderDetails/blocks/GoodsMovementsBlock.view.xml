@@ -23,8 +23,8 @@
 			<items>
 				<ColumnListItem type="{parts:[{path:'EditModeModel>/EditMode'}],formatter:'.checkOrderStatusForType'}" press="goToMaterialDetailForSelectedMaterial">
 					<cells>
-						<ObjectIdentifier text="{Description}" title="{Matnr}"/>
-						<ObjectIdentifier text="{Quantity} {Unit}"/>
+						<ObjectIdentifier text="{Matnr}" title="{Description}"/>
+						<ObjectIdentifier title="{Quantity} {Unit}"/>
 						<core:Icon src="{parts:[{path:'EditModeModel>/EditMode'}],formatter:'.showArrow'}" color="Gray"/>
 					</cells>
 				</ColumnListItem>

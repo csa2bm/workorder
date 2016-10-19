@@ -52,29 +52,24 @@ sap.ui.define([
 			self = this;
 			var parametersUserDetails = {
 				success: function(oData, oResponse) {
-
 					self.DashBoardModel.getData().Fullname = oData.Fullname;
+					self.DashBoardModel.getData().Position = oData.Position;
 					self.DashBoardModel.getData().ImagePath = oData.__metadata.media_src;
 					self.DashBoardModel.refresh();
-
 				},
 				error: this.errorCallBackShowInPopUp
 			};
 			var parametersOrder = {
 				success: function(oData, oResponse) {
-
 					self.DashBoardModel.getData().orderCount = oData;
 					self.DashBoardModel.refresh();
-
 				},
 				error: this.errorCallBackShowInPopUp
 			};
 			var parametersNotif = {
 				success: function(oData, oResponse) {
-
 					self.DashBoardModel.getData().notificationCount = oData;
 					self.DashBoardModel.refresh();
-
 				},
 				error: this.errorCallBackShowInPopUp
 			};

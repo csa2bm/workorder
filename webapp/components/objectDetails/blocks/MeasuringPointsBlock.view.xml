@@ -9,17 +9,12 @@
 			<Column>
 				<Text text="{i18n>ObjectDetails-MeasuringPointBlock-PreviousColumn}"/>
 			</Column>
-			<Column width="5em" vAlign="Middle"></Column>
-			<Column width="1.5em" vAlign="Middle"></Column>
 		</columns>
 		<items>
 			<ColumnListItem type="Active" press="onEquipmentItemPress">
 				<cells>
 					<ObjectIdentifier text="{Descriptn}" title="{Measpoint}"/>
 					<ObjectIdentifier text="{LastReading}" title="{LastReadingBy}"/>
-					<Button id="readingButton" enabled="{parts:[{path:'OrderStatus'}],formatter:'.orderStatusValid'}" class="sapUiMediumMarginEnd"
-						icon="sap-icon://measure" press="addMeasurement"></Button>
-					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 				</cells>
 			</ColumnListItem>
 		</items>
