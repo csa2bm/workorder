@@ -20,10 +20,10 @@
 		<items>
 			<ColumnListItem type="Active" press="onTaskItemPress">
 				<cells>
-					<Text text="{TaskSortNo}"/>
+					<ObjectIdentifier text="" title="{TaskSortNo}"/>
 					<ObjectIdentifier text="{TaskCodegrp}" title="{TxtTaskgrp}"/>
 					<ObjectIdentifier text="{TaskCode}" title="{TxtTaskcd}"/>
-					<Text text="{TaskText}"/>
+					<ObjectIdentifier text="" title="{TaskText}"/>
 					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 				</cells>
 			</ColumnListItem>

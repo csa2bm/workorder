@@ -439,8 +439,8 @@
     "bFacade": true
   },
   "hcpdeploy": {
-    "account": "s0008749115trial",
+    "account": "a2b30ffcb",
     "name": "comtwobmmobileworkorder",
-    "lastVersionWeTriedToDeploy": "1.0.10"
+    "lastVersionWeTriedToDeploy": "1.0.0"
   }
 }
