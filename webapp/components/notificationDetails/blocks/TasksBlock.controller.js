@@ -1,6 +1,7 @@
 sap.ui.define([
-	"com/twobm/mobileworkorder/util/Controller"
-], function(Controller) {
+	"com/twobm/mobileworkorder/util/Controller",
+		"sap/ui/model/Filter"
+], function(Controller, Filter) {
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.notificationDetails.blocks.TasksBlock", {
@@ -24,6 +25,8 @@ sap.ui.define([
 		},
 
 		onTaskItemPress: function(oEvent) {
+			// Compile the model path for the code group on the item for use later if the user wants to change the code
+			this.codeGroupBindingContext = "/CodeGroupsSet('2" + this.getView().getModel().getProperty(oEvent.getSource().getBindingContext() + "/TaskCodegrp") + "')";
 			// Update view model to indicate we are editing an existing item
 			this.getView().getModel("ViewModel").setProperty("/isEditing", true);
 			// Set binding context from list item on popover
@@ -104,6 +107,81 @@ sap.ui.define([
 			}
 			// Close the popup
 			this.popover.close();
+		},
+		
+		handleValueHelpCodeGroup: function() {
+			// Create value help dialog if we dont have one
+			if (!this.valueHelpCodeGroupDialog) {
+				this.valueHelpCodeGroupDialog = sap.ui.xmlfragment(
+					"com.twobm.mobileworkorder.components.notificationDetails.fragments.TaskCodeGroupValueHelp",
+					this
+				);
+				// Attach to view
+				this.getView().addDependent(this.valueHelpCodeGroupDialog);
+			}
+			// Show dialog
+			this.valueHelpCodeGroupDialog.open();
+		},
+		
+		handleValueHelpCode: function() {
+			// Create value help dialog if we dont have one
+			if (!this.valueHelpCodeDialog) {
+				this.valueHelpCodeDialog = sap.ui.xmlfragment(
+					"com.twobm.mobileworkorder.components.notificationDetails.fragments.TaskCodeValueHelp",
+					this
+				);
+				// Attach to view
+				this.getView().addDependent(this.valueHelpCodeDialog);
+			}
+			// Bind to parent code group so we show the correct codes
+			sap.ui.getCore().byId("CodeValueHelpDialog").bindElement(this.codeGroupBindingContext);
+			// Show dialog
+			this.valueHelpCodeDialog.open();
+		},
+		
+		handleValueHelpSearchCodeGroup: function(oEvent) {
+			var sValue = oEvent.getParameter("value");
+			var oFilter = new Filter(
+				"Codegroup",
+				sap.ui.model.FilterOperator.Contains, sValue
+			);
+			oEvent.getSource().getBinding("items").filter([oFilter,
+			new Filter(
+				"CatalogType",
+				sap.ui.model.FilterOperator.EQ,  "2")]);
+				
+			oEvent.getSource().getBinding("items").refresh();
+		},
+		
+		handleValueHelpCloseCodeGroup: function(oEvent) {
+			// Get selected item
+			var selectedItem = oEvent.getParameter("selectedItem");
+			if (selectedItem) {
+				// Update values on model
+				this.getView().getModel().setProperty(this.popover.getBindingContext().getPath() + "/TaskCodegrp", selectedItem.getDescription());
+				this.getView().getModel().setProperty(this.popover.getBindingContext().getPath() + "/TxtTaskgrp", selectedItem.getTitle());
+				this.codeGroupBindingContext = selectedItem.getBindingContext().getPath();		
+			}
+		},
+
+		handleValueHelpAfterCloseCodeGroup: function() {
+			//Destroy the ValueHelpDialog
+			this.valueHelpCodeGroupDialog.destroy();
+		},
+		
+		handleValueHelpCloseCode: function(oEvent) {
+			// Get selected item
+			var selectedItem = oEvent.getParameter("selectedItem");
+			if (selectedItem) {
+				// Update values on model
+				this.getView().getModel().setProperty(this.popover.getBindingContext().getPath() + "/TaskCode", selectedItem.getDescription());
+				this.getView().getModel().setProperty(this.popover.getBindingContext().getPath() + "/TxtTaskcd", selectedItem.getTitle());
+			}
+		},
+
+		handleValueHelpAfterCloseCode: function() {
+			//Destroy the ValueHelpDialog
+			this.valueHelpCodeDialog.destroy();
 		}
 	});
 });

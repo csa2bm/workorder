@@ -27,7 +27,6 @@ sap.ui.define([
 		onActivityItemPress: function(oEvent) {
 			// Compile the model path for the code group on the item for use later if the user wants to change the code
 			this.codeGroupBindingContext = "/CodeGroupsSet('A" + this.getView().getModel().getProperty(oEvent.getSource().getBindingContext() + "/ActCodegrp") + "')";
-			
 			// Update view model to indicate we are editing an existing item
 			this.getView().getModel("ViewModel").setProperty("/isEditing", true);
 			// Set binding context from list item on popover
@@ -111,30 +110,34 @@ sap.ui.define([
 		},
 		
 		handleValueHelpCodeGroup: function(oEvent) {
+			// Create value help dialog if we dont have one
 			if (!this.valueHelpCodeGroupDialog) {
 				this.valueHelpCodeGroupDialog = sap.ui.xmlfragment(
-					"com.twobm.mobileworkorder.components.notificationDetails.fragments.CodeGroupValueHelp",
+					"com.twobm.mobileworkorder.components.notificationDetails.fragments.ActivityCodeGroupValueHelp",
 					this
 				);
+				// Attach to view
 				this.getView().addDependent(this.valueHelpCodeGroupDialog);
 			}
+			// Show dialog
 			this.valueHelpCodeGroupDialog.open();
 		},
 		
 		handleValueHelpCode: function(oEvent) {
+			// Create value help dialog if we dont have one
 			if (!this.valueHelpCodeDialog) {
 				this.valueHelpCodeDialog = sap.ui.xmlfragment(
-					"com.twobm.mobileworkorder.components.notificationDetails.fragments.CodeValueHelp",
+					"com.twobm.mobileworkorder.components.notificationDetails.fragments.ActivityCodeValueHelp",
 					this
 				);
+				// Attach to view
 				this.getView().addDependent(this.valueHelpCodeDialog);
 			}
-			
+			// Bind to parent code group so we show the correct codes
 			sap.ui.getCore().byId("CodeValueHelpDialog").bindElement(this.codeGroupBindingContext);
-			
+			// Show dialog
 			this.valueHelpCodeDialog.open();
 		},
-		
 		
 		handleValueHelpSearchCodeGroup: function(oEvent) {
 			var sValue = oEvent.getParameter("value");
@@ -151,31 +154,33 @@ sap.ui.define([
 		},
 		
 		handleValueHelpCloseCodeGroup: function(oEvent) {
+			// Get selected item
 			var selectedItem = oEvent.getParameter("selectedItem");
 			if (selectedItem) {
+				// Update values on model
 				this.getView().getModel().setProperty(this.popover.getBindingContext().getPath() + "/ActCodegrp", selectedItem.getDescription());
-this.getView().getModel().setProperty(this.popover.getBindingContext().getPath() + "/TxtActgrp", selectedItem.getTitle());
+				this.getView().getModel().setProperty(this.popover.getBindingContext().getPath() + "/TxtActgrp", selectedItem.getTitle());
 				this.codeGroupBindingContext = selectedItem.getBindingContext().getPath();		
 				
 			}
-			oEvent.getSource().getBinding("items").filter([]);
 		},
 
-		handleValueHelpAfterCloseCodeGroup: function(evt) {
+		handleValueHelpAfterCloseCodeGroup: function() {
 			//Destroy the ValueHelpDialog
 			this.valueHelpCodeGroupDialog.destroy();
 		},
 		
 		handleValueHelpCloseCode: function(oEvent) {
+			// Get selected item
 			var selectedItem = oEvent.getParameter("selectedItem");
 			if (selectedItem) {
+				// Update values on model
 				this.getView().getModel().setProperty(this.popover.getBindingContext().getPath() + "/ActCode", selectedItem.getDescription());
 				this.getView().getModel().setProperty(this.popover.getBindingContext().getPath() + "/TxtActcd", selectedItem.getTitle());
 			}
-			oEvent.getSource().getBinding("items").filter([]);
 		},
 
-		handleValueHelpAfterCloseCode: function(evt) {
+		handleValueHelpAfterCloseCode: function() {
 			//Destroy the ValueHelpDialog
 			this.valueHelpCodeDialog.destroy();
 		}
