@@ -6,7 +6,7 @@
 			<Column id="sortNumberColumn" minScreenWidth="Tablet">
 				<Text text="{i18n>NotificationDetails-ActivitiesBlock-SortNumberHeader}"/>
 			</Column>
-			<Column id="codeGroupColumn">
+			<Column id="codeGroupColumn" minScreenWidth="Tablet">
 				<Text text="{i18n>NotificationDetails-ActivitiesBlock-CodeGroupHeader}"/>
 			</Column>
 			<Column id="codeColumn">

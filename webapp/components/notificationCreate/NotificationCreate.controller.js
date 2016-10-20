@@ -37,12 +37,15 @@ sap.ui.define([
 			if (sName !== "notificationCreate") {
 				return;
 			}
-			this.newEntry = this.getView().getModel().createEntry("/NotificationsSet",{
+			this.newEntry = this.getView().getModel().createEntry("/NotificationsSet", {
+				properties: {
+					NotifDate: new Date().toISOString().substr(0, 19)
+				},
 				success: jQuery.proxy(function(oData, oResponse) {
 					this.getView().setBusy(false);
-				this.getRouter().navTo("notificationDetails", {
-							notificationContext: this.newEntry.getPath().substr(1)
-						}, true);
+					this.getRouter().navTo("notificationDetails", {
+						notificationContext: this.newEntry.getPath().substr(1)
+					}, true);
 
 				}, this),
 				error: jQuery.proxy(function(error) {
@@ -173,7 +176,18 @@ sap.ui.define([
 			evt.getSource().getBinding("items").filter([oFilter]);
 		},
 
-		_handleValueHelpClose: function(evt) {
+		_handleValueHelpCloseFunctionalLocation: function(evt) {
+			var oSelectedItem = evt.getParameter("selectedItem");
+			if (oSelectedItem) {
+				var productInput = this.getView().byId(this.inputId);
+				productInput.setValue(oSelectedItem.getTitle());
+			}
+			evt.getSource().getBinding("items").filter([]);
+			var thisDialog = evt.getParameter("id");
+			thisDialog.close();
+		},
+
+		_handleValueHelpCloseEquipment: function(evt) {
 			var oSelectedItem = evt.getParameter("selectedItem");
 			if (oSelectedItem) {
 				var productInput = this.getView().byId(this.inputId);

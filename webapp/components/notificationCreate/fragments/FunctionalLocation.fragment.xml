@@ -7,7 +7,7 @@
 		class="sapUiPopupWithPadding"
 		items="{/FunctionalLocationsSet}"
 		search="_handleValueHelpSearchFunctionalLocation"
-		confirm="_handleValueHelpClose"
+		confirm="_handleValueHelpCloseFunctionalLocation"
 		cancel="_handleValueHelpClose"
 		afterClose="_handleValueHelpAfterClose">
 		<StandardListItem

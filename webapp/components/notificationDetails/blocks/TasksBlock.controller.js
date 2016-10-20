@@ -112,7 +112,7 @@ sap.ui.define([
 		handleValueHelpCodeGroup: function() {
 			// Create value help dialog if we dont have one
 			if (!this.valueHelpCodeGroupDialog) {
-				this.valueHelpCodeGroupDialog = sap.ui.xmlfragment(
+				this.valueHelpCodeGroupDialog = sap.ui.xmlfragment(this.createId("TaskCodeGroup"),
 					"com.twobm.mobileworkorder.components.notificationDetails.fragments.TaskCodeGroupValueHelp",
 					this
 				);
@@ -126,7 +126,7 @@ sap.ui.define([
 		handleValueHelpCode: function() {
 			// Create value help dialog if we dont have one
 			if (!this.valueHelpCodeDialog) {
-				this.valueHelpCodeDialog = sap.ui.xmlfragment(
+				this.valueHelpCodeDialog = sap.ui.xmlfragment(this.createId("TaskCode"),
 					"com.twobm.mobileworkorder.components.notificationDetails.fragments.TaskCodeValueHelp",
 					this
 				);
@@ -134,7 +134,7 @@ sap.ui.define([
 				this.getView().addDependent(this.valueHelpCodeDialog);
 			}
 			// Bind to parent code group so we show the correct codes
-			sap.ui.getCore().byId("CodeValueHelpDialog").bindElement(this.codeGroupBindingContext);
+			this.valueHelpCodeDialog.bindElement(this.codeGroupBindingContext);
 			// Show dialog
 			this.valueHelpCodeDialog.open();
 		},

@@ -7,7 +7,7 @@
 		class="sapUiPopupWithPadding"
 		items="{/EquipmentsSet}"
 		search="_handleValueHelpSearchEquipment"
-		confirm="_handleValueHelpClose"
+		confirm="_handleValueHelpCloseEquipment"
 		cancel="_handleValueHelpClose"
 		afterClose="_handleValueHelpAfterClose">
 		<StandardListItem

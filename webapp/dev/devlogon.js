@@ -327,7 +327,7 @@ sap.ui.define([
 								title: "Server communication failed",
 								actions: [sap.m.MessageBox.Action.OK],
 								onClose: function(oAction, object) {
-									//that.reset();
+									that.reset();
 								}
 							});
 					});
