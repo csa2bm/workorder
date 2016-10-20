@@ -3,8 +3,9 @@ sap.ui.define([
 	"com/twobm/mobileworkorder/dev/devapp",
 	"com/twobm/mobileworkorder/util/Globalization",
 	"com/twobm/mobileworkorder/util/Formatter",
-	"sap/ui/core/routing/History"
-], function(Controller, devApp, Globalization, Formatter, History) {
+	"sap/ui/core/routing/History",
+		"com/twobm/mobileworkorder/util/SyncStateHandler"
+], function(Controller, devApp, Globalization, Formatter, History,SyncStateHandler) {
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.notificationList.NotificationList", {
@@ -30,8 +31,8 @@ sap.ui.define([
 			this.getEventBus().subscribe("DeviceOnline", this.deviceWentOnline, this);
 			this.getEventBus().subscribe("DeviceOffline", this.deviceWentOffline, this);
 
-			this.getEventBus().publish("UpdateSyncState");
-
+			SyncStateHandler.handleSyncState();
+			
 			this.setInitialSorting();
 
 			//flush and refresh data

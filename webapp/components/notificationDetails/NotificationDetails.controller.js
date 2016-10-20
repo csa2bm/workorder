@@ -14,7 +14,6 @@ sap.ui.define([
 			eventBus.subscribe("BlockNavigation", this.performNavigationForBlocks, this);
 		},
 		_onRouteMatched: function(oEvent) {
-
 			var oArguments = oEvent.getParameter("arguments");
 			var contextPath = '/' + oArguments.notificationContext;
 			var givenContext = new sap.ui.model.Context(this.getView().getModel(), contextPath);
@@ -30,14 +29,6 @@ sap.ui.define([
 				this.getView().setBindingContext(givenContext);
 				this.getView().bindElement(contextPath);
 			}
-
-		},
-
-		_onBindingChange: function(oEvent) {
-			// No data for the binding
-			if (!this.getView().getBindingContext()) {
-				this.getRouter().getTargets().display("notFound");
-			}
 		},
 
 		onNavigationButtonPress: function(oEvent) {
@@ -50,17 +41,6 @@ sap.ui.define([
 				var oRouter = this.getRouter();
 				oRouter.navTo("notificationList", true);
 			}
-		},
-		isNotificationNotCompleted: function(sString) {
-			if (sString === this.getI18nText("notificationStatusCompleted")) {
-				return false;
-			} else {
-				return true;
-			}
-		},
-		editNotificationPressed: function() {
-
 		}
-
 	});
 });

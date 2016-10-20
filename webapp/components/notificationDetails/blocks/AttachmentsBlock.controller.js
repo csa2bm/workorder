@@ -35,7 +35,7 @@ sap.ui.define([
 		capturePhoto: function() {
 			self = this;
 			var oNav = navigator.camera;
-			oNav.getPicture(this.onPhotoCaptureSuccess,
+			oNav.getPicture(this.onPhotoCaptureSuccess.bind(this),
 				function() { //Nothing happens when cancel photo input
 				}, {
 					quality: 20,
@@ -45,7 +45,7 @@ sap.ui.define([
 		},
 
 		onPhotoCaptureSuccess: function(file) {
-			var notiNo = self.getView().getBindingContext().getObject().NotifNo;
+		/*	var notiNo = self.getView().getBindingContext().getObject().NotifNo;
 
 			var parameters = {
 				success: function(oData, response) {
@@ -64,7 +64,21 @@ sap.ui.define([
 
 			var createPath = "/NotificationsSet(NotifNo='" + notiNo + "')/NotifAttachmentsSet";
 
-			self.getView().getModel().create(createPath, dataCreate, parameters);
+			self.getView().getModel().create(createPath, dataCreate, parameters);*/
+			var path = this.getView().getBindingContext().getPath() + "/NotifAttachmentsSet";
+			
+			var entry = self.getView().getModel().createEntry(path, { properties: {
+					Data: file,
+					CreateDate: new Date(),
+					CreatedBy: "current user"
+				},
+					success: function(oData, response) {
+					//var X = 0;
+					self.getView().byId("attachmentsList").getBinding("items").refresh();
+				},
+				error: self.errorCallBackShowInPopUp});
+
+				self.getView().getModel().submitChanges();
 		},
 		deleteAttachment: function(e) {
 			var deletePath = e.getParameter('listItem').getBindingContext().getPath();
@@ -239,9 +253,30 @@ sap.ui.define([
 					IncludeInReport: this._oPopover.getModel("ImageModel").getData().IncludeInReport
 				};
 
-				var createPath = "/NotificationsSet(NotifNo='" + notifNo + "')/NotifAttachmentsSet";
+				var path = this.getView().getBindingContext().getPath() + "/NotifActivitiesSet";
 
-				self.getView().getModel().create(createPath, dataCreate, parameters);
+				self.getView().getModel().createEntry(path, { properties: {
+					NotifNo: notifNo,
+					Data: imageWithoutBase64Prefix,
+					CreateDate: new Date(),
+					CreatedBy: "current user",
+					Description: this._oPopover.getModel("ImageModel").getData().Description,
+					IncludeInReport: this._oPopover.getModel("ImageModel").getData().IncludeInReport
+				},
+				success: function(oData, response) {
+					alert("ok");
+					self.getView().byId("attachmentsList").getBinding("items").refresh(true);
+
+				},
+				error: function(oError) {
+					alert("error");
+				}});
+
+				self.getView().getModel().submitChanges();
+				
+				//var createPath = "/NotificationsSet(NotifNo='" + notifNo + "')/NotifAttachmentsSet";
+
+				//self.getView().getModel().create(createPath, dataCreate, parameters);
 			
 
 			self._oPopover.close();

@@ -441,6 +441,6 @@
   "hcpdeploy": {
     "account": "a2b30ffcb",
     "name": "comtwobmmobileworkorder",
-    "lastVersionWeTriedToDeploy": "1.0.0"
+    "lastVersionWeTriedToDeploy": "1.0.1"
   }
 }

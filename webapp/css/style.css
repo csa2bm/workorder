@@ -2,11 +2,6 @@
     margin-top: 2rem;
 }
 
-/* Force top blue line to not be show  */
-.sapMPageHeader::before {
-    border-top: 0.0rem !important;
-}
-
 .headerBusyIndicatorTopMargin {
     margin-top: 1.5rem !important;
 }

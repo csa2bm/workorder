@@ -10,8 +10,6 @@
 		<buttons></buttons>
 		<content>
 			<VBox>
-				<!--class="sapUiSmallMargin"-->
-				<!--<Label text="Select new work date" labelFor="DP3"/>-->
 				<Label text="Measuring Point" design="Bold" class="sapUiTinyMarginBottom"/>
 				<Label text="{ViewModel>/Descriptn}" class="sapUiSmallMarginBottom" />
 				<Label text="Enter reading" design="Bold" class="sapUiTinyMarginBottom"/>
