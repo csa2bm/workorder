@@ -20,10 +20,10 @@
 		<items>
 			<ColumnListItem type="Active" press="onEquipmentItemPress">
 				<cells>
-					<ObjectIdentifier text="{UserStatus}" title="{}"/>
+					<ObjectIdentifier text="{}" title="{OrderStatus}"/>
 					<ObjectIdentifier text="{}" title="{OrderType}"/>
-					<ObjectIdentifier text="{ShortText}" title="{OrderId}"/>
-					<ObjectIdentifier text="{Workcenter}" title="{Plant}"/>
+					<ObjectIdentifier text="{Orderid}" title="{ShortText}"/>
+					<ObjectIdentifier text="UserInitials" title="{AssignedTo}"/>
 				</cells>
 			</ColumnListItem>
 		</items>

@@ -2,12 +2,13 @@
 	<ViewSettingsDialog title="Sort notifications" confirm="handleNotificationFilterConfirm">
 		<sortItems text="f" title="js">
 			<ViewSettingsItem text="Created date" key="NotifDate" selected="true"/>
-			<ViewSettingsItem text="End date" key="RequiredEndDate" />
-			<ViewSettingsItem text="Priority" key="Priority"/>
+			<ViewSettingsItem text="Functional Location" key="FunctionalLoc"/>
+			<ViewSettingsItem text="Equipment" key="Equipment"/>
 		</sortItems>
 		<groupItems>
 			<ViewSettingsItem text="End Date" key="RequiredEndDate"/>
-			<ViewSettingsItem text="Priority" key="Priority"/>
+			<ViewSettingsItem text="Functional Location" key="FunctionalLoc"/>
+			<ViewSettingsItem text="Equipment" key="Equipment"/>
 		</groupItems>
 	</ViewSettingsDialog>
 </core:FragmentDefinition>

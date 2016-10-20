@@ -13,8 +13,8 @@
 		<items>
 			<ColumnListItem type="Active" press="onEquipmentItemPress">
 				<cells>
-					<ObjectIdentifier text="{Descriptn}" title="{Measpoint}"/>
-					<ObjectIdentifier text="{LastReading}" title="{LastReadingBy}"/>
+					<ObjectIdentifier text="{Measpoint}" title="{Descriptn}"/>
+					<ObjectIdentifier text="{LastReadingBy}" title="{LastReading} {MeasUnit}"/>
 				</cells>
 			</ColumnListItem>
 		</items>
