@@ -2,16 +2,10 @@
     margin-top: 2rem;
 }
 
-
-
 /* Force top blue line to not be show  */
 .sapMPageHeader::before {
     border-top: 0.0rem !important;
 }
-
-/*.sapMShellBrandingBar {*/
-/*    background-color: rgb(224, 0, 64);*/
-/*}*/
 
 .headerBusyIndicatorTopMargin {
     margin-top: 1.5rem !important;
@@ -32,4 +26,12 @@
     margin-top: 10px;
     font-size: 12px;
     font-weight: bold;
+}
+
+.circular {
+	width: 300px;
+	height: 300px;
+	border-radius: 150px;
+	-webkit-border-radius: 150px;
+	-moz-border-radius: 150px;
 }

@@ -100,13 +100,13 @@ sap.ui.define([
 		},
 		onDeleteFile: function(oEvent) {
 			var context = oEvent.getSource().getBindingContext();
-			var message = this.getI18nText("deleteAttachmentMessageText");
+			var message = this.getI18nText("NotificationDetails-AttachmentsBlock-DeleteAttachmentMessageText");
 			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
 
 			var that = this;
 			sap.m.MessageBox.show(message, {
 				icon: sap.m.MessageBox.Icon.None,
-				title: this.getI18nText("deleteAttachmentMessageHeader"),
+				title: this.getI18nText("NotificationDetails-AttachmentsBlock-DeleteAttachmentMessageHeader"),
 				actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
 				defaultAction: sap.m.MessageBox.Action.NO,
 				styleClass: bCompact ? "sapUiSizeCompact" : "",
@@ -119,7 +119,7 @@ sap.ui.define([
 						if (attachmentId) {
 							var notiNo = that._oPopover.getModel("ImageModel").getData().OrderNo;
 
-							deletePath = "/NotifAttachmentsSet(AttachmentID='" + attachmentId + "',NotiNo='" + notiNo + "')";
+							deletePath = "/NotifAttachmentsSet(AttachmentID='" + attachmentId + "',NotifNo='" + notiNo + "')";
 						} else {
 							//Local db object
 							deletePath = that._oPopover.getModel("ImageModel").getData().LocalObjectUri;
@@ -200,39 +200,7 @@ sap.ui.define([
 			var windowWidth = window.innerWidth;
 			var windowHeight = window.innerHeight;
 
-			//self._oPopover.setContentWidth(popUpWidth-200 + "px");
-
-			//if (imageHeight > windowHeight) {
-
-			//	var factorHeight = (windowHeight - 300) / imageHeight;
-
-			//	sap.ui.getCore().byId("popupImageControl").setHeight((windowHeight - 300) + "px");
-
-			//	var scaledWidth = imageWidth * factorHeight;
-
-			//	if (scaledWidth > windowWidth) {
-			//		sap.ui.getCore().byId("popupImageControl").setWidth(windowWidth - 100 + "px");
-			//	}
-
-			//} else if (imageWidth > windowWidth) {
-			//	//Landscape
-			//	sap.ui.getCore().byId("popupImageControl").setWidth(windowWidth - 100 + "px");
-
-			//} else {
-			//	//Portrait
-			//	//sap.ui.getCore().byId("popupImageControl").setWidth(popupWidth - 30 + "px");
-			//}
-
-			//fit image size to popup if image is bigger
-			// if (imageWidth > popupWidth) {
-			// 	//var imageWidth = sap.ui.getCore().byId("popupImageControl").getWidth();
-			//	sap.ui.getCore().byId("popupImageControl").setWidth(popupWidth - 30 + "px");
-			// 	//sap.ui.getCore().byId("popupImageControl").setHeight(that._oPopover.$().height()-100 + "px");
-			// }
-
-			// if (imageHeight > popupHeight) {
-			// 	sap.ui.getCore().byId("popupImageControl").setHeight(popupHeight - 200 + "px");
-			// }
+			
 		},
 
 		closeAttachmentPopupButton: function() {
