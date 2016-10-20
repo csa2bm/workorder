@@ -38,13 +38,13 @@
     "appIcon": {
       "defaultIcon": "",
       "ios": {
-        "ios8Iphone": "res/ios/industrial_worker-180.png",
-        "ios7Iphone": "res/ios/industrial_worker-60.png",
-        "ios7Ipad": "res/ios/industrial_worker-76.png",
+        "ios8Iphone": "",
+        "ios7Iphone": "res/ios/icon-60.png",
+        "ios7Ipad": "res/ios/icon-76.png",
         "ios61Iphone": "",
         "ios61Ipad": "",
-        "ios7Ipad2x": "res/ios/industrial_worker-152.png",
-        "ios7Iphone2x": "res/ios/industrial_worker-120.png"
+        "ios7Ipad2x": "res/ios/icon-152.png",
+        "ios7Iphone2x": "res/ios/icon-120.png"
       },
       "android": {
         "ldpi": "",
@@ -83,7 +83,7 @@
         "landIpad": "",
         "landIpad2x": "res/ios/splash_ipad_landscape_2x.png",
         "iphone52x": "",
-        "iphone6": "",
+        "iphone6": "res/ios/splash_iphone_portrait_2x.png",
         "iphone6plus": ""
       },
       "android": {
