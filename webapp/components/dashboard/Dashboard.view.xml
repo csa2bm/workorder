@@ -11,7 +11,7 @@
 							<tileContent>
 								<TileContent footer="">
 									<content>
-										<FeedContent contentText="Hello Lau, Welcome to 2BM Mobile Work Order." subheader="Have a great day!" value=""></FeedContent>
+										<FeedContent contentText="Welcome to 2BM Mobile Work Order." subheader="Have a great day!" value=""></FeedContent>
 									</content>
 								</TileContent>
 							</tileContent>

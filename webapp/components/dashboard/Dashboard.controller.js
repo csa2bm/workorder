@@ -100,10 +100,10 @@ sap.ui.define([
 		},
 
 		onPressScanObject: function() {
-			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+		//	var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			//var oRouter = this.getRouter();
-			oRouter.navTo("objectTreeList", true);
-			/*cordova.plugins.barcodeScanner.scan(
+		//	oRouter.navTo("objectTreeList", true);
+			window.cordova.plugins.barcodeScanner.scan(
 				function(result) {
 					if (result.cancelled === "true") {
 						return;
@@ -112,7 +112,7 @@ sap.ui.define([
 				function() {
 					sap.m.MessageToast.show("Scanning failed");
 				}
-			);*/
+		);
 		},
 
 		onPressNotifications: function() {

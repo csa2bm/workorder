@@ -241,13 +241,21 @@
 				"dataSource": "mainService",
 				"path": "/EquipmentsSet"
 			},
+			"FunctionalLocationsSet": {
+				"dataSource": "mainService",
+				"path": "/FunctionalLocationsSet"
+			},
 			"NotificationsSet": {
 				"dataSource": "mainService",
-				"path": "/NotificationsSet"
+				"path": "/NotificationsSet?$expand=NotifAttachmentsSet,NotifActivitiesSet,NotifTasksSet"
 			},
 			"UserDetailsSet": {
 				"dataSource": "mainService",
 				"path": "/UserDetailsSet"
+			},
+			"CodeGroupsSet": {
+				"dataSource": "mainService",
+				"path": "/CodeGroupsSet?$expand=CodeCatalogSet"
 			}
 		}
 	},

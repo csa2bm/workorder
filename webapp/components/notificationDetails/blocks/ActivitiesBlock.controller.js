@@ -154,6 +154,7 @@ sap.ui.define([
 			var selectedItem = oEvent.getParameter("selectedItem");
 			if (selectedItem) {
 				this.getView().getModel().setProperty(this.popover.getBindingContext().getPath() + "/ActCodegrp", selectedItem.getDescription());
+this.getView().getModel().setProperty(this.popover.getBindingContext().getPath() + "/TxtActgrp", selectedItem.getTitle());
 				this.codeGroupBindingContext = selectedItem.getBindingContext().getPath();		
 				
 			}
@@ -169,6 +170,7 @@ sap.ui.define([
 			var selectedItem = oEvent.getParameter("selectedItem");
 			if (selectedItem) {
 				this.getView().getModel().setProperty(this.popover.getBindingContext().getPath() + "/ActCode", selectedItem.getDescription());
+				this.getView().getModel().setProperty(this.popover.getBindingContext().getPath() + "/TxtActcd", selectedItem.getTitle());
 			}
 			oEvent.getSource().getBinding("items").filter([]);
 		},

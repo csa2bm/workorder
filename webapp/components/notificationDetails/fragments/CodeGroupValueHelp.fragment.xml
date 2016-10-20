@@ -8,7 +8,7 @@
 		items="{ path: '/CodeGroupsSet', filters: [{
         path: 'CatalogType', 
         operator: 'EQ',
-        value1: '2'
+        value1: 'A'
     }]}"
 		search="handleValueHelpSearchCodeGroup"
 		confirm="handleValueHelpCloseCodeGroup"
