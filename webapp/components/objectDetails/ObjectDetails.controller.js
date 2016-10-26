@@ -71,7 +71,16 @@ sap.ui.define([
 		onPressCreateNotification: function() {
 
 		var oRouter = this.getRouter();
-			oRouter.navTo("notificationCreate", true);
+		
+		//Getting object of currently selected object in this view
+		var object = this.getView().getBindingContext().getObject();
+		// creating a data to pass functional location no. and equipment no of current object.
+		
+		var path = this.getView().getBindingContext().getPath().substr(1);
+		
+		oRouter.navTo("notificationCreate", {
+					objectContext: path
+				}, true);
 		}
 	});
 });
