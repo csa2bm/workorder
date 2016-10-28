@@ -135,7 +135,7 @@
 					]
 				},
 				{
-					"pattern": "notificationCreate",
+					"pattern": "notificationCreate/:equipmentNo:/:functionalLoc:/:argAvailable:",
 					"name": "notificationCreate",
 					"greedy": false,
 					"target": [

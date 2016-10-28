@@ -9,7 +9,9 @@ sap.ui.define([
 		formatter:Formatter,
 		
 		onInit: function() {
-			this.getRouter().attachRoutePatternMatched(this.onRouteMatched, this);
+			//this.getRouter("objectDetails").attachMatched(this.onRouteMatched, this);
+			this.getRouter().getRoute("objectDetails").attachMatched(this.onRouteMatched, this);
+
 		},
 		
 		onRouteMatched: function(oEvent) {
@@ -76,11 +78,13 @@ sap.ui.define([
 		var object = this.getView().getBindingContext().getObject();
 		// creating a data to pass functional location no. and equipment no of current object.
 		
-		var path = this.getView().getBindingContext().getPath().substr(1);
+		//var path = this.getView().getBindingContext().getPath().substr(1);
 		
 		oRouter.navTo("notificationCreate", {
-					objectContext: path
-				}, true);
+					equipmentNo: object.Equipment,
+					functionalLoc: object.FunctLoc,
+					argAvailable:"true"
+				}, false);
 		}
 	});
 });

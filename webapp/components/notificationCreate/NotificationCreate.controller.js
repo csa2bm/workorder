@@ -10,7 +10,7 @@ sap.ui.define([
 
 	return Controller.extend("com.twobm.mobileworkorder.components.notificationCreate.NotificationCreate", {
 		onInit: function() {
-			this.getRouter().attachRoutePatternMatched(this.onRouteMatched, this);
+			this.getRouter().getRoute("notificationCreate").attachMatched(this.onRouteMatched, this);
 
 			//	Notification popUps
 			this.NotificationDropdownsModel = new sap.ui.model.json.JSONModel({
@@ -30,13 +30,9 @@ sap.ui.define([
 		},
 
 		onRouteMatched: function(oEvent) {
-
-			var sName = oEvent.getParameter("name");
-
-			//Is it this page we have navigated to?
-			if (sName !== "notificationCreate") {
-				return;
-			}
+			
+			
+			
 			this.newEntry = this.getView().getModel().createEntry("/NotificationsSet", {
 				properties: {
 					NotifDate: new Date().toISOString().substr(0, 19)
@@ -57,11 +53,17 @@ sap.ui.define([
 					this.errorCallBackShowInPopUp(error);
 				}, this)
 			});
+			var oArguments = oEvent.getParameter("arguments");
+			if(oArguments.argAvailable){
+				this.getView().getModel().setProperty(this.newEntry.getPath() + "/Equipment", oArguments.equipmentNo);
+				this.getView().getModel().setProperty(this.newEntry.getPath() + "/FunctionalLoc", oArguments.functionalLoc);
+			}
 
 			this.getView().setBindingContext(this.newEntry);
 		},
 
 		goBack: function(oEvent) {
+			
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
 			this.getView().setBindingContext(null);
@@ -69,7 +71,7 @@ sap.ui.define([
 			if (sPreviousHash !== undefined) {
 				window.history.go(-1);
 			} else {
-				var oRouter = this.getRouter();
+				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 				oRouter.navTo("dashboard", true);
 			}
 		},
