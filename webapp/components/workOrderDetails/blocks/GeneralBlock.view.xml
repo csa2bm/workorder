@@ -17,9 +17,9 @@
 				<Label text="{i18n>WorkOrderDetails-GeneralBlock-Priority}"/>
 				<Text text="{Priority} "/>
 				<Label text="{i18n>WorkOrderDetails-GeneralBlock-Start}"/>
-				<Text text="{path: 'StartDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'medium' }}"/>
+				<Text text="{path: 'StartDate', type: 'sap.ui.model.type.DateTime', formatOptions: {source: { pattern: 'yyyy-MM-ddTHH:mm:ss' }, style: 'medium' }}"/>
 				<Label text="{i18n>WorkOrderDetails-GeneralBlock-End}"/>
-				<Text text="{path: 'FinishDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'medium' }}"/>
+				<Text text="{path: 'FinishDate', type: 'sap.ui.model.type.DateTime', formatOptions: {source: { pattern: 'yyyy-MM-ddTHH:mm:ss' }, style: 'medium' }}"/>
 				<core:Title text="{i18n>WorkOrderDetails-GeneralBlock-Location}"/>
 				<Label text="{i18n>WorkOrderDetails-GeneralBlock-FunctionalLocation}"/>
 				<Text text="{Funcldescr}\r\n({FunctLoc})"/>

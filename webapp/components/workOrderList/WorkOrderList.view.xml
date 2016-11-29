@@ -8,7 +8,8 @@
 				</l:HorizontalLayout>
 			</headerContent>
 			<content>
-				<Table id="workOrderTableId" items="{path: '/OrderSet', sorter: [{path: 'StartDate', descending: false}]}" noDataText="No Work Orders" showSeparators="true" class="workOrderListTableClass">
+				<Table id="workOrderTableId" items="{path: '/OrderSet', sorter: [{path: 'StartDate', descending: false}]}" noDataText="No Work Orders"
+					showSeparators="true" class="workOrderListTableClass">
 					<columns>
 						<Column width="1rem" hAlign="Center" vAlign="Middle" minScreenWidth="Tablet">
 							<header>
@@ -41,8 +42,10 @@
 						<ColumnListItem type="Active" press="onWorkOrderItemPress">
 							<cells>
 								<core:Icon class="" src="sap-icon://circle-task-2" color="{parts:[{path:'OrderStatus'}],formatter:'.getOrderStatusIconColor'}"/>
-								<ObjectIdentifier text="{path: 'FinishDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"
-									title="{path: 'StartDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"/>
+								<ObjectIdentifier                
+							        
+									text="{path: 'FinishDate', type: 'sap.ui.model.type.DateTime', formatOptions: {source: { pattern: 'yyyy-MM-ddTHH:mm:ss' },  pattern: 'dd-MM-yyyy'}}"
+									title="{path: 'StartDate', type: 'sap.ui.model.type.DateTime', formatOptions: {source: { pattern: 'yyyy-MM-ddTHH:mm:ss' }, pattern: 'dd-MM-yyyy'}}"/>
 								<ObjectIdentifier text="{Orderid}" title="{ShortText}"/>
 								<ObjectIdentifier text="{FunctLoc}" title="{Funcldescr}"/>
 								<ObjectIdentifier text="{Equipment}" title="{Equidescr}"/>
