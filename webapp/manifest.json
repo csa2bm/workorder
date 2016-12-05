@@ -87,71 +87,60 @@
 					"target": "notFound"
 				}
 			},
-			"routes": [
-				{
-					"pattern": "",
-					"name": "dashboard",
-					"target": "dashboard"
-				},
-				{
-					"pattern": "workOrderList",
-					"name": "workOrderList",
-					"target": "workOrderList"
-				},
-				{
-					"pattern": "workOrderDetails/{workOrderContext}",
-					"name": "workOrderDetails",
-					"target": "workOrderDetails"
-				},
-				{
-					"pattern": "operationDetails/{operationContext}",
-					"name": "operationDetails",
-					"target": "operationDetails"
-				},
-				{
-					"pattern": "objectDetails/{objectContext}",
-					"name": "objectDetails",
-					"target": "objectDetails"
-				},
-				{
-					"pattern": "measurementPointDetails/{measurementContext}",
-					"name": "measurementPointDetails",
-					"target": "measurementPointDetails"
-				},
-				{
-					"pattern": "notificationList",
-					"name": "notificationList",
-					"greedy": false,
-					"target": [
-						"notificationList"
-					]
-				},
-				{
-					"pattern": "notificationDetails/{notificationContext}",
-					"name": "notificationDetails",
-					"greedy": false,
-					"target": [
-						"notificationDetails"
-					]
-				},
-				{
-					"pattern": "notificationCreate/:equipmentNo:/:functionalLoc:/:argAvailable:",
-					"name": "notificationCreate",
-					"greedy": false,
-					"target": [
-						"notificationCreate"
-					]
-				},
-				{
-					"name": "objectTreeList",
-					"pattern": "objectTreeList",
-					"titleTarget": "",
-					"greedy": false,
-					"target": [
-						"objectTreeList"
-					]
-				}
-			],
+			"routes": [{
+				"pattern": "",
+				"name": "dashboard",
+				"target": "dashboard"
+			}, {
+				"pattern": "workOrderList",
+				"name": "workOrderList",
+				"target": "workOrderList"
+			}, {
+				"pattern": "workOrderDetails/{workOrderContext}",
+				"name": "workOrderDetails",
+				"target": "workOrderDetails"
+			}, {
+				"pattern": "operationDetails/{operationContext}",
+				"name": "operationDetails",
+				"target": "operationDetails"
+			}, {
+				"pattern": "objectDetails/{objectContext}",
+				"name": "objectDetails",
+				"target": "objectDetails"
+			}, {
+				"pattern": "measurementPointDetails/{measurementContext}",
+				"name": "measurementPointDetails",
+				"target": "measurementPointDetails"
+			}, {
+				"pattern": "notificationList",
+				"name": "notificationList",
+				"greedy": false,
+				"target": [
+					"notificationList"
+				]
+			}, {
+				"pattern": "notificationDetails/{notificationContext}",
+				"name": "notificationDetails",
+				"greedy": false,
+				"target": [
+					"notificationDetails"
+				]
+			}, {
+				"pattern": "notificationCreate/:equipmentNo:/:functionalLoc:/:argAvailable:",
+				"name": "notificationCreate",
+				"greedy": false,
+				"target": [
+					"notificationCreate"
+				]
+			}, {
+				"name": "objectTreeList",
+				"pattern": "objectTreeList",
+				"titleTarget": "",
+				"greedy": false,
+				"target": [
+					"objectTreeList"
+				]
+			}],
 			"targets": {
 				"dashboard": {
 					"viewPath": "com.twobm.mobileworkorder.components.dashboard",
@@ -228,7 +217,35 @@
 		"definingRequests": {
 			"OrderSet": {
 				"dataSource": "mainService",
-				"path": "/OrderSet?$expand=OrderOperation,OrderComponent,OrderObject,OrderAttachments,OrderGoodsMovements,OrderTimeRegistration,OrderMaterialSummary,OrderEquipments,OrderMeasPoint"
+				"path": "/OrderSet"
+			},
+			"OperationsSet": {
+				"dataSource": "mainService",
+				"path": "/OperationsSet"
+			},
+			"AttachmentsSet": {
+				"dataSource": "mainService",
+				"path": "/AttachmentsSet"
+			},
+			"ComponentsSet": {
+				"dataSource": "mainService",
+				"path": "/ComponentsSet"
+			},
+			"GoodsMovementsSet": {
+				"dataSource": "mainService",
+				"path": "/GoodsMovementsSet"
+			},
+			"MaterialsSummarySet": {
+				"dataSource": "mainService",
+				"path": "/MaterialsSummarySet"
+			},
+			"ObjectsSet": {
+				"dataSource": "mainService",
+				"path": "/ObjectsSet"
+			},
+			"TimeRegistrationsSet": {
+				"dataSource": "mainService",
+				"path": "/TimeRegistrationsSet"
 			},
 			"MaterialsSet": {
 				"dataSource": "mainService",
@@ -247,7 +264,7 @@
 			},
 			"NotificationsSet": {
 				"dataSource": "mainService",
-				"path": "/NotificationsSet?$expand=NotifAttachmentsSet,NotifActivitiesSet,NotifTasksSet"
+				"path": "/NotificationsSet"
 			},
 			"UserDetailsSet": {
 				"dataSource": "mainService",
@@ -255,7 +272,7 @@
 			},
 			"CodeGroupsSet": {
 				"dataSource": "mainService",
-				"path": "/CodeGroupsSet?$expand=CodeCatalogSet"
+				"path": "/CodeGroupsSet"
 			}
 		}
 	},
