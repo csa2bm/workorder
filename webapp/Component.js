@@ -20,7 +20,7 @@ sap.ui.define([
 			var oModel, appContext, sServiceUrl;
 			//create odata model for kapsel application
 			var param = {
-				"json": true,
+				json: true,
 				loadMetadataAsync: true,
 				useBatch: true,
 				refreshAfterChange: true
