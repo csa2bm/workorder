@@ -217,7 +217,7 @@
 		"definingRequests": {
 			"OrderSet": {
 				"dataSource": "mainService",
-				"path": "/OrderSet"
+			"path": "/OrderSet?$expand=OrderOperation,OrderComponent,OrderObject,OrderAttachments,OrderGoodsMovements,OrderTimeRegistration,OrderMaterialSummary,OrderEquipments,OrderMeasPoint"
 			},
 			"OperationsSet": {
 				"dataSource": "mainService",
@@ -264,7 +264,7 @@
 			},
 			"NotificationsSet": {
 				"dataSource": "mainService",
-				"path": "/NotificationsSet"
+			"path": "/NotificationsSet?$expand=NotifAttachmentsSet,NotifActivitiesSet,NotifTasksSet"
 			},
 			"UserDetailsSet": {
 				"dataSource": "mainService",
@@ -272,7 +272,7 @@
 			},
 			"CodeGroupsSet": {
 				"dataSource": "mainService",
-				"path": "/CodeGroupsSet"
+				"path": "/CodeGroupsSet?$expand=CodeCatalogSet"
 			}
 		}
 	},
