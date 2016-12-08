@@ -37,8 +37,8 @@
 					<items>
 						<ColumnListItem type="Active" press="onNotificationItemPress">
 							<cells>
-								<ObjectIdentifier text="{path: 'RequiredEndDate', type: 'sap.ui.model.type.DateTime', formatOptions: {source: { pattern: 'yyyy-MM-ddTHH:mm:ss' }, pattern: 'dd-MM-yyyy'}}"
-									title="{path: 'NotifDate', type: 'sap.ui.model.type.DateTime', formatOptions: {source: { pattern: 'yyyy-MM-ddTHH:mm:ss' },pattern: 'dd-MM-yyyy'}}"/>
+								<ObjectIdentifier text="{path: 'RequiredEndDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"
+									title="{path: 'NotifDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"/>
 								<ObjectIdentifier text="{NotifNo}" title="{ShortText}"/>
 								<ObjectIdentifier text="{FunctionalLoc}" title="{FuncLocDesc}"/>
 								<ObjectIdentifier text="{Equipment}" title="{EquipmentDesc}"/>

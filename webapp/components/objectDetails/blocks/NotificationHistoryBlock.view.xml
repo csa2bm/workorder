@@ -15,7 +15,7 @@
 		<items>
 			<ColumnListItem type="Active" press="onEquipmentItemPress">
 				<cells>
-					<ObjectIdentifier text="Notif status" title="{path: 'NotifDate', type: 'sap.ui.model.type.DateTime', formatOptions:{source: { pattern: 'yyyy-MM-ddTHH:mm:ss' }, pattern: 'dd-MM-yyyy'}}"/>
+					<ObjectIdentifier text="Notif status" title="{path: 'NotifDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"/>
 					<ObjectIdentifier text="{NotifId}" title="{ShortText}"/>
 					<ObjectIdentifier text="{CreatedBy}" title="Insert User"/>
 				</cells>
