@@ -54,8 +54,10 @@ sap.ui.define([
 				Online: false,
 				PendingLocalData: false,
 				Errors: [],
-				InErrorState : false,
-				IsSynching : false
+				OrderErrors: [],
+				NoticationErrors: [],
+				InErrorState: false,
+				IsSynching: false
 			});
 			syncStatusModel.setDefaultBindingMode("TwoWay");
 			this.setModel(syncStatusModel, "syncStatusModel");
@@ -84,7 +86,7 @@ sap.ui.define([
 			//check errorArchive count
 			if (devapp.isLoaded) {
 				devapp.devLogon.getErrorArchiveCount();
-				
+
 				if ((navigator.network.connection.type).toUpperCase() !== "NONE" &&
 					(navigator.network.connection.type).toUpperCase() !== "UNKNOWN") {
 					devapp.isOnline = true;

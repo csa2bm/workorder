@@ -31,6 +31,7 @@
 								<Label text="{i18n>NotificationList-EquipmentHeader}"/>
 							</header>
 						</Column>
+						<Column demandPopin="true" id="errorColumn" minScreenWidth="Small" width="1rem"/>
 						<Column width="1.5em" vAlign="Middle"></Column>
 					</columns>
 					<items>
@@ -41,6 +42,7 @@
 								<ObjectIdentifier text="{NotifNo}" title="{ShortText}"/>
 								<ObjectIdentifier text="{FunctionalLoc}" title="{FuncLocDesc}"/>
 								<ObjectIdentifier text="{Equipment}" title="{EquipmentDesc}"/>
+								<core:Icon visible="{parts:[{path:'syncStatusModel>/NoticationErrors'},{path:'NotifNo'}],formatter:'com.twobm.wmoa.util.Formatter.isInErrorStateNotification'}"/>
 								<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 							</cells>
 						</ColumnListItem>

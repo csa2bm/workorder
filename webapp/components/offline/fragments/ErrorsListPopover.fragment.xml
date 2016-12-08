@@ -27,7 +27,7 @@
 							</Column>
 						</columns>
 						<items>
-							<ColumnListItem press="onNavtoErrDetail" type="Active">
+							<ColumnListItem press="onNavtoErrDetail" type="Active" visible="">
 								<cells>
 									<ObjectIdentifier text="{syncStatusModel>OrderNo}"/>
 									<ObjectIdentifier text="{syncStatusModel>RequestObject}"/>

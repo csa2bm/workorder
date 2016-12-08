@@ -36,6 +36,7 @@
 								<Label text="{i18n>WorkOrderList-EquipmentHeader}"/>
 							</header>
 						</Column>
+						<Column demandPopin="false" id="errorColumn" minScreenWidth="Small" width="1rem"/>
 						<Column demandPopin="false" id="navigationColumn" width="0.5rem"/>
 					</columns>
 					<items>
@@ -49,6 +50,8 @@
 								<ObjectIdentifier text="{Orderid}" title="{ShortText}"/>
 								<ObjectIdentifier text="{FunctLoc}" title="{Funcldescr}"/>
 								<ObjectIdentifier text="{Equipment}" title="{Equidescr}"/>
+								<core:Icon visible="{parts:[{path:'syncStatusModel>/OrderErrors'},{path:'Orderid'}],formatter:'com.twobm.wmoa.util.Formatter.isInErrorStateWorkOrder'}"
+								color="red" useIconTooltip="false" size="2rem" src="sap-icon://alert"></core:Icon>
 								<core:Icon class="sapUiTinyMarginTop" src="sap-icon://slim-arrow-right" color="Gray"/>
 							</cells>
 						</ColumnListItem>
