@@ -41,7 +41,6 @@ sap.ui.define([
 						syncStatusModel.getData().NoticationErrors = [];
 
 						if (data.results.length > 0) {
-
 							syncStatusModel.getData().InErrorState = true;
 							
 							errorsHandler.handleErrors(data,syncStatusModel);
@@ -97,7 +96,7 @@ sap.ui.define([
 
 		setSyncStateIcon: function(syncStatusModel, isOnline) {
 			if (syncStatusModel.getData().InErrorState) {
-				syncStatusModel.getData().SyncIcon = "sap-icon://alert";
+				syncStatusModel.getData().SyncIcon = "sap-icon://error";
 			} else if (syncStatusModel.getData().PendingLocalData) {
 				syncStatusModel.getData().SyncIcon = "sap-icon://system-exit-2";
 			} else {

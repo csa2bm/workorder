@@ -4,7 +4,7 @@
 			<l:VerticalLayout>
 				<l:HorizontalLayout class="sapUiTinyMarginTopBottom">
 					<core:Icon class="sapUiSmallMarginEnd" color="{syncStatusModel>/SyncColor}" size="3em" noTabStop="true" src="{syncStatusModel>/SyncIcon}"></core:Icon>
-					<Label class="syncStatusTextBig" id="syncStatusText" text="{syncStatusModel>/SyncStateText}"/>
+					<Label class="syncStatusTextBig" text="{syncStatusModel>/SyncStateText}"/>
 				</l:HorizontalLayout>
 				<l:HorizontalLayout class="sapUiTinyMarginTopBottom">
 					<Label class="syncStatusText sapUiSmallMarginEnd" text="Network Connection:"/>
@@ -12,9 +12,11 @@
 				</l:HorizontalLayout>
 				<l:HorizontalLayout>
 					<Label class="syncStatusText sapUiSmallMarginEnd" text="{i18n>lastSyncLabel}"/>
-					<Label class="syncStatusTextBold" id="lastSyncTime" text="{syncStatusModel>/LastSyncTime}"/>
+					<Label class="syncStatusTextBold" text="{syncStatusModel>/LastSyncTime}"/>
 				</l:HorizontalLayout>
-				<mvc:XMLView viewName="com.twobm.mobileworkorder.components.offline.ErrorListControl"/>
+				<!--<mvc:XMLView class="sapUiMediumMarginTop" viewName="com.twobm.mobileworkorder.components.offline.ErrorListControl"/>-->
+				
+				<Button class="sapUiMediumMarginTop" visible="{syncStatusModel>/InErrorState}" text="Show Sync Errors" press="showErrorsList"></Button>
 				<Button class="sapUiMediumMarginTop" text="Synchronize Now" press="synchronizeData"></Button>
 				<Button class="sapUiMediumMarginTop" text="Reset database" press="resetStore"></Button>
 			</l:VerticalLayout>

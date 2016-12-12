@@ -42,7 +42,7 @@
 								<ObjectIdentifier text="{NotifNo}" title="{ShortText}"/>
 								<ObjectIdentifier text="{FunctionalLoc}" title="{FuncLocDesc}"/>
 								<ObjectIdentifier text="{Equipment}" title="{EquipmentDesc}"/>
-								<core:Icon visible="{parts:[{path:'syncStatusModel>/NoticationErrors'},{path:'NotifNo'}],formatter:'com.twobm.wmoa.util.Formatter.isInErrorStateNotification'}"/>
+								<core:Icon visible="{parts:[{path:'syncStatusModel>/NoticationErrors'},{path:'NotifNo'}],formatter:'.isInErrorStateNotification'}"/>
 								<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 							</cells>
 						</ColumnListItem>

@@ -7,12 +7,12 @@
 						<columns>
 							<Column demandPopin="true" popinDisplay="Inline" minScreenWidth="Small" width="1rem">
 								<header>
-									<Label text="{i18n>errorListPopupListColumnOrder}"/>
+									<Label text="{i18n>errorListPopupListColumnObject}"/>
 								</header>
 							</Column>
 							<Column demandPopin="true" popinDisplay="Inline" minScreenWidth="Small" width="1rem">
 								<header>
-									<Label text="{i18n>errorListPopupListColumnObject}"/>
+									<Label text="{i18n>errorListPopupListColumnOrder}"/>
 								</header>
 							</Column>
 							<Column demandPopin="true" popinDisplay="Inline" minScreenWidth="Small" width="5rem">
@@ -27,10 +27,10 @@
 							</Column>
 						</columns>
 						<items>
-							<ColumnListItem press="onNavtoErrDetail" type="Active" visible="">
+							<ColumnListItem press="onNavtoErrDetail" type="Active" visible="{parts:[{path:'syncStatusModel>/ErrorListContextObject'},{path:'syncStatusModel>/ErrorListContextID'}, {path:'syncStatusModel>RequestMetaObject'},{path:'syncStatusModel>ObjectID'} ],formatter:'.isErrorRelevantForContext'}">
 								<cells>
-									<ObjectIdentifier text="{syncStatusModel>OrderNo}"/>
 									<ObjectIdentifier text="{syncStatusModel>RequestObject}"/>
+									<ObjectIdentifier text="{syncStatusModel>ObjectID}"/>
 									<ObjectIdentifier text="{syncStatusModel>Message}"/>
 									<ObjectIdentifier text="{syncStatusModel>RequestID}"/>
 								</cells>
@@ -40,6 +40,7 @@
 					<footer>
 						<Toolbar>
 							<content>
+								<Button text="{i18n>errorListPopupRetryButtonText}" press="onRetrySync"></Button>
 								<ToolbarSpacer/>
 								<Button text="{i18n>errorListPopupCloseButtonText}" press="closeErrorListPopupButton"></Button>
 							</content>
@@ -89,7 +90,7 @@
 							<content>
 								<Button text="{i18n>errorListPopupDetailDeleteButtonText}" press="onDeleteErrRecord" type="Reject"></Button>
 								<ToolbarSpacer/>
-								<Button text="{i18n>errorListPopupCloseButtonText}" press="closeErrorListPopupButton"></Button>
+								<Button text="{i18n>errorListPopupCloseButtonText}" press="closeErrorListDetailPopupButton"></Button>
 							</content>
 						</Toolbar>
 					</footer>

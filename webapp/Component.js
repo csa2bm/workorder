@@ -53,11 +53,13 @@ sap.ui.define([
 				LastSyncTime: "",
 				Online: false,
 				PendingLocalData: false,
+				IsSynching: false,
+				InErrorState: false,
 				Errors: [],
 				OrderErrors: [],
 				NoticationErrors: [],
-				InErrorState: false,
-				IsSynching: false
+				ErrorListContextObject : "", //The object to limit the errors shown in the error list. For instance Order
+				ErrorListContextID : "" // The object ID to limit the errors shown in the error list. For instance Order ID
 			});
 			syncStatusModel.setDefaultBindingMode("TwoWay");
 			this.setModel(syncStatusModel, "syncStatusModel");

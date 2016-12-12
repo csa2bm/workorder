@@ -1,4 +1,4 @@
-<core:View controllerName="com.twobm.mobileworkorder.components.workOrderList.WorkOrderList" xmlns:core="sap.ui.core"
+<mvc:View controllerName="com.twobm.mobileworkorder.components.workOrderList.WorkOrderList" xmlns:core="sap.ui.core"
 	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
 	<App class="wordOrderListClass">
 		<Page showNavButton="true" navButtonPress="onNavigationButtonPress" title="{i18n>WorkOrderList-Title}">
@@ -35,7 +35,7 @@
 								<Label text="{i18n>WorkOrderList-EquipmentHeader}"/>
 							</header>
 						</Column>
-						<Column demandPopin="false" id="errorColumn" minScreenWidth="Small" width="1rem"/>
+						<Column demandPopin="false" id="errorColumn" width="1rem"/>
 						<Column demandPopin="false" id="navigationColumn" width="0.5rem"/>
 					</columns>
 					<items>
@@ -47,8 +47,8 @@
 								<ObjectIdentifier text="{Orderid}" title="{ShortText}"/>
 								<ObjectIdentifier text="{FunctLoc}" title="{Funcldescr}"/>
 								<ObjectIdentifier text="{Equipment}" title="{Equidescr}"/>
-								<core:Icon visible="{parts:[{path:'syncStatusModel>/OrderErrors'},{path:'Orderid'}],formatter:'com.twobm.wmoa.util.Formatter.isInErrorStateWorkOrder'}"
-								color="red" useIconTooltip="false" size="2rem" src="sap-icon://alert"></core:Icon>
+								<core:Icon 
+								color="red" useIconTooltip="false" size="1.5rem" src="sap-icon://error" visible="{parts:[{path:'syncStatusModel>/OrderErrors'},{path:'Orderid'}],formatter:'.isInErrorStateWorkOrder'}"></core:Icon>
 								<core:Icon class="sapUiTinyMarginTop" src="sap-icon://slim-arrow-right" color="Gray"/>
 							</cells>
 						</ColumnListItem>
@@ -65,4 +65,4 @@
 			</footer>
 		</Page>
 	</App>
-</core:View>
+</mvc:View>

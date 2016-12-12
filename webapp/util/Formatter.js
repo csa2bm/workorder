@@ -49,22 +49,6 @@ sap.ui.define([], function() {
 					return "blue";
 			}
 
-		},
-
-		isInErrorStateWorkOrder: function(errorsArray, orderId) {
-			if ($.inArray(orderId, errorsArray) >= 0) {
-				return true;
-			} else {
-				return false;
-			}
-		},
-
-		isInErrorStateNotification: function(errorsArray, notificationId) {
-			if ($.inArray(notificationId, errorsArray) >= 0) {
-				return true;
-			} else {
-				return false;
-			}
 		}
 	};
 });

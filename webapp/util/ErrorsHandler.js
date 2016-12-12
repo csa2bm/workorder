@@ -17,12 +17,12 @@ sap.ui.define([
 
 			data.results.forEach(
 				function(item, index) {
-					var parsedJSONMessage = this.getMessageTextFromError(item.Message);
+					var parsedJSONMessage = self.getMessageTextFromError(item.Message);
 
 					error = {
 						"Message": parsedJSONMessage,
-						"RequestMetaObject": this.getRequestMetaObjectName(item.RequestURL),
-						"RequestObject": this.getRequestObjectName(item.RequestURL),
+						"RequestMetaObject": self.getRequestMetaObjectName(item.RequestURL),
+						"RequestObject": self.getRequestObjectName(item.RequestURL),
 						"RequestBody": item.RequestBody,
 						"RequestMethod": item.RequestMethod,
 						"HTTPStatusCode": item.HTTPStatusCode,
@@ -52,13 +52,14 @@ sap.ui.define([
 									var objectId;
 									
 									if (responseUrl === item.ErrorUrl) {
+										
 										if(syncStatusModel.getData().Errors[index].RequestObject === self.orderMetaObjectName){
 											objectId = data.Orderid;
 											
 											syncStatusModel.getData().Errors[index].ObjectID = objectId;
 											//Assign to array
+										
 											syncStatusModel.getData().OrderErrors.push(objectId);
-											
 										}
 										else if(syncStatusModel.getData().Errors[index].RequestObject === self.notificationMetaObjectName){
 											objectId = data.NotifNo;
@@ -79,6 +80,8 @@ sap.ui.define([
 
 										syncStatusModel.getData().Errors[index].ObjectData = objectData;
 									}
+									
+									syncStatusModel.refresh(true);
 								}
 							);
 							syncStatusModel.refresh();
@@ -127,7 +130,7 @@ sap.ui.define([
 			var MaterialsSummaryURLPrefix = "/MaterialsSummarySet";
 
 			if (requestUrl.startsWith(orderURLPrefix)) {
-				return "Order header";
+				return "Order";
 			}
 
 			if (requestUrl.startsWith(timeRegistrationURLPrefix)) {
