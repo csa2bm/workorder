@@ -4,7 +4,7 @@
 	<m:Page showNavButton="true" navButtonPress="navigateBack" title="{i18n>WorkOrderDetails-Title}">
 		<m:headerContent>
 			<l:HorizontalLayout>
-				<core:Icon width="3em" height="3em" color="red" noTabStop="true" press="openErrorsForOrder" src="sap-icon://error" visible="{parts:[{path:'syncStatusModel>/OrderErrors'},{path:'Orderid'}],formatter:'.isInErrorStateWorkOrder'}"/>
+				<core:Icon width="3em" height="3em" color="red" noTabStop="true" press="openErrorsForOrder" src="sap-icon://circle-task-2" visible="{parts:[{path:'syncStatusModel>/OrderErrors'},{path:'Orderid'}],formatter:'.isInErrorStateWorkOrder'}"/>
 			</l:HorizontalLayout>
 		</m:headerContent>
 		<m:content>

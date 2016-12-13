@@ -183,6 +183,15 @@ sap.ui.define([
 				this._oDialog.close();
 			}
 		},
+		
+		onSettings: function(oEvent) {
+			if (!this.settingsDialog) {
+				this.settingsDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.settings.fragments.Settings", sap.ui.controller("com.twobm.mobileworkorder.components.settings.Settings"));
+			}
+			// toggle compact style
+			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);
+			this.settingsDialog.openBy(oEvent.getSource());
+		},
 
 		//These event are event from the odata service
 		//In offline scenario we are not interesting in these

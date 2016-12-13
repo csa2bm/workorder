@@ -231,13 +231,29 @@ sap.ui.define([
 			}
 			return false;
 		},
-		
+
 		// 
-		isInErrorStateWorkOrder: function(errorsArray,orderId) {
+		isInErrorStateWorkOrder: function(errorsArray, orderId) {
 			if ($.inArray(orderId, errorsArray) >= 0) {
 				return true;
 			} else {
 				return false;
+			}
+		},
+
+		isInErrorStateIconWorkOrder: function(errorsArray, orderId) {
+			if ($.inArray(orderId, errorsArray) >= 0) {
+				return "sap-icon://message-error";
+			} else {
+				return "sap-icon://slim-arrow-right";
+			}
+		},
+
+		isInErrorStateColorWorkOrder: function(errorsArray, orderId) {
+			if ($.inArray(orderId, errorsArray) >= 0) {
+				return "Red";
+			} else {
+				return "Gray";
 			}
 		}
 	});

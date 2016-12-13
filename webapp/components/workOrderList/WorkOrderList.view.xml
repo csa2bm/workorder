@@ -49,7 +49,7 @@
 								<ObjectIdentifier text="{Equipment}" title="{Equidescr}"/>
 								<core:Icon 
 								color="red" useIconTooltip="false" size="1.5rem" src="sap-icon://error" visible="{parts:[{path:'syncStatusModel>/OrderErrors'},{path:'Orderid'}],formatter:'.isInErrorStateWorkOrder'}"></core:Icon>
-								<core:Icon class="sapUiTinyMarginTop" src="sap-icon://slim-arrow-right" color="Gray"/>
+								<core:Icon class="sapUiTinyMarginTop" src="{parts:[{path:'syncStatusModel>/OrderErrors'},{path:'Orderid'}],formatter:'.isInErrorStateIconWorkOrder'}" color="{parts:[{path:'syncStatusModel>/OrderErrors'},{path:'Orderid'}],formatter:'.isInErrorStateColorWorkOrder'}"/>
 							</cells>
 						</ColumnListItem>
 					</items>

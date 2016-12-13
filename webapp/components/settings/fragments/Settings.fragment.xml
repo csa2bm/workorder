@@ -1,0 +1,9 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc">
+	<ResponsivePopover class="sapUiPopupWithPadding" placement="PreferredTopOrFlip" title="{i18n>dataSyncPopupHeader}">
+		<content>
+			<l:VerticalLayout>
+				<Button class="sapUiMediumMarginTop" text="Reset client" press="onResetClient"></Button>
+			</l:VerticalLayout>
+		</content>
+	</ResponsivePopover>
+</core:FragmentDefinition>
