@@ -103,7 +103,7 @@ sap.ui.define([
 		//	var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			//var oRouter = this.getRouter();
 		//	oRouter.navTo("objectTreeList", true);
-			window.cordova.plugins.barcodeScanner.scan(
+			/*window.cordova.plugins.barcodeScanner.scan(
 				function(result) {
 					if (result.cancelled === "true") {
 						return;
@@ -112,7 +112,21 @@ sap.ui.define([
 				function() {
 					sap.m.MessageToast.show("Scanning failed");
 				}
-		);
+		);*/
+		
+			alert("Starting push registration..");
+		
+			sap.Push.registerForNotificationTypes(sap.Push.notificationType.badge | sap.Push.notificationType.sound | sap.Push.notificationType
+				.alert,
+				function(message) {
+					alert("Successfully registered for push: " + message);
+				},
+				function(message) {
+					alert("Failed to register for push: " + message);
+				},
+				function(message) {
+					alert("Received message: " + message);
+				}, "");
 		},
 
 		onPressNotifications: function() {

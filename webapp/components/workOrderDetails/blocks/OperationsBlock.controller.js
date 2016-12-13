@@ -74,9 +74,17 @@ sap.ui.define([
 
 		opStatusColor: function(sStatus) {
 			if (sStatus) {
-				return "Accept";
+				return "Default";
 			} else {
 				return "Default";
+			}
+		},
+		
+		opStatusIcon: function(sStatus) {
+			if (sStatus) {
+				return "sap-icon://circle-task-2"; 
+			} else {
+				return "sap-icon://circle-task";
 			}
 		},
 		

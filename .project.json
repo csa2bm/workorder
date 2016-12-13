@@ -31,7 +31,7 @@
   ],
   "hybrid": {
     "appname": "Mobile Work Order",
-    "appid": "com.twobm.mobileworkorder",
+    "appid": "com.twobm.mwo",
     "appdesc": "Mobile Work Order by 2BM",
     "appversion": "0.1.16",
     "debugMode": true,
@@ -115,7 +115,8 @@
       "logo": "",
       "logoText": "",
       "background": "",
-      "disablePasscode": false
+      "disablePasscode": false,
+      "hideLogoCopyright": false
     },
     "useAppDescriptor4UI5Libs": false,
     "localBuild": {
@@ -151,7 +152,7 @@
         }
       },
       "android": {
-        "selected": false,
+        "selected": true,
         "preferences": {
           "Fullscreen": false,
           "Orientation": "default",
@@ -325,7 +326,7 @@
           "cloudBuild": false
         },
         "push": {
-          "selected": false,
+          "selected": true,
           "registry": "kapsel-plugin-push",
           "localBuild": true,
           "cloudBuild": false
@@ -398,7 +399,7 @@
         },
         "printer": {
           "selected": false,
-          "registry": "kapsel-plugin-print",
+          "registry": "de.appplant.cordova.plugin.printer",
           "localBuild": false,
           "cloudBuild": true
         },

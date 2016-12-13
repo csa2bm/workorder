@@ -1,0 +1,32 @@
+<core:View controllerName="com.twobm.mobileworkorder.components.notificationDetails.blocks.ItemsBlock" xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+	<Button class="sapUiSmallMarginEnd" icon="sap-icon://add" press="onCreate"/>
+	<Table id="itemsList" items="{ path: 'NotifItemsSet', sorter: { path: 'ItemSortNo', descending: false}}" noDataText="{i18n>NotificationDetails-ItemsBlock-NoData}">
+		<columns>
+			<Column id="sortNumberColumn" minScreenWidth="Tablet">
+				<Text text="{i18n>NotificationDetails-ItemsBlock-SortNumberHeader}"/>
+			</Column>
+			<Column id="codeGroupColumn" minScreenWidth="Tablet">
+				<Text text="{i18n>NotificationDetails-ItemsBlock-PartHeader}"/>
+			</Column>
+			<Column id="codeColumn">
+				<Text text="{i18n>NotificationDetails-ItemsBlock-DamageHeader}"/>
+			</Column>
+			<Column id="textColumn">
+				<Text text="{i18n>NotificationDetails-ItemsBlock-TextHeader}"/>
+			</Column>
+			<Column width="1.5em" vAlign="Middle"></Column>
+		</columns>
+		<items>
+			<ColumnListItem type="Active" press="onItemPress">
+				<cells>
+					<ObjectIdentifier text="" title="{ItemSortNo}"/>
+					<ObjectIdentifier text="{DlCode}" title="{TxtObjptcd}"/>
+					<ObjectIdentifier text="{DCode}" title="{StxtGrpcd}"/>
+					<ObjectIdentifier text="" title="{Descript}"/>
+					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+</core:View>

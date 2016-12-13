@@ -112,13 +112,16 @@ sap.ui.define([
 
 		refresh: function() {
 			//Subscribe to sync events
-			if (window.sap_webide_FacadePreview) {
+		/*	if (window.sap_webide_FacadePreview) {
 				this.subscribeToOnlineSyncEvents();
 			} else {
 				//When not in webide 
-			}
+			}*/
 
+
+	if (devApp.isLoaded) {
 			this.refreshData();
+	}
 		},
 
 		//These event are event from the odata service

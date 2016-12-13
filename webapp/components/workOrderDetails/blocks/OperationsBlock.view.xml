@@ -12,7 +12,7 @@
 			<ColumnListItem type="Active" press="onOperationItemPress">
 				<cells>
 					<ObjectIdentifier text="{Activity}" title="{Description}"/>
-					<Button id="readingButton" class="sapUiMediumMarginEnd" icon="sap-icon://complete" press="onCompleOperationbtnPressed" type="{parts:[{path:'Complete'}],formatter:'.opStatusColor'}" enabled="{EditModeModel>/EditMode}"></Button>
+					<Button id="readingButton" class="sapUiMediumMarginEnd" icon="{parts:[{path:'Complete'}],formatter:'.opStatusIcon'}" press="onCompleOperationbtnPressed" type="{parts:[{path:'Complete'}],formatter:'.opStatusColor'}" enabled="{EditModeModel>/EditMode}"></Button>
 					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 				</cells>
 			</ColumnListItem>
