@@ -1,7 +1,13 @@
 <core:View controllerName="com.twobm.mobileworkorder.components.notificationDetails.NotificationDetails" xmlns:core="sap.ui.core"
-	xmlns="sap.uxap" xmlns:layout="sap.ui.layout" xmlns:m="sap.m" xmlns:blocks="com.twobm.mobileworkorder.components.notificationDetails.blocks.configuration"
+	xmlns="sap.uxap" xmlns:l="sap.ui.layout" xmlns:m="sap.m" xmlns:blocks="com.twobm.mobileworkorder.components.notificationDetails.blocks.configuration"
 	height="100%">
 	<m:Page showNavButton="true" navButtonPress="onNavigationButtonPress" title="{i18n>NotificationDetails-Title}">
+		<m:headerContent>
+			<l:HorizontalLayout>
+				<core:Icon width="3em" height="3em" color="red" noTabStop="true" press="openErrorsForNotification" src="sap-icon://error" visible="{parts:[{path:'syncStatusModel>/NoticationErrors'},{path:'NotifNo'}],formatter:'.isInErrorStateWorkNotification'}"/>
+			</l:HorizontalLayout>
+		</m:headerContent>
+		<m:content>
 		<ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="false">
 			<headerTitle>
 				<ObjectPageHeader headerDesign="Dark" objectTitle="{path:'ShortText'}" objectSubtitle="{path:'NotifNo'}"></ObjectPageHeader>
@@ -63,6 +69,7 @@
 				</ObjectPageSection>
 			</sections>
 		</ObjectPageLayout>
+		</m:content>
 		<m:footer>
 			<m:OverflowToolbar>
 				<m:content>

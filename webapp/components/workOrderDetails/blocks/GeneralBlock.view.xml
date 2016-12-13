@@ -7,7 +7,7 @@
 			<f:content>
 				<core:Title text="{i18n>WorkOrderDetails-GeneralBlock-Information}"/>
 				<Label text="{i18n>WorkOrderDetails-GeneralBlock-Status}"/>
-				<HBox align="Center">
+				<HBox>
 					<core:Icon class="sapUiTinyMarginEnd" src="sap-icon://circle-task-2"
 						color="{parts:[{path:'OrderStatus'}],formatter:'.getOrderStatusIconColor'}"/>
 					<Text text="{OrderStatus}"/>

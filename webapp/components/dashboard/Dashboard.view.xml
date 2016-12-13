@@ -86,7 +86,7 @@
 						<!--	src="{syncStatusModel>/SyncIcon}" tooltip="Sync status"></core:Icon>-->
 						<!--<BusyIndicator id="syncBusyIndicator" visible="{syncStatusModel>/IsSynching}"/>-->
 						<mvc:XMLView width="7em" viewName="com.twobm.mobileworkorder.components.offline.Status"/>
-						<mvc:XMLView viewName="com.twobm.mobileworkorder.components.offline.ErrorListControl"/>
+						<!--<mvc:XMLView viewName="com.twobm.mobileworkorder.components.offline.ErrorListControl"/>-->
 						<ToolbarSpacer></ToolbarSpacer>
 						<!--<Button type="Reject" visible="{syncStatusModel>/InErrorState}" text="Shows Errors" press="openErrorsView"></Button>-->
 					</content>

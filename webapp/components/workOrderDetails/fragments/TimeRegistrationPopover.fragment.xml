@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
-	<Dialog title="{i18n>WorkOrderDetails-TimeRegistrationPopover-Title}" class="sapUiPopupWithPadding" stretch="false" showHeader="true" showCloseButton="true">
+	<Dialog title="{i18n>WorkOrderDetails-TimeRegistrationPopover-Title}" class="sapUiPopupWithPadding" stretch="false" showHeader="true">
 		<buttons>
 			<Button icon="sap-icon://delete" type="Reject" text="{i18n>WorkOrderDetails-TimeRegistrationPopover-DeleteButton}" press="deleteTimeRegistration"
 				visible="{/deletable}"></Button>

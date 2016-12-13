@@ -41,6 +41,25 @@ sap.ui.define([
 				var oRouter = this.getRouter();
 				oRouter.navTo("notificationList", true);
 			}
+		},
+		
+		isInErrorStateWorkNotification: function(errorsArray, notificationId) {
+			if ($.inArray(notificationId, errorsArray) >= 0) {
+				return true;
+			} else {
+				return false;
+			}
+		},
+		
+		openErrorsForNotification : function(oEvent){
+			var notifNo = oEvent.getSource().getBindingContext().getObject().NotifNo;
+			
+			var data = {
+				"Object" : "Notification",
+				"ID" : notifNo
+			};
+			
+			this.getEventBus().publish("ShowErrorList", data);
 		}
 	});
 });

@@ -23,34 +23,32 @@ sap.ui.define([], function() {
 				return true;
 			}
 		},
-		
+
 		/**
 		 * Convert type date to the format of 01/02/2017
 		 * param{Date}  input string
 		 * @returns {Date}} with the corresponding format
 		 */
 		dateTimeShortType: function(ddate) {
-		ddate = new sap.ui.model.type.Date({
-			pattern: "dd/MM/yyyy"
-		});
-		return ddate;
-	},
+			ddate = new sap.ui.model.type.Date({
+				pattern: "dd/MM/yyyy"
+			});
+			return ddate;
+		},
 
-	
-	priorityValueConvert: function(value) {
-		
+		priorityValueConvert: function(value) {
+
 			switch (value) {
 				case "1":
 					return "green";
-				case  "2":
+				case "2":
 					return "yellow";
-				case  "3":
+				case "3":
 					return "red";
 				default:
 					return "blue";
 			}
-		
-	}
-	
+
+		}
 	};
 });

@@ -8,7 +8,7 @@ sap.ui.define([
 		onInit: function() {
 			var oRouter = this.getRouter();
 			oRouter.getRoute("workOrderDetails").attachMatched(this.onRouteMatched, this);
-			
+
 			//Subscribe to events
 			var eventBus = this.getEventBus();
 			eventBus.subscribe("BlockNavigation", this.performNavigationForBlocks, this);
@@ -155,7 +155,7 @@ sap.ui.define([
 				}
 			});
 		},
-		
+
 		updateOrderStatus: function() {
 			var orderNo = this.getView().getBindingContext().getObject().Orderid;
 			var that = this;
@@ -201,8 +201,7 @@ sap.ui.define([
 				btnText = this.getI18nText("WorkOrderDetails-orderStatusBtnTextNotStarted");
 			} else if (sString === this.getI18nText("orderStatusInProgress")) {
 				btnText = this.getI18nText("WorkOrderDetails-orderStatusBtnTextInProgress");
-			}
-			else {
+			} else {
 				btnText = this.getI18nText("WorkOrderDetails-orderStatusBtnTextCompleted");
 			}
 			return btnText;
@@ -246,6 +245,25 @@ sap.ui.define([
 			if (generalSection) {
 				this.getView().byId("ObjectPageLayout").scrollToSection(generalSection, 0, -500);
 			}
+		},
+
+		isInErrorStateWorkOrder: function(errorsArray, orderId) {
+			if ($.inArray(orderId, errorsArray) >= 0) {
+				return true;
+			} else {
+				return false;
+			}
+		},
+		
+		openErrorsForOrder : function(oEvent){
+			var orderId = oEvent.getSource().getBindingContext().getObject().Orderid;
+			
+			var data = {
+				"Object" : "Order",
+				"ID" : orderId
+			};
+			
+			this.getEventBus().publish("ShowErrorList", data);
 		}
 	});
 });

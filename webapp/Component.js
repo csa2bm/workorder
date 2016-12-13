@@ -53,9 +53,13 @@ sap.ui.define([
 				LastSyncTime: "",
 				Online: false,
 				PendingLocalData: false,
+				IsSynching: false,
+				InErrorState: false,
 				Errors: [],
-				InErrorState : false,
-				IsSynching : false
+				OrderErrors: [],
+				NoticationErrors: [],
+				ErrorListContextObject : "", //The object to limit the errors shown in the error list. For instance Order
+				ErrorListContextID : "" // The object ID to limit the errors shown in the error list. For instance Order ID
 			});
 			syncStatusModel.setDefaultBindingMode("TwoWay");
 			this.setModel(syncStatusModel, "syncStatusModel");
@@ -84,7 +88,7 @@ sap.ui.define([
 			//check errorArchive count
 			if (devapp.isLoaded) {
 				devapp.devLogon.getErrorArchiveCount();
-				
+
 				if ((navigator.network.connection.type).toUpperCase() !== "NONE" &&
 					(navigator.network.connection.type).toUpperCase() !== "UNKNOWN") {
 					devapp.isOnline = true;

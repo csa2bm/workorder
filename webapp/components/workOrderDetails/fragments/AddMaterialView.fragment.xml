@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
-	<Dialog stretch="{device>/isPhone}" contentWidth="100%" contentHeight="100%" showHeader="false" showCloseButton="false">
+	<Dialog stretch="{device>/isPhone}" contentWidth="100%" contentHeight="100%" showHeader="false">
 		<NavContainer id="navCon">
 			<Page id="master" showNavButton="false" title="{i18n>MaterialSearchPageHeaderLabel}">
 				<content>

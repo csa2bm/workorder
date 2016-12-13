@@ -12,15 +12,6 @@ sap.ui.define([
 
 		onInit: function() {
 			this.getRouter().attachRoutePatternMatched(this.onRouteMatched, this);
-
-			//	this.setNotificationModel(this);
-			this.DashBoardModel = new sap.ui.model.json.JSONModel({
-				notificationCount: 0,
-				orderCount: 0
-			});
-			this.getView().setModel(this.DashBoardModel, "DashBoardModel");
-			/*	var oInput = this.byId("userTile");
-				oInput.bindElement("/UserDetailsSet('LLA')");*/
 		},
 
 		onRouteMatched: function(oEvent) {
@@ -29,18 +20,26 @@ sap.ui.define([
 			//Is it this page we have navigated to?
 			if (sName !== "dashboard") {
 				//We navigated to another page - unsubscribe to events for this page
-				this.getEventBus().unsubscribe("OfflineStore", "Synced", this.syncCompleted, this);
-				this.getEventBus().unsubscribe("DeviceOnline", this.deviceWentOnline, this);
-				this.getEventBus().unsubscribe("DeviceOffline", this.deviceWentOffline, this);
+				//this.getEventBus().unsubscribe("OfflineStore", "Synced", this.syncCompleted, this);
+				//this.getEventBus().unsubscribe("DeviceOnline", this.deviceWentOnline, this);
+				//this.getEventBus().unsubscribe("DeviceOffline", this.deviceWentOffline, this);
 				this.getEventBus().unsubscribe("OfflineStore", "DBReinitialized", this.dbHasBeenReinitialized, this);
 				return;
+			}
+			
+			if(!this.DashBoardModel){
+				this.DashBoardModel = new sap.ui.model.json.JSONModel({
+					notificationCount: "0",
+					orderCount: "0"
+				});
+				this.getView().setModel(this.DashBoardModel, "DashBoardModel");
 			}
 
 			self = this;
 
-			this.getEventBus().subscribe("OfflineStore", "Synced", this.syncCompleted, this);
-			this.getEventBus().subscribe("DeviceOnline", this.deviceWentOnline, this);
-			this.getEventBus().subscribe("DeviceOffline", this.deviceWentOffline, this);
+			//this.getEventBus().subscribe("OfflineStore", "Synced", this.syncCompleted, this);
+			//this.getEventBus().subscribe("DeviceOnline", this.deviceWentOnline, this);
+			//this.getEventBus().subscribe("DeviceOffline", this.deviceWentOffline, this);
 			this.getEventBus().subscribe("OfflineStore", "DBReinitialized", this.dbHasBeenReinitialized, this);
 
 			SyncStateHandler.handleSyncState();
@@ -188,117 +187,117 @@ sap.ui.define([
 		//These event are event from the odata service
 		//In offline scenario we are not interesting in these
 		//as it is more important that the data has been synced to the backend
-		subscribeToOnlineSyncEvents: function() {
-			//subscribe to sync events
-			self.getView().getModel().attachRequestCompleted(self.syncCompleted);
-			self.getView().getModel().attachRequestFailed(self.syncFailed);
-		},
+		// subscribeToOnlineSyncEvents: function() {
+		// 	//subscribe to sync events
+		// 	self.getView().getModel().attachRequestCompleted(self.syncCompleted);
+		// 	self.getView().getModel().attachRequestFailed(self.syncFailed);
+		// },
 
-		unSubscribeToOnlineSyncEvents: function() {
-			//Unsubscribe to sync events
-			self.getView().getModel().detachRequestCompleted(self.syncCompleted);
-			self.getView().getModel().detachRequestFailed(self.syncFailed);
-		},
+		// unSubscribeToOnlineSyncEvents: function() {
+		// 	//Unsubscribe to sync events
+		// 	self.getView().getModel().detachRequestCompleted(self.syncCompleted);
+		// 	self.getView().getModel().detachRequestFailed(self.syncFailed);
+		// },
 
-		syncCompleted: function() {
-			if (window.sap_webide_FacadePreview) {
-				self.unSubscribeToOnlineSyncEvents();
-			}
+		// syncCompleted: function() {
+		// 	if (window.sap_webide_FacadePreview) {
+		// 		self.unSubscribeToOnlineSyncEvents();
+		// 	}
 			
-			self.setContentInTiles();
+		// 	self.setContentInTiles();
 
-			self.setSyncIndicators(false);
-		},
+		// 	self.setSyncIndicators(false);
+		// },
 
-		syncFailed: function() {
-			if (window.sap_webide_FacadePreview) {
-				self.unSubscribeToOnlineSyncEvents();
-			} else {
-				//sap.m.MessageToast.show("Synchronization with server failed");
-			}
+		// syncFailed: function() {
+		// 	if (window.sap_webide_FacadePreview) {
+		// 		self.unSubscribeToOnlineSyncEvents();
+		// 	} else {
+		// 		//sap.m.MessageToast.show("Synchronization with server failed");
+		// 	}
 
-			self.setSyncIndicators(false);
-		},
+		// 	self.setSyncIndicators(false);
+		// },
 
 		/**
 		 * refreshing offline store data
 		 */
-		refreshData: function() {
-			var model = this.getView().getModel();
+		// refreshData: function() {
+		// 	var model = this.getView().getModel();
 
-			if (model.hasPendingChanges() || model.newEntryContext) {
-				if (devApp.isLoaded) {
-					if (devApp.isOnline) {
-						//Show sync busy indicator
-						self.setSyncIndicators(true);
+		// 	if (model.hasPendingChanges() || model.newEntryContext) {
+		// 		if (devApp.isLoaded) {
+		// 			if (devApp.isOnline) {
+		// 				//Show sync busy indicator
+		// 				self.setSyncIndicators(true);
 
-						self.flushAndRefresh();
-					} else {
-						model.refresh();
-					}
-				} else {
-					model.refresh();
-				}
-			} else {
-				if (devApp.isLoaded) {
-					if (devApp.isOnline) {
-						self.setSyncIndicators(true);
+		// 				self.flushAndRefresh();
+		// 			} else {
+		// 				model.refresh();
+		// 			}
+		// 		} else {
+		// 			model.refresh();
+		// 		}
+		// 	} else {
+		// 		if (devApp.isLoaded) {
+		// 			if (devApp.isOnline) {
+		// 				self.setSyncIndicators(true);
 
-						self.flushAndRefresh();
-					} else {
-						model.refresh();
-					}
-				} else {
-					model.refresh();
-				}
-			}
-		},
+		// 				self.flushAndRefresh();
+		// 			} else {
+		// 				model.refresh();
+		// 			}
+		// 		} else {
+		// 			model.refresh();
+		// 		}
+		// 	}
+		// },
 
-		setSyncIndicators: function(isSynching) {
-			var syncStatusModel = this.getView().getModel("syncStatusModel");
-			syncStatusModel.getData().IsSynching = isSynching;
-			syncStatusModel.refresh();
-		},
+		// setSyncIndicators: function(isSynching) {
+		// 	var syncStatusModel = this.getView().getModel("syncStatusModel");
+		// 	syncStatusModel.getData().IsSynching = isSynching;
+		// 	syncStatusModel.refresh();
+		// },
 
-		deviceWentOnline: function() {
-			self.setSyncIndicators(true);
+		// deviceWentOnline: function() {
+		// 	self.setSyncIndicators(true);
 
-			self.flushAndRefresh();
-		},
+		// 	self.flushAndRefresh();
+		// },
 
-		deviceWentOffline: function() {
-			self.setSyncIndicators(false);
-		},
+		// deviceWentOffline: function() {
+		// 	self.setSyncIndicators(false);
+		// },
 
-		flushAndRefresh: function() {
-			if (devApp.isOnline) {
-				//ask refreshing store after flush
-				if (devApp.devLogon) {
-					devApp.devLogon.flushAppOfflineStore();
-				}
-			} else {
-				//Update data in views
-				this.getView().getModel().refresh();
-			}
-		},
+		// flushAndRefresh: function() {
+		// 	if (devApp.isOnline) {
+		// 		//ask refreshing store after flush
+		// 		if (devApp.devLogon) {
+		// 			devApp.devLogon.flushAppOfflineStore();
+		// 		}
+		// 	} else {
+		// 		//Update data in views
+		// 		this.getView().getModel().refresh();
+		// 	}
+		// },
 
-		synchronizeData: function() {
-			if (this._syncQuickView) {
-				this._syncQuickView.close();
-			}
+		// synchronizeData: function() {
+		// 	if (this._syncQuickView) {
+		// 		this._syncQuickView.close();
+		// 	}
 
-			if (window.sap_webide_FacadePreview || devApp.isOnline) {
-				if (window.sap_webide_FacadePreview) {
-					this.subscribeToOnlineSyncEvents();
-				}
+		// 	if (window.sap_webide_FacadePreview || devApp.isOnline) {
+		// 		if (window.sap_webide_FacadePreview) {
+		// 			this.subscribeToOnlineSyncEvents();
+		// 		}
 
-				this.setSyncIndicators(true);
+		// 		this.setSyncIndicators(true);
 
-				this.flushAndRefresh();
-			} else {
-				sap.m.MessageToast.show("Device is offline");
-			}
-		},
+		// 		this.flushAndRefresh();
+		// 	} else {
+		// 		sap.m.MessageToast.show("Device is offline");
+		// 	}
+		// },
 
 		dataCount: function(oValue) {
 			//read the number of data entities returned

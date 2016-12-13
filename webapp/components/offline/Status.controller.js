@@ -179,6 +179,15 @@ sap.ui.define([
 				}
 			});
 		},
+		
+		showErrorsList : function(){
+			var data = {
+				"Object" : "", //Show all errors
+				"ID" : "" //Show all errors
+			};
+
+			sap.ui.getCore().getEventBus().publish("ShowErrorList", data);	
+		},
 
 		closeSyncPopup: function() {
 			if (this._syncQuickView) {
