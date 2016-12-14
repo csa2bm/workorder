@@ -144,7 +144,7 @@ sap.ui.define([
 
 						var request = {
 							headers: {},
-							requestUri: deleteErrorsURL,
+							requestUri: deletePath,
 							method: "DELETE"
 						};
 
