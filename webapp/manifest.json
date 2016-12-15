@@ -4,17 +4,20 @@
 		"_version": "1.1.0",
 		"id": "com.twobm.mobileworkorder",
 		"type": "application",
-		"resources": "resources.json",
 		"i18n": "i18n/messageBundle.properties",
 		"title": "{{appTitle}}",
 		"description": "{{appDescription}}",
+		"sourceTemplate": {
+			"id": "servicecatalog.connectivityComponent",
+			"version": "0.0.0"
+		},
 		"applicationVersion": {
 			"version": "1.0.0"
 		},
 		"ach": "ach",
 		"dataSources": {
-			"mainService": {
-				"uri": "/sap/opu/odata/tobmas/WORKORDER_SRV/",
+			"WORKORDER_SRV": {
+				"uri": "/ID3/sap/opu/odata/tobmas/WORKORDER_SRV/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0",
@@ -22,11 +25,7 @@
 				}
 			}
 		},
-		"offline": true,
-		"sourceTemplate": {
-			"id": "fioritemplate.UI5masterDetailKapselOffline",
-			"version": "1.32.4"
-		}
+		"offline": true
 	},
 	"sap.ui": {
 		"_version": "1.1.0",
@@ -44,16 +43,13 @@
 			"tablet": true,
 			"phone": true
 		},
-		"supportedThemes": [
-			"sap_belize_plus"
-		]
+		"supportedThemes": ["sap_belize_plus"]
 	},
 	"sap.ui5": {
 		"_version": "1.1.0",
 		"rootView": {
-			"viewName": "com.twobm.mobileworkorder.components.app.App",
-			"type": "XML",
-			"id": "mobileWorkOrderApp"
+			"viewName": "com.twobm.mobileworkorder.components.dashboard.Dashboard",
+			"type": "XML"
 		},
 		"dependencies": {
 			"minUI5Version": "1.38.8",
@@ -74,6 +70,16 @@
 				"settings": {
 					"bundleName": "com.twobm.mobileworkorder.i18n.messageBundle"
 				}
+			},
+			"": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "TwoWay",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "WORKORDER_SRV",
+				"preload": true
 			}
 		},
 		"routing": {
@@ -115,31 +121,23 @@
 				"pattern": "notificationList",
 				"name": "notificationList",
 				"greedy": false,
-				"target": [
-					"notificationList"
-				]
+				"target": ["notificationList"]
 			}, {
 				"pattern": "notificationDetails/{notificationContext}",
 				"name": "notificationDetails",
 				"greedy": false,
-				"target": [
-					"notificationDetails"
-				]
+				"target": ["notificationDetails"]
 			}, {
 				"pattern": "notificationCreate/:equipmentNo:/:functionalLoc:/:argAvailable:",
 				"name": "notificationCreate",
 				"greedy": false,
-				"target": [
-					"notificationCreate"
-				]
+				"target": ["notificationCreate"]
 			}, {
 				"name": "objectTreeList",
 				"pattern": "objectTreeList",
 				"titleTarget": "",
 				"greedy": false,
-				"target": [
-					"objectTreeList"
-				]
+				"target": ["objectTreeList"]
 			}],
 			"targets": {
 				"dashboard": {
@@ -216,62 +214,62 @@
 		"_version": "1.1.0",
 		"definingRequests": {
 			"OrderSet": {
-				"dataSource": "mainService",
-			"path": "/OrderSet?$expand=OrderOperation,OrderComponent,OrderObject,OrderAttachments,OrderGoodsMovements,OrderTimeRegistration,OrderMaterialSummary,OrderEquipments,OrderMeasPoint"
+				"dataSource": "WORKORDER_SRV",
+				"path": "/OrderSet?$expand=OrderOperation,OrderComponent,OrderObject,OrderAttachments,OrderGoodsMovements,OrderTimeRegistration,OrderMaterialSummary,OrderEquipments,OrderMeasPoint"
 			},
 			"OperationsSet": {
-				"dataSource": "mainService",
+				"dataSource": "WORKORDER_SRV",
 				"path": "/OperationsSet"
 			},
 			"AttachmentsSet": {
-				"dataSource": "mainService",
+				"dataSource": "WORKORDER_SRV",
 				"path": "/AttachmentsSet"
 			},
 			"ComponentsSet": {
-				"dataSource": "mainService",
+				"dataSource": "WORKORDER_SRV",
 				"path": "/ComponentsSet"
 			},
 			"GoodsMovementsSet": {
-				"dataSource": "mainService",
+				"dataSource": "WORKORDER_SRV",
 				"path": "/GoodsMovementsSet"
 			},
 			"MaterialsSummarySet": {
-				"dataSource": "mainService",
+				"dataSource": "WORKORDER_SRV",
 				"path": "/MaterialsSummarySet"
 			},
 			"ObjectsSet": {
-				"dataSource": "mainService",
+				"dataSource": "WORKORDER_SRV",
 				"path": "/ObjectsSet"
 			},
 			"TimeRegistrationsSet": {
-				"dataSource": "mainService",
+				"dataSource": "WORKORDER_SRV",
 				"path": "/TimeRegistrationsSet"
 			},
 			"MaterialsSet": {
-				"dataSource": "mainService",
+				"dataSource": "WORKORDER_SRV",
 				"path": {
 					"url": "/MaterialsSet",
 					"retrieveStreams": true
 				}
 			},
 			"EquipmentsSet": {
-				"dataSource": "mainService",
+				"dataSource": "WORKORDER_SRV",
 				"path": "/EquipmentsSet"
 			},
 			"FunctionalLocationsSet": {
-				"dataSource": "mainService",
+				"dataSource": "WORKORDER_SRV",
 				"path": "/FunctionalLocationsSet"
 			},
 			"NotificationsSet": {
-				"dataSource": "mainService",
-			"path": "/NotificationsSet?$expand=NotifAttachmentsSet,NotifActivitiesSet,NotifTasksSet"
+				"dataSource": "WORKORDER_SRV",
+				"path": "/NotificationsSet?$expand=NotifAttachmentsSet,NotifActivitiesSet,NotifTasksSet"
 			},
 			"UserDetailsSet": {
-				"dataSource": "mainService",
+				"dataSource": "WORKORDER_SRV",
 				"path": "/UserDetailsSet"
 			},
 			"CodeGroupsSet": {
-				"dataSource": "mainService",
+				"dataSource": "WORKORDER_SRV",
 				"path": "/CodeGroupsSet?$expand=CodeCatalogSet"
 			}
 		}

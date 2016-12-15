@@ -3,8 +3,9 @@ sap.ui.define([
 	"com/twobm/mobileworkorder/dev/devapp",
 	"com/twobm/mobileworkorder/util/Globalization",
 	"sap/ui/core/routing/History",
-	"com/twobm/mobileworkorder/util/SyncStateHandler"
-], function(Controller, devApp, Globalization, History, SyncStateHandler) {
+	"com/twobm/mobileworkorder/util/SyncStateHandler",
+	"com/twobm/mobileworkorder/components/offline/SyncManager"
+], function(Controller, devApp, Globalization, History, SyncStateHandler, SyncManager) {
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.workOrderList.WorkOrderList", {
@@ -18,24 +19,18 @@ sap.ui.define([
 			//Is it this page we have navigated to?
 			if (sName !== "workOrderList") {
 				//We navigated to another page - unsubscribe to events for this page
-				this.getEventBus().unsubscribe("OfflineStore", "Synced", this.syncCompleted, this);
+				//this.getEventBus().unsubscribe("OfflineStore", "Synced", this.syncCompleted, this);
 				//this.getEventBus().unsubscribe("DeviceOnline", this.deviceWentOnline, this);
 				//this.getEventBus().unsubscribe("DeviceOffline", this.deviceWentOffline, this);
 				return;
 			}
 
-			self = this;
+			//self = this;
 
-			this.getEventBus().subscribe("OfflineStore", "Synced", this.syncCompleted, this);
-			//this.getEventBus().subscribe("DeviceOnline", this.deviceWentOnline, this);
-			//this.getEventBus().subscribe("DeviceOffline", this.deviceWentOffline, this);
+			//this.getEventBus().subscribe("OfflineStore", "Synced", this.syncCompleted, this);
 
+			SyncManager.syncIfNeeded();
 			SyncStateHandler.handleSyncState();
-
-			//	this.setInitialSorting();
-
-			//flush and refresh data
-			//this.refresh();
 		},
 
 		onNavigationButtonPress: function(oEvent) {
@@ -135,16 +130,16 @@ sap.ui.define([
 		// 	self.getView().getModel().detachRequestFailed(self.syncFailed);
 		// },
 
-		syncCompleted: function() {
-			// if (window.sap_webide_FacadePreview) {
-			// 	self.unSubscribeToOnlineSyncEvents();
-			// }
+		// syncCompleted: function() {
+		// 	// if (window.sap_webide_FacadePreview) {
+		// 	// 	self.unSubscribeToOnlineSyncEvents();
+		// 	// }
 
-			//self.setSyncIndicators(false);
+		// 	//self.setSyncIndicators(false);
 
-			//Update items in table
-			self.getView().byId("workOrderTableId").getBinding("items").refresh(true);
-		},
+		// 	//Update items in table
+		// 	self.getView().byId("workOrderTableId").getBinding("items").refresh(true);
+		// },
 
 		// syncFailed: function() {
 		// 	if (window.sap_webide_FacadePreview) {

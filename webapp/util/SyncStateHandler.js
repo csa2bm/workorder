@@ -1,85 +1,76 @@
 sap.ui.define([
-	"com/twobm/mobileworkorder/dev/devapp",
 	"com/twobm/mobileworkorder/util/ErrorsHandler"
-], function(devApp, errorsHandler) {
+], function(errorsHandler) {
 	"use strict";
 
 	return {
 		handleSyncState: function() {
 
-			if (!window.cordova || window.cordova.platformId === "browser") {
-				return;
-			}
-
 			var that = this;
 
 			var syncStatusModel = sap.ui.getCore().getComponent("__component0").getModel("syncStatusModel");
 
-			if (window.sap_webide_FacadePreview) {
-				syncStatusModel.getData().SyncColor = "green"; //Always online
-				syncStatusModel.refresh(true);
+			var serviceUrl = sap.ui.getCore().getComponent("__component0").getModel().sServiceUrl;
+			var errorsUrl = serviceUrl + "/ErrorArchive";
 
-				//Not sync when online in webide
-				return;
-			}
+			var request = {
+				headers: {},
+				requestUri: errorsUrl,
+				method: "GET"
+			};
 
-			if (devApp.devLogon.isOfflineStoreOpen) {
-				var serviceUrl = sap.ui.getCore().getComponent("__component0").getModel().sServiceUrl;
-				var errorsUrl = serviceUrl + "/ErrorArchive";
+			OData.read(request,
+				function(data, response) {
+					syncStatusModel.getData().InErrorState = false;
+					syncStatusModel.getData().Errors = [];
+					syncStatusModel.getData().OrderErrors = [];
+					syncStatusModel.getData().NoticationErrors = [];
 
-				var request = {
-					headers: {},
-					requestUri: errorsUrl,
-					method: "GET"
-				};
+					if (data.results.length > 0) {
+						syncStatusModel.getData().InErrorState = true;
 
-				OData.read(request,
-					function(data, response) {
-						syncStatusModel.getData().InErrorState = false;
-						syncStatusModel.getData().Errors = [];
-						syncStatusModel.getData().OrderErrors = [];
-						syncStatusModel.getData().NoticationErrors = [];
+						errorsHandler.handleErrors(data, syncStatusModel);
+					}
 
-						if (data.results.length > 0) {
-							syncStatusModel.getData().InErrorState = true;
-							
-							errorsHandler.handleErrors(data,syncStatusModel);
-						}
+					//Check if there is data pending sync in the offline db
+					sap.hybrid.getOfflineStore().getRequestQueueStatus(
+						function(status) {
 
-						//Check if there is data pending sync in the offline db
-						devApp.devLogon.appOfflineStore.store.getRequestQueueStatus(
-							function(status) {
+							if (!status.isEmpty) {
+								//There is data pending sync in db
 
-								if (!status.isEmpty) {
-									//There is data pending sync in db
-
-									//Do not overwrite error state if that is present
-									//Error state is most important
-									if (!syncStatusModel.getData().InErrorState) {
-										//Data created offline is awaiting sync with server
-										//syncStatusModel.getData().SyncState = self.getI18nText("syncDataPending");
-									}
-									syncStatusModel.getData().PendingLocalData = true;
-								} else {
-									syncStatusModel.getData().PendingLocalData = false;
+								//Do not overwrite error state if that is present
+								//Error state is most important
+								if (!syncStatusModel.getData().InErrorState) {
+									//Data created offline is awaiting sync with server
+									//syncStatusModel.getData().SyncState = self.getI18nText("syncDataPending");
 								}
-
-								that.setSyncIndicatorColor(syncStatusModel, devApp.isOnline);
-								that.setSyncStateIcon(syncStatusModel, devApp.isOnline);
-								that.setNetworkConnectionStatusText(syncStatusModel, devApp.isOnline);
-								that.setSyncStateText(syncStatusModel, devApp.isOnline);
-
-								syncStatusModel.refresh(true);
-							},
-							function(e) {
-								//var x = 0;
-								syncStatusModel.refresh(true);
+								syncStatusModel.getData().PendingLocalData = true;
+							} else {
+								syncStatusModel.getData().PendingLocalData = false;
 							}
-						);
+/*
+							that.setSyncIndicatorColor(syncStatusModel, devApp.isOnline);
+							that.setSyncStateIcon(syncStatusModel, devApp.isOnline);
+							that.setNetworkConnectionStatusText(syncStatusModel, devApp.isOnline);
+							that.setSyncStateText(syncStatusModel, devApp.isOnline);
+*/
+							that.setSyncIndicatorColor(syncStatusModel, sap.hybrid.SMP.isOnline);
+							that.setSyncStateIcon(syncStatusModel, sap.hybrid.SMP.isOnline);
+							that.setNetworkConnectionStatusText(syncStatusModel, sap.hybrid.SMP.isOnline);
+							that.setSyncStateText(syncStatusModel, sap.hybrid.SMP.isOnline);
 
-						syncStatusModel.refresh(true);
-					}, this.errorCallBack);
-			}
+							syncStatusModel.refresh(true);
+						},
+						function(e) {
+							//var x = 0;
+							syncStatusModel.refresh(true);
+						}
+					);
+
+					syncStatusModel.refresh(true);
+				}, this.errorCallBack);
+
 		},
 
 		setSyncIndicatorColor: function(syncStatusModel, isOnline) {

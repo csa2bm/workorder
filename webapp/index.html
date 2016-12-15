@@ -20,60 +20,17 @@
 			data-sap-ui-language="en">
 		</script>
 
-		<script type="text/javascript" src="../cordova.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		
-		<script src="Component.js"></script>
-        <script src="dev/devapp.js"></script>
-        <script src="dev/devlogon.js"></script>
-        <script src="util/Formatter.js"></script>
-
 		<script>
-			window.onload = function() {
-				sap.ui.require([
-				"com/twobm/mobileworkorder/dev/devapp"
-				], function (devapp) {
-					if (window.cordova || devapp.findUrlParameterName("companionbuster")) {
-						var page = window.location.pathname.split("/").pop();
-		                if(page === "preview_hidden.html") {
-		                    window.sap_webide_FacadePreview = true;
-		                }
-						devapp.initialize();
-					}
-					else {
-						devapp.startApp();
-					}
-				});
-					//Load modules a component-preload.js file should be created instead, Please note that the supportet language is set to: data-sap-ui-xx-supportedLanguages="" this need to be deleted aswell.
-				
-				sap.ui.require([
-						"sap/uxap/ObjectPageLayout",
-						"sap/uxap/ObjectPageSubSection",
-						"sap/uxap/ObjectPageSectionBase",
-						"sap/uxap/library",
-						"sap/uxap/BlockBase",
-						"sap/uxap/BlockBaseMetadata",
-						"sap/uxap/ModelMapping",
-						"sap/uxap/ObjectPageLazyLoader",
-						"sap/uxap/LazyLoading",
-						"sap/uxap/ObjectPageLayoutABHelper",
-						"sap/uxap/AnchorBar",
-						"sap/uxap/HierarchicalSelect",
-						"sap/uxap/ObjectPageHeader",
-						"sap/uxap/ObjectPageHeaderActionButton",
-						"sap/uxap/ObjectPageSection",
-						"sap/uxap/ObjectPageLayoutRenderer",
-						"sap/uxap/ObjectPageHeaderRenderer",
-						"sap/uxap/ObjectPageHeaderContent",
-						"sap/uxap/HierarchicalSelectRenderer",
-						"sap/uxap/AnchorBarRenderer",
-						"sap/uxap/BlockBaseRenderer",
-						"sap/uxap/ObjectPageSectionRenderer",
-						"sap/uxap/ObjectPageSubSectionRenderer"
-					]);
-			
-			}
-		
+			sap.ui.getCore().attachInit(function() {
+				new sap.m.Shell({
+					app: new sap.ui.core.ComponentContainer({
+						height : "100%",
+						name : "com.twobm.mobileworkorder"
+					})
+				}).placeAt("content");
+			});
 		</script>
 	</head>
 

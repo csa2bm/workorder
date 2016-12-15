@@ -1,10 +1,9 @@
 sap.ui.define([
 	"sap/ui/core/UIComponent",
-	"sap/ui/model/odata/v2/ODataModel",
-	"sap/ui/model/json/JSONModel",
 	"sap/ui/Device",
-	"com/twobm/mobileworkorder/dev/devapp"
-], function(UIComponent, ODataModel, JSONModel, Device, devapp) {
+	"com/twobm/mobileworkorder/model/models",
+	"com/twobm/mobileworkorder/components/offline/SyncManager"
+], function(UIComponent, Device, models, SyncManager) {
 	"use strict";
 
 	return UIComponent.extend("com.twobm.mobileworkorder.Component", {
@@ -17,86 +16,22 @@ sap.ui.define([
 		 * In this method, the resource and application models are set and the router is initialized.
 		 */
 		init: function() {
-			var oModel, appContext, sServiceUrl;
-			//create odata model for kapsel application
-			var param = {
-				json: true,
-				loadMetadataAsync: true,
-				useBatch: true,
-				refreshAfterChange: true
-			};
-
-			if (window.cordova && window.cordova.platformId !== "browser" && !window.sap_webide_FacadePreview && !window.sap_webide_companion) {
-				if (devapp.devLogon) {
-					appContext = devapp.devLogon.appContext;
+				if (window.cordova.require("cordova/platform").id === "ios") {
+					StatusBar.backgroundColorByName("white");
+					StatusBar.styleDefault();
+					StatusBar.overlaysWebView(false);
 				}
-				sServiceUrl = appContext.applicationEndpointURL + "/";
-				var oHeader = {
-					"X-SMP-APPCID": appContext.applicationConnectionId
-				};
-				if (appContext.registrationContext.user) {
-					oHeader.Authorization = "Basic " + btoa(appContext.registrationContext.user + ":" + appContext.registrationContext.password);
-				}
-				param.headers = oHeader;
-			} else {
-				var appMeta = this.getMetadata().getManifestEntry("sap.app");
-				sServiceUrl = appMeta.dataSources.mainService.uri;
-			}
-			oModel = new ODataModel(sServiceUrl, param);
-			oModel.setDefaultBindingMode("TwoWay");
-			this.setModel(oModel);
-			devapp.appModel = oModel;
-
-			//Create sync status model
-			var syncStatusModel = new sap.ui.model.json.JSONModel({
-				SyncColor: "",
-				LastSyncTime: "",
-				Online: false,
-				PendingLocalData: false,
-				IsSynching: false,
-				InErrorState: false,
-				Errors: [],
-				OrderErrors: [],
-				NoticationErrors: [],
-				ErrorListContextObject : "", //The object to limit the errors shown in the error list. For instance Order
-				ErrorListContextID : "" // The object ID to limit the errors shown in the error list. For instance Order ID
-			});
-			syncStatusModel.setDefaultBindingMode("TwoWay");
-			this.setModel(syncStatusModel, "syncStatusModel");
-
-			// set device model
-			var oDeviceModel = new JSONModel({
-				isTouch: Device.support.touch,
-				isNoTouch: !Device.support.touch,
-				isPhone: Device.system.phone,
-				isNotPhone: !Device.system.phone,
-				listMode: Device.system.phone ? "None" : "SingleSelectMaster",
-				listItemType: Device.system.phone ? "Active" : "Inactive",
-				isOffline: Device.system.phone ? !devapp.isOnline : false,
-				errorNum: 0
-			});
-			oDeviceModel.setDefaultBindingMode("OneWay");
-			this.setModel(oDeviceModel, "device");
-
-			if (window.cordova) {
-				devapp.deviceModel = oDeviceModel;
-			}
-
+				
+			// call the base component's init function
 			UIComponent.prototype.init.apply(this, arguments);
+			// set the device model
+			this.setModel(models.createDeviceModel(), "device");
+			// set sync model
+			this.setModel(models.createSyncModel(), "syncStatusModel");
+			// Strat the sync manager
+			SyncManager.start();
+			// Start the router
 			this.getRouter().initialize();
-
-			//check errorArchive count
-			if (devapp.isLoaded) {
-				devapp.devLogon.getErrorArchiveCount();
-
-				if ((navigator.network.connection.type).toUpperCase() !== "NONE" &&
-					(navigator.network.connection.type).toUpperCase() !== "UNKNOWN") {
-					devapp.isOnline = true;
-
-					var eventBus = sap.ui.getCore().getEventBus();
-					eventBus.publish("DeviceOnline");
-				}
-			}
 		},
 
 		/**

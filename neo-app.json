@@ -1,23 +1,12 @@
 {
   "welcomeFile": "/webapp/index.html",
-  "sendWelcomeFileRedirect": true,
   "routes": [
-    {
-      "path": "/sap/opu/odata",
-      "target": {
-        "type": "destination",
-        "name": "ID3",
-        "entryPath": "/sap/opu/odata"
-      },
-      "description": "ID3"
-    },
     {
       "path": "/resources",
       "target": {
         "type": "service",
         "name": "sapui5",
-        "entryPath": "/resources",
-        "version": "1.40.10"
+        "entryPath": "/resources"
       },
       "description": "SAPUI5 Resources"
     },
@@ -26,26 +15,18 @@
       "target": {
         "type": "service",
         "name": "sapui5",
-        "entryPath": "/test-resources",
-        "version": "1.40.10"
+        "entryPath": "/test-resources"
       },
       "description": "SAPUI5 Test Resources"
+    },
+    {
+      "path": "/ID3",
+      "target": {
+        "type": "destination",
+        "name": "ID3"
+      },
+      "description": "ID3 OData Services"
     }
   ],
-  "cacheControl": [
-    {
-      "directive": "private",
-      "maxAge": 0,
-      "path": "**.html"
-    },
-    {
-      "directive": "private",
-      "maxAge": 0,
-      "path": "sap-ui-cachebuster-info.json"
-    },
-    {
-      "directive": "public",
-      "maxAge": 31536000
-    }
-  ]
+  "sendWelcomeFileRedirect": true
 }

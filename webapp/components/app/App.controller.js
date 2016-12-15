@@ -13,53 +13,7 @@ sap.ui.define([
 		 */
 		onInit: function() {
 			var oEventBus = this.getEventBus();
-			oEventBus.subscribe("OfflineStore", "Synced", this.syncCompleted, this);
-			oEventBus.subscribe("DeviceOnline", this.handleConnected, this);
-			oEventBus.subscribe("DeviceOffline", this.handleDisconnected, this);
-
-			oEventBus.subscribe("UpdateSyncState", SyncStateHandler.handleSyncState, this);
-
 			oEventBus.subscribe("ShowErrorList", this.openErrorsView, this);
-
-			//Add Content Density Style Class
-			//this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
-		},
-
-		/**
-		 * UI5 OfflineStore channel Synced event handler, after refreshing offline store, refresh data model
-		 */
-		syncCompleted: function() {
-			this.getView().getModel().refresh();
-
-			//Update syncStatusModel
-			var syncStatusModel = this.getView().getModel("syncStatusModel");
-			var d = new Date();
-			syncStatusModel.getData().LastSyncTime = d.toLocaleString();
-
-			if (window.sap_webide_FacadePreview) {
-				syncStatusModel.getData().Online = true; //always online in webide
-			}
-			syncStatusModel.refresh();
-			
-			this.setSyncIndicators(false);
-
-			//Update sync state indicator
-			SyncStateHandler.handleSyncState();
-		},
-
-		handleDisconnected: function() {
-			var syncStatusModel = this.getView().getModel("syncStatusModel");
-			syncStatusModel.getData().Online = false;
-
-			SyncStateHandler.handleSyncState();
-		},
-
-		handleConnected: function() {
-			var syncStatusModel = this.getView().getModel("syncStatusModel");
-			syncStatusModel.getData().Online = true;
-			//syncStatusModel.refresh(true);
-
-			SyncStateHandler.handleSyncState();
 		},
 
 		openErrorsView: function(channel, eventId, data) {
@@ -175,35 +129,6 @@ sap.ui.define([
 				}
 			} else {
 				return true; //There is no limited context. Show all errors
-			}
-		},
-		
-		setSyncIndicators: function(isSynching) {
-			var syncStatusModel = this.getView().getModel("syncStatusModel");
-			syncStatusModel.getData().IsSynching = isSynching;
-			syncStatusModel.refresh();
-		},
-
-		deviceWentOnline: function() {
-			this.setSyncIndicators(true);
-
-			this.flushAndRefresh();
-		},
-
-		deviceWentOffline: function() {
-			this.setSyncIndicators(false);
-		},
-
-		flushAndRefresh: function() {
-			if (devApp.isOnline) {
-				//ask refreshing store after flush
-				if (devApp.devLogon) {
-					//console.log("refreshing offline store");
-					devApp.devLogon.flushAppOfflineStore();
-				}
-			} else {
-				//Update data in views
-				this.getView().getModel().refresh();
 			}
 		}
 	});

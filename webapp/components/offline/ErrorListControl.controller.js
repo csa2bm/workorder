@@ -4,35 +4,33 @@ sap.ui.define([
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.offline.ErrorListControl", {
-		openErrorsView: function(oEvent) {
-			if (!this._errorsView) {
-				this._errorsView = sap.ui.xmlfragment("errorArchiveDialog",
-					"com.twobm.mobileworkorder.components.offline.fragments.ErrorsListPopover", this);
-				this.getView().addDependent(this._errorsView);
-			}
+		
+		dialog:  null,
+        idPrefix: null,
 
-			// delay because addDependent will do a async rerendering and the actionSheet will immediately close without it.
-			var oButton = oEvent.getSource();
-			jQuery.sap.delayedCall(0, this, function() {
-				this._errorsView.open();
-			});
+		closeErrorListPopupButton: function(oEvent) {
+			this.dialog.close();
 		},
+		
+		closeErrorListDetailPopupButton: function() {
+			//Go back.
+			var oNavCon = sap.ui.core.Fragment.byId(this.idPrefix, "errorNav");
+			oNavCon.back();
 
-		closeErrorListPopupButton: function() {
 			if (this._errorsView) {
 				this._errorsView.close();
 			}
 		},
-		
-		onRetrySync : function(){
-			this.getEventBus().publish("OfflineStore", "Synced");
+
+		onRetrySync: function() {
 			this.closeErrorListPopupButton();
+			this.getEventBus().publish("OfflineStore", "Synced");
 		},
 
 		onNavtoErrDetail: function(oEvent) {
 			var oCtx = oEvent.getSource().getBindingContext("syncStatusModel");
-			var oNavCon = sap.ui.core.Fragment.byId("errorArchiveDialog", "errorNav");
-			var oDetailPage = sap.ui.core.Fragment.byId("errorArchiveDialog", "errorDetail");
+			var oNavCon = sap.ui.core.Fragment.byId(this.idPrefix, "errorNav");
+			var oDetailPage = sap.ui.core.Fragment.byId(this.idPrefix, "errorDetail");
 			oNavCon.to(oDetailPage);
 			oDetailPage.bindElement({
 				path: oCtx.getPath(),
@@ -41,7 +39,7 @@ sap.ui.define([
 		},
 
 		onErrorNavBack: function() {
-			var oNavCon = sap.ui.core.Fragment.byId("errorArchiveDialog", "errorNav");
+			var oNavCon = sap.ui.core.Fragment.byId(this.idPrefix, "errorNav");
 			oNavCon.back();
 		},
 
@@ -57,14 +55,14 @@ sap.ui.define([
 		onDeleteErrRecord: function(oEvent) {
 			var deletePath = oEvent.getSource().getBindingContext("syncStatusModel").getObject().ErrorUrl;
 			var that = this;
-			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+			//var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
 
 			sap.m.MessageBox.show(this.getI18nText("errorListPopupDetailDeletePopupText"), {
 				icon: sap.m.MessageBox.Icon.None,
 				title: this.getI18nText("errorListPopupDetailDeletePopupTitle"),
 				actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
 				defaultAction: sap.m.MessageBox.Action.NO,
-				styleClass: bCompact ? "sapUiSizeCompact" : "",
+				//styleClass: bCompact ? "sapUiSizeCompact" : "",
 				onClose: function(oAction, object) {
 
 					if (oAction === sap.m.MessageBox.Action.YES) {
@@ -72,13 +70,13 @@ sap.ui.define([
 
 						var request = {
 							headers: {},
-							requestUri: deletePath,
+							requestUri: deleteErrorsURL,
 							method: "DELETE"
 						};
 
 						OData.read(request,
 							function(data, response) {
-								var oNavCon = sap.ui.core.Fragment.byId("errorArchiveDialog", "errorNav");
+								var oNavCon = sap.ui.core.Fragment.byId(this.idPrefix, "errorNav");
 								oNavCon.back();
 
 								//that.getEventBus().publish("UpdateSyncState");
@@ -87,6 +85,23 @@ sap.ui.define([
 					}
 				}
 			});
+		},
+
+		isErrorRelevantForContext: function(errorListContextObject, errorListContextID, errorObject, errorObjectID) {
+			//If errorListContextObject and errorListContextID is defined then we need to check
+			//for each error in the error list whether it has to be shown in error list
+			//when opening. 
+			//errorListContextObject and errorListContextID defines that only error relevant for this context must be visible
+
+			if (errorListContextObject !== "") {
+				if (errorListContextObject === errorObject && errorListContextID === errorObjectID) {
+					return true; //visible
+				} else {
+					return false; //not visible
+				}
+			} else {
+				return true; //There is no limited context. Show all errors
+			}
 		}
 	});
 });

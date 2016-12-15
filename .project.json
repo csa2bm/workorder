@@ -1,23 +1,27 @@
 {
+  "projectType": [
+    "com.watt.common.builder.sapui5clientbuild",
+    "sap.watt.uitools.ide.fiori",
+    "com.sap.webide.hybrid.cordova"
+  ],
+  "build": {
+    "targetFolder": "dist",
+    "sourceFolder": "webapp",
+    "buildRequired": true,
+    "lastBuildDateTime": "Sun, 06 Nov 2016 13:27:47 GMT"
+  },
   "generation": [
     {
-      "templateId": "fioritemplate.UI5masterDetailKapselOffline",
-      "templateVersion": "1.32.4",
-      "dateTimeStamp": "Mon, 11 Jul 2016 06:35:41 GMT"
+      "templateId": "ui5template.basicSAPUI5ApplicationProject",
+      "templateVersion": "1.32.0",
+      "dateTimeStamp": "Sun, 06 Nov 2016 13:03:31 GMT"
     },
     {
-      "templateId": "ui5template.basicSAPUI5ApplicationComponent",
-      "templateVersion": "1.4.0",
-      "dateTimeStamp": "Thu, 13 Oct 2016 21:38:54 GMT"
+      "templateId": "servicecatalog.connectivityComponent",
+      "templateVersion": "0.0.0",
+      "dateTimeStamp": "Tue, 13 Dec 2016 16:20:09 GMT"
     }
   ],
-  "mockpreview": {
-    "mockUri": "/sap/opu/odata/tobmas/WORKORDER_SRV/",
-    "metadataFilePath": "localService/metadata.xml",
-    "loadJSONFiles": false,
-    "loadCustomRequests": false,
-    "mockRequestsFilePath": ""
-  },
   "translation": {
     "translationDomain": "",
     "supportedLanguages": "en,fr,de",
@@ -25,13 +29,37 @@
     "defaultI18NPropertyFile": "i18n.properties",
     "resourceModelName": "i18n"
   },
-  "projectType": [
-    "com.sap.webide.hybrid.cordova",
-    "sap.watt.uitools.ide.fiori"
-  ],
+  "basevalidator": {
+    "services": {
+      "xml": "fioriXmlAnalysis",
+      "js": "fioriJsValidator"
+    }
+  },
+  "codeCheckingTriggers": {
+    "notifyBeforePush": true,
+    "notifyBeforePushLevel": "Error",
+    "blockPush": false,
+    "blockPushLevel": "Error"
+  },
   "hybrid": {
+    "hatVersion": "1.21.2",
+    "appNamespace": "com.twobm.mobileworkorder",
+    "backendDestination": "ID3",
+    "oDataConfigs": [
+      {
+        "hybridOdata": {
+          "name": "WORKORDER_SRV",
+          "serviceUrl": "https://mobile-a2b30ffcb.hana.ondemand.com:443/com.twobm.mobileworkorder/"
+        },
+        "originOdata": {
+          "name": "WORKORDER_SRV",
+          "serviceUrl": "/ID3/sap/opu/odata/tobmas/WORKORDER_SRV/"
+        },
+        "oDataType": "smpodata"
+      }
+    ],
     "appname": "Mobile Work Order",
-    "appid": "com.twobm.mwo",
+    "appid": "com.twobm.mobileworkorder",
     "appdesc": "Mobile Work Order by 2BM",
     "appversion": "0.1.16",
     "debugMode": true,
@@ -152,7 +180,7 @@
         }
       },
       "android": {
-        "selected": true,
+        "selected": false,
         "preferences": {
           "Fullscreen": false,
           "Orientation": "default",
@@ -289,7 +317,7 @@
           "cloudBuild": true
         },
         "statusbar": {
-          "selected": false,
+          "selected": true,
           "registry": "cordova-plugin-statusbar",
           "localBuild": false,
           "cloudBuild": true
@@ -326,7 +354,7 @@
           "cloudBuild": false
         },
         "push": {
-          "selected": true,
+          "selected": false,
           "registry": "kapsel-plugin-push",
           "localBuild": true,
           "cloudBuild": false
@@ -438,6 +466,13 @@
   },
   "hybrid.facadeconfig": {
     "bFacade": true
+  },
+  "mockpreview": {
+    "mockUri": "/ID3/sap/opu/odata/tobmas/WORKORDER_SRV",
+    "metadataFilePath": "",
+    "loadJSONFiles": false,
+    "loadCustomRequests": false,
+    "mockRequestsFilePath": ""
   },
   "hcpdeploy": {
     "account": "a2b30ffcb",
