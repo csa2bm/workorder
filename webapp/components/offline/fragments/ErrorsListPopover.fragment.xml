@@ -57,8 +57,9 @@
 						<content>
 							<VBox>
 								<Text text="{syncStatusModel>Message}"/>
-								<Text text="{i18n>errorListPopupDetailErrorOrder} {syncStatusModel>OrderNo}"/>
 								<Text text="{i18n>errorListPopupDetailErrorObject} {syncStatusModel>RequestObject}"/>
+								<Text text="{i18n>errorListPopupDetailErrorOrder} {syncStatusModel>ObjectID}"/>
+
 							</VBox>
 						</content>
 					</Panel>
