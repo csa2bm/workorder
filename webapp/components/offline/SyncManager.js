@@ -1,68 +1,75 @@
 sap.ui.define([
 	"sap/m/MessageBox",
-	"com/twobm/mobileworkorder/util/SyncStateHandler"
+	"com/twobm/mobileworkorder/components/offline/SyncStateHandler"
 ], function(MessageBox, SyncStateHandler) {
 	"use strict";
 	return {
 		needsSync: false,
 
-		start: function() {
-			document.addEventListener("online", this.handleConnected.bind(this), false);
-			document.addEventListener("offline", this.handleDisconnected.bind(this), false);
+		start: function(router) {
+			// Attach online / offline events
+			document.addEventListener("online", this.onConnected.bind(this), false);
+			document.addEventListener("offline", this.onDisconnected.bind(this), false);
+			// Attach to router so we can start sync when certain pages are shown
+			router.attachRoutePatternMatched(this.onRouteMatched, this);
+		},
 
-			var oEventBus = sap.ui.getCore().getEventBus();
-			oEventBus.subscribe("ShowErrorList", this.openErrorsView, this);
+		onRouteMatched: function(oEvent) {
+			// Get name of route
+			var sName = oEvent.getParameter("name");
 
-			/*sap.ui.getCore().getComponent("__component0").getModel().attachBatchRequestCompleted(function(event) {
-				//this.refreshSyncStatus();
-				if (event.getParameters().method === "POST") {
-
-				}
-			}.bind(this));
-
-			sap.ui.getCore().getComponent("__component0").getModel().attachRequestCompleted(function(event) {
-				//this.refreshSyncStatus();
-				if (event.getParameters().method === "POST") {
-					if (event.getParameters().response.statusCode === "201") {
-						this.needsSync = true;
-					}
-				}
-			}.bind(this));*/
-
+			// Are we navigating to a page that should trigger sync?
+			if (sName === "dashboard" || sName === "workOrderList" || sName === "notificationList") {
+				// Sync
+				this.syncIfNeeded();
+				// Update state that drives the sync UI
+				SyncStateHandler.handleSyncState();
+			}
 		},
 
 		syncIfNeeded: function() {
+			// Are there any pending changes?
 			sap.hybrid.getOfflineStore().getRequestQueueStatus(
 				function(status) {
 					if (!status.isEmpty) {
+						// Then sync
 						this.sync();
 					}
 				}.bind(this));
 		},
 
 		sync: function() {
-			this.setSyncIndicators(true);
+			// Only sync when there is a connection
 			if (sap.hybrid.SMP.isOnline) {
+			// Show sync indicator
+			this.setSyncIndicators(true);
+			// Start sync
 				sap.hybrid.synAppOfflineStore(function() {
+						// Refresh default model to display any changes to data
 						sap.ui.getCore().getComponent("__component0").getModel().refresh();
 
-						//Update syncStatusModel
+						// Set new date / time for last sync
 						var syncStatusModel = sap.ui.getCore().getComponent("__component0").getModel("syncStatusModel");
 						var d = new Date();
 						syncStatusModel.getData().LastSyncTime = d.toLocaleString();
-
 						syncStatusModel.refresh();
-
+						
+						// Hide sync indicator
 						this.setSyncIndicators(false);
 
-						//Update sync state indicator
+						//Update sync state 
 						SyncStateHandler.handleSyncState();
 					}.bind(this),
-					function() {
-						// Error during sync - most likely device is offline
-						alert("error during sync");
-						alert(sap.hybrid.SMP.isOnline);
-						this.setSyncIndicators(true);
+					function(error) {
+						// Error during sync - most likely the device went offline during a sync
+						if (sap.hybrid.SMP.isOnline)
+						{
+							// If this was not due to the device beeing offline, show the error
+							this.showMessage("Error during sync: " + error);
+						}
+
+						// Hide sync indicator
+						this.setSyncIndicators(false);
 					}.bind(this),
 					false);
 			}
@@ -75,26 +82,25 @@ sap.ui.define([
 				actions: [sap.m.MessageBox.Action.OK],
 				defaultAction: sap.m.MessageBox.Action.NO,
 				onClose: function(oAction, object) {
-
 				}
 			});
 		},
 
-		//---- Morten stuff
-
-		handleDisconnected: function() {
+		onDisconnected: function() {
+			// Set connection status on sync model
 			var syncStatusModel = sap.ui.getCore().getComponent("__component0").getModel("syncStatusModel");
 			syncStatusModel.getData().Online = false;
-
+			// Update sync state
 			SyncStateHandler.handleSyncState();
 		},
 
-		handleConnected: function() {
+		onConnected: function() {
+			// Set connection status on sync model
 			var syncStatusModel = sap.ui.getCore().getComponent("__component0").getModel("syncStatusModel");
 			syncStatusModel.getData().Online = true;
-
+			// Synchronize
 			this.sync();
-
+			// Update sync state
 			SyncStateHandler.handleSyncState();
 		},
 

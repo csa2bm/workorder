@@ -16,20 +16,25 @@ sap.ui.define([
 		 * In this method, the resource and application models are set and the router is initialized.
 		 */
 		init: function() {
+			// call the base component's init function
+			UIComponent.prototype.init.apply(this, arguments);
+
+			// set the device model
+			this.setModel(models.createDeviceModel(), "device");
+			// set sync model
+			this.setModel(models.createSyncModel(), "syncStatusModel");
+
+			if (sap.hybrid) {
+				// Configure status bar
 				if (window.cordova.require("cordova/platform").id === "ios") {
 					StatusBar.backgroundColorByName("white");
 					StatusBar.styleDefault();
 					StatusBar.overlaysWebView(false);
 				}
-				
-			// call the base component's init function
-			UIComponent.prototype.init.apply(this, arguments);
-			// set the device model
-			this.setModel(models.createDeviceModel(), "device");
-			// set sync model
-			this.setModel(models.createSyncModel(), "syncStatusModel");
-			// Strat the sync manager
-			SyncManager.start();
+
+				// Strat the sync manager
+				SyncManager.start(this.getRouter());
+			}
 			// Start the router
 			this.getRouter().initialize();
 		},

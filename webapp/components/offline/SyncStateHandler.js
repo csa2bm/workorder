@@ -1,5 +1,5 @@
 sap.ui.define([
-	"com/twobm/mobileworkorder/util/ErrorsHandler"
+	"com/twobm/mobileworkorder/components/offline/ErrorsHandler"
 ], function(errorsHandler) {
 	"use strict";
 
@@ -49,12 +49,7 @@ sap.ui.define([
 							} else {
 								syncStatusModel.getData().PendingLocalData = false;
 							}
-/*
-							that.setSyncIndicatorColor(syncStatusModel, devApp.isOnline);
-							that.setSyncStateIcon(syncStatusModel, devApp.isOnline);
-							that.setNetworkConnectionStatusText(syncStatusModel, devApp.isOnline);
-							that.setSyncStateText(syncStatusModel, devApp.isOnline);
-*/
+
 							that.setSyncIndicatorColor(syncStatusModel, sap.hybrid.SMP.isOnline);
 							that.setSyncStateIcon(syncStatusModel, sap.hybrid.SMP.isOnline);
 							that.setNetworkConnectionStatusText(syncStatusModel, sap.hybrid.SMP.isOnline);
@@ -63,7 +58,6 @@ sap.ui.define([
 							syncStatusModel.refresh(true);
 						},
 						function(e) {
-							//var x = 0;
 							syncStatusModel.refresh(true);
 						}
 					);

@@ -1,6 +1,6 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"com/twobm/mobileworkorder/util/SyncStateHandler",
+	"com/twobm/mobileworkorder/components/offline/SyncStateHandler",
 	"com/twobm/mobileworkorder/components/offline/SyncManager"
 ], function(Controller, SyncStateHandler, SyncManager) {
 	"use strict";

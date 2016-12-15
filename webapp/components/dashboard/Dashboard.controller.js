@@ -3,8 +3,9 @@ sap.ui.define([
 	"sap/ui/core/routing/History",
 	"com/twobm/mobileworkorder/util/Formatter",
 	"com/twobm/mobileworkorder/dev/devapp",
-	"com/twobm/mobileworkorder/util/SyncStateHandler"
-], function(Controller, History, Formatter, devApp, SyncStateHandler) {
+	"com/twobm/mobileworkorder/components/offline/SyncStateHandler",
+	"com/twobm/mobileworkorder/components/offline/SyncManager"
+], function(Controller, History, Formatter, devApp, SyncStateHandler, SyncManager) {
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.dashboard.Dashboard", {
@@ -19,15 +20,11 @@ sap.ui.define([
 
 			//Is it this page we have navigated to?
 			if (sName !== "dashboard") {
-				//We navigated to another page - unsubscribe to events for this page
-				//this.getEventBus().unsubscribe("OfflineStore", "Synced", this.syncCompleted, this);
-				//this.getEventBus().unsubscribe("DeviceOnline", this.deviceWentOnline, this);
-				//this.getEventBus().unsubscribe("DeviceOffline", this.deviceWentOffline, this);
 				this.getEventBus().unsubscribe("OfflineStore", "DBReinitialized", this.dbHasBeenReinitialized, this);
 				return;
 			}
-			
-			if(!this.DashBoardModel){
+
+			if (!this.DashBoardModel) {
 				this.DashBoardModel = new sap.ui.model.json.JSONModel({
 					notificationCount: "0",
 					orderCount: "0"
@@ -36,8 +33,6 @@ sap.ui.define([
 			}
 
 			this.getEventBus().subscribe("OfflineStore", "DBReinitialized", this.dbHasBeenReinitialized, this);
-
-			SyncStateHandler.handleSyncState();
 
 			this.setContentInTiles();
 		},
@@ -93,22 +88,22 @@ sap.ui.define([
 		},
 
 		onPressScanObject: function() {
-		//	var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			//	var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			//var oRouter = this.getRouter();
-		//	oRouter.navTo("objectTreeList", true);
+			//	oRouter.navTo("objectTreeList", true);
 			/*window.cordova.plugins.barcodeScanner.scan(
-				function(result) {
-					if (result.cancelled === "true") {
-						return;
-					}
-				},
-				function() {
-					sap.m.MessageToast.show("Scanning failed");
-				}
-		);*/
-		
+			 function(result) {
+			 if (result.cancelled === "true") {
+			 return;
+			 }
+			 },
+			 function() {
+			 sap.m.MessageToast.show("Scanning failed");
+			 }
+			 );*/
+
 			alert("Starting push registration..");
-		
+
 			sap.Push.registerForNotificationTypes(sap.Push.notificationType.badge | sap.Push.notificationType.sound | sap.Push.notificationType
 				.alert,
 				function(message) {
@@ -177,10 +172,11 @@ sap.ui.define([
 				this._oDialog.close();
 			}
 		},
-		
+
 		onSettings: function(oEvent) {
 			if (!this.settingsDialog) {
-				this.settingsDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.settings.fragments.Settings", sap.ui.controller("com.twobm.mobileworkorder.components.settings.Settings"));
+				this.settingsDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.settings.fragments.Settings", sap.ui.controller(
+					"com.twobm.mobileworkorder.components.settings.Settings"));
 			}
 			// toggle compact style
 			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);

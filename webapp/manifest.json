@@ -150,11 +150,6 @@
 					"viewName": "WorkOrderList",
 					"viewLevel": 2
 				},
-				"notFound": {
-					"viewPath": "com.twobm.mobileworkorder.components.app",
-					"viewName": "NotFound",
-					"transition": "show"
-				},
 				"workOrderDetails": {
 					"viewPath": "com.twobm.mobileworkorder.components.workOrderDetails",
 					"viewName": "WorkOrderDetails",

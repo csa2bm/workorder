@@ -1,6 +1,8 @@
 sap.ui.define([
-	"com/twobm/mobileworkorder/util/Controller"
-], function(Controller) {
+	"com/twobm/mobileworkorder/util/Controller",
+               "com/twobm/mobileworkorder/components/offline/SyncStateHandler"
+               
+], function(Controller, SyncStateHandler) {
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.offline.ErrorListControl", {
@@ -66,24 +68,24 @@ sap.ui.define([
 				onClose: function(oAction, object) {
 
 					if (oAction === sap.m.MessageBox.Action.YES) {
-						var deleteErrorsURL = deletePath.replace(that.getView().getModel().sServiceUrl, "");
+						var deleteErrorsURL = deletePath.replace(sap.ui.getCore().getComponent("__component0").getModel().sServiceUrl, "");
 
 						var request = {
 							headers: {},
-							requestUri: deleteErrorsURL,
+							requestUri: deletePath,
 							method: "DELETE"
 						};
 
 						OData.read(request,
 							function(data, response) {
+                                   SyncStateHandler.handleSyncState();
 								var oNavCon = sap.ui.core.Fragment.byId(this.idPrefix, "errorNav");
 								oNavCon.back();
-
-								//that.getEventBus().publish("UpdateSyncState");
-								that.getEventBus().publish("OfflineStore", "Synced");
-							}, this.errorCallBackShowInPopUp);
-					}
-				}
+                                   }.bind(this), function(error){
+                                   alert(error);
+                                   });
+                    }
+				}.bind(this)
 			});
 		},
 

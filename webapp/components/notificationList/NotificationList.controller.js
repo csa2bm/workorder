@@ -1,11 +1,11 @@
 sap.ui.define([
 	"com/twobm/mobileworkorder/util/Controller",
-	"com/twobm/mobileworkorder/dev/devapp",
 	"com/twobm/mobileworkorder/util/Globalization",
 	"com/twobm/mobileworkorder/util/Formatter",
 	"sap/ui/core/routing/History",
-		"com/twobm/mobileworkorder/util/SyncStateHandler"
-], function(Controller, devApp, Globalization, Formatter, History,SyncStateHandler) {
+	"com/twobm/mobileworkorder/components/offline/SyncStateHandler",
+	"com/twobm/mobileworkorder/components/offline/SyncManager"
+], function(Controller, Globalization, Formatter, History, SyncStateHandler, SyncManager) {
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.notificationList.NotificationList", {
@@ -18,26 +18,10 @@ sap.ui.define([
 
 			//Is it this page we have navigated to?
 			if (sName !== "notificationList") {
-				//We navigated to another page - unsubscribe to events for this page
-				this.getEventBus().unsubscribe("OfflineStore", "Synced", this.syncCompleted, this);
-				//this.getEventBus().unsubscribe("DeviceOnline", this.deviceWentOnline, this);
-				//this.getEventBus().unsubscribe("DeviceOffline", this.deviceWentOffline, this);
 				return;
 			}
 
-			self = this;
-
-			this.getEventBus().subscribe("OfflineStore", "Synced", this.syncCompleted, this);
-			//this.getEventBus().subscribe("DeviceOnline", this.deviceWentOnline, this);
-			//this.getEventBus().subscribe("DeviceOffline", this.deviceWentOffline, this);
-
-			SyncStateHandler.handleSyncState();
-			
 			this.setInitialSorting();
-
-
-			//flush and refresh data
-			//this.refresh();
 		},
 
 		onNavigationButtonPress: function(oEvent) {
@@ -112,159 +96,6 @@ sap.ui.define([
 			model.refresh();
 		},
 
-		// refresh: function() {
-		// 	//Subscribe to sync events
-		// 	if (window.sap_webide_FacadePreview) {
-		// 		this.subscribeToOnlineSyncEvents();
-		// 	} else {
-		// 		//When not in webide 
-		// 	}
-		// 	this.refreshData();
-		// },
-
-		//These event are event from the odata service
-		//In offline scenario we are not interesting in these
-		//as it is more important that the data has been synced to the backend
-		// subscribeToOnlineSyncEvents: function() {
-		// 	//subscribe to sync events
-		// 	self.getView().getModel().attachRequestCompleted(self.syncCompleted);
-		// 	self.getView().getModel().attachRequestFailed(self.syncFailed);
-		// },
-
-		// unSubscribeToOnlineSyncEvents: function() {
-		// 	//Unsubscribe to sync events
-		// 	self.getView().getModel().detachRequestCompleted(self.syncCompleted);
-		// 	self.getView().getModel().detachRequestFailed(self.syncFailed);
-		// },
-
-		syncCompleted: function() {
-			// if (window.sap_webide_FacadePreview) {
-			// 	self.unSubscribeToOnlineSyncEvents();
-
-			// 	//Update syncStatusModel
-			// 	var syncStatusModel = self.getView().getModel("syncStatusModel");
-			// 	var d = new Date();
-			// 	syncStatusModel.getData().LastSyncTime = d.toLocaleString();
-			// 	syncStatusModel.getData().Online = true; //always online in webide
-
-			// 	syncStatusModel.refresh();
-			// }
-			
-			// self.setSyncIndicators(false);
-
-			//Update items in table
-			self.getView().byId("notificationTableId").getBinding("items").refresh(true);
-		},
-
-		// syncFailed: function() {
-		// 	if (window.sap_webide_FacadePreview) {
-		// 		self.unSubscribeToOnlineSyncEvents();
-		// 	} else {
-		// 		//sap.m.MessageToast.show("Synchronization with server failed");
-		// 	}
-
-		// 	self.setSyncIndicators(false);
-		// },
-
-		/**
-		 * refreshing offline store data
-		 */
-		// refreshData: function() {
-		// 	var model = this.getView().getModel();
-
-		// 	if (model.hasPendingChanges() || model.newEntryContext) {
-		// 		if (devApp.isLoaded) {
-		// 			if (devApp.isOnline) {
-		// 				//Show sync busy indicator
-		// 				self.setSyncIndicators(true);
-
-		// 				self.flushAndRefresh();
-		// 			} else {
-		// 				model.refresh();
-		// 			}
-		// 		} else {
-		// 			model.refresh();
-		// 		}
-		// 	} else {
-		// 		if (devApp.isLoaded) {
-		// 			if (devApp.isOnline) {
-		// 				self.setSyncIndicators(true);
-
-		// 				self.flushAndRefresh();
-		// 			} else {
-		// 				model.refresh();
-		// 			}
-		// 		} else {
-		// 			model.refresh();
-		// 		}
-		// 	}
-		// },
-
-		// setSyncIndicators: function(isSynching) {
-		// 	var syncStatusModel = this.getView().getModel("syncStatusModel");
-		// 	syncStatusModel.getData().IsSynching = isSynching;
-		// 	syncStatusModel.refresh();
-		// },
-
-		// deviceWentOnline: function() {
-		// 	self.setSyncIndicators(true);
-
-		// 	self.flushAndRefresh();
-		// },
-
-		// deviceWentOffline: function() {
-		// 	self.setSyncIndicators(false);
-		// },
-
-		// flushAndRefresh: function() {
-		// 	if (devApp.isOnline) {
-		// 		//ask refreshing store after flush
-		// 		if (devApp.devLogon) {
-		// 			//console.log("refreshing offline store");
-		// 			devApp.devLogon.flushAppOfflineStore();
-		// 		}
-		// 	} else {
-		// 		//Update data in views
-		// 		this.getView().getModel().refresh();
-		// 	}
-		// },
-
-		// showSyncQuickview: function(oEvent) {
-		// 	this.createPopover();
-
-		// 	// delay because addDependent will do a async rerendering and the actionSheet will immediately close without it.
-		// 	var oButton = oEvent.getSource();
-		// 	jQuery.sap.delayedCall(0, this, function() {
-		// 		this._syncQuickView.openBy(oButton);
-		// 	});
-		// },
-
-		// createPopover: function() {
-		// 	if (!this._syncQuickView) {
-		// 		this._syncQuickView = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.offline.fragments.SyncQuickView", this);
-		// 		this.getView().addDependent(this._syncQuickView);
-		// 	}
-		// },
-
-		// synchronizeData: function() {
-		// 	if (this._syncQuickView) {
-		// 		this._syncQuickView.close();
-		// 	}
-
-		// 	if (window.sap_webide_FacadePreview || devApp.isOnline) {
-
-		// 		if (window.sap_webide_FacadePreview) {
-		// 			this.subscribeToOnlineSyncEvents();
-		// 		}
-
-		// 		this.setSyncIndicators(true);
-
-		// 		this.flushAndRefresh();
-		// 	} else {
-		// 		sap.m.MessageToast.show("Device is offline");
-		// 	}
-		// },
-
 		closeSyncPopup: function() {
 			if (this._syncQuickView) {
 				this._syncQuickView.close();
@@ -275,7 +106,7 @@ sap.ui.define([
 			var oRouter = this.getRouter();
 			oRouter.navTo("notificationCreate", true);
 		},
-		
+
 		priorityValueConvert: function(value) {
 			switch (value) {
 				case "1":
@@ -307,10 +138,10 @@ sap.ui.define([
 				this._errorsView.close();
 			}
 		},
-		
+
 		isInErrorStateNotification: function(errorsArray, notificationId) {
 			console.log("isInErrorStateNotification");
-			
+
 			if ($.inArray(notificationId, errorsArray) >= 0) {
 				return true;
 			} else {

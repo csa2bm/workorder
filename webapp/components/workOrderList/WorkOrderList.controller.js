@@ -1,11 +1,10 @@
 sap.ui.define([
 	"com/twobm/mobileworkorder/util/Controller",
-	"com/twobm/mobileworkorder/dev/devapp",
 	"com/twobm/mobileworkorder/util/Globalization",
 	"sap/ui/core/routing/History",
-	"com/twobm/mobileworkorder/util/SyncStateHandler",
+	"com/twobm/mobileworkorder/components/offline/SyncStateHandler",
 	"com/twobm/mobileworkorder/components/offline/SyncManager"
-], function(Controller, devApp, Globalization, History, SyncStateHandler, SyncManager) {
+], function(Controller, Globalization, History, SyncStateHandler, SyncManager) {
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.workOrderList.WorkOrderList", {
@@ -18,19 +17,8 @@ sap.ui.define([
 
 			//Is it this page we have navigated to?
 			if (sName !== "workOrderList") {
-				//We navigated to another page - unsubscribe to events for this page
-				//this.getEventBus().unsubscribe("OfflineStore", "Synced", this.syncCompleted, this);
-				//this.getEventBus().unsubscribe("DeviceOnline", this.deviceWentOnline, this);
-				//this.getEventBus().unsubscribe("DeviceOffline", this.deviceWentOffline, this);
 				return;
 			}
-
-			//self = this;
-
-			//this.getEventBus().subscribe("OfflineStore", "Synced", this.syncCompleted, this);
-
-			SyncManager.syncIfNeeded();
-			SyncStateHandler.handleSyncState();
 		},
 
 		onNavigationButtonPress: function(oEvent) {
@@ -104,87 +92,7 @@ sap.ui.define([
 			var model = this.getView().getModel();
 			model.refresh();
 		},
-
-		// refresh: function() {
-		// 	//Subscribe to sync events
-		// 	if (window.sap_webide_FacadePreview) {
-		// 		this.subscribeToOnlineSyncEvents();
-		// 	} else {
-		// 		//When not in webide 
-		// 	}
-		// 	this.refreshData();
-		// },
-
-		//These event are event from the odata service
-		//In offline scenario we are not interesting in these
-		//as it is more important that the data has been synced to the backend
-		// subscribeToOnlineSyncEvents: function() {
-		// 	//subscribe to sync events
-		// 	self.getView().getModel().attachRequestCompleted(self.syncCompleted);
-		// 	self.getView().getModel().attachRequestFailed(self.syncFailed);
-		// },
-
-		// unSubscribeToOnlineSyncEvents: function() {
-		// 	//Unsubscribe to sync events
-		// 	self.getView().getModel().detachRequestCompleted(self.syncCompleted);
-		// 	self.getView().getModel().detachRequestFailed(self.syncFailed);
-		// },
-
-		// syncCompleted: function() {
-		// 	// if (window.sap_webide_FacadePreview) {
-		// 	// 	self.unSubscribeToOnlineSyncEvents();
-		// 	// }
-
-		// 	//self.setSyncIndicators(false);
-
-		// 	//Update items in table
-		// 	self.getView().byId("workOrderTableId").getBinding("items").refresh(true);
-		// },
-
-		// syncFailed: function() {
-		// 	if (window.sap_webide_FacadePreview) {
-		// 		self.unSubscribeToOnlineSyncEvents();
-		// 	} else {
-		// 		//sap.m.MessageToast.show("Synchronization with server failed");
-		// 	}
-
-		// 	self.setSyncIndicators(false);
-		// },
-
-		/**
-		 * refreshing offline store data
-		 */
-		// refreshData: function() {
-		// 	var model = this.getView().getModel();
-
-		// 	if (model.hasPendingChanges() || model.newEntryContext) {
-		// 		if (devApp.isLoaded) {
-		// 			if (devApp.isOnline) {
-		// 				//Show sync busy indicator
-		// 				self.setSyncIndicators(true);
-
-		// 				self.flushAndRefresh();
-		// 			} else {
-		// 				model.refresh();
-		// 			}
-		// 		} else {
-		// 			model.refresh();
-		// 		}
-		// 	} else {
-		// 		if (devApp.isLoaded) {
-		// 			if (devApp.isOnline) {
-		// 				self.setSyncIndicators(true);
-
-		// 				self.flushAndRefresh();
-		// 			} else {
-		// 				model.refresh();
-		// 			}
-		// 		} else {
-		// 			model.refresh();
-		// 		}
-		// 	}
-		// },
-
+		
 		getOrderStatusIcon: function(orderStatus) {
 
 			if (orderStatus === this.getI18nText("orderStatusNotStarted")) {
@@ -238,7 +146,7 @@ sap.ui.define([
 
 		isInErrorStateIconWorkOrder: function(errorsArray, orderId) {
 			if ($.inArray(orderId, errorsArray) >= 0) {
-				return "sap-icon://message-error";
+				return "sap-icon://error";
 			} else {
 				return "sap-icon://slim-arrow-right";
 			}
