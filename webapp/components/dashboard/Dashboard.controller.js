@@ -2,10 +2,9 @@ sap.ui.define([
 	"com/twobm/mobileworkorder/util/Controller",
 	"sap/ui/core/routing/History",
 	"com/twobm/mobileworkorder/util/Formatter",
-	"com/twobm/mobileworkorder/dev/devapp",
 	"com/twobm/mobileworkorder/components/offline/SyncStateHandler",
 	"com/twobm/mobileworkorder/components/offline/SyncManager"
-], function(Controller, History, Formatter, devApp, SyncStateHandler, SyncManager) {
+], function(Controller, History, Formatter, SyncStateHandler, SyncManager) {
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.dashboard.Dashboard", {

@@ -1,6 +1,6 @@
 sap.ui.define([
-	"com/twobm/mobileworkorder/dev/devapp"
-], function(devApp) {
+
+], function() {
 	"use strict";
 
 	return {
