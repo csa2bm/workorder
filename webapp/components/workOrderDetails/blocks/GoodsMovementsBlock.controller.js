@@ -241,6 +241,15 @@ sap.ui.define([
 					if (result.cancelled === "true") {
 						return;
 					}
+					
+					var barcodeScanned = self.getMaterialNrFromBarcode(result.text);
+
+					var materialDetailsModel = self.getView().getModel("MaterialDetailsModel");
+					materialDetailsModel.getData().OrderNumber = orderNr; 
+					materialDetailsModel.refresh();
+
+					self.searchForMaterial(barcodeScanned);
+					
 				},
 				function() {
 					sap.m.MessageToast.show("Scanning failed");
@@ -249,8 +258,8 @@ sap.ui.define([
 		},
 
 		getMaterialNrFromBarcode: function(barcode) {
-			//Remove leading 99
-			var barcodeStripped = barcode.substring(2);
+			//Remove leading 99 - removed
+			var barcodeStripped = barcode; //.substring(2);
 
 			//Remove leading zeros
 			while (barcodeStripped.charAt(0) === '0') {
@@ -538,6 +547,8 @@ sap.ui.define([
 						that._oPopover.open();
 					} else {
 						//Material not found
+						sap.m.MessageToast.show("Material number not found");
+						
 					}
 				},
 				error: this.errorCallBackShowInPopUp,
