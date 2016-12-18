@@ -3,11 +3,11 @@
 	xmlns:mic="sap.suite.ui.microchart" height="100%">
 	<App class="dashboardClass" id="mobileWorkOrderApp">
 		<Page title="{i18n>Dashboard-Title}">
-			<headerContent>
+			<!--<headerContent>
 				<l:HorizontalLayout>
 					<core:Icon width="3em" height="3em" noTabStop="true" press="onSettings" src="sap-icon://action-settings"/>
 				</l:HorizontalLayout>
-			</headerContent>
+			</headerContent>-->
 			<content>
 				<FlexBox alignItems="Left" justifyContent="Left">
 					<items>
