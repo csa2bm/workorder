@@ -41,3 +41,8 @@
 	color: #666666 !important;
 	line-height: 1.375rem !important;
 }
+
+.customProfileTile {
+	width:22.5rem !important;
+	outline: 0 !important;
+}

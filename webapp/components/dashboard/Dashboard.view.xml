@@ -9,10 +9,10 @@
 				</l:HorizontalLayout>
 			</headerContent>-->
 			<content>
-				<FlexBox alignItems="Left" justifyContent="Left">
+		<FlexBox alignItems="Left" justifyContent="Left">
 					<items>
 					
-						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginEnd sapUiTinyMarginTop tileLayout" visible="{device>/isNotPhone}"
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" visible="{device>/isNotPhone}"
 							backgroundImage="images/2bmTileLogo7.png" frameType="TwoByOne" press="press">
 							<tileContent>
 								<TileContent footer="" class="sapUiSmallMargin">
@@ -22,7 +22,7 @@
 								</TileContent>
 							</tileContent>
 						</GenericTile>
-							<CustomTile class="sapUiTinyMarginTop TwoByOne sapMGT sapMPointer">
+							<CustomTile class="sapUiTinyMarginTop TwoByOne sapMGT sapMPointer sapUiTinyMarginBegin customProfileTile">
 							<HBox alignItems="Start" justifyContent="SpaceBetween" class="sapUiSmallMarginBegin sapUiSmallMarginTop sapUiSmallMarginEnd">
 								<items>
 									<VBox>
@@ -31,7 +31,7 @@
 											<Text text="{DashBoardModel>/Position}" class="profileSubTitle"/>
 										</items>
 									</VBox>
-									<VBox alignItems="End" justifyContent="Center" height="190px">
+									<VBox alignItems="End" justifyContent="Center" height="195px">
 										<items>
 											<Image src="{DashBoardModel>/ImagePath}" class="circular sapUiSmallMarginEnd"></Image>
 										</items>
@@ -39,7 +39,7 @@
 								</items>
 							</HBox>
 						</CustomTile>
-					</items>
+			</items>
 				</FlexBox>
 				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-WorkOrdersTile-Header}" subheader=""
 					size="S" frameType="OneByOne" press="onPressOtherWorkorders">
