@@ -7,7 +7,7 @@
 				<ObjectPageHeader headerDesign="Dark" objectTitle="{path:'Equidescr'}" objectSubtitle="{path:'Equipment'}"/>
 			</headerTitle>
 			<sections>
-				<ObjectPageSection>
+			<!---	<ObjectPageSection>
 					<subSections>
 						<ObjectPageSubSection id="objectDetails-GeneralSubsection" title="{i18n>ObjectDetails-GeneralSubSection}">
 							<blocks>
@@ -15,7 +15,7 @@
 							</blocks>
 						</ObjectPageSubSection>
 					</subSections>
-				</ObjectPageSection>
+				</ObjectPageSection>-->
 				<ObjectPageSection>
 					<subSections>
 						<ObjectPageSubSection id="objectDetails-MeasuringPointsSubsection" title="{i18n>ObjectDetails-MeasuringPointsSubSection}">

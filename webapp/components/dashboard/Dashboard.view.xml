@@ -22,7 +22,7 @@
 							</tileContent>
 						</GenericTile>
 						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginEnd sapUiTinyMarginTop tileLayout" visible="{device>/isNotPhone}"
-							backgroundImage="../webapp/localService/mockData/2bmTileLogo7.png" frameType="TwoByOne" press="press">
+							backgroundImage="images/2bmTileLogo7.png" frameType="TwoByOne" press="press">
 							<tileContent>
 								<TileContent footer="" class="sapUiSmallMargin">
 									<content>
