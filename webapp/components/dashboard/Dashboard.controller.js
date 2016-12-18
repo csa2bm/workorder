@@ -197,6 +197,21 @@ sap.ui.define([
 			this.getView().getModel().refresh(true);
 
 			this.getEventBus().publish("UpdateSyncState");
+		},
+		
+		isOnline: function(){
+			if (sap.hybrid)
+			{
+				return false;
+			}
+			
+			return true;
+		},
+		
+		onRefresh: function()
+		{
+			this.setContentInTiles();
+			this.getView().getModel().refresh();
 		}
 	});
 });

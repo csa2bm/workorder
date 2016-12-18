@@ -147,6 +147,20 @@ sap.ui.define([
 			} else {
 				return false;
 			}
+		},
+		
+		isOnline: function(){
+			if (sap.hybrid)
+			{
+				return false;
+			}
+			
+			return true;
+		},
+		
+		onRefresh: function()
+		{
+			this.getView().getModel().refresh();
 		}
 	});
 });

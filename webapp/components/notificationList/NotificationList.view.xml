@@ -54,6 +54,12 @@
 					<content>
 						<mvc:XMLView viewName="com.twobm.mobileworkorder.components.offline.Status"/>
 						<ToolbarSpacer></ToolbarSpacer>
+								<Button id="goToNotificationButton" icon="sap-icon://refresh"
+						press="onRefresh" visible="{path:'',formatter:'.isOnline'}">
+						<layoutData>
+							<OverflowToolbarLayoutData priority="NeverOverflow"/>
+						</layoutData>
+						</Button>
 						<Button id="notificationCreateButton" type="Emphasized" ariaDescribedBy="acceptButtonDescription genericButtonDescription"
 							press="createNewNotification" text="{i18n>NotificationList-CreateButton}">
 							<layoutData>
