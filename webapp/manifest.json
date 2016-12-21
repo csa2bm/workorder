@@ -43,7 +43,9 @@
 			"tablet": true,
 			"phone": true
 		},
-		"supportedThemes": ["sap_belize_plus"]
+		"supportedThemes": [
+			"sap_belize_plus"
+		]
 	},
 	"sap.ui5": {
 		"_version": "1.1.0",
@@ -93,52 +95,71 @@
 					"target": "notFound"
 				}
 			},
-			"routes": [{
-				"pattern": "",
-				"name": "dashboard",
-				"target": "dashboard"
-			}, {
-				"pattern": "workOrderList",
-				"name": "workOrderList",
-				"target": "workOrderList"
-			}, {
-				"pattern": "workOrderDetails/{workOrderContext}",
-				"name": "workOrderDetails",
-				"target": "workOrderDetails"
-			}, {
-				"pattern": "operationDetails/{operationContext}",
-				"name": "operationDetails",
-				"target": "operationDetails"
-			}, {
-				"pattern": "objectDetails/{objectContext}",
-				"name": "objectDetails",
-				"target": "objectDetails"
-			}, {
-				"pattern": "measurementPointDetails/{measurementContext}",
-				"name": "measurementPointDetails",
-				"target": "measurementPointDetails"
-			}, {
-				"pattern": "notificationList",
-				"name": "notificationList",
-				"greedy": false,
-				"target": ["notificationList"]
-			}, {
-				"pattern": "notificationDetails/{notificationContext}",
-				"name": "notificationDetails",
-				"greedy": false,
-				"target": ["notificationDetails"]
-			}, {
-				"pattern": "notificationCreate/:equipmentNo:/:functionalLoc:/:argAvailable:",
-				"name": "notificationCreate",
-				"greedy": false,
-				"target": ["notificationCreate"]
-			}, {
-				"name": "objectTreeList",
-				"pattern": "objectTreeList",
-				"titleTarget": "",
-				"greedy": false,
-				"target": ["objectTreeList"]
-			}],
+			"routes": [
+				{
+					"pattern": "",
+					"name": "dashboard",
+					"target": "dashboard"
+				},
+				{
+					"pattern": "workOrderList",
+					"name": "workOrderList",
+					"target": "workOrderList"
+				},
+				{
+					"pattern": "workOrderDetails/{workOrderContext}",
+					"name": "workOrderDetails",
+					"target": "workOrderDetails"
+				},
+				{
+					"pattern": "operationDetails/{operationContext}",
+					"name": "operationDetails",
+					"target": "operationDetails"
+				},
+				{
+					"pattern": "objectDetails/{objectContext}",
+					"name": "objectDetails",
+					"target": "objectDetails"
+				},
+				{
+					"pattern": "measurementPointDetails/{measurementContext}",
+					"name": "measurementPointDetails",
+					"target": "measurementPointDetails"
+				},
+				{
+					"pattern": "notificationList",
+					"name": "notificationList",
+					"greedy": false,
+					"target": [
+						"notificationList"
+					]
+				},
+				{
+					"pattern": "notificationDetails/{notificationContext}",
+					"name": "notificationDetails",
+					"greedy": false,
+					"target": [
+						"notificationDetails"
+					]
+				},
+				{
+					"pattern": "notificationCreate/:equipmentNo:/:functionalLoc:/:argAvailable:",
+					"name": "notificationCreate",
+					"greedy": false,
+					"target": [
+						"notificationCreate"
+					]
+				},
+				{
+					"name": "objectTreeList",
+					"pattern": "objectTreeList",
+					"titleTarget": "",
+					"greedy": false,
+					"target": [
+						"objectTreeList"
+					]
+				}
+			],
 			"targets": {
 				"dashboard": {
 					"viewPath": "com.twobm.mobileworkorder.components.dashboard",
@@ -210,7 +231,7 @@
 		"definingRequests": {
 			"OrderSet": {
 				"dataSource": "WORKORDER_SRV",
-				"path": "/OrderSet?$expand=OrderOperation,OrderComponent,OrderObject,OrderAttachments,OrderGoodsMovements,OrderTimeRegistration,OrderMaterialSummary,OrderEquipments,OrderMeasPoint"
+				"path": "/OrderSet"
 			},
 			"OperationsSet": {
 				"dataSource": "WORKORDER_SRV",
@@ -257,15 +278,54 @@
 			},
 			"NotificationsSet": {
 				"dataSource": "WORKORDER_SRV",
-				"path": "/NotificationsSet?$expand=NotifAttachmentsSet,NotifActivitiesSet,NotifTasksSet"
+				"path": "/NotificationsSet"
+			},
+			"CodeCatalogSet": {
+				"dataSource": "WORKORDER_SRV",
+				"path": "/CodeCatalogSet"
 			},
 			"UserDetailsSet": {
 				"dataSource": "WORKORDER_SRV",
-				"path": "/UserDetailsSet"
+				"path": {
+					"url": "/UserDetailsSet",
+					"retrieveStreams": true
+				}
+			},
+			"HistoricNotifSet": {
+				"dataSource": "WORKORDER_SRV",
+				"path": "/HistoricNotifSet"
+			},
+			"HistoricOrdersSet": {
+				"dataSource": "WORKORDER_SRV",
+				"path": "/HistoricOrdersSet"
+			},
+			"MeasurementPointsSet": {
+				"dataSource": "WORKORDER_SRV",
+				"path": "/MeasurementPointsSet"
+			},
+			"NotifActivitiesSet": {
+				"dataSource": "WORKORDER_SRV",
+				"path": "/NotifActivitiesSet"
+			},
+			"NotifAttachmentsSet": {
+				"dataSource": "WORKORDER_SRV",
+				"path": "/NotifAttachmentsSet"
+			},
+			"NotifCausesSet": {
+				"dataSource": "WORKORDER_SRV",
+				"path": "/NotifCausesSet"
+			},
+			"NotifItemsSet": {
+				"dataSource": "WORKORDER_SRV",
+				"path": "/NotifItemsSet"
+			},
+			"NotifTasksSet": {
+				"dataSource": "WORKORDER_SRV",
+				"path": "/NotifTasksSet"
 			},
 			"CodeGroupsSet": {
 				"dataSource": "WORKORDER_SRV",
-				"path": "/CodeGroupsSet?$expand=CodeCatalogSet"
+				"path": "/CodeGroupsSet"
 			}
 		}
 	},

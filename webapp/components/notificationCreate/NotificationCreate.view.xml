@@ -4,6 +4,24 @@
 	<Page id="createPage" showNavButton="true" navButtonPress="goBack" title="{i18n>NotificationCreate-Title}"
 		class="sapUiFioriObjectPage appBackgroundColor">
 		<content>
+			
+			<!-- General data -->
+			<layout:form.SimpleForm minWidth="1024" title="{i18n>NotificationCreate-General}" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
+				labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
+				<layout:content>
+					<Label text="{i18n>NotificationCreate-Description}"></Label>
+					<Input id="shortDescription" value="{ShortText}" valueHelpRequest="showAccountF4" valueHelpOnly="false" showValueHelp="false"></Input>
+					<Label text="{i18n>NotificationCreate-Notes}"></Label>
+					<TextArea id="remark" liveChange="onContactInputFieldChanged" value="{LongText}" suggestionItemSelected="onContactSuggestItemSelected"
+						valueHelpRequest="showContactF4" valueHelpOnly="false" showValueHelp="true"></TextArea>
+					<Label text="{i18n>NotificationCreate-Priority}"></Label>
+					<Select id="priority" selectedKey="{Priority}" items="{NotificationDropdownsModel>/priority}" class="pos_input">
+						<items>
+							<core:Item key="{NotificationDropdownsModel>priorityKey}" text="{NotificationDropdownsModel>priorityValue}"></core:Item>
+						</items>
+					</Select>
+				</layout:content>
+			</layout:form.SimpleForm>
 				<!-- Object -->
 			<layout:form.SimpleForm minWidth="1024" title="{i18n>NotificationCreate-Location}" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
 				labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
@@ -22,23 +40,6 @@
 							<core:Item text="{Equipment}"/>
 						</suggestionItems>
 					</Input>
-				</layout:content>
-			</layout:form.SimpleForm>
-			<!-- General data -->
-			<layout:form.SimpleForm minWidth="1024" title="{i18n>NotificationCreate-General}" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
-				labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
-				<layout:content>
-					<Label text="{i18n>NotificationCreate-Description}"></Label>
-					<Input id="shortDescription" value="{ShortText}" valueHelpRequest="showAccountF4" valueHelpOnly="false" showValueHelp="false"></Input>
-					<Label text="{i18n>NotificationCreate-Notes}"></Label>
-					<TextArea id="remark" liveChange="onContactInputFieldChanged" value="{LongText}" suggestionItemSelected="onContactSuggestItemSelected"
-						valueHelpRequest="showContactF4" valueHelpOnly="false" showValueHelp="true"></TextArea>
-					<Label text="{i18n>NotificationCreate-Priority}"></Label>
-					<Select id="priority" selectedKey="{Priority}" items="{NotificationDropdownsModel>/priority}" class="pos_input">
-						<items>
-							<core:Item key="{NotificationDropdownsModel>priorityKey}" text="{NotificationDropdownsModel>priorityValue}"></core:Item>
-						</items>
-					</Select>
 				</layout:content>
 			</layout:form.SimpleForm>
 		</content>
