@@ -133,7 +133,7 @@ sap.ui.define([
 			var parameters = {
 				success: function(oData, response) {
 					oData.results.some(function myFunction(item) {
-						if (item['@com.sap.vocabularies.Offline.v1.islocal'] && item.Matnr === materialDetailsModel.getData().SearchResult.MaterialNumber) {
+						if (item['@com.sap.vocabularies.Offline.v1.islocal'] && item.Matnr === materialDetailsModel.getData().SelectedMaterial.MaterialNumber) {
 
 							materialDetailsModel.getData().LocalDbObject = true;
 							materialDetailsModel.getData().LocalDbObjectUri = item.__metadata.uri.replace(that.getView().getModel().sServiceUrl, "");
@@ -144,8 +144,8 @@ sap.ui.define([
 							return true; //break the loop
 						}
 					});
-				},
-				error: this.errorCallBackShowInPopUp
+				}
+				//,error: this.errorCallBackShowInPopUp
 			};
 
 			var sPath4 = "/OrderSet(Orderid='" + materialDetailsModel.getData().OrderNumber + "')/OrderMaterialSummary?$filter=sap.islocal()";
@@ -241,6 +241,12 @@ sap.ui.define([
 					if (result.cancelled === "true") {
 						return;
 					}
+					
+					var materialDetailsModel = self.getView().getModel("MaterialDetailsModel");
+					materialDetailsModel.getData().OrderNumber = orderNr;
+					materialDetailsModel.refresh();
+					
+					self.searchForMaterial(result.text);
 				},
 				function() {
 					sap.m.MessageToast.show("Scanning failed");
@@ -321,7 +327,7 @@ sap.ui.define([
 				Orderid: ordernr,
 				Matnr: matnr,
 				Quantity: valueToIssue.toString(),
-				Type: this.getMaterialDocumentStateText(returnValue),
+				Type: "", //this.getMaterialDocumentStateText(returnValue),
 				Description: description,
 				Unit: unit,
 				Return: returnValue
@@ -439,7 +445,7 @@ sap.ui.define([
 				//Material has not previously been issued on the order
 				//Create the summary
 				data = {
-					OrderNo: ordernr,
+					Orderid: ordernr,
 					Quantity: valueToIssue.toString(),
 					Description: description,
 					Unit: unit,
