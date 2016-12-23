@@ -1,19 +1,19 @@
 sap.ui.define([
 	"com/twobm/mobileworkorder/util/Controller",
-               "com/twobm/mobileworkorder/components/offline/SyncStateHandler"
-               
+	"com/twobm/mobileworkorder/components/offline/SyncStateHandler"
+
 ], function(Controller, SyncStateHandler) {
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.offline.ErrorListControl", {
-		
-		dialog:  null,
-        idPrefix: null,
+
+		dialog: null,
+		idPrefix: null,
 
 		closeErrorListPopupButton: function(oEvent) {
 			this.dialog.close();
 		},
-		
+
 		closeErrorListDetailPopupButton: function() {
 			//Go back.
 			var oNavCon = sap.ui.core.Fragment.byId(this.idPrefix, "errorNav");
@@ -68,7 +68,8 @@ sap.ui.define([
 				onClose: function(oAction, object) {
 
 					if (oAction === sap.m.MessageBox.Action.YES) {
-						var deleteErrorsURL = deletePath.replace(sap.ui.getCore().getComponent("__component0").getModel().sServiceUrl, "");
+
+						//var deleteErrorsURL = deletePath.replace(sap.ui.getCore().getComponent("__component0").getModel().sServiceUrl, "");
 
 						var request = {
 							headers: {},
@@ -76,15 +77,16 @@ sap.ui.define([
 							method: "DELETE"
 						};
 
-						OData.read(request,
+						OData.request(request,
 							function(data, response) {
-                                   SyncStateHandler.handleSyncState();
+								SyncStateHandler.handleSyncState();
 								var oNavCon = sap.ui.core.Fragment.byId(this.idPrefix, "errorNav");
 								oNavCon.back();
-                                   }.bind(this), function(error){
-                                   alert(error);
-                                   });
-                    }
+							}.bind(this),
+							function(error) {
+								that.errorCallBackShowInPopUp();
+							});
+					}
 				}.bind(this)
 			});
 		},

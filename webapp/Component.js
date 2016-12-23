@@ -23,6 +23,8 @@ sap.ui.define([
 			this.setModel(models.createDeviceModel(), "device");
 			// set sync model
 			this.setModel(models.createSyncModel(), "syncStatusModel");
+			// set settings model
+			this.setModel(models.createSettingsModel(), "settingsModel");
 
 			if (sap.hybrid) {
 				// Configure status bar
@@ -31,10 +33,16 @@ sap.ui.define([
 					StatusBar.styleDefault();
 					StatusBar.overlaysWebView(false);
 				}
+				
+				//Get appversion and app name
+				
 
 				// Strat the sync manager
 				SyncManager.start(this.getRouter());
 			}
+			
+			
+			
 			// Start the router
 			this.getRouter().initialize();
 		},

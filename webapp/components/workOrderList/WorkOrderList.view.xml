@@ -35,7 +35,6 @@
 								<Label text="{i18n>WorkOrderList-EquipmentHeader}"/>
 							</header>
 						</Column>
-						<Column demandPopin="false" id="errorColumn" width="1rem"/>
 						<Column demandPopin="false" id="navigationColumn" width="0.5rem"/>
 					</columns>
 					<items>
@@ -47,8 +46,6 @@
 								<ObjectIdentifier text="{Orderid}" title="{ShortText}"/>
 								<ObjectIdentifier text="{FunctLoc}" title="{Funcldescr}"/>
 								<ObjectIdentifier text="{Equipment}" title="{Equidescr}"/>
-								<core:Icon 
-								color="red" useIconTooltip="false" size="1.5rem" src="sap-icon://error" visible="false"></core:Icon>
 								<core:Icon class="sapUiTinyMarginTop" src="{parts:[{path:'syncStatusModel>/OrderErrors'},{path:'Orderid'}],formatter:'.isInErrorStateIconWorkOrder'}" color="{parts:[{path:'syncStatusModel>/OrderErrors'},{path:'Orderid'}],formatter:'.isInErrorStateColorWorkOrder'}"/>
 							</cells>
 						</ColumnListItem>

@@ -12,7 +12,7 @@ sap.ui.define([
 			return oModel;
 		},
 
-		createSyncModel: function(){
+		createSyncModel: function() {
 			var oModel = new JSONModel({
 				SyncColor: "",
 				LastSyncTime: "",
@@ -23,11 +23,22 @@ sap.ui.define([
 				Errors: [],
 				OrderErrors: [],
 				NoticationErrors: [],
-				ErrorListContextObject : "", //The object to limit the errors shown in the error list. For instance Order
-				ErrorListContextID : "" // The object ID to limit the errors shown in the error list. For instance Order ID
+				ErrorListContextObject: "", //The object to limit the errors shown in the error list. For instance Order
+				ErrorListContextID: "" // The object ID to limit the errors shown in the error list. For instance Order ID
 			});
-			
+
 			oModel.setDefaultBindingMode("TwoWay");
+			return oModel;
+		},
+
+		createSettingsModel: function() {
+			var oModel = new JSONModel({
+				AppVersion: "",
+				AppName: "",
+				LoggedInUser: ""
+			});
+
+			oModel.setDefaultBindingMode("OneWay");
 			return oModel;
 		}
 
