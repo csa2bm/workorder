@@ -34,7 +34,7 @@ sap.ui.define([
 
 				sap.m.MessageBox.show(this.getI18nText("WorkOrderDetails-OperationBlock-CancelCompletionAlertMsg"), {
 					icon: sap.m.MessageBox.Icon.None,
-					title: this.getI18nText("orderStatusTitle"),
+					title: this.getI18nText("WorkOrderDetails-orderStatusTitle"),
 					actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
 					defaultAction: sap.m.MessageBox.Action.NO,
 					styleClass: bCompact ? "sapUiSizeCompact" : "",

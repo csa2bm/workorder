@@ -3,26 +3,17 @@
 	xmlns:mic="sap.suite.ui.microchart" height="100%">
 	<App class="dashboardClass" id="mobileWorkOrderApp">
 		<Page title="{i18n>Dashboard-Title}">
-			<headerContent>
+			<!--<headerContent>
 				<l:HorizontalLayout>
 					<core:Icon width="3em" height="3em" noTabStop="true" press="onSettings" src="sap-icon://action-settings"/>
 				</l:HorizontalLayout>
-			</headerContent>
+			</headerContent>-->
 			<content>
-				<FlexBox alignItems="Left" justifyContent="Left">
+		<FlexBox alignItems="Left" justifyContent="Left">
 					<items>
-						<GenericTile id="userTile" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{DashBoardModel>/Fullname}"
-							subheader="{DashBoardModel>/Position}" headerImage="{DashBoardModel>/ImagePath}" frameType="TwoByOne" press="press">
-							<tileContent>
-								<TileContent footer="">
-									<content>
-										<FeedContent contentText="Welcome to 2BM Mobile Work Order." subheader="Have a great day!" value=""></FeedContent>
-									</content>
-								</TileContent>
-							</tileContent>
-						</GenericTile>
-						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginEnd sapUiTinyMarginTop tileLayout" visible="{device>/isNotPhone}"
-							backgroundImage="../webapp/localService/mockData/2bmTileLogo7.png" frameType="TwoByOne" press="press">
+					
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" visible="{device>/isNotPhone}"
+							backgroundImage="images/2bmTileLogo7.png" frameType="TwoByOne" press="press">
 							<tileContent>
 								<TileContent footer="" class="sapUiSmallMargin">
 									<content>
@@ -31,7 +22,24 @@
 								</TileContent>
 							</tileContent>
 						</GenericTile>
-					</items>
+							<CustomTile class="sapUiTinyMarginTop TwoByOne sapMGT sapMPointer sapUiTinyMarginBegin customProfileTile">
+							<HBox alignItems="Start" justifyContent="SpaceBetween" class="sapUiSmallMarginBegin sapUiSmallMarginTop sapUiSmallMarginEnd">
+								<items>
+									<VBox>
+										<items>
+											<Text text="{DashBoardModel>/Fullname}" class="profileTitle"/>
+											<Text text="{DashBoardModel>/Position}" class="profileSubTitle"/>
+										</items>
+									</VBox>
+									<VBox alignItems="End" justifyContent="Center" height="195px">
+										<items>
+											<Image src="{DashBoardModel>/ImagePath}" class="circular sapUiSmallMarginEnd"></Image>
+										</items>
+									</VBox>
+								</items>
+							</HBox>
+						</CustomTile>
+			</items>
 				</FlexBox>
 				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-WorkOrdersTile-Header}" subheader=""
 					size="S" frameType="OneByOne" press="onPressOtherWorkorders">
@@ -87,13 +95,14 @@
 			<footer>
 				<Toolbar id="detailToolbar">
 					<content>
-						<!--<core:Icon id="syncIndicator" width="3em" height="3em" color="{syncStatusModel>/SyncColor}" noTabStop="true" press="showSyncQuickview"-->
-						<!--	src="{syncStatusModel>/SyncIcon}" tooltip="Sync status"></core:Icon>-->
-						<!--<BusyIndicator id="syncBusyIndicator" visible="{syncStatusModel>/IsSynching}"/>-->
 						<mvc:XMLView width="7em" viewName="com.twobm.mobileworkorder.components.offline.Status"/>
-						<!--<mvc:XMLView viewName="com.twobm.mobileworkorder.components.offline.ErrorListControl"/>-->
 						<ToolbarSpacer></ToolbarSpacer>
-						<!--<Button type="Reject" visible="{syncStatusModel>/InErrorState}" text="Shows Errors" press="openErrorsView"></Button>-->
+						<ToolbarSpacer></ToolbarSpacer>
+						<Button id="goToNotificationButton" icon="sap-icon://refresh" press="onRefresh" visible="{path:'',formatter:'.isOnline'}">
+							<layoutData>
+								<OverflowToolbarLayoutData priority="NeverOverflow"/>
+							</layoutData>
+						</Button>
 					</content>
 				</Toolbar>
 			</footer>

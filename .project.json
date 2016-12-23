@@ -7,8 +7,8 @@
   "build": {
     "targetFolder": "dist",
     "sourceFolder": "webapp",
-    "buildRequired": true,
-    "lastBuildDateTime": "Sun, 06 Nov 2016 13:27:47 GMT"
+    "buildRequired": false,
+    "lastBuildDateTime": "Tue, 20 Dec 2016 07:24:28 GMT"
   },
   "generation": [
     {
@@ -58,7 +58,7 @@
         "oDataType": "smpodata"
       }
     ],
-    "appname": "Mobile Work Order",
+    "appname": "Work Order",
     "appid": "com.twobm.mobileworkorder",
     "appdesc": "Mobile Work Order by 2BM",
     "appversion": "0.1.16",
@@ -67,12 +67,12 @@
       "defaultIcon": "",
       "ios": {
         "ios8Iphone": "",
-        "ios7Iphone": "res/ios/icon-60.png",
-        "ios7Ipad": "res/ios/icon-76.png",
+        "ios7Iphone": "res/ios/iPhone.png",
+        "ios7Ipad": "res/ios/iPad.png",
         "ios61Iphone": "",
         "ios61Ipad": "",
-        "ios7Ipad2x": "res/ios/icon-152.png",
-        "ios7Iphone2x": "res/ios/icon-120.png"
+        "ios7Ipad2x": "res/ios/iPadRetina.png",
+        "ios7Iphone2x": "res/ios/iPhoneRetina.png"
       },
       "android": {
         "ldpi": "",
@@ -107,11 +107,11 @@
         "iphone": "",
         "iphone2x": "",
         "portIpad": "",
-        "portIpad2x": "",
+        "portIpad2x": "res/ios/iPadRetinaPortrait.png",
         "landIpad": "",
-        "landIpad2x": "res/ios/splash_ipad_landscape_2x.png",
+        "landIpad2x": "res/ios/iPadRetinaLandscape.png",
         "iphone52x": "",
-        "iphone6": "res/ios/splash_iphone_portrait_2x.png",
+        "iphone6": "res/ios/iPhone6Portrait.png",
         "iphone6plus": ""
       },
       "android": {
@@ -139,12 +139,13 @@
       "defaultPSplashData": ""
     },
     "kapselLogon": {
-      "type": "",
-      "logo": "",
-      "logoText": "",
-      "background": "",
-      "disablePasscode": false,
-      "hideLogoCopyright": false
+      "type": "enterUsernamePassword",
+      "logo": "res/LoginLogo.png",
+      "logoText": "Copyright 2016 2BM AS",
+      "background": "res/Login.png",
+      "disablePasscode": true,
+      "hideLogoCopyright": false,
+      "copyrightText": "All rights reserved"
     },
     "useAppDescriptor4UI5Libs": false,
     "localBuild": {
@@ -482,6 +483,6 @@
   "hcpdeploy": {
     "account": "a2b30ffcb",
     "name": "comtwobmmobileworkorder",
-    "lastVersionWeTriedToDeploy": "1.0.1"
+    "lastVersionWeTriedToDeploy": "1.0.4"
   }
 }

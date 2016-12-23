@@ -41,7 +41,9 @@ sap.ui.define([
 				success: function(oData, oResponse) {
 					this.DashBoardModel.getData().Fullname = oData.Fullname;
 					this.DashBoardModel.getData().Position = oData.Position;
-					this.DashBoardModel.getData().ImagePath = oData.__metadata.media_src;
+					//this.DashBoardModel.getData().ImagePath = oData.__metadata.media_src;
+					this.DashBoardModel.getData().ImagePath = this.getView().getModel().sServiceUrl + "/UserDetailsSet('LLA')/$value";
+					
 					this.DashBoardModel.refresh();
 				}.bind(this),
 				error: this.errorCallBackShowInPopUp
@@ -195,6 +197,21 @@ sap.ui.define([
 			this.getView().getModel().refresh(true);
 
 			this.getEventBus().publish("UpdateSyncState");
+		},
+		
+		isOnline: function(){
+			if (sap.hybrid)
+			{
+				return false;
+			}
+			
+			return true;
+		},
+		
+		onRefresh: function()
+		{
+			this.setContentInTiles();
+			this.getView().getModel().refresh();
 		}
 	});
 });
