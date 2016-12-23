@@ -450,6 +450,11 @@
           "registry": "cordova-plugin-statusbar",
           "localBuild": true,
           "registered": true
+        },
+        "AppVersion": {
+          "selected": true,
+          "registry": "cordova-plugin-app-version",
+          "localBuild": true
         }
       }
     }
