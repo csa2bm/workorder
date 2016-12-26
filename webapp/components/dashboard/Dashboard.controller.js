@@ -103,18 +103,18 @@ sap.ui.define([
 			 }
 			 );*/
 
-			alert("Starting push registration..");
+			sap.m.MessageToast.show("Starting push registration..");
 
 			sap.Push.registerForNotificationTypes(sap.Push.notificationType.badge | sap.Push.notificationType.sound | sap.Push.notificationType
 				.alert,
 				function(message) {
-					alert("Successfully registered for push: " + message);
+					sap.m.MessageToast.show("Successfully registered for push: " + message);
 				},
 				function(message) {
-					alert("Failed to register for push: " + message);
+					sap.m.MessageToast.show("Failed to register for push: " + message);
 				},
 				function(message) {
-					alert("Received message: " + message);
+					sap.m.MessageToast.show("Received message: " + message);
 				}, "");
 		},
 

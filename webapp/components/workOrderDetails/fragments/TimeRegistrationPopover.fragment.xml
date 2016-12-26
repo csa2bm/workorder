@@ -10,7 +10,7 @@
 			<VBox>
 				<Label text="{i18n>WorkOrderDetails-TimeRegistrationPopover-Time}" design="Bold"/>
 				<Input id="__WorkTimeField" placeholder="{i18n>WorkOrderDetails-TimeRegistrationPopover-TimeTextPlaceHolder}" value="{path:'WorkTime' , type:'.typeTimeFormat'}"
-					focus="true"/>
+					/>
 				<Label text="{i18n>WorkOrderDetails-TimeRegistrationPopover-Date}" design="Bold"/>
 				<DatePicker dateValue="{RegistrationDate}"></DatePicker>
 			</VBox>

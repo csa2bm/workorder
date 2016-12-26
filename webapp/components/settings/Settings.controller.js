@@ -11,7 +11,7 @@ sap.ui.define([
 
 		onResetClient : function()
 		{
-			alert("test");
+			sap.m.MessageToast.show("test");
 		}
 
 	});

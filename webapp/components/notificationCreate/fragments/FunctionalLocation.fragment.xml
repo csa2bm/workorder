@@ -9,7 +9,8 @@
 		search="_handleValueHelpSearchFunctionalLocation"
 		confirm="_handleValueHelpCloseFunctionalLocation"
 		cancel="_handleValueHelpClose"
-		afterClose="_handleValueHelpAfterClose">
+		>
+		<!--afterClose="_handleValueHelpAfterClose"-->
 		<StandardListItem
 			title="{FunctionalLocation}"
 			description="{Description}" />

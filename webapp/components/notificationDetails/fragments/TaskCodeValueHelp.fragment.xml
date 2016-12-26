@@ -8,8 +8,8 @@
 		items="{CodeCatalogSet}"
 		
 		confirm="handleValueHelpCloseCode"
-		cancel="handleValueHelpCloseCode"
-		afterClose="handleValueHelpAfterCloseCode">
+		cancel="handleValueHelpCloseCode">
+		<!--afterClose="handleValueHelpAfterCloseCode"-->
 		<StandardListItem
 			title="{CodeText}"
 			description="{Code}" />

@@ -40,7 +40,7 @@
 		-->
 			<ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="false">
 				<headerTitle>
-					<ObjectPageHeader headerDesign="Dark" objectTitle="{path:'ShortText'}" objectSubtitle="{path:'Orderid'}"></ObjectPageHeader>
+					<ObjectPageHeader objectTitle="{path:'ShortText'}" objectSubtitle="{path:'Orderid'}"></ObjectPageHeader>
 				</headerTitle>
 				<sections>
 					<ObjectPageSection>
@@ -128,8 +128,7 @@
 			</ObjectPageLayout>
 		</m:content>
 		<m:footer>
-			<m:OverflowToolbar>
-				<m:content>
+			<m:Toolbar>
 					<!--<m:Button id="goToNotificationButton" ariaDescribedBy="acceptButtonDescription genericButtonDescription"-->
 					<!--	press="orderStatusBtnPressed" text="{i18n>WorkOrderDetails-GoToNotification}"-->
 					<!--	visible="{path:'OrderStatus',formatter:'.isOrderNotCompleted'}">-->
@@ -139,15 +138,14 @@
 					<!--</m:Button>-->
 				<m:ToolbarSpacer></m:ToolbarSpacer>
 
-					<m:Button id="orderStatusChangeButton" icon="sap-icon://accept" ariaDescribedBy="acceptButtonDescription genericButtonDescription"
+					<m:Button id="orderStatusChangeButton" icon="sap-icon://accept"
 						press="orderStatusBtnPressed" text="{path:'OrderStatus',formatter:'.getOrderStatusBtnText'}"
 						visible="{path:'OrderStatus',formatter:'.isOrderNotCompleted'}" type="{path:'OrderStatus',formatter:'.isOrderNotCompletedType'}">
 						<m:layoutData>
 							<m:OverflowToolbarLayoutData priority="NeverOverflow"/>
 						</m:layoutData>
 					</m:Button>
-				</m:content>
-			</m:OverflowToolbar>
+			</m:Toolbar>
 		</m:footer>
 	</m:Page>
 </mvc:View>

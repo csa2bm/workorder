@@ -12,8 +12,9 @@
 					<Label text="{i18n>NotificationCreate-Description}"></Label>
 					<Input id="shortDescription" value="{ShortText}" valueHelpRequest="showAccountF4" valueHelpOnly="false" showValueHelp="false"></Input>
 					<Label text="{i18n>NotificationCreate-Notes}"></Label>
-					<TextArea id="remark" liveChange="onContactInputFieldChanged" value="{LongText}" suggestionItemSelected="onContactSuggestItemSelected"
-						valueHelpRequest="showContactF4" valueHelpOnly="false" showValueHelp="true"></TextArea>
+					<!--valueHelpRequest="showContactF4" -->
+					<TextArea id="remark" liveChange="onContactInputFieldChanged" value="{LongText}"
+					 ></TextArea>
 					<Label text="{i18n>NotificationCreate-Priority}"></Label>
 					<Select id="priority" selectedKey="{Priority}" items="{NotificationDropdownsModel>/priority}" class="pos_input">
 						<items>
@@ -44,22 +45,22 @@
 			</layout:form.SimpleForm>
 		</content>
 		<footer id="footer">
-			<OverflowToolbar>
+			<Toolbar>
 				<content>
 					<ToolbarSpacer></ToolbarSpacer>
-					<Button type="Emphasized" ariaDescribedBy="acceptButtonDescription genericButtonDescription" press="handleSaveNotification"
+					<Button type="Emphasized"  press="handleSaveNotification"
 						text="{i18n>NotificationCreate-SaveButton}">
 						<layoutData>
 							<OverflowToolbarLayoutData priority="NeverOverflow"/>
 						</layoutData>
 					</Button>
-					<Button ariaDescribedBy="cancelButtonDescription genericButtonDescription" press="goBack" text="{i18n>NotificationCreate-CancelButton}">
+					<Button press="goBack" text="{i18n>NotificationCreate-CancelButton}">
 						<layoutData>
 							<OverflowToolbarLayoutData priority="NeverOverflow"/>
 						</layoutData>
 					</Button>
 				</content>
-			</OverflowToolbar>
+			</Toolbar>
 		</footer>
 	</Page>
 </core:View>

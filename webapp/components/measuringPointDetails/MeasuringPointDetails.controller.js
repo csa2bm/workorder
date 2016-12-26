@@ -53,8 +53,7 @@ sap.ui.define([
 				this.getView().getModel().createBindingContext(contextPath, "", {
 						expand: aExpand.toString()
 					},
-					function(oEvent) {
-						var f = oEvent;
+					function(oEvent2) {
 						that.ExpandLoaded = true;
 
 					}, true);

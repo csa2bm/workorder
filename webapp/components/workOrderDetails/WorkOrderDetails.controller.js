@@ -78,8 +78,8 @@ sap.ui.define([
 				this.getView().getModel().createBindingContext(contextPath, "", {
 						expand: aExpand.toString()
 					},
-					function(oEvent) {
-						var f = oEvent;
+					function(oEvent2) {
+						//var f = oEvent2;
 						that.ExpandLoaded = true;
 
 						//Set edit mode
@@ -166,7 +166,7 @@ sap.ui.define([
 
 					that.updateEditModeModel(orderStatus);
 
-					if (orderStatus == that.getI18nText("orderStatusCompleted")) {
+					if (orderStatus === that.getI18nText("orderStatusCompleted")) {
 						that.navigateBack();
 					}
 				},

@@ -11,7 +11,7 @@ sap.ui.define([
 		
 		handleErrors : function(data, syncStatusModel){
 			var error;
-			var errorMap = {};
+			//var errorMap = {};
 			
 			self = this;
 
@@ -44,17 +44,17 @@ sap.ui.define([
 					};
 
 					OData.read(request,
-						function(data, response) {
+						function(data1, response) {
 							syncStatusModel.getData().Errors.forEach(
-								function(item, indexNotUsed) {
+								function(item1, indexNotUsed) {
 
 									var responseUrl = response.requestUri.replace("/AffectedEntity", "");
 									var objectId;
 									
-									if (responseUrl === item.ErrorUrl) {
+									if (responseUrl === item1.ErrorUrl) {
 										
 										if(syncStatusModel.getData().Errors[index].RequestObject === self.orderMetaObjectName){
-											objectId = data.Orderid;
+											objectId = data1.Orderid;
 											
 											syncStatusModel.getData().Errors[index].ObjectID = objectId;
 											//Assign to array
@@ -62,7 +62,7 @@ sap.ui.define([
 											syncStatusModel.getData().OrderErrors.push(objectId);
 										}
 										else if(syncStatusModel.getData().Errors[index].RequestObject === self.notificationMetaObjectName){
-											objectId = data.NotifNo;
+											objectId = data1.NotifNo;
 											
 											syncStatusModel.getData().Errors[index].ObjectID = objectId;
 											//Assign to array
@@ -72,11 +72,11 @@ sap.ui.define([
 											//We do not know the failing object therefore we cannot get the details
 										}
 										
-										var objectData = JSON.parse(JSON.stringify(data));
+										var objectData = JSON.parse(JSON.stringify(data1));
 										delete objectData['@com.sap.vocabularies.Offline.v1.inErrorState'];
 										delete objectData['@com.sap.vocabularies.Offline.v1.islocal'];
 										delete objectData.__metadata;
-										objectData.__proto__ = null;
+										//objectData.__proto__ = null;
 
 										syncStatusModel.getData().Errors[index].ObjectData = objectData;
 									}
@@ -87,7 +87,7 @@ sap.ui.define([
 							syncStatusModel.refresh();
 						},
 						function(e) {
-							console.log("Error in read AffectedEntity");
+							//console.log("Error in read AffectedEntity");
 						}
 					);
 				}
