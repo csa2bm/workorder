@@ -24,7 +24,7 @@ sap.ui.define([
 			// set sync model
 			this.setModel(models.createSyncModel(), "syncStatusModel");
 			// set settings model
-			this.setModel(models.createSettingsModel(), "settingsModel");
+			this.setModel(models.createAppInfoModel(), "appInfoModel");
 
 			if (sap.hybrid) {
 				// Configure status bar

@@ -5,8 +5,8 @@
 		"id": "com.twobm.mobileworkorder",
 		"type": "application",
 		"i18n": "i18n/messageBundle.properties",
-		"title": "{{appTitle}}",
-		"description": "{{appDescription}}",
+		"title": "{{App-Title}}",
+		"description": "{{App-Description}}",
 		"sourceTemplate": {
 			"id": "servicecatalog.connectivityComponent",
 			"version": "0.0.0"

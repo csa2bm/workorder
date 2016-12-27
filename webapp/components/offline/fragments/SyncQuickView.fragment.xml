@@ -15,7 +15,6 @@
 					<Label class="syncStatusTextBold" text="{syncStatusModel>/LastSyncTime}"/>
 				</l:HorizontalLayout>
 				<!--<mvc:XMLView class="sapUiMediumMarginTop" viewName="com.twobm.mobileworkorder.components.offline.ErrorListControl"/>-->
-				
 				<Button class="sapUiMediumMarginTop" visible="{syncStatusModel>/InErrorState}" text="Show Sync Errors" press="openErrorsView"></Button>
 				<Button class="sapUiMediumMarginTop" text="Synchronize Now" press="synchronizeData"></Button>
 				<Button class="sapUiMediumMarginTop" text="Reset database" press="resetStore"></Button>

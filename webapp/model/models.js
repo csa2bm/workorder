@@ -16,6 +16,7 @@ sap.ui.define([
 		createSyncModel: function() {
 			var oModel = new JSONModel({
 				SyncColor: "",
+				SyncIcon: "",
 				LastSyncTime: "",
 				Online: false,
 				PendingLocalData: false,
@@ -32,11 +33,16 @@ sap.ui.define([
 			return oModel;
 		},
 
-		createSettingsModel: function() {
+		createAppInfoModel: function() {
 			var oModel = new JSONModel({
-				AppVersion: "",
-				AppName: "",
-				LoggedInUser: ""
+				AppVersion: "1.2",
+				AppName: "2BM Work Order",
+				WebSite: "http://www.2bm.com",
+				UserName: "",
+				UserFirstName: "",
+				UserFullName: "",
+				UserPosition: "",
+				UserImage: ""
 			});
 
 			oModel.setDefaultBindingMode("OneWay");

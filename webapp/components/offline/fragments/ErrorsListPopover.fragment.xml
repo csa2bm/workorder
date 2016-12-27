@@ -40,7 +40,8 @@
 					<footer>
 						<Toolbar>
 							<content>
-								<Button text="{i18n>errorListPopupRetryButtonText}" press="onRetrySync"></Button>
+								<Button text="{i18n>errorListPopupRetryButtonText}" press="onRetrySync" type="Accept"></Button>
+								<Button text="{i18n>errorListPopupDeleteButtonText}" press="onDeleteErrRecord" type="Reject" visible="{syncStatusModel>/InErrorState}"></Button>
 								<ToolbarSpacer/>
 								<Button text="{i18n>errorListPopupCloseButtonText}" press="closeErrorListPopupButton"></Button>
 							</content>
@@ -89,7 +90,7 @@
 					<footer>
 						<Toolbar>
 							<content>
-								<Button text="{i18n>errorListPopupDetailDeleteButtonText}" press="onDeleteErrRecord" type="Reject"></Button>
+								
 								<ToolbarSpacer/>
 								<Button text="{i18n>errorListPopupCloseButtonText}" press="closeErrorListDetailPopupButton"></Button>
 							</content>

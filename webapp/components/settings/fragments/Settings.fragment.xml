@@ -1,8 +1,21 @@
 <core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc">
-	<ResponsivePopover class="sapUiPopupWithPadding" placement="PreferredTopOrFlip" title="{i18n>dataSyncPopupHeader}">
+	<ResponsivePopover class="sapUiPopupWithPadding" placement="PreferredTopOrFlip" title="{i18n>App-Info}">
+		<endButton>
+			<Button class="sapUiMediumMarginTop" text="Reset client" press="onResetClient"></Button>
+		</endButton>
 		<content>
 			<l:VerticalLayout>
-				<Button class="sapUiMediumMarginTop" text="Reset client" press="onResetClient"></Button>
+				
+				<Image src="{appInfoModel>/UserImage}" press="onSettings" class="circular"></Image>
+				<Label class="syncStatusTextBig" text="{appInfoModel>/UserFullName} ({appInfoModel>/UserName})"/>
+				<Label class="syncStatusText" text="{appInfoModel>/UserPosition}"/>
+				
+				
+
+				<Image src="images/LoginLogo.png" press="onSettings" width="5em" class="sapUiMediumMarginTop"></Image>
+				<Label class="syncStatusTextBold" text="{appInfoModel>/AppName} v.{appInfoModel>/AppVersion}"/>
+				<!--<Link href="{infoModel>/WebSite}" text="{infoModel>/WebSite}" ></Link>-->
+				
 			</l:VerticalLayout>
 		</content>
 	</ResponsivePopover>

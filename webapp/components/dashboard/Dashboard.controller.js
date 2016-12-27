@@ -39,12 +39,16 @@ sap.ui.define([
 		setContentInTiles: function() {
 			var parametersUserDetails = {
 				success: function(oData, oResponse) {
-					this.DashBoardModel.getData().Fullname = oData.Fullname;
-					this.DashBoardModel.getData().Position = oData.Position;
-					//this.DashBoardModel.getData().ImagePath = oData.__metadata.media_src;
-					this.DashBoardModel.getData().ImagePath = this.getView().getModel().sServiceUrl + "/UserDetailsSet('LLA')/$value";
+					this.getView().getModel("appInfoModel").getData().UserFullName = oData.results[0].Fullname;
+					this.getView().getModel("appInfoModel").getData().UserFirstName = oData.results[0].Firstname;
+					this.getView().getModel("appInfoModel").getData().UserName = oData.results[0].Username;
+					this.getView().getModel("appInfoModel").getData().UserPosition = oData.results[0].Position;
+					this.getView().getModel("appInfoModel").getData().UserImage = oData.results[0].__metadata.media_src;
 					
-					this.DashBoardModel.refresh();
+					//this.DashBoardModel.getData().ImagePath = oData.results[0].__metadata.media_src;
+					//this.DashBoardModel.getData().ImagePath = this.getView().getModel().sServiceUrl + "/UserDetailsSet('LLA')/$value";
+					
+					this.getView().getModel("appInfoModel").refresh();
 				}.bind(this),
 				error: this.errorCallBackShowInPopUp
 			};
@@ -65,7 +69,7 @@ sap.ui.define([
 
 			this.getView().getModel().read("/OrderSet/$count", parametersOrder);
 			this.getView().getModel().read("/NotificationsSet/$count", parametersNotif);
-			this.getView().getModel().read("/UserDetailsSet('LLA')", parametersUserDetails);
+			this.getView().getModel().read("/UserDetailsSet", parametersUserDetails);
 		},
 
 		setNotificationModel: function(oEvent) {
@@ -181,6 +185,8 @@ sap.ui.define([
 			}
 			// toggle compact style
 			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);
+			this.settingsDialog.setModel(this.getView().getModel("i18n"), "i18n");
+			this.settingsDialog.setModel(this.getView().getModel("appInfoModel"), "appInfoModel");
 			this.settingsDialog.openBy(oEvent.getSource());
 		},
 

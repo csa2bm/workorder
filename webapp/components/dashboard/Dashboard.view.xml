@@ -3,11 +3,12 @@
 	xmlns:mic="sap.suite.ui.microchart" height="100%">
 	<App class="dashboardClass" id="mobileWorkOrderApp">
 		<Page title="{i18n>Dashboard-Title}">
-			<!--<headerContent>
+			<headerContent>
 				<l:HorizontalLayout>
+					<!--<Image width="2em" height="2em" src="{DashBoardModel>/ImagePath}" press="onSettings" class="circular sapUiTinyMarginTop sapUiTinyMarginEnd"></Image>-->
 					<core:Icon width="3em" height="3em" noTabStop="true" press="onSettings" src="sap-icon://action-settings"/>
 				</l:HorizontalLayout>
-			</headerContent>-->
+			</headerContent>
 			<content>
 				<FlexBox alignItems="Start" justifyContent="Start">
 					<items>
@@ -26,13 +27,13 @@
 								<items>
 									<VBox>
 										<items>
-											<Text text="{DashBoardModel>/Fullname}" class="profileTitle"/>
-											<Text text="{DashBoardModel>/Position}" class="profileSubTitle"/>
+											<Text text="{appInfoModel>/UserFullName}" class="profileTitle"/>
+											<Text text="{appInfoModel>/UserPosition}" class="profileSubTitle"/>
 										</items>
 									</VBox>
 									<VBox alignItems="End" justifyContent="Center" height="195px">
 										<items>
-											<Image src="{DashBoardModel>/ImagePath}" class="circular sapUiSmallMarginEnd"></Image>
+											<Image src="{appInfoModel>/UserImage}" class="circular sapUiSmallMarginEnd"></Image>
 										</items>
 									</VBox>
 								</items>
