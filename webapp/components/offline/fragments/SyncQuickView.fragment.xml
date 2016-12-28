@@ -1,5 +1,11 @@
 <core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc">
-	<ResponsivePopover class="sapUiPopupWithPadding" placement="PreferredTopOrFlip" title="{i18n>dataSyncPopupHeader}">
+	<ResponsivePopover class="sapUiPopupWithPadding" placement="PreferredTopOrFlip" title="{i18n>DataSyncStatusPopup-Header}">
+		<beginButton>
+			<Button class="sapUiMediumMarginTop" type="Reject" visible="{syncStatusModel>/InErrorState}" text="{i18n>DataSyncStatusPopup-ShowSyncErrorsButtonText}" press="openErrorsView"></Button>
+		</beginButton>
+		<endButton>
+			<Button text="{i18n>DataSyncStatusPopup-SyncButtonText}" press="synchronizeData"></Button>
+		</endButton>
 		<content>
 			<l:VerticalLayout>
 				<l:HorizontalLayout class="sapUiTinyMarginTopBottom">
@@ -7,17 +13,16 @@
 					<Label class="syncStatusTextBig" text="{syncStatusModel>/SyncStateText}"/>
 				</l:HorizontalLayout>
 				<l:HorizontalLayout class="sapUiTinyMarginTopBottom">
-					<Label class="syncStatusText sapUiSmallMarginEnd" text="Network Connection:"/>
+					<Label class="syncStatusText sapUiSmallMarginEnd" text="{i18n>DataSyncStatusPopup-NetworkConnectionLabel}"/>
 					<Label class="syncStatusTextBold sapUiSmallMarginEnd" text="{syncStatusModel>/NetworkConnectionText}"/>
 				</l:HorizontalLayout>
 				<l:HorizontalLayout>
-					<Label class="syncStatusText sapUiSmallMarginEnd" text="{i18n>lastSyncLabel}"/>
+					<Label class="syncStatusText sapUiSmallMarginEnd" text="{i18n>DataSyncStatusPopup-LastSyncLabel}"/>
 					<Label class="syncStatusTextBold" text="{syncStatusModel>/LastSyncTime}"/>
 				</l:HorizontalLayout>
 				<!--<mvc:XMLView class="sapUiMediumMarginTop" viewName="com.twobm.mobileworkorder.components.offline.ErrorListControl"/>-->
-				<Button class="sapUiMediumMarginTop" visible="{syncStatusModel>/InErrorState}" text="Show Sync Errors" press="openErrorsView"></Button>
-				<Button class="sapUiMediumMarginTop" text="Synchronize Now" press="synchronizeData"></Button>
-				<Button class="sapUiMediumMarginTop" text="Reset database" press="resetStore"></Button>
+
+				<!--<Button class="sapUiMediumMarginTop" text="Reset database" press="resetStore"></Button>-->
 			</l:VerticalLayout>
 		</content>
 	</ResponsivePopover>

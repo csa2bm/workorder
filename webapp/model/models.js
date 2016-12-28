@@ -35,9 +35,9 @@ sap.ui.define([
 
 		createAppInfoModel: function() {
 			var oModel = new JSONModel({
-				AppVersion: "1.2",
-				AppName: "2BM Work Order",
-				WebSite: "http://www.2bm.com",
+				AppVersion: "AppVersion",
+				AppName: "AppName",
+				WebSite: "http://www.2bm.com/2bm-mobile-work-order/",
 				UserName: "",
 				UserFirstName: "",
 				UserFullName: "",
@@ -48,6 +48,5 @@ sap.ui.define([
 			oModel.setDefaultBindingMode("OneWay");
 			return oModel;
 		}
-
 	};
 });

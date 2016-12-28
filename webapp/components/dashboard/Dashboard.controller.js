@@ -29,6 +29,8 @@ sap.ui.define([
 					orderCount: "0"
 				});
 				this.getView().setModel(this.DashBoardModel, "DashBoardModel");
+				
+				this.getUserDetails();
 			}
 
 			this.getEventBus().subscribe("OfflineStore", "DBReinitialized", this.dbHasBeenReinitialized, this);
@@ -37,21 +39,6 @@ sap.ui.define([
 		},
 
 		setContentInTiles: function() {
-			var parametersUserDetails = {
-				success: function(oData, oResponse) {
-					this.getView().getModel("appInfoModel").getData().UserFullName = oData.results[0].Fullname;
-					this.getView().getModel("appInfoModel").getData().UserFirstName = oData.results[0].Firstname;
-					this.getView().getModel("appInfoModel").getData().UserName = oData.results[0].Username;
-					this.getView().getModel("appInfoModel").getData().UserPosition = oData.results[0].Position;
-					this.getView().getModel("appInfoModel").getData().UserImage = oData.results[0].__metadata.media_src;
-					
-					//this.DashBoardModel.getData().ImagePath = oData.results[0].__metadata.media_src;
-					//this.DashBoardModel.getData().ImagePath = this.getView().getModel().sServiceUrl + "/UserDetailsSet('LLA')/$value";
-					
-					this.getView().getModel("appInfoModel").refresh();
-				}.bind(this),
-				error: this.errorCallBackShowInPopUp
-			};
 			var parametersOrder = {
 				success: function(oData, oResponse) {
 					this.DashBoardModel.getData().orderCount = oData;
@@ -69,6 +56,30 @@ sap.ui.define([
 
 			this.getView().getModel().read("/OrderSet/$count", parametersOrder);
 			this.getView().getModel().read("/NotificationsSet/$count", parametersNotif);
+		},
+
+		getUserDetails: function() {
+			var parametersUserDetails = {
+				success: function(oData, oResponse) {
+					this.getView().getModel("appInfoModel").getData().UserFullName = oData.results[0].Fullname;
+					this.getView().getModel("appInfoModel").getData().UserFirstName = oData.results[0].Firstname;
+					this.getView().getModel("appInfoModel").getData().UserName = oData.results[0].Username;
+					this.getView().getModel("appInfoModel").getData().UserPosition = oData.results[0].Position;
+
+					if (sap.hybrid) {
+						this.getView().getModel("appInfoModel").getData().UserImage = oData.results[0].__metadata.media_src;
+					} else {
+						this.getView().getModel("appInfoModel").getData().UserImage = this.getView().getModel().sServiceUrl +
+							"/UserDetailsSet('LLA')/$value";
+					}
+					//this.DashBoardModel.getData().ImagePath = oData.results[0].__metadata.media_src;
+					//this.DashBoardModel.getData().ImagePath = this.getView().getModel().sServiceUrl + "/UserDetailsSet('LLA')/$value";
+
+					this.getView().getModel("appInfoModel").refresh();
+				}.bind(this),
+				error: this.errorCallBackShowInPopUp
+			};
+
 			this.getView().getModel().read("/UserDetailsSet", parametersUserDetails);
 		},
 
@@ -204,18 +215,16 @@ sap.ui.define([
 
 			this.getEventBus().publish("UpdateSyncState");
 		},
-		
-		isOnline: function(){
-			if (sap.hybrid)
-			{
+
+		isOnline: function() {
+			if (sap.hybrid) {
 				return false;
 			}
-			
+
 			return true;
 		},
-		
-		onRefresh: function()
-		{
+
+		onRefresh: function() {
 			this.setContentInTiles();
 			this.getView().getModel().refresh();
 		}
