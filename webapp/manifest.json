@@ -198,7 +198,7 @@
 					"viewType": "XML",
 					"transition": "slide",
 					"clearAggregation": true,
-					"viewName": "structureBrowser",
+					"viewName": "StructureBrowser",
 					"viewPath": "com.twobm.mobileworkorder.components.structureBrowser"
 				}
 			}
