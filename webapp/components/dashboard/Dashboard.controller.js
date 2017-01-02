@@ -212,6 +212,21 @@ sap.ui.define([
 		{
 			this.setContentInTiles();
 			this.getView().getModel().refresh();
+		},
+		
+		onPressFunctionalLocations : function()
+		{
+				var oHistory = History.getInstance();
+			var sPreviousHash = oHistory.getPreviousHash();
+
+			if (sPreviousHash !== undefined) {
+				window.history.go(-1);
+			} else {
+				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+				//var oRouter = this.getRouter();
+				oRouter.navTo("structureBrowser", true);
+
+			}
 		}
 	});
 });
