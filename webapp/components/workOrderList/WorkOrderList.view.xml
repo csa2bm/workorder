@@ -11,7 +11,7 @@
 				<Table id="workOrderTableId" items="{path: '/OrderSet', sorter: [{path: 'StartDate', descending: false}]}" noDataText="No Work Orders"
 					showSeparators="All" class="workOrderListTableClass">
 					<columns>
-						<Column width="1rem" hAlign="Center" vAlign="Middle" minScreenWidth="Tablet">
+						<Column width="2rem" hAlign="Center" vAlign="Middle">
 							<header>
 								<Label text="Status"/>
 							</header>
