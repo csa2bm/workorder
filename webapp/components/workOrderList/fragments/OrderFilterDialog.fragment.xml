@@ -6,10 +6,13 @@
 			<ViewSettingsItem text="Functional Location" key="Funcldescr"/>
 			<ViewSettingsItem text="Equipment" key="Equidescr"/>
 		</sortItems>
+		
+		<!--
 		<groupItems>
 			<ViewSettingsItem text="Start Date" key="StartDate"/>
 			<ViewSettingsItem text="Functional Location" key="Funcldescr"/>
 			<ViewSettingsItem text="Equipment" key="Equidescr"/>
 		</groupItems>
+		-->
 	</ViewSettingsDialog>
 </core:FragmentDefinition>
