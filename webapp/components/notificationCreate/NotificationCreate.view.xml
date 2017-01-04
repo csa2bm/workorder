@@ -34,13 +34,18 @@
 							<core:Item text="{FunctionalLocation}"/>
 						</suggestionItems>
 					</Input>
+					<Label text=""></Label>
+					<Text text="{FuncLocDesc}" />
 					<Label text="{i18n>NotificationCreate-Equipment}"></Label>
+					
 					<Input id="equipment" value="{Equipment}" showSuggestion="true" showValueHelp="true"
 						valueHelpRequest="handleValueHelpEquipment" suggestionItems="{/EquipmentsSet}">
 						<suggestionItems>
 							<core:Item text="{Equipment}"/>
 						</suggestionItems>
 					</Input>
+					<Label text=""></Label>
+					<Text text="{EquipmentDesc}" />
 				</layout:content>
 			</layout:form.SimpleForm>
 		</content>

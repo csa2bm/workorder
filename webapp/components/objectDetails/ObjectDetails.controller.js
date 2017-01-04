@@ -82,7 +82,9 @@ sap.ui.define([
 		
 		oRouter.navTo("notificationCreate", {
 					equipmentNo: object.Equipment,
+					equipmentDesc: object.Equidescr,
 					functionalLoc: object.FunctLoc,
+					funcLocDesc: object.Funcldescr,
 					argAvailable:"true"
 				}, false);
 		}
