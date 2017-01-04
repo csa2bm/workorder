@@ -55,7 +55,9 @@ sap.ui.define([
 			var oArguments = oEvent.getParameter("arguments");
 			if(oArguments.argAvailable){
 				this.getView().getModel().setProperty(this.newEntry.getPath() + "/Equipment", oArguments.equipmentNo);
+				this.getView().getModel().setProperty(this.newEntry.getPath() + "/FuncLocDesc", oArguments.funcLocDesc);
 				this.getView().getModel().setProperty(this.newEntry.getPath() + "/FunctionalLoc", oArguments.functionalLoc);
+				this.getView().getModel().setProperty(this.newEntry.getPath() + "/EquipmentDesc", oArguments.equipmentDesc);
 			}
 
 			this.getView().setBindingContext(this.newEntry);
@@ -182,6 +184,7 @@ sap.ui.define([
 			if (oSelectedItem) {
 				var productInput = this.getView().byId(this.inputId);
 				productInput.setValue(oSelectedItem.getTitle());
+				this.getView().getModel().setProperty(this.newEntry.getPath() + "/FuncLocDesc", oSelectedItem.getDescription());
 			}
 			evt.getSource().getBinding("items").filter([]);
 			//var thisDialog = evt.getParameter("id");
@@ -193,6 +196,8 @@ sap.ui.define([
 			if (oSelectedItem) {
 				var productInput = this.getView().byId(this.inputId);
 				productInput.setValue(oSelectedItem.getTitle());
+				this.getView().getModel().setProperty(this.newEntry.getPath() + "/EquipmentDesc", oSelectedItem.getDescription());
+				
 			}
 			evt.getSource().getBinding("items").filter([]);
 			//var thisDialog = evt.getParameter("id");

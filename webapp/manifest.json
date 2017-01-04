@@ -128,7 +128,7 @@
 				"greedy": false,
 				"target": ["notificationDetails"]
 			}, {
-				"pattern": "notificationCreate/:equipmentNo:/:functionalLoc:/:argAvailable:",
+				"pattern": "notificationCreate/:equipmentNo:/:functionalLoc:/:funcLocDesc:/:equipmentDesc:/:argAvailable:",
 				"name": "notificationCreate",
 				"greedy": false,
 				"target": ["notificationCreate"]
