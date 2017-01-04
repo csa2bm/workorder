@@ -61,7 +61,17 @@
 						</TileContent>
 					</tileContent>
 				</GenericTile>
-				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-CreateNotificationTile-Header}"
+					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-TechnicalObjectsTile-Header}" size="S"
+					frameType="OneByOne" press="onPressFunctionalLocations">
+					<tileContent>
+						<TileContent>
+							<content>
+								<ImageContent src="sap-icon://functional-location"/>
+							</content>
+						</TileContent>
+					</tileContent>
+				</GenericTile>
+				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-CreateNotificationTile-Header}" size="S"
 					frameType="OneByOne" press="onPressCreateNotification">
 					<tileContent>
 						<TileContent>
@@ -71,22 +81,13 @@
 						</TileContent>
 					</tileContent>
 				</GenericTile>
+				
 				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-ScanObjectTile-Header}" subheader=""
 					frameType="OneByOne" press="onPressScanObject">
 					<tileContent>
 						<TileContent>
 							<content>
 								<ImageContent src="sap-icon://bar-code"/>
-							</content>
-						</TileContent>
-					</tileContent>
-				</GenericTile>
-				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-TechnicalObjectsTile-Header}"
-					frameType="OneByOne" press="onPressFunctionalLocations">
-					<tileContent>
-						<TileContent>
-							<content>
-								<ImageContent src="sap-icon://functional-location"/>
 							</content>
 						</TileContent>
 					</tileContent>

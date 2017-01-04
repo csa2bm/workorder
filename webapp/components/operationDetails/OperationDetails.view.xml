@@ -13,18 +13,18 @@ height="100%">
 				<ObjectPageHeader headerDesign="Dark" objectTitle="{path:'Description'}" objectSubtitle="{path:'Activity'}"/>
 			</headerTitle>
 			<sections>
-				<!--<ObjectPageSection title="{i18n>SubSectionTitleOperationInformation}">
+				<ObjectPageSection>
 					<subSections>
-						<ObjectPageSubSection title="{i18n>SubSectionTitleOperationInformation}">
+						<ObjectPageSubSection id="generalSubSection" title="{i18n>OperationDetails-GeneralSubSection}">
 							<blocks>
-								<blocks:OperationInformationBlock/>
+								<blocks:OperationGeneralBlock/>
 							</blocks>
 						</ObjectPageSubSection>
 					</subSections>
-				</ObjectPageSection>-->
-				<ObjectPageSection title="{i18n>SubSectionTitleOperationNotes}">
+				</ObjectPageSection>
+				<ObjectPageSection>
 					<subSections>
-						<ObjectPageSubSection title="{i18n>SubSectionTitleOperationNotes}">
+						<ObjectPageSubSection id="notesSubSection" title="{i18n>OperationDetails-NotesSubSection}">
 							<blocks>
 								<blocks:OperationNotesBlock/>
 							</blocks>

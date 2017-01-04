@@ -2,16 +2,16 @@
 	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
 	xmlns:vbm="sap.ui.vbm" xmlns="sap.m">
 	<Table id="idMeasuringHistoryTable" items="{ path: 'MeasPointMeasDoc', sorter: { path: 'ReadingDate', descending: false}}"
-		noDataText="{i18n>EquipmentBlockNoEquipmentAdded}">
+		noDataText="{i18n>MeasuringPointDetails-HistoryBlock-NoData}">
 		<columns>
 			<Column minScreenWidth="Tablet">
-				<Text text="{i18n>MeasuringPointDetails-DateTimeColumn}"/>
+				<Text text="{i18n>MeasuringPointDetails-HistoryBlock-DateTimeColumn}"/>
 			</Column>
 			<Column>
-				<Text text="{i18n>MeasuringPointDetails-ReadByNameColumn}"/>
+				<Text text="{i18n>MeasuringPointDetails-HistoryBlock-ReadByNameColumn}"/>
 			</Column>
 			<Column>
-				<Text text="{i18n>MeasuringPointDetails-ReadUnitColumn}"/>
+				<Text text="{i18n>MeasuringPointDetails-HistoryBlock-ReadUnitColumn}"/>
 			</Column>
 		</columns>
 		<items>
