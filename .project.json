@@ -355,7 +355,7 @@
           "cloudBuild": false
         },
         "push": {
-          "selected": false,
+          "selected": true,
           "registry": "kapsel-plugin-push",
           "localBuild": true,
           "cloudBuild": false
