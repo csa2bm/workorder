@@ -12,6 +12,18 @@ sap.ui.define([
 			document.addEventListener("offline", this.onDisconnected.bind(this), false);
 			// Attach to router so we can start sync when certain pages are shown
 			router.attachRoutePatternMatched(this.onRouteMatched, this);
+
+			sap.Push.registerForNotificationTypes(sap.Push.notificationType.badge | sap.Push.notificationType.sound | sap.Push.notificationType
+				.alert,
+				function(message) {
+
+				}.bind(this),
+				function(message) {
+					this.showMessage("Failed to register for push: " + message);
+				}.bind(this),
+				function(message) {
+					this.sync();
+				}.bind(this), "");
 		},
 
 		onRouteMatched: function(oEvent) {
@@ -41,9 +53,9 @@ sap.ui.define([
 		sync: function() {
 			// Only sync when there is a connection
 			if (sap.hybrid.SMP.isOnline) {
-			// Show sync indicator
-			this.setSyncIndicators(true);
-			// Start sync
+				// Show sync indicator
+				this.setSyncIndicators(true);
+				// Start sync
 				sap.hybrid.synAppOfflineStore(function() {
 						// Refresh default model to display any changes to data
 						sap.ui.getCore().getComponent("__component0").getModel().refresh();
@@ -53,7 +65,7 @@ sap.ui.define([
 						var d = new Date();
 						syncStatusModel.getData().LastSyncTime = d.toLocaleString();
 						syncStatusModel.refresh();
-						
+
 						// Hide sync indicator
 						this.setSyncIndicators(false);
 
@@ -62,8 +74,7 @@ sap.ui.define([
 					}.bind(this),
 					function(error) {
 						// Error during sync - most likely the device went offline during a sync
-						if (sap.hybrid.SMP.isOnline)
-						{
+						if (sap.hybrid.SMP.isOnline) {
 							// If this was not due to the device beeing offline, show the error
 							this.showMessage("Error during sync: " + error);
 						}
@@ -81,8 +92,7 @@ sap.ui.define([
 				title: "Message",
 				actions: [sap.m.MessageBox.Action.OK],
 				defaultAction: sap.m.MessageBox.Action.NO,
-				onClose: function(oAction, object) {
-				}
+				onClose: function(oAction, object) {}
 			});
 		},
 
