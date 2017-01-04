@@ -12,6 +12,18 @@ sap.ui.define([
 			document.addEventListener("offline", this.onDisconnected.bind(this), false);
 			// Attach to router so we can start sync when certain pages are shown
 			router.attachRoutePatternMatched(this.onRouteMatched, this);
+
+			sap.Push.registerForNotificationTypes(sap.Push.notificationType.badge | sap.Push.notificationType.sound | sap.Push.notificationType
+				.alert,
+				function(message) {
+
+				}.bind(this),
+				function(message) {
+					this.showMessage("Failed to register for push: " + message);
+				}.bind(this),
+				function(message) {
+					this.sync();
+				}.bind(this), "");
 		},
 
 		saveLastSyncTimeInBrowserCache: function(lastSyncTime) {
