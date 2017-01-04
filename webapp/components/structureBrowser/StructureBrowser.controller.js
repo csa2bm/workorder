@@ -1,7 +1,8 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"sap/ui/model/json/JSONModel"
-], function(Controller, JSONModel) {
+	"sap/ui/model/json/JSONModel",
+	"sap/ui/core/routing/History"
+], function(Controller, JSONModel, History) {
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.structureBrowser.StructureBrowser", {
@@ -163,8 +164,23 @@ sap.ui.define([
 				}
 				
 				return text;
+			},
+			
+		navigateBack: function(oEvent) {
+			window.history.go(-1);
+			/*
+			var oHistory = History.getInstance();
+			var sPreviousHash = oHistory.getPreviousHash();
+
+			if (sPreviousHash !== undefined) {
+				window.history.go(-1);
+			} else {
+				var oRouter = this.getRouter();
+				oRouter.navTo("workOrderList", true);
 			}
 
+			this.scrollToTop();*/
+		}
 		/**
 		 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
 		 * (NOT before the first rendering! onInit() is used for that one!).

@@ -2,7 +2,7 @@
 	controllerName="com.twobm.mobileworkorder.components.structureBrowser.StructureBrowser" xmlns:html="http://www.w3.org/1999/xhtml">
 	<App>
 		<pages>
-			<Page title="Browse Structure">
+			<Page title="Browse Structure" showNavButton="true" navButtonPress="navigateBack">
 				<content>
 						<Table id="workOrderTableId" items="{path: 'viewModel>/items'}" noDataText="No Work Orders" showSeparators="true" class="workOrderListTableClass">
 					<columns>

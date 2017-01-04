@@ -3,7 +3,7 @@ sap.ui.define([
 ], function(Controller) {
 	"use strict";
 
-	return Controller.extend("com.twobm.mobileworkorder.components.operationDetails.blocks.OperationInformationBlock", {
+	return Controller.extend("com.twobm.mobileworkorder.components.operationDetails.blocks.OperationGeneralBlock", {
 		
 	});
 });
