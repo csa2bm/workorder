@@ -184,8 +184,8 @@ sap.ui.define([
 				productInput.setValue(oSelectedItem.getTitle());
 			}
 			evt.getSource().getBinding("items").filter([]);
-			var thisDialog = evt.getParameter("id");
-			thisDialog.close();
+			//var thisDialog = evt.getParameter("id");
+			//thisDialog.close();
 		},
 
 		_handleValueHelpCloseEquipment: function(evt) {
@@ -195,8 +195,8 @@ sap.ui.define([
 				productInput.setValue(oSelectedItem.getTitle());
 			}
 			evt.getSource().getBinding("items").filter([]);
-			var thisDialog = evt.getParameter("id");
-			thisDialog.close();
+			//var thisDialog = evt.getParameter("id");
+			//thisDialog.close();
 		},
 
 		_handleValueHelpAfterClose: function(evt) {

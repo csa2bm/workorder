@@ -4,15 +4,15 @@ sap.ui.define([
 	"use strict";
 
 	return {
-		
+
 		undefinedObjectName: "Unhandled object",
 		orderMetaObjectName: "Order",
 		notificationMetaObjectName: "Notification",
-		
-		handleErrors : function(data, syncStatusModel){
+
+		handleErrors: function(data, syncStatusModel) {
 			var error;
 			//var errorMap = {};
-			
+
 			self = this;
 
 			data.results.forEach(
@@ -21,19 +21,19 @@ sap.ui.define([
 
 					error = {
 						"Message": parsedJSONMessage,
-						"RequestMetaObject": self.getRequestMetaObjectName(item.RequestURL),
-						"RequestObject": self.getRequestObjectName(item.RequestURL),
+						"RequestMetaObject": self.getRequestMetaObjectName(item.RequestURL), // The Overlying object for instance Order
+						"RequestObject": self.getRequestObjectName(item.RequestURL), // The changed object in request for instance Time Registration
+						"ObjectID": "", //For instance orderid  //assigned later from AffectedEntity
 						"RequestBody": item.RequestBody,
 						"RequestMethod": item.RequestMethod,
 						"HTTPStatusCode": item.HTTPStatusCode,
 						"RequestURL": item.RequestURL,
 						"RequestID": item.RequestID,
-						"ErrorUrl": data.results[index].__metadata.uri,
-						"ObjectID" : "" //assigned later from AffectedEntity
+						"ErrorUrl": data.results[index].__metadata.uri
 					};
-					
+
 					syncStatusModel.getData().Errors.push(error);
-					
+
 					//Check affectedEntity for further information
 					var affectedEntitysUrl = data.results[index].__metadata.uri + "/AffectedEntity";
 
@@ -50,28 +50,30 @@ sap.ui.define([
 
 									var responseUrl = response.requestUri.replace("/AffectedEntity", "");
 									var objectId;
-									
+
 									if (responseUrl === item1.ErrorUrl) {
-										
-										if(syncStatusModel.getData().Errors[index].RequestObject === self.orderMetaObjectName){
-											objectId = data1.Orderid;
+
+										if (syncStatusModel.getData().Errors[index].RequestMetaObject === self.orderMetaObjectName) {
+											//Error related to an Order
 											
+											objectId = data1.Orderid;
+
 											syncStatusModel.getData().Errors[index].ObjectID = objectId;
 											//Assign to array
-										
+
 											syncStatusModel.getData().OrderErrors.push(objectId);
-										}
-										else if(syncStatusModel.getData().Errors[index].RequestObject === self.notificationMetaObjectName){
-											objectId = data1.NotifNo;
+										} else if (syncStatusModel.getData().Errors[index].RequestMetaObject === self.notificationMetaObjectName) {
+											//Error related to an Notification
 											
+											objectId = data1.NotifNo;
+
 											syncStatusModel.getData().Errors[index].ObjectID = objectId;
 											//Assign to array
 											syncStatusModel.getData().NoticationErrors.push(objectId);
-										}
-										else{
+										} else {
 											//We do not know the failing object therefore we cannot get the details
 										}
-										
+
 										var objectData = JSON.parse(JSON.stringify(data1));
 										delete objectData['@com.sap.vocabularies.Offline.v1.inErrorState'];
 										delete objectData['@com.sap.vocabularies.Offline.v1.islocal'];
@@ -80,7 +82,7 @@ sap.ui.define([
 
 										syncStatusModel.getData().Errors[index].ObjectData = objectData;
 									}
-									
+
 									syncStatusModel.refresh(true);
 								}
 							);
@@ -93,21 +95,12 @@ sap.ui.define([
 				}
 			);
 		},
-		
+
 		getMessageTextFromError: function(message) {
 			try {
 				var parsedJSON = JSON.parse(message);
 
 				return parsedJSON.error.message.value;
-
-				//var errorJSON = {
-				//    message: parsedJSON.error.message.value,
-				//    errorCode: parsedJSON.error.code,
-				//    requestId: entry.RequestID,
-				//    requestBody: JSON.parse(entry.RequestBody),
-				//    requestMethod: entry.RequestMethod,
-				//    requestUrl: entry.RequestURL
-				//};
 
 			} catch (error) {
 				return message;
@@ -122,12 +115,17 @@ sap.ui.define([
 			return title;
 		},
 
+		// Method only used to insert display string in error popup view
 		getRequestObjectName: function(requestUrl) {
 			var orderURLPrefix = "/OrderSet";
 			var timeRegistrationURLPrefix = "/TimeRegistrationSet";
 			var AttachmentsURLPrefix = "/AttachmentsSet";
 			var MaterialsURLPrefix = "/MaterialsSet";
 			var MaterialsSummaryURLPrefix = "/MaterialsSummarySet";
+			
+			//OrderSet(Orderid='4000095')/OrderGoodsMovements
+			// OrderSet(Orderid='4000095')/OrderTimeRegistration
+			//OrderSet(Orderid='" + orderNo + "')/OrderAttachments
 
 			if (requestUrl.startsWith(orderURLPrefix)) {
 				return "Order";
@@ -151,16 +149,19 @@ sap.ui.define([
 
 			return "";
 		},
-		
-		getRequestMetaObjectName: function(requestUrl) {
-			var orderURLPrefix = "/OrderSet";
-			var notificationSetURLPrefix = "/NotificationSet";
 
-			if (requestUrl.startsWith(orderURLPrefix)) {
+		/*	Function used to determine the overlying changed object.
+			This is used to related the odata post error to the correct overlying object
+		*/
+		getRequestMetaObjectName: function(requestUrl) {
+			var orderRelatedURLPrefixes = ["/OrderSet", "/OperationsSet", "/MeasurementDocsSet", "/AttachmentsSet"];
+			var notificationRelatedURLPrefixes = ["/NotificationSet", "NotifAttachmentsSet"];
+
+			if ($.inArray(requestUrl, orderRelatedURLPrefixes) >= 0) {
 				return self.orderMetaObjectName;
 			}
 
-			if (requestUrl.startsWith(notificationSetURLPrefix)) {
+			if ($.inArray(requestUrl, notificationRelatedURLPrefixes) >= 0) {
 				return self.notificationMetaObjectName;
 			}
 

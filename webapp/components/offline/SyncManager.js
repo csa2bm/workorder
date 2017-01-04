@@ -14,6 +14,18 @@ sap.ui.define([
 			router.attachRoutePatternMatched(this.onRouteMatched, this);
 		},
 
+		saveLastSyncTimeInBrowserCache: function(lastSyncTime) {
+			jQuery.sap.require("jquery.sap.storage");
+
+			if (jQuery.sap.storage.isSupported()) {
+				//Get Storage object to use
+				var oStorage = jQuery.sap.storage(jQuery.sap.storage.Type.local);
+
+				// Set value in htlm5 storage 
+				oStorage.put("LastSyncTime", lastSyncTime);
+			}
+		},
+
 		onRouteMatched: function(oEvent) {
 			// Get name of route
 			var sName = oEvent.getParameter("name");
@@ -41,9 +53,9 @@ sap.ui.define([
 		sync: function() {
 			// Only sync when there is a connection
 			if (sap.hybrid.SMP.isOnline) {
-			// Show sync indicator
-			this.setSyncIndicators(true);
-			// Start sync
+				// Show sync indicator
+				this.setSyncIndicators(true);
+				// Start sync
 				sap.hybrid.synAppOfflineStore(function() {
 						// Refresh default model to display any changes to data
 						sap.ui.getCore().getComponent("__component0").getModel().refresh();
@@ -53,7 +65,9 @@ sap.ui.define([
 						var d = new Date();
 						syncStatusModel.getData().LastSyncTime = d.toLocaleString();
 						syncStatusModel.refresh();
-						
+
+						this.saveLastSyncTimeInBrowserCache(syncStatusModel.getData().LastSyncTime);
+
 						// Hide sync indicator
 						this.setSyncIndicators(false);
 
@@ -62,8 +76,7 @@ sap.ui.define([
 					}.bind(this),
 					function(error) {
 						// Error during sync - most likely the device went offline during a sync
-						if (sap.hybrid.SMP.isOnline)
-						{
+						if (sap.hybrid.SMP.isOnline) {
 							// If this was not due to the device beeing offline, show the error
 							this.showMessage("Error during sync: " + error);
 						}
@@ -81,8 +94,7 @@ sap.ui.define([
 				title: "Message",
 				actions: [sap.m.MessageBox.Action.OK],
 				defaultAction: sap.m.MessageBox.Action.NO,
-				onClose: function(oAction, object) {
-				}
+				onClose: function(oAction, object) {}
 			});
 		},
 

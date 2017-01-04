@@ -25,8 +25,9 @@ sap.ui.define([
 			this.setModel(models.createSyncModel(), "syncStatusModel");
 			// set settings model
 			this.setModel(models.createAppInfoModel(), "appInfoModel");
-			
+
 			var appInfoModel = this.getModel("appInfoModel");
+			var syncStatusModel = this.getModel("syncStatusModel");
 
 			if (sap.hybrid) {
 				// Configure status bar
@@ -35,26 +36,42 @@ sap.ui.define([
 					StatusBar.styleDefault();
 					StatusBar.overlaysWebView(false);
 				}
-				
+
 				//Get appversion and app name
-				
-		        cordova.getAppVersion.getVersionNumber(function (version) {
-		             appInfoModel.getData().AppVersion = version;
 
-		        });
+				cordova.getAppVersion.getVersionNumber(function(version) {
+					appInfoModel.getData().AppVersion = version;
 
-		        cordova.getAppVersion.getAppName(function (appName) {
-		            appInfoModel.getData().AppName = appName;
-		        });
-				
+				});
+
+				cordova.getAppVersion.getAppName(function(appName) {
+					appInfoModel.getData().AppName = appName;
+				});
+
+				//Set last sync time 
+				syncStatusModel.getData().LastSyncTime = this.getLastSyncTimeInBrowserCache();
+				syncStatusModel.refresh();
+
 				// Strat the sync manager
 				SyncManager.start(this.getRouter());
+
 			}
-			
-			
-			
+
 			// Start the router
 			this.getRouter().initialize();
+		},
+
+		getLastSyncTimeInBrowserCache: function() {
+			jQuery.sap.require("jquery.sap.storage");
+			//Get Storage object to use
+			if (jQuery.sap.storage.isSupported()) {
+				var oStorage = jQuery.sap.storage(jQuery.sap.storage.Type.local);
+
+				// Set value in htlm5 storage 
+				return oStorage.get("LastSyncTime");
+			} else {
+				return "";
+			}
 		},
 
 		/**
