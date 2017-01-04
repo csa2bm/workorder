@@ -78,8 +78,8 @@ sap.ui.define([
 				this.getView().getModel().createBindingContext(contextPath, "", {
 						expand: aExpand.toString()
 					},
-					function(oEvent) {
-						var f = oEvent;
+					function(oEvent2) {
+						//var f = oEvent2;
 						that.ExpandLoaded = true;
 
 						//Set edit mode
@@ -166,7 +166,7 @@ sap.ui.define([
 
 					that.updateEditModeModel(orderStatus);
 
-					if (orderStatus == that.getI18nText("orderStatusCompleted")) {
+					if (orderStatus === that.getI18nText("orderStatusCompleted")) {
 						that.navigateBack();
 					}
 				},
@@ -254,31 +254,31 @@ sap.ui.define([
 				return false;
 			}
 		},
-		
-			openErrorsView: function(oEvent) {
-				var orderId = oEvent.getSource().getBindingContext().getObject().Orderid;
-				
-                             this.getView().getModel("syncStatusModel").getData().ErrorListContextObject = "";
-                             this.getView().getModel("syncStatusModel").getData().ErrorListContextID = "";
-                             this.getView().getModel("syncStatusModel").refresh();
-                             
-                             if (!this._errorsView) {
-                             
-                             var idPrefix = this.getView().createId("errorList");
-                             var controller = sap.ui.controller("com.twobm.mobileworkorder.components.offline.ErrorListControl");
-                             this._errorsView = sap.ui.xmlfragment(idPrefix,
-                                                                   "com.twobm.mobileworkorder.components.offline.fragments.ErrorsListPopover", controller);
-                             controller.dialog = this._errorsView;
-                             controller.idPrefix = idPrefix;
-                             this.getView().addDependent(this._errorsView);
-                             }
-                             
-                             // delay because addDependent will do a async rerendering and the actionSheet will immediately close without it.
-                             // var oButton = oEvent.getSource();
-                             // jQuery.sap.delayedCall(0, this, function() {
-                             this._errorsView.open();
-                             
-                             
-                             }
+
+		openErrorsView: function(oEvent) {
+			var orderId = oEvent.getSource().getBindingContext().getObject().Orderid;
+
+			this.getView().getModel("syncStatusModel").getData().ErrorListContextObject = "Order";
+			this.getView().getModel("syncStatusModel").getData().ErrorListContextID = orderId;
+			this.getView().getModel("syncStatusModel").refresh();
+
+			if (!this._errorsView) {
+
+				var idPrefix = this.getView().createId("errorList");
+				var controller = sap.ui.controller("com.twobm.mobileworkorder.components.offline.ErrorListControl");
+				this._errorsView = sap.ui.xmlfragment(idPrefix,
+					"com.twobm.mobileworkorder.components.offline.fragments.ErrorsListPopover", controller);
+				this._errorsView.setModel(this.getView().getModel());
+				controller.dialog = this._errorsView;
+				controller.idPrefix = idPrefix;
+				this.getView().addDependent(this._errorsView);
+			}
+
+			// delay because addDependent will do a async rerendering and the actionSheet will immediately close without it.
+			// var oButton = oEvent.getSource();
+			// jQuery.sap.delayedCall(0, this, function() {
+			this._errorsView.open();
+
+		}
 	});
 });

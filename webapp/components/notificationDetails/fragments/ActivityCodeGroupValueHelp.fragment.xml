@@ -13,7 +13,8 @@
 		search="handleValueHelpSearchCodeGroup"
 		confirm="handleValueHelpCloseCodeGroup"
 		cancel="handleValueHelpCloseCodeGroup"
-		afterClose="handleValueHelpAfterCloseCodeGroup">
+		>
+		<!--afterClose="handleValueHelpAfterCloseCodeGroup"-->
 		<StandardListItem
 			title="{CodegroupText}"
 			description="{Codegroup}" />

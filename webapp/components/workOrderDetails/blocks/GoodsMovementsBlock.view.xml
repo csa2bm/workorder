@@ -5,7 +5,8 @@
 			<Button class="sapUiSmallMarginEnd" icon="sap-icon://add" press="addMaterial" enabled="{parts:[{path:'OrderStatus'}],formatter:'.orderStatusValid'}"></Button>
 			<Button class="sapUiSmallMarginEnd" icon="sap-icon://bar-code" press="scanBarcode" enabled="{parts:[{path:'OrderStatus'}],formatter:'.orderStatusValid'}"></Button>
 		</l:HorizontalLayout>
-		<Table id="MaterialsSummaryList" titel="{i18n>SubSectionTitleMaterials}" templateShareable="true"
+		<!--titel="{i18n>SubSectionTitleMaterials}"-->
+		<Table id="MaterialsSummaryList"
 			items="{ path: 'OrderMaterialSummary', sorter: { path: 'Matnr', descending: false}}" noDataText="{i18n>WorkOrderDetails-MaterialsBlock-NoMaterials}">
 			<columns>
 				<Column demandPopin="true" popinDisplay="WithoutHeader">

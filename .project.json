@@ -7,7 +7,7 @@
   "build": {
     "targetFolder": "dist",
     "sourceFolder": "webapp",
-    "buildRequired": false,
+    "buildRequired": true,
     "lastBuildDateTime": "Tue, 20 Dec 2016 07:24:28 GMT"
   },
   "generation": [
@@ -451,6 +451,11 @@
           "registry": "cordova-plugin-statusbar",
           "localBuild": true,
           "registered": true
+        },
+        "AppVersion": {
+          "selected": true,
+          "registry": "cordova-plugin-app-version",
+          "localBuild": true
         }
       }
     }

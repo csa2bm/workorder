@@ -8,7 +8,7 @@
 				</l:HorizontalLayout>
 			</headerContent>
 			<content>
-				<Table id="notificationTableId" items="{path: '/NotificationsSet', sorter: [{path: 'NotifDate', descending: true}]}" noDataText="No Notifications" showSeparators="false"
+				<Table id="notificationTableId" items="{path: '/NotificationsSet', sorter: [{path: 'NotifDate', descending: true}]}" noDataText="No Notifications" showSeparators="None"
 					class="notificationListTableClass" >
 					<columns>
 						<Column id="dataColumn">
@@ -50,7 +50,7 @@
 				</Table>
 			</content>
 			<footer>
-				<OverflowToolbar id="detailToolbar">
+				<Toolbar id="detailToolbar">
 					<content>
 						<mvc:XMLView viewName="com.twobm.mobileworkorder.components.offline.Status"/>
 						<ToolbarSpacer></ToolbarSpacer>
@@ -60,14 +60,14 @@
 							<OverflowToolbarLayoutData priority="NeverOverflow"/>
 						</layoutData>
 						</Button>
-						<Button id="notificationCreateButton" type="Emphasized" ariaDescribedBy="acceptButtonDescription genericButtonDescription"
+						<Button id="notificationCreateButton" type="Emphasized"
 							press="createNewNotification" text="{i18n>NotificationList-CreateButton}">
 							<layoutData>
 								<OverflowToolbarLayoutData priority="NeverOverflow"/>
 							</layoutData>
 						</Button>
 					</content>
-				</OverflowToolbar>
+				</Toolbar>
 			</footer>
 		</Page>
 	</App>

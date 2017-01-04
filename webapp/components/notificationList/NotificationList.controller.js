@@ -127,7 +127,7 @@ sap.ui.define([
 			}
 
 			// delay because addDependent will do a async rerendering and the actionSheet will immediately close without it.
-			var oButton = oEvent.getSource();
+			//var oButton = oEvent.getSource();
 			jQuery.sap.delayedCall(0, this, function() {
 				this._errorsView.open();
 			});
@@ -140,7 +140,7 @@ sap.ui.define([
 		},
 
 		isInErrorStateNotification: function(errorsArray, notificationId) {
-			console.log("isInErrorStateNotification");
+			//console.log("isInErrorStateNotification");
 
 			if ($.inArray(notificationId, errorsArray) >= 0) {
 				return true;

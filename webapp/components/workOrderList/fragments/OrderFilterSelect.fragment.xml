@@ -2,10 +2,11 @@
 	<Popover placement="Top" modal="false" showHeader="false">
 		<content>
 			<l:VerticalLayout class="sapUiTinyMarginEnd">
+				<!--ariaDescribedBy="acceptButtonDescription genericButtonDescription"-->
 				<Button class="sapUiTinyMarginTop sapUiTinyMarginBegin sapUiTinyMarginEnd" width="100%"
-					ariaDescribedBy="acceptButtonDescription genericButtonDescription" press="setUserStatusInvoiceReady" text="My Orders" type="Emphasized"></Button>
+					 press="setUserStatusInvoiceReady" text="My Orders" type="Emphasized"></Button>
 				<Button class="sapUiTinyMarginBottom sapUiTinyMarginBegin sapUiTinyMarginEnd" width="100%"
-					ariaDescribedBy="acceptButtonDescription genericButtonDescription" press="setUserStatusTaskFinished" text="Unassigned Orders"
+					 press="setUserStatusTaskFinished" text="Unassigned Orders"
 					type="Emphasized"></Button>
 			</l:VerticalLayout>
 		</content>

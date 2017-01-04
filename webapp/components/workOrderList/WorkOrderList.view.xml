@@ -8,7 +8,8 @@
 				</l:HorizontalLayout>
 			</headerContent>
 			<content>
-				<Table id="workOrderTableId" items="{path: '/OrderSet', sorter: [{path: 'StartDate', descending: false}]}" noDataText="No Work Orders" showSeparators="true" class="workOrderListTableClass">
+				<Table id="workOrderTableId" items="{path: '/OrderSet', sorter: [{path: 'StartDate', descending: false}]}" noDataText="No Work Orders"
+					showSeparators="All" class="workOrderListTableClass">
 					<columns>
 						<Column width="1rem" hAlign="Center" vAlign="Middle" minScreenWidth="Tablet">
 							<header>
@@ -35,42 +36,37 @@
 								<Label text="{i18n>WorkOrderList-EquipmentHeader}"/>
 							</header>
 						</Column>
-						<Column demandPopin="false" id="errorColumn" width="1rem"/>
 						<Column demandPopin="false" id="navigationColumn" width="0.5rem"/>
 					</columns>
 					<items>
 						<ColumnListItem type="Active" press="onWorkOrderItemPress">
 							<cells>
-								<core:Icon class="" src="sap-icon://circle-task-2" color="{parts:[{path:'OrderStatus'}],formatter:'.getOrderStatusIconColor'}"/>
+								<core:Icon src="sap-icon://circle-task-2" color="{parts:[{path:'OrderStatus'}],formatter:'.getOrderStatusIconColor'}"/>
 								<ObjectIdentifier text="{path: 'FinishDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"
 									title="{path: 'StartDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"/>
 								<ObjectIdentifier text="{Orderid}" title="{ShortText}"/>
 								<ObjectIdentifier text="{FunctLoc}" title="{Funcldescr}"/>
 								<ObjectIdentifier text="{Equipment}" title="{Equidescr}"/>
-								<core:Icon 
-								color="red" useIconTooltip="false" size="1.5rem" src="sap-icon://error" visible="false"></core:Icon>
-								<core:Icon class="sapUiTinyMarginTop" src="{parts:[{path:'syncStatusModel>/OrderErrors'},{path:'Orderid'}],formatter:'.isInErrorStateIconWorkOrder'}" color="{parts:[{path:'syncStatusModel>/OrderErrors'},{path:'Orderid'}],formatter:'.isInErrorStateColorWorkOrder'}"/>
+								<core:Icon class="sapUiTinyMarginTop"
+									src="{parts:[{path:'syncStatusModel>/OrderErrors'},{path:'Orderid'}],formatter:'.isInErrorStateIconWorkOrder'}"
+									color="{parts:[{path:'syncStatusModel>/OrderErrors'},{path:'Orderid'}],formatter:'.isInErrorStateColorWorkOrder'}"/>
 							</cells>
 						</ColumnListItem>
 					</items>
 				</Table>
 			</content>
 			<footer>
-				<OverflowToolbar id="detailToolbar">
+				<Toolbar id="detailToolbar">
 					<content>
 						<mvc:XMLView viewName="com.twobm.mobileworkorder.components.offline.Status"/>
-					
 						<ToolbarSpacer></ToolbarSpacer>
-								<Button id="goToNotificationButton" icon="sap-icon://refresh"
-						press="onRefresh" visible="{path:'',formatter:'.isOnline'}">
-						<layoutData>
-							<OverflowToolbarLayoutData priority="NeverOverflow"/>
-						</layoutData>
-					</Button>
-			
+						<Button id="goToNotificationButton" icon="sap-icon://refresh" press="onRefresh" visible="{path:'',formatter:'.isOnline'}">
+							<layoutData>
+								<OverflowToolbarLayoutData priority="NeverOverflow"/>
+							</layoutData>
+						</Button>
 					</content>
-					
-				</OverflowToolbar>
+				</Toolbar>
 			</footer>
 		</Page>
 	</App>

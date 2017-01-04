@@ -3,15 +3,15 @@
 	xmlns:mic="sap.suite.ui.microchart" height="100%">
 	<App class="dashboardClass" id="mobileWorkOrderApp">
 		<Page title="{i18n>Dashboard-Title}">
-			<!--<headerContent>
+			<headerContent>
 				<l:HorizontalLayout>
+					<!--<Image width="2em" height="2em" src="{DashBoardModel>/ImagePath}" press="onSettings" class="circular sapUiTinyMarginTop sapUiTinyMarginEnd"></Image>-->
 					<core:Icon width="3em" height="3em" noTabStop="true" press="onSettings" src="sap-icon://action-settings"/>
 				</l:HorizontalLayout>
-			</headerContent>-->
+			</headerContent>
 			<content>
-		<FlexBox alignItems="Left" justifyContent="Left">
+				<FlexBox alignItems="Start" justifyContent="Start">
 					<items>
-					
 						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" visible="{device>/isNotPhone}"
 							backgroundImage="images/2bmTileLogo7.png" frameType="TwoByOne" press="press">
 							<tileContent>
@@ -22,41 +22,41 @@
 								</TileContent>
 							</tileContent>
 						</GenericTile>
-							<CustomTile class="sapUiTinyMarginTop TwoByOne sapMGT sapMPointer sapUiTinyMarginBegin customProfileTile">
+						<CustomTile class="sapUiTinyMarginTop TwoByOne sapMGT sapMPointer sapUiTinyMarginBegin customProfileTile">
 							<HBox alignItems="Start" justifyContent="SpaceBetween" class="sapUiSmallMarginBegin sapUiSmallMarginTop sapUiSmallMarginEnd">
 								<items>
 									<VBox>
 										<items>
-											<Text text="{DashBoardModel>/Fullname}" class="profileTitle"/>
-											<Text text="{DashBoardModel>/Position}" class="profileSubTitle"/>
+											<Text text="{appInfoModel>/UserFullName}" class="profileTitle"/>
+											<Text text="{appInfoModel>/UserPosition}" class="profileSubTitle"/>
 										</items>
 									</VBox>
 									<VBox alignItems="End" justifyContent="Center" height="195px">
 										<items>
-											<Image src="{DashBoardModel>/ImagePath}" class="circular sapUiSmallMarginEnd"></Image>
+											<Image src="{appInfoModel>/UserImage}" class="circular sapUiSmallMarginEnd"></Image>
 										</items>
 									</VBox>
 								</items>
 							</HBox>
 						</CustomTile>
-			</items>
+					</items>
 				</FlexBox>
 				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-WorkOrdersTile-Header}" subheader=""
-					size="S" frameType="OneByOne" press="onPressOtherWorkorders">
+					frameType="OneByOne" press="onPressOtherWorkorders">
 					<tileContent>
-						<TileContent footer="" size="S">
+						<TileContent footer="">
 							<content>
-								<NumericContent size="S" value="{DashBoardModel>/orderCount}" valueColor="" icon="sap-icon://eam-work-order"/>
+								<NumericContent value="{DashBoardModel>/orderCount}" icon="sap-icon://eam-work-order"/>
 							</content>
 						</TileContent>
 					</tileContent>
 				</GenericTile>
 				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-NotificationsTile-Header}" subheader=""
-					size="S" frameType="OneByOne" press="onPressNotifications">
+					frameType="OneByOne" press="onPressNotifications">
 					<tileContent>
-						<TileContent footer="" size="S">
+						<TileContent footer="">
 							<content>
-								<NumericContent size="S" value="{DashBoardModel>/notificationCount}" valueColor="" icon="sap-icon://notification"/>
+								<NumericContent value="{DashBoardModel>/notificationCount}" icon="sap-icon://notification"/>
 							</content>
 						</TileContent>
 					</tileContent>
@@ -74,7 +74,7 @@
 				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-CreateNotificationTile-Header}" size="S"
 					frameType="OneByOne" press="onPressCreateNotification">
 					<tileContent>
-						<TileContent size="S">
+						<TileContent>
 							<content>
 								<ImageContent src="sap-icon://add"/>
 							</content>
@@ -83,7 +83,7 @@
 				</GenericTile>
 				
 				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-ScanObjectTile-Header}" subheader=""
-					size="S" frameType="OneByOne" press="onPressScanObject">
+					frameType="OneByOne" press="onPressScanObject">
 					<tileContent>
 						<TileContent>
 							<content>
@@ -92,7 +92,6 @@
 						</TileContent>
 					</tileContent>
 				</GenericTile>
-			
 			</content>
 			<footer>
 				<Toolbar id="detailToolbar">

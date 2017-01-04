@@ -53,13 +53,27 @@ sap.ui.define([
 		
 		openErrorsForNotification : function(oEvent){
 			var notifNo = oEvent.getSource().getBindingContext().getObject().NotifNo;
-			
-			var data = {
-				"Object" : "Notification",
-				"ID" : notifNo
-			};
-			
-			this.getEventBus().publish("ShowErrorList", data);
+
+			this.getView().getModel("syncStatusModel").getData().ErrorListContextObject = "Notification";
+			this.getView().getModel("syncStatusModel").getData().ErrorListContextID = notifNo;
+			this.getView().getModel("syncStatusModel").refresh();
+
+			if (!this._errorsView) {
+
+				var idPrefix = this.getView().createId("errorList");
+				var controller = sap.ui.controller("com.twobm.mobileworkorder.components.offline.ErrorListControl");
+				this._errorsView = sap.ui.xmlfragment(idPrefix,
+					"com.twobm.mobileworkorder.components.offline.fragments.ErrorsListPopover", controller);
+				this._errorsView.setModel(this.getView().getModel());
+				controller.dialog = this._errorsView;
+				controller.idPrefix = idPrefix;
+				this.getView().addDependent(this._errorsView);
+			}
+
+			// delay because addDependent will do a async rerendering and the actionSheet will immediately close without it.
+			// var oButton = oEvent.getSource();
+			// jQuery.sap.delayedCall(0, this, function() {
+			this._errorsView.open();
 		}
 	});
 });

@@ -23,6 +23,10 @@ sap.ui.define([
 			this.setModel(models.createDeviceModel(), "device");
 			// set sync model
 			this.setModel(models.createSyncModel(), "syncStatusModel");
+			// set settings model
+			this.setModel(models.createAppInfoModel(), "appInfoModel");
+			
+			var appInfoModel = this.getModel("appInfoModel");
 
 			if (sap.hybrid) {
 				// Configure status bar
@@ -31,10 +35,24 @@ sap.ui.define([
 					StatusBar.styleDefault();
 					StatusBar.overlaysWebView(false);
 				}
+				
+				//Get appversion and app name
+				
+		        cordova.getAppVersion.getVersionNumber(function (version) {
+		             appInfoModel.getData().AppVersion = version;
 
+		        });
+
+		        cordova.getAppVersion.getAppName(function (appName) {
+		            appInfoModel.getData().AppName = appName;
+		        });
+				
 				// Strat the sync manager
 				SyncManager.start(this.getRouter());
 			}
+			
+			
+			
 			// Start the router
 			this.getRouter().initialize();
 		},

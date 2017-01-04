@@ -6,7 +6,7 @@ xmlns:m="sap.m"
 xmlns="sap.uxap"
 xmlns:blocks="com.twobm.mobileworkorder.components.measuringPointDetails.blocks.configuration"
 height="100%">
-	<m:Page showNavButton="true" navButtonPress="onNavigationButtonPress" title="{i18n>MeasuringPointDetails-Title}" height="100%">
+	<m:Page showNavButton="true" navButtonPress="onNavigationButtonPress" title="{i18n>MeasuringPointDetails-Title}">
 		<ObjectPageLayout id="MeasuringObjectPageId" enableLazyLoading="false">
 			<headerTitle>
 				<ObjectPageHeader headerDesign="Dark" objectTitle="{Descriptn}" objectSubtitle="{Measpoint}"/>

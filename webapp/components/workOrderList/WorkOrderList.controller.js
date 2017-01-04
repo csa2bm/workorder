@@ -92,7 +92,7 @@ sap.ui.define([
 			var model = this.getView().getModel();
 			model.refresh();
 		},
-		
+
 		getOrderStatusIcon: function(orderStatus) {
 
 			if (orderStatus === this.getI18nText("orderStatusNotStarted")) {
@@ -159,18 +159,16 @@ sap.ui.define([
 				return "Gray";
 			}
 		},
-		
-		isOnline: function(){
-			if (sap.hybrid)
-			{
+
+		isOnline: function() {
+			if (sap.hybrid) {
 				return false;
 			}
-			
+
 			return true;
 		},
-		
-		onRefresh: function()
-		{
+
+		onRefresh: function() {
 			this.getView().getModel().refresh();
 		}
 	});

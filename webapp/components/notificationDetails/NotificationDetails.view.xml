@@ -10,7 +10,7 @@
 		<m:content>
 		<ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="false">
 			<headerTitle>
-				<ObjectPageHeader headerDesign="Dark" objectTitle="{path:'ShortText'}" objectSubtitle="{path:'NotifNo'}"></ObjectPageHeader>
+				<ObjectPageHeader objectTitle="{path:'ShortText'}" objectSubtitle="{path:'NotifNo'}"></ObjectPageHeader>
 			</headerTitle>
 			<sections>
 				<ObjectPageSection>
@@ -73,8 +73,7 @@
 		</ObjectPageLayout>
 		</m:content>
 		<m:footer>
-			<m:OverflowToolbar>
-				<m:content>
+			<m:Toolbar>
 					<m:ToolbarSpacer></m:ToolbarSpacer>
 					<m:Button id="editNotificationButton" icon="sap-icon://sap-icon://edit" ariaDescribedBy="genericButtonDescription"
 						press="editNotificationPressed">
@@ -82,8 +81,7 @@
 							<m:OverflowToolbarLayoutData priority="NeverOverflow"/>
 						</m:layoutData>
 					</m:Button>
-				</m:content>
-			</m:OverflowToolbar>
+			</m:Toolbar>
 		</m:footer>
 	</m:Page>
 </core:View>

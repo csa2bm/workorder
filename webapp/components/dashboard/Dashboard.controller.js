@@ -29,6 +29,8 @@ sap.ui.define([
 					orderCount: "0"
 				});
 				this.getView().setModel(this.DashBoardModel, "DashBoardModel");
+				
+				this.getUserDetails();
 			}
 
 			this.getEventBus().subscribe("OfflineStore", "DBReinitialized", this.dbHasBeenReinitialized, this);
@@ -37,17 +39,6 @@ sap.ui.define([
 		},
 
 		setContentInTiles: function() {
-			var parametersUserDetails = {
-				success: function(oData, oResponse) {
-					this.DashBoardModel.getData().Fullname = oData.Fullname;
-					this.DashBoardModel.getData().Position = oData.Position;
-					//this.DashBoardModel.getData().ImagePath = oData.__metadata.media_src;
-					this.DashBoardModel.getData().ImagePath = this.getView().getModel().sServiceUrl + "/UserDetailsSet('LLA')/$value";
-					
-					this.DashBoardModel.refresh();
-				}.bind(this),
-				error: this.errorCallBackShowInPopUp
-			};
 			var parametersOrder = {
 				success: function(oData, oResponse) {
 					this.DashBoardModel.getData().orderCount = oData;
@@ -65,7 +56,31 @@ sap.ui.define([
 
 			this.getView().getModel().read("/OrderSet/$count", parametersOrder);
 			this.getView().getModel().read("/NotificationsSet/$count", parametersNotif);
-			this.getView().getModel().read("/UserDetailsSet('LLA')", parametersUserDetails);
+		},
+
+		getUserDetails: function() {
+			var parametersUserDetails = {
+				success: function(oData, oResponse) {
+					this.getView().getModel("appInfoModel").getData().UserFullName = oData.results[0].Fullname;
+					this.getView().getModel("appInfoModel").getData().UserFirstName = oData.results[0].Firstname;
+					this.getView().getModel("appInfoModel").getData().UserName = oData.results[0].Username;
+					this.getView().getModel("appInfoModel").getData().UserPosition = oData.results[0].Position;
+
+					if (sap.hybrid) {
+						this.getView().getModel("appInfoModel").getData().UserImage = oData.results[0].__metadata.media_src;
+					} else {
+						this.getView().getModel("appInfoModel").getData().UserImage = this.getView().getModel().sServiceUrl +
+							"/UserDetailsSet('LLA')/$value";
+					}
+					//this.DashBoardModel.getData().ImagePath = oData.results[0].__metadata.media_src;
+					//this.DashBoardModel.getData().ImagePath = this.getView().getModel().sServiceUrl + "/UserDetailsSet('LLA')/$value";
+
+					this.getView().getModel("appInfoModel").refresh();
+				}.bind(this),
+				error: this.errorCallBackShowInPopUp
+			};
+
+			this.getView().getModel().read("/UserDetailsSet", parametersUserDetails);
 		},
 
 		setNotificationModel: function(oEvent) {
@@ -103,18 +118,18 @@ sap.ui.define([
 			 }
 			 );*/
 
-			alert("Starting push registration..");
+			sap.m.MessageToast.show("Starting push registration..");
 
 			sap.Push.registerForNotificationTypes(sap.Push.notificationType.badge | sap.Push.notificationType.sound | sap.Push.notificationType
 				.alert,
 				function(message) {
-					alert("Successfully registered for push: " + message);
+					sap.m.MessageToast.show("Successfully registered for push: " + message);
 				},
 				function(message) {
-					alert("Failed to register for push: " + message);
+					sap.m.MessageToast.show("Failed to register for push: " + message);
 				},
 				function(message) {
-					alert("Received message: " + message);
+					sap.m.MessageToast.show("Received message: " + message);
 				}, "");
 		},
 
@@ -181,6 +196,8 @@ sap.ui.define([
 			}
 			// toggle compact style
 			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);
+			this.settingsDialog.setModel(this.getView().getModel("i18n"), "i18n");
+			this.settingsDialog.setModel(this.getView().getModel("appInfoModel"), "appInfoModel");
 			this.settingsDialog.openBy(oEvent.getSource());
 		},
 
@@ -198,18 +215,16 @@ sap.ui.define([
 
 			this.getEventBus().publish("UpdateSyncState");
 		},
-		
-		isOnline: function(){
-			if (sap.hybrid)
-			{
+
+		isOnline: function() {
+			if (sap.hybrid) {
 				return false;
 			}
-			
+
 			return true;
 		},
-		
-		onRefresh: function()
-		{
+
+		onRefresh: function() {
 			this.setContentInTiles();
 			this.getView().getModel().refresh();
 		},

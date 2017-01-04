@@ -110,7 +110,7 @@ sap.ui.define([
 		},
 
 		errorCallback: function(e) {
-			console.log("An error occurred " + JSON.stringify(e));
+			sap.m.MessageToast.show("SyncStateHandler: An error occurred " + JSON.stringify(e));
 		}
 	};
 });

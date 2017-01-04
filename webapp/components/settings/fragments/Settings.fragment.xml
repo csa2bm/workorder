@@ -1,8 +1,31 @@
 <core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc">
-	<ResponsivePopover class="sapUiPopupWithPadding" placement="PreferredTopOrFlip" title="{i18n>dataSyncPopupHeader}">
+	<ResponsivePopover class="sapUiPopupWithPadding" placement="PreferredTopOrFlip" title="{i18n>App-Info}">
+		<endButton>
+			<Button text="{i18n>SettingsPopup-ResetClient}" press="onResetClient"></Button>
+		</endButton>
 		<content>
 			<l:VerticalLayout>
-				<Button class="sapUiMediumMarginTop" text="Reset client" press="onResetClient"></Button>
+				<Panel class="sapUiSmallMarginBottom">
+					<l:VerticalLayout>
+						<Image src="{appInfoModel>/UserImage}" press="onSettings" class="circular"></Image>
+						<Label class="syncStatusTextBold" text="{appInfoModel>/UserFullName} ({appInfoModel>/UserName})"/>
+						<Label class="syncStatusText" text="{appInfoModel>/UserPosition}"/>
+					</l:VerticalLayout>
+				</Panel>
+				<Panel>
+					<headerToolbar>
+						<Toolbar height="3rem">
+							<Title text="{appInfoModel>/AppName}"/>
+							<ToolbarSpacer/>
+						</Toolbar>
+					</headerToolbar>
+					<l:VerticalLayout>
+						<Link href="{appInfoModel>/WebSite}" text="{i18n>SettingsPopup-2BMWebsiteLink}" target="_blank" class="sapUiTinyMarginBottom"></Link>
+						<Image src="images/LoginLogo.png" press="onSettings" width="5em"></Image>
+						<Label class="syncStatusTextBold" text="{appInfoModel>/AppName} v.{appInfoModel>/AppVersion}"/>
+
+					</l:VerticalLayout>
+				</Panel>
 			</l:VerticalLayout>
 		</content>
 	</ResponsivePopover>

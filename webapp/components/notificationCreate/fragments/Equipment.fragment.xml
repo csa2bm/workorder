@@ -9,7 +9,8 @@
 		search="_handleValueHelpSearchEquipment"
 		confirm="_handleValueHelpCloseEquipment"
 		cancel="_handleValueHelpClose"
-		afterClose="_handleValueHelpAfterClose">
+		>
+		<!--afterClose="_handleValueHelpAfterClose"-->
 		<StandardListItem
 			title="{Equipment}"
 			description="{Description}" />

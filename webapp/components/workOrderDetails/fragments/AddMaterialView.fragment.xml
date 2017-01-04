@@ -3,7 +3,7 @@
 		<NavContainer id="navCon">
 			<Page id="master" showNavButton="false" title="{i18n>MaterialSearchPageHeaderLabel}">
 				<content>
-					<SearchField search="searchMaterial" placeholder="{i18n>MaterialSearchFieldPlaceHolder}" class=""/>
+					<SearchField search="searchMaterial" placeholder="{i18n>MaterialSearchFieldPlaceHolder}"/>
 					<List id="materialSearchResultsList" items="{/MaterialsSet}">
 						<StandardListItem title="{Description}" description="{Matnr}" info="{Quantity} {UOM}" type="Active"
 							press="onProductSelectedFromSearchResult"/>
@@ -51,7 +51,7 @@
 							<HBox>
 								<Input id="inpQuantity" type="Number"
 									value="{ path : 'MaterialDetailsModel>/SelectedQuantity', type : 'sap.ui.model.type.Integer', formatOptions : { groupingEnabled : true }, constraints : { minimum : 0, maximum : 1000000 }}"
-									getValueLiveUpdate="true" valueStateText="{i18n>MaterialQuantityMustBeMoreThanZero}" change="recalculateTotal"/>
+								    valueStateText="{i18n>MaterialQuantityMustBeMoreThanZero}" change="recalculateTotal"/>
 								<Label text="" class="sapUiSmallMarginEnd"/>
 								<Button icon="sap-icon://less" press="decreaseMaterialToOrder" class="sapUiSmallMarginEnd"></Button>
 								<Button icon="sap-icon://add" press="increaseMaterialToOrder"></Button>
@@ -63,7 +63,7 @@
 					<Toolbar>
 						<content>
 							<ToolbarSpacer></ToolbarSpacer>
-							<Button ariaDescribedBy="acceptButtonDescription genericButtonDescription" press="issueMaterial"
+							<Button press="issueMaterial"
 								text="Submit" type="Emphasized"></Button>
 							<Button ariaDescribedBy="genericButtonDescription" press="closeAddMaterial" text="{i18n>MaterialIssueDialogClose}"></Button>
 						</content>

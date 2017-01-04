@@ -1,6 +1,6 @@
 <core:View controllerName="com.twobm.mobileworkorder.components.objectDetails.blocks.NotificationHistoryBlock" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
 	xmlns:l="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns:vbm="sap.ui.vbm" xmlns="sap.m">
-	<Table id="idNotificationTable" items="{HistoricNotifSet}" noDataText="{i18n>ObjectDetails-OrderHistoryBlock-NoHistory=No history available}">
+	<Table id="idNotificationTable" items="{HistoricNotifSet}" noDataText="{i18n>ObjectDetails-OrderHistoryBlock-NoHistory}">
 		<columns>
 			<Column>
 				<Text text="{i18n>ObjectDetails-NotificationHistoryBlock-TimeAndStatusColumn}"/>

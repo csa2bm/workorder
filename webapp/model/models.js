@@ -13,9 +13,10 @@ sap.ui.define([
 			return oModel;
 		},
 
-		createSyncModel: function(){
+		createSyncModel: function() {
 			var oModel = new JSONModel({
 				SyncColor: "",
+				SyncIcon: "",
 				LastSyncTime: "",
 				Online: false,
 				PendingLocalData: false,
@@ -24,13 +25,28 @@ sap.ui.define([
 				Errors: [],
 				OrderErrors: [],
 				NoticationErrors: [],
-				ErrorListContextObject : "", //The object to limit the errors shown in the error list. For instance Order
-				ErrorListContextID : "" // The object ID to limit the errors shown in the error list. For instance Order ID
+				ErrorListContextObject: "", //The object to limit the errors shown in the error list. For instance Order
+				ErrorListContextID: "" // The object ID to limit the errors shown in the error list. For instance Order ID
 			});
-			
+
 			oModel.setDefaultBindingMode("TwoWay");
 			return oModel;
-		}
+		},
 
+		createAppInfoModel: function() {
+			var oModel = new JSONModel({
+				AppVersion: "AppVersion",
+				AppName: "AppName",
+				WebSite: "http://www.2bm.com/2bm-mobile-work-order/",
+				UserName: "",
+				UserFirstName: "",
+				UserFullName: "",
+				UserPosition: "",
+				UserImage: ""
+			});
+
+			oModel.setDefaultBindingMode("OneWay");
+			return oModel;
+		}
 	};
 });
