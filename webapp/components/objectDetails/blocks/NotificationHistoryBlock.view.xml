@@ -2,7 +2,7 @@
 	xmlns:l="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns:vbm="sap.ui.vbm" xmlns="sap.m">
 	<Table id="idNotificationTable" items="{HistoricNotifSet}" noDataText="{i18n>ObjectDetails-OrderHistoryBlock-NoHistory}">
 		<columns>
-			<Column>
+			<Column minScreenWidth="Tablet">
 				<Text text="{i18n>ObjectDetails-NotificationHistoryBlock-TimeAndStatusColumn}"/>
 			</Column>
 			<Column>
