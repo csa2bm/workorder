@@ -12,7 +12,7 @@ height="100%">
 				<ObjectPageHeader headerDesign="Dark" objectTitle="{Descriptn}" objectSubtitle="{Measpoint}"/>
 			</headerTitle>
 			<sections>
-				<!--<ObjectPageSection>
+				<ObjectPageSection>
 					<subSections>
 						<ObjectPageSubSection id="generalSectionId" title="{i18n>MeasuringPointDetails-GeneralSubSection}">
 							<blocks>
@@ -20,7 +20,7 @@ height="100%">
 							</blocks>
 						</ObjectPageSubSection>
 					</subSections>
-				</ObjectPageSection>-->
+				</ObjectPageSection>
 				<ObjectPageSection>
 					<subSections>
 						<ObjectPageSubSection title="{i18n>MeasuringPointDetails-HistorySubSection}">
