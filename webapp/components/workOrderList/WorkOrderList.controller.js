@@ -44,6 +44,7 @@ sap.ui.define([
 		handleViewSettingsDialogButtonPressed: function() {
 			if (!this._oDialog) {
 				this._oDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.workOrderList.fragments.OrderFilterDialog", this);
+				this._oDialog.setModel(this.getView().getModel("i18n"), "i18n");
 			}
 			// toggle compact style
 			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);

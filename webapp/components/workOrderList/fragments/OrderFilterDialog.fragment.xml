@@ -1,10 +1,10 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
-	<ViewSettingsDialog title="Sort orders" confirm="handleOrderFilterConfirm">
+	<ViewSettingsDialog title="{i18n>OrderFilterDialog_Title}" confirm="handleOrderFilterConfirm">
 		<sortItems text="f" title="js">
-			<ViewSettingsItem text="Start Date" key="StartDate" selected="true"/>
-			<ViewSettingsItem text="Short Text" key="ShortText"/>
-			<ViewSettingsItem text="Functional Location" key="Funcldescr"/>
-			<ViewSettingsItem text="Equipment" key="Equidescr"/>
+			<ViewSettingsItem text="{i18n>OrderFilterDialog_SortItem_StartDate}" key="StartDate" selected="true"/>
+			<ViewSettingsItem text="{i18n>OrderFilterDialog_SortItem_ShortText}" key="ShortText"/>
+			<ViewSettingsItem text="{i18n>OrderFilterDialog_SortItem_FuncLoc}" key="Funcldescr"/>
+			<ViewSettingsItem text="{i18n>OrderFilterDialog_SortItem_Equipment}" key="Equidescr"/>
 		</sortItems>
 		
 		<!--

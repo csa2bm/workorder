@@ -1,14 +1,14 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
-	<ViewSettingsDialog title="Sort notifications" confirm="handleNotificationFilterConfirm">
+	<ViewSettingsDialog title="{i18n>NotificationFilterDialog_Title}" sortDescending="true" confirm="handleNotificationFilterConfirm">
 		<sortItems text="f" title="js">
-			<ViewSettingsItem text="Created date" key="NotifDate" selected="true"/>
-			<ViewSettingsItem text="Functional Location" key="FunctionalLoc"/>
-			<ViewSettingsItem text="Equipment" key="Equipment"/>
+			<ViewSettingsItem text="{i18n>NotificationFilterDialog_SortItem_CreatedDate}" key="NotifDate" selected="true"/>
+			<ViewSettingsItem text="{i18n>NotificationFilterDialog_SortItem_FuncLoc}" key="FunctionalLoc"/>
+			<ViewSettingsItem text="{i18n>NotificationFilterDialog_SortItem_Equipment}" key="Equipment"/>
 		</sortItems>
 		<groupItems>
-			<ViewSettingsItem text="End Date" key="RequiredEndDate"/>
-			<ViewSettingsItem text="Functional Location" key="FunctionalLoc"/>
-			<ViewSettingsItem text="Equipment" key="Equipment"/>
+			<ViewSettingsItem text="{i18n>NotificationFilterDialog_GroupItem_EndDate}" key="RequiredEndDate"/>
+			<ViewSettingsItem text="{i18n>NotificationFilterDialog_GroupItem_FuncLoc}" key="FunctionalLoc"/>
+			<ViewSettingsItem text="{i18n>NotificationFilterDialog_GroupItem_Equipment}" key="Equipment"/>
 		</groupItems>
 	</ViewSettingsDialog>
 </core:FragmentDefinition>
