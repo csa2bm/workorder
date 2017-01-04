@@ -15,7 +15,7 @@
 			<Column width="1.5em" vAlign="Middle"></Column>
 		</columns>
 		<items>
-			<ColumnListItem type="Active" press="onEquipmentItemPress">
+			<ColumnListItem type="Active" press="onMeasuringPointItemPress">
 				<cells>
 					<ObjectIdentifier title="{path:'LastReadingDate', type:'sap.ui.model.type.Date', formatOptions:'short'}"/>
 					<ObjectIdentifier text="{Measpoint}" title="{Descriptn}"/>
