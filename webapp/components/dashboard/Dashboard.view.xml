@@ -46,7 +46,7 @@
 					<tileContent>
 						<TileContent footer="">
 							<content>
-								<NumericContent value="{DashBoardModel>/orderCount}" icon="sap-icon://eam-work-order"/>
+								<NumericContent value="{DashBoardModel>/orderCount}"  icon="sap-icon://eam-work-order"/>
 							</content>
 						</TileContent>
 					</tileContent>

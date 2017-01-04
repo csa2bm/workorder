@@ -71,6 +71,9 @@ sap.ui.define([
 				sap.hybrid.synAppOfflineStore(function() {
 						// Refresh default model to display any changes to data
 						sap.ui.getCore().getComponent("__component0").getModel().refresh();
+						
+						var eventBus = sap.ui.getCore().getEventBus();
+						eventBus.publish("OfflineStore", "Updated");
 
 						// Set new date / time for last sync
 						var syncStatusModel = sap.ui.getCore().getComponent("__component0").getModel("syncStatusModel");
