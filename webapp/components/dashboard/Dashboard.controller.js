@@ -198,6 +198,7 @@ sap.ui.define([
 			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);
 			this.settingsDialog.setModel(this.getView().getModel("i18n"), "i18n");
 			this.settingsDialog.setModel(this.getView().getModel("appInfoModel"), "appInfoModel");
+			this.settingsDialog.setModel(this.getView().getModel("device"), "device");
 			this.settingsDialog.openBy(oEvent.getSource());
 		},
 

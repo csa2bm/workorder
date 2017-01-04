@@ -26,6 +26,18 @@ sap.ui.define([
 				}.bind(this), "");
 		},
 
+		saveLastSyncTimeInBrowserCache: function(lastSyncTime) {
+			jQuery.sap.require("jquery.sap.storage");
+
+			if (jQuery.sap.storage.isSupported()) {
+				//Get Storage object to use
+				var oStorage = jQuery.sap.storage(jQuery.sap.storage.Type.local);
+
+				// Set value in htlm5 storage 
+				oStorage.put("LastSyncTime", lastSyncTime);
+			}
+		},
+
 		onRouteMatched: function(oEvent) {
 			// Get name of route
 			var sName = oEvent.getParameter("name");
@@ -65,6 +77,8 @@ sap.ui.define([
 						var d = new Date();
 						syncStatusModel.getData().LastSyncTime = d.toLocaleString();
 						syncStatusModel.refresh();
+
+						this.saveLastSyncTimeInBrowserCache(syncStatusModel.getData().LastSyncTime);
 
 						// Hide sync indicator
 						this.setSyncIndicators(false);
