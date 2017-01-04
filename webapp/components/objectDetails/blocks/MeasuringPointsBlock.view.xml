@@ -3,18 +3,24 @@
 	xmlns:vbm="sap.ui.vbm" xmlns="sap.m">
 	<Table id="idProductsTable" items="{ObjectMeasurementPoint}" noDataText="{i18n>ObjectDetails-MeasuringPointBlock-NoMeasuringPoints}">
 		<columns>
+			<Column minScreenWidth="Tablet">
+				<Text text="{i18n>ObjectDetails-MeasuringPointBlock-lastReadingDateColumn}"/>
+			</Column>
 			<Column>
 				<Text text="{i18n>ObjectDetails-MeasuringPointBlock-MesuringPointColumn}"/>
 			</Column>
 			<Column>
 				<Text text="{i18n>ObjectDetails-MeasuringPointBlock-PreviousColumn}"/>
 			</Column>
+			<Column width="1.5em" vAlign="Middle"></Column>
 		</columns>
 		<items>
-			<ColumnListItem type="Active" press="onEquipmentItemPress">
+			<ColumnListItem type="Active" press="onMeasuringPointItemPress">
 				<cells>
+					<ObjectIdentifier title="{path:'LastReadingDate', type:'sap.ui.model.type.Date', formatOptions:'short'}"/>
 					<ObjectIdentifier text="{Measpoint}" title="{Descriptn}"/>
 					<ObjectIdentifier text="{LastReadingBy}" title="{LastReading} {MeasUnit}"/>
+					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 				</cells>
 			</ColumnListItem>
 		</items>

@@ -1,27 +1,27 @@
 <core:View controllerName="com.twobm.mobileworkorder.components.objectDetails.blocks.OrderHistoryBlock" xmlns:core="sap.ui.core"
 	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
 	xmlns:vbm="sap.ui.vbm" xmlns="sap.m">
-	<Table id="idOrderTable" items="" noDataText="{i18n>ObjectDetails-OrderHistoryBlock-NoHistoricOrders}" class="sapUiSmallMarginBottom">
+	<Table id="idOrderTable" items="{HistoricOrderSet}" noDataText="{i18n>ObjectDetails-OrderHistoryBlock-NoHistoricOrders}" class="sapUiSmallMarginBottom" >
 
 		<columns>
 			<Column>
-				<Text text="{i18n>ObjectDetails-OrderHistoryBlock-TimeAndStatusColumn}"/>
+				<Text text="{i18n>ObjectDetails-OrderHistoryBlock-CompletedDateColumn}"/>
 			</Column>
-			<Column>
+			<Column minScreenWidth="Tablet">
 				<Text text="{i18n>ObjectDetails-OrderHistoryBlock-OrderTypeColumn}"/>
 			</Column>
 			<Column>
 				<Text text="{i18n>ObjectDetails-OrderHistoryBlock-OrderColumn}"/>
 			</Column>
-			<Column>
+			<Column minScreenWidth="Tablet">
 				<Text text="{i18n>ObjectDetails-OrderHistoryBlock-UserColumn}"/>
 			</Column>
 		</columns>
 		<items>
-			<ColumnListItem type="Active" press="onEquipmentItemPress">
+			<ColumnListItem type="Inactive" press="onEquipmentItemPress">
 				<cells>
-					<ObjectIdentifier text="{}" title="{OrderStatus}"/>
-					<ObjectIdentifier text="{}" title="{OrderType}"/>
+					<ObjectIdentifier text="{}" title="{}"/>
+					<ObjectIdentifier text="" title="{OrderType}"/>
 					<ObjectIdentifier text="{Orderid}" title="{ShortText}"/>
 					<ObjectIdentifier text="UserInitials" title="{AssignedTo}"/>
 				</cells>

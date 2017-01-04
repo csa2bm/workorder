@@ -13,6 +13,5 @@ sap.ui.define([
 		{
 			sap.m.MessageToast.show("test");
 		}
-
 	});
 });

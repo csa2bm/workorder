@@ -12,16 +12,20 @@ sap.ui.define([
 
 		onInit: function() {
 			this.getRouter().attachRoutePatternMatched(this.onRouteMatched, this);
+			//this.getRouter().getRoute("dashboard").attachMatched(this.onRouteMatched, this);
+			
+			var eventBus = sap.ui.getCore().getEventBus();
+			eventBus.subscribe("OfflineStore", "Updated", this.setContentInTiles, this);
 		},
 
 		onRouteMatched: function(oEvent) {
-			var sName = oEvent.getParameter("name");
+			// var sName = oEvent.getParameter("name");
 
-			//Is it this page we have navigated to?
-			if (sName !== "dashboard") {
-				this.getEventBus().unsubscribe("OfflineStore", "DBReinitialized", this.dbHasBeenReinitialized, this);
-				return;
-			}
+			// //Is it this page we have navigated to?
+			// if (sName !== "dashboard") {
+			// 	//this.getEventBus().unsubscribe("OfflineStore", "DBReinitialized", this.dbHasBeenReinitialized, this);
+			// 	return;
+			// }
 
 			if (!this.DashBoardModel) {
 				this.DashBoardModel = new sap.ui.model.json.JSONModel({
@@ -29,11 +33,11 @@ sap.ui.define([
 					orderCount: "0"
 				});
 				this.getView().setModel(this.DashBoardModel, "DashBoardModel");
-				
+
 				this.getUserDetails();
 			}
 
-			this.getEventBus().subscribe("OfflineStore", "DBReinitialized", this.dbHasBeenReinitialized, this);
+			//this.getEventBus().subscribe("OfflineStore", "DBReinitialized", this.dbHasBeenReinitialized, this);
 
 			this.setContentInTiles();
 		},
@@ -104,20 +108,6 @@ sap.ui.define([
 		},
 
 		onPressScanObject: function() {
-			//	var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			//var oRouter = this.getRouter();
-			//	oRouter.navTo("objectTreeList", true);
-			/*window.cordova.plugins.barcodeScanner.scan(
-			 function(result) {
-			 if (result.cancelled === "true") {
-			 return;
-			 }
-			 },
-			 function() {
-			 sap.m.MessageToast.show("Scanning failed");
-			 }
-			 );*/
-
 			sap.m.MessageToast.show("Starting push registration..");
 
 			sap.Push.registerForNotificationTypes(sap.Push.notificationType.badge | sap.Push.notificationType.sound | sap.Push.notificationType
@@ -143,7 +133,6 @@ sap.ui.define([
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 				//var oRouter = this.getRouter();
 				oRouter.navTo("notificationList", true);
-
 			}
 		},
 
@@ -160,7 +149,6 @@ sap.ui.define([
 				oRouter.navTo("notificationCreate", {
 					entity: bindingPath.substr(1)
 				});
-
 			}
 		},
 
@@ -198,6 +186,7 @@ sap.ui.define([
 			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);
 			this.settingsDialog.setModel(this.getView().getModel("i18n"), "i18n");
 			this.settingsDialog.setModel(this.getView().getModel("appInfoModel"), "appInfoModel");
+			this.settingsDialog.setModel(this.getView().getModel("device"), "device");
 			this.settingsDialog.openBy(oEvent.getSource());
 		},
 
@@ -228,10 +217,9 @@ sap.ui.define([
 			this.setContentInTiles();
 			this.getView().getModel().refresh();
 		},
-		
-		onPressFunctionalLocations : function()
-		{
-				var oHistory = History.getInstance();
+
+		onPressFunctionalLocations: function() {
+			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
 
 			if (sPreviousHash !== undefined) {

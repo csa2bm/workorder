@@ -8,6 +8,8 @@ sap.ui.define([
 
 		createDeviceModel: function() {
 			Device.isNotPhone = !Device.system.phone;
+			Device.isPhone = Device.system.phone;
+			Device.isHybridApp = this.getIsHybridApp();
 			var oModel = new JSONModel(Device);
 			oModel.setDefaultBindingMode("OneWay");
 			return oModel;
@@ -47,6 +49,13 @@ sap.ui.define([
 
 			oModel.setDefaultBindingMode("OneWay");
 			return oModel;
+		},
+		
+		getIsHybridApp : function(){
+			if(sap.hybrid){
+				return true;
+			}
+			return false;
 		}
 	};
 });

@@ -1,7 +1,7 @@
 <core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc">
 	<ResponsivePopover class="sapUiPopupWithPadding" placement="PreferredTopOrFlip" title="{i18n>DataSyncStatusPopup-Header}">
 		<beginButton>
-			<Button class="sapUiMediumMarginTop" type="Reject" visible="{syncStatusModel>/InErrorState}" text="{i18n>DataSyncStatusPopup-ShowSyncErrorsButtonText}" press="openErrorsView"></Button>
+			<Button type="Reject" visible="{syncStatusModel>/InErrorState}" text="{i18n>DataSyncStatusPopup-ShowSyncErrorsButtonText}" press="openErrorsView"></Button>
 		</beginButton>
 		<endButton>
 			<Button text="{i18n>DataSyncStatusPopup-SyncButtonText}" press="synchronizeData"></Button>
