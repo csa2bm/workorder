@@ -3,7 +3,7 @@
 		<buttons>
 			<Button icon="sap-icon://delete" type="Reject" text="{i18n>NotificationDetails-ActivityPopover-DeleteButton}" press="onDeleteActivity"
 				visible="{ViewModel>/isEditing}"></Button>
-			<Button type="Emphasized" text="Submit" press="onSubmitActivity"></Button>
+			<Button type="Emphasized" text="OK" press="onSubmitActivity"></Button>
 			<Button text="Close" press="onPopopoverClose"/>
 		</buttons>
 		<content>

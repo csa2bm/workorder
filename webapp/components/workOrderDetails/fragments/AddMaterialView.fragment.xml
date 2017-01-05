@@ -3,7 +3,7 @@
 		<NavContainer id="navCon">
 			<Page id="master" showNavButton="false" title="{i18n>MaterialSearchPageHeaderLabel}">
 				<content>
-					<SearchField search="searchMaterial" placeholder="{i18n>MaterialSearchFieldPlaceHolder}"/>
+					<SearchField liveChange="searchMaterialLive" search="searchMaterialPress" placeholder="{i18n>MaterialSearchFieldPlaceHolder}"/>
 					<List id="materialSearchResultsList" items="{/MaterialsSet}">
 						<StandardListItem title="{Description}" description="{Matnr}" info="{Quantity} {UOM}" type="Active"
 							press="onProductSelectedFromSearchResult"/>
@@ -64,7 +64,7 @@
 						<content>
 							<ToolbarSpacer></ToolbarSpacer>
 							<Button press="issueMaterial"
-								text="Submit" type="Emphasized"></Button>
+								text="OK" type="Emphasized"></Button>
 							<Button ariaDescribedBy="genericButtonDescription" press="closeAddMaterial" text="{i18n>MaterialIssueDialogClose}"></Button>
 						</content>
 					</Toolbar>

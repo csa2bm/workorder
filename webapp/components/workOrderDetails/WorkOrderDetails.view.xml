@@ -117,7 +117,7 @@
 					</ObjectPageSection>
 					<ObjectPageSection>
 						<subSections>
-							<ObjectPageSubSection id="attachmentsSubSection" title="{i18n>WorkOrderDetails-AttachmentsSubSection}">
+							<ObjectPageSubSection id="photosSubSection" title="{i18n>WorkOrderDetails_PhotosSubSection}">
 								<blocks>
 									<blocks:AttachmentsBlock/>
 								</blocks>

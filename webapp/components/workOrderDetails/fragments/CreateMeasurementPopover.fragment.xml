@@ -1,7 +1,7 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
 	<Dialog title="Take Measurement" class="sapUiPopupWithPadding" stretch="false" showHeader="true">
 		<beginButton>
-			<Button  type="Emphasized" text="Submit" press="onSubmitMeasurement"></Button>
+			<Button  type="Emphasized" text="OK" press="onSubmitMeasurement"></Button>
 		</beginButton>
 
 		<endButton>
