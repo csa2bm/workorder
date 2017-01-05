@@ -107,21 +107,21 @@ sap.ui.define([
 			}
 		},
 
-		onPressScanObject: function() {
-			sap.m.MessageToast.show("Starting push registration..");
+		// onPressScanObject: function() {
+		// 	sap.m.MessageToast.show("Starting push registration..");
 
-			sap.Push.registerForNotificationTypes(sap.Push.notificationType.badge | sap.Push.notificationType.sound | sap.Push.notificationType
-				.alert,
-				function(message) {
-					sap.m.MessageToast.show("Successfully registered for push: " + message);
-				},
-				function(message) {
-					sap.m.MessageToast.show("Failed to register for push: " + message);
-				},
-				function(message) {
-					sap.m.MessageToast.show("Received message: " + message);
-				}, "");
-		},
+		// 	sap.Push.registerForNotificationTypes(sap.Push.notificationType.badge | sap.Push.notificationType.sound | sap.Push.notificationType
+		// 		.alert,
+		// 		function(message) {
+		// 			sap.m.MessageToast.show("Successfully registered for push: " + message);
+		// 		},
+		// 		function(message) {
+		// 			sap.m.MessageToast.show("Failed to register for push: " + message);
+		// 		},
+		// 		function(message) {
+		// 			sap.m.MessageToast.show("Received message: " + message);
+		// 		}, "");
+		// },
 
 		onPressNotifications: function() {
 			var oHistory = History.getInstance();
@@ -228,7 +228,6 @@ sap.ui.define([
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 				//var oRouter = this.getRouter();
 				oRouter.navTo("structureBrowser", true);
-
 			}
 		}
 	});

@@ -3,7 +3,7 @@
 	<l:VerticalLayout class="sapUiSmallMarginEnd" width="100%">
 		<l:HorizontalLayout>
 			<Button class="sapUiSmallMarginEnd" icon="sap-icon://add" press="addMaterial" enabled="{parts:[{path:'OrderStatus'}],formatter:'.orderStatusValid'}"></Button>
-			<Button class="sapUiSmallMarginEnd" icon="sap-icon://bar-code" press="scanBarcode" enabled="{parts:[{path:'OrderStatus'}],formatter:'.orderStatusValid'}"></Button>
+			<Button class="sapUiSmallMarginEnd" visible="{device>/isHybridApp}" icon="sap-icon://bar-code" press="scanBarcode" enabled="{parts:[{path:'OrderStatus'}],formatter:'.orderStatusValid'}"></Button>
 		</l:HorizontalLayout>
 		<!--titel="{i18n>SubSectionTitleMaterials}"-->
 		<Table id="MaterialsSummaryList"
