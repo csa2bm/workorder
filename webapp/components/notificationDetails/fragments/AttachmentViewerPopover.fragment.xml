@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
-	<Dialog title="Attachment" class="sapUiPopupWithPadding" stretch="{device>/isPhone}" showHeader="false">
+	<Dialog class="sapUiPopupWithPadding" stretch="{device>/isPhone}" showHeader="true" title="Photo">
 		<beginButton>
 			<Button icon="sap-icon://delete" type="Reject" text="{i18n>NotificationDetails-AttachmentPopover-DeleteButton}" press="onDeleteFile" visible="{parts:[{path:'ImageModel>/AttachmentID'}],formatter:'.attachmentPopUpShowDeleteButton'}"></Button>
 		</beginButton>
