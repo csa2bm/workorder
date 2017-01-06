@@ -4,13 +4,14 @@
 	<VBox class="sapUiSmallMargin">
 		<l:VerticalLayout id="NotesLayoutId" class="sapUiTinyMargin" width="100%"></l:VerticalLayout>
 	</VBox>
-	<VBox  id="LongtextBtnView">
-	<Button id="editButton" class="sapUiMediumMarginEnd" visible="true" icon="sap-icon://edit" press="editLongText"></Button>
-	<!--<Button id="saveButton" visible="false" class="sapUiMediumMarginEnd" icon="sap-icon://save" press="SaveLongText"></Button>-->
+	<VBox id="LongtextBtnView">
+		<Button id="editButton" visible="{path:'EditNoteModel>/Editable',formatter:'.getNotEditableNote'}" class="sapUiMediumMarginEnd"
+			icon="sap-icon://edit" press="editLongText"></Button>
+		<Button id="saveButton" visible="{EditNoteModel>/Editable}" class="sapUiMediumMarginEnd" icon="sap-icon://save" press="SaveLongText"></Button>
+		<!--<Button id="editButton" class="sapUiMediumMarginEnd" visible="true" icon="sap-icon://edit" press="editLongText"></Button>-->
+		<!--<Button id="saveButton" visible="false" class="sapUiMediumMarginEnd" icon="sap-icon://save" press="SaveLongText"></Button>-->
 	</VBox>
 </core:View>
-
-
 <!--	<l:VerticalLayout class="sapUiSmallMarginEnd" width="100%">
 		<FlexBox id="NotesLayoutId" items="{ path: 'NotificationAttachments', factory: '.itemFactory'}" wrap="Wrap" />
 		<l:HorizontalLayout >

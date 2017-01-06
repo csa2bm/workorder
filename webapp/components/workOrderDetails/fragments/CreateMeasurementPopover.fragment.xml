@@ -1,7 +1,7 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
 	<Dialog title="Take Measurement" class="sapUiPopupWithPadding" stretch="false" showHeader="true">
 		<beginButton>
-			<Button  type="Emphasized" text="Submit" press="onSubmitMeasurement"></Button>
+			<Button  type="Emphasized" text="OK" press="onSubmitMeasurement"></Button>
 		</beginButton>
 
 		<endButton>
@@ -14,7 +14,7 @@
 				<Label text="{ViewModel>/Descriptn}" class="sapUiSmallMarginBottom" />
 				<Label text="Enter reading" design="Bold" class="sapUiTinyMarginBottom"/>
 				<HBox alignItems="Center">
-				<Input type="Text" width="16em" value="{ViewModel>/RecordedValue}" />
+				<Input type="Number" width="16em" value="{ViewModel>/RecordedValue}" />
 				<Label text="{ViewModel>/MeasUnit}" width="3em" class="sapUiSmallMarginBegin" />
 				</HBox>
 			</VBox>

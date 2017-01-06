@@ -1,9 +1,9 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
-	<Dialog title="{i18n>NotificationDetails-ActivityPopover-Title}" class="sapUiPopupWithPadding" stretch="false" showHeader="true">
+	<Dialog title="{i18n>NotificationDetails-ActivityPopover-Title}" class="sapUiPopupWithPadding" stretch="{device>/isPhone}" showHeader="true">
 		<buttons>
 			<Button icon="sap-icon://delete" type="Reject" text="{i18n>NotificationDetails-ActivityPopover-DeleteButton}" press="onDeleteActivity"
 				visible="{ViewModel>/isEditing}"></Button>
-			<Button type="Emphasized" text="Submit" press="onSubmitActivity"></Button>
+			<Button type="Emphasized" text="OK" press="onSubmitActivity"></Button>
 			<Button text="Close" press="onPopopoverClose"/>
 		</buttons>
 		<content>

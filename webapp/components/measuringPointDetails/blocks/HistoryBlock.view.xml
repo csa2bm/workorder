@@ -17,7 +17,7 @@
 		<items>
 			<ColumnListItem type="Active" press="onMeasuringPointItemPress">
 				<cells>
-					<ObjectIdentifier text="" title="{path: 'ReadingDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'short' }}"/>
+					<ObjectIdentifier text="" title="{path: 'ReadingDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy HH:MM:ss'}}"/>
 					<ObjectIdentifier text="{Reader}" title="{Fullname}"/>
 					<ObjectIdentifier text="{RecordedUnit}" title="{RecordedValue}"/>
 				</cells>

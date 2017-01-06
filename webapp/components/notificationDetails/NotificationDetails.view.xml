@@ -62,7 +62,7 @@
 				</ObjectPageSection>
 				<ObjectPageSection>
 					<subSections>
-						<ObjectPageSubSection id="notificationDetails-AttachmentsSubSection" title="{i18n>NotificationDetails-AttachmentsSubSection}">
+						<ObjectPageSubSection id="notificationDetails-photosSubSection" title="{i18n>NotificationDetails_PhotosSubSection}">
 							<blocks>
 								<blocks:AttachmentsBlock/>
 							</blocks>
