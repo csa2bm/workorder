@@ -15,7 +15,7 @@
 			</Column>
 		</columns>
 		<items>
-			<ColumnListItem type="Active" press="onMeasuringPointItemPress">
+			<ColumnListItem type="Inactive" press="onMeasuringPointItemPress">
 				<cells>
 					<ObjectIdentifier text="" title="{path: 'ReadingDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy HH:MM:ss'}}"/>
 					<ObjectIdentifier text="{Reader}" title="{Fullname}"/>
