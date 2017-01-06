@@ -9,7 +9,8 @@ sap.ui.define([
 		formatter:Formatter,
 		
 		onInit: function() {
-			this.getRouter().attachRoutePatternMatched(this.onRouteMatched, this);
+			
+			this.getRouter().getRoute("operationDetails").attachMatched(this.onRouteMatched, this);
 		},
 		
 		onRouteMatched: function(oEvent) {

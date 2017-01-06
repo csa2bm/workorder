@@ -20,10 +20,10 @@
 		<items>
 			<ColumnListItem type="Inactive" press="onEquipmentItemPress">
 				<cells>
-					<ObjectIdentifier text="{}" title="{}"/>
+					<ObjectIdentifier text="" title="{path:'ReferenceDate', type:'sap.ui.model.type.Date', formatOptions:'short'}"/>
 					<ObjectIdentifier text="" title="{OrderType}"/>
 					<ObjectIdentifier text="{Orderid}" title="{ShortText}"/>
-					<ObjectIdentifier text="UserInitials" title="{AssignedTo}"/>
+					<ObjectIdentifier text="{Username}" title="{Name}"/>
 				</cells>
 			</ColumnListItem>
 		</items>

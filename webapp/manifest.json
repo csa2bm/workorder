@@ -302,6 +302,10 @@
 				"dataSource": "WORKORDER_SRV",
 				"path": "/MeasurementPointsSet"
 			},
+			"MeasurementDocsSet": {
+				"dataSource": "WORKORDER_SRV",
+				"path": "/MeasurementDocsSet"
+			},
 			"NotifActivitiesSet": {
 				"dataSource": "WORKORDER_SRV",
 				"path": "/NotifActivitiesSet"

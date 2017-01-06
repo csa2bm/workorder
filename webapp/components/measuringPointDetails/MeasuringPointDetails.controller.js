@@ -9,7 +9,8 @@ sap.ui.define([
 		formatter:Formatter,
 		
 		onInit: function() {
-			this.getRouter().attachRoutePatternMatched(this.onRouteMatched, this);
+			var oRouter = this.getRouter();
+			oRouter.getRoute("measurementPointDetails").attachMatched(this.onRouteMatched, this);
 		},
 		
 		onRouteMatched: function(oEvent) {
