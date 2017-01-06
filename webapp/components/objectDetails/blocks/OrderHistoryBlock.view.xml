@@ -23,7 +23,7 @@
 					<ObjectIdentifier text="{}" title="{}"/>
 					<ObjectIdentifier text="" title="{OrderType}"/>
 					<ObjectIdentifier text="{Orderid}" title="{ShortText}"/>
-					<ObjectIdentifier text="UserInitials" title="{AssignedTo}"/>
+					<ObjectIdentifier text="{Username}" title="{Name}"/>
 				</cells>
 			</ColumnListItem>
 		</items>
