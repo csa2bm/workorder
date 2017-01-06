@@ -8,41 +8,12 @@
 			</l:HorizontalLayout>
 		</m:headerContent>
 		<m:content>
-			<!--
-		<layout:VerticalLayout class="sapUiContentPadding" width="100%">
-		Uncomment list below and make it dynamic
-		<m:List id="errorList" items="{ path: 'syncStatusModel>/Errors'}">
-		
-		And add formater for NotificationListItem for the property relavant for types: 
-		1. warning message
-		2. error message
-		
-		<m:NotificationListItem
-		title="Error from server"
-		description="Work order was blocked by SUJ"
-		authorPicture="sap-icon://message-error"
-		showCloseButton="false"
-		priority="High"
-		unread="true">
-		</m:NotificationListItem>
-	
-		<m:NotificationListItem
-		title="Warning from server"
-		description="Used more materials than in stock"
-		authorPicture="sap-icon://alert"
-		showCloseButton="false"
-		priority="Medium"
-		unread="true">
-		</m:NotificationListItem>
-	
-		</m:list>
-		</layout:VerticalLayout>
-		-->
 			<ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="false">
 				<headerTitle>
 					<ObjectPageHeader objectTitle="{path:'ShortText'}" objectSubtitle="{path:'Orderid'}"></ObjectPageHeader>
 				</headerTitle>
 				<sections>
+					<core:ExtensionPoint name="workOrderDetailsSections">
 					<ObjectPageSection>
 						<subSections>
 							<ObjectPageSubSection id="generalSubSection" title="{i18n>WorkOrderDetails-GeneralSubSection}">
@@ -124,6 +95,7 @@
 							</ObjectPageSubSection>
 						</subSections>
 					</ObjectPageSection>
+					</core:ExtensionPoint>
 				</sections>
 			</ObjectPageLayout>
 		</m:content>
