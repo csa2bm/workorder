@@ -6,10 +6,10 @@
 		title="Code Groups"
 		class="sapUiPopupWithPadding"
 		items="{ path: '/CodeGroupsSet', filters: [{
-        path: 'CatalogType', 
-        operator: 'EQ',
-        value1: 'A'
-    }]}"
+	        path: 'CatalogType', 
+	        operator: 'EQ',
+	        value1: 'A'
+	    }]}"
 		search="handleValueHelpSearchCodeGroup"
 		confirm="handleValueHelpCloseCodeGroup"
 		cancel="handleValueHelpCloseCodeGroup"

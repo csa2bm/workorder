@@ -6,7 +6,7 @@
 		title="Code"
 		class="sapUiPopupWithPadding"
 		items="{CodeCatalogSet}"
-		
+		search="handleTaskCodeSearch"
 		confirm="handleValueHelpCloseCode"
 		cancel="handleValueHelpCloseCode">
 		<!--afterClose="handleValueHelpAfterCloseCode"-->

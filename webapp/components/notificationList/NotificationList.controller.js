@@ -11,6 +11,25 @@ sap.ui.define([
 	return Controller.extend("com.twobm.mobileworkorder.components.notificationList.NotificationList", {
 		onInit: function() {
 			this.getRouter().attachRoutePatternMatched(this.onRouteMatched, this);
+
+			//Function used for sorting order list
+			// this.orderGroupFunctions = {
+			// 	StartDate: function(oContext) {
+			// 		var name = oContext.getProperty("StartDate");
+			// 		return {
+			// 			key: name,
+			// 			text: formatter.formatDateTimeShort(name)
+			// 		};
+			// 	},
+			// 	Ordertype: function(oContext) {
+			// 		var name = oContext.getProperty("Ordertype");
+			// 		return {
+			// 			key: name,
+			// 			text: name
+			// 		};
+			// 	}
+			// };
+
 		},
 
 		onRouteMatched: function(oEvent) {
@@ -47,7 +66,7 @@ sap.ui.define([
 		handleViewSettingsDialogButtonPressed: function() {
 			if (!this._oDialog) {
 				this._oDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.notificationList.controls.NotificationFilterDialog", this);
-			
+
 				this._oDialog.setModel(this.getView().getModel("i18n"), "i18n");
 			}
 			// toggle compact style
@@ -78,12 +97,12 @@ sap.ui.define([
 			// apply sorter to binding
 			// (grouping comes before sorting)
 			var aSorters = [];
-			if (mParams.groupItem) {
-				var sPath = mParams.groupItem.getKey();
-				var bDescending = mParams.groupDescending;
-				var vGroup = this.orderGroupFunctions[sPath];
-				aSorters.push(new sap.ui.model.Sorter(sPath, bDescending, vGroup));
-			}
+			// if (mParams.groupItem) {
+			// 	var sPath = mParams.groupItem.getKey();
+			// 	var bDescending = mParams.groupDescending;
+			// 	var vGroup = this.orderGroupFunctions[sPath];
+			// 	aSorters.push(new sap.ui.model.Sorter(sPath, bDescending, vGroup));
+			// }
 
 			var sortItem = mParams.sortItem.getKey();
 			var sortDescending = mParams.sortDescending;
@@ -150,18 +169,16 @@ sap.ui.define([
 				return false;
 			}
 		},
-		
-		isOnline: function(){
-			if (sap.hybrid)
-			{
+
+		isOnline: function() {
+			if (sap.hybrid) {
 				return false;
 			}
-			
+
 			return true;
 		},
-		
-		onRefresh: function()
-		{
+
+		onRefresh: function() {
 			this.getView().getModel().refresh();
 		}
 	});
