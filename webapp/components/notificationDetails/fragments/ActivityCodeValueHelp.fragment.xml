@@ -6,11 +6,10 @@
 		title="Code"
 		class="sapUiPopupWithPadding"
 		items="{CodeCatalogSet}"
-		
+		search="handleActivityCodeSearch"
 		confirm="handleValueHelpCloseCode"
 		cancel="handleValueHelpCloseCode"
 	>
-			<!--afterClose="handleValueHelpAfterCloseCode"-->
 		<StandardListItem
 			title="{CodeText}"
 			description="{Code}" />

@@ -2,13 +2,14 @@
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core">
 	<SelectDialog
-		id = "CodeValueHelpDialog"
+		id = "DamageCodeValueHelpDialog"
 		title="Code"
 		class="sapUiPopupWithPadding"
 		items="{CodeCatalogSet}"
-		search="handleTaskCodeSearch"
-		confirm="handleValueHelpCloseCode"
-		cancel="handleValueHelpCloseCode">
+		
+		confirm="handleValueDamageHelpCloseCode"
+		cancel="handleValueHelpAfterCloseCode"
+		>
 		<!--afterClose="handleValueHelpAfterCloseCode"-->
 		<StandardListItem
 			title="{CodeText}"

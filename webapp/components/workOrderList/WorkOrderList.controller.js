@@ -74,12 +74,12 @@ sap.ui.define([
 			// apply sorter to binding
 			// (grouping comes before sorting)
 			var aSorters = [];
-			if (mParams.groupItem) {
-				var sPath = mParams.groupItem.getKey();
-				var bDescending = mParams.groupDescending;
-				var vGroup = this.orderGroupFunctions[sPath];
-				aSorters.push(new sap.ui.model.Sorter(sPath, bDescending, vGroup));
-			}
+			// if (mParams.groupItem) {
+			// 	var sPath = mParams.groupItem.getKey();
+			// 	var bDescending = mParams.groupDescending;
+			// 	var vGroup = this.orderGroupFunctions[sPath];
+			// 	aSorters.push(new sap.ui.model.Sorter(sPath, bDescending, vGroup));
+			// }
 
 			var sortItem = mParams.sortItem.getKey();
 			var sortDescending = mParams.sortDescending;

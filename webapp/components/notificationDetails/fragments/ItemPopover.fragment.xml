@@ -9,15 +9,15 @@
 		<content>
 			<VBox>
 				<Label text="{i18n>NotificationDetails-ItemPopover-PartCodeGroup}" design="Bold" class="sapUiTinyMarginBottom"/>
-				<Input type="Text" value="{ActCodegrp}" showValueHelp="true" valueHelpRequest="handleValueHelpCodeGroup"  />
+				<Input type="Text" value="{DlCodegrp}" showValueHelp="true" valueHelpRequest="handleValueHelpCodeGroup"  />
 				<Label text="{i18n>NotificationDetails-ItemPopover-PartCode}" design="Bold" class="sapUiTinyMarginBottom sapUiTinyMarginTop"/>
-				<Input type="Text" value="{ActCode}" showValueHelp="true" valueHelpRequest="handleValueHelpCode" />
+				<Input type="Text" value="{DlCode}" showValueHelp="true" valueHelpRequest="handleValueHelpCode" />
 				<Label text="{i18n>NotificationDetails-ItemPopover-DamageCodeGroup}" design="Bold" class="sapUiTinyMarginBottom"/>
-				<Input type="Text" value="{ActCodegrp}" showValueHelp="true" valueHelpRequest="handleValueHelpCodeGroup"  />
+				<Input type="Text" value="{DCodegrp}" showValueHelp="true" valueHelpRequest="handleDamageValueHelpCodeGroup"  />
 				<Label text="{i18n>NotificationDetails-ItemPopover-DamageCode}" design="Bold" class="sapUiTinyMarginBottom sapUiTinyMarginTop"/>
-				<Input type="Text" value="{ActCode}" showValueHelp="true" valueHelpRequest="handleValueHelpCode" />
+				<Input type="Text" value="{DCode}" showValueHelp="true" valueHelpRequest="handleDamageValueHelpCode" />
 				<Label text="{i18n>NotificationDetails-ItemPopover-Text}" design="Bold" class="sapUiTinyMarginBottom sapUiTinyMarginTop"/>
-				<Input type="Text" value="{Acttext}"/>
+				<Input type="Text" value="{Descript}"/>
 			</VBox>
 		</content>
 	</Dialog>
