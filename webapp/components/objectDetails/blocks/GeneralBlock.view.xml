@@ -2,6 +2,6 @@
 	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout">
 		<l:HorizontalLayout>
 			<Label text="{i18n>ObjectDetails-GeneralBlock-FunctionalLocation}" class="sapUiSmallMarginEnd"/>
-			<Text text="{Funcldescr}\r\n({FunctLoc})"/>
+			<Text text="{Funclocdesc}\r\n({Funcloc})"/>
 		</l:HorizontalLayout>
 </core:View>

@@ -30,7 +30,7 @@ sap.ui.define([
 				this.getView().setBindingContext(givenContext);
 				this.getView().bindElement(contextPath);
 			}
-			
+			/*
 			//do we have this context loaded in our model? We should always have a timeregistration entry
 			if (this.ExpandLoaded) { //this.getView().getBindingContext().getObject()) {
 
@@ -55,7 +55,7 @@ sap.ui.define([
 						that.ExpandLoaded = true;
 
 					}, true);
-			}
+			}*/
 		},
 		
 		onNavigationButtonPress: function(){
@@ -82,9 +82,9 @@ sap.ui.define([
 		
 		oRouter.navTo("notificationCreate", {
 					equipmentNo: object.Equipment,
-					equipmentDesc: object.Equidescr,
-					functionalLoc: object.FunctLoc,
-					funcLocDesc: object.Funcldescr,
+					equipmentDesc: object.Description,
+					functionalLoc: object.Funcloc,
+					funcLocDesc: object.Funclocdesc,
 					argAvailable:"true"
 				}, false);
 		}
