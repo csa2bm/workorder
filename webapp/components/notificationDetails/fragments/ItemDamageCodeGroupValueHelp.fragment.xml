@@ -1,0 +1,22 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<SelectDialog
+		id = "CodeDamageGroupValueHelpDialog"
+		title="Damage Code Groups"
+		class="sapUiPopupWithPadding"
+		items="{ path: '/CodeGroupsSet', filters: [{
+        path: 'CatalogType', 
+        operator: 'EQ',
+        value1: 'C'
+    }]}"
+		search="handleValueHelpSearchCodeGroup"
+		confirm="handleValueDamageHelpCloseCodeGroup"
+		cancel="handleValueDamageHelpAfterCloseCodeGroup"
+		>
+		<!--afterClose="handleValueHelpAfterCloseCodeGroup"-->
+		<StandardListItem
+			title="{CodegroupText}"
+			description="{Codegroup}" />
+	</SelectDialog>
+</core:FragmentDefinition>

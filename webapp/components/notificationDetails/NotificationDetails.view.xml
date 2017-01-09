@@ -31,7 +31,6 @@
 						</ObjectPageSubSection>
 					</subSections>
 				</ObjectPageSection>
-				<!--
 				<ObjectPageSection>
 					<subSections>
 						<ObjectPageSubSection id="notificationDetails-ItemsSubSection" title="{i18n>NotificationDetails-ItemsSubSection}">
@@ -41,7 +40,6 @@
 						</ObjectPageSubSection>
 					</subSections>
 				</ObjectPageSection>
-				-->
 				<ObjectPageSection>
 					<subSections>
 						<ObjectPageSubSection id="notificationDetails-TasksSubSection" title="{i18n>NotificationDetails-TasksSubSection}">
