@@ -8,7 +8,7 @@
     "targetFolder": "dist",
     "sourceFolder": "webapp",
     "buildRequired": true,
-    "lastBuildDateTime": "Fri, 06 Jan 2017 10:40:27 GMT"
+    "lastBuildDateTime": "Sun, 08 Jan 2017 16:52:19 GMT"
   },
   "generation": [
     {
@@ -483,6 +483,6 @@
   "hcpdeploy": {
     "account": "a2b30ffcb",
     "name": "comtwobmmobileworkorder",
-    "lastVersionWeTriedToDeploy": "1.0.11"
+    "lastVersionWeTriedToDeploy": "1.0.12"
   }
 }

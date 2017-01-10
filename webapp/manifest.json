@@ -117,9 +117,14 @@
 					"target": "operationDetails"
 				},
 				{
-					"pattern": "objectDetails/{objectContext}",
-					"name": "objectDetails",
-					"target": "objectDetails"
+					"pattern": "equipmentDetails/{objectContext}",
+					"name": "equipmentDetails",
+					"target": "equipmentDetails"
+				},
+				{
+					"pattern": "functionalLocationDetails/{objectContext}",
+					"name": "functionalLocationDetails",
+					"target": "functionalLocationDetails"
 				},
 				{
 					"pattern": "measurementPointDetails/{measurementContext}",
@@ -181,9 +186,14 @@
 					"viewName": "OperationDetails",
 					"viewLevel": 4
 				},
-				"objectDetails": {
-					"viewPath": "com.twobm.mobileworkorder.components.objectDetails",
-					"viewName": "ObjectDetails",
+				"equipmentDetails": {
+					"viewPath": "com.twobm.mobileworkorder.components.equipmentDetails",
+					"viewName": "EquipmentDetails",
+					"viewLevel": 4
+				},
+				"functionalLocationDetails": {
+					"viewPath": "com.twobm.mobileworkorder.components.functionalLocationDetails",
+					"viewName": "FunctionalLocationDetails",
 					"viewLevel": 4
 				},
 				"measurementPointDetails": {
