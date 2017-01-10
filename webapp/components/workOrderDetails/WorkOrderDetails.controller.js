@@ -229,8 +229,8 @@ sap.ui.define([
 				this.getRouter().navTo("operationDetails", {
 					operationContext: data.operationContext
 				}, false);
-			} else if ('object'.localeCompare(data.block) === 0) {
-				this.getRouter().navTo("objectDetails", {
+			} else if ('equipment'.localeCompare(data.block) === 0) {
+				this.getRouter().navTo("equipmentDetails", {
 					objectContext: data.objectContext
 				}, false);
 			} else if ("measurement".localeCompare(data.block) === 0) {

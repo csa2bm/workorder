@@ -5,12 +5,12 @@ sap.ui.define([
 ], function(Controller, History, Formatter) {
 	"use strict";
 
-	return Controller.extend("com.twobm.mobileworkorder.components.objectDetails.ObjectDetails", {
+	return Controller.extend("com.twobm.mobileworkorder.components.functionalLocationDetails.FunctionalLocationDetails", {
 		formatter:Formatter,
 		
 		onInit: function() {
 			//this.getRouter("objectDetails").attachMatched(this.onRouteMatched, this);
-			this.getRouter().getRoute("objectDetails").attachMatched(this.onRouteMatched, this);
+			this.getRouter().getRoute("functionalLocationDetails").attachMatched(this.onRouteMatched, this);
 
 		},
 		

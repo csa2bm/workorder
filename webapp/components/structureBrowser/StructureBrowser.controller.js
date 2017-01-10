@@ -289,15 +289,31 @@ sap.ui.define([
 				}
 				, false);*/
 
+if (this.getView().getModel("viewModel").getProperty(oEvent.getSource().getBindingContext("viewModel").getPath()).type === "EQUIPMENT")
+{
+
 			var objecContext = "/EquipmentsSet('" + this.getView().getModel("viewModel").getProperty(oEvent.getSource().getBindingContext("viewModel").getPath()).name + "')";
 	
 			
 				var oRouter = this.getRouter();
 		
-		oRouter.navTo("objectDetails", {
+				oRouter.navTo("equipmentDetails", {
 					objectContext: objecContext.substr(1),
 					
 				}, false);
+}
+else
+{
+				var objecContext = "/FunctionalLocationsSet('" + this.getView().getModel("viewModel").getProperty(oEvent.getSource().getBindingContext("viewModel").getPath()).name + "')";
+	
+			
+				var oRouter = this.getRouter();
+		
+				oRouter.navTo("functionalLocationDetails", {
+					objectContext: objecContext.substr(1),
+					
+				}, false);
+}
 		
 		},
 
