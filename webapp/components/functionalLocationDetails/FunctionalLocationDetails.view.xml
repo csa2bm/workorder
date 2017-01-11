@@ -25,6 +25,15 @@
 						</ObjectPageSubSection>
 					</subSections>
 				</ObjectPageSection>
+					<ObjectPageSection>
+					<subSections>
+						<ObjectPageSubSection id="functionalLocationDetails-PendingOrdersSubSection" title="{i18n>FunctionalLocationDetails-PendingOrdersSubSection}">
+							<blocks>
+								<blocks:PendingOrdersBlock/>
+							</blocks>
+						</ObjectPageSubSection>
+					</subSections>
+				</ObjectPageSection>
 				<ObjectPageSection>
 					<subSections>
 						<ObjectPageSubSection id="functionalLocationDetails-OrderHistroySubSection" title="{i18n>FunctionalLocationDetails-OrderHistorySubSection}">
