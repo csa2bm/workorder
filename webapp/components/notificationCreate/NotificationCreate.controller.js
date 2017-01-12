@@ -209,6 +209,16 @@ sap.ui.define([
 			var thisDialog = evt.getParameter("id");
 			//this._valueHelpDialog.destroy();
 			thisDialog.destroy();
+		},
+		onFunctionallocationBtnPress: function(oEvent){
+		
+				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+				//var oRouter = this.getRouter();
+				oRouter.navTo("structureBrowser", true);
+		},
+		
+		onEquipmentBtnPress: function(oEvent){
+			
 		}
 	});
 });

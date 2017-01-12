@@ -42,7 +42,7 @@
 							
 							<ObjectIdentifier text="{parts:[{path:'viewModel>level'}, {path:'viewModel>name'}],formatter:'.indentForLevel'}" title="{parts:[{path:'viewModel>level'}, {path:'viewModel>description'}],formatter:'.indentForLevel'}"/>
 							
-							<Button icon="sap-icon://hint" press="onDetailsPress" /> <Button icon="sap-icon://accept" /> 
+							<Button icon="sap-icon://hint" press="onDetailsPress" /> <Button icon="sap-icon://accept" visible="true" press="onSelectBtnPress"/> 
 							</cells>
 						</ColumnListItem>
 					</items>
