@@ -210,15 +210,12 @@ sap.ui.define([
 			//this._valueHelpDialog.destroy();
 			thisDialog.destroy();
 		},
-		onFunctionallocationBtnPress: function(oEvent){
-		
+		onSelectBtnPress: function(oEvent){
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-				//var oRouter = this.getRouter();
-				oRouter.navTo("structureBrowser", true);
-		},
-		
-		onEquipmentBtnPress: function(oEvent){
-			
+				oRouter.navTo("structureBrowser", {
+					notificationContext:this.newEntry.getPath().substr(1),
+					parentView: "notificationCreate"
+				}, false);
 		}
 	});
 });

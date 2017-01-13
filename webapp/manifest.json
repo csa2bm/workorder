@@ -156,8 +156,8 @@
 					]
 				},
 				{
+					"pattern": "structureBrowser/:notificationContext:/:parentView:",
 					"name": "structureBrowser",
-					"pattern": "structureBrowser",
 					"titleTarget": "",
 					"greedy": false,
 					"target": [

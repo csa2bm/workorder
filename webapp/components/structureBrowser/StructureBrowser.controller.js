@@ -4,7 +4,7 @@ sap.ui.define([
 	"sap/ui/core/routing/History"
 ], function(Controller, JSONModel, History) {
 	"use strict";
-
+	
 	return Controller.extend("com.twobm.mobileworkorder.components.structureBrowser.StructureBrowser", {
 
 		/**
@@ -15,6 +15,25 @@ sap.ui.define([
 		onInit: function() {
 			// Create demo data
 			this.createDemoData();
+			
+			this.getView().setModel(new JSONModel({
+				parentView: ""
+			}), "visibleSelectButtonModel");
+			
+			this.getRouter().getRoute("structureBrowser").attachMatched(this.onRouteMatched,this);
+		},
+		
+		onRouteMatched: function(oEvent) {
+			var oArguments = oEvent.getParameter("arguments");
+			var model = this.getView().getModel("visibleSelectButtonModel");
+			
+			if(oArguments.notificationContext && oArguments.parentView==="notificationCreate"){
+				model.setProperty("/parentView", oArguments.parentView);
+			}
+			else{
+				model.setProperty("/parentView", "");
+			}
+			model.refresh();
 		},
 
 		createDemoData: function() {
@@ -320,6 +339,18 @@ else
 		gotoEquipmentDetailsPage: function(data) {
 			var eventBus = sap.ui.getCore().getEventBus();
 			eventBus.publish("BlockNavigation", data);
+		},
+		
+		onSelectBtnPress: function(oEvent){
+			
+		},
+		
+		EnableButtonVisbleCheck: function(str){
+			if (str === "notificationCreate") {
+				return true;
+			} else {
+				return false;
+			}
 		}
 			/**
 			 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered

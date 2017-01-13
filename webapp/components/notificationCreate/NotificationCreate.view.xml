@@ -32,7 +32,7 @@
 							<core:Item text="{FunctionalLocation}"/>
 						</suggestionItems>
 					</Input>
-					<Button id="FunctionalLocationSelectorBtn" text="Select" press="onFunctionallocationBtnPress"></Button>
+					<Button id="selectorButton" text="{i18n>NotificationCreate-SelectButton}" press="onSelectBtnPress"></Button>
 					<Label text=""></Label>
 					<Text text="{FuncLocDesc}"/>
 					<Label text="{i18n>NotificationCreate-Equipment}"></Label>
@@ -42,7 +42,6 @@
 							<core:Item text="{Equipment}"/>
 						</suggestionItems>
 					</Input>
-					<Button id="EquipmentSelectorBtn" text="Select" press="onEquipmentBtnPress"></Button>
 					<Label text=""></Label>
 					<Text text="{EquipmentDesc}"/>
 				</layout:content>
