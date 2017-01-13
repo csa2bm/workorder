@@ -54,12 +54,14 @@ sap.ui.define([
 			});
 			var oArguments = oEvent.getParameter("arguments");
 			if(oArguments.argAvailable){
-				this.getView().getModel().setProperty(this.newEntry.getPath() + "/Equipment", oArguments.equipmentNo);
+				if(oArguments.equipmentNo !== "NONE" && oArguments.equipmentDesc !== "NONE"){
+					this.getView().getModel().setProperty(this.newEntry.getPath() + "/Equipment", oArguments.equipmentNo);
+					this.getView().getModel().setProperty(this.newEntry.getPath() + "/EquipmentDesc", oArguments.equipmentDesc);
+				}
 				this.getView().getModel().setProperty(this.newEntry.getPath() + "/FuncLocDesc", oArguments.funcLocDesc);
 				this.getView().getModel().setProperty(this.newEntry.getPath() + "/FunctionalLoc", oArguments.functionalLoc);
-				this.getView().getModel().setProperty(this.newEntry.getPath() + "/EquipmentDesc", oArguments.equipmentDesc);
+				
 			}
-
 			this.getView().setBindingContext(this.newEntry);
 		},
 

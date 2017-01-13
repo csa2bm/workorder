@@ -114,7 +114,7 @@ sap.ui.define([
 					description: "VW Golf 1.6 diesel",
 					id: 7,
 					parentFunctionalLocationId: 2,
-					parentFunctionalLocationName:"2BM--LIV-CA",
+					parentFunctionalLocationName: "2BM--LIV-CA",
 					parentFunctionalLocationdescription: "Livjægergade - Cars",
 					leaf: false,
 					type: "EQUIPMENT"
@@ -123,7 +123,7 @@ sap.ui.define([
 					description: "1.6 R4 16v TDI CR 55-85kW (engine)",
 					id: 8,
 					parentFunctionalLocationId: 2,
-					parentFunctionalLocationName:"2BM--LIV-CA",
+					parentFunctionalLocationName: "2BM--LIV-CA",
 					parentFunctionalLocationdescription: "Livjægergade - Cars",
 					parentEquipmentId: 7,
 					leaf: true,
@@ -133,7 +133,7 @@ sap.ui.define([
 					description: "TomTom GPS",
 					id: 9,
 					parentFunctionalLocationId: 7,
-					parentFunctionalLocationName:"2BM--LIV-CA",
+					parentFunctionalLocationName: "2BM--LIV-CA",
 					parentFunctionalLocationdescription: "Livjægergade - Cars",
 					parentEquipmentId: 7,
 					leaf: true,
@@ -143,7 +143,7 @@ sap.ui.define([
 					description: "Machine A",
 					id: 15,
 					parentFunctionalLocationId: 10,
-					parentFunctionalLocationName:"DK-BU-ST-S1",
+					parentFunctionalLocationName: "DK-BU-ST-S1",
 					parentFunctionalLocationdescription: "Station 1",
 					leaf: true,
 					type: "EQUIPMENT"
@@ -152,7 +152,7 @@ sap.ui.define([
 					description: "Machine B",
 					id: 15,
 					parentFunctionalLocationId: 10,
-					parentFunctionalLocationName:"DK-BU-ST-S1",
+					parentFunctionalLocationName: "DK-BU-ST-S1",
 					parentFunctionalLocationdescription: "Station 1",
 					leaf: true,
 					type: "EQUIPMENT"
@@ -161,7 +161,7 @@ sap.ui.define([
 					description: "Machine C",
 					id: 15,
 					parentFunctionalLocationId: 11,
-					parentFunctionalLocationName:"DK-BU-ST-S2",
+					parentFunctionalLocationName: "DK-BU-ST-S2",
 					parentFunctionalLocationdescription: "Station 2",
 					leaf: true,
 					type: "EQUIPMENT"
@@ -170,7 +170,7 @@ sap.ui.define([
 					description: "Machine D",
 					id: 15,
 					parentFunctionalLocationId: 12,
-					parentFunctionalLocationName:"DK-BU-ST-S3",
+					parentFunctionalLocationName: "DK-BU-ST-S3",
 					parentFunctionalLocationdescription: "Station 3",
 					leaf: true,
 					type: "EQUIPMENT"
@@ -349,28 +349,29 @@ sap.ui.define([
 
 		onSelectBtnPress: function(oEvent) {
 			var oRouter = this.getRouter();
-			
+
 			var object = this.getView().getModel("viewModel").getProperty(oEvent.getSource().getBindingContext(
-					"viewModel").getPath());
-					
-			if(object.type !=="EQUIPMENT"){
-				object.parentFunctionalLocationName = object.name;
-				object.parentFunctionalLocationdescription= object.description;
-				object.name ="";
-				object.description="";
-				
+				"viewModel").getPath());
+
+			if (object.type !== "EQUIPMENT") {
+				oRouter.navTo("notificationCreate", {
+					equipmentNo: "NONE",
+					equipmentDesc: "NONE",
+					functionalLoc: object.name,
+					funcLocDesc: object.description,
+					argAvailable: true
+				}, false);
+
+			} else {
+				oRouter.navTo("notificationCreate", {
+					equipmentNo: object.name,
+					equipmentDesc: object.description,
+					functionalLoc: object.parentFunctionalLocationName,
+					funcLocDesc: object.parentFunctionalLocationdescription,
+					argAvailable: true
+
+				}, false);
 			}
-			
-
-			//var object = oEvent.getSource().getBindingContext("viewModel").getObject();
-
-			oRouter.navTo("notificationCreate", {
-				equipmentNo: object.name,
-				equipmentDesc: object.description,
-				functionalLoc: object.parentFunctionalLocationName,
-				funcLocDesc: object.parentFunctionalLocationdescription,
-				argAvailable:true
-			}, false);
 
 		},
 		//formatter function to either show or hide the button
