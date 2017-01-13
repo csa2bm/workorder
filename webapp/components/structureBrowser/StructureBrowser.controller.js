@@ -4,7 +4,7 @@ sap.ui.define([
 	"sap/ui/core/routing/History"
 ], function(Controller, JSONModel, History) {
 	"use strict";
-	
+
 	return Controller.extend("com.twobm.mobileworkorder.components.structureBrowser.StructureBrowser", {
 
 		/**
@@ -15,22 +15,22 @@ sap.ui.define([
 		onInit: function() {
 			// Create demo data
 			this.createDemoData();
-			
+
 			this.getView().setModel(new JSONModel({
 				parentView: ""
 			}), "visibleSelectButtonModel");
-			
-			this.getRouter().getRoute("structureBrowser").attachMatched(this.onRouteMatched,this);
+
+			this.getRouter().getRoute("structureBrowser").attachMatched(this.onRouteMatched, this);
 		},
-		
+
 		onRouteMatched: function(oEvent) {
 			var oArguments = oEvent.getParameter("arguments");
 			var model = this.getView().getModel("visibleSelectButtonModel");
-			
-			if(oArguments.notificationContext && oArguments.parentView==="notificationCreate"){
+
+			// set the binding model for select button
+			if (oArguments.notificationContext && oArguments.parentView === "notificationCreate") {
 				model.setProperty("/parentView", oArguments.parentView);
-			}
-			else{
+			} else {
 				model.setProperty("/parentView", "");
 			}
 			model.refresh();
@@ -59,8 +59,7 @@ sap.ui.define([
 					parentId: "",
 					leaf: false,
 					type: "FUNCTIONAL_LOCATION"
-				}, 
-				{
+				}, {
 					name: "DK-BU",
 					description: "Business Unit",
 					id: 5,
@@ -110,60 +109,72 @@ sap.ui.define([
 					leaf: true,
 					type: "FUNCTIONAL_LOCATION"
 				}],
-				Equipment: [
-					{
-						name: "10000000",
-						description: "VW Golf 1.6 diesel",
-						id: 7,
-						parentFunctionalLocationId: 2,
-						leaf: false,
-						type: "EQUIPMENT"
-					}, {
-						name: "10000001",
-						description: "1.6 R4 16v TDI CR 55-85kW (engine)",
-						id: 8,
-						parentFunctionalLocationId: 2,
-						parentEquipmentId: 7,
-						leaf: true,
-						type: "EQUIPMENT"
-					}, {
-						name: "10000002",
-						description: "TomTom GPS",
-						id: 9,
-						parentFunctionalLocationId: 7,
-						parentEquipmentId: 7,
-						leaf: true,
-						type: "EQUIPMENT"
-					}, {
-						name: "10000003",
-						description: "Machine A",
-						id: 15,
-						parentFunctionalLocationId: 10,
-						leaf: true,
-						type: "EQUIPMENT"
-					}, {
-						name: "10000004",
-						description: "Machine B",
-						id: 15,
-						parentFunctionalLocationId: 10,
-						leaf: true,
-						type: "EQUIPMENT"
-					}, {
-						name: "10000005",
-						description: "Machine C",
-						id: 15,
-						parentFunctionalLocationId: 11,
-						leaf: true,
-						type: "EQUIPMENT"
-					}, {
-						name: "10000006",
-						description: "Machine D",
-						id: 15,
-						parentFunctionalLocationId: 12,
-						leaf: true,
-						type: "EQUIPMENT"
-					}
-				]
+				Equipment: [{
+					name: "10000000",
+					description: "VW Golf 1.6 diesel",
+					id: 7,
+					parentFunctionalLocationId: 2,
+					parentFunctionalLocationName:"2BM--LIV-CA",
+					parentFunctionalLocationdescription: "Livjægergade - Cars",
+					leaf: false,
+					type: "EQUIPMENT"
+				}, {
+					name: "10000001",
+					description: "1.6 R4 16v TDI CR 55-85kW (engine)",
+					id: 8,
+					parentFunctionalLocationId: 2,
+					parentFunctionalLocationName:"2BM--LIV-CA",
+					parentFunctionalLocationdescription: "Livjægergade - Cars",
+					parentEquipmentId: 7,
+					leaf: true,
+					type: "EQUIPMENT"
+				}, {
+					name: "10000002",
+					description: "TomTom GPS",
+					id: 9,
+					parentFunctionalLocationId: 7,
+					parentFunctionalLocationName:"2BM--LIV-CA",
+					parentFunctionalLocationdescription: "Livjægergade - Cars",
+					parentEquipmentId: 7,
+					leaf: true,
+					type: "EQUIPMENT"
+				}, {
+					name: "10000003",
+					description: "Machine A",
+					id: 15,
+					parentFunctionalLocationId: 10,
+					parentFunctionalLocationName:"DK-BU-ST-S1",
+					parentFunctionalLocationdescription: "Station 1",
+					leaf: true,
+					type: "EQUIPMENT"
+				}, {
+					name: "10000004",
+					description: "Machine B",
+					id: 15,
+					parentFunctionalLocationId: 10,
+					parentFunctionalLocationName:"DK-BU-ST-S1",
+					parentFunctionalLocationdescription: "Station 1",
+					leaf: true,
+					type: "EQUIPMENT"
+				}, {
+					name: "10000005",
+					description: "Machine C",
+					id: 15,
+					parentFunctionalLocationId: 11,
+					parentFunctionalLocationName:"DK-BU-ST-S2",
+					parentFunctionalLocationdescription: "Station 2",
+					leaf: true,
+					type: "EQUIPMENT"
+				}, {
+					name: "10000006",
+					description: "Machine D",
+					id: 15,
+					parentFunctionalLocationId: 12,
+					parentFunctionalLocationName:"DK-BU-ST-S3",
+					parentFunctionalLocationdescription: "Station 3",
+					leaf: true,
+					type: "EQUIPMENT"
+				}]
 			};
 
 			this.structureData = new JSONModel(this.data);
@@ -235,14 +246,11 @@ sap.ui.define([
 
 		closeItem: function(item) {
 			var children = this.viewModel.filter(function(currentItem) {
-				if (item.type==="FUNCTIONAL_LOCATION")
-				{
-				return currentItem.parentId === item.id || (currentItem.parentFunctionalLocationId === item.id && !currentItem.parentEquipmentId); 
+				if (item.type === "FUNCTIONAL_LOCATION") {
+					return currentItem.parentId === item.id || (currentItem.parentFunctionalLocationId === item.id && !currentItem.parentEquipmentId);
+				} else {
+					return currentItem.parentEquipmentId === item.id;
 				}
-				else
-				{
-				return currentItem.parentEquipmentId === item.id;
-			}
 			});
 			for (var i = 0; i < children.length; i++) {
 				this.closeItem(children[i]);
@@ -282,76 +290,97 @@ sap.ui.define([
 		},
 
 		navigateBack: function(oEvent) {
+			window.history.go(-1);
+			/*
+			var oHistory = History.getInstance();
+			var sPreviousHash = oHistory.getPreviousHash();
+
+			if (sPreviousHash !== undefined) {
 				window.history.go(-1);
-				/*
-				var oHistory = History.getInstance();
-				var sPreviousHash = oHistory.getPreviousHash();
+			} else {
+				var oRouter = this.getRouter();
+				oRouter.navTo("workOrderList", true);
+			}
 
-				if (sPreviousHash !== undefined) {
-					window.history.go(-1);
-				} else {
-					var oRouter = this.getRouter();
-					oRouter.navTo("workOrderList", true);
-				}
+			this.scrollToTop();*/
+		},
 
-				this.scrollToTop();*/
-			},
-			
-				onDetailsPress: function(oEvent) {
+		onDetailsPress: function(oEvent) {
 			var oBindingContext = oEvent.getSource().getBindingContext("ViewModel");
 
-		/*	this.getView().getModel().createBindingContext(
-				"/ObjectsSet(ObjectNo='IE000000000010000000',Orderid='4000180',Counter='1')/Equipments", null, {},
-				function(result) {
-					
-					
-				}
-				, false);*/
+			/*	this.getView().getModel().createBindingContext(
+					"/ObjectsSet(ObjectNo='IE000000000010000000',Orderid='4000180',Counter='1')/Equipments", null, {},
+					function(result) {
+						
+						
+					}
+					, false);*/
 
-if (this.getView().getModel("viewModel").getProperty(oEvent.getSource().getBindingContext("viewModel").getPath()).type === "EQUIPMENT")
-{
+			if (this.getView().getModel("viewModel").getProperty(oEvent.getSource().getBindingContext("viewModel").getPath()).type ===
+				"EQUIPMENT") {
 
-			var objecContext = "/EquipmentsSet('" + this.getView().getModel("viewModel").getProperty(oEvent.getSource().getBindingContext("viewModel").getPath()).name + "')";
-	
-			
+				var objecContext = "/EquipmentsSet('" + this.getView().getModel("viewModel").getProperty(oEvent.getSource().getBindingContext(
+					"viewModel").getPath()).name + "')";
+
 				var oRouter = this.getRouter();
-		
+
 				oRouter.navTo("equipmentDetails", {
 					objectContext: objecContext.substr(1),
-					
+
 				}, false);
-}
-else
-{
-				var objecContext = "/FunctionalLocationsSet('" + this.getView().getModel("viewModel").getProperty(oEvent.getSource().getBindingContext("viewModel").getPath()).name + "')";
-	
-			
+			} else {
+				var objecContext = "/FunctionalLocationsSet('" + this.getView().getModel("viewModel").getProperty(oEvent.getSource().getBindingContext(
+					"viewModel").getPath()).name + "')";
+
 				var oRouter = this.getRouter();
-		
+
 				oRouter.navTo("functionalLocationDetails", {
 					objectContext: objecContext.substr(1),
-					
+
 				}, false);
-}
-		
+			}
+
 		},
 
 		gotoEquipmentDetailsPage: function(data) {
 			var eventBus = sap.ui.getCore().getEventBus();
 			eventBus.publish("BlockNavigation", data);
 		},
-		
-		onSelectBtnPress: function(oEvent){
+
+		onSelectBtnPress: function(oEvent) {
+			var oRouter = this.getRouter();
 			
-		},
-		
-		EnableButtonVisbleCheck: function(str){
-			if (str === "notificationCreate") {
-				return true;
-			} else {
-				return false;
+			var object = this.getView().getModel("viewModel").getProperty(oEvent.getSource().getBindingContext(
+					"viewModel").getPath());
+					
+			if(object.type !=="EQUIPMENT"){
+				object.parentFunctionalLocationName = object.name;
+				object.parentFunctionalLocationdescription= object.description;
+				object.name ="";
+				object.description="";
+				
 			}
-		}
+			
+
+			//var object = oEvent.getSource().getBindingContext("viewModel").getObject();
+
+			oRouter.navTo("notificationCreate", {
+				equipmentNo: object.name,
+				equipmentDesc: object.description,
+				functionalLoc: object.parentFunctionalLocationName,
+				funcLocDesc: object.parentFunctionalLocationdescription,
+				argAvailable:true
+			}, false);
+
+		},
+		//formatter function to either show or hide the button
+		EnableButtonVisbleCheck: function(str) {
+				if (str === "notificationCreate") {
+					return true;
+				} else {
+					return false;
+				}
+			}
 			/**
 			 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
 			 * (NOT before the first rendering! onInit() is used for that one!).
