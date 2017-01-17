@@ -54,12 +54,14 @@ sap.ui.define([
 			});
 			var oArguments = oEvent.getParameter("arguments");
 			if(oArguments.argAvailable){
-				this.getView().getModel().setProperty(this.newEntry.getPath() + "/Equipment", oArguments.equipmentNo);
+				if(oArguments.equipmentNo !== "NONE" && oArguments.equipmentDesc !== "NONE"){
+					this.getView().getModel().setProperty(this.newEntry.getPath() + "/Equipment", oArguments.equipmentNo);
+					this.getView().getModel().setProperty(this.newEntry.getPath() + "/EquipmentDesc", oArguments.equipmentDesc);
+				}
 				this.getView().getModel().setProperty(this.newEntry.getPath() + "/FuncLocDesc", oArguments.funcLocDesc);
 				this.getView().getModel().setProperty(this.newEntry.getPath() + "/FunctionalLoc", oArguments.functionalLoc);
-				this.getView().getModel().setProperty(this.newEntry.getPath() + "/EquipmentDesc", oArguments.equipmentDesc);
+				
 			}
-
 			this.getView().setBindingContext(this.newEntry);
 		},
 
@@ -209,6 +211,13 @@ sap.ui.define([
 			var thisDialog = evt.getParameter("id");
 			//this._valueHelpDialog.destroy();
 			thisDialog.destroy();
+		},
+		onSelectBtnPress: function(oEvent){
+				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+				oRouter.navTo("structureBrowser", {
+					notificationContext:this.newEntry.getPath().substr(1),
+					parentView: "notificationCreate"
+				}, false);
 		}
 	});
 });

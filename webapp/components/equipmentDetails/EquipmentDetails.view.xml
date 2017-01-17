@@ -25,6 +25,15 @@
 						</ObjectPageSubSection>
 					</subSections>
 				</ObjectPageSection>
+					<ObjectPageSection>
+					<subSections>
+						<ObjectPageSubSection id="equipmentDetails-PendingOrdersSubSection" title="{i18n>EquipmentDetails-PendingOrdersSubSection}">
+							<blocks>
+								<blocks:PendingOrdersBlock/>
+							</blocks>
+						</ObjectPageSubSection>
+					</subSections>
+				</ObjectPageSection>
 				<ObjectPageSection>
 					<subSections>
 						<ObjectPageSubSection id="equipmentDetails-OrderHistroySubSection" title="{i18n>EquipmentDetails-OrderHistorySubSection}">

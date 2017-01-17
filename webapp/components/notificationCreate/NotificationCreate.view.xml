@@ -4,17 +4,15 @@
 	<Page id="createPage" showNavButton="true" navButtonPress="goBack" title="{i18n>NotificationCreate-Title}"
 		class="sapUiFioriObjectPage appBackgroundColor">
 		<content>
-			
 			<!-- General data -->
-			<layout:form.SimpleForm minWidth="1024" title="{i18n>NotificationCreate-General}" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
-				labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
+			<layout:form.SimpleForm minWidth="1024" title="{i18n>NotificationCreate-General}" maxContainerCols="2" editable="true"
+				layout="ResponsiveGridLayout" labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
 				<layout:content>
 					<Label text="{i18n>NotificationCreate-Description}"></Label>
 					<Input id="shortDescription" value="{ShortText}" valueHelpRequest="showAccountF4" valueHelpOnly="false" showValueHelp="false"></Input>
 					<Label text="{i18n>NotificationCreate-Notes}"></Label>
 					<!--valueHelpRequest="showContactF4" -->
-					<TextArea id="remark" liveChange="onContactInputFieldChanged" value="{LongText}"
-					 ></TextArea>
+					<TextArea id="remark" liveChange="onContactInputFieldChanged" value="{LongText}"></TextArea>
 					<Label text="{i18n>NotificationCreate-Priority}"></Label>
 					<Select id="priority" selectedKey="{Priority}" items="{NotificationDropdownsModel>/priority}" class="pos_input">
 						<items>
@@ -23,9 +21,9 @@
 					</Select>
 				</layout:content>
 			</layout:form.SimpleForm>
-				<!-- Object -->
-			<layout:form.SimpleForm minWidth="1024" title="{i18n>NotificationCreate-Location}" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
-				labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
+			<!-- Object -->
+			<layout:form.SimpleForm minWidth="1024" title="{i18n>NotificationCreate-Location}" maxContainerCols="3" editable="true"
+				layout="ResponsiveGridLayout" labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
 				<layout:content>
 					<Label text="{i18n>NotificationCreate-FunctionalLocation}"></Label>
 					<Input id="functionalLocation" value="{FunctionalLoc}" showSuggestion="true" showValueHelp="true"
@@ -34,18 +32,18 @@
 							<core:Item text="{FunctionalLocation}"/>
 						</suggestionItems>
 					</Input>
+					<Button id="selectorButton" text="{i18n>NotificationCreate-SelectButton}" press="onSelectBtnPress"></Button>
 					<Label text=""></Label>
-					<Text text="{FuncLocDesc}" />
+					<Text text="{FuncLocDesc}"/>
 					<Label text="{i18n>NotificationCreate-Equipment}"></Label>
-					
-					<Input id="equipment" value="{Equipment}" showSuggestion="true" showValueHelp="true"
-						valueHelpRequest="handleValueHelpEquipment" suggestionItems="{/EquipmentsSet}">
+					<Input id="equipment" value="{Equipment}" showSuggestion="true" showValueHelp="true" valueHelpRequest="handleValueHelpEquipment"
+						suggestionItems="{/EquipmentsSet}">
 						<suggestionItems>
 							<core:Item text="{Equipment}"/>
 						</suggestionItems>
 					</Input>
 					<Label text=""></Label>
-					<Text text="{EquipmentDesc}" />
+					<Text text="{EquipmentDesc}"/>
 				</layout:content>
 			</layout:form.SimpleForm>
 		</content>
@@ -53,8 +51,7 @@
 			<Toolbar>
 				<content>
 					<ToolbarSpacer></ToolbarSpacer>
-					<Button type="Emphasized"  press="handleSaveNotification"
-						text="{i18n>NotificationCreate-SaveButton}">
+					<Button type="Emphasized" press="handleSaveNotification" text="{i18n>NotificationCreate-SaveButton}">
 						<layoutData>
 							<OverflowToolbarLayoutData priority="NeverOverflow"/>
 						</layoutData>
