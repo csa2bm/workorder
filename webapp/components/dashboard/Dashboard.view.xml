@@ -5,7 +5,7 @@
 		<Page title="{i18n>Dashboard-Title}" class="myBackgroundStyle">
 			<headerContent>
 				<l:HorizontalLayout>
-					<Image src="{appInfoModel>/UserImage}" width="2em" height="2em" press="onSettings" class="circular sapUiTinyMarginTop sapUiTinyMarginEnd"></Image>
+					<Image visible="{device>/isPhone}" src="{appInfoModel>/UserImage}" width="2em" height="2em" press="onSettings" class="circular sapUiTinyMarginTop sapUiTinyMarginEnd"></Image>
 					<!--<core:Icon width="3em" height="3em" noTabStop="true" press="onSettings" src="sap-icon://action-settings"/>-->
 				</l:HorizontalLayout>
 			</headerContent>
@@ -13,7 +13,7 @@
 				<FlexBox alignItems="Start" justifyContent="Start">
 					<items>
 						<GenericTile  class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout"
-							backgroundImage="images/2bmTileLogo7.png" frameType="TwoByOne" press="press">
+							backgroundImage="images/2bmTileLogo7.png" frameType="TwoByOne">
 							<tileContent>
 								<TileContent footer="" class="sapUiSmallMargin">
 									<content>
@@ -22,7 +22,7 @@
 								</TileContent>
 							</tileContent>
 						</GenericTile>
-						<CustomTile visible="false" class="sapUiTinyMarginTop TwoByOne sapMGT sapMPointer sapUiTinyMarginBegin customProfileTile">
+						<CustomTile visible="{device>/isNotPhone}" class="sapUiTinyMarginTop TwoByOne sapMGT sapMPointer sapUiTinyMarginBegin customProfileTile">
 							<HBox alignItems="Start" justifyContent="SpaceBetween" class="sapUiSmallMarginBegin sapUiSmallMarginTop sapUiSmallMarginEnd">
 								<items>
 									<VBox>

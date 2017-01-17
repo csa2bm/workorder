@@ -4,7 +4,7 @@
 		<pages>
 			<Page title="Browse Structure" showNavButton="true" navButtonPress="navigateBack">
 				<content>
-						<Table id="workOrderTableId" items="{path: 'viewModel>/items'}" noDataText="No Work Orders" showSeparators="true" class="workOrderListTableClass">
+						<Table id="workOrderTableId" items="{path: 'viewModel>/items'}" noDataText="No Work Orders" class="workOrderListTableClass">
 					<columns>
 						<Column width="1rem" hAlign="Center" vAlign="Middle">
 							<header>
