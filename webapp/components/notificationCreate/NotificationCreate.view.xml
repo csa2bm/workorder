@@ -5,7 +5,7 @@
 		class="sapUiFioriObjectPage appBackgroundColor">
 		<content>
 			<!-- General data -->
-			<layout:form.SimpleForm minWidth="1024" title="{i18n>NotificationCreate-General}" maxContainerCols="2" editable="true"
+			<layout:form.SimpleForm minWidth="1024" title="{i18n>NotificationCreate-General}" maxContainerCols="1" editable="true"
 				layout="ResponsiveGridLayout" labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
 				<layout:content>
 					<Label text="{i18n>NotificationCreate-Description}"></Label>
@@ -45,12 +45,15 @@
 						</suggestionItems>
 					</Input>
 					-->
-					<FlexBox justifyContent="Center">
-						<Button id="selectorButton" text="{i18n>NotificationCreate-SelectButton}" press="onSelectBtnPress"></Button>
-					</FlexBox>
 				</layout:content>
 			</layout:form.SimpleForm>
-			
+
+				<FlexBox justifyContent="Center" class="sapUiSmallMarginBeginEnd">
+				<Button id="selectorButton" class="sapUiSmallMarginEnd" text="{i18n>NotificationCreate-SelectButton}" press="onSelectBtnPress"></Button>
+				<Button id="scanButton" text="{i18n>NotificationCreate-ScanButton}" press="onScanBtnPress"></Button>
+				</FlexBox>
+
+				
 		</content>
 		<footer id="footer">
 			<Toolbar>
