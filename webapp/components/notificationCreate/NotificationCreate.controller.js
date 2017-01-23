@@ -29,9 +29,7 @@ sap.ui.define([
 		},
 
 		onRouteMatched: function(oEvent) {
-			
-			
-			
+
 			this.newEntry = this.getView().getModel().createEntry("/NotificationsSet", {
 				properties: {
 					NotifDate: new Date().toISOString().substr(0, 19)
@@ -53,20 +51,40 @@ sap.ui.define([
 				}, this)
 			});
 			var oArguments = oEvent.getParameter("arguments");
-			if(oArguments.argAvailable){
-				if(oArguments.equipmentNo !== "NONE" && oArguments.equipmentDesc !== "NONE"){
+			if (oArguments.argAvailable) {
+				if (oArguments.equipmentNo !== "NONE" && oArguments.equipmentDesc !== "NONE") {
 					this.getView().getModel().setProperty(this.newEntry.getPath() + "/Equipment", oArguments.equipmentNo);
 					this.getView().getModel().setProperty(this.newEntry.getPath() + "/EquipmentDesc", oArguments.equipmentDesc);
 				}
 				this.getView().getModel().setProperty(this.newEntry.getPath() + "/FuncLocDesc", oArguments.funcLocDesc);
 				this.getView().getModel().setProperty(this.newEntry.getPath() + "/FunctionalLoc", oArguments.functionalLoc);
-				
+
 			}
+
+			var oHistory = History.getInstance();
+			var sPreviousHash = oHistory.getPreviousHash();
+/*
+			var str = "struct"; // structure browser
+			if (sPreviousHash !== undefined) {
+				if (sPreviousHash.substring(0, str.length) === str) {
+					oHistory.aHistory.pop();
+				} else {
+					for (var i = 0; i < oHistory.aHistory.length; i++) {
+						var strStructure = "struct";
+
+						if (oHistory.aHistory[i].substring(0, strStructure.length) === strStructure) {
+							oHistory.aHistory.splice(i, 1);
+						} else if (oHistory.aHistory[i].substring(0, str.length) === str) {
+							oHistory.aHistory.splice(i, 1);
+						}
+					}
+				}
+			}*/
 			this.getView().setBindingContext(this.newEntry);
 		},
 
 		goBack: function(oEvent) {
-			
+
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
 			this.getView().setBindingContext(null);
@@ -117,51 +135,53 @@ sap.ui.define([
 			);
 		},
 
-		handleValueHelpFunctionalLocation: function(oEvent) {
-			var sInputValue = oEvent.getSource().getValue();
+		/*
+				handleValueHelpFunctionalLocation: function(oEvent) {
+					var sInputValue = oEvent.getSource().getValue();
 
-			this.inputId = oEvent.getSource().getId();
+					this.inputId = oEvent.getSource().getId();
 
-			if (!this._valueHelpFunctionalLocationDialog) {
-				this._valueHelpFunctionalLocationDialog = sap.ui.xmlfragment(
-					"com.twobm.mobileworkorder.components.notificationCreate.fragments.FunctionalLocation",
-					this
-				);
-				this.getView().addDependent(this._valueHelpFunctionalLocationDialog);
-			}
+					if (!this._valueHelpFunctionalLocationDialog) {
+						this._valueHelpFunctionalLocationDialog = sap.ui.xmlfragment(
+							"com.twobm.mobileworkorder.components.notificationCreate.fragments.FunctionalLocation",
+							this
+						);
+						this.getView().addDependent(this._valueHelpFunctionalLocationDialog);
+					}
 
-			// create a filter for the binding
-			this._valueHelpFunctionalLocationDialog.getBinding("items").filter([new Filter(
-				"FunctionalLocation",
-				sap.ui.model.FilterOperator.Contains, sInputValue
-			)]);
+					// create a filter for the binding
+					this._valueHelpFunctionalLocationDialog.getBinding("items").filter([new Filter(
+						"FunctionalLocation",
+						sap.ui.model.FilterOperator.Contains, sInputValue
+					)]);
 
-			// open value help dialog filtered by the input value
-			this._valueHelpFunctionalLocationDialog.open(sInputValue);
-		},
+					// open value help dialog filtered by the input value
+					this._valueHelpFunctionalLocationDialog.open(sInputValue);
+				},
 
-		handleValueHelpEquipment: function(oEvent) {
-			var sInputValue = oEvent.getSource().getValue();
+				handleValueHelpEquipment: function(oEvent) {
+					var sInputValue = oEvent.getSource().getValue();
 
-			this.inputId = oEvent.getSource().getId();
+					this.inputId = oEvent.getSource().getId();
 
-			if (!this._valueHelpEquipmentDialog) {
-				this._valueHelpEquipmentDialog = sap.ui.xmlfragment(
-					"com.twobm.mobileworkorder.components.notificationCreate.fragments.Equipment",
-					this
-				);
-				this.getView().addDependent(this._valueHelpEquipmentDialog);
-			}
+					if (!this._valueHelpEquipmentDialog) {
+						this._valueHelpEquipmentDialog = sap.ui.xmlfragment(
+							"com.twobm.mobileworkorder.components.notificationCreate.fragments.Equipment",
+							this
+						);
+						this.getView().addDependent(this._valueHelpEquipmentDialog);
+					}
 
-			// create a filter for the binding
-			this._valueHelpEquipmentDialog.getBinding("items").filter([new Filter(
-				"Equipment",
-				sap.ui.model.FilterOperator.Contains, sInputValue
-			)]);
+					// create a filter for the binding
+					this._valueHelpEquipmentDialog.getBinding("items").filter([new Filter(
+						"Equipment",
+						sap.ui.model.FilterOperator.Contains, sInputValue
+					)]);
 
-			// open value help dialog filtered by the input value
-			this._valueHelpEquipmentDialog.open(sInputValue);
-		},
+					// open value help dialog filtered by the input value
+					this._valueHelpEquipmentDialog.open(sInputValue);
+				},
+				*/
 
 		_handleValueHelpSearchFunctionalLocation: function(evt) {
 			var sValue = evt.getParameter("value");
@@ -199,7 +219,7 @@ sap.ui.define([
 				var productInput = this.getView().byId(this.inputId);
 				productInput.setValue(oSelectedItem.getTitle());
 				this.getView().getModel().setProperty(this.newEntry.getPath() + "/EquipmentDesc", oSelectedItem.getDescription());
-				
+
 			}
 			evt.getSource().getBinding("items").filter([]);
 			//var thisDialog = evt.getParameter("id");
@@ -212,12 +232,36 @@ sap.ui.define([
 			//this._valueHelpDialog.destroy();
 			thisDialog.destroy();
 		},
-		onSelectBtnPress: function(oEvent){
-				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-				oRouter.navTo("structureBrowser", {
-					notificationContext:this.newEntry.getPath().substr(1),
-					parentView: "notificationCreate"
-				}, false);
+		onSelectBtnPress: function(oEvent) {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("structureBrowser", {
+				notificationContext: this.newEntry.getPath().substr(1),
+				parentView: "notificationCreate"
+			}, false);
+		},
+		onScanBtnPress: function() {
+			var that = this;
+			var code = "";
+			try {
+				cordova.plugins.barcodeScanner.scan(
+					function(result) {
+
+						if (result.cancelled) {
+							sap.m.MessageToast.show("Canelled");
+							return;
+						}
+
+						// set functional location and equipent to model and refresh model
+						//localmodel.refresh();
+
+					},
+					function(error) {
+						sap.m.MessageToast.show("Scanning failed: " + error);
+					}
+				);
+			} catch (err) {
+				console.log(err);
+			}
 		}
 	});
 });

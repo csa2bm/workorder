@@ -34,6 +34,29 @@ sap.ui.define([
 				model.setProperty("/parentView", "");
 			}
 			model.refresh();
+/*
+			var oHistory = History.getInstance();
+			var sPreviousHash = oHistory.getPreviousHash();
+
+			var str = "notifi"; //strutureBrowser
+
+			if (sPreviousHash !== undefined) {
+				if (sPreviousHash.substring(0, str.length) === str) {
+					oHistory.aHistory.pop();
+				}
+				else {
+					for (var i = 0; i < oHistory.aHistory.length; i++) {
+						var strStructure = "struct";
+
+						if (oHistory.aHistory[i].substring(0, strStructure.length) === strStructure) {
+							oHistory.aHistory.splice(i, 1);
+						}
+						else if(oHistory.aHistory[i].substring(0, str.length) === str){
+							oHistory.aHistory.splice(i, 1);
+						}
+					}
+				}
+			}*/
 		},
 
 		createDemoData: function() {
@@ -370,7 +393,7 @@ sap.ui.define([
 					funcLocDesc: object.parentFunctionalLocationdescription,
 					argAvailable: true
 
-				}, false);
+				}, true);
 			}
 
 		},

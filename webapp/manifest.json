@@ -223,13 +223,14 @@
 					"clearAggregation": true,
 					"viewName": "NotificationCreate",
 					"viewPath": "com.twobm.mobileworkorder.components.notificationCreate",
-					"viewLevel": 5
+					"viewLevel": 2
 				},
 				"structureBrowser": {
 					"viewType": "XML",
 					"transition": "slide",
 					"clearAggregation": true,
 					"viewName": "StructureBrowser",
+					"viewLevel":"3",
 					"viewPath": "com.twobm.mobileworkorder.components.structureBrowser"
 				}
 			}
