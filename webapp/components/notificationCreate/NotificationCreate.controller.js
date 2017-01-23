@@ -220,6 +220,31 @@ sap.ui.define([
 					notificationContext:this.newEntry.getPath().substr(1),
 					parentView: "notificationCreate"
 				}, false);
-		}
+		},
+		onScanBtnPress: function () {
+            var that = this;
+            var code = "";
+            try {
+                cordova.plugins.barcodeScanner.scan(
+                    function (result) {
+
+                        if (result.cancelled) {
+                            sap.m.MessageToast.show("Canelled");
+                            return;
+                        }
+                        
+                        // set functional location and equipent to model and refresh model
+                        //localmodel.refresh();
+
+
+                    },
+                    function (error) {
+                        sap.m.MessageToast.show("Scanning failed: " + error);
+                    }
+                );
+            } catch (err) {
+                console.log(err);
+            }
+        },
 	});
 });

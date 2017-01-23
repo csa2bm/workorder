@@ -47,13 +47,10 @@
 					-->
 				</layout:content>
 			</layout:form.SimpleForm>
-
-				<FlexBox justifyContent="Center" class="sapUiSmallMarginBeginEnd">
+			<FlexBox justifyContent="Center" class="sapUiSmallMarginBeginEnd">
 				<Button id="selectorButton" class="sapUiSmallMarginEnd" text="{i18n>NotificationCreate-SelectButton}" press="onSelectBtnPress"></Button>
 				<Button id="scanButton" text="{i18n>NotificationCreate-ScanButton}" press="onScanBtnPress"></Button>
-				</FlexBox>
-
-				
+			</FlexBox>
 		</content>
 		<footer id="footer">
 			<Toolbar>
