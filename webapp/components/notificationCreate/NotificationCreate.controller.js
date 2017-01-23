@@ -117,6 +117,7 @@ sap.ui.define([
 			);
 		},
 
+/*
 		handleValueHelpFunctionalLocation: function(oEvent) {
 			var sInputValue = oEvent.getSource().getValue();
 
@@ -162,6 +163,7 @@ sap.ui.define([
 			// open value help dialog filtered by the input value
 			this._valueHelpEquipmentDialog.open(sInputValue);
 		},
+		*/
 
 		_handleValueHelpSearchFunctionalLocation: function(evt) {
 			var sValue = evt.getParameter("value");

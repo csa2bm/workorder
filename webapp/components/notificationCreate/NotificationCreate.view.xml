@@ -23,29 +23,34 @@
 			</layout:form.SimpleForm>
 			<!-- Object -->
 			<layout:form.SimpleForm minWidth="1024" title="{i18n>NotificationCreate-Location}" maxContainerCols="3" editable="true"
-				layout="ResponsiveGridLayout" labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
+				layout="ResponsiveGridLayout" labelSpanL="4" labelSpanM="4" emptySpanL="5" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
 				<layout:content>
 					<Label text="{i18n>NotificationCreate-FunctionalLocation}"></Label>
+					<Text text="{FuncLocDesc}\r\n({FunctionalLoc})"/>
+					<!--
 					<Input id="functionalLocation" value="{FunctionalLoc}" showSuggestion="true" showValueHelp="true"
 						valueHelpRequest="handleValueHelpFunctionalLocation" suggestionItems="{/FunctionalLocationsSet}">
 						<suggestionItems>
 							<core:Item text="{FunctionalLocation}"/>
 						</suggestionItems>
 					</Input>
-					<Button id="selectorButton" text="{i18n>NotificationCreate-SelectButton}" press="onSelectBtnPress"></Button>
-					<Label text=""></Label>
-					<Text text="{FuncLocDesc}"/>
+					-->
 					<Label text="{i18n>NotificationCreate-Equipment}"></Label>
+					<Text text="{EquipmentDesc}\r\n({Equipment})"/>
+					<!--
 					<Input id="equipment" value="{Equipment}" showSuggestion="true" showValueHelp="true" valueHelpRequest="handleValueHelpEquipment"
 						suggestionItems="{/EquipmentsSet}">
 						<suggestionItems>
 							<core:Item text="{Equipment}"/>
 						</suggestionItems>
 					</Input>
-					<Label text=""></Label>
-					<Text text="{EquipmentDesc}"/>
+					-->
+					<FlexBox justifyContent="Center">
+						<Button id="selectorButton" text="{i18n>NotificationCreate-SelectButton}" press="onSelectBtnPress"></Button>
+					</FlexBox>
 				</layout:content>
 			</layout:form.SimpleForm>
+			
 		</content>
 		<footer id="footer">
 			<Toolbar>
