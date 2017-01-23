@@ -19,14 +19,6 @@ sap.ui.define([
 		},
 
 		onRouteMatched: function(oEvent) {
-			// var sName = oEvent.getParameter("name");
-
-			// //Is it this page we have navigated to?
-			// if (sName !== "dashboard") {
-			// 	//this.getEventBus().unsubscribe("OfflineStore", "DBReinitialized", this.dbHasBeenReinitialized, this);
-			// 	return;
-			// }
-
 			if (!this.DashBoardModel) {
 				this.DashBoardModel = new sap.ui.model.json.JSONModel({
 					notificationCount: "0",
@@ -36,8 +28,6 @@ sap.ui.define([
 
 				this.getUserDetails();
 			}
-
-			//this.getEventBus().subscribe("OfflineStore", "DBReinitialized", this.dbHasBeenReinitialized, this);
 
 			this.setContentInTiles();
 		},
@@ -144,6 +134,10 @@ sap.ui.define([
 			if (sPreviousHash !== undefined) {
 				window.history.go(-1);
 			} else {
+				//Reset create notification model
+				var selectObjectForNewNotificationModel = this.getView().getModel("selectObjectForNewNotificationModel");
+				selectObjectForNewNotificationModel.setData({});
+			
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 				//var oRouter = this.getRouter();
 				oRouter.navTo("notificationCreate", {

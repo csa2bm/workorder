@@ -10,7 +10,6 @@
 		confirm="_handleValueHelpCloseFunctionalLocation"
 		cancel="_handleValueHelpClose"
 		>
-		<!--afterClose="_handleValueHelpAfterClose"-->
 		<StandardListItem
 			title="{FunctionalLocation}"
 			description="{Description}" />

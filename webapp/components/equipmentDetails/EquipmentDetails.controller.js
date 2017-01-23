@@ -6,19 +6,19 @@ sap.ui.define([
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.equipmentDetails.EquipmentDetails", {
-		formatter:Formatter,
-		
+		formatter: Formatter,
+
 		onInit: function() {
 			//this.getRouter("objectDetails").attachMatched(this.onRouteMatched, this);
 			this.getRouter().getRoute("equipmentDetails").attachMatched(this.onRouteMatched, this);
 
 		},
-		
+
 		onRouteMatched: function(oEvent) {
 			var oArguments = oEvent.getParameter("arguments");
 			var contextPath = '/' + oArguments.objectContext;
 			var givenContext = new sap.ui.model.Context(this.getView().getModel(), contextPath);
-			
+
 			//this.oContext is the current context of the view
 			//this context is the context that was set when the view was shown the last time
 			//therefore the new contextPath can be different from the contextPath/context
@@ -57,8 +57,8 @@ sap.ui.define([
 					}, true);
 			}*/
 		},
-		
-		onNavigationButtonPress: function(){
+
+		onNavigationButtonPress: function() {
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
 
@@ -67,26 +67,35 @@ sap.ui.define([
 			} else {
 				var oRouter = this.getRouter();
 				oRouter.navTo("workOrderDetails", false);
-			}	
+			}
 		},
-		
+
 		onPressCreateNotification: function() {
 
-		var oRouter = this.getRouter();
-		
-		//Getting object of currently selected object in this view
-		var object = this.getView().getBindingContext().getObject();
-		// creating a data to pass functional location no. and equipment no of current object.
-		
-		//var path = this.getView().getBindingContext().getPath().substr(1);
-		
-		oRouter.navTo("notificationCreate", {
-					equipmentNo: object.Equipment,
-					equipmentDesc: object.Description,
-					functionalLoc: object.Funcloc,
-					funcLocDesc: object.Funclocdesc,
-					argAvailable:"true"
-				}, false);
+			var oRouter = this.getRouter();
+
+			//Getting object of currently selected object in this view
+			var object = this.getView().getBindingContext().getObject();
+			// creating a data to pass functional location no. and equipment no of current object.
+
+			//var path = this.getView().getBindingContext().getPath().substr(1);
+
+			//Reset create notification model
+			var selectObjectForNewNotificationModel = this.getView().getModel("selectObjectForNewNotificationModel");
+			selectObjectForNewNotificationModel.setData({});
+
+			selectObjectForNewNotificationModel.getData().equipmentNo = object.Equipment;
+			selectObjectForNewNotificationModel.getData().equipmentDesc = object.Description;
+			selectObjectForNewNotificationModel.getData().functionalLoc = object.Funcloc;
+			selectObjectForNewNotificationModel.getData().funcLocDesc = object.Funclocdesc;
+
+			oRouter.navTo("notificationCreate", {
+				// equipmentNo: object.Equipment,
+				// equipmentDesc: object.Description,
+				// functionalLoc: object.Funcloc,
+				// funcLocDesc: object.Funclocdesc,
+				// argAvailable: "true"
+			}, false);
 		}
 	});
 });

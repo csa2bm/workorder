@@ -124,6 +124,10 @@ sap.ui.define([
 		},
 
 		createNewNotification: function() {
+			//Reset create notification model
+			var selectObjectForNewNotificationModel = this.getView().getModel("selectObjectForNewNotificationModel");
+			selectObjectForNewNotificationModel.setData({});
+
 			var oRouter = this.getRouter();
 			oRouter.navTo("notificationCreate", true);
 		},

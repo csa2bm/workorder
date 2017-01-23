@@ -50,9 +50,21 @@ sap.ui.define([
 			oModel.setDefaultBindingMode("OneWay");
 			return oModel;
 		},
-		
-		getIsHybridApp : function(){
-			if(sap.hybrid){
+
+		createSelectObjectForNewNotificationModel: function() {
+			var oModel = new JSONModel({
+				equipmentNo: "",
+				equipmentDesc: "",
+				functionalLoc: "",
+				funcLocDesc: ""
+			});
+
+			oModel.setDefaultBindingMode("TwoWay");
+			return oModel;
+		},
+
+		getIsHybridApp: function() {
+			if (sap.hybrid) {
 				return true;
 			}
 			return false;

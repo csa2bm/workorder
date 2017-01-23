@@ -25,6 +25,9 @@ sap.ui.define([
 			this.setModel(models.createSyncModel(), "syncStatusModel");
 			// set settings model
 			this.setModel(models.createAppInfoModel(), "appInfoModel");
+			
+			// set createSelectObjectForNewNotificationModel model
+			this.setModel(models.createSelectObjectForNewNotificationModel(), "selectObjectForNewNotificationModel");
 
 			var appInfoModel = this.getModel("appInfoModel");
 			var syncStatusModel = this.getModel("syncStatusModel");

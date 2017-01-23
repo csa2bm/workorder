@@ -34,29 +34,29 @@ sap.ui.define([
 				model.setProperty("/parentView", "");
 			}
 			model.refresh();
-/*
-			var oHistory = History.getInstance();
-			var sPreviousHash = oHistory.getPreviousHash();
+			/*
+						var oHistory = History.getInstance();
+						var sPreviousHash = oHistory.getPreviousHash();
 
-			var str = "notifi"; //strutureBrowser
+						var str = "notifi"; //strutureBrowser
 
-			if (sPreviousHash !== undefined) {
-				if (sPreviousHash.substring(0, str.length) === str) {
-					oHistory.aHistory.pop();
-				}
-				else {
-					for (var i = 0; i < oHistory.aHistory.length; i++) {
-						var strStructure = "struct";
+						if (sPreviousHash !== undefined) {
+							if (sPreviousHash.substring(0, str.length) === str) {
+								oHistory.aHistory.pop();
+							}
+							else {
+								for (var i = 0; i < oHistory.aHistory.length; i++) {
+									var strStructure = "struct";
 
-						if (oHistory.aHistory[i].substring(0, strStructure.length) === strStructure) {
-							oHistory.aHistory.splice(i, 1);
-						}
-						else if(oHistory.aHistory[i].substring(0, str.length) === str){
-							oHistory.aHistory.splice(i, 1);
-						}
-					}
-				}
-			}*/
+									if (oHistory.aHistory[i].substring(0, strStructure.length) === strStructure) {
+										oHistory.aHistory.splice(i, 1);
+									}
+									else if(oHistory.aHistory[i].substring(0, str.length) === str){
+										oHistory.aHistory.splice(i, 1);
+									}
+								}
+							}
+						}*/
 		},
 
 		createDemoData: function() {
@@ -301,7 +301,6 @@ sap.ui.define([
 			}
 
 			return "sap-icon://wrench";
-
 		},
 
 		indentForLevel: function(level, text) {
@@ -329,15 +328,7 @@ sap.ui.define([
 		},
 
 		onDetailsPress: function(oEvent) {
-			var oBindingContext = oEvent.getSource().getBindingContext("ViewModel");
-
-			/*	this.getView().getModel().createBindingContext(
-					"/ObjectsSet(ObjectNo='IE000000000010000000',Orderid='4000180',Counter='1')/Equipments", null, {},
-					function(result) {
-						
-						
-					}
-					, false);*/
+			//var oBindingContext = oEvent.getSource().getBindingContext("ViewModel");
 
 			if (this.getView().getModel("viewModel").getProperty(oEvent.getSource().getBindingContext("viewModel").getPath()).type ===
 				"EQUIPMENT") {
@@ -345,92 +336,75 @@ sap.ui.define([
 				var objecContext = "/EquipmentsSet('" + this.getView().getModel("viewModel").getProperty(oEvent.getSource().getBindingContext(
 					"viewModel").getPath()).name + "')";
 
-				var oRouter = this.getRouter();
-
-				oRouter.navTo("equipmentDetails", {
-					objectContext: objecContext.substr(1),
+				this.getRouter().navTo("equipmentDetails", {
+					objectContext: objecContext.substr(1)
 
 				}, false);
 			} else {
-				var objecContext = "/FunctionalLocationsSet('" + this.getView().getModel("viewModel").getProperty(oEvent.getSource().getBindingContext(
+				var funcObjectContext = "/FunctionalLocationsSet('" + this.getView().getModel("viewModel").getProperty(oEvent.getSource().getBindingContext(
 					"viewModel").getPath()).name + "')";
 
-				var oRouter = this.getRouter();
-
-				oRouter.navTo("functionalLocationDetails", {
-					objectContext: objecContext.substr(1),
+				this.getRouter().navTo("functionalLocationDetails", {
+					objectContext: funcObjectContext.substr(1)
 
 				}, false);
 			}
-
 		},
 
-		gotoEquipmentDetailsPage: function(data) {
-			var eventBus = sap.ui.getCore().getEventBus();
-			eventBus.publish("BlockNavigation", data);
-		},
+		// gotoEquipmentDetailsPage: function(data) {
+		// 	var eventBus = sap.ui.getCore().getEventBus();
+		// 	eventBus.publish("BlockNavigation", data);
+		// },
 
 		onSelectBtnPress: function(oEvent) {
-			var oRouter = this.getRouter();
-
 			var object = this.getView().getModel("viewModel").getProperty(oEvent.getSource().getBindingContext(
 				"viewModel").getPath());
 
+			var selectObjectForNewNotificationModel = this.getView().getModel("selectObjectForNewNotificationModel");
+
 			if (object.type !== "EQUIPMENT") {
-				oRouter.navTo("notificationCreate", {
-					equipmentNo: "NONE",
-					equipmentDesc: "NONE",
-					functionalLoc: object.name,
-					funcLocDesc: object.description,
-					argAvailable: true
-				}, false);
+				selectObjectForNewNotificationModel.getData().equipmentNo = "NONE";
+				selectObjectForNewNotificationModel.getData().equipmentDesc = "NONE";
+				selectObjectForNewNotificationModel.getData().functionalLoc = object.name;
+				selectObjectForNewNotificationModel.getData().funcLocDesc = object.description;
+
+				/*				oRouter.navTo("notificationCreate", {
+									equipmentNo: "NONE",
+									equipmentDesc: "NONE",
+									functionalLoc: object.name,
+									funcLocDesc: object.description,
+									argAvailable: true
+								}, false);*/
 
 			} else {
-				oRouter.navTo("notificationCreate", {
-					equipmentNo: object.name,
-					equipmentDesc: object.description,
-					functionalLoc: object.parentFunctionalLocationName,
-					funcLocDesc: object.parentFunctionalLocationdescription,
-					argAvailable: true
 
-				}, true);
+				selectObjectForNewNotificationModel.getData().equipmentNo = object.name;
+				selectObjectForNewNotificationModel.getData().equipmentDesc = object.description;
+				selectObjectForNewNotificationModel.getData().functionalLoc = object.parentFunctionalLocationName;
+				selectObjectForNewNotificationModel.getData().funcLocDesc = object.parentFunctionalLocationdescription;
+
+				// oRouter.navTo("notificationCreate", {
+				// 	equipmentNo: object.name,
+				// 	equipmentDesc: object.description,
+				// 	functionalLoc: object.parentFunctionalLocationName,
+				// 	funcLocDesc: object.parentFunctionalLocationdescription,
+				// 	argAvailable: true
+
+				// }, true);
 			}
 
+			selectObjectForNewNotificationModel.refresh();
+
+			this.navigateBack();
 		},
+		
 		//formatter function to either show or hide the button
 		EnableButtonVisbleCheck: function(str) {
-				if (str === "notificationCreate") {
-					return true;
-				} else {
-					return false;
-				}
+			if (str === "notificationCreate") {
+				return true;
+			} else {
+				return false;
 			}
-			/**
-			 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
-			 * (NOT before the first rendering! onInit() is used for that one!).
-			 * @memberOf com.twobm.mobileworkorder.components.structureBrowser.view.structureBrowser
-			 */
-			//	onBeforeRendering: function() {
-			//
-			//	},
-
-		/**
-		 * Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.
-		 * This hook is the same one that SAPUI5 controls get after being rendered.
-		 * @memberOf com.twobm.mobileworkorder.components.structureBrowser.view.structureBrowser
-		 */
-		//	onAfterRendering: function() {
-		//
-		//	},
-
-		/**
-		 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
-		 * @memberOf com.twobm.mobileworkorder.components.structureBrowser.view.structureBrowser
-		 */
-		//	onExit: function() {
-		//
-		//	}
-
+		}
 	});
-
 });
