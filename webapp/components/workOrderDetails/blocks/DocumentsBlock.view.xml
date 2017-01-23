@@ -1,0 +1,46 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout"
+	controllerName="com.twobm.mobileworkorder.components.workOrderDetails.blocks.DocumentsBlock" xmlns:html="http://www.w3.org/1999/xhtml">
+	<l:VerticalLayout class="sapUiSmallMarginEnd" width="100%">
+		<l:HorizontalLayout >
+			<!--<u:FileUploader id="customFileUploader" icon="sap-icon://add" iconOnly="true"
+				buttonOnly="true" uploadStart="uploadStartedFileUploader" uploadOnChange="false" uploadComplete="onUploadCompleteFileUploader" 
+				class="sapUiSmallMarginEnd" change="onChangeFileUploader" />-->
+			<Button visible="true" class="sapUiSmallMarginEnd" icon="sap-icon://add" press="uploadPhotoFromFileSystem"></Button>
+			<!--<Button id="cameraButton" visible="true" class="sapUiSmallMarginEnd" icon="sap-icon://camera" press="capturePhoto"></Button>-->
+		</l:HorizontalLayout>
+		<Table id="attachmentsList" items="{path: 'viewModel>/items'}" noDataText="No Documents">
+			<columns>
+				<!-- Icon column -->
+				<Column demandPopin="true" popinDisplay="WithoutHeader" vAlign="Middle" width="2rem"/>
+				<Column demandPopin="true" popinDisplay="WithoutHeader" vAlign="Middle">
+					<header>
+						<Label text="Filename"/>
+					</header>
+				</Column>
+				<Column demandPopin="true" popinDisplay="WithoutHeader" vAlign="Middle" minScreenWidth="Small" width="8rem">
+					<header>
+						<Label text="Created Date"/>
+					</header>
+				</Column>
+				<Column demandPopin="true" popinDisplay="WithoutHeader" vAlign="Middle" minScreenWidth="Small" width="8rem">
+					<header>
+						<Label text="Created By"/>
+					</header>
+				</Column>
+				<Column demandPopin="true" popinDisplay="WithoutHeader" vAlign="Middle" width="8rem"/>
+			</columns>
+			<items>
+				<ColumnListItem type="Inactive" press="clickPreviewDocument">
+					<cells>
+						<core:Icon id="documentListImageIcon" class="sapUiSmallMarginEnd" noTabStop="true" size="2em" src="sap-icon://document"/>
+						<ObjectIdentifier text="{viewModel>Description}"/>
+						<!--<Link text="{Filename}" press="clickPreviewAttachment"/>-->
+						<ObjectIdentifier text="{parts:[{path:'viewModel>CreateDate'}]}"/>
+						<ObjectIdentifier text="{viewModel>CreatedBy}"/>
+						<Button id="downloadButton" class="sapUiMediumMarginEnd" text="Download" icon="sap-icon://download" press="downloadDocument"></Button>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+	</l:VerticalLayout>
+</mvc:View>
