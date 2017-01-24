@@ -4,105 +4,108 @@
 	<App class="dashboardClass" id="mobileWorkOrderApp">
 		<Page title="{i18n>Dashboard-Title}" class="myBackgroundStyle">
 			<headerContent>
-				<l:HorizontalLayout>
-					<Image visible="{device>/isPhone}" src="{appInfoModel>/UserImage}" width="2em" height="2em" press="onSettings" class="circular sapUiTinyMarginTop sapUiTinyMarginEnd"></Image>
-					<!--<core:Icon width="3em" height="3em" noTabStop="true" press="onSettings" src="sap-icon://action-settings"/>-->
-				</l:HorizontalLayout>
+				<core:ExtensionPoint name="dashboardHeaderItems">
+					<l:HorizontalLayout>
+						<Image visible="{device>/isPhone}" src="{appInfoModel>/UserImage}" width="2em" height="2em" press="onSettings"
+							class="circular sapUiTinyMarginTop sapUiTinyMarginEnd"></Image>
+						<!--<core:Icon width="3em" height="3em" noTabStop="true" press="onSettings" src="sap-icon://action-settings"/>-->
+					</l:HorizontalLayout>
+				</core:ExtensionPoint>
 			</headerContent>
 			<content>
-				<FlexBox alignItems="Start" justifyContent="Start">
-					<items>
-						<GenericTile  class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout"
-							backgroundImage="images/2bmTileLogo7.png" frameType="TwoByOne">
-							<tileContent>
-								<TileContent footer="" class="sapUiSmallMargin">
-									<content>
-										<FeedContent class="sapUiTinyMarginEnd" contentText="" subheader="" value=""></FeedContent>
-									</content>
-								</TileContent>
-							</tileContent>
-						</GenericTile>
-						<CustomTile visible="{device>/isNotPhone}" class="sapUiTinyMarginTop TwoByOne sapMGT sapMPointer sapUiTinyMarginBegin customProfileTile">
-							<HBox alignItems="Start" justifyContent="SpaceBetween" class="sapUiSmallMarginBegin sapUiSmallMarginTop sapUiSmallMarginEnd">
-								<items>
-									<VBox>
-										<items>
-											<Text text="{appInfoModel>/UserFullName}" class="profileTitle"/>
-											<Text text="{appInfoModel>/UserPosition}" class="profileSubTitle"/>
-										</items>
-									</VBox>
-									<VBox alignItems="End" justifyContent="Center" height="195px">
-										<items>
-											<Image src="{appInfoModel>/UserImage}" class="circular sapUiSmallMarginEnd"></Image>
-										</items>
-									</VBox>
-								</items>
-							</HBox>
-						</CustomTile>
-					</items>
-				</FlexBox>
-				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-WorkOrdersTile-Header}" subheader=""
-					frameType="OneByOne" press="onPressOtherWorkorders">
-					<tileContent>
-						<TileContent footer="">
-							<content>
-								<NumericContent value="{DashBoardModel>/orderCount}"  icon="sap-icon://eam-work-order"/>
-							</content>
-						</TileContent>
-					</tileContent>
-				</GenericTile>
-				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-NotificationsTile-Header}" subheader=""
-					frameType="OneByOne" press="onPressNotifications">
-					<tileContent>
-						<TileContent footer="">
-							<content>
-								<NumericContent value="{DashBoardModel>/notificationCount}" icon="sap-icon://notification"/>
-							</content>
-						</TileContent>
-					</tileContent>
-				</GenericTile>
-				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-CreateNotificationTile-Header}"
-					frameType="OneByOne" press="onPressCreateNotification">
-					<tileContent>
-						<TileContent>
-							<content>
-								<ImageContent src="sap-icon://add"/>
-							</content>
-						</TileContent>
-					</tileContent>
-				</GenericTile>
-				<!--<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-ScanObjectTile-Header}" subheader=""-->
-				<!--	frameType="OneByOne" press="onPressScanObject">-->
-				<!--	<tileContent>-->
-				<!--		<TileContent>-->
-				<!--			<content>-->
-				<!--				<ImageContent src="sap-icon://bar-code"/>-->
-				<!--			</content>-->
-				<!--		</TileContent>-->
-				<!--	</tileContent>-->
-				<!--</GenericTile>-->
-				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-TechnicalObjectsTile-Header}"
-					frameType="OneByOne" press="onPressFunctionalLocations">
-					<tileContent>
-						<TileContent>
-							<content>
-								<ImageContent src="sap-icon://functional-location"/>
-							</content>
-						</TileContent>
-					</tileContent>
-				</GenericTile>
+				<core:ExtensionPoint name="dashboardTiles">
+					<FlexBox alignItems="Start" justifyContent="Start">
+						<items>
+							<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" backgroundImage="images/2bmTileLogo7.png" frameType="TwoByOne">
+								<tileContent>
+									<TileContent footer="" class="sapUiSmallMargin">
+										<content>
+											<FeedContent class="sapUiTinyMarginEnd" contentText="" subheader="" value=""></FeedContent>
+										</content>
+									</TileContent>
+								</tileContent>
+							</GenericTile>
+							<CustomTile visible="{device>/isNotPhone}" class="sapUiTinyMarginTop TwoByOne sapMGT sapMPointer sapUiTinyMarginBegin customProfileTile">
+								<HBox alignItems="Start" justifyContent="SpaceBetween" class="sapUiSmallMarginBegin sapUiSmallMarginTop sapUiSmallMarginEnd">
+									<items>
+										<VBox>
+											<items>
+												<Text text="{appInfoModel>/UserFullName}" class="profileTitle"/>
+												<Text text="{appInfoModel>/UserPosition}" class="profileSubTitle"/>
+											</items>
+										</VBox>
+										<VBox alignItems="End" justifyContent="Center" height="195px">
+											<items>
+												<Image src="{appInfoModel>/UserImage}" class="circular sapUiSmallMarginEnd"></Image>
+											</items>
+										</VBox>
+									</items>
+								</HBox>
+							</CustomTile>
+						</items>
+					</FlexBox>
+					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-WorkOrdersTile-Header}" subheader=""
+						frameType="OneByOne" press="onPressOtherWorkorders">
+						<tileContent>
+							<TileContent footer="">
+								<content>
+									<NumericContent value="{DashBoardModel>/orderCount}" icon="sap-icon://eam-work-order"/>
+								</content>
+							</TileContent>
+						</tileContent>
+					</GenericTile>
+					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-NotificationsTile-Header}" subheader=""
+						frameType="OneByOne" press="onPressNotifications">
+						<tileContent>
+							<TileContent footer="">
+								<content>
+									<NumericContent value="{DashBoardModel>/notificationCount}" icon="sap-icon://notification"/>
+								</content>
+							</TileContent>
+						</tileContent>
+					</GenericTile>
+					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-CreateNotificationTile-Header}"
+						frameType="OneByOne" press="onPressCreateNotification">
+						<tileContent>
+							<TileContent>
+								<content>
+									<ImageContent src="sap-icon://add"/>
+								</content>
+							</TileContent>
+						</tileContent>
+					</GenericTile>
+					<!--<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-ScanObjectTile-Header}" subheader=""-->
+					<!--	frameType="OneByOne" press="onPressScanObject">-->
+					<!--	<tileContent>-->
+					<!--		<TileContent>-->
+					<!--			<content>-->
+					<!--				<ImageContent src="sap-icon://bar-code"/>-->
+					<!--			</content>-->
+					<!--		</TileContent>-->
+					<!--	</tileContent>-->
+					<!--</GenericTile>-->
+					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-TechnicalObjectsTile-Header}"
+						frameType="OneByOne" press="onPressFunctionalLocations">
+						<tileContent>
+							<TileContent>
+								<content>
+									<ImageContent src="sap-icon://functional-location"/>
+								</content>
+							</TileContent>
+						</tileContent>
+					</GenericTile>
+					<core:ExtensionPoint name="dashboardAdditionalTiles"/>
+				</core:ExtensionPoint>
 			</content>
 			<footer>
 				<Toolbar id="detailToolbar">
 					<content>
-						<mvc:XMLView width="7em" visible="{path:'device>/isHybridApp'}"  viewName="com.twobm.mobileworkorder.components.offline.Status"/>
-						<ToolbarSpacer></ToolbarSpacer>
-						<ToolbarSpacer></ToolbarSpacer>
-						<Button id="goToNotificationButton" icon="sap-icon://refresh" press="onRefresh" visible="{path:'',formatter:'.isOnline'}">
-							<layoutData>
-								<OverflowToolbarLayoutData priority="NeverOverflow"/>
-							</layoutData>
-						</Button>
+						<core:ExtensionPoint name="dashboardFooterItems">
+							<mvc:XMLView width="7em" visible="{path:'device>/isHybridApp'}" viewName="com.twobm.mobileworkorder.components.offline.Status"/>
+							<ToolbarSpacer></ToolbarSpacer>
+							<ToolbarSpacer></ToolbarSpacer>
+							<Button id="goToNotificationButton" icon="sap-icon://refresh" press="onRefresh" visible="{path:'',formatter:'.isOnline'}"></Button>
+						</core:ExtensionPoint>
 					</content>
 				</Toolbar>
 			</footer>

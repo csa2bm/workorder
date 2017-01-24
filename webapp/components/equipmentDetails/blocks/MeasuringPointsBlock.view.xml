@@ -3,23 +3,27 @@
 	xmlns:vbm="sap.ui.vbm" xmlns="sap.m">
 	<Table id="idProductsTable" items="{EquipmentMeasurementPoint}" noDataText="{i18n>EquipmentDetails-MeasuringPointBlock-NoMeasuringPoints}">
 		<columns>
-			<Column minScreenWidth="Tablet">
-				<Text text="{i18n>EquipmentDetails-MeasuringPointBlock-lastReadingDateColumn}"/>
-			</Column>
-			<Column>
-				<Text text="{i18n>EquipmentDetails-MeasuringPointBlock-MesuringPointColumn}"/>
-			</Column>
-			<Column>
-				<Text text="{i18n>EquipmentDetails-MeasuringPointBlock-PreviousColumn}"/>
-			</Column>
+			<core:ExtensionPoint name="equipmentDetailsMeasurementPointsTableColumns">
+				<Column minScreenWidth="Tablet">
+					<Text text="{i18n>EquipmentDetails-MeasuringPointBlock-lastReadingDateColumn}"/>
+				</Column>
+				<Column>
+					<Text text="{i18n>EquipmentDetails-MeasuringPointBlock-MesuringPointColumn}"/>
+				</Column>
+				<Column>
+					<Text text="{i18n>EquipmentDetails-MeasuringPointBlock-PreviousColumn}"/>
+				</Column>
+			</core:ExtensionPoint>
 			<Column width="1.5em" vAlign="Middle"></Column>
 		</columns>
 		<items>
 			<ColumnListItem type="Active" press="onMeasuringPointItemPress">
 				<cells>
-					<ObjectIdentifier title="{path:'LastReadingDate', type:'sap.ui.model.type.Date', formatOptions:'short'}"/>
-					<ObjectIdentifier text="{Measpoint}" title="{Descriptn}"/>
-					<ObjectIdentifier text="{LastReadingBy}" title="{LastReading} {MeasUnit}"/>
+					<core:ExtensionPoint name="equipmentDetailsMeasurementPointsTableCells">
+						<ObjectIdentifier title="{path:'LastReadingDate', type:'sap.ui.model.type.Date', formatOptions:'short'}"/>
+						<ObjectIdentifier text="{Measpoint}" title="{Descriptn}"/>
+						<ObjectIdentifier text="{LastReadingBy}" title="{LastReading} {MeasUnit}"/>
+					</core:ExtensionPoint>
 					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 				</cells>
 			</ColumnListItem>

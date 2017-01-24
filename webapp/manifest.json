@@ -230,7 +230,7 @@
 					"transition": "slide",
 					"clearAggregation": true,
 					"viewName": "StructureBrowser",
-					"viewLevel":"3",
+					"viewLevel": "3",
 					"viewPath": "com.twobm.mobileworkorder.components.structureBrowser"
 				}
 			}

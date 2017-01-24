@@ -1,29 +1,33 @@
 <core:View controllerName="com.twobm.mobileworkorder.components.equipmentDetails.blocks.PendingOrdersBlock" xmlns:core="sap.ui.core"
 	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
 	xmlns:vbm="sap.ui.vbm" xmlns="sap.m">
-	<Table id="idPendingOrdersTable" items="{EquipmentPendingOrders}" noDataText="{i18n>EquipmentDetails-PendingOrdersBlock-NoDat}" class="sapUiSmallMarginBottom" >
-
+	<Table id="idPendingOrdersTable" items="{PendingOrders}" noDataText="{i18n>EquipmentDetails-PendingOrdersBlock-NoDat}"
+		class="sapUiSmallMarginBottom">
 		<columns>
-			<Column>
-				<Text text="{i18n>EquipmentDetails-PendingOrdersBlock-CompletedDateColumn}"/>
-			</Column>
-			<Column minScreenWidth="Tablet">
-				<Text text="{i18n>EquipmentDetails-PendingOrdersBlock-OrderTypeColumn}"/>
-			</Column>
-			<Column>
-				<Text text="{i18n>EquipmentDetails-PendingOrdersBlock-OrderColumn}"/>
-			</Column>
-			<Column minScreenWidth="Tablet">
-				<Text text="{i18n>EquipmentDetails-PendingOrdersBlock-UserColumn}"/>
-			</Column>
+			<core:ExtensionPoint name="equipmentDetailsPendingOrdersTableColumns">
+				<Column>
+					<Text text="{i18n>EquipmentDetails-PendingOrdersBlock-CompletedDateColumn}"/>
+				</Column>
+				<Column minScreenWidth="Tablet">
+					<Text text="{i18n>EquipmentDetails-PendingOrdersBlock-OrderTypeColumn}"/>
+				</Column>
+				<Column>
+					<Text text="{i18n>EquipmentDetails-PendingOrdersBlock-OrderColumn}"/>
+				</Column>
+				<Column minScreenWidth="Tablet">
+					<Text text="{i18n>EquipmentDetails-PendingOrdersBlock-UserColumn}"/>
+				</Column>
+			</core:ExtensionPoint>
 		</columns>
 		<items>
 			<ColumnListItem type="Inactive" press="onPendingOrderItemPress">
 				<cells>
-					<ObjectIdentifier text="" title="{path:'ReferenceDate', type:'sap.ui.model.type.Date', formatOptions:'short'}"/>
-					<ObjectIdentifier text="" title="{OrderType}"/>
-					<ObjectIdentifier text="{Orderid}" title="{ShortText}"/>
-					<ObjectIdentifier text="{Username}" title="{Name}"/>
+					<core:ExtensionPoint name="equipmentDetailsPendingOrdersTableCells">
+						<ObjectIdentifier text="" title="{path:'ReferenceDate', type:'sap.ui.model.type.Date', formatOptions:'short'}"/>
+						<ObjectIdentifier text="" title="{OrderType}"/>
+						<ObjectIdentifier text="{Orderid}" title="{ShortText}"/>
+						<ObjectIdentifier text="{Username}" title="{Name}"/>
+					</core:ExtensionPoint>
 				</cells>
 			</ColumnListItem>
 		</items>
