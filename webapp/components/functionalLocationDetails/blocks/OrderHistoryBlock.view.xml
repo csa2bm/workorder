@@ -1,29 +1,33 @@
 <core:View controllerName="com.twobm.mobileworkorder.components.functionalLocationDetails.blocks.OrderHistoryBlock" xmlns:core="sap.ui.core"
 	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
 	xmlns:vbm="sap.ui.vbm" xmlns="sap.m">
-	<Table id="idOrderTable" items="{FuncLocHistoricOrders}" noDataText="{i18n>FunctionalLocationDetails-OrderHistoryBlock-NoData}" class="sapUiSmallMarginBottom" >
-
+	<Table id="idOrderTable" items="{FuncLocHistoricOrders}" noDataText="{i18n>FunctionalLocationDetails-OrderHistoryBlock-NoData}"
+		class="sapUiSmallMarginBottom">
 		<columns>
-			<Column>
-				<Text text="{i18n>FunctionalLocationDetails-OrderHistoryBlock-CompletedDateColumn}"/>
-			</Column>
-			<Column minScreenWidth="Tablet">
-				<Text text="{i18n>FunctionalLocationDetails-OrderHistoryBlock-OrderTypeColumn}"/>
-			</Column>
-			<Column>
-				<Text text="{i18n>FunctionalLocationDetails-OrderHistoryBlock-OrderColumn}"/>
-			</Column>
-			<Column minScreenWidth="Tablet">
-				<Text text="{i18n>FunctionalLocationDetails-OrderHistoryBlock-UserColumn}"/>
-			</Column>
+			<core:ExtensionPoint name="functionalLocationDetailsOrderHistoryTableItems">
+				<Column>
+					<Text text="{i18n>FunctionalLocationDetails-OrderHistoryBlock-CompletedDateColumn}"/>
+				</Column>
+				<Column minScreenWidth="Tablet">
+					<Text text="{i18n>FunctionalLocationDetails-OrderHistoryBlock-OrderTypeColumn}"/>
+				</Column>
+				<Column>
+					<Text text="{i18n>FunctionalLocationDetails-OrderHistoryBlock-OrderColumn}"/>
+				</Column>
+				<Column minScreenWidth="Tablet">
+					<Text text="{i18n>FunctionalLocationDetails-OrderHistoryBlock-UserColumn}"/>
+				</Column>
+			</core:ExtensionPoint>
 		</columns>
 		<items>
 			<ColumnListItem type="Inactive" press="onEquipmentItemPress">
 				<cells>
-					<ObjectIdentifier text="" title="{path:'ReferenceDate', type:'sap.ui.model.type.Date', formatOptions:'short'}"/>
-					<ObjectIdentifier text="" title="{OrderType}"/>
-					<ObjectIdentifier text="{Orderid}" title="{ShortText}"/>
-					<ObjectIdentifier text="{Username}" title="{Name}"/>
+					<core:ExtensionPoint name="functionalLocationDetailsOrderHistoryTableCells">
+						<ObjectIdentifier text="" title="{path:'ReferenceDate', type:'sap.ui.model.type.Date', formatOptions:'short'}"/>
+						<ObjectIdentifier text="" title="{OrderType}"/>
+						<ObjectIdentifier text="{Orderid}" title="{ShortText}"/>
+						<ObjectIdentifier text="{Username}" title="{Name}"/>
+					</core:ExtensionPoint>
 				</cells>
 			</ColumnListItem>
 		</items>
