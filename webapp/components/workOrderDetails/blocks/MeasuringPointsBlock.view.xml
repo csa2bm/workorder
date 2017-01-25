@@ -4,7 +4,7 @@
 	<Table id="idMeasuringPointTable" items="{ path: 'OrderMeasPoint', sorter: { path: 'Measpos', descending: false}}"
 		noDataText="{i18n>WorkOrderDetails-MeasuringPointsBlock-NoMeasuringPoints}">
 		<columns>
-			<core:ExtensionPoint name="workOrderDetailMeasuringPointsTableColumns">
+			<core:ExtensionPoint name="workOrderDetailsMeasuringPointsTableColumns">
 				<Column minScreenWidth="Tablet">
 					<Text text="{i18n>WorkOrderDetails-MeasuringPointsBlock-EquipmentColumn}"/>
 				</Column>
@@ -24,7 +24,7 @@
 		<items>
 			<ColumnListItem type="Active" press="onMeasuringPointItemPress">
 				<cells>
-					<core:ExtensionPoint name="workOrderDetailMeasuringPointsTableCells">
+					<core:ExtensionPoint name="workOrderDetailsMeasuringPointsTableCells">
 						<ObjectIdentifier text="{Equipment}" title="{EquipmentDesc}"/>
 						<ObjectIdentifier text="{Measpoint}" title="{Descriptn}"/>
 						<ObjectIdentifier text="{LastReadingBy}" title="{LastReading} {MeasUnit}"/>

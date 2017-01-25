@@ -13,7 +13,7 @@
 		<Table id="MaterialsSummaryList" items="{ path: 'OrderMaterialSummary', sorter: { path: 'Matnr', descending: false}}"
 			noDataText="{i18n>WorkOrderDetails-MaterialsBlock-NoMaterials}">
 			<columns>
-				<core:ExtensionPoint name="workOrderDetailGoodsMovementsTableColumns">
+				<core:ExtensionPoint name="workOrderDetailsGoodsMovementsTableColumns">
 					<Column demandPopin="true" popinDisplay="WithoutHeader">
 						<header>
 							<Label text="{i18n>WorkOrderDetails-MaterialsBlock-MaterialColumn}"/>
@@ -31,7 +31,7 @@
 				<ColumnListItem type="{parts:[{path:'EditModeModel>/EditMode'}],formatter:'.checkOrderStatusForType'}"
 					press="goToMaterialDetailForSelectedMaterial">
 					<cells>
-						<core:ExtensionPoint name="workOrderTableCells">
+						<core:ExtensionPoint name="workOrderDetailsGoodsMovementsTableCells">
 							<ObjectIdentifier text="{Matnr}" title="{Description}"/>
 							<ObjectIdentifier title="{Quantity} {Unit}"/>
 						</core:ExtensionPoint>
