@@ -2,59 +2,64 @@
 	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns="sap.uxap"
 	xmlns:blocks="com.twobm.mobileworkorder.components.objectDetails.blocks.configuration" height="100%">
 	<m:Page showNavButton="true" navButtonPress="onNavigationButtonPress" title="{i18n>ObjectDetails-Title}">
-		<ObjectPageLayout id="equipmentObjectPage" enableLazyLoading="false">
+		<ObjectPageLayout id="itemObjectPage" enableLazyLoading="false">
 			<headerTitle>
 				<ObjectPageHeader objectTitle="{path:'Equidescr'}" objectSubtitle="{path:'Equipment'}"/>
 			</headerTitle>
 			<sections>
-				<ObjectPageSection>
-					<subSections>
-						<ObjectPageSubSection id="objectDetails-GeneralSubsection" title="{i18n>ObjectDetails-GeneralSubSection}">
-							<blocks>
-								<blocks:GeneralBlock/>
-							</blocks>
-						</ObjectPageSubSection>
-					</subSections>
-				</ObjectPageSection>
-				<ObjectPageSection>
-					<subSections>
-						<ObjectPageSubSection id="objectDetails-MeasuringPointsSubsection" title="{i18n>ObjectDetails-MeasuringPointsSubSection}">
-							<blocks>
-								<blocks:MeasuringPointsBlock/>
-							</blocks>
-						</ObjectPageSubSection>
-					</subSections>
-				</ObjectPageSection>
-				<ObjectPageSection>
-					<subSections>
-						<ObjectPageSubSection id="objectDetails-OrderHistroySubSection" title="{i18n>ObjectDetails-OrderHistorySubSection}">
-							<blocks>
-								<blocks:OrderHistoryBlock/>
-							</blocks>
-						</ObjectPageSubSection>
-					</subSections>
-				</ObjectPageSection>
-				<ObjectPageSection>
-					<subSections>
-						<ObjectPageSubSection id="objectDetails-notificationHistorySubSection" title="{i18n>ObjectDetails-NotificationHistorySubSection}">
-							<blocks>
-								<blocks:NotificationHistoryBlock/>
-							</blocks>
-						</ObjectPageSubSection>
-					</subSections>
-				</ObjectPageSection>
+				<core:ExtensionPoint name="itemDetailsSections">
+					<ObjectPageSection>
+						<subSections>
+							<ObjectPageSubSection id="objectDetails-GeneralSubsection" title="{i18n>ObjectDetails-GeneralSubSection}">
+								<blocks>
+									<blocks:GeneralBlock/>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+					<ObjectPageSection>
+						<subSections>
+							<ObjectPageSubSection id="objectDetails-MeasuringPointsSubsection" title="{i18n>ObjectDetails-MeasuringPointsSubSection}">
+								<blocks>
+									<blocks:MeasuringPointsBlock/>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+					<ObjectPageSection>
+						<subSections>
+							<ObjectPageSubSection id="objectDetails-OrderHistroySubSection" title="{i18n>ObjectDetails-OrderHistorySubSection}">
+								<blocks>
+									<blocks:OrderHistoryBlock/>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+					<ObjectPageSection>
+						<subSections>
+							<ObjectPageSubSection id="objectDetails-notificationHistorySubSection" title="{i18n>ObjectDetails-NotificationHistorySubSection}">
+								<blocks>
+									<blocks:NotificationHistoryBlock/>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+					<core:ExtensionPoint name="itemDetailsAdditionalSections"/>
+				</core:ExtensionPoint>
 			</sections>
 		</ObjectPageLayout>
 		<m:footer>
 			<m:Toolbar>
-				<m:content>
-					<m:ToolbarSpacer></m:ToolbarSpacer>
-					<m:Button id="createNotification" press="onPressCreateNotification" text="{i18n>ObjectDetails-CreateNotificationBtnTitle}" type="Emphasized">
-						<!--<m:layoutData>-->
-						<!--	<m:OverflowToolbarLayoutData priority="NeverOverflow"/>-->
-						<!--</m:layoutData>-->
-					</m:Button>
-				</m:content>
+				<core:ExtensionPoint name="itemDetailsFooter">
+					<m:content>
+						<m:ToolbarSpacer></m:ToolbarSpacer>
+						<m:Button id="createNotification" press="onPressCreateNotification" text="{i18n>ObjectDetails-CreateNotificationBtnTitle}" type="Emphasized">
+							<!--<m:layoutData>-->
+							<!--	<m:OverflowToolbarLayoutData priority="NeverOverflow"/>-->
+							<!--</m:layoutData>-->
+						</m:Button>
+					</m:content>
+				</core:ExtensionPoint>
 			</m:Toolbar>
 		</m:footer>
 	</m:Page>

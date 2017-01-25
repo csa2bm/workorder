@@ -3,6 +3,7 @@
 	<Button class="sapUiSmallMarginEnd" icon="sap-icon://add" press="onCreateActivity"/>
 	<Table id="activitiesList" items="{ path: 'NotifActivitiesSet', sorter: { path: 'ActSortNo', descending: false}}" noDataText="{i18n>NotificationDetails-ActivitiesBlock-NoData}">
 		<columns>
+			<core:ExtensionPoint name="NotificationDetailsActivitiesTableColumns">
 			<Column id="sortNumberColumn" minScreenWidth="Tablet">
 				<Text text="{i18n>NotificationDetails-ActivitiesBlock-SortNumberHeader}"/>
 			</Column>
@@ -15,15 +16,18 @@
 			<Column id="textColumn">
 				<Text text="{i18n>NotificationDetails-ActivitiesBlock-TextHeader}"/>
 			</Column>
+			</core:ExtensionPoint>
 			<Column width="1.5em" vAlign="Middle"></Column>
 		</columns>
 		<items>
 			<ColumnListItem type="Active" press="onActivityItemPress">
 				<cells>
+					<core:ExtensionPoint name="NotificationDetailsActivitiesTableCells">
 					<ObjectIdentifier text="" title="{ActSortNo}"/>
 					<ObjectIdentifier text="{ActCodegrp}" title="{TxtActgrp}"/>
 					<ObjectIdentifier text="{ActCode}" title="{TxtActcd}"/>
 					<ObjectIdentifier text="" title="{Acttext}"/>
+					</core:ExtensionPoint>
 					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 				</cells>
 			</ColumnListItem>
