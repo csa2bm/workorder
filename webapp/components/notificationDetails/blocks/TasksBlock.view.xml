@@ -3,6 +3,7 @@
 	<Button class="sapUiSmallMarginEnd" icon="sap-icon://add" press="onCreateTask"/>
 	<Table id="tasksList" items="{ path: 'NotifTasksSet', sorter: { path: 'TaskSortNo', descending: false}}" noDataText="{i18n>NotificationDetails-TasksBlock-NoData}">
 		<columns>
+			<core:ExtensionPoint name="notificationDetailsTaskTableColumns">
 			<Column id="sortNumberColumn" minScreenWidth="Tablet">
 				<Text text="{i18n>NotificationDetails-TasksBlock-SortNumberHeader}"/>
 			</Column>
@@ -15,15 +16,18 @@
 			<Column id="textColumn">
 				<Text text="{i18n>NotificationDetails-TasksBlock-TextHeader}"/>
 			</Column>
+			</core:ExtensionPoint>
 			<Column width="1.5em" vAlign="Middle"></Column>
 		</columns>
 		<items>
 			<ColumnListItem type="Active" press="onTaskItemPress">
 				<cells>
+					<core:ExtensionPoint name="notificationDetailsTaskTableCells">
 					<ObjectIdentifier text="" title="{TaskSortNo}"/>
 					<ObjectIdentifier text="{TaskCodegrp}" title="{TxtTaskgrp}"/>
 					<ObjectIdentifier text="{TaskCode}" title="{TxtTaskcd}"/>
 					<ObjectIdentifier text="" title="{TaskText}"/>
+					</core:ExtensionPoint>
 					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 				</cells>
 			</ColumnListItem>
