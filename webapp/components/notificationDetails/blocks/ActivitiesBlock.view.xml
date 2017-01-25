@@ -28,8 +28,8 @@
 						<ObjectIdentifier text="{ActCodegrp}" title="{TxtActgrp}"/>
 						<ObjectIdentifier text="{ActCode}" title="{TxtActcd}"/>
 						<ObjectIdentifier text="" title="{Acttext}"/>
-						<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 					</core:ExtensionPoint>
+					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 				</cells>
 			</ColumnListItem>
 		</items>

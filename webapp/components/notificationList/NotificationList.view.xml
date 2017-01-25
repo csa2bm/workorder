@@ -8,40 +8,44 @@
 				</l:HorizontalLayout>
 			</headerContent>
 			<content>
-				<Table id="notificationTableId" items="{path: '/NotificationsSet', sorter: [{path: 'NotifDate', descending: true}]}" noDataText="No Notifications" showSeparators="All"
-					class="notificationListTableClass" >
+				<Table id="notificationTableId" items="{path: '/NotificationsSet', sorter: [{path: 'NotifDate', descending: true}]}"
+					noDataText="No Notifications" showSeparators="All" class="notificationListTableClass">
 					<columns>
-						<Column id="dataColumn">
-							<header>
-								<Label text="{i18n>NotificationList-DateHeader}"/>
-							</header>
-						</Column>
-						<Column id="notificationColumn">
-							<header>
-								<Label text="{i18n>NotificationList-NotificationHeader}"/>
-							</header>
-						</Column>
-						<Column id="functionalLocationColumn" minScreenWidth="Tablet">
-							<header>
-								<Label text="{i18n>NotificationList-FunctionalLocationHeader}"/>
-							</header>
-						</Column>
-						<Column id="equipmentColumn" minScreenWidth="Tablet">
-							<header>
-								<Label text="{i18n>NotificationList-EquipmentHeader}"/>
-							</header>
-						</Column>
+						<core:ExtensionPoint name="notificationListTableColumns">
+							<Column id="dataColumn">
+								<header>
+									<Label text="{i18n>NotificationList-DateHeader}"/>
+								</header>
+							</Column>
+							<Column id="notificationColumn">
+								<header>
+									<Label text="{i18n>NotificationList-NotificationHeader}"/>
+								</header>
+							</Column>
+							<Column id="functionalLocationColumn" minScreenWidth="Tablet">
+								<header>
+									<Label text="{i18n>NotificationList-FunctionalLocationHeader}"/>
+								</header>
+							</Column>
+							<Column id="equipmentColumn" minScreenWidth="Tablet">
+								<header>
+									<Label text="{i18n>NotificationList-EquipmentHeader}"/>
+								</header>
+							</Column>
+						</core:ExtensionPoint>
 						<Column demandPopin="true" id="errorColumn" minScreenWidth="Small" width="1rem"/>
 						<Column width="1.5em" vAlign="Middle"></Column>
 					</columns>
 					<items>
 						<ColumnListItem type="Active" press="onNotificationItemPress">
 							<cells>
-								<ObjectIdentifier text="{path: 'RequiredEndDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"
-									title="{path: 'NotifDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"/>
-								<ObjectIdentifier text="{NotifNo}" title="{ShortText}"/>
-								<ObjectIdentifier text="{FunctionalLoc}" title="{FuncLocDesc}"/>
-								<ObjectIdentifier text="{Equipment}" title="{EquipmentDesc}"/>
+								<core:ExtensionPoint name="notificationListTableCells">
+									<ObjectIdentifier text="{path: 'RequiredEndDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"
+										title="{path: 'NotifDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"/>
+									<ObjectIdentifier text="{NotifNo}" title="{ShortText}"/>
+									<ObjectIdentifier text="{FunctionalLoc}" title="{FuncLocDesc}"/>
+									<ObjectIdentifier text="{Equipment}" title="{EquipmentDesc}"/>
+								</core:ExtensionPoint>
 								<core:Icon visible="{parts:[{path:'syncStatusModel>/NoticationErrors'},{path:'NotifNo'}],formatter:'.isInErrorStateNotification'}"/>
 								<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 							</cells>
@@ -51,22 +55,22 @@
 			</content>
 			<footer>
 				<Toolbar id="detailToolbar">
-					<content>
-						<mvc:XMLView viewName="com.twobm.mobileworkorder.components.offline.Status"/>
-						<ToolbarSpacer></ToolbarSpacer>
-								<Button id="goToNotificationButton" icon="sap-icon://refresh"
-						press="onRefresh" visible="{path:'',formatter:'.isOnline'}">
-						<layoutData>
-							<OverflowToolbarLayoutData priority="NeverOverflow"/>
-						</layoutData>
-						</Button>
-						<Button id="notificationCreateButton" type="Emphasized"
-							press="createNewNotification" text="{i18n>NotificationList-CreateButton}">
-							<layoutData>
-								<OverflowToolbarLayoutData priority="NeverOverflow"/>
-							</layoutData>
-						</Button>
-					</content>
+					<core:ExtensionPoint name="itemDetailsFooter">
+						<content>
+							<mvc:XMLView viewName="com.twobm.mobileworkorder.components.offline.Status"/>
+							<ToolbarSpacer></ToolbarSpacer>
+							<Button id="goToNotificationButton" icon="sap-icon://refresh" press="onRefresh" visible="{path:'',formatter:'.isOnline'}">
+								<layoutData>
+									<OverflowToolbarLayoutData priority="NeverOverflow"/>
+								</layoutData>
+							</Button>
+							<Button id="notificationCreateButton" type="Emphasized" press="createNewNotification" text="{i18n>NotificationList-CreateButton}">
+								<layoutData>
+									<OverflowToolbarLayoutData priority="NeverOverflow"/>
+								</layoutData>
+							</Button>
+						</content>
+					</core:ExtensionPoint>
 				</Toolbar>
 			</footer>
 		</Page>
