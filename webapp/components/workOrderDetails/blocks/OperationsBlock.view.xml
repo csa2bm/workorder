@@ -1,18 +1,25 @@
-<core:View  xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
-	controllerName="com.twobm.mobileworkorder.components.workOrderDetails.blocks.OperationsBlock" xmlns:l="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns:vbm="sap.ui.vbm" xmlns="sap.m">
-	<Table id="idOperationTable" items="{ path: 'OrderOperation', sorter: { path: 'Activity', descending: false}}" noDataText="{i18n>WorkOrderDetails-OperationBlock-NoOperations}">
+<core:View xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
+	controllerName="com.twobm.mobileworkorder.components.workOrderDetails.blocks.OperationsBlock" xmlns:l="sap.ui.layout"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns:vbm="sap.ui.vbm" xmlns="sap.m">
+	<Table id="idOperationTable" items="{ path: 'OrderOperation', sorter: { path: 'Activity', descending: false}}"
+		noDataText="{i18n>WorkOrderDetails-OperationBlock-NoOperations}">
 		<columns>
-		<Column popinDisplay="Inline">
-				<Text text="{i18n>WorkOrderDetails-OperationBlock-OperationColumn}"/>
-			</Column>
+			<core:ExtensionPoint name="workOrderDetailsOperationTableColumns">
+				<Column popinDisplay="Inline">
+					<Text text="{i18n>WorkOrderDetails-OperationBlock-OperationColumn}"/>
+				</Column>
+			</core:ExtensionPoint>
 			<Column width="5em" vAlign="Middle"></Column>
 			<Column width="1.5em" vAlign="Middle"></Column>
 		</columns>
 		<items>
 			<ColumnListItem type="Active" press="onOperationItemPress">
 				<cells>
+					<core:ExtensionPoint name="workOrderDetailObjectTableCells">
 					<ObjectIdentifier text="{Activity}" title="{Description}"/>
-					<Button id="readingButton" class="sapUiMediumMarginEnd" icon="{parts:[{path:'Complete'}],formatter:'.opStatusIcon'}" press="onCompleOperationbtnPressed" type="{parts:[{path:'Complete'}],formatter:'.opStatusColor'}" enabled="{EditModeModel>/EditMode}"></Button>
+					</core:ExtensionPoint>
+					<Button id="readingButton" class="sapUiMediumMarginEnd" icon="{parts:[{path:'Complete'}],formatter:'.opStatusIcon'}"
+						press="onCompleOperationbtnPressed" type="{parts:[{path:'Complete'}],formatter:'.opStatusColor'}" enabled="{EditModeModel>/EditMode}"></Button>
 					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 				</cells>
 			</ColumnListItem>

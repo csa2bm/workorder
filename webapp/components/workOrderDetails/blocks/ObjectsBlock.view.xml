@@ -3,7 +3,7 @@
 	<Table id="idProductsTable" items="{ path: 'OrderObject', sorter: { path: 'FunclocDisp', descending: false}}"
 		noDataText="{i18n>WorkOrderDetails-ObjectsBlock-NoEquipment}">
 		<columns>
-			<core:ExtensionPoint name="workOrderDetailsObjectsTableColumns">
+			<core:ExtensionPoint name="workOrderDetailsObjectTableColumns">
 				<Column>
 					<Text text="{i18n>WorkOrderDetails-ObjectsBlock-FunctionalLocactionColumn}"/>
 				</Column>
@@ -16,7 +16,7 @@
 		<items>
 			<ColumnListItem type="Active" press="onEquipmentItemPress">
 				<cells>
-					<core:ExtensionPoint name="workOrderDetailTableCells">
+					<core:ExtensionPoint name="workOrderDetailObjectTableCells">
 						<ObjectIdentifier text="{FunclocDisp}" title="{Funcldescr}"/>
 						<ObjectIdentifier text="{Equipment}" title="{Equidescr}"/>
 					</core:ExtensionPoint>
