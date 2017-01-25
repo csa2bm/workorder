@@ -5,28 +5,30 @@
 		<f:SimpleForm maxContainerCols="3" editable="false" layout="ResponsiveGridLayout" title="" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
 			emptySpanXL="0" emptySpanL="0" emptySpanM="0" columnsXL="3" columnsL="2" columnsM="2">
 			<f:content>
-				<core:Title/>
-				<Label text="{i18n>WorkOrderDetails-GeneralBlock-Status}"/>
-				<HBox>
-					<core:Icon class="sapUiTinyMarginEnd" src="sap-icon://circle-task-2"
-						color="{parts:[{path:'OrderStatus'}],formatter:'.getOrderStatusIconColor'}"/>
-					<Text text="{OrderStatus}"/>
-				</HBox>
-				<Label text="{i18n>WorkOrderDetails-GeneralBlock-Type}"/>
-				<Text text="{OrderType}"/>
-				<Label text="{i18n>WorkOrderDetails-GeneralBlock-Priority}"/>
-				<Text text="{Priority} "/>
-				<Label text="{i18n>WorkOrderDetails-GeneralBlock-Start}"/>
-				<Text text="{path: 'StartDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'medium' }}"/>
-				<Label text="{i18n>WorkOrderDetails-GeneralBlock-End}"/>
-				<Text text="{path: 'FinishDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'medium' }}"/>
-				<core:Title/>
-				<Label text="{i18n>WorkOrderDetails-GeneralBlock-FunctionalLocation}"/>
-				<Text text="{Funcldescr}\r\n({FunctLoc})"/>
-				<Label text="{i18n>WorkOrderDetails-GeneralBlock-Equipment}"/>
-				<Text text="{Equidescr}\r\n({Equipment})"/>
-				<Label text="{i18n>WorkOrderDetails-GeneralBlock-Address}"/>
-				<Text text="{Street}\r\n{City}"/>
+				<core:ExtensionPoint name="workOrderDetailsGeneralForm">
+					<core:Title/>
+					<Label text="{i18n>WorkOrderDetails-GeneralBlock-Status}"/>
+					<HBox>
+						<core:Icon class="sapUiTinyMarginEnd" src="sap-icon://circle-task-2"
+							color="{parts:[{path:'OrderStatus'}],formatter:'.getOrderStatusIconColor'}"/>
+						<Text text="{OrderStatus}"/>
+					</HBox>
+					<Label text="{i18n>WorkOrderDetails-GeneralBlock-Type}"/>
+					<Text text="{OrderType}"/>
+					<Label text="{i18n>WorkOrderDetails-GeneralBlock-Priority}"/>
+					<Text text="{Priority} "/>
+					<Label text="{i18n>WorkOrderDetails-GeneralBlock-Start}"/>
+					<Text text="{path: 'StartDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'medium' }}"/>
+					<Label text="{i18n>WorkOrderDetails-GeneralBlock-End}"/>
+					<Text text="{path: 'FinishDate', type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'medium' }}"/>
+					<core:Title/>
+					<Label text="{i18n>WorkOrderDetails-GeneralBlock-FunctionalLocation}"/>
+					<Text text="{Funcldescr}\r\n({FunctLoc})"/>
+					<Label text="{i18n>WorkOrderDetails-GeneralBlock-Equipment}"/>
+					<Text text="{Equidescr}\r\n({Equipment})"/>
+					<Label text="{i18n>WorkOrderDetails-GeneralBlock-Address}"/>
+					<Text text="{Street}\r\n{City}"/>
+				</core:ExtensionPoint>
 			</f:content>
 		</f:SimpleForm>
 	</VBox>
