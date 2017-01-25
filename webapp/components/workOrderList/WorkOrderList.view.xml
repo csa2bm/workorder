@@ -62,14 +62,15 @@
 			<footer>
 				<Toolbar id="detailToolbar">
 					<content>
-						<core:ExtensionPoint name="test"/>
 						<mvc:XMLView viewName="com.twobm.mobileworkorder.components.offline.Status"/>
-						<ToolbarSpacer></ToolbarSpacer>
-						<Button id="goToNotificationButton" icon="sap-icon://refresh" press="onRefresh" visible="{path:'',formatter:'.isOnline'}">
-							<layoutData>
-								<OverflowToolbarLayoutData priority="NeverOverflow"/>
-							</layoutData>
-						</Button>
+						<core:ExtensionPoint name="workOrderListFooter">
+							<ToolbarSpacer></ToolbarSpacer>
+							<Button id="goToNotificationButton" icon="sap-icon://refresh" press="onRefresh" visible="{path:'',formatter:'.isOnline'}">
+								<layoutData>
+									<OverflowToolbarLayoutData priority="NeverOverflow"/>
+								</layoutData>
+							</Button>
+						</core:ExtensionPoint>
 					</content>
 				</Toolbar>
 			</footer>
