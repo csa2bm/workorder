@@ -4,28 +4,32 @@
 	<Table id="idMeasuringPointTable" items="{ path: 'OrderMeasPoint', sorter: { path: 'Measpos', descending: false}}"
 		noDataText="{i18n>WorkOrderDetails-MeasuringPointsBlock-NoMeasuringPoints}">
 		<columns>
-			<Column minScreenWidth="Tablet">
-				<Text text="{i18n>WorkOrderDetails-MeasuringPointsBlock-EquipmentColumn}"/>
-			</Column>
-			<Column>
-				<Text text="{i18n>WorkOrderDetails-MeasuringPointsBlock-MeasuringPointColumn}"/>
-			</Column>
-			<Column>
-				<Text text="{i18n>WorkOrderDetails-MeasuringPointsBlock-PreviousReadingColumn}"/>
-			</Column>
-			<Column minScreenWidth="Tablet">
-				<Text text="{i18n>WorkOrderDetails_MeasuringPointsBlock_PreviousReadingDateColumn}" />
-			</Column>
+			<core:ExtensionPoint name="workOrderDetailMeasuringPointsTableColumns">
+				<Column minScreenWidth="Tablet">
+					<Text text="{i18n>WorkOrderDetails-MeasuringPointsBlock-EquipmentColumn}"/>
+				</Column>
+				<Column>
+					<Text text="{i18n>WorkOrderDetails-MeasuringPointsBlock-MeasuringPointColumn}"/>
+				</Column>
+				<Column>
+					<Text text="{i18n>WorkOrderDetails-MeasuringPointsBlock-PreviousReadingColumn}"/>
+				</Column>
+				<Column minScreenWidth="Tablet">
+					<Text text="{i18n>WorkOrderDetails_MeasuringPointsBlock_PreviousReadingDateColumn}"/>
+				</Column>
+			</core:ExtensionPoint>
 			<Column width="5em" vAlign="Middle"></Column>
 			<Column width="1.5em" vAlign="Middle"></Column>
 		</columns>
 		<items>
 			<ColumnListItem type="Active" press="onMeasuringPointItemPress">
 				<cells>
-					<ObjectIdentifier text="{Equipment}" title="{EquipmentDesc}"/>
-					<ObjectIdentifier text="{Measpoint}" title="{Descriptn}"/>
-					<ObjectIdentifier text="{LastReadingBy}" title="{LastReading} {MeasUnit}"/>
-					<ObjectIdentifier text="" title="{path: 'LastReadingDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"/>
+					<core:ExtensionPoint name="workOrderDetailMeasuringPointsTableCells">
+						<ObjectIdentifier text="{Equipment}" title="{EquipmentDesc}"/>
+						<ObjectIdentifier text="{Measpoint}" title="{Descriptn}"/>
+						<ObjectIdentifier text="{LastReadingBy}" title="{LastReading} {MeasUnit}"/>
+						<ObjectIdentifier text="" title="{path: 'LastReadingDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"/>
+					</core:ExtensionPoint>
 					<Button id="readingButton" enabled="{EditModeModel>/EditMode}" class="sapUiMediumMarginEnd" icon="sap-icon://measure" press="addMeasurement"></Button>
 					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 				</cells>
