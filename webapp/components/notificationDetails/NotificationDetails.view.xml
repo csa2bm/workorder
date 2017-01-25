@@ -77,13 +77,13 @@
 		<m:footer>
 			<m:Toolbar>
 				<core:ExtensionPoint name="itemDetailsFooter">
-				<m:ToolbarSpacer></m:ToolbarSpacer>
-				<m:Button id="editNotificationButton" icon="sap-icon://sap-icon://edit" ariaDescribedBy="genericButtonDescription"
-					press="editNotificationPressed">
-					<m:layoutData>
-						<m:OverflowToolbarLayoutData priority="NeverOverflow"/>
-					</m:layoutData>
-				</m:Button>
+					<m:ToolbarSpacer></m:ToolbarSpacer>
+					<m:Button id="editNotificationButton" icon="sap-icon://sap-icon://edit" ariaDescribedBy="genericButtonDescription"
+						press="editNotificationPressed">
+						<m:layoutData>
+							<m:OverflowToolbarLayoutData priority="NeverOverflow"/>
+						</m:layoutData>
+					</m:Button>
 				</core:ExtensionPoint>
 			</m:Toolbar>
 		</m:footer>
