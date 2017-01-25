@@ -5,7 +5,7 @@
 		<f:SimpleForm maxContainerCols="3" editable="false" layout="ResponsiveGridLayout" title="" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
 			emptySpanXL="0" emptySpanL="0" emptySpanM="0" columnsXL="3" columnsL="2" columnsM="2" class="sapUiTinyMarginBottom">
 			<f:content>
-				<core:ExtensionPoint name="notificationDetailsGeneralForm">
+				<core:ExtensionPoint name="notificationDetailsGeneralSection">
 					<!--Column Description-->
 					<core:Title/>
 					<!--text="{i18n>NotificationDetails-GeneralBlock-GeneralTitle}"-->
