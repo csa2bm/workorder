@@ -1,23 +1,28 @@
-<core:View controllerName="com.twobm.mobileworkorder.components.workOrderDetails.blocks.ComponentsBlock" xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml"
-	xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
-	<Table id="idProductsTable" items="{ path: 'OrderComponent', sorter: { path: 'Material', descending: false}}" noDataText="{i18n>WorkOrderDetails-ComponentsBlock-NoComponents}">
+<core:View controllerName="com.twobm.mobileworkorder.components.workOrderDetails.blocks.ComponentsBlock" xmlns:core="sap.ui.core"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+	<Table id="idProductsTable" items="{ path: 'OrderComponent', sorter: { path: 'Material', descending: false}}"
+		noDataText="{i18n>WorkOrderDetails-ComponentsBlock-NoComponents}">
 		<columns>
-			<Column>
-				<Text text="{i18n>WorkOrderDetails-ComponentsBlock-ComponentColumn}"/>
-			</Column>
-			<Column width="5em" vAlign="Middle" hAlign="Center">
-				<Text text="{i18n>WorkOrderDetails-ComponentsBlock-ReservedColumn}"/>
-			</Column>
-			<Column width="5em" vAlign="Middle" hAlign="Center">
-				<Text text="{i18n>WorkOrderDetails-ComponentsBlock-WithdrawnColumn}"/>
-			</Column>
+			<core:ExtensionPoint name="workOrderDetailsComponentTableColumns">
+				<Column>
+					<Text text="{i18n>WorkOrderDetails-ComponentsBlock-ComponentColumn}"/>
+				</Column>
+				<Column width="5em" vAlign="Middle" hAlign="Center">
+					<Text text="{i18n>WorkOrderDetails-ComponentsBlock-ReservedColumn}"/>
+				</Column>
+				<Column width="5em" vAlign="Middle" hAlign="Center">
+					<Text text="{i18n>WorkOrderDetails-ComponentsBlock-WithdrawnColumn}"/>
+				</Column>
+			</core:ExtensionPoint>
 		</columns>
 		<items>
 			<ColumnListItem>
 				<cells>
-					<ObjectIdentifier text="{Material}" title="{MaterialDescription}"/>
-					<Text text="{ReqQuantity}"/>
-					<Text text="{WithdQuan}"/>
+					<core:ExtensionPoint name="workOrderDetailsComponentTableCells">
+						<ObjectIdentifier text="{Material}" title="{MaterialDescription}"/>
+						<Text text="{ReqQuantity}"/>
+						<Text text="{WithdQuan}"/>
+					</core:ExtensionPoint>
 				</cells>
 			</ColumnListItem>
 		</items>
