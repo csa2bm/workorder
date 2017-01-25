@@ -1,84 +1,90 @@
 <core:View controllerName="com.twobm.mobileworkorder.components.notificationDetails.NotificationDetails" xmlns:core="sap.ui.core"
-	xmlns="sap.uxap" xmlns:l="sap.ui.layout" xmlns:m="sap.m" xmlns:blocks="com.twobm.mobileworkorder.components.notificationDetails.blocks.configuration"
-	height="100%">
+	xmlns="sap.uxap" xmlns:l="sap.ui.layout" xmlns:m="sap.m"
+	xmlns:blocks="com.twobm.mobileworkorder.components.notificationDetails.blocks.configuration" height="100%">
 	<m:Page showNavButton="true" navButtonPress="onNavigationButtonPress" title="{i18n>NotificationDetails-Title}">
 		<m:headerContent>
 			<l:HorizontalLayout>
-				<core:Icon width="3em" height="3em" color="red" noTabStop="true" press="openErrorsForNotification" src="sap-icon://error" visible="{parts:[{path:'syncStatusModel>/NoticationErrors'},{path:'NotifNo'}],formatter:'.isInErrorStateWorkNotification'}"/>
+				<core:Icon width="3em" height="3em" color="red" noTabStop="true" press="openErrorsForNotification" src="sap-icon://error"
+					visible="{parts:[{path:'syncStatusModel>/NoticationErrors'},{path:'NotifNo'}],formatter:'.isInErrorStateWorkNotification'}"/>
 			</l:HorizontalLayout>
 		</m:headerContent>
 		<m:content>
-		<ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="false">
-			<headerTitle>
-				<ObjectPageHeader objectTitle="{path:'ShortText'}" objectSubtitle="{path:'NotifNo'}"></ObjectPageHeader>
-			</headerTitle>
-			<sections>
-				<ObjectPageSection>
-					<subSections>
-						<ObjectPageSubSection id="notificationDetails-GeneralSubSection" title="{i18n>NotificationDetails-GeneralSubSection}">
-							<blocks>
-								<blocks:GeneralBlock/>
-							</blocks>
-						</ObjectPageSubSection>
-					</subSections>
-				</ObjectPageSection>
-				<ObjectPageSection>
-					<subSections>
-						<ObjectPageSubSection id="notificationDetails-NotesSubSection" title="{i18n>NotificationDetails-NotesSubSection}">
-							<blocks>
-								<blocks:NotesBlock/>
-							</blocks>
-						</ObjectPageSubSection>
-					</subSections>
-				</ObjectPageSection>
-				<ObjectPageSection>
-					<subSections>
-						<ObjectPageSubSection id="notificationDetails-ItemsSubSection" title="{i18n>NotificationDetails-ItemsSubSection}">
-							<blocks>
-								<blocks:ItemsBlock/>
-							</blocks>
-						</ObjectPageSubSection>
-					</subSections>
-				</ObjectPageSection>
-				<ObjectPageSection>
-					<subSections>
-						<ObjectPageSubSection id="notificationDetails-TasksSubSection" title="{i18n>NotificationDetails-TasksSubSection}">
-							<blocks>
-								<blocks:TasksBlock/>
-							</blocks>
-						</ObjectPageSubSection>
-					</subSections>
-				</ObjectPageSection>
-					<ObjectPageSection>
-					<subSections>
-						<ObjectPageSubSection id="notificationDetails-ActivitiesSubSection" title="{i18n>NotificationDetails-ActivitiesSubSection}">
-							<blocks>
-								<blocks:ActivitiesBlock/>
-							</blocks>
-						</ObjectPageSubSection>
-					</subSections>
-				</ObjectPageSection>
-				<ObjectPageSection>
-					<subSections>
-						<ObjectPageSubSection id="notificationDetails-photosSubSection" title="{i18n>NotificationDetails_PhotosSubSection}">
-							<blocks>
-								<blocks:AttachmentsBlock/>
-							</blocks>
-						</ObjectPageSubSection>
-					</subSections>
-				</ObjectPageSection>
-			</sections>
-		</ObjectPageLayout>
+			<ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="false">
+				<headerTitle>
+					<ObjectPageHeader objectTitle="{path:'ShortText'}" objectSubtitle="{path:'NotifNo'}"></ObjectPageHeader>
+				</headerTitle>
+				<sections>
+					<core:ExtensionPoint name="notificationDetailsSections">
+						<ObjectPageSection>
+							<subSections>
+								<ObjectPageSubSection id="notificationDetails-GeneralSubSection" title="{i18n>NotificationDetails-GeneralSubSection}">
+									<blocks>
+										<blocks:GeneralBlock/>
+									</blocks>
+								</ObjectPageSubSection>
+							</subSections>
+						</ObjectPageSection>
+						<ObjectPageSection>
+							<subSections>
+								<ObjectPageSubSection id="notificationDetails-NotesSubSection" title="{i18n>NotificationDetails-NotesSubSection}">
+									<blocks>
+										<blocks:NotesBlock/>
+									</blocks>
+								</ObjectPageSubSection>
+							</subSections>
+						</ObjectPageSection>
+						<ObjectPageSection>
+							<subSections>
+								<ObjectPageSubSection id="notificationDetails-ItemsSubSection" title="{i18n>NotificationDetails-ItemsSubSection}">
+									<blocks>
+										<blocks:ItemsBlock/>
+									</blocks>
+								</ObjectPageSubSection>
+							</subSections>
+						</ObjectPageSection>
+						<ObjectPageSection>
+							<subSections>
+								<ObjectPageSubSection id="notificationDetails-TasksSubSection" title="{i18n>NotificationDetails-TasksSubSection}">
+									<blocks>
+										<blocks:TasksBlock/>
+									</blocks>
+								</ObjectPageSubSection>
+							</subSections>
+						</ObjectPageSection>
+						<ObjectPageSection>
+							<subSections>
+								<ObjectPageSubSection id="notificationDetails-ActivitiesSubSection" title="{i18n>NotificationDetails-ActivitiesSubSection}">
+									<blocks>
+										<blocks:ActivitiesBlock/>
+									</blocks>
+								</ObjectPageSubSection>
+							</subSections>
+						</ObjectPageSection>
+						<ObjectPageSection>
+							<subSections>
+								<ObjectPageSubSection id="notificationDetails-photosSubSection" title="{i18n>NotificationDetails_PhotosSubSection}">
+									<blocks>
+										<blocks:AttachmentsBlock/>
+									</blocks>
+								</ObjectPageSubSection>
+							</subSections>
+						</ObjectPageSection>
+						<core:ExtensionPoint name="notificationDetailsAdditionalSections"/>
+					</core:ExtensionPoint>
+				</sections>
+			</ObjectPageLayout>
 		</m:content>
 		<m:footer>
 			<m:Toolbar>
-					<m:ToolbarSpacer></m:ToolbarSpacer>
-					<m:Button id="editNotificationButton" icon="sap-icon://sap-icon://edit" ariaDescribedBy="genericButtonDescription"
-						press="editNotificationPressed">
-						<m:layoutData>
-							<m:OverflowToolbarLayoutData priority="NeverOverflow"/>
-						</m:layoutData>
-					</m:Button>
+				<core:ExtensionPoint name="itemDetailsFooter">
+				<m:ToolbarSpacer></m:ToolbarSpacer>
+				<m:Button id="editNotificationButton" icon="sap-icon://sap-icon://edit" ariaDescribedBy="genericButtonDescription"
+					press="editNotificationPressed">
+					<m:layoutData>
+						<m:OverflowToolbarLayoutData priority="NeverOverflow"/>
+					</m:layoutData>
+				</m:Button>
+				</core:ExtensionPoint>
 			</m:Toolbar>
 		</m:footer>
 	</m:Page>
