@@ -4,7 +4,7 @@
 	<Table id="activitiesList" items="{ path: 'NotifActivitiesSet', sorter: { path: 'ActSortNo', descending: false}}"
 		noDataText="{i18n>NotificationDetails-ActivitiesBlock-NoData}">
 		<columns>
-			<core:ExtensionPoint name="NotificationDetailsActivitiesTableColumns">
+			<core:ExtensionPoint name="itemDetailsActivitiesTableColumns">
 				<Column id="sortNumberColumn" minScreenWidth="Tablet">
 					<Text text="{i18n>NotificationDetails-ActivitiesBlock-SortNumberHeader}"/>
 				</Column>
@@ -23,7 +23,7 @@
 		<items>
 			<ColumnListItem type="Active" press="onActivityItemPress">
 				<cells>
-					<core:ExtensionPoint name="NotificationDetailsActivitiesTableCells">
+					<core:ExtensionPoint name="itemDetailsActivitiesTableCells">
 						<ObjectIdentifier text="" title="{ActSortNo}"/>
 						<ObjectIdentifier text="{ActCodegrp}" title="{TxtActgrp}"/>
 						<ObjectIdentifier text="{ActCode}" title="{TxtActcd}"/>
