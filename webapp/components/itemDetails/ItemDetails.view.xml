@@ -50,9 +50,9 @@
 				<m:content>
 					<m:ToolbarSpacer></m:ToolbarSpacer>
 					<m:Button id="createNotification" press="onPressCreateNotification" text="{i18n>ObjectDetails-CreateNotificationBtnTitle}" type="Emphasized">
-						<m:layoutData>
-							<m:OverflowToolbarLayoutData priority="NeverOverflow"/>
-						</m:layoutData>
+						<!--<m:layoutData>-->
+						<!--	<m:OverflowToolbarLayoutData priority="NeverOverflow"/>-->
+						<!--</m:layoutData>-->
 					</m:Button>
 				</m:content>
 			</m:Toolbar>

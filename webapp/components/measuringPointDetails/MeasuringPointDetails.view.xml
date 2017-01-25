@@ -1,36 +1,34 @@
-<core:View controllerName="com.twobm.mobileworkorder.components.measuringPointDetails.MeasuringPointDetails" 
-xmlns:core="sap.ui.core"
-xmlns:html="http://www.w3.org/1999/xhtml" 
-xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" 
-xmlns:m="sap.m" 
-xmlns="sap.uxap"
-xmlns:blocks="com.twobm.mobileworkorder.components.measuringPointDetails.blocks.configuration"
-height="100%">
+<core:View controllerName="com.twobm.mobileworkorder.components.measuringPointDetails.MeasuringPointDetails" xmlns:core="sap.ui.core"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns="sap.uxap"
+	xmlns:blocks="com.twobm.mobileworkorder.components.measuringPointDetails.blocks.configuration" height="100%">
 	<m:Page showNavButton="true" navButtonPress="onNavigationButtonPress" title="{i18n>MeasuringPointDetails-Title}">
 		<ObjectPageLayout id="MeasuringObjectPageId" enableLazyLoading="false">
 			<headerTitle>
 				<ObjectPageHeader headerDesign="Dark" objectTitle="{Descriptn}" objectSubtitle="{Measpoint}"/>
 			</headerTitle>
 			<sections>
-				<ObjectPageSection>
-					<subSections>
-						<ObjectPageSubSection id="generalSectionId" title="{i18n>MeasuringPointDetails-GeneralSubSection}">
-							<blocks>
-								<blocks:GeneralBlock/>
-							</blocks>
-						</ObjectPageSubSection>
-					</subSections>
-				</ObjectPageSection>
-				<ObjectPageSection>
-					<subSections>
-						<ObjectPageSubSection title="{i18n>MeasuringPointDetails-HistorySubSection}">
-							<blocks>
-								<blocks:HistoryBlock/>
-							</blocks>
-						</ObjectPageSubSection>
-					</subSections>
-				</ObjectPageSection>
-				</sections>
-			</ObjectPageLayout>
-		</m:Page>
-	</core:View>
+				<core:ExtensionPoint name="measurementPointDetailsSections">
+					<ObjectPageSection>
+						<subSections>
+							<ObjectPageSubSection id="generalSectionId" title="{i18n>MeasuringPointDetails-GeneralSubSection}">
+								<blocks>
+									<blocks:GeneralBlock/>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+					<ObjectPageSection>
+						<subSections>
+							<ObjectPageSubSection title="{i18n>MeasuringPointDetails-HistorySubSection}">
+								<blocks>
+									<blocks:HistoryBlock/>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+					<core:ExtensionPoint name="measurementPointDetailsAdditionalSections"/>
+				</core:ExtensionPoint>
+			</sections>
+		</ObjectPageLayout>
+	</m:Page>
+</core:View>

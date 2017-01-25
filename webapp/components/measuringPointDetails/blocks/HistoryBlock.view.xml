@@ -4,22 +4,26 @@
 	<Table id="idMeasuringHistoryTable" items="{ path: 'MeasPointMeasDoc', sorter: { path: 'ReadingDate', descending: false}}"
 		noDataText="{i18n>MeasuringPointDetails-HistoryBlock-NoData}">
 		<columns>
-			<Column minScreenWidth="Tablet">
-				<Text text="{i18n>MeasuringPointDetails-HistoryBlock-DateTimeColumn}"/>
-			</Column>
-			<Column>
-				<Text text="{i18n>MeasuringPointDetails-HistoryBlock-ReadByNameColumn}"/>
-			</Column>
-			<Column>
-				<Text text="{i18n>MeasuringPointDetails-HistoryBlock-ReadUnitColumn}"/>
-			</Column>
+			<core:ExtensionPoint name="measurementPointsHistorySectionTableColumns">
+				<Column minScreenWidth="Tablet">
+					<Text text="{i18n>MeasuringPointDetails-HistoryBlock-DateTimeColumn}"/>
+				</Column>
+				<Column>
+					<Text text="{i18n>MeasuringPointDetails-HistoryBlock-ReadByNameColumn}"/>
+				</Column>
+				<Column>
+					<Text text="{i18n>MeasuringPointDetails-HistoryBlock-ReadUnitColumn}"/>
+				</Column>
+			</core:ExtensionPoint>
 		</columns>
 		<items>
 			<ColumnListItem type="Inactive" press="onMeasuringPointItemPress">
 				<cells>
-					<ObjectIdentifier text="" title="{path: 'ReadingDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy HH:MM:ss'}}"/>
-					<ObjectIdentifier text="{Reader}" title="{Fullname}"/>
-					<ObjectIdentifier text="{RecordedUnit}" title="{RecordedValue}"/>
+					<core:ExtensionPoint name="measurementPointsHistorySectionTableCells">
+						<ObjectIdentifier text="" title="{path: 'ReadingDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy HH:MM:ss'}}"/>
+						<ObjectIdentifier text="{Reader}" title="{Fullname}"/>
+						<ObjectIdentifier text="{RecordedUnit}" title="{RecordedValue}"/>
+					</core:ExtensionPoint>
 				</cells>
 			</ColumnListItem>
 		</items>

@@ -8,7 +8,7 @@
 				</l:HorizontalLayout>
 			</headerContent>
 			<content>
-				<Table id="notificationTableId" items="{path: '/NotificationsSet', sorter: [{path: 'NotifDate', descending: true}]}" noDataText="No Notifications" showSeparators="None"
+				<Table id="notificationTableId" items="{path: '/NotificationsSet', sorter: [{path: 'NotifDate', descending: true}]}" noDataText="No Notifications" showSeparators="All"
 					class="notificationListTableClass" >
 					<columns>
 						<Column id="dataColumn">

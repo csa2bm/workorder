@@ -8,16 +8,19 @@
 			<layout:form.SimpleForm minWidth="1024" title="{i18n>NotificationCreate-General}" maxContainerCols="1" editable="true"
 				layout="ResponsiveGridLayout" labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
 				<layout:content>
-					<Label text="{i18n>NotificationCreate-Description}"></Label>
-					<Input id="shortDescription" value="{ShortText}" valueHelpRequest="showAccountF4" valueHelpOnly="false" showValueHelp="false"></Input>
-					<Label text="{i18n>NotificationCreate-Notes}"></Label>
-					<TextArea id="remark" liveChange="onContactInputFieldChanged" value="{LongText}"></TextArea>
-					<Label text="{i18n>NotificationCreate-Priority}"></Label>
-					<Select id="priority" selectedKey="{Priority}" items="{NotificationDropdownsModel>/priority}" class="pos_input">
-						<items>
-							<core:Item key="{NotificationDropdownsModel>priorityKey}" text="{NotificationDropdownsModel>priorityValue}"></core:Item>
-						</items>
-					</Select>
+					<core:ExtensionPoint name="notificationCreateGeneralSectionAllContent">
+						<Label text="{i18n>NotificationCreate-Description}"></Label>
+						<Input id="shortDescription" value="{ShortText}" valueHelpRequest="showAccountF4" valueHelpOnly="false" showValueHelp="false"></Input>
+						<Label text="{i18n>NotificationCreate-Notes}"></Label>
+						<TextArea id="remark" liveChange="onContactInputFieldChanged" value="{LongText}"></TextArea>
+						<Label text="{i18n>NotificationCreate-Priority}"></Label>
+						<Select id="priority" selectedKey="{Priority}" items="{NotificationDropdownsModel>/priority}" class="pos_input">
+							<items>
+								<core:Item key="{NotificationDropdownsModel>priorityKey}" text="{NotificationDropdownsModel>priorityValue}"></core:Item>
+							</items>
+						</Select>
+						<core:ExtensionPoint name="notificationCreateGeneralSectionAdditionalContent"/>
+					</core:ExtensionPoint>
 				</layout:content>
 			</layout:form.SimpleForm>
 			<!-- Object -->
@@ -39,9 +42,11 @@
 		<footer id="footer">
 			<Toolbar>
 				<content>
-					<ToolbarSpacer></ToolbarSpacer>
-					<Button type="Emphasized" press="handleSaveNotification" text="{i18n>NotificationCreate-SaveButton}"></Button>
-					<Button press="goBack" text="{i18n>NotificationCreate-CancelButton}"></Button>
+					<core:ExtensionPoint name="notificationCreateFooter">
+						<ToolbarSpacer></ToolbarSpacer>
+						<Button type="Emphasized" press="handleSaveNotification" text="{i18n>NotificationCreate-SaveButton}"></Button>
+						<Button press="goBack" text="{i18n>NotificationCreate-CancelButton}"></Button>
+					</core:ExtensionPoint>
 				</content>
 			</Toolbar>
 		</footer>
