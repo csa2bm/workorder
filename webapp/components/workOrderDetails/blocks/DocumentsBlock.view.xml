@@ -12,31 +12,35 @@
 			<columns>
 				<!-- Icon column -->
 				<Column demandPopin="true" popinDisplay="WithoutHeader" vAlign="Middle" width="2rem"/>
-				<Column demandPopin="true" popinDisplay="WithoutHeader" vAlign="Middle">
-					<header>
-						<Label text="Filename"/>
-					</header>
-				</Column>
-				<Column demandPopin="true" popinDisplay="WithoutHeader" vAlign="Middle" minScreenWidth="Small" width="8rem">
-					<header>
-						<Label text="Created Date"/>
-					</header>
-				</Column>
-				<Column demandPopin="true" popinDisplay="WithoutHeader" vAlign="Middle" minScreenWidth="Small" width="8rem">
-					<header>
-						<Label text="Created By"/>
-					</header>
-				</Column>
+				<core:ExtensionPoint name="workOrderDetailsDocumentsTableColumns">
+					<Column demandPopin="true" popinDisplay="WithoutHeader" vAlign="Middle">
+						<header>
+							<Label text="Filename"/>
+						</header>
+					</Column>
+					<Column demandPopin="true" popinDisplay="WithoutHeader" vAlign="Middle" minScreenWidth="Small" width="8rem">
+						<header>
+							<Label text="Created Date"/>
+						</header>
+					</Column>
+					<Column demandPopin="true" popinDisplay="WithoutHeader" vAlign="Middle" minScreenWidth="Small" width="8rem">
+						<header>
+							<Label text="Created By"/>
+						</header>
+					</Column>
+				</core:ExtensionPoint>
 				<Column demandPopin="true" popinDisplay="WithoutHeader" vAlign="Middle" width="8rem"/>
 			</columns>
 			<items>
 				<ColumnListItem type="Inactive" press="clickPreviewDocument">
 					<cells>
 						<core:Icon id="documentListImageIcon" class="sapUiSmallMarginEnd" noTabStop="true" size="2em" src="sap-icon://document"/>
-						<ObjectIdentifier text="{viewModel>Description}"/>
-						<!--<Link text="{Filename}" press="clickPreviewAttachment"/>-->
-						<ObjectIdentifier text="{parts:[{path:'viewModel>CreateDate'}]}"/>
-						<ObjectIdentifier text="{viewModel>CreatedBy}"/>
+						<core:ExtensionPoint name="workOrderDetailsDocumentsTableCells">
+							<ObjectIdentifier text="{viewModel>Description}"/>
+							<!--<Link text="{Filename}" press="clickPreviewAttachment"/>-->
+							<ObjectIdentifier text="{parts:[{path:'viewModel>CreateDate'}]}"/>
+							<ObjectIdentifier text="{viewModel>CreatedBy}"/>
+						</core:ExtensionPoint>
 						<Button id="downloadButton" class="sapUiMediumMarginEnd" text="Download" icon="sap-icon://download" press="downloadDocument"></Button>
 					</cells>
 				</ColumnListItem>
