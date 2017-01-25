@@ -105,27 +105,30 @@
 								</ObjectPageSubSection>
 							</subSections>
 						</ObjectPageSection>
+						<core:ExtensionPoint name="workOrderDetailsAdditionalSections"/>
 					</core:ExtensionPoint>
 				</sections>
 			</ObjectPageLayout>
 		</m:content>
 		<m:footer>
 			<m:Toolbar>
-				<!--<m:Button id="goToNotificationButton" ariaDescribedBy="acceptButtonDescription genericButtonDescription"-->
-				<!--	press="orderStatusBtnPressed" text="{i18n>WorkOrderDetails-GoToNotification}"-->
-				<!--	visible="{path:'OrderStatus',formatter:'.isOrderNotCompleted'}">-->
-				<!--	<m:layoutData>-->
-				<!--		<m:OverflowToolbarLayoutData priority="NeverOverflow"/>-->
-				<!--	</m:layoutData>-->
-				<!--</m:Button>-->
-				<m:ToolbarSpacer></m:ToolbarSpacer>
-				<m:Button id="orderStatusChangeButton" icon="sap-icon://accept" press="orderStatusBtnPressed"
-					text="{path:'OrderStatus',formatter:'.getOrderStatusBtnText'}" visible="{path:'OrderStatus',formatter:'.isOrderNotCompleted'}"
-					type="{path:'OrderStatus',formatter:'.isOrderNotCompletedType'}">
-					<m:layoutData>
-						<m:OverflowToolbarLayoutData priority="NeverOverflow"/>
-					</m:layoutData>
-				</m:Button>
+				<core:ExtensionPoint name="workOrderDetailsFooter">
+					<!--<m:Button id="goToNotificationButton" ariaDescribedBy="acceptButtonDescription genericButtonDescription"-->
+					<!--	press="orderStatusBtnPressed" text="{i18n>WorkOrderDetails-GoToNotification}"-->
+					<!--	visible="{path:'OrderStatus',formatter:'.isOrderNotCompleted'}">-->
+					<!--	<m:layoutData>-->
+					<!--		<m:OverflowToolbarLayoutData priority="NeverOverflow"/>-->
+					<!--	</m:layoutData>-->
+					<!--</m:Button>-->
+					<m:ToolbarSpacer></m:ToolbarSpacer>
+					<m:Button id="orderStatusChangeButton" icon="sap-icon://accept" press="orderStatusBtnPressed"
+						text="{path:'OrderStatus',formatter:'.getOrderStatusBtnText'}" visible="{path:'OrderStatus',formatter:'.isOrderNotCompleted'}"
+						type="{path:'OrderStatus',formatter:'.isOrderNotCompletedType'}">
+						<m:layoutData>
+							<m:OverflowToolbarLayoutData priority="NeverOverflow"/>
+						</m:layoutData>
+					</m:Button>
+				</core:ExtensionPoint>
 			</m:Toolbar>
 		</m:footer>
 	</m:Page>
