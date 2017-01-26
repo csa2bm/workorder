@@ -1,1 +1,1 @@
-sap.ui.define([	"com/twobm/mobileworkorder/util/Controller"], function(Controller) {	"use strict";	return Controller.extend("com.twobm.mobileworkorder.components.objectDetails.blocks.GeneralBlock", {	});});
+sap.ui.define([	"com/twobm/mobileworkorder/util/Controller"], function(Controller) {	"use strict";	return Controller.extend("com.twobm.mobileworkorder.components.itemDetails.blocks.GeneralBlock", {	});});

@@ -5,17 +5,19 @@ sap.ui.define([
 ], function(Controller, History, Formatter) {
 	"use strict";
 
-	return Controller.extend("com.twobm.mobileworkorder.components.objectDetails.ObjectDetails", {
+	return Controller.extend("com.twobm.mobileworkorder.components.itemDetails.ItemDetails", {
 		formatter:Formatter,
 		
 		onInit: function() {
 			//this.getRouter("objectDetails").attachMatched(this.onRouteMatched, this);
-			this.getRouter().getRoute("objectDetails").attachMatched(this.onRouteMatched, this);
+			this.getRouter().getRoute("itemDetails").attachMatched(this.onRouteMatched, this);
 
 		},
 		
 		onRouteMatched: function(oEvent) {
+			
 			var oArguments = oEvent.getParameter("arguments");
+			/*
 			var contextPath = '/' + oArguments.objectContext;
 			var givenContext = new sap.ui.model.Context(this.getView().getModel(), contextPath);
 			
@@ -55,6 +57,7 @@ sap.ui.define([
 
 					}, true);
 			}
+			*/
 		},
 		
 		onNavigationButtonPress: function(){
@@ -65,25 +68,8 @@ sap.ui.define([
 				window.history.go(-1);
 			} else {
 				var oRouter = this.getRouter();
-				oRouter.navTo("workOrderDetails", false);
+				oRouter.navTo("notificationDetails", false);
 			}	
-		},
-		
-		onPressCreateNotification: function() {
-
-		var oRouter = this.getRouter();
-		
-		//Getting object of currently selected object in this view
-		var object = this.getView().getBindingContext().getObject();
-		// creating a data to pass functional location no. and equipment no of current object.
-		
-		//var path = this.getView().getBindingContext().getPath().substr(1);
-		
-		oRouter.navTo("notificationCreate", {
-					equipmentNo: object.Equipment,
-					functionalLoc: object.FunctLoc,
-					argAvailable:"true"
-				}, false);
 		}
 	});
 });

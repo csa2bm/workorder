@@ -11,7 +11,7 @@ sap.ui.define([
 
 			//Subscribe to connection events
 			var eventBus = this.getEventBus();
-			eventBus.subscribe("BlockNavigation", this.performNavigationForBlocks, this);
+			eventBus.subscribe("BlockNavigationNotification", this.performNavigationForBlocks, this);
 		},
 		_onRouteMatched: function(oEvent) {
 			var oArguments = oEvent.getParameter("arguments");
@@ -28,6 +28,15 @@ sap.ui.define([
 				//this.oContext = givenContext;
 				this.getView().setBindingContext(givenContext);
 				this.getView().bindElement(contextPath);
+			}
+		},
+		
+		performNavigationForBlocks: function(a, b, data){
+			
+			if ('item'.localeCompare(data.block) === 0) {
+				this.getRouter().navTo("itemDetails", {
+					itemContext: data.itemContext
+				}, false);
 			}
 		},
 

@@ -27,7 +27,17 @@ sap.ui.define([
 		},
 
 		onItemPress: function(oEvent) {
-		
+			var oBindingContext = oEvent.getSource().getBindingContext();
+
+			var data = {
+				"block": "item",
+				"itemContext": oBindingContext.getPath().substr(1)
+			};
+			this.goToItemDetailsPage(data);
+		},
+		goToItemDetailsPage: function(data) {
+			var eventBus = sap.ui.getCore().getEventBus();
+			eventBus.publish("BlockNavigationNotification", data);
 		},
 		
 		editItemPress: function(oEvent){
