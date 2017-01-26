@@ -1,8 +1,8 @@
 <core:View controllerName="com.twobm.mobileworkorder.components.itemDetails.ItemDetails" xmlns:core="sap.ui.core"
 	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns="sap.uxap"
 	xmlns:blocks="com.twobm.mobileworkorder.components.itemDetails.blocks.configuration" height="100%">
-	<m:Page showNavButton="true" navButtonPress="onNavigationButtonPress" title="{i18n>ObjectDetails-Title}">
-		<ObjectPageLayout id="itemObjectPage" enableLazyLoading="false">
+	<m:Page showNavButton="true" navButtonPress="onNavigationButtonPress" title="{i18n>ItemDetails-Title}">
+		<ObjectPageLayout id="itemDetailsPage" enableLazyLoading="false">
 			<headerTitle>
 				<ObjectPageHeader objectTitle="{path:'Equidescr'}" objectSubtitle="{path:'Equipment'}"/>
 			</headerTitle>
