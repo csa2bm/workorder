@@ -18,10 +18,11 @@
 					<Text text="{i18n>NotificationDetails-ActivitiesBlock-TextHeader}"/>
 				</Column>
 			</core:ExtensionPoint>
+			<Column id ="editBtnColumn" vAlign="Middle" width="3.5em"></Column>
 			<Column width="1.5em" vAlign="Middle"></Column>
 		</columns>
 		<items>
-			<ColumnListItem type="Active" press="onActivityItemPress">
+			<ColumnListItem type="Inactive">
 				<cells>
 					<core:ExtensionPoint name="notificationDetailsActivityTableCells">
 						<ObjectIdentifier text="" title="{ActSortNo}"/>
@@ -29,7 +30,8 @@
 						<ObjectIdentifier text="{ActCode}" title="{TxtActcd}"/>
 						<ObjectIdentifier text="" title="{Acttext}"/>
 					</core:ExtensionPoint>
-					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
+					<Button id="editButton" icon="sap-icon://edit" press="editActivityPress" />
+					<core:Icon src="" color="Gray"/>
 				</cells>
 			</ColumnListItem>
 		</items>

@@ -17,10 +17,11 @@
 				<Text text="{i18n>NotificationDetails-TasksBlock-TextHeader}"/>
 			</Column>
 			</core:ExtensionPoint>
+			<Column id ="editBtnColumn" vAlign="Middle" width="3.5em"></Column>
 			<Column width="1.5em" vAlign="Middle"></Column>
 		</columns>
 		<items>
-			<ColumnListItem type="Active" press="onTaskItemPress">
+			<ColumnListItem type="Inactive">
 				<cells>
 					<core:ExtensionPoint name="notificationDetailsTaskTableCells">
 					<ObjectIdentifier text="" title="{TaskSortNo}"/>
@@ -28,7 +29,8 @@
 					<ObjectIdentifier text="{TaskCode}" title="{TxtTaskcd}"/>
 					<ObjectIdentifier text="" title="{TaskText}"/>
 					</core:ExtensionPoint>
-					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
+					<Button id="editButton" icon="sap-icon://edit" press="editTaskPress" />
+					<core:Icon src="" color="Gray"/>
 				</cells>
 			</ColumnListItem>
 		</items>

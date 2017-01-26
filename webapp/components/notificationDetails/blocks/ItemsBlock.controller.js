@@ -1,4 +1,3 @@
-
 sap.ui.define([
 	"com/twobm/mobileworkorder/util/Controller",
 	"sap/ui/model/Filter"
@@ -28,7 +27,11 @@ sap.ui.define([
 		},
 
 		onItemPress: function(oEvent) {
-			// Compile the model path for the code group on the item for use later if the user wants to change the code
+		
+		},
+		
+		editItemPress: function(oEvent){
+				// Compile the model path for the code group on the item for use later if the user wants to change the code
 			this.codeGroupBindingContext = "/CodeGroupsSet('B" + this.getView().getModel().getProperty(oEvent.getSource().getBindingContext() +
 				"/DlCodegrp") + "')";
 			this.damangeCodeGroupBindingContext = "/CodeGroupsSet('C" + this.getView().getModel().getProperty(oEvent.getSource().getBindingContext() +

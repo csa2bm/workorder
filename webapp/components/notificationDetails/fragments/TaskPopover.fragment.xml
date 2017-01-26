@@ -14,7 +14,7 @@
 				<Label text="{i18n>NotificationDetails-TaskPopover-Code}" design="Bold" class="sapUiTinyMarginBottom sapUiTinyMarginTop"/>
 				<Input type="Text" value="{TaskCode}" showValueHelp="true" valueHelpRequest="handleValueHelpCode" />
 				<Label text="{i18n>NotificationDetails-TaskPopover-Text}" design="Bold" class="sapUiTinyMarginBottom sapUiTinyMarginTop"/>
-				<Input type="Text" value="{TaskText}"/>
+				<Input type="Text" value="{TaskText}" maxLength="40"/>
 			</VBox>
 		</content>
 	</Dialog>
