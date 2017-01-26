@@ -131,6 +131,7 @@
 					"name": "measurementPointDetails",
 					"target": "measurementPointDetails"
 				},
+				
 				{
 					"pattern": "notificationList",
 					"name": "notificationList",
@@ -146,6 +147,11 @@
 					"target": [
 						"notificationDetails"
 					]
+				},
+				{
+					"pattern": "itemDetails/{itemContext}",
+					"name": "itemDetails",
+					"target": "itemDetails"
 				},
 				{
 					"pattern": "notificationCreate/:equipmentNo:/:functionalLoc:/:funcLocDesc:/:equipmentDesc:/:argAvailable:",
@@ -217,6 +223,16 @@
 					"viewLevel": 3,
 					"viewPath": "com.twobm.mobileworkorder.components.notificationDetails"
 				},
+				
+					"itemDetails": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewName": "ItemDetails",
+					"viewLevel": 4,
+					"viewPath": "com.twobm.mobileworkorder.components.itemDetails"
+				},
+				
 				"notificationCreate": {
 					"viewType": "XML",
 					"transition": "slide",
