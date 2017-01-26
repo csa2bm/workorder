@@ -17,26 +17,24 @@
 							</ObjectPageSubSection>
 						</subSections>
 					</ObjectPageSection>
-					<!--
 					<ObjectPageSection>
 						<subSections>
-							<ObjectPageSubSection id="itemDetails-MeasuringPointsSubsection" title="{i18n>ObjectDetails-MeasuringPointsSubSection}">
+							<ObjectPageSubSection id="itemDetails-TaskSubSection" title="{i18n>ItemDetails-TaskSubSection}">
 								<blocks>
-									<blocks:MeasuringPointsBlock/>
+									<blocks:TasksBlock/>
 								</blocks>
 							</ObjectPageSubSection>
 						</subSections>
 					</ObjectPageSection>
 					<ObjectPageSection>
 						<subSections>
-							<ObjectPageSubSection id="objectDetails-OrderHistroySubSection" title="{i18n>ObjectDetails-OrderHistorySubSection}">
+							<ObjectPageSubSection id="itemDetails-ActivitiesSubsection" title="{i18n>ItemDetails-ActivitiesSubsection}">
 								<blocks>
-									<blocks:OrderHistoryBlock/>
+									<blocks:ActivitiesBlock/>
 								</blocks>
 							</ObjectPageSubSection>
 						</subSections>
 					</ObjectPageSection>
-					-->
 					<core:ExtensionPoint name="itemDetailsAdditionalSections"/>
 				</core:ExtensionPoint>
 			</sections>

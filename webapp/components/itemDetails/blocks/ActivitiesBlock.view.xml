@@ -1,4 +1,4 @@
-<core:View controllerName="com.twobm.mobileworkorder.components.notificationDetails.blocks.ActivitiesBlock" xmlns:core="sap.ui.core"
+<core:View controllerName="com.twobm.mobileworkorder.components.itemDetails.blocks.ActivitiesBlock" xmlns:core="sap.ui.core"
 	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
 	<Button class="sapUiSmallMarginEnd" icon="sap-icon://add" press="onCreateActivity"/>
 	<Table id="activitiesList" items="{ path: 'NotifActivitiesSet', sorter: { path: 'ActSortNo', descending: false}}"
@@ -18,10 +18,9 @@
 					<Text text="{i18n>NotificationDetails-ActivitiesBlock-TextHeader}"/>
 				</Column>
 			</core:ExtensionPoint>
-			<Column width="1.5em" vAlign="Middle"></Column>
 		</columns>
 		<items>
-			<ColumnListItem type="Active" press="onActivityItemPress">
+			<ColumnListItem type="Inactive">
 				<cells>
 					<core:ExtensionPoint name="itemDetailsActivitiesTableCells">
 						<ObjectIdentifier text="" title="{ActSortNo}"/>
@@ -29,7 +28,6 @@
 						<ObjectIdentifier text="{ActCode}" title="{TxtActcd}"/>
 						<ObjectIdentifier text="" title="{Acttext}"/>
 					</core:ExtensionPoint>
-					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 				</cells>
 			</ColumnListItem>
 		</items>
