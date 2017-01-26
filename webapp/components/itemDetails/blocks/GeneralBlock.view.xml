@@ -8,7 +8,6 @@
 					<core:Title text="{i18n>ObjectDetails-GeneralBlock-Information}"/>
 					<Label text="{i18n>ObjectDetails-GeneralBlock-FunctionalLocation}"/>
 					<Text text="{Funcldescr}\r\n({FunctLoc})"/>
-					<core:ExtensionPoint name="itemDetailsGeneralBlockAdditionalInformation"/>
 				</core:ExtensionPoint>
 			</f:content>
 		</f:SimpleForm>

@@ -55,16 +55,16 @@
 			</content>
 			<footer>
 				<Toolbar id="detailToolbar">
-					<core:ExtensionPoint name="notificationListFooter">
 						<content>
+							<core:ExtensionPoint name="notificationListFooter">
 							<mvc:XMLView viewName="com.twobm.mobileworkorder.components.offline.Status"/>
 							<ToolbarSpacer></ToolbarSpacer>
 							<Button id="goToNotificationButton" icon="sap-icon://refresh" press="onRefresh" visible="{path:'',formatter:'.isOnline'}">
 							</Button>
 							<Button id="notificationCreateButton" type="Emphasized" press="createNewNotification" text="{i18n>NotificationList-CreateButton}">
 							</Button>
+							</core:ExtensionPoint>
 						</content>
-					</core:ExtensionPoint>
 				</Toolbar>
 			</footer>
 		</Page>

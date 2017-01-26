@@ -80,9 +80,6 @@
 					<m:ToolbarSpacer></m:ToolbarSpacer>
 					<m:Button id="editNotificationButton" icon="sap-icon://sap-icon://edit" ariaDescribedBy="genericButtonDescription"
 						press="editNotificationPressed">
-						<m:layoutData>
-							<m:OverflowToolbarLayoutData priority="NeverOverflow"/>
-						</m:layoutData>
 					</m:Button>
 				</core:ExtensionPoint>
 			</m:Toolbar>
