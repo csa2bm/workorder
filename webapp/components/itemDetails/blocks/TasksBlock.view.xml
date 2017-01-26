@@ -21,7 +21,7 @@
 			<Column width="1.5em" vAlign="Middle"></Column>
 		</columns>
 		<items>
-			<ColumnListItem type="Active" press="onTaskItemPress">
+			<ColumnListItem type="Inactive" >
 				<cells>
 					<core:ExtensionPoint name="itemDetailsTaskTableCells">
 						<ObjectIdentifier text="" title="{TaskSortNo}"/>
@@ -29,7 +29,6 @@
 						<ObjectIdentifier text="{TaskCode}" title="{TxtTaskcd}"/>
 						<ObjectIdentifier text="" title="{TaskText}"/>
 					</core:ExtensionPoint>
-					<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 				</cells>
 			</ColumnListItem>
 		</items>
