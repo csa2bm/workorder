@@ -124,9 +124,6 @@
 					<m:Button id="orderStatusChangeButton" icon="sap-icon://accept" press="orderStatusBtnPressed"
 						text="{path:'OrderStatus',formatter:'.getOrderStatusBtnText'}" visible="{path:'OrderStatus',formatter:'.isOrderNotCompleted'}"
 						type="{path:'OrderStatus',formatter:'.isOrderNotCompletedType'}">
-						<m:layoutData>
-							<m:OverflowToolbarLayoutData priority="NeverOverflow"/>
-						</m:layoutData>
 					</m:Button>
 				</core:ExtensionPoint>
 			</m:Toolbar>
