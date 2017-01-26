@@ -17,8 +17,7 @@ sap.ui.define([
 		onRouteMatched: function(oEvent) {
 			
 			var oArguments = oEvent.getParameter("arguments");
-			/*
-			var contextPath = '/' + oArguments.objectContext;
+			var contextPath = '/' + oArguments.itemContext;
 			var givenContext = new sap.ui.model.Context(this.getView().getModel(), contextPath);
 			
 			//this.oContext is the current context of the view
@@ -47,7 +46,7 @@ sap.ui.define([
 			} else {
 				var that = this;
 				//if not, create the binding context with all the expands we need in this view
-				var aExpand = ["ObjectMeasurementPoint", "HistoricOrderSet", "HistoricNotifSet"];
+				var aExpand = ["NotifTasksSet", "NotifActivitiesSet"];
 
 				this.getView().getModel().createBindingContext(contextPath, "", {
 						expand: aExpand.toString()
@@ -57,7 +56,6 @@ sap.ui.define([
 
 					}, true);
 			}
-			*/
 		},
 		
 		onNavigationButtonPress: function(){
