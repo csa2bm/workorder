@@ -64,7 +64,7 @@ sap.ui.define([
 						this.getView().getModel("appInfoModel").getData().UserImage = oData.results[0].__metadata.media_src;
 					} else {
 						this.getView().getModel("appInfoModel").getData().UserImage = this.getView().getModel().sServiceUrl +
-							"/UserDetailsSet('LLA')/$value";
+							"/UserDetailsSet('"+this.getView().getModel("appInfoModel").getData().UserName+"')/$value";
 					}
 					//this.DashBoardModel.getData().ImagePath = oData.results[0].__metadata.media_src;
 					//this.DashBoardModel.getData().ImagePath = this.getView().getModel().sServiceUrl + "/UserDetailsSet('LLA')/$value";

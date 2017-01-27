@@ -4,7 +4,7 @@
 	<m:Page showNavButton="true" navButtonPress="onNavigationButtonPress" title="{i18n>ItemDetails-Title}">
 		<ObjectPageLayout id="itemDetailsPage" enableLazyLoading="false">
 			<headerTitle>
-				<ObjectPageHeader objectTitle="{path:'Equidescr'}" objectSubtitle="{path:'Equipment'}"/>
+				<ObjectPageHeader objectTitle="{path:'Descript'}" objectSubtitle="{path:'ItemKey'}"/>
 			</headerTitle>
 			<sections>
 				<core:ExtensionPoint name="itemDetailsSections">
