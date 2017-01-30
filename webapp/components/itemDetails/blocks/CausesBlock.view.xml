@@ -1,0 +1,39 @@
+<core:View controllerName="com.twobm.mobileworkorder.components.itemDetails.blocks.CausesBlock" xmlns:core="sap.ui.core"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+	<Button class="sapUiSmallMarginEnd" icon="sap-icon://add" press="onCreateCause"/>
+	<Table id="causesList" items="{ path: 'NotifCausesSet', sorter: { path: 'CauseSortNo', descending: false}}"
+		noDataText="{i18n>ItemDetails-CausesBlock-NoData}">
+		<columns>
+			<core:ExtensionPoint name="itemDetailsCausesTableColumns">
+				<Column id="sortNumberColumn" minScreenWidth="Tablet">
+					<Text text="{i18n>ItemDetails-CausesBlock-SortNumberHeader}"/>
+				</Column>
+				<Column id="codeGroupColumn" minScreenWidth="Tablet">
+					<Text text="{i18n>ItemDetails-CausesBlock-CodeGroupHeader}"/>
+				</Column>
+				<Column id="codeColumn">
+					<Text text="{i18n>ItemDetails-CausesBlock-CodeHeader}"/>
+				</Column>
+				<Column id="textColumn">
+					<Text text="{i18n>ItemDetails-CausesBlock-TextHeader}"/>
+				</Column>
+				<Column id="editBtnColumn" vAlign="Middle" width="3.5em"></Column>
+				<Column width="1.5em" vAlign="Middle"></Column>
+			</core:ExtensionPoint>
+		</columns>
+		<items>
+			<ColumnListItem type="Inactive">
+				<cells>
+					<core:ExtensionPoint name="itemDetailsCausesTableCells">
+						<ObjectIdentifier text="" title="{CauseSortNo}"/>
+						<ObjectIdentifier text="{CauseCodegrp>}" title="{TxtCausegrp}"/>
+						<ObjectIdentifier text="{CauseCode}" title="{TxtCausecd}"/>
+						<ObjectIdentifier text="" title="{Causetext}"/>
+					</core:ExtensionPoint>
+					<Button id="editButton" icon="sap-icon://edit" press="editCausesPress"/>
+					<core:Icon src="" color="Gray"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+</core:View>

@@ -35,6 +35,15 @@
 							</ObjectPageSubSection>
 						</subSections>
 					</ObjectPageSection>
+					<ObjectPageSection>
+						<subSections>
+							<ObjectPageSubSection id="itemDetails-CausesSubsection" title="{i18n>ItemDetails-CausesSubsection}">
+								<blocks>
+									<blocks:CausesBlock/>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
 					<core:ExtensionPoint name="itemDetailsAdditionalSections"/>
 				</core:ExtensionPoint>
 			</sections>

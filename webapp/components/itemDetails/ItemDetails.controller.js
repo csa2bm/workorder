@@ -46,7 +46,7 @@ sap.ui.define([
 			} else {
 				var that = this;
 				//if not, create the binding context with all the expands we need in this view
-				var aExpand = ["NotifTasksSet", "NotifActivitiesSet"];
+				var aExpand = ["NotifTasksSet", "NotifActivitiesSet", "NotifCausesSet"];
 
 				this.getView().getModel().createBindingContext(contextPath, "", {
 						expand: aExpand.toString()
