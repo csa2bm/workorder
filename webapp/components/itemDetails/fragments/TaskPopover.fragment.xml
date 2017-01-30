@@ -2,7 +2,7 @@
 	<Dialog title="{i18n>NotificationDetails-TaskPopover-Title}" class="sapUiPopupWithPadding" stretch="{device>/isPhone}" showHeader="true"
 	>
 		<buttons>
-			<Button icon="sap-icon://delete" type="Reject" text="{i18n>NotificationDetails-TaskPopover-DeleteButton}" press="onDeleteCause"
+			<Button icon="sap-icon://delete" type="Reject" text="{i18n>NotificationDetails-TaskPopover-DeleteButton}" press="onDeleteTask"
 				visible="{ViewModel>/isEditing}"></Button>
 			<Button type="Emphasized" text="OK" press="onSubmitTask"></Button>
 			<Button text="Close" press="onPopopoverClose"/>
