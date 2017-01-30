@@ -1,0 +1,17 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<SelectDialog
+		id = "CodeValueHelpDialog"
+		title="Code"
+		class="sapUiPopupWithPadding"
+		items="{CodeCatalogSet}"
+		search="handleTaskCodeSearch"
+		confirm="handleValueHelpCloseCode"
+		cancel="handleValueHelpCloseCode">
+		<!--afterClose="handleValueHelpAfterCloseCode"-->
+		<StandardListItem
+			title="{CodeText}"
+			description="{Code}" />
+	</SelectDialog>
+</core:FragmentDefinition>

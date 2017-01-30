@@ -1,0 +1,21 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="{i18n>ItemDetails-CausePopover-Title}" class="sapUiPopupWithPadding" stretch="{device>/isPhone}" showHeader="true"
+	>
+		<buttons>
+			<Button icon="sap-icon://delete" type="Reject" text="{i18n>ItemDetails-causePopover-DeleteButton}" press="onDeleteCause"
+				visible="{ViewModel>/isEditing}"></Button>
+			<Button type="Emphasized" text="OK" press="onSubmitCause"></Button>
+			<Button text="Close" press="onPopopoverClose"/>
+		</buttons>
+		<content>
+			<VBox>
+				<Label text="{i18n>ItemDetails-CausePopover-CodeGroup}" design="Bold" class="sapUiTinyMarginBottom"/>
+				<Input type="Text" value="{CauseCodegrp}" showValueHelp="true" valueHelpRequest="handleValueHelpCodeGroup"/>
+				<Label text="{i18n>ItemDetails-TaskPopover-Code}" design="Bold" class="sapUiTinyMarginBottom sapUiTinyMarginTop"/>
+				<Input type="Text" value="{CauseCode}" showValueHelp="true" valueHelpRequest="handleValueHelpCode" />
+				<Label text="{i18n>ItemDetails-CausePopover-Text}" design="Bold" class="sapUiTinyMarginBottom sapUiTinyMarginTop"/>
+				<Input type="Text" value="{Causetext}" maxLength="40"/>
+			</VBox>
+		</content>
+	</Dialog>
+</core:FragmentDefinition>
