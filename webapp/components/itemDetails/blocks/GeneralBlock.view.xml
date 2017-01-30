@@ -12,14 +12,10 @@
 			columnsL="1"
 			columnsM="1">
 			<f:content>
-				<Label text="Sort Number" />
-				<Text text="{ItemSortNo}" />
 				<Label text="Part" />
 				<Text text="{TxtObjptcd} - {DlCode}" />
 				<Label text="Damage" />
 				<Text text="{TxtGrpcd} - {DCode}" />
-				<Label text="Text" />
-				<Text text="{Descript}" />
 			</f:content>
 		</f:SimpleForm>
 </core:View>

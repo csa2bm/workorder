@@ -62,7 +62,7 @@
     "appid": "com.twobm.mobileworkorder",
     "appdesc": "Mobile Work Order by 2BM",
     "appversion": "0.1.16",
-    "debugMode": true,
+    "debugMode": false,
     "appIcon": {
       "defaultIcon": "",
       "ios": {
