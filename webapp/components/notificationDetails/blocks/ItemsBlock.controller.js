@@ -60,6 +60,7 @@ sap.ui.define([
 			// Build path for new entry
 			var path = this.getView().getBindingContext().getPath() + "/NotifItemsSet";
 			// Create new entry with default values
+			//ItemSortNo must be empty. It is set in the BE service
 			this.newEntry = this.getView().getModel().createEntry(path, {
 				properties: {
 					ItemSortNo: ""
