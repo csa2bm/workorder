@@ -18,8 +18,7 @@
 					<Text text="{i18n>NotificationDetails-TasksBlock-TextHeader}"/>
 				</Column>
 			</core:ExtensionPoint>
-			<Column id ="editBtnColumn" vAlign="Middle" width="3.5em"></Column>
-			<Column width="1.5em" vAlign="Middle"></Column>
+			<Column id ="editBtnColumn" vAlign="Middle" width="2.5em"></Column>
 		</columns>
 		<items>
 			<ColumnListItem type="Inactive" >
@@ -31,7 +30,6 @@
 						<ObjectIdentifier text="" title="{TaskText}"/>
 					</core:ExtensionPoint>
 					<Button id="editButton" icon="sap-icon://edit" press="editTaskPress" />
-					<core:Icon src="" color="Gray"/>
 				</cells>
 			</ColumnListItem>
 		</items>

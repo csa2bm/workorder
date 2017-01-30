@@ -17,8 +17,7 @@
 				<Column id="textColumn">
 					<Text text="{i18n>ItemDetails-CausesBlock-TextHeader}"/>
 				</Column>
-				<Column id="editBtnColumn" vAlign="Middle" width="3.5em"></Column>
-				<Column width="1.5em" vAlign="Middle"></Column>
+				<Column id="editBtnColumn" vAlign="Middle" width="2.5em"></Column>
 			</core:ExtensionPoint>
 		</columns>
 		<items>
@@ -31,7 +30,6 @@
 						<ObjectIdentifier text="" title="{Causetext}"/>
 					</core:ExtensionPoint>
 					<Button id="editButton" icon="sap-icon://edit" press="editCausesPress"/>
-					<core:Icon src="" color="Gray"/>
 				</cells>
 			</ColumnListItem>
 		</items>

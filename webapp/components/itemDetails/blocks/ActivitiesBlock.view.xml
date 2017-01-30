@@ -17,8 +17,7 @@
 				<Column id="textColumn">
 					<Text text="{i18n>NotificationDetails-ActivitiesBlock-TextHeader}"/>
 				</Column>
-				<Column id="editBtnColumn" vAlign="Middle" width="3.5em"></Column>
-				<Column width="1.5em" vAlign="Middle"></Column>
+				<Column id="editBtnColumn" vAlign="Middle" width="2.5em"></Column>
 			</core:ExtensionPoint>
 		</columns>
 		<items>
@@ -31,7 +30,6 @@
 						<ObjectIdentifier text="" title="{Acttext}"/>
 					</core:ExtensionPoint>
 					<Button id="editButton" icon="sap-icon://edit" press="editActivityPress"/>
-					<core:Icon src="" color="Gray"/>
 				</cells>
 			</ColumnListItem>
 		</items>
