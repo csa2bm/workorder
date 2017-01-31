@@ -127,6 +127,16 @@ sap.ui.define([
 		},
 
 		onPopopoverClose: function() {
+			var isEditing = this.getView().getModel("ViewModel").getProperty("/isEditing");
+			var pendingChanges = this.getView().getModel().hasPendingChanges();
+			
+			// reset changes in model if user close popOver and is in isEditing
+			if(isEditing && pendingChanges){
+				var sPathArr = [];
+				var sPath = oEvent.getSource().getBindingContext().getPath();
+				sPathArr.push(sPath);
+				this.getView().getModel().resetChanges(sPathArr);
+			}
 			// If we started creating a new entry..
 			if (this.newEntry) {
 				// ..make sure it is removed from the model if the user cancels
