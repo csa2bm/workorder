@@ -287,6 +287,22 @@ sap.ui.define([
 		handleValueHelpAfterCloseCode: function() {
 			//Destroy the ValueHelpDialog
 			//this.valueDamageHelpCodeDialog.destroy();
+		},
+		// formatter function for enable/disable Code input in popover
+		isItemCodeGrpEmpty: function(itemGroupValue) {
+			if (itemGroupValue !== undefined && itemGroupValue !== "") {
+				return true;
+			} else {
+				return false;
+			}
+		},
+			// formatter function for enable/disable Damage Code input in popover
+		isDamageCodeGrpEmpty: function(itemDamageGroupValue) {
+			if (itemDamageGroupValue !== undefined && itemDamageGroupValue !== "") {
+				return true;
+			} else {
+				return false;
+			}
 		}
 	});
 });

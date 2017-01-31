@@ -11,11 +11,11 @@
 				<Label text="{i18n>NotificationDetails-ItemPopover-PartCodeGroup}" design="Bold" class="sapUiTinyMarginBottom"/>
 				<Input type="Text" value="{DlCodegrp}" showValueHelp="true" valueHelpRequest="handleValueHelpCodeGroup"  valueHelpOnly="true"/>
 				<Label text="{i18n>NotificationDetails-ItemPopover-PartCode}" design="Bold" class="sapUiTinyMarginBottom sapUiTinyMarginTop"/>
-				<Input type="Text" value="{DlCode}" showValueHelp="true" valueHelpRequest="handleValueHelpCode" valueHelpOnly="true"/>
+				<Input type="Text" value="{DlCode}" showValueHelp="true" valueHelpRequest="handleValueHelpCode" valueHelpOnly="true" enabled="{parts:[{path:'DlCodegrp'}],formatter:'.isItemCodeGrpEmpty'}"/>
 				<Label text="{i18n>NotificationDetails-ItemPopover-DamageCodeGroup}" design="Bold" class="sapUiTinyMarginBottom"/>
 				<Input type="Text" value="{DCodegrp}" showValueHelp="true" valueHelpRequest="handleDamageValueHelpCodeGroup" valueHelpOnly="true"/>
 				<Label text="{i18n>NotificationDetails-ItemPopover-DamageCode}" design="Bold" class="sapUiTinyMarginBottom sapUiTinyMarginTop"/>
-				<Input type="Text" value="{DCode}" showValueHelp="true" valueHelpRequest="handleDamageValueHelpCode" valueHelpOnly="true"/>
+				<Input type="Text" value="{DCode}" showValueHelp="true" valueHelpRequest="handleDamageValueHelpCode" valueHelpOnly="true" enabled="{parts:[{path:'DCodegrp'}],formatter:'.isDamageCodeGrpEmpty'}"/>
 				<Label text="{i18n>NotificationDetails-ItemPopover-Text}" design="Bold" class="sapUiTinyMarginBottom sapUiTinyMarginTop"/>
 				<Input type="Text" value="{Descript}" maxLength="40"/>
 			</VBox>
