@@ -219,6 +219,8 @@ sap.ui.define([
 				// Update values on model
 				this.getView().getModel().setProperty(this.popover.getBindingContext().getPath() + "/DlCodegrp", selectedItem.getDescription());
 				this.getView().getModel().setProperty(this.popover.getBindingContext().getPath() + "/TxtGrpcd", selectedItem.getTitle());
+				this.getView().getModel().setProperty(this.popover.getBindingContext().getPath() + "/DlCode", ""); // reset CodeValue
+				this.getView().getModel().setProperty(this.popover.getBindingContext().getPath() + "/TxtObjptcd", ""); // reset CodeText
 				this.codeGroupBindingContext = selectedItem.getBindingContext().getPath();
 
 			}
@@ -241,7 +243,7 @@ sap.ui.define([
 
 		handleValueHelpAfterCloseCode: function() {
 			//Destroy the ValueHelpDialog
-			this.valueHelpCodeDialog.destroy();
+			//this.valueHelpCodeDialog.destroy();
 		},
 
 		handleValueDamageHelpCloseCodeGroup: function(oEvent) {
@@ -251,6 +253,8 @@ sap.ui.define([
 				// Update values on model
 				this.getView().getModel().setProperty(this.popover.getBindingContext().getPath() + "/DCodegrp", selectedItem.getDescription());
 				this.getView().getModel().setProperty(this.popover.getBindingContext().getPath() + "/StxtGrpcd", selectedItem.getTitle());
+				this.getView().getModel().setProperty(this.popover.getBindingContext().getPath() + "/DCode", ""); // reset CodeValue
+				this.getView().getModel().setProperty(this.popover.getBindingContext().getPath() + "/TxtProbcd", ""); // reset CodeText
 				this.damangeCodeGroupBindingContext = selectedItem.getBindingContext().getPath();
 
 			}
