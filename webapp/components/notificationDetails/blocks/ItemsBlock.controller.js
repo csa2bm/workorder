@@ -257,7 +257,7 @@ sap.ui.define([
 		},
 		handleValueDamageHelpAfterCloseCodeGroup: function() {
 			//Destroy the ValueHelpDialog
-			this.valueHelpDamageCodeGroupDialog.destroy();
+			//this.valueHelpDamageCodeGroupDialog.destroy();
 		},
 
 		handleValueDamageHelpCloseCode: function(oEvent) {
