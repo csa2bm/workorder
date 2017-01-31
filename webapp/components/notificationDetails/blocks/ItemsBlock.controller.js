@@ -39,9 +39,9 @@ sap.ui.define([
 			var eventBus = sap.ui.getCore().getEventBus();
 			eventBus.publish("BlockNavigationNotification", data);
 		},
-		
-		editItemPress: function(oEvent){
-				// Compile the model path for the code group on the item for use later if the user wants to change the code
+
+		editItemPress: function(oEvent) {
+			// Compile the model path for the code group on the item for use later if the user wants to change the code
 			this.codeGroupBindingContext = "/CodeGroupsSet('B" + this.getView().getModel().getProperty(oEvent.getSource().getBindingContext() +
 				"/DlCodegrp") + "')";
 			this.damangeCodeGroupBindingContext = "/CodeGroupsSet('C" + this.getView().getModel().getProperty(oEvent.getSource().getBindingContext() +
@@ -76,25 +76,34 @@ sap.ui.define([
 		onSubmit: function() {
 			// Set view busy
 			this.popover.setBusy(true);
-			// Submit the changes
-			this.getView().getModel().submitChanges({
-				success: function() {
-					// Reset view busy
-					this.popover.setBusy(false);
-					// If we just created a new entity, clear the reference to it
-					if (this.newEntry) {
-						this.newEntry = null;
-					}
-					// Close the popup
-					this.popover.close();
-				}.bind(this),
-				error: function(error) {
-					// Reset view busy
-					this.popover.setBusy(false);
-					// Show error to user
-					self.errorCallBackShowInPopUp(error);
-				}.bind(this)
-			});
+
+			// if there are changes to the model post it to BE.
+			if (this.getView().getModel().hasPendingChanges()) {
+				// Submit the changes
+				this.getView().getModel().submitChanges({
+					success: function() {
+						// Reset view busy
+						this.popover.setBusy(false);
+						// If we just created a new entity, clear the reference to it
+						if (this.newEntry) {
+							this.newEntry = null;
+						}
+						// Close the popup
+						this.popover.close();
+					}.bind(this),
+					error: function(error) {
+						// Reset view busy
+						this.popover.setBusy(false);
+						// Show error to user
+						self.errorCallBackShowInPopUp(error);
+					}.bind(this)
+				});
+			}
+			// else close the popover without commit to BE
+			else {
+				this.popover.setBusy(false);
+				this.popover.close();
+			}
 		},
 
 		onDelete: function() {
@@ -250,7 +259,7 @@ sap.ui.define([
 			//Destroy the ValueHelpDialog
 			this.valueHelpDamageCodeGroupDialog.destroy();
 		},
-		
+
 		handleValueDamageHelpCloseCode: function(oEvent) {
 			// Get selected item
 			var selectedItem = oEvent.getParameter("selectedItem");
