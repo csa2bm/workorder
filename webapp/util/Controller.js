@@ -33,23 +33,23 @@ sap.ui.define([
 		},
 
 		getI18nText: function(para) {
-			return Globalization.geti18NText(para);
+			return Globalization.geti18NText(this.getResourceBundle(),para);
 		},
 
 		getI18nTextReplace1: function(para, replace1) {
-			return Globalization.geti18NText1(para, replace1);
+			return Globalization.geti18NText1(this.getResourceBundle(), para, replace1);
 		},
 
 		getI18nTextReplace2: function(para, replace1, replace2) {
-			return Globalization.geti18NText2(para, replace1, replace2);
+			return Globalization.geti18NText2(this.getResourceBundle(), para, replace1, replace2);
 		},
 
 		getI18nTextReplace3: function(para, replace1, replace2, replace3) {
-			return Globalization.geti18NText3(para, replace1, replace2, replace3);
+			return Globalization.geti18NText3(this.getResourceBundle(), para, replace1, replace2, replace3);
 		},
 
 		getI18nTextReplace4: function(para, replace1, replace2, replace3, replace4) {
-			return Globalization.geti18NText4(para, replace1, replace2, replace3, replace4);
+			return Globalization.geti18NText4(this.getResourceBundle(), para, replace1, replace2, replace3, replace4);
 		},
 
 		navBack: function(route, data) {

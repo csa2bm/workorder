@@ -131,7 +131,6 @@
 					"name": "measurementPointDetails",
 					"target": "measurementPointDetails"
 				},
-				
 				{
 					"pattern": "notificationList",
 					"name": "notificationList",
@@ -223,8 +222,7 @@
 					"viewLevel": 3,
 					"viewPath": "com.twobm.mobileworkorder.components.notificationDetails"
 				},
-				
-					"itemDetails": {
+				"itemDetails": {
 					"viewType": "XML",
 					"transition": "slide",
 					"clearAggregation": true,
@@ -232,7 +230,6 @@
 					"viewLevel": 4,
 					"viewPath": "com.twobm.mobileworkorder.components.itemDetails"
 				},
-				
 				"notificationCreate": {
 					"viewType": "XML",
 					"transition": "slide",

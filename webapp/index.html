@@ -26,7 +26,7 @@
 		<script>
 			sap.ui.getCore().attachInit(function() {
 				new sap.m.Shell({
-					app: new sap.ui.core.ComponentContainer({
+					app: new sap.ui.core.ComponentContainer("mainComponent", {
 						height : "100%",
 						name : "com.twobm.mobileworkorder"
 					})

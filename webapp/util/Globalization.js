@@ -2,27 +2,27 @@ sap.ui.define([], function() {
 	"use strict";
 
 	return {
-		geti18NResourceBundle: function() {
-			var bundleUrl = "i18n/messageBundle.properties";
+		// geti18NResourceBundle: function() {
+		// 	var bundleUrl = "i18n/messageBundle.properties";
 
-			var i18nModel = new sap.ui.model.resource.ResourceModel({
-				bundleUrl: bundleUrl
-			});
+		// 	var i18nModel = new sap.ui.model.resource.ResourceModel({
+		// 		bundleUrl: bundleUrl
+		// 	});
 
-			return i18nModel;
-		},
+		// 	return i18nModel;
+		// },
 
-		geti18NText: function(key) {
-			if (this.geti18NResourceBundle()) {
-				return this.geti18NResourceBundle().getProperty(key);
+		geti18NText: function(bundle, key) {
+			if (bundle) {
+				return bundle.getText(key);
 			} else {
 				return null;
 			}
 		},
 
-		geti18NText1: function(key, replace) {
-			if (this.geti18NResourceBundle()) {
-				var text = this.geti18NResourceBundle().getProperty(key);
+		geti18NText1: function(bundle, key, replace) {
+			if (bundle) {
+				var text = bundle.getText(key);
 				if (text !== null) {
 					var textWithReplacement = text.replace("{0}", replace);
 					return textWithReplacement;
@@ -32,9 +32,9 @@ sap.ui.define([], function() {
 			}
 		},
 
-		geti18NText2: function(key, replace1, replace2) {
-			if (this.geti18NResourceBundle()) {
-				var text = this.geti18NResourceBundle().getProperty(key);
+		geti18NText2: function(bundle, key, replace1, replace2) {
+			if (bundle) {
+				var text = bundle.getText(key);
 				if (text !== null) {
 					var textWithReplacement = text.replace("{0}", replace1);
 					textWithReplacement = textWithReplacement.replace("{1}", replace2);
@@ -45,9 +45,9 @@ sap.ui.define([], function() {
 			}
 		},
 
-		geti18NText3: function(key, replace1, replace2, replace3) {
-			if (this.geti18NResourceBundle()) {
-				var text = this.geti18NResourceBundle().getProperty(key);
+		geti18NText3: function(bundle, key, replace1, replace2, replace3) {
+			if (bundle) {
+				var text = bundle.getText(key);
 				if (text !== null) {
 					var textWithReplacement = text.replace("{0}", replace1);
 					textWithReplacement = textWithReplacement.replace("{1}", replace2);
@@ -59,9 +59,9 @@ sap.ui.define([], function() {
 			}
 		},
 
-		geti18NText4: function(key, replace1, replace2, replace3, replace4) {
-			if (this.geti18NResourceBundle()) {
-				var text = this.geti18NResourceBundle().getProperty(key);
+		geti18NText4: function(bundle, key, replace1, replace2, replace3, replace4) {
+			if (bundle) {
+				var text = bundle.getText(key);
 				if (text !== null) {
 					var textWithReplacement = text.replace("{0}", replace1);
 					textWithReplacement = textWithReplacement.replace("{1}", replace2);
