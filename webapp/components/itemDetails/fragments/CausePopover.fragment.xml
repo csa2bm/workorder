@@ -12,7 +12,7 @@
 				<Label text="{i18n>ItemDetails-CausePopover-CodeGroup}" design="Bold" class="sapUiTinyMarginBottom"/>
 				<Input type="Text" value="{CauseCodegrp}" showValueHelp="true" valueHelpRequest="handleValueHelpCodeGroup" valueHelpOnly="true"/>
 				<Label text="{i18n>ItemDetails-CausePopover-Code}" design="Bold" class="sapUiTinyMarginBottom sapUiTinyMarginTop"/>
-				<Input type="Text" value="{CauseCode}" showValueHelp="true" valueHelpRequest="handleValueHelpCode" valueHelpOnly="true"/>
+				<Input type="Text" value="{CauseCode}" showValueHelp="true" valueHelpRequest="handleValueHelpCode" valueHelpOnly="true" enabled="{parts:[{path:'CauseCodegrp'}],formatter:'.isCauseCodeGrpEmpty'}"/>
 				<Label text="{i18n>ItemDetails-CausePopover-Text}" design="Bold" class="sapUiTinyMarginBottom sapUiTinyMarginTop"/>
 				<Input type="Text" value="{Causetext}" maxLength="40"/>
 			</VBox>
