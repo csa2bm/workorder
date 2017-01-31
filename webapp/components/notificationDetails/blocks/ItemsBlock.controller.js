@@ -126,7 +126,7 @@ sap.ui.define([
 			});
 		},
 
-		onPopopoverClose: function() {
+		onPopopoverClose: function(oEvent) {
 			var isEditing = this.getView().getModel("ViewModel").getProperty("/isEditing");
 			var pendingChanges = this.getView().getModel().hasPendingChanges();
 			
