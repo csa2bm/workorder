@@ -10,9 +10,9 @@
 		<content>
 			<VBox>
 				<Label text="{i18n>NotificationDetails-TaskPopover-CodeGroup}" design="Bold" class="sapUiTinyMarginBottom"/>
-				<Input type="Text" value="{TaskCodegrp}" showValueHelp="true" valueHelpRequest="handleValueHelpCodeGroup"/>
+				<Input type="Text" value="{TaskCodegrp}" showValueHelp="true" valueHelpRequest="handleValueHelpCodeGroup" valueHelpOnly="true"/>
 				<Label text="{i18n>NotificationDetails-TaskPopover-Code}" design="Bold" class="sapUiTinyMarginBottom sapUiTinyMarginTop"/>
-				<Input type="Text" value="{TaskCode}" showValueHelp="true" valueHelpRequest="handleValueHelpCode" />
+				<Input type="Text" value="{TaskCode}" showValueHelp="true" valueHelpRequest="handleValueHelpCode" valueHelpOnly="true"/>
 				<Label text="{i18n>NotificationDetails-TaskPopover-Text}" design="Bold" class="sapUiTinyMarginBottom sapUiTinyMarginTop"/>
 				<Input type="Text" value="{TaskText}" maxLength="40"/>
 			</VBox>

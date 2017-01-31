@@ -39,9 +39,9 @@ sap.ui.define([
 			var eventBus = sap.ui.getCore().getEventBus();
 			eventBus.publish("BlockNavigationNotification", data);
 		},
-		
-		editItemPress: function(oEvent){
-				// Compile the model path for the code group on the item for use later if the user wants to change the code
+
+		editItemPress: function(oEvent) {
+			// Compile the model path for the code group on the item for use later if the user wants to change the code
 			this.codeGroupBindingContext = "/CodeGroupsSet('B" + this.getView().getModel().getProperty(oEvent.getSource().getBindingContext() +
 				"/DlCodegrp") + "')";
 			this.damangeCodeGroupBindingContext = "/CodeGroupsSet('C" + this.getView().getModel().getProperty(oEvent.getSource().getBindingContext() +
@@ -76,25 +76,34 @@ sap.ui.define([
 		onSubmit: function() {
 			// Set view busy
 			this.popover.setBusy(true);
-			// Submit the changes
-			this.getView().getModel().submitChanges({
-				success: function() {
-					// Reset view busy
-					this.popover.setBusy(false);
-					// If we just created a new entity, clear the reference to it
-					if (this.newEntry) {
-						this.newEntry = null;
-					}
-					// Close the popup
-					this.popover.close();
-				}.bind(this),
-				error: function(error) {
-					// Reset view busy
-					this.popover.setBusy(false);
-					// Show error to user
-					self.errorCallBackShowInPopUp(error);
-				}.bind(this)
-			});
+
+			// if there are changes to the model post it to BE.
+			if (this.getView().getModel().hasPendingChanges()) {
+				// Submit the changes
+				this.getView().getModel().submitChanges({
+					success: function() {
+						// Reset view busy
+						this.popover.setBusy(false);
+						// If we just created a new entity, clear the reference to it
+						if (this.newEntry) {
+							this.newEntry = null;
+						}
+						// Close the popup
+						this.popover.close();
+					}.bind(this),
+					error: function(error) {
+						// Reset view busy
+						this.popover.setBusy(false);
+						// Show error to user
+						self.errorCallBackShowInPopUp(error);
+					}.bind(this)
+				});
+			}
+			// else close the popover without commit to BE
+			else {
+				this.popover.setBusy(false);
+				this.popover.close();
+			}
 		},
 
 		onDelete: function() {
@@ -117,7 +126,17 @@ sap.ui.define([
 			});
 		},
 
-		onPopopoverClose: function() {
+		onPopopoverClose: function(oEvent) {
+			var isEditing = this.getView().getModel("ViewModel").getProperty("/isEditing");
+			var pendingChanges = this.getView().getModel().hasPendingChanges();
+			
+			// reset changes in model if user close popOver and is in isEditing
+			if(isEditing && pendingChanges){
+				var sPathArr = [];
+				var sPath = oEvent.getSource().getBindingContext().getPath();
+				sPathArr.push(sPath);
+				this.getView().getModel().resetChanges(sPathArr);
+			}
 			// If we started creating a new entry..
 			if (this.newEntry) {
 				// ..make sure it is removed from the model if the user cancels
@@ -210,6 +229,8 @@ sap.ui.define([
 				// Update values on model
 				this.getView().getModel().setProperty(this.popover.getBindingContext().getPath() + "/DlCodegrp", selectedItem.getDescription());
 				this.getView().getModel().setProperty(this.popover.getBindingContext().getPath() + "/TxtGrpcd", selectedItem.getTitle());
+				this.getView().getModel().setProperty(this.popover.getBindingContext().getPath() + "/DlCode", ""); // reset CodeValue
+				this.getView().getModel().setProperty(this.popover.getBindingContext().getPath() + "/TxtObjptcd", ""); // reset CodeText
 				this.codeGroupBindingContext = selectedItem.getBindingContext().getPath();
 
 			}
@@ -232,7 +253,7 @@ sap.ui.define([
 
 		handleValueHelpAfterCloseCode: function() {
 			//Destroy the ValueHelpDialog
-			this.valueHelpCodeDialog.destroy();
+			//this.valueHelpCodeDialog.destroy();
 		},
 
 		handleValueDamageHelpCloseCodeGroup: function(oEvent) {
@@ -242,15 +263,17 @@ sap.ui.define([
 				// Update values on model
 				this.getView().getModel().setProperty(this.popover.getBindingContext().getPath() + "/DCodegrp", selectedItem.getDescription());
 				this.getView().getModel().setProperty(this.popover.getBindingContext().getPath() + "/StxtGrpcd", selectedItem.getTitle());
+				this.getView().getModel().setProperty(this.popover.getBindingContext().getPath() + "/DCode", ""); // reset CodeValue
+				this.getView().getModel().setProperty(this.popover.getBindingContext().getPath() + "/TxtProbcd", ""); // reset CodeText
 				this.damangeCodeGroupBindingContext = selectedItem.getBindingContext().getPath();
 
 			}
 		},
 		handleValueDamageHelpAfterCloseCodeGroup: function() {
 			//Destroy the ValueHelpDialog
-			this.valueHelpDamageCodeGroupDialog.destroy();
+			//this.valueHelpDamageCodeGroupDialog.destroy();
 		},
-		
+
 		handleValueDamageHelpCloseCode: function(oEvent) {
 			// Get selected item
 			var selectedItem = oEvent.getParameter("selectedItem");
