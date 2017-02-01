@@ -7,8 +7,8 @@
   "build": {
     "targetFolder": "dist",
     "sourceFolder": "webapp",
-    "buildRequired": true,
-    "lastBuildDateTime": "Wed, 01 Feb 2017 10:07:47 GMT"
+    "buildRequired": false,
+    "lastBuildDateTime": "Wed, 01 Feb 2017 12:57:26 GMT"
   },
   "generation": [
     {
@@ -373,7 +373,7 @@
           "cloudBuild": false
         },
         "barcode": {
-          "selected": true,
+          "selected": false,
           "registry": "kapsel-plugin-barcodescanner",
           "localBuild": true,
           "cloudBuild": true
@@ -456,6 +456,12 @@
           "selected": true,
           "registry": "cordova-plugin-app-version",
           "localBuild": true
+        },
+        "phonegap-plugin-barcodescanner": {
+          "selected": true,
+          "registry": "phonegap-plugin-barcodescanner",
+          "localBuild": true,
+          "registered": true
         }
       }
     }
