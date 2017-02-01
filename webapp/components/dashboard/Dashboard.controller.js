@@ -121,7 +121,7 @@ sap.ui.define([
 								}
 							}
 						};
-						this.getView().getModel().read("/EquipmentsSet('" + scannedEquipmentId + "')", onDataReceived);
+						that.getView().getModel().read("/EquipmentsSet('" + scannedEquipmentId + "')", onDataReceived);
 					}
 
 				});
