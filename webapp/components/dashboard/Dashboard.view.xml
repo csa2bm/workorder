@@ -74,16 +74,16 @@
 							</TileContent>
 						</tileContent>
 					</GenericTile>
-					<!--<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-ScanObjectTile-Header}" subheader=""-->
-					<!--	frameType="OneByOne" press="onPressScanObject">-->
-					<!--	<tileContent>-->
-					<!--		<TileContent>-->
-					<!--			<content>-->
-					<!--				<ImageContent src="sap-icon://bar-code"/>-->
-					<!--			</content>-->
-					<!--		</TileContent>-->
-					<!--	</tileContent>-->
-					<!--</GenericTile>-->
+					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-ScanObjectTile-Header}" subheader=""
+						frameType="OneByOne" press="onPressScanObject">
+						<tileContent>
+							<TileContent>
+								<content>
+									<ImageContent src="sap-icon://bar-code"/>
+								</content>
+							</TileContent>
+						</tileContent>
+					</GenericTile>
 					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-TechnicalObjectsTile-Header}"
 						frameType="OneByOne" press="onPressFunctionalLocations">
 						<tileContent>

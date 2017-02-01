@@ -13,7 +13,7 @@ sap.ui.define([
 		onInit: function() {
 			this.getRouter().attachRoutePatternMatched(this.onRouteMatched, this);
 			//this.getRouter().getRoute("dashboard").attachMatched(this.onRouteMatched, this);
-			
+
 			var eventBus = sap.ui.getCore().getEventBus();
 			eventBus.subscribe("OfflineStore", "Updated", this.setContentInTiles, this);
 		},
@@ -64,7 +64,7 @@ sap.ui.define([
 						this.getView().getModel("appInfoModel").getData().UserImage = oData.results[0].__metadata.media_src;
 					} else {
 						this.getView().getModel("appInfoModel").getData().UserImage = this.getView().getModel().sServiceUrl +
-							"/UserDetailsSet('"+this.getView().getModel("appInfoModel").getData().UserName+"')/$value";
+							"/UserDetailsSet('" + this.getView().getModel("appInfoModel").getData().UserName + "')/$value";
 					}
 					//this.DashBoardModel.getData().ImagePath = oData.results[0].__metadata.media_src;
 					//this.DashBoardModel.getData().ImagePath = this.getView().getModel().sServiceUrl + "/UserDetailsSet('LLA')/$value";
@@ -97,21 +97,67 @@ sap.ui.define([
 			}
 		},
 
-		// onPressScanObject: function() {
-		// 	sap.m.MessageToast.show("Starting push registration..");
+		onPressScanObject: function() {
+			cordova.plugins.barcodeScanner.scan(
+				function(result) {
+					if (result.cancelled === true) {
+						return;
+					} else {
 
-		// 	sap.Push.registerForNotificationTypes(sap.Push.notificationType.badge | sap.Push.notificationType.sound | sap.Push.notificationType
-		// 		.alert,
-		// 		function(message) {
-		// 			sap.m.MessageToast.show("Successfully registered for push: " + message);
-		// 		},
-		// 		function(message) {
-		// 			sap.m.MessageToast.show("Failed to register for push: " + message);
-		// 		},
-		// 		function(message) {
-		// 			sap.m.MessageToast.show("Received message: " + message);
-		// 		}, "");
-		// },
+						var scannedEquipmentId = result.text;
+						var that = this;
+						var onDataReceived = {
+							success: function(oData, oResponse) {
+								var equipmentNo = oData.Equipment;
+								var isFuncLoc = false;
+								that.ShowEquipmentDetailsWithId(equipmentNo, isFuncLoc);
+
+							},
+							error: function(oData, oResponse) {
+								if (oData.statusCode === 404) {
+									that.searchFuncLocWithId(scannedEquipmentId);
+								} else {
+									that.errorCallBackShowInPopUp();
+								}
+							}
+						};
+						this.getView().getModel().read("/EquipmentsSet('" + scannedEquipmentId + "')", onDataReceived);
+					}
+
+				});
+		},
+		searchFuncLocWithId: function(equipId) {
+			var that = this;
+			var onDataReceived = {
+				success: function(oData, oResponse) {
+					var equipmentNo = oData.FunctionalLocation;
+					var isFuncLoc = true;
+					that.ShowEquipmentDetailsWithId(equipmentNo, isFuncLoc);
+				},
+				error: this.errorCallBackShowInPopUp
+			};
+			this.getView().getModel().read("/FunctionalLocationsSet('" + equipId + "')", onDataReceived);
+		},
+
+		ShowEquipmentDetailsWithId: function(equipmentId, isFuncLoc) {
+
+			if (!isFuncLoc) {
+				var objectContext = "/EquipmentsSet('" + equipmentId + "')";
+
+				this.getRouter().navTo("equipmentDetails", {
+					objectContext: objectContext.substring(1)
+
+				}, false);
+			} else {
+				var objectContext = "/FunctionalLocationsSet('" + equipmentId + "')";
+				this.getRouter().navTo("functionalLocationDetails", {
+					objectContext: objectContext.substring(1)
+
+				}, false);
+
+			}
+
+		},
 
 		onPressNotifications: function() {
 			var oHistory = History.getInstance();
@@ -137,7 +183,7 @@ sap.ui.define([
 				//Reset create notification model
 				var selectObjectForNewNotificationModel = this.getView().getModel("selectObjectForNewNotificationModel");
 				selectObjectForNewNotificationModel.setData({});
-			
+
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 				//var oRouter = this.getRouter();
 				oRouter.navTo("notificationCreate", {
