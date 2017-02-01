@@ -17,6 +17,9 @@ sap.ui.define([
 
 				var eventBus = sap.ui.getCore().getEventBus();
 				eventBus.subscribe("OfflineStore", "Updated", this.setContentInTiles, this);
+				
+	
+				eventBus.subscribe("BlockNavigation", this.performNavigationForBlocks, this);
 			},
 
 			onRouteMatched: function(oEvent) {
@@ -286,6 +289,22 @@ sap.ui.define([
 				//var oRouter = this.getRouter();
 				oRouter.navTo("structureBrowser", true);
 			}
-		}
+		},
+		performNavigationForBlocks: function(a, b, data) {
+
+			if ('operation'.localeCompare(data.block) === 0) {
+				this.getRouter().navTo("operationDetails", {
+					operationContext: data.operationContext
+				}, false);
+			} else if ('equipment'.localeCompare(data.block) === 0) {
+				this.getRouter().navTo("equipmentDetails", {
+					objectContext: data.objectContext
+				}, false);
+			} else if ("measurement".localeCompare(data.block) === 0) {
+				this.getRouter().navTo("measurementPointDetails", {
+					measurementContext: data.measurementContext
+				}, false);
+			}
+		},
 	});
 });
