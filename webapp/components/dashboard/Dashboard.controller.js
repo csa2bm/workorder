@@ -3,8 +3,9 @@ sap.ui.define([
 	"sap/ui/core/routing/History",
 	"com/twobm/mobileworkorder/util/Formatter",
 	"com/twobm/mobileworkorder/components/offline/SyncStateHandler",
-	"com/twobm/mobileworkorder/components/offline/SyncManager"
-], function(Controller, History, Formatter, SyncStateHandler, SyncManager) {
+	"com/twobm/mobileworkorder/components/offline/SyncManager",
+	"sap/m/MessageBox"
+], function(Controller, History, Formatter, SyncStateHandler, SyncManager, MessageBox) {
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.dashboard.Dashboard", {
@@ -134,43 +135,45 @@ sap.ui.define([
 					}.bind(this),
 					error: function(oData, oResponse) {
 						if (oData.statusCode === "404") {
-							var message = "No result was found for object with object number " + equipmentNo 
-							var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
-							sap.m.MessageBox.show(message), {
-								icon: MessageBox.Icon.INFORMATION,
-								title: "Search result",
-								actions: [MessageBox.Action.OK],
-								defaultAction: MessageBox.Action.OK,
-								styleClass: bCompact ? "sapUiSizeCompact" : ""
-							});
-					}
-					else {
-						this.errorCallBackShowInPopUp();
-					}
-				}.bind(this)
-			};
+							this.showAlertNoObjectFound(equipId);
 
-			this.getView().getModel().read("/FunctionalLocationsSet('" + equipId + "')", onDataReceived);
-		},
+						} else {
+							this.errorCallBackShowInPopUp();
+						}
+					}.bind(this)
+				};
 
-		ShowEquipmentDetailsWithId: function(equipmentId, isFuncLoc) {
+				this.getView().getModel().read("/FunctionalLocationsSet('" + equipId + "')", onDataReceived);
+			},
 
-			if (!isFuncLoc) {
-				var objectContext = "/EquipmentsSet('" + equipmentId + "')";
+			ShowEquipmentDetailsWithId: function(equipmentId, isFuncLoc) {
 
-				this.getRouter().navTo("equipmentDetails", {
-					objectContext: objectContext.substring(1)
+				if (!isFuncLoc) {
+					var objectContext = "/EquipmentsSet('" + equipmentId + "')";
 
-				}, false);
-			} else {
-				var objectContext = "/FunctionalLocationsSet('" + equipmentId + "')";
-				this.getRouter().navTo("functionalLocationDetails", {
-					objectContext: objectContext.substring(1)
+					this.getRouter().navTo("equipmentDetails", {
+						objectContext: objectContext.substring(1)
 
-				}, false);
+					}, false);
+				} else {
+					var objectContext = "/FunctionalLocationsSet('" + equipmentId + "')";
+					this.getRouter().navTo("functionalLocationDetails", {
+						objectContext: objectContext.substring(1)
 
-			}
+					}, false);
 
+				}
+
+			},
+			showAlertNoObjectFound: function(equipmentNo) {
+				var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+				MessageBox.show("No object was found for object number " + equipmentNo, {
+					icon: MessageBox.Icon.NONE,
+					title: "Search result",
+					actions: [MessageBox.Action.OK],
+					defaultAction: MessageBox.Action.OK,
+					styleClass: bCompact ? "sapUiSizeCompact" : ""
+				});
 		},
 
 		onPressNotifications: function() {
