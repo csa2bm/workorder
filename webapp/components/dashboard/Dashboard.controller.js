@@ -101,7 +101,7 @@ sap.ui.define([
 			onPressScanObject: function() {
 				cordova.plugins.barcodeScanner.scan(
 					function(result) {
-						if (result.cancelled === true) {
+						if (result.cancelled) {
 							return;
 						} else {
 
