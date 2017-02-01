@@ -8,132 +8,148 @@ sap.ui.define([
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.dashboard.Dashboard", {
-		formatter: Formatter,
+			formatter: Formatter,
 
-		onInit: function() {
-			this.getRouter().attachRoutePatternMatched(this.onRouteMatched, this);
-			//this.getRouter().getRoute("dashboard").attachMatched(this.onRouteMatched, this);
+			onInit: function() {
+				this.getRouter().attachRoutePatternMatched(this.onRouteMatched, this);
+				//this.getRouter().getRoute("dashboard").attachMatched(this.onRouteMatched, this);
 
-			var eventBus = sap.ui.getCore().getEventBus();
-			eventBus.subscribe("OfflineStore", "Updated", this.setContentInTiles, this);
-		},
+				var eventBus = sap.ui.getCore().getEventBus();
+				eventBus.subscribe("OfflineStore", "Updated", this.setContentInTiles, this);
+			},
 
-		onRouteMatched: function(oEvent) {
-			if (!this.DashBoardModel) {
-				this.DashBoardModel = new sap.ui.model.json.JSONModel({
-					notificationCount: "0",
-					orderCount: "0"
-				});
-				this.getView().setModel(this.DashBoardModel, "DashBoardModel");
+			onRouteMatched: function(oEvent) {
+				if (!this.DashBoardModel) {
+					this.DashBoardModel = new sap.ui.model.json.JSONModel({
+						notificationCount: "0",
+						orderCount: "0"
+					});
+					this.getView().setModel(this.DashBoardModel, "DashBoardModel");
 
-				this.getUserDetails();
-			}
+					this.getUserDetails();
+				}
 
-			this.setContentInTiles();
-		},
+				this.setContentInTiles();
+			},
 
-		setContentInTiles: function() {
-			var parametersOrder = {
-				success: function(oData, oResponse) {
-					this.DashBoardModel.getData().orderCount = oData;
-					this.DashBoardModel.refresh();
-				}.bind(this),
-				error: this.errorCallBackShowInPopUp
-			};
-			var parametersNotif = {
-				success: function(oData, oResponse) {
-					this.DashBoardModel.getData().notificationCount = oData;
-					this.DashBoardModel.refresh();
-				}.bind(this),
-				error: this.errorCallBackShowInPopUp
-			};
+			setContentInTiles: function() {
+				var parametersOrder = {
+					success: function(oData, oResponse) {
+						this.DashBoardModel.getData().orderCount = oData;
+						this.DashBoardModel.refresh();
+					}.bind(this),
+					error: this.errorCallBackShowInPopUp
+				};
+				var parametersNotif = {
+					success: function(oData, oResponse) {
+						this.DashBoardModel.getData().notificationCount = oData;
+						this.DashBoardModel.refresh();
+					}.bind(this),
+					error: this.errorCallBackShowInPopUp
+				};
 
-			this.getView().getModel().read("/OrderSet/$count", parametersOrder);
-			this.getView().getModel().read("/NotificationsSet/$count", parametersNotif);
-		},
+				this.getView().getModel().read("/OrderSet/$count", parametersOrder);
+				this.getView().getModel().read("/NotificationsSet/$count", parametersNotif);
+			},
 
-		getUserDetails: function() {
-			var parametersUserDetails = {
-				success: function(oData, oResponse) {
-					this.getView().getModel("appInfoModel").getData().UserFullName = oData.results[0].Fullname;
-					this.getView().getModel("appInfoModel").getData().UserFirstName = oData.results[0].Firstname;
-					this.getView().getModel("appInfoModel").getData().UserName = oData.results[0].Username;
-					this.getView().getModel("appInfoModel").getData().UserPosition = oData.results[0].Position;
+			getUserDetails: function() {
+				var parametersUserDetails = {
+					success: function(oData, oResponse) {
+						this.getView().getModel("appInfoModel").getData().UserFullName = oData.results[0].Fullname;
+						this.getView().getModel("appInfoModel").getData().UserFirstName = oData.results[0].Firstname;
+						this.getView().getModel("appInfoModel").getData().UserName = oData.results[0].Username;
+						this.getView().getModel("appInfoModel").getData().UserPosition = oData.results[0].Position;
 
-					if (sap.hybrid) {
-						this.getView().getModel("appInfoModel").getData().UserImage = oData.results[0].__metadata.media_src;
-					} else {
-						this.getView().getModel("appInfoModel").getData().UserImage = this.getView().getModel().sServiceUrl +
-							"/UserDetailsSet('" + this.getView().getModel("appInfoModel").getData().UserName + "')/$value";
+						if (sap.hybrid) {
+							this.getView().getModel("appInfoModel").getData().UserImage = oData.results[0].__metadata.media_src;
+						} else {
+							this.getView().getModel("appInfoModel").getData().UserImage = this.getView().getModel().sServiceUrl +
+								"/UserDetailsSet('" + this.getView().getModel("appInfoModel").getData().UserName + "')/$value";
+						}
+						//this.DashBoardModel.getData().ImagePath = oData.results[0].__metadata.media_src;
+						//this.DashBoardModel.getData().ImagePath = this.getView().getModel().sServiceUrl + "/UserDetailsSet('LLA')/$value";
+
+						this.getView().getModel("appInfoModel").refresh();
+					}.bind(this),
+					error: this.errorCallBackShowInPopUp
+				};
+
+				this.getView().getModel().read("/UserDetailsSet", parametersUserDetails);
+			},
+
+			setNotificationModel: function(oEvent) {
+				var notificationModel = new sap.ui.model.json.JSONModel();
+				notificationModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
+				oEvent.getview().setModel(notificationModel, "NotificationModel");
+			},
+
+			onPressOtherWorkorders: function() {
+
+				var oHistory = History.getInstance();
+				var sPreviousHash = oHistory.getPreviousHash();
+
+				if (sPreviousHash !== undefined) {
+					window.history.go(-1);
+				} else {
+					var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+					//var oRouter = this.getRouter();
+					oRouter.navTo("workOrderList", true);
+				}
+			},
+
+			onPressScanObject: function() {
+				cordova.plugins.barcodeScanner.scan(
+					function(result) {
+						if (result.cancelled === true) {
+							return;
+						} else {
+
+							var scannedEquipmentId = result.text;
+							var onDataReceived = {
+								success: function(oData, oResponse) {
+									var equipmentNo = oData.Equipment;
+									var isFuncLoc = false;
+									this.ShowEquipmentDetailsWithId(equipmentNo, isFuncLoc);
+
+								}.bind(this),
+								error: function(oData, oResponse) {
+									if (oData.statusCode === "404") {
+										this.searchFuncLocWithId(scannedEquipmentId);
+									} else {
+										this.errorCallBackShowInPopUp();
+									}
+								}.bind(this)
+							};
+							this.getView().getModel().read("/EquipmentsSet('" + scannedEquipmentId + "')", onDataReceived);
+						}
+
+					}.bind(this));
+			},
+			searchFuncLocWithId: function(equipId) {
+				var onDataReceived = {
+					success: function(oData, oResponse) {
+						var equipmentNo = oData.FunctionalLocation;
+						var isFuncLoc = true;
+						this.ShowEquipmentDetailsWithId(equipmentNo, isFuncLoc);
+					}.bind(this),
+					error: function(oData, oResponse) {
+						if (oData.statusCode === "404") {
+							var message = "No result was found for object with object number " + equipmentNo 
+							var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+							sap.m.MessageBox.show(message), {
+								icon: MessageBox.Icon.INFORMATION,
+								title: "Search result",
+								actions: [MessageBox.Action.OK],
+								defaultAction: MessageBox.Action.OK,
+								styleClass: bCompact ? "sapUiSizeCompact" : ""
+							});
 					}
-					//this.DashBoardModel.getData().ImagePath = oData.results[0].__metadata.media_src;
-					//this.DashBoardModel.getData().ImagePath = this.getView().getModel().sServiceUrl + "/UserDetailsSet('LLA')/$value";
-
-					this.getView().getModel("appInfoModel").refresh();
-				}.bind(this),
-				error: this.errorCallBackShowInPopUp
-			};
-
-			this.getView().getModel().read("/UserDetailsSet", parametersUserDetails);
-		},
-
-		setNotificationModel: function(oEvent) {
-			var notificationModel = new sap.ui.model.json.JSONModel();
-			notificationModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
-			oEvent.getview().setModel(notificationModel, "NotificationModel");
-		},
-
-		onPressOtherWorkorders: function() {
-
-			var oHistory = History.getInstance();
-			var sPreviousHash = oHistory.getPreviousHash();
-
-			if (sPreviousHash !== undefined) {
-				window.history.go(-1);
-			} else {
-				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-				//var oRouter = this.getRouter();
-				oRouter.navTo("workOrderList", true);
-			}
-		},
-
-		onPressScanObject: function() {
-			cordova.plugins.barcodeScanner.scan(
-				function(result) {
-					if (result.cancelled === true) {
-						return;
-					} else {
-
-						var scannedEquipmentId = result.text;
-						var onDataReceived = {
-							success: function(oData, oResponse) {
-								var equipmentNo = oData.Equipment;
-								var isFuncLoc = false;
-								this.ShowEquipmentDetailsWithId(equipmentNo, isFuncLoc);
-
-							}.bind(this),
-							error: function(oData, oResponse) {
-								if (oData.statusCode === 404) {
-									this.searchFuncLocWithId(scannedEquipmentId);
-								} else {
-									this.errorCallBackShowInPopUp();
-								}
-							}.bind(this)
-						};
-						this.getView().getModel().read("/EquipmentsSet('" + scannedEquipmentId + "')", onDataReceived);
+					else {
+						this.errorCallBackShowInPopUp();
 					}
-
-				}.bind(this));
-		},
-		searchFuncLocWithId: function(equipId) {
-			var onDataReceived = {
-				success: function(oData, oResponse) {
-					var equipmentNo = oData.FunctionalLocation;
-					var isFuncLoc = true;
-					this.ShowEquipmentDetailsWithId(equipmentNo, isFuncLoc);
-				}.bind(this),
-				error: this.errorCallBackShowInPopUp
+				}.bind(this)
 			};
+
 			this.getView().getModel().read("/FunctionalLocationsSet('" + equipId + "')", onDataReceived);
 		},
 
