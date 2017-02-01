@@ -105,35 +105,33 @@ sap.ui.define([
 					} else {
 
 						var scannedEquipmentId = result.text;
-						var that = this;
 						var onDataReceived = {
 							success: function(oData, oResponse) {
 								var equipmentNo = oData.Equipment;
 								var isFuncLoc = false;
-								that.ShowEquipmentDetailsWithId(equipmentNo, isFuncLoc);
+								this.ShowEquipmentDetailsWithId(equipmentNo, isFuncLoc);
 
-							},
+							}.bind(this),
 							error: function(oData, oResponse) {
 								if (oData.statusCode === 404) {
-									that.searchFuncLocWithId(scannedEquipmentId);
+									this.searchFuncLocWithId(scannedEquipmentId);
 								} else {
-									that.errorCallBackShowInPopUp();
+									this.errorCallBackShowInPopUp();
 								}
-							}
+							}.bind(this)
 						};
-						that.getView().getModel().read("/EquipmentsSet('" + scannedEquipmentId + "')", onDataReceived);
+						this.getView().getModel().read("/EquipmentsSet('" + scannedEquipmentId + "')", onDataReceived);
 					}
 
-				});
+				}.bind(this));
 		},
 		searchFuncLocWithId: function(equipId) {
-			var that = this;
 			var onDataReceived = {
 				success: function(oData, oResponse) {
 					var equipmentNo = oData.FunctionalLocation;
 					var isFuncLoc = true;
-					that.ShowEquipmentDetailsWithId(equipmentNo, isFuncLoc);
-				},
+					this.ShowEquipmentDetailsWithId(equipmentNo, isFuncLoc);
+				}.bind(this),
 				error: this.errorCallBackShowInPopUp
 			};
 			this.getView().getModel().read("/FunctionalLocationsSet('" + equipId + "')", onDataReceived);
