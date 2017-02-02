@@ -1,11 +1,10 @@
 sap.ui.define([
 	"com/twobm/mobileworkorder/util/Controller",
-	"com/twobm/mobileworkorder/util/Globalization",
 	"com/twobm/mobileworkorder/util/Formatter",
 	"sap/ui/core/routing/History",
 	"com/twobm/mobileworkorder/components/offline/SyncStateHandler",
 	"com/twobm/mobileworkorder/components/offline/SyncManager"
-], function(Controller, Globalization, Formatter, History, SyncStateHandler, SyncManager) {
+], function(Controller, Formatter, History, SyncStateHandler, SyncManager) {
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.notificationList.NotificationList", {

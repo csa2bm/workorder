@@ -1,10 +1,9 @@
 sap.ui.define([
 	"com/twobm/mobileworkorder/util/Controller",
-	"com/twobm/mobileworkorder/util/Globalization",
 	"sap/ui/core/routing/History",
 	"com/twobm/mobileworkorder/components/offline/SyncStateHandler",
 	"com/twobm/mobileworkorder/components/offline/SyncManager"
-], function(Controller, Globalization, History, SyncStateHandler, SyncManager) {
+], function(Controller, History, SyncStateHandler, SyncManager) {
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.workOrderList.WorkOrderList", {

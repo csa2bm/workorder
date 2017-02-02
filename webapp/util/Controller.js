@@ -1,8 +1,7 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"sap/ui/core/UIComponent",
-	"com/twobm/mobileworkorder/util/Globalization"
-], function(Controller, UIComponent, Globalization) {
+	"sap/ui/core/UIComponent"
+], function(Controller, UIComponent) {
 	"use strict";
 
 	return Controller.extend("com.2bm.mobileworkorder.util.Controller", {
@@ -29,27 +28,79 @@ sap.ui.define([
 		 * @returns {sap.ui.model.resource.ResourceModel} the resourceModel of the component
 		 */
 		getResourceBundle: function() {
-			return this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			return this.getView().getModel("i18n").getResourceBundle();
 		},
 
-		getI18nText: function(para) {
-			return Globalization.geti18NText(this.getResourceBundle(),para);
+		getI18nText: function(key) {
+			var rb = this.getResourceBundle();
+
+			if (rb) {
+				return rb.getText(key);
+			} else {
+				return null;
+			}
 		},
 
-		getI18nTextReplace1: function(para, replace1) {
-			return Globalization.geti18NText1(this.getResourceBundle(), para, replace1);
+		getI18nTextReplace1: function(key, replace1) {
+			var rb = this.getResourceBundle();
+
+			if (rb) {
+				var text = rb.getText(key);
+				if (text !== null) {
+					var textWithReplacement = text.replace("{0}", replace1);
+					return textWithReplacement;
+				}
+			} else {
+				return null;
+			}
 		},
 
-		getI18nTextReplace2: function(para, replace1, replace2) {
-			return Globalization.geti18NText2(this.getResourceBundle(), para, replace1, replace2);
+		getI18nTextReplace2: function(key, replace1, replace2) {
+			var rb = this.getResourceBundle();
+
+			if (rb) {
+				var text = rb.getText(key);
+				if (text !== null) {
+					var textWithReplacement = text.replace("{0}", replace1);
+					textWithReplacement = textWithReplacement.replace("{1}", replace2);
+					return textWithReplacement;
+				}
+			} else {
+				return null;
+			}
 		},
 
-		getI18nTextReplace3: function(para, replace1, replace2, replace3) {
-			return Globalization.geti18NText3(this.getResourceBundle(), para, replace1, replace2, replace3);
+		getI18nTextReplace3: function(key, replace1, replace2, replace3) {
+			var rb = this.getResourceBundle();
+
+			if (rb) {
+				var text = rb.getText(key);
+				if (text !== null) {
+					var textWithReplacement = text.replace("{0}", replace1);
+					textWithReplacement = textWithReplacement.replace("{1}", replace2);
+					textWithReplacement = textWithReplacement.replace("{2}", replace3);
+					return textWithReplacement;
+				}
+			} else {
+				return null;
+			}
 		},
 
-		getI18nTextReplace4: function(para, replace1, replace2, replace3, replace4) {
-			return Globalization.geti18NText4(this.getResourceBundle(), para, replace1, replace2, replace3, replace4);
+		getI18nTextReplace4: function(key, replace1, replace2, replace3, replace4) {
+			var rb = this.getResourceBundle();
+
+			if (rb) {
+				var text = rb.getText(key);
+				if (text !== null) {
+					var textWithReplacement = text.replace("{0}", replace1);
+					textWithReplacement = textWithReplacement.replace("{1}", replace2);
+					textWithReplacement = textWithReplacement.replace("{2}", replace3);
+					textWithReplacement = textWithReplacement.replace("{3}", replace4);
+					return textWithReplacement;
+				}
+			} else {
+				return null;
+			}
 		},
 
 		navBack: function(route, data) {
@@ -79,18 +130,17 @@ sap.ui.define([
 				}
 			}
 		},
-		readOnly: function(oContext, oModel){
-			
+		readOnly: function(oContext, oModel) {
+
 			var orderStatus = oModel.getProperty("OrderStatus", oContext);
-			
-			if(orderStatus === this.getI18nText("orderStatusCompleted") || orderStatus === this.getI18nText("orderStatusNotStarted")){
+
+			if (orderStatus === this.getI18nText("orderStatusCompleted") || orderStatus === this.getI18nText("orderStatusNotStarted")) {
 				return true;
-				
-			}
-			else{
+
+			} else {
 				return false;
 			}
-			
+
 		}
 	});
 });

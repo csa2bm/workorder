@@ -1,10 +1,9 @@
 sap.ui.define([
 	"com/twobm/mobileworkorder/util/Controller",
-	"com/twobm/mobileworkorder/util/Globalization",
 	"sap/ui/core/routing/History",
 	"sap/m/MessageBox",
 	"sap/ui/model/Filter"
-], function(Controller, Globalization, History, MessageBox, Filter) {
+], function(Controller, History, MessageBox, Filter) {
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.notificationCreate.NotificationCreate", {
