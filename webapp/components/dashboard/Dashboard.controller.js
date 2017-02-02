@@ -170,9 +170,9 @@ sap.ui.define([
 			},
 			showAlertNoObjectFound: function(equipmentNo) {
 				var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
-				MessageBox.show("No object was found for object number " + equipmentNo, {
+				MessageBox.show(this.getI18nTextReplace1("Dashboard-scanObjectTile-searchObjectNotFoundMsgText",equipmentNo), {
 					icon: MessageBox.Icon.NONE,
-					title: "Search result",
+					title: this.getI18nText("Dashboard-scanObjectTile-searchObjectNotFoundMsgTitleText"),
 					actions: [MessageBox.Action.OK],
 					defaultAction: MessageBox.Action.OK,
 					styleClass: bCompact ? "sapUiSizeCompact" : ""
