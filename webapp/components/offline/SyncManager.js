@@ -70,13 +70,13 @@ sap.ui.define([
 				// Start sync
 				sap.hybrid.synAppOfflineStore(function() {
 						// Refresh default model to display any changes to data
-						sap.ui.getCore().getComponent("__component0").getModel().refresh();
+						sap.ui.getCore().getComponent(window.componentId).getModel().refresh();
 						
 						var eventBus = sap.ui.getCore().getEventBus();
 						eventBus.publish("OfflineStore", "Updated");
 
 						// Set new date / time for last sync
-						var syncStatusModel = sap.ui.getCore().getComponent("__component0").getModel("syncStatusModel");
+						var syncStatusModel = sap.ui.getCore().getComponent(window.componentId).getModel("syncStatusModel");
 						var d = new Date();
 						syncStatusModel.getData().LastSyncTime = d.toLocaleString();
 						syncStatusModel.refresh();
@@ -115,7 +115,7 @@ sap.ui.define([
 
 		onDisconnected: function() {
 			// Set connection status on sync model
-			var syncStatusModel = sap.ui.getCore().getComponent("__component0").getModel("syncStatusModel");
+			var syncStatusModel = sap.ui.getCore().getComponent(window.componentId).getModel("syncStatusModel");
 			syncStatusModel.getData().Online = false;
 			// Update sync state
 			SyncStateHandler.handleSyncState();
@@ -123,7 +123,7 @@ sap.ui.define([
 
 		onConnected: function() {
 			// Set connection status on sync model
-			var syncStatusModel = sap.ui.getCore().getComponent("__component0").getModel("syncStatusModel");
+			var syncStatusModel = sap.ui.getCore().getComponent(window.componentId).getModel("syncStatusModel");
 			syncStatusModel.getData().Online = true;
 			// Synchronize
 			this.sync();
@@ -132,7 +132,7 @@ sap.ui.define([
 		},
 
 		setSyncIndicators: function(isSynching) {
-			var syncStatusModel = sap.ui.getCore().getComponent("__component0").getModel("syncStatusModel");
+			var syncStatusModel = sap.ui.getCore().getComponent(window.componentId).getModel("syncStatusModel");
 			syncStatusModel.getData().IsSynching = isSynching;
 			syncStatusModel.refresh();
 		}
