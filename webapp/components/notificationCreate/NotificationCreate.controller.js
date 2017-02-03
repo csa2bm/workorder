@@ -177,22 +177,100 @@ sap.ui.define([
 		},
 
 		onScanBtnPress: function() {
-			cordova.plugins.barcodeScanner.scan(
-				function(result) {
-					if (result.cancelled === "true") {
-						return;
+			var isHybridApp = this.getView().getModel("device").getData().isHybridApp;
+			if (isHybridApp) {
+				cordova.plugins.barcodeScanner.scan(
+					function(result) {
+						if (result.cancelled) {
+							return;
+						} else {
+
+							var scannedEquipmentId = result.text;
+							var onDataReceived = {
+								success: function(oData, oResponse) {
+									var isFuncLoc = false;
+									this.saveEquipmentToModel(oData, isFuncLoc);
+
+								}.bind(this),
+								error: function(oData, oResponse) {
+									if (oData.statusCode === "404") {
+										this.searchFuncLocWithId(scannedEquipmentId);
+									} else {
+										this.errorCallBackShowInPopUp();
+									}
+								}.bind(this)
+							};
+							this.getView().getModel().read("/EquipmentsSet('" + scannedEquipmentId + "')", onDataReceived);
+						}
+
+					}.bind(this));
+
+			} else {
+				this.showAlertNotDevice();
+			}
+		},
+		saveEquipmentToModel: function(equipmentObject, isFuncLoc) {
+
+			if (isFuncLoc) {
+				this.getView().getModel().setProperty(this.newEntry.getPath() + "/FunctionalLoc", equipmentObject.FunctionalLocation);
+				this.getView().getModel().setProperty(this.newEntry.getPath() + "/FuncLocDesc", equipmentObject.Description);
+				
+			} else {
+				this.getView().getModel().setProperty(this.newEntry.getPath() + "/FunctionalLoc", equipmentObject.Funcloc);
+				this.getView().getModel().setProperty(this.newEntry.getPath() + "/FuncLocDesc", equipmentObject.Funclocdesc);
+				this.getView().getModel().setProperty(this.newEntry.getPath() + "/Equipment", equipmentObject.Equipment);
+				this.getView().getModel().setProperty(this.newEntry.getPath() + "/EquipmentDesc", equipmentObject.Description);
+			}
+
+		},
+
+		searchFuncLocWithId: function(equipId) {
+			var onDataReceived = {
+				success: function(oData, oResponse) {
+					var isFuncLoc = true;
+					this.saveEquipmentToModel(oData, isFuncLoc);
+				}.bind(this),
+				error: function(oData, oResponse) {
+					if (oData.statusCode === "404") {
+						this.showAlertNoObjectFound(equipId);
+
+					} else {
+						this.errorCallBackShowInPopUp();
 					}
+				}.bind(this)
+			};
 
-					// var materialDetailsModel = self.getView().getModel("MaterialDetailsModel");
-					// materialDetailsModel.getData().OrderNumber = orderNr;
-					// materialDetailsModel.refresh();
+			this.getView().getModel().read("/FunctionalLocationsSet('" + equipId + "')", onDataReceived);
+		},
 
-					// self.searchForMaterial(result.text);
-				},
-				function() {
-					sap.m.MessageToast.show("Scanning failed");
-				}
-			);
-		}
+		showAlertNoObjectFound: function(equipmentNo) {
+			// Reset values if object was not found
+			this.getView().getModel().setProperty(this.newEntry.getPath() + "/FunctionalLoc", "");
+			this.getView().getModel().setProperty(this.newEntry.getPath() + "/FuncLocDesc", "");
+			this.getView().getModel().setProperty(this.newEntry.getPath() + "/Equipment", "");
+			this.getView().getModel().setProperty(this.newEntry.getPath() + "/EquipmentDesc", "");
+			
+			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+			MessageBox.show(this.getI18nTextReplace1("Dashboard-scanObjectTile-searchObjectNotFoundMsgText", equipmentNo), {
+				icon: MessageBox.Icon.NONE,
+				title: this.getI18nText("Dashboard-scanObjectTile-searchObjectNotFoundMsgTitleText"),
+				actions: [MessageBox.Action.OK],
+				defaultAction: MessageBox.Action.OK,
+				styleClass: bCompact ? "sapUiSizeCompact" : ""
+			});
+		},
+
+		showAlertNotDevice: function() {
+			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+			MessageBox.show(this.getI18nText("Dashboard-scanObjectTile-isNotDeviceMsgText"), {
+				icon: MessageBox.Icon.NONE,
+				title: this.getI18nText("Dashboard-scanObjectTile-isNotDeviceMsgTitleText"),
+				actions: [MessageBox.Action.OK],
+				defaultAction: MessageBox.Action.OK,
+				styleClass: bCompact ? "sapUiSizeCompact" : ""
+			});
+
+		},
+
 	});
 });

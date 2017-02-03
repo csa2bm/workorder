@@ -325,6 +325,6 @@ sap.ui.define([
 					measurementContext: data.measurementContext
 				}, false);
 			}
-		},
+		}
 	});
 });
