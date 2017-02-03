@@ -8,9 +8,9 @@ sap.ui.define([
 
 			var that = this;
 
-			var syncStatusModel = sap.ui.getCore().getComponent("__component0").getModel("syncStatusModel");
+			var syncStatusModel = sap.ui.getCore().getComponent(window.componentId).getModel("syncStatusModel");
 
-			var serviceUrl = sap.ui.getCore().getComponent("__component0").getModel().sServiceUrl;
+			var serviceUrl = sap.ui.getCore().getComponent(window.componentId).getModel().sServiceUrl;
 			var errorsUrl = serviceUrl + "/ErrorArchive";
 
 			var request = {
