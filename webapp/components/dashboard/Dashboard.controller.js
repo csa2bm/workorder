@@ -102,7 +102,9 @@ sap.ui.define([
 			},
 
 			onPressScanObject: function() {
-				cordova.plugins.barcodeScanner.scan(
+				var isHybridApp = this.getView().getModel("device").getData().isHybridApp;
+				if(isHybridApp){
+					cordova.plugins.barcodeScanner.scan(
 					function(result) {
 						if (result.cancelled) {
 							return;
@@ -128,6 +130,12 @@ sap.ui.define([
 						}
 
 					}.bind(this));
+					
+				}
+				else{
+					this.showAlertNotDevice();
+				}
+				
 			},
 			searchFuncLocWithId: function(equipId) {
 				var onDataReceived = {
@@ -177,6 +185,18 @@ sap.ui.define([
 					defaultAction: MessageBox.Action.OK,
 					styleClass: bCompact ? "sapUiSizeCompact" : ""
 				});
+		},
+		
+		showAlertNotDevice: function(){
+			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+				MessageBox.show(this.getI18nText("Dashboard-scanObjectTile-isNotDeviceMsgText"), {
+					icon: MessageBox.Icon.NONE,
+					title: this.getI18nText("Dashboard-scanObjectTile-isNotDeviceMsgTitleText"),
+					actions: [MessageBox.Action.OK],
+					defaultAction: MessageBox.Action.OK,
+					styleClass: bCompact ? "sapUiSizeCompact" : ""
+				});
+			
 		},
 
 		onPressNotifications: function() {
