@@ -1,22 +1,22 @@
 <core:View controllerName="com.twobm.mobileworkorder.components.workOrderDetails.blocks.TimeConfirmationsBlock" xmlns:l="sap.ui.layout"
 	xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
 	<l:VerticalLayout class="sapUiSmallMarginEnd" width="100%">
-		<l:HorizontalLayout >
-			<Button class="sapUiSmallMarginEnd" icon="sap-icon://add" press="openTimeRegistrationPopoverCreate"
-				visible="{parts:[{path:'OrderStatus'}],formatter:'.orderStatusValid'}"></Button>
-		</l:HorizontalLayout>
-		<Table id="TimeRegistrationsList" items="{ path: 'ConfirmationsSet' , sorter: [{path: 'ExecStartDate', descending: true}]}"
-			noDataText="{i18n>WorkOrderDetails-TimeRegistrationsBlock-NoTimeRegistrations}">
+		<!--<l:HorizontalLayout >-->
+		<!--	<Button class="sapUiSmallMarginEnd" icon="sap-icon://add" press="openTimeConfirmationPopoverCreate"-->
+		<!--		visible="{parts:[{path:'OrderStatus'}],formatter:'.orderStatusValid'}"></Button>-->
+		<!--</l:HorizontalLayout>-->
+		<Table id="TimeConfirmationsList" items="{ path: 'ConfirmationsSet' , sorter: [{path: 'ExecStartDate', descending: true}]}"
+			noDataText="{i18n>WorkOrderDetails-TimeConfirmationsBlock-NoTimeRegistrations}">
 			<columns>
 				<core:ExtensionPoint name="workOrderDetailsTimeConfirmationsTableColumns">
 					<Column demandPopin="true" popinDisplay="Inline">
-						<Text text="{i18n>WorkOrderDetails-TimeRegistrationsBlock-DateColumn}"/>
+						<Text text="{i18n>WorkOrderDetails-TimeConfirmationsBlock-DateColumn}"/>
 					</Column>
 					<Column demandPopin="true" popinDisplay="WithoutHeader">
-						<Text text="{i18n>WorkOrderDetails-TimeRegistrationsBlock-PersonColumn}"/>
+						<Text text="{i18n>WorkOrderDetails-TimeConfirmationsBlock-PersonColumn}"/>
 					</Column>
 					<Column demandPopin="true" popinDisplay="Inline" width="5em" vAlign="Middle">
-						<Text text="{i18n>WorkOrderDetails-TimeRegistrationsBlock-TimeColumn}"/>
+						<Text text="{i18n>WorkOrderDetails-TimeConfirmationsBlock-TimeColumn}"/>
 					</Column>
 				</core:ExtensionPoint>
 				<Column demandPopin="false" width="1.5em" vAlign="Middle"></Column>
@@ -25,11 +25,10 @@
 				<ColumnListItem type="{parts:[{path:'EditModeModel>/EditMode'}],formatter:'.checkOrderStatusForType'}"
 					press="openTimeRegistrationPopoverUpdate">
 					<cells>
-						<core:ExtensionPoint name="workOrderDetailTimeRegistrationTableCells">
-							<ObjectIdentifier title="{path:'RegistrationDate', type:'sap.ui.model.type.Date', formatOptions:'short'}"/>
+						<core:ExtensionPoint name="workOrderDetailTimeConfirmationsTableCells">
+							<ObjectIdentifier title="{path:'ExecStartDate', type:'sap.ui.model.type.Date', formatOptions:'short'}"/>
 							<Text text="{Fullname}"/>
-							<Text
-								text="{ActWork} {=${ActWork} === '1' ? ${i18n>WorkOrderDetails-TimeRegistrationsBlock-Hour} : ${i18n>WorkOrderDetails-TimeRegistrationsBlock-Hours}}"/>
+							<Text text="{ActWork} {=${ActWork} === '1' ? ${i18n>WorkOrderDetails-TimeConfirmationsBlock-Hour} : ${i18n>WorkOrderDetails-TimeConfirmationsBlock-Hours}}"/>
 						</core:ExtensionPoint>
 						<core:Icon src="{parts:[{path:'EditModeModel>/EditMode'}],formatter:'.showArrow'}" color="Gray"/>
 					</cells>
