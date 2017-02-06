@@ -89,6 +89,15 @@
 						</ObjectPageSection>
 						<ObjectPageSection>
 							<subSections>
+								<ObjectPageSubSection id="timeConfirmationsSubSection" title="{i18n>WorkOrderDetails-TimeConfirmationsSubSection}">
+									<blocks>
+										<blocks:TimeConfirmationsBlock/>
+									</blocks>
+								</ObjectPageSubSection>
+							</subSections>
+						</ObjectPageSection>
+						<ObjectPageSection>
+							<subSections>
 								<ObjectPageSubSection id="photosSubSection" title="{i18n>WorkOrderDetails_PhotosSubSection}">
 									<blocks>
 										<blocks:AttachmentsBlock/>
