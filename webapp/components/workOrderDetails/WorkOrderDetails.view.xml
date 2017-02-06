@@ -78,7 +78,7 @@
 								</ObjectPageSubSection>
 							</subSections>
 						</ObjectPageSection>
-						<ObjectPageSection>
+						<ObjectPageSection visible="false">
 							<subSections>
 								<ObjectPageSubSection id="timeRegistrationSubSection" title="{i18n>WorkOrderDetails-TimeRegistrationsSubSection}">
 									<blocks>
