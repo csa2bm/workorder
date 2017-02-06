@@ -1,0 +1,28 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
+	<Dialog stretch="{device>/isPhone}"  contentHeight="100%" showHeader="false">
+		<NavContainer id="navCon">
+			<Page id="master" showNavButton="false" title="Re-assign to other user">
+				<content>
+					<SearchField liveChange="searchMaterialLive" search="searchMaterialPress" placeholder="Enter name or username"/>
+					<List id="reAssignEmployeeList" items="{/UserDetailsSet}" mode="SingleSelectMaster">
+						<StandardListItem title="{Fullname}" description="{Persno}" info="{Position}" type="Active"
+						/>
+					</List>
+				
+				
+				</content>
+				<footer>
+					<Toolbar>
+						<content>
+							
+							<ToolbarSpacer></ToolbarSpacer>
+							<Button 
+								text="OK" type="Emphasized" press="onReAssignOKButtonPressed"></Button>
+							<Button ariaDescribedBy="genericButtonDescription" press="closeReAssignPopover" text="Cancel"></Button>
+						</content>
+					</Toolbar>
+				</footer>
+			</Page>
+		</NavContainer>
+	</Dialog>
+</core:FragmentDefinition>

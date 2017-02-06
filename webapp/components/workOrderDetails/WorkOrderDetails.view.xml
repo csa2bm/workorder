@@ -130,6 +130,9 @@
 					<!--	</m:layoutData>-->
 					<!--</m:Button>-->
 					<m:ToolbarSpacer></m:ToolbarSpacer>
+					<m:Button id="orderReAssignButton" text="Re-assign" press="onOrderReAssignButtonPressed" type="Emphasized">
+						
+					</m:Button>
 					<m:Button id="orderStatusChangeButton" icon="sap-icon://accept" press="orderStatusBtnPressed"
 						text="{path:'OrderStatus',formatter:'.getOrderStatusBtnText'}" visible="{path:'OrderStatus',formatter:'.isOrderNotCompleted'}"
 						type="{path:'OrderStatus',formatter:'.isOrderNotCompletedType'}">
