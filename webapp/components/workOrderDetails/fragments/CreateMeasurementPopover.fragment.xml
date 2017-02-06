@@ -1,9 +1,8 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
 	<Dialog title="Take Measurement" class="sapUiPopupWithPadding" stretch="false" showHeader="true">
 		<beginButton>
-			<Button  type="Emphasized" text="OK" press="onSubmitMeasurement"></Button>
+			<Button type="Emphasized" text="OK" press="onSubmitMeasurement"></Button>
 		</beginButton>
-
 		<endButton>
 			<Button text="Close" press="closeAddMeasurement"/>
 		</endButton>
@@ -11,11 +10,17 @@
 		<content>
 			<VBox>
 				<Label text="Measuring Point" design="Bold" class="sapUiTinyMarginBottom"/>
-				<Label text="{ViewModel>/Descriptn}" class="sapUiSmallMarginBottom" />
+				<Label text="{ViewModel>/Descriptn}" class="sapUiSmallMarginBottom"/>
+				<Label text="Minimum threshold" design="Bold" class="sapUiTinyMarginBottom"/>
+				<Label text="{path:'ViewModel>/MinLimit', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}"
+					class="sapUiSmallMarginBottom"/>
+				<Label text="Maximum threshold" design="Bold" class="sapUiTinyMarginBottom"/>
+				<Label text="{path:'ViewModel>/MaxLimit', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" class="sapUiSmallMarginBottom"/>
 				<Label text="Enter reading" design="Bold" class="sapUiTinyMarginBottom"/>
 				<HBox alignItems="Center">
-				<Input type="Number" width="16em" value="{ViewModel>/RecordedValue}" />
-				<Label text="{ViewModel>/MeasUnit}" width="3em" class="sapUiSmallMarginBegin" />
+					<Input type="Number" width="16em"
+						value="{path : 'ViewModel>/RecordedValue', type : 'sap.ui.model.type.Float', formatOptions : {minIntegerDigits: 2}}"/>
+					<Label text="{ViewModel>/MeasUnit}" width="3em" class="sapUiSmallMarginBegin"/>
 				</HBox>
 			</VBox>
 		</content>
