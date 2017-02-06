@@ -44,7 +44,8 @@ sap.ui.define([
 				UserFirstName: "",
 				UserFullName: "",
 				UserPosition: "",
-				UserImage: ""
+				UserImage: "",
+				Persno: ""
 			});
 
 			oModel.setDefaultBindingMode("OneWay");

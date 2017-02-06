@@ -63,6 +63,7 @@ sap.ui.define([
 						this.getView().getModel("appInfoModel").getData().UserFirstName = oData.results[0].Firstname;
 						this.getView().getModel("appInfoModel").getData().UserName = oData.results[0].Username;
 						this.getView().getModel("appInfoModel").getData().UserPosition = oData.results[0].Position;
+						this.getView().getModel("appInfoModel").getData().Persno = oData.results[0].Persno;
 
 						if (sap.hybrid) {
 							this.getView().getModel("appInfoModel").getData().UserImage = oData.results[0].__metadata.media_src;

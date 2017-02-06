@@ -1,7 +1,8 @@
 sap.ui.define([
 	"com/twobm/mobileworkorder/util/Controller",
-	"sap/ui/core/routing/History"
-], function(Controller, History) {
+	"sap/ui/core/routing/History",
+	'sap/m/MessageBox'
+], function(Controller, History, MessageBox) {
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.workOrderDetails.WorkOrderDetails", {
@@ -279,6 +280,128 @@ sap.ui.define([
 			// jQuery.sap.delayedCall(0, this, function() {
 			this._errorsView.open();
 
+		},
+		
+		onOrderReAssignToUserButtonPressed : function(oEvent)
+		{
+				if (!this._reAssignPopover) {
+				this._reAssignPopover = sap.ui.xmlfragment("ReAssignPopover", "com.twobm.mobileworkorder.components.workOrderDetails.fragments.ReAssignPopover",
+					this);
+
+				this._reAssignPopover.setModel(this.readingModel, "ViewModel");
+
+				//this._oPopover.attachAfterOpen(this.resizePopup);
+
+				this._reAssignPopover.attachBeforeClose(function() {
+					//Just make sure that the control minimized
+					//sap.ui.getCore().byId("popupImageControl").setWidth(null);
+				});
+
+				this.getView().addDependent(this._reAssignPopover);
+			}
+			
+			
+			this._reAssignPopover.open();
+		},
+		
+		onReAssignOKButtonPressed : function()
+		{
+			var list = sap.ui.core.Fragment.byId("ReAssignPopover", "reAssignEmployeeList");                        
+			
+			if (list.getSelectedContextPaths().length < 1)
+			{
+				MessageBox.alert(
+				"Please select a user in the list.");
+				return;
+			}
+		
+			var pernr = this.getView().getModel().getData(list.getSelectedContextPaths()[0]).Persno;
+
+			this.assignOrderToPersonelNumber(pernr);
+
+			this._reAssignPopover.close();
+		},
+		
+		closeReAssignPopover: function() {
+			this._reAssignPopover.close();
+		},
+		
+		onOrderReAssignToMePressed : function(){
+		sap.m.MessageBox.show("Assign the work order to you?", {
+					icon: sap.m.MessageBox.Icon.None,
+					title: "Re-assign work order",
+					actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+					defaultAction: sap.m.MessageBox.Action.NO,
+					onClose: function(oAction, object) {
+						if (oAction === sap.m.MessageBox.Action.YES) {
+							this.assignOrderToPersonelNumber(this.getView().getModel("appInfoModel").getData().Persno);
+						} else {
+							return;
+						}
+					}.bind(this)
+				});	
+		},
+		
+			onOrderReAssignUnassignPressed : function(){
+		sap.m.MessageBox.show("Unassign youself from the work order?", {
+					icon: sap.m.MessageBox.Icon.None,
+					title: "Re-assign work order",
+					actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+					defaultAction: sap.m.MessageBox.Action.NO,
+					onClose: function(oAction, object) {
+
+						if (oAction === sap.m.MessageBox.Action.YES) {
+							this.assignOrderToPersonelNumber("");
+						} else {
+							return;
+						}
+
+					}.bind(this)
+
+				});	
+		},
+		
+		assignOrderToPersonelNumber : function(personelNumber)
+		{
+			this.getView().getModel().update(this.getView().getBindingContext().getPath(), {
+				Personresp: personelNumber
+			}, {
+				success: function(oData, response) {
+					this.navigateBack();
+				}.bind(this),
+				error: this.errorCallBackShowInPopUp
+			});	
+		},
+		
+		onOrderReAssignButtonPressed : function (oEvent) {
+			var oButton = oEvent.getSource();
+ 
+			// create action sheet only once
+			if (!this._actionSheet) {
+				this._actionSheet = sap.ui.xmlfragment(
+					"com.twobm.mobileworkorder.components.workOrderDetails.fragments.ReAssignActionSheet",
+					this
+				);
+				this.getView().addDependent(this._actionSheet);
+			}
+ 
+			this._actionSheet.openBy(oButton);
+		},
+		
+		allowAssignToMe : function(personelNumber)
+		{
+			if (this.getView().getModel("appInfoModel").getData().Persno === personelNumber)
+				return false;
+
+			return true;
+		},
+		
+		allowUnassign : function(personelNumber)
+		{
+			if (this.getView().getModel("appInfoModel").getData().Persno === personelNumber)
+				return true;
+		
+			return false;
 		}
 	});
 });
