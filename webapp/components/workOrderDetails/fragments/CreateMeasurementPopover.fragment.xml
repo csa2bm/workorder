@@ -12,7 +12,7 @@
 				<Label text="Measuring Point" design="Bold" class="sapUiTinyMarginBottom"/>
 				<Label text="{ViewModel>/Descriptn}" class="sapUiSmallMarginBottom"/>
 				<Label text="Minimum threshold" design="Bold" class="sapUiTinyMarginBottom"/>
-				<Label text="{parts:[{path:'ViewModel>/MinLimit', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}, {path:'ViewModel>/ValueMinLimit'}],formatter:'.showTextForMinValue'}{path:'ViewModel>/MinLimit', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}"
+				<Label text="{parts:[{path:'ViewModel>/MinLimit', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}, {path:'ViewModel>/ValueMinLimit'}],formatter:'.showTextForMinValue'}"
 					class="sapUiSmallMarginBottom"/>
 				<Label text="Maximum threshold" design="Bold" class="sapUiTinyMarginBottom"/>
 				<Label text="{parts:[{path:'ViewModel>/MaxLimit', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}, {path:'ViewModel>/ValueMaxLimit'}],formatter:'.showTextForMaxValue'}" class="sapUiSmallMarginBottom"/>
