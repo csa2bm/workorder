@@ -398,8 +398,7 @@ sap.ui.define([
 			return false;
 		},
 
-<<<<<<< HEAD
-		
+
 			searchEmployeePress: function(oEvent) {
 			var sValue = oEvent.getParameter("query");
 			var searchString = sValue.toLowerCase();
@@ -442,8 +441,6 @@ sap.ui.define([
 		},
 
 
-=======
->>>>>>> branch 'master' of https://t0PPy@bitbucket.org/2bm/com.twobm.mobileworkorder.git
 		onTimeRegistrationTimerChangeButtonPressed: function(oEvent) {
 			var timerModel = this.getView().getModel("timeRegistrationTimerModel").getData();
 
