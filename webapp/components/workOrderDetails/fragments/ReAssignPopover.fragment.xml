@@ -3,12 +3,12 @@
 		<NavContainer id="navCon">
 			<Page id="master" showNavButton="false" title="Re-assign to other user">
 				<content>
-					<SearchField liveChange="searchMaterialLive" search="searchMaterialPress" placeholder="Enter name or username"/>
-					<List id="reAssignEmployeeList" items="{/UserDetailsSet}" mode="SingleSelectMaster">
-						<StandardListItem title="{Fullname}" description="{Persno}" info="{Position}" type="Active"
+					<SearchField liveChange="searchEmployeeLive" search="searchEmployeePress" placeholder="Enter name or username"/>
+					<List id="reAssignEmployeeList" items="{path: '/EmployeesSet', sorter: [{path: 'Fullname', descending: false}]}" mode="SingleSelectMaster">
+						<StandardListItem title="{Fullname}" description="{Username}" info="{Persno}" type="Active"
 						/>
 					</List>
-				
+			
 				
 				</content>
 				<footer>

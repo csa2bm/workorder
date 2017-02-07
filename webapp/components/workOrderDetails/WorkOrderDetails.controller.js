@@ -402,6 +402,47 @@ sap.ui.define([
 				return true;
 		
 			return false;
-		}
+		},
+		
+			searchEmployeePress: function(oEvent) {
+			var sValue = oEvent.getParameter("query");
+			var searchString = sValue.toLowerCase();
+			
+			this.searchEmployee(searchString);
+		},
+		
+		searchEmployeeLive: function(oEvent) {
+			var sValue = oEvent.getParameter("newValue");
+			var searchString = sValue.toLowerCase();
+			
+			this.searchEmployee(searchString);
+		},
+		
+		searchEmployee: function(sValue) {
+			var aFilters = [];
+			var searchString = sValue.toLowerCase();
+
+			aFilters.push(new sap.ui.model.Filter("Fullname", sap.ui.model.FilterOperator.Contains, searchString));
+
+			// update list binding
+			var list = sap.ui.core.Fragment.byId("ReAssignPopover", "reAssignEmployeeList"); 
+			var itemsBinding = list.getBinding("items");
+
+			if (itemsBinding) {
+				itemsBinding.aApplicationFilters = [];
+
+				if (aFilters.length > 0) {
+
+					var filter = new sap.ui.model.Filter({
+						filters: aFilters,
+						and: true
+					});
+
+					itemsBinding.filter(filter);
+				} else {
+					itemsBinding.filter(aFilters);
+				}
+			}
+		},
 	});
 });
