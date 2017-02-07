@@ -129,6 +129,8 @@
 					<!--		<m:OverflowToolbarLayoutData priority="NeverOverflow"/>-->
 					<!--	</m:layoutData>-->
 					<!--</m:Button>-->
+					<m:Button id="timeRegistrationTimerButton" text="{parts:[{path:'Orderid'}, 'timeRegistrationTimerModel>/Started'],formatter:'.determineTimeRegistrationTimerButtonText'}" press="onTimeRegistrationTimerChangeButtonPressed" type="{parts:[{path:'Orderid'}, 'timeRegistrationTimerModel>/Started'],formatter:'.determineTimeRegistrationTimerButtonType'}" />
+						
 					<m:ToolbarSpacer></m:ToolbarSpacer>
 					<m:Button id="orderReAssignButton" text="Re-assign" press="onOrderReAssignButtonPressed" type="Emphasized">
 						

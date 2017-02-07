@@ -281,11 +281,11 @@ sap.ui.define([
 			this._errorsView.open();
 
 		},
-		
-		onOrderReAssignToUserButtonPressed : function(oEvent)
-		{
-				if (!this._reAssignPopover) {
-				this._reAssignPopover = sap.ui.xmlfragment("ReAssignPopover", "com.twobm.mobileworkorder.components.workOrderDetails.fragments.ReAssignPopover",
+
+		onOrderReAssignToUserButtonPressed: function(oEvent) {
+			if (!this._reAssignPopover) {
+				this._reAssignPopover = sap.ui.xmlfragment("ReAssignPopover",
+					"com.twobm.mobileworkorder.components.workOrderDetails.fragments.ReAssignPopover",
 					this);
 
 				this._reAssignPopover.setModel(this.readingModel, "ViewModel");
@@ -299,70 +299,66 @@ sap.ui.define([
 
 				this.getView().addDependent(this._reAssignPopover);
 			}
-			
-			
+
 			this._reAssignPopover.open();
 		},
-		
-		onReAssignOKButtonPressed : function()
-		{
-			var list = sap.ui.core.Fragment.byId("ReAssignPopover", "reAssignEmployeeList");                        
-			
-			if (list.getSelectedContextPaths().length < 1)
-			{
+
+		onReAssignOKButtonPressed: function() {
+			var list = sap.ui.core.Fragment.byId("ReAssignPopover", "reAssignEmployeeList");
+
+			if (list.getSelectedContextPaths().length < 1) {
 				MessageBox.alert(
-				"Please select a user in the list.");
+					"Please select a user in the list.");
 				return;
 			}
-		
+
 			var pernr = this.getView().getModel().getData(list.getSelectedContextPaths()[0]).Persno;
 
 			this.assignOrderToPersonelNumber(pernr);
 
 			this._reAssignPopover.close();
 		},
-		
+
 		closeReAssignPopover: function() {
 			this._reAssignPopover.close();
 		},
-		
-		onOrderReAssignToMePressed : function(){
-		sap.m.MessageBox.show("Assign the work order to you?", {
-					icon: sap.m.MessageBox.Icon.None,
-					title: "Re-assign work order",
-					actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
-					defaultAction: sap.m.MessageBox.Action.NO,
-					onClose: function(oAction, object) {
-						if (oAction === sap.m.MessageBox.Action.YES) {
-							this.assignOrderToPersonelNumber(this.getView().getModel("appInfoModel").getData().Persno);
-						} else {
-							return;
-						}
-					}.bind(this)
-				});	
+
+		onOrderReAssignToMePressed: function() {
+			sap.m.MessageBox.show("Assign the work order to you?", {
+				icon: sap.m.MessageBox.Icon.None,
+				title: "Re-assign work order",
+				actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+				defaultAction: sap.m.MessageBox.Action.NO,
+				onClose: function(oAction, object) {
+					if (oAction === sap.m.MessageBox.Action.YES) {
+						this.assignOrderToPersonelNumber(this.getView().getModel("appInfoModel").getData().Persno);
+					} else {
+						return;
+					}
+				}.bind(this)
+			});
 		},
-		
-			onOrderReAssignUnassignPressed : function(){
-		sap.m.MessageBox.show("Unassign youself from the work order?", {
-					icon: sap.m.MessageBox.Icon.None,
-					title: "Re-assign work order",
-					actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
-					defaultAction: sap.m.MessageBox.Action.NO,
-					onClose: function(oAction, object) {
 
-						if (oAction === sap.m.MessageBox.Action.YES) {
-							this.assignOrderToPersonelNumber("");
-						} else {
-							return;
-						}
+		onOrderReAssignUnassignPressed: function() {
+			sap.m.MessageBox.show("Unassign youself from the work order?", {
+				icon: sap.m.MessageBox.Icon.None,
+				title: "Re-assign work order",
+				actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+				defaultAction: sap.m.MessageBox.Action.NO,
+				onClose: function(oAction, object) {
 
-					}.bind(this)
+					if (oAction === sap.m.MessageBox.Action.YES) {
+						this.assignOrderToPersonelNumber("");
+					} else {
+						return;
+					}
 
-				});	
+				}.bind(this)
+
+			});
 		},
-		
-		assignOrderToPersonelNumber : function(personelNumber)
-		{
+
+		assignOrderToPersonelNumber: function(personelNumber) {
 			this.getView().getModel().update(this.getView().getBindingContext().getPath(), {
 				Personresp: personelNumber
 			}, {
@@ -370,12 +366,12 @@ sap.ui.define([
 					this.navigateBack();
 				}.bind(this),
 				error: this.errorCallBackShowInPopUp
-			});	
+			});
 		},
-		
-		onOrderReAssignButtonPressed : function (oEvent) {
+
+		onOrderReAssignButtonPressed: function(oEvent) {
 			var oButton = oEvent.getSource();
- 
+
 			// create action sheet only once
 			if (!this._actionSheet) {
 				this._actionSheet = sap.ui.xmlfragment(
@@ -384,24 +380,74 @@ sap.ui.define([
 				);
 				this.getView().addDependent(this._actionSheet);
 			}
- 
+
 			this._actionSheet.openBy(oButton);
 		},
-		
-		allowAssignToMe : function(personelNumber)
-		{
+
+		allowAssignToMe: function(personelNumber) {
 			if (this.getView().getModel("appInfoModel").getData().Persno === personelNumber)
 				return false;
 
 			return true;
 		},
-		
-		allowUnassign : function(personelNumber)
-		{
+
+		allowUnassign: function(personelNumber) {
 			if (this.getView().getModel("appInfoModel").getData().Persno === personelNumber)
 				return true;
-		
+
 			return false;
+		},
+
+		onTimeRegistrationTimerChangeButtonPressed: function(oEvent) {
+			var timerModel = this.getView().getModel("timeRegistrationTimerModel").getData();
+
+			var currentOrderId = this.getView().getBindingContext().getObject().Orderid;
+
+			//Timer has not been set or timer is 
+			if (timerModel.OrderId && timerModel.OrderId !== "" && timerModel.OrderId === currentOrderId) {
+				//Stop the timer
+				this.getView().getModel("timeRegistrationTimerModel").getData().Started = false;
+				this.getView().getModel("timeRegistrationTimerModel").getData().OrderId = "";
+				this.getView().getModel("timeRegistrationTimerModel").refresh();
+			}
+			else if(timerModel.OrderId && timerModel.OrderId !== "" && timerModel.OrderId !== currentOrderId){
+				//Timer is already running for another order - show warning
+				sap.m.MessageToast.show("Timer running for another order");
+			}else{
+				//Start timer for current order
+				this.getView().getModel("timeRegistrationTimerModel").getData().Started = true;
+				this.getView().getModel("timeRegistrationTimerModel").getData().OrderId = currentOrderId;
+				this.getView().getModel("timeRegistrationTimerModel").getData().StartDateTime = new Date();
+				this.getView().getModel("timeRegistrationTimerModel").refresh();
+			}
+		},
+
+		determineTimeRegistrationTimerButtonType: function(orderId, timerStarted) {
+			var timerModel = this.getView().getModel("timeRegistrationTimerModel").getData();
+
+			if (timerModel.OrderId !== "" & timerModel.OrderId === orderId) {
+				if (timerStarted) {
+					return "Accept";
+				} else {
+					return "Emphasized";
+				}
+			} else {
+				return "Emphasized";
+			}
+		},
+
+		determineTimeRegistrationTimerButtonText: function(orderId, timerStarted) {
+			var timerModel = this.getView().getModel("timeRegistrationTimerModel").getData();
+
+			if (timerModel.OrderId !== "" & timerModel.OrderId === orderId) {
+				if (timerStarted) {
+					return this.getI18nText("WorkOrderDetails-TimeRegistrationTimerButtonTextStopWork");
+				} else {
+					return this.getI18nText("WorkOrderDetails-TimeRegistrationTimerButtonTextStartWork");
+				}
+			} else {
+				return this.getI18nText("WorkOrderDetails-TimeRegistrationTimerButtonTextStartWork");
+			}
 		}
 	});
 });
