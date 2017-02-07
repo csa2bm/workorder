@@ -28,7 +28,12 @@ sap.ui.define([
 		 * @returns {sap.ui.model.resource.ResourceModel} the resourceModel of the component
 		 */
 		getResourceBundle: function() {
+			if(this.getView().getModel("i18n")){
 			return this.getView().getModel("i18n").getResourceBundle();
+			}
+			else{
+				return null;
+			}
 		},
 
 		getI18nText: function(key) {
