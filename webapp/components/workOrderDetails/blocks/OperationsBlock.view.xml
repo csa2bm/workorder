@@ -20,7 +20,7 @@
 				<cells>
 					<core:ExtensionPoint name="workOrderDetailObjectTableCells">
 					<ObjectIdentifier text="{Activity}" title="{Description}"/>
-					<ObjectIdentifier text="" title="{parts:[{path:'Personresp'}],formatter:'.checkResponibleValid'}"/>
+					<ObjectIdentifier text="{parts:[{path:'Personresp'}],formatter:'.checkResponibleValid'}" title="{parts:[{path:'Fullname'}, {path:'Username'}],formatter:'.getFullname'}"/>
 					</core:ExtensionPoint>
 					<Button id="readingButton" class="sapUiMediumMarginEnd" icon="{parts:[{path:'Complete'}],formatter:'.opStatusIcon'}"
 						press="onCompleOperationbtnPressed" type="{parts:[{path:'Complete'}],formatter:'.opStatusColor'}" enabled="{EditModeModel>/EditMode}"></Button>
