@@ -2,7 +2,7 @@
 	xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
 	<l:VerticalLayout class="sapUiSmallMarginEnd" width="100%">
 		<l:HorizontalLayout >
-			<Button class="sapUiSmallMarginEnd" icon="sap-icon://add" press="openTimeConfirmationPopoverCreate"
+			<Button class="sapUiSmallMarginEnd" icon="sap-icon://add" press="createNewTimeRegistration"
 				visible="{parts:[{path:'OrderStatus'}],formatter:'.orderStatusValid'}"></Button>
 		</l:HorizontalLayout>
 		<Table id="TimeConfirmationsList" items="{ path: 'ConfirmationsSet' , sorter: [{path: 'ExecStartDate', descending: true}]}"
@@ -22,15 +22,15 @@
 				<Column demandPopin="false" width="1.5em" vAlign="Middle"></Column>
 			</columns>
 			<items>
-				<ColumnListItem type="{path:'Fullname', formatter:'.checkConfEditStatus'}"
-					press="openTimeConfirmationPopoverUpdate">
+				<ColumnListItem type="{path:'PersNo', formatter:'.checkConfEditStatus'}"
+					press="updateTimeRegistration">
 					<cells>
 						<core:ExtensionPoint name="workOrderDetailTimeConfirmationsTableCells">
 							<ObjectIdentifier title="{path:'ExecStartDate', type:'sap.ui.model.type.Date', formatOptions:'short'} {path:'ExecStartTime', formatter:'.formatEDMTime' }"/>
 							<Text text="{Fullname}"/>
 							<Text text="{ActWork} {=${ActWork} === '1' ? ${i18n>WorkOrderDetails-TimeConfirmationsBlock-Hour} : ${i18n>WorkOrderDetails-TimeConfirmationsBlock-Hours}}"/>
 						</core:ExtensionPoint>
-						<core:Icon src="{path:'Fullname', formatter:'.showArrow'}" color="Gray"/>
+						<core:Icon src="{path:'PersNo', formatter:'.showArrow'}" color="Gray"/>
 					</cells>
 				</ColumnListItem>
 			</items>

@@ -406,18 +406,47 @@ sap.ui.define([
 			//Timer has not been set or timer is 
 			if (timerModel.OrderId && timerModel.OrderId !== "" && timerModel.OrderId === currentOrderId) {
 				//Stop the timer
-				this.getView().getModel("timeRegistrationTimerModel").getData().Started = false;
-				this.getView().getModel("timeRegistrationTimerModel").getData().OrderId = "";
-				this.getView().getModel("timeRegistrationTimerModel").refresh();
-			}
-			else if(timerModel.OrderId && timerModel.OrderId !== "" && timerModel.OrderId !== currentOrderId){
+
+				//Find the elapsed time
+				var endTime = new Date();
+				var startTime = new Date(this.getView().getModel("timeRegistrationTimerModel").getData().StartDateTime);
+
+				var difference = endTime - startTime;
+
+				var differenceInMinutes = difference / 60 / 1000;
+
+				var that = this;
+				sap.m.MessageBox.show("Did you complete your work?", {
+					icon: sap.m.MessageBox.Icon.None,
+					title: "Stop Work", //this.getI18nText("WorkOrderDetails-orderStatusTitle"),
+					actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+					defaultAction: sap.m.MessageBox.Action.NO,
+					onClose: function(oAction, object) {
+						if (oAction === sap.m.MessageBox.Action.YES) {
+							var data = {
+								"Minutes": differenceInMinutes
+							};
+
+							var eventBus = that.getEventBus();
+							eventBus.publish("TimeRegistrationTimerStopped", data);
+
+							that.getView().getModel("timeRegistrationTimerModel").getData().Started = false;
+							that.getView().getModel("timeRegistrationTimerModel").getData().OrderId = "";
+							that.getView().getModel("timeRegistrationTimerModel").getData().StartDateTime = "";
+							that.getView().getModel("timeRegistrationTimerModel").refresh();
+
+						}
+					}
+				});
+
+			} else if (timerModel.OrderId && timerModel.OrderId !== "" && timerModel.OrderId !== currentOrderId) {
 				//Timer is already running for another order - show warning
 				sap.m.MessageToast.show("Timer running for another order");
-			}else{
+			} else {
 				//Start timer for current order
 				this.getView().getModel("timeRegistrationTimerModel").getData().Started = true;
 				this.getView().getModel("timeRegistrationTimerModel").getData().OrderId = currentOrderId;
-				this.getView().getModel("timeRegistrationTimerModel").getData().StartDateTime = new Date();
+				this.getView().getModel("timeRegistrationTimerModel").getData().StartDateTime = new Date().toString();
 				this.getView().getModel("timeRegistrationTimerModel").refresh();
 			}
 		},
