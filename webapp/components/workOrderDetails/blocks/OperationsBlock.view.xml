@@ -8,6 +8,9 @@
 				<Column popinDisplay="Inline">
 					<Text text="{i18n>WorkOrderDetails-OperationBlock-OperationColumn}"/>
 				</Column>
+				<Column popinDisplay="Inline">
+					<Text text="{i18n>WorkOrderDetails-OperationBlock-OperationAssignedToColumn}"/>
+				</Column>
 			</core:ExtensionPoint>
 			<Column width="5em" vAlign="Middle"></Column>
 			<Column width="1.5em" vAlign="Middle"></Column>
@@ -17,6 +20,7 @@
 				<cells>
 					<core:ExtensionPoint name="workOrderDetailObjectTableCells">
 					<ObjectIdentifier text="{Activity}" title="{Description}"/>
+					<ObjectIdentifier text="" title="{parts:[{path:'Personresp'}],formatter:'.checkResponibleValid'}"/>
 					</core:ExtensionPoint>
 					<Button id="readingButton" class="sapUiMediumMarginEnd" icon="{parts:[{path:'Complete'}],formatter:'.opStatusIcon'}"
 						press="onCompleOperationbtnPressed" type="{parts:[{path:'Complete'}],formatter:'.opStatusColor'}" enabled="{EditModeModel>/EditMode}"></Button>
