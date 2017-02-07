@@ -16,32 +16,36 @@
 				<core:ExtensionPoint name="dashboardTiles">
 					<FlexBox alignItems="Start" justifyContent="Start">
 						<items>
-							<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" backgroundImage="images/DashboardLogo.png" frameType="TwoByOne">
-								<tileContent>
-									<TileContent footer="" class="sapUiSmallMargin">
-										<content>
-											<FeedContent class="sapUiTinyMarginEnd" contentText="" subheader="" value=""></FeedContent>
-										</content>
-									</TileContent>
-								</tileContent>
-							</GenericTile>
-							<CustomTile visible="{device>/isNotPhone}" class="sapUiTinyMarginTop TwoByOne sapMGT sapMPointer sapUiTinyMarginBegin customProfileTile">
-								<HBox alignItems="Start" justifyContent="SpaceBetween" class="sapUiSmallMarginBegin sapUiSmallMarginTop sapUiSmallMarginEnd">
-									<items>
-										<VBox>
-											<items>
-												<Text text="{appInfoModel>/UserFullName}" class="profileTitle"/>
-												<Text text="{appInfoModel>/UserPosition}" class="profileSubTitle"/>
-											</items>
-										</VBox>
-										<VBox alignItems="End" justifyContent="Center" height="195px">
-											<items>
-												<Image src="{appInfoModel>/UserImage}" class="circular sapUiSmallMarginEnd"></Image>
-											</items>
-										</VBox>
-									</items>
-								</HBox>
-							</CustomTile>
+							<core:ExtensionPoint name="dashboardAppNameTile">
+								<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" backgroundImage="images/DashboardLogo.png" frameType="TwoByOne">
+									<tileContent>
+										<TileContent footer="" class="sapUiSmallMargin">
+											<content>
+												<FeedContent class="sapUiTinyMarginEnd" contentText="" subheader="" value=""></FeedContent>
+											</content>
+										</TileContent>
+									</tileContent>
+								</GenericTile>
+							</core:ExtensionPoint>
+							<core:ExtensionPoint name="dashboardUserTile">
+								<CustomTile visible="{device>/isNotPhone}" class="sapUiTinyMarginTop TwoByOne sapMGT sapMPointer sapUiTinyMarginBegin customProfileTile">
+									<HBox alignItems="Start" justifyContent="SpaceBetween" class="sapUiSmallMarginBegin sapUiSmallMarginTop sapUiSmallMarginEnd">
+										<items>
+											<VBox>
+												<items>
+													<Text text="{appInfoModel>/UserFullName}" class="profileTitle"/>
+													<Text text="{appInfoModel>/UserPosition}" class="profileSubTitle"/>
+												</items>
+											</VBox>
+											<VBox alignItems="End" justifyContent="Center" height="195px">
+												<items>
+													<Image src="{appInfoModel>/UserImage}" class="circular sapUiSmallMarginEnd"></Image>
+												</items>
+											</VBox>
+										</items>
+									</HBox>
+								</CustomTile>
+							</core:ExtensionPoint>
 						</items>
 					</FlexBox>
 					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-WorkOrdersTile-Header}" subheader=""

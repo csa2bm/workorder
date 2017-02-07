@@ -30,6 +30,9 @@ sap.ui.define([
 			
 			// set createSelectObjectForNewNotificationModel model
 			this.setModel(models.createSelectObjectForNewNotificationModel(), "selectObjectForNewNotificationModel");
+			
+			// set createTimeRegistrationTimerModel
+			this.setModel(models.createTimeRegistrationTimerModel(), "timeRegistrationTimerModel");
 
 			var appInfoModel = this.getModel("appInfoModel");
 			var syncStatusModel = this.getModel("syncStatusModel");

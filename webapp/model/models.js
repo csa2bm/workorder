@@ -64,6 +64,17 @@ sap.ui.define([
 			return oModel;
 		},
 
+		createTimeRegistrationTimerModel: function() {
+			var oModel = new JSONModel({
+				Started: false,
+				OrderId: "",
+				StartDateTime: ""
+			});
+
+			oModel.setDefaultBindingMode("TwoWay");
+			return oModel;
+		},
+
 		getIsHybridApp: function() {
 			if (sap.hybrid) {
 				return true;
