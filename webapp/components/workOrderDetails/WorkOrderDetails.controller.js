@@ -398,21 +398,20 @@ sap.ui.define([
 			return false;
 		},
 
-
-			searchEmployeePress: function(oEvent) {
+		searchEmployeePress: function(oEvent) {
 			var sValue = oEvent.getParameter("query");
 			var searchString = sValue.toLowerCase();
-			
+
 			this.searchEmployee(searchString);
 		},
-		
+
 		searchEmployeeLive: function(oEvent) {
 			var sValue = oEvent.getParameter("newValue");
 			var searchString = sValue.toLowerCase();
-			
+
 			this.searchEmployee(searchString);
 		},
-		
+
 		searchEmployee: function(sValue) {
 			var aFilters = [];
 			var searchString = sValue.toLowerCase();
@@ -420,7 +419,7 @@ sap.ui.define([
 			aFilters.push(new sap.ui.model.Filter("Searchstring", sap.ui.model.FilterOperator.Contains, searchString));
 
 			// update list binding
-			var list = sap.ui.core.Fragment.byId("ReAssignPopover", "reAssignEmployeeList"); 
+			var list = sap.ui.core.Fragment.byId("ReAssignPopover", "reAssignEmployeeList");
 			var itemsBinding = list.getBinding("items");
 
 			if (itemsBinding) {
@@ -440,7 +439,6 @@ sap.ui.define([
 			}
 		},
 
-
 		onTimeRegistrationTimerChangeButtonPressed: function(oEvent) {
 			var timerModel = this.getView().getModel("timeRegistrationTimerModel").getData();
 
@@ -454,20 +452,20 @@ sap.ui.define([
 				var endTime = new Date();
 				var startTime = new Date(this.getView().getModel("timeRegistrationTimerModel").getData().StartDateTime);
 
-				var difference = endTime - startTime;
+				var difference = endTime - startTime; //in milliseconds
 
-				var differenceInMinutes = difference / 60 / 1000;
+				var differenceInHours = difference / 1000 / 60 / 60;
 
 				var that = this;
-				sap.m.MessageBox.show("Did you complete your work?", {
+				sap.m.MessageBox.show(this.getI18nTextReplace1("WorkOrderDetails-StopWorkPopupMessage", currentOrderId), {
 					icon: sap.m.MessageBox.Icon.None,
-					title: "Stop Work", //this.getI18nText("WorkOrderDetails-orderStatusTitle"),
+					title: this.getI18nText("WorkOrderDetails-StopWorkPopupHeader"),
 					actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
 					defaultAction: sap.m.MessageBox.Action.NO,
 					onClose: function(oAction, object) {
 						if (oAction === sap.m.MessageBox.Action.YES) {
 							var data = {
-								"Time": differenceInMinutes
+								"Hours": differenceInHours
 							};
 
 							var eventBus = that.getEventBus();
@@ -483,19 +481,17 @@ sap.ui.define([
 
 			} else if (timerModel.OrderId && timerModel.OrderId !== "" && timerModel.OrderId !== currentOrderId) {
 				//Timer is already running for another order - show warning
-				sap.m.MessageToast.show("Timer already started for another order");
+				sap.m.MessageToast.show(this.getI18nTextReplace1("WorkOrderDetails-StartWorkWarningTimerAlreadyRunning", timerModel.OrderId));
 			} else {
 				//Start timer for current order
 				this.getView().getModel("timeRegistrationTimerModel").getData().Started = true;
 				this.getView().getModel("timeRegistrationTimerModel").getData().OrderId = currentOrderId;
 				this.getView().getModel("timeRegistrationTimerModel").getData().StartDateTime = new Date().toString();
 				this.getView().getModel("timeRegistrationTimerModel").refresh();
-				
+
 				//TODO post userstatus change 
-				
-				
-				
-				sap.m.MessageToast.show("Timer started");
+
+				sap.m.MessageToast.show(this.getI18nText("WorkOrderDetails-StartWorkMessageToastText"));
 			}
 		},
 
