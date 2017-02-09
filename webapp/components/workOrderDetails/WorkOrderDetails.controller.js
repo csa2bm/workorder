@@ -417,7 +417,7 @@ sap.ui.define([
 			var aFilters = [];
 			var searchString = sValue.toLowerCase();
 
-			aFilters.push(new sap.ui.model.Filter("Fullname", sap.ui.model.FilterOperator.Contains, searchString));
+			aFilters.push(new sap.ui.model.Filter("Searchstring", sap.ui.model.FilterOperator.Contains, searchString));
 
 			// update list binding
 			var list = sap.ui.core.Fragment.byId("ReAssignPopover", "reAssignEmployeeList"); 
