@@ -279,7 +279,6 @@ sap.ui.define([
 			// var oButton = oEvent.getSource();
 			// jQuery.sap.delayedCall(0, this, function() {
 			this._errorsView.open();
-
 		},
 
 		onOrderReAssignToUserButtonPressed: function(oEvent) {
@@ -307,8 +306,7 @@ sap.ui.define([
 			var list = sap.ui.core.Fragment.byId("ReAssignPopover", "reAssignEmployeeList");
 
 			if (list.getSelectedContextPaths().length < 1) {
-				MessageBox.alert(
-					"Please select a user in the list.");
+				MessageBox.alert(this.getI18nText("WorkOrderDetails-ReassignOrderSelectAUser")); 
 				return;
 			}
 
@@ -324,9 +322,9 @@ sap.ui.define([
 		},
 
 		onOrderReAssignToMePressed: function() {
-			sap.m.MessageBox.show("Assign the work order to you?", {
+			sap.m.MessageBox.show(this.getI18nText("WorkOrderDetails-ReassignOrderAssignToMePopupMessage"), { 
 				icon: sap.m.MessageBox.Icon.None,
-				title: "Re-assign work order",
+				title: this.getI18nText("WorkOrderDetails-ReassignOrderPopupTitle"),
 				actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
 				defaultAction: sap.m.MessageBox.Action.NO,
 				onClose: function(oAction, object) {
@@ -340,21 +338,18 @@ sap.ui.define([
 		},
 
 		onOrderReAssignUnassignPressed: function() {
-			sap.m.MessageBox.show("Unassign youself from the work order?", {
+			sap.m.MessageBox.show(this.getI18nText("WorkOrderDetails-ReassignOrderUnassignPopupMessage"), {
 				icon: sap.m.MessageBox.Icon.None,
-				title: "Re-assign work order",
+				title: this.getI18nText("WorkOrderDetails-ReassignOrderPopupTitle"),
 				actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
 				defaultAction: sap.m.MessageBox.Action.NO,
 				onClose: function(oAction, object) {
-
 					if (oAction === sap.m.MessageBox.Action.YES) {
 						this.assignOrderToPersonelNumber("");
 					} else {
 						return;
 					}
-
 				}.bind(this)
-
 			});
 		},
 
