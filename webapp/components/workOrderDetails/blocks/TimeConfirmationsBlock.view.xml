@@ -3,7 +3,7 @@
 	<l:VerticalLayout class="sapUiSmallMarginEnd" width="100%">
 		<l:HorizontalLayout >
 			<Button class="sapUiSmallMarginEnd" icon="sap-icon://add" press="createNewTimeRegistration"></Button>
-				<!--visible="{parts:[{path:'OrderStatus'}],formatter:'.orderStatusValid'}"-->
+			<!--visible="{parts:[{path:'OrderStatus'}],formatter:'.orderStatusValid'}"-->
 		</l:HorizontalLayout>
 		<Table id="TimeConfirmationsList" items="{ path: 'ConfirmationsSet' , sorter: [{path: 'ExecStartDate', descending: true}]}"
 			noDataText="{i18n>WorkOrderDetails-TimeConfirmationsBlock-NoTimeRegistrations}">
@@ -27,9 +27,11 @@
 						<core:ExtensionPoint name="workOrderDetailTimeConfirmationsTableCells">
 							<ObjectIdentifier title="{path:'ExecStartDate', type:'sap.ui.model.type.Date', formatOptions:'short'}"/>
 							<Text text="{Fullname}"/>
-							<Text text="{ActWork} {=${ActWork} === '1' ? ${i18n>WorkOrderDetails-TimeConfirmationsBlock-Hour} : ${i18n>WorkOrderDetails-TimeConfirmationsBlock-Hours}}"/>
+							<Text
+								text="{ActWork} {=${ActWork} === '1' ? ${i18n>WorkOrderDetails-TimeConfirmationsBlock-Hour} : ${i18n>WorkOrderDetails-TimeConfirmationsBlock-Hours}}"/>
 						</core:ExtensionPoint>
-						<Button id="editButton" visible="{path:'PersNo', formatter:'.editTimeConfirmationEnabled'}" icon="sap-icon://edit" press="updateTimeRegistration" />
+						<Button id="editButton" visible="{path:'PersNo', formatter:'.editTimeConfirmationEnabled'}" icon="sap-icon://edit"
+							press="updateTimeRegistration"/>
 					</cells>
 				</ColumnListItem>
 			</items>

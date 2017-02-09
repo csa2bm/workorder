@@ -306,7 +306,13 @@ sap.ui.define([
 			var list = sap.ui.core.Fragment.byId("ReAssignPopover", "reAssignEmployeeList");
 
 			if (list.getSelectedContextPaths().length < 1) {
-				MessageBox.alert(this.getI18nText("WorkOrderDetails-ReassignOrderSelectAUser")); 
+				MessageBox.show(
+					this.getI18nText("WorkOrderDetails-ReassignOrderSelectAUser"), {
+						icon: MessageBox.Icon.INFORMATION,
+						title: this.getI18nText("WorkOrderDetails-ReassignOrderSelectAUserHeader"),
+						actions: [MessageBox.Action.OK]
+					}
+				);
 				return;
 			}
 
@@ -322,7 +328,7 @@ sap.ui.define([
 		},
 
 		onOrderReAssignToMePressed: function() {
-			sap.m.MessageBox.show(this.getI18nText("WorkOrderDetails-ReassignOrderAssignToMePopupMessage"), { 
+			sap.m.MessageBox.show(this.getI18nText("WorkOrderDetails-ReassignOrderAssignToMePopupMessage"), {
 				icon: sap.m.MessageBox.Icon.None,
 				title: this.getI18nText("WorkOrderDetails-ReassignOrderPopupTitle"),
 				actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
