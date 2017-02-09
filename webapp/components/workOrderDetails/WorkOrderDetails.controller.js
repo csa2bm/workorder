@@ -467,7 +467,7 @@ sap.ui.define([
 					onClose: function(oAction, object) {
 						if (oAction === sap.m.MessageBox.Action.YES) {
 							var data = {
-								"Minutes": differenceInMinutes
+								"Time": differenceInMinutes
 							};
 
 							var eventBus = that.getEventBus();
@@ -477,20 +477,25 @@ sap.ui.define([
 							that.getView().getModel("timeRegistrationTimerModel").getData().OrderId = "";
 							that.getView().getModel("timeRegistrationTimerModel").getData().StartDateTime = "";
 							that.getView().getModel("timeRegistrationTimerModel").refresh();
-
 						}
 					}
 				});
 
 			} else if (timerModel.OrderId && timerModel.OrderId !== "" && timerModel.OrderId !== currentOrderId) {
 				//Timer is already running for another order - show warning
-				sap.m.MessageToast.show("Timer running for another order");
+				sap.m.MessageToast.show("Timer already started for another order");
 			} else {
 				//Start timer for current order
 				this.getView().getModel("timeRegistrationTimerModel").getData().Started = true;
 				this.getView().getModel("timeRegistrationTimerModel").getData().OrderId = currentOrderId;
 				this.getView().getModel("timeRegistrationTimerModel").getData().StartDateTime = new Date().toString();
 				this.getView().getModel("timeRegistrationTimerModel").refresh();
+				
+				//TODO post userstatus change 
+				
+				
+				
+				sap.m.MessageToast.show("Timer started");
 			}
 		},
 

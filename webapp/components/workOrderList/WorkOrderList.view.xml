@@ -4,6 +4,7 @@
 		<Page showNavButton="true" navButtonPress="onNavigationButtonPress" title="{i18n>WorkOrderList-Title}">
 			<headerContent>
 				<l:HorizontalLayout>
+					<!--<core:Icon width="3em" height="3em" noTabStop="true" color="green" src="sap-icon://fob-watch"/>-->
 					<core:Icon width="3em" height="3em" noTabStop="true" press="handleViewSettingsDialogButtonPressed" src="sap-icon://drop-down-list"/>
 				</l:HorizontalLayout>
 			</headerContent>
