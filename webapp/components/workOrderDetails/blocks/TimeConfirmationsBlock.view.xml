@@ -2,8 +2,8 @@
 	xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
 	<l:VerticalLayout class="sapUiSmallMarginEnd" width="100%">
 		<l:HorizontalLayout >
-			<Button class="sapUiSmallMarginEnd" icon="sap-icon://add" press="createNewTimeRegistration"
-				visible="{parts:[{path:'OrderStatus'}],formatter:'.orderStatusValid'}"></Button>
+			<Button class="sapUiSmallMarginEnd" icon="sap-icon://add" press="createNewTimeRegistration"></Button>
+				<!--visible="{parts:[{path:'OrderStatus'}],formatter:'.orderStatusValid'}"-->
 		</l:HorizontalLayout>
 		<Table id="TimeConfirmationsList" items="{ path: 'ConfirmationsSet' , sorter: [{path: 'ExecStartDate', descending: true}]}"
 			noDataText="{i18n>WorkOrderDetails-TimeConfirmationsBlock-NoTimeRegistrations}">
