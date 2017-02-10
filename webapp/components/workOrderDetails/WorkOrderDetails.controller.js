@@ -198,9 +198,9 @@ sap.ui.define([
 
 		getOrderStatusBtnText: function(sString) {
 			var btnText = this.getI18nText("WorkOrderDetails-orderStatusBtnTextNotStarted");
-			if (sString === this.getI18nText("orderStatusNotStarted")) {
+			if (sString === "INITIAL") {
 				btnText = this.getI18nText("WorkOrderDetails-orderStatusBtnTextNotStarted");
-			} else if (sString === this.getI18nText("orderStatusInProgress")) {
+			} else if (sString === "INPROGRESS") {
 				btnText = this.getI18nText("WorkOrderDetails-orderStatusBtnTextInProgress");
 			} else {
 				btnText = this.getI18nText("WorkOrderDetails-orderStatusBtnTextCompleted");
