@@ -284,6 +284,10 @@
 				"dataSource": "WORKORDER_SRV",
 				"path": "/TimeRegistrationsSet"
 			},
+			"ConfirmationsSet": {
+				"dataSource": "WORKORDER_SRV",
+				"path": "/ConfirmationsSet"
+			},
 			"MaterialsSet": {
 				"dataSource": "WORKORDER_SRV",
 				"path": {

@@ -98,7 +98,7 @@
 						</ObjectPageSection>
 						<ObjectPageSection>
 							<subSections>
-								<ObjectPageSubSection id="photosSubSection" title="{i18n>WorkOrderDetails_PhotosSubSection}">
+								<ObjectPageSubSection id="photosSubSection" title="{i18n>WorkOrderDetails-PhotosSubSection}">
 									<blocks>
 										<blocks:AttachmentsBlock/>
 									</blocks>
@@ -107,7 +107,7 @@
 						</ObjectPageSection>
 						<ObjectPageSection>
 							<subSections>
-								<ObjectPageSubSection id="documentsSubSection" title="{i18n>WorkOrderDetails_DocumentsSubSection}">
+								<ObjectPageSubSection id="documentsSubSection" title="{i18n>WorkOrderDetails-DocumentsSubSection}">
 									<blocks>
 										<blocks:DocumentsBlock/>
 									</blocks>
@@ -132,9 +132,9 @@
 					<m:Button id="timeRegistrationTimerButton" text="{parts:[{path:'Orderid'}, 'timeRegistrationTimerModel>/Started'],formatter:'.determineTimeRegistrationTimerButtonText'}" press="onTimeRegistrationTimerChangeButtonPressed" type="{parts:[{path:'Orderid'}, 'timeRegistrationTimerModel>/Started'],formatter:'.determineTimeRegistrationTimerButtonType'}" />
 						
 					<m:ToolbarSpacer></m:ToolbarSpacer>
-					<m:Button id="orderReAssignButton" text="Re-assign" press="onOrderReAssignButtonPressed" icon="sap-icon://action" visible="{parts:[{path: 'Personresp'}],formatter:'.reAssignVisible'}">
-						
-					</m:Button>
+
+					<m:Button id="orderReAssignButton" text="{i18n>WorkOrderDetails-ReassignOrderButtonText}" press="onOrderReAssignButtonPressed" icon="sap-icon://action" visible="{parts:[{path: 'Personresp'}],formatter:'.reAssignVisible'}" />
+
 					<m:Button id="orderStatusChangeButton" icon="sap-icon://accept" press="orderStatusBtnPressed"
 						text="{path:'OrderStatus',formatter:'.getOrderStatusBtnText'}" visible="{path:'OrderStatus',formatter:'.isOrderNotCompleted'}"
 						type="{path:'OrderStatus',formatter:'.isOrderNotCompletedType'}">

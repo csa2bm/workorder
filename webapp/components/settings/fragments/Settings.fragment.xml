@@ -1,18 +1,18 @@
 <core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc">
 	<ResponsivePopover class="sapUiPopupWithPadding" placement="PreferredTopOrFlip" title="{i18n>App-Info}">
 		<endButton>
-			<Button visible="{path:'device>/isHybridApp'}" text="{i18n>SettingsPopup-ResetClient}" press="onResetClient"></Button>
+			<Button text="{i18n>SettingsPopup-ResetClient}" press="onResetClient"></Button>
 		</endButton>
 		<content>
 			<l:VerticalLayout>
-				<Panel class="sapUiSmallMarginBottom">
+				<Panel class="sapUiSmallMarginBottom" visible="{path:'device>/isPhone'}">
 					<l:VerticalLayout>
 						<Image src="{appInfoModel>/UserImage}" press="onSettings" class="circular"></Image>
 						<Label class="syncStatusTextBold" text="{appInfoModel>/UserFullName} ({appInfoModel>/UserName})"/>
 						<Label class="syncStatusText" text="{appInfoModel>/UserPosition}"/>
 					</l:VerticalLayout>
 				</Panel>
-				<Panel visible="{path:'device>/isHybridApp'}">
+				<Panel>
 					<headerToolbar>
 						<Toolbar height="3rem">
 							<Title text="{appInfoModel>/AppName}"/>
