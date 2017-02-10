@@ -281,6 +281,14 @@ sap.ui.define([
 			this._errorsView.open();
 		},
 
+		reAssignVisible : function(personelNumber)
+		{
+			if (this.getView().getModel("appInfoModel").getData().Persno === personelNumber)
+				return true;
+
+			return false;	
+		},
+
 		onOrderReAssignToUserButtonPressed: function(oEvent) {
 			if (!this._reAssignPopover) {
 				this._reAssignPopover = sap.ui.xmlfragment("ReAssignPopover",

@@ -4,7 +4,7 @@
 		"_version": "1.1.0",
 		"id": "com.twobm.mobileworkorder",
 		"type": "application",
-		"i18n": "i18n/messageBundle.properties",
+		"i18n": "i18n/i18n.properties",
 		"title": "{{App-Title}}",
 		"description": "{{App-Description}}",
 		"sourceTemplate": {
@@ -43,9 +43,7 @@
 			"tablet": true,
 			"phone": true
 		},
-		"supportedThemes": [
-			"sap_belize_plus"
-		]
+		"supportedThemes": ["sap_belize_plus"]
 	},
 	"sap.ui5": {
 		"_version": "1.1.0",
@@ -70,7 +68,7 @@
 			"i18n": {
 				"type": "sap.ui.model.resource.ResourceModel",
 				"settings": {
-					"bundleName": "com.twobm.mobileworkorder.i18n.messageBundle"
+					"bundleName": "com.twobm.mobileworkorder.i18n.i18n"
 				}
 			},
 			"": {
@@ -95,81 +93,60 @@
 					"target": "notFound"
 				}
 			},
-			"routes": [
-				{
-					"pattern": "",
-					"name": "dashboard",
-					"target": "dashboard"
-				},
-				{
-					"pattern": "workOrderList",
-					"name": "workOrderList",
-					"target": "workOrderList"
-				},
-				{
-					"pattern": "workOrderDetails/{workOrderContext}",
-					"name": "workOrderDetails",
-					"target": "workOrderDetails"
-				},
-				{
-					"pattern": "operationDetails/{operationContext}",
-					"name": "operationDetails",
-					"target": "operationDetails"
-				},
-				{
-					"pattern": "equipmentDetails/{objectContext}",
-					"name": "equipmentDetails",
-					"target": "equipmentDetails"
-				},
-				{
-					"pattern": "functionalLocationDetails/{objectContext}",
-					"name": "functionalLocationDetails",
-					"target": "functionalLocationDetails"
-				},
-				{
-					"pattern": "measurementPointDetails/{measurementContext}",
-					"name": "measurementPointDetails",
-					"target": "measurementPointDetails"
-				},
-				{
-					"pattern": "notificationList",
-					"name": "notificationList",
-					"greedy": false,
-					"target": [
-						"notificationList"
-					]
-				},
-				{
-					"pattern": "notificationDetails/{notificationContext}",
-					"name": "notificationDetails",
-					"greedy": false,
-					"target": [
-						"notificationDetails"
-					]
-				},
-				{
-					"pattern": "itemDetails/{itemContext}",
-					"name": "itemDetails",
-					"target": "itemDetails"
-				},
-				{
-					"pattern": "notificationCreate/:equipmentNo:/:functionalLoc:/:funcLocDesc:/:equipmentDesc:/:argAvailable:",
-					"name": "notificationCreate",
-					"greedy": false,
-					"target": [
-						"notificationCreate"
-					]
-				},
-				{
-					"pattern": "structureBrowser/:notificationContext:/:parentView:",
-					"name": "structureBrowser",
-					"titleTarget": "",
-					"greedy": false,
-					"target": [
-						"structureBrowser"
-					]
-				}
-			],
+			"routes": [{
+				"pattern": "",
+				"name": "dashboard",
+				"target": "dashboard"
+			}, {
+				"pattern": "workOrderList",
+				"name": "workOrderList",
+				"target": "workOrderList"
+			}, {
+				"pattern": "workOrderDetails/{workOrderContext}",
+				"name": "workOrderDetails",
+				"target": "workOrderDetails"
+			}, {
+				"pattern": "operationDetails/{operationContext}",
+				"name": "operationDetails",
+				"target": "operationDetails"
+			}, {
+				"pattern": "equipmentDetails/{objectContext}",
+				"name": "equipmentDetails",
+				"target": "equipmentDetails"
+			}, {
+				"pattern": "functionalLocationDetails/{objectContext}",
+				"name": "functionalLocationDetails",
+				"target": "functionalLocationDetails"
+			}, {
+				"pattern": "measurementPointDetails/{measurementContext}",
+				"name": "measurementPointDetails",
+				"target": "measurementPointDetails"
+			}, {
+				"pattern": "notificationList",
+				"name": "notificationList",
+				"greedy": false,
+				"target": ["notificationList"]
+			}, {
+				"pattern": "notificationDetails/{notificationContext}",
+				"name": "notificationDetails",
+				"greedy": false,
+				"target": ["notificationDetails"]
+			}, {
+				"pattern": "itemDetails/{itemContext}",
+				"name": "itemDetails",
+				"target": "itemDetails"
+			}, {
+				"pattern": "notificationCreate/:equipmentNo:/:functionalLoc:/:funcLocDesc:/:equipmentDesc:/:argAvailable:",
+				"name": "notificationCreate",
+				"greedy": false,
+				"target": ["notificationCreate"]
+			}, {
+				"pattern": "structureBrowser/:notificationContext:/:parentView:",
+				"name": "structureBrowser",
+				"titleTarget": "",
+				"greedy": false,
+				"target": ["structureBrowser"]
+			}],
 			"targets": {
 				"dashboard": {
 					"viewPath": "com.twobm.mobileworkorder.components.dashboard",
@@ -357,6 +334,10 @@
 			"CodeGroupsSet": {
 				"dataSource": "WORKORDER_SRV",
 				"path": "/CodeGroupsSet"
+			},
+			"EmployeesSet": {
+				"dataSource": "WORKORDER_SRV",
+				"path": "/EmployeesSet"
 			}
 		}
 	},
