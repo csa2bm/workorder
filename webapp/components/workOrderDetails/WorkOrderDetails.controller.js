@@ -185,7 +185,7 @@ sap.ui.define([
 
 		updateEditModeModel: function(orderStatus) {
 			var orderStatusBool = false;
-			if (orderStatus === this.getI18nText("orderStatusCompleted") || orderStatus === this.getI18nText("orderStatusNotStarted")) {
+			if (orderStatus === "COMPLETED"|| orderStatus === "INITIAL") {
 				orderStatusBool = false;
 			} else {
 				orderStatusBool = true;
