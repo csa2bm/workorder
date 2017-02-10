@@ -93,18 +93,27 @@ sap.ui.define([
 			model.refresh();
 		},
 
-		getOrderStatusIcon: function(orderStatus) {
+		getOrderStatusIcon: function(orderStatus, personelNumber) {
 
-			if (orderStatus === this.getI18nText("orderStatusNotStarted")) {
-				return "sap-icon://system-exit-2";
-			} else if (orderStatus === this.getI18nText("orderStatusInProgress")) {
-				return "sap-icon://system-exit-2";
-			}
+			if (this.getView().getModel("appInfoModel").getData().Persno !== personelNumber)
+				return "sap-icon://circle-task-2";
 
-			return "sap-icon://system-exit-2";
+			if (orderStatus === this.getI18nText("orderStatusNotStarted")) 
+			
+			
+				return "sap-icon://circle-task-2";
+			
+			if (orderStatus === this.getI18nText("orderStatusInProgress")) 
+				return "sap-icon://system-exit-2";
+
+			return "sap-icon://circle-task-2";
 		},
 
-		getOrderStatusIconColor: function(orderStatus) {
+		getOrderStatusIconColor: function(orderStatus, personelNumber) {
+			
+			if (this.getView().getModel("appInfoModel").getData().Persno !== personelNumber)
+				return "#DBDBDB";
+				
 			if (orderStatus === this.getI18nText("orderStatusNotStarted")) {
 				return "#DBDBDB";
 			} else if (orderStatus === this.getI18nText("orderStatusInProgress")) {

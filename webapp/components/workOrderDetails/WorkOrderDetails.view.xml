@@ -132,7 +132,7 @@
 					<m:Button id="timeRegistrationTimerButton" text="{parts:[{path:'Orderid'}, 'timeRegistrationTimerModel>/Started'],formatter:'.determineTimeRegistrationTimerButtonText'}" press="onTimeRegistrationTimerChangeButtonPressed" type="{parts:[{path:'Orderid'}, 'timeRegistrationTimerModel>/Started'],formatter:'.determineTimeRegistrationTimerButtonType'}" />
 						
 					<m:ToolbarSpacer></m:ToolbarSpacer>
-					<m:Button id="orderReAssignButton" text="Re-assign" press="onOrderReAssignButtonPressed" type="Emphasized">
+					<m:Button id="orderReAssignButton" text="Re-assign" press="onOrderReAssignButtonPressed" icon="sap-icon://action" visible="{parts:[{path: 'Personresp'}],formatter:'.reAssignVisible'}">
 						
 					</m:Button>
 					<m:Button id="orderStatusChangeButton" icon="sap-icon://accept" press="orderStatusBtnPressed"

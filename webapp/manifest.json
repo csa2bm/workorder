@@ -353,6 +353,10 @@
 			"CodeGroupsSet": {
 				"dataSource": "WORKORDER_SRV",
 				"path": "/CodeGroupsSet"
+			},
+			"EmployeesSet": {
+				"dataSource": "WORKORDER_SRV",
+				"path": "/EmployeesSet"
 			}
 		}
 	},
