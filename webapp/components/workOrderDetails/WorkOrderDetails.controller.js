@@ -209,7 +209,7 @@ sap.ui.define([
 		},
 
 		isOrderNotCompleted: function(sString) {
-			if (sString === this.getI18nText("orderStatusCompleted")) {
+			if (sString === "COMPLETED") {
 				return false;
 			} else {
 				return true;
@@ -217,7 +217,7 @@ sap.ui.define([
 		},
 
 		isOrderNotCompletedType: function(sString) {
-			if (sString === this.getI18nText("orderStatusNotStarted")) {
+			if (sString === "INITIAL") {
 				return "Emphasized";
 			} else {
 				return "Accept";
