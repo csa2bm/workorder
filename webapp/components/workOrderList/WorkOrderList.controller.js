@@ -98,13 +98,13 @@ sap.ui.define([
 			if (this.getView().getModel("appInfoModel").getData().Persno !== personelNumber)
 				return "sap-icon://circle-task-2";
 
-			if (orderStatus === this.getI18nText("orderStatusNotStarted")) 
+			if (orderStatus === "INITIAL") 
 			
 			
 				return "sap-icon://circle-task-2";
 			
-			if (orderStatus === this.getI18nText("orderStatusInProgress")) 
-				return "sap-icon://system-exit-2";
+			if (orderStatus === "INPROGRESS") 
+				return "sap-icon://circle-task-2";
 
 			return "sap-icon://circle-task-2";
 		},
@@ -114,11 +114,11 @@ sap.ui.define([
 			if (this.getView().getModel("appInfoModel").getData().Persno !== personelNumber)
 				return "#DBDBDB";
 				
-			if (orderStatus === this.getI18nText("orderStatusNotStarted")) {
+			if (orderStatus === "INITIAL") {
 				return "#DBDBDB";
-			} else if (orderStatus === this.getI18nText("orderStatusInProgress")) {
+			} else if (orderStatus === "INPROGRESS") {
 				return "#3AACF2";
-			} else if (orderStatus === this.getI18nText("orderStatusCompleted")) {
+			} else if (orderStatus === "COMPLETED") {
 				return "#30D130";
 			}
 		},
