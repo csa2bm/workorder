@@ -6,8 +6,8 @@
 			<f:content>
 				<Label text="{i18n>WorkOrderDetails-OperationGeneralBlock-AssignedToLabel}"/>
 				<VBox>
-					<Text text="{Username} - {Fullname}"/>
-					<Text text="({Personresp})"/>
+					<Text text="{Fullname} - ({Username})"/>
+					<Text text="{Personresp}"/>
 				</VBox>
 				<Label text="{i18n>WorkOrderDetails-OperationGeneralBlock-CompletedLabel}"/>
 				<VBox>
