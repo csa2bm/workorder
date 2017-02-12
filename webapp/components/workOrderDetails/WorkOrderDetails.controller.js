@@ -121,9 +121,9 @@ sap.ui.define([
 
 		setUserStatusTaskStarted: function(orderStatus) {
 			var message = "";
-			if (orderStatus === this.getI18nText("orderStatusNotStarted")) {
+			if (orderStatus === "INITIAL") {
 				message = this.getI18nText("WorkOrderDetails-orderStatusMessageNotStarted");
-			} else if (orderStatus === this.getI18nText("orderStatusInProgress")) {
+			} else if (orderStatus === "INPROGRESS") {
 				message = this.getI18nText("WorkOrderDetails-orderStatusMessageInProgress");
 			}
 
@@ -139,11 +139,11 @@ sap.ui.define([
 					if (oAction === sap.m.MessageBox.Action.YES) {
 						// Set the order status to "inProgress" and post it
 						var newStatus = "";
-						if (orderStatus === that.getI18nText("orderStatusNotStarted")) {
+						if (orderStatus === "INITIAL") {
 							newStatus = that.getI18nText("orderStatusInProgress");
 						}
 						// Set the order status to "completed" and post it
-						else if (orderStatus === that.getI18nText("orderStatusInProgress")) {
+						else if (orderStatus === "INPROGRESS") {
 							newStatus = that.getI18nText("orderStatusCompleted");
 						} else {
 							return;
@@ -167,7 +167,7 @@ sap.ui.define([
 
 					that.updateEditModeModel(orderStatus);
 
-					if (orderStatus === that.getI18nText("orderStatusCompleted")) {
+					if (orderStatus === "COMPLETED") {
 						that.navigateBack();
 					}
 				},
@@ -185,7 +185,7 @@ sap.ui.define([
 
 		updateEditModeModel: function(orderStatus) {
 			var orderStatusBool = false;
-			if (orderStatus === this.getI18nText("orderStatusCompleted") || orderStatus === this.getI18nText("orderStatusNotStarted")) {
+			if (orderStatus === "COMPLETED"|| orderStatus === "INITIAL") {
 				orderStatusBool = false;
 			} else {
 				orderStatusBool = true;
@@ -198,9 +198,9 @@ sap.ui.define([
 
 		getOrderStatusBtnText: function(sString) {
 			var btnText = this.getI18nText("WorkOrderDetails-orderStatusBtnTextNotStarted");
-			if (sString === this.getI18nText("orderStatusNotStarted")) {
+			if (sString === "INITIAL") {
 				btnText = this.getI18nText("WorkOrderDetails-orderStatusBtnTextNotStarted");
-			} else if (sString === this.getI18nText("orderStatusInProgress")) {
+			} else if (sString === "INPROGRESS") {
 				btnText = this.getI18nText("WorkOrderDetails-orderStatusBtnTextInProgress");
 			} else {
 				btnText = this.getI18nText("WorkOrderDetails-orderStatusBtnTextCompleted");
@@ -209,7 +209,7 @@ sap.ui.define([
 		},
 
 		isOrderNotCompleted: function(sString) {
-			if (sString === this.getI18nText("orderStatusCompleted")) {
+			if (sString === "COMPLETED") {
 				return false;
 			} else {
 				return true;
@@ -217,7 +217,7 @@ sap.ui.define([
 		},
 
 		isOrderNotCompletedType: function(sString) {
-			if (sString === this.getI18nText("orderStatusNotStarted")) {
+			if (sString === "INITIAL") {
 				return "Emphasized";
 			} else {
 				return "Accept";

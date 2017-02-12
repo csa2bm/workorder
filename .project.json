@@ -7,8 +7,8 @@
   "build": {
     "targetFolder": "dist",
     "sourceFolder": "webapp",
-    "buildRequired": false,
-    "lastBuildDateTime": "Fri, 10 Feb 2017 13:52:18 GMT"
+    "buildRequired": true,
+    "lastBuildDateTime": "Fri, 10 Feb 2017 09:01:34 GMT"
   },
   "generation": [
     {
@@ -143,7 +143,7 @@
       "logo": "res/LoginLogo.png",
       "logoText": "Copyright 2016 2BM AS",
       "background": "res/Login.png",
-      "disablePasscode": true,
+      "disablePasscode": false,
       "hideLogoCopyright": false,
       "copyrightText": "All rights reserved"
     },

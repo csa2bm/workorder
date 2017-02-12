@@ -11,7 +11,7 @@
 					<HBox>
 						<core:Icon class="sapUiTinyMarginEnd" src="sap-icon://circle-task-2"
 							color="{parts:[{path:'OrderStatus'}],formatter:'.getOrderStatusIconColor'}"/>
-						<Text text="{OrderStatus}"/>
+						<Text text="{parts:[{path:'OrderStatus'}],formatter:'.getOrderStatusIconText'}"/>
 					</HBox>
 					<Label text="{i18n>WorkOrderDetails-GeneralBlock-Type}"/>
 					<Text text="{OrderType}"/>

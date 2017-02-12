@@ -98,12 +98,16 @@ sap.ui.define([
 			if (this.getView().getModel("appInfoModel").getData().Persno !== personelNumber && !assignedOperation)
 				return "sap-icon://circle-task-2";
 
-			if (orderStatus === this.getI18nText("orderStatusNotStarted")) 
+			if (orderStatus === "INITIAL") 
 			
 			
 				return "sap-icon://circle-task-2";
 			
+<<<<<<< HEAD
 			if (orderStatus === this.getI18nText("orderStatusInProgress")) 
+=======
+			if (orderStatus === "INPROGRESS") 
+>>>>>>> branch 'master' of https://t0PPy@bitbucket.org/2bm/com.twobm.mobileworkorder.git
 				return "sap-icon://circle-task-2";
 
 			return "sap-icon://circle-task-2";
@@ -114,11 +118,11 @@ sap.ui.define([
 			if (this.getView().getModel("appInfoModel").getData().Persno !== personelNumber && !assignedOperation)
 				return "#DBDBDB";
 				
-			if (orderStatus === this.getI18nText("orderStatusNotStarted")) {
+			if (orderStatus === "INITIAL") {
 				return "#DBDBDB";
-			} else if (orderStatus === this.getI18nText("orderStatusInProgress")) {
+			} else if (orderStatus === "INPROGRESS") {
 				return "#3AACF2";
-			} else if (orderStatus === this.getI18nText("orderStatusCompleted")) {
+			} else if (orderStatus === "COMPLETED") {
 				return "#30D130";
 			}
 		},
