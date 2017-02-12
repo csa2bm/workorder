@@ -32,7 +32,8 @@ sap.ui.define([
 
 					this.getUserDetails();
 					
-					sap.m.MessageToast.show("Browser: " + window.navigator.language + " - Core Config: " + sap.ui.getCore().getConfiguration().getLanguage());
+					//Show Browser and configuration language
+					//sap.m.MessageToast.show("Browser: " + window.navigator.language + " - Core Config: " + sap.ui.getCore().getConfiguration().getLanguage());
 				}
 
 				this.setContentInTiles();

@@ -7,8 +7,8 @@
   "build": {
     "targetFolder": "dist",
     "sourceFolder": "webapp",
-    "buildRequired": true,
-    "lastBuildDateTime": "Fri, 10 Feb 2017 09:01:34 GMT"
+    "buildRequired": false,
+    "lastBuildDateTime": "Sun, 12 Feb 2017 16:02:47 GMT"
   },
   "generation": [
     {
@@ -174,7 +174,7 @@
       "ios": {
         "selected": true,
         "preferences": {
-          "Fullscreen": false,
+          "Fullscreen": true,
           "Orientation": "all",
           "EnableViewportScale": false,
           "UrlScheme": ""
