@@ -99,15 +99,9 @@ sap.ui.define([
 				return "sap-icon://circle-task-2";
 
 			if (orderStatus === "INITIAL") 
-			
-			
 				return "sap-icon://circle-task-2";
 			
-<<<<<<< HEAD
-			if (orderStatus === this.getI18nText("orderStatusInProgress")) 
-=======
 			if (orderStatus === "INPROGRESS") 
->>>>>>> branch 'master' of https://t0PPy@bitbucket.org/2bm/com.twobm.mobileworkorder.git
 				return "sap-icon://circle-task-2";
 
 			return "sap-icon://circle-task-2";
