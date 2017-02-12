@@ -93,14 +93,12 @@ sap.ui.define([
 			model.refresh();
 		},
 
-		getOrderStatusIcon: function(orderStatus, personelNumber) {
+		getOrderStatusIcon: function(orderStatus, personelNumber, assignedOperation) {
 
-			if (this.getView().getModel("appInfoModel").getData().Persno !== personelNumber)
+			if (this.getView().getModel("appInfoModel").getData().Persno !== personelNumber && !assignedOperation)
 				return "sap-icon://circle-task-2";
 
 			if (orderStatus === "INITIAL") 
-			
-			
 				return "sap-icon://circle-task-2";
 			
 			if (orderStatus === "INPROGRESS") 
@@ -109,9 +107,9 @@ sap.ui.define([
 			return "sap-icon://circle-task-2";
 		},
 
-		getOrderStatusIconColor: function(orderStatus, personelNumber) {
+		getOrderStatusIconColor: function(orderStatus, personelNumber, assignedOperation) {
 			
-			if (this.getView().getModel("appInfoModel").getData().Persno !== personelNumber)
+			if (this.getView().getModel("appInfoModel").getData().Persno !== personelNumber && !assignedOperation)
 				return "#DBDBDB";
 				
 			if (orderStatus === "INITIAL") {
