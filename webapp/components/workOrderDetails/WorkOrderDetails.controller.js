@@ -62,33 +62,33 @@ sap.ui.define([
 				}
 			}
 
-			//do we have this context loaded in our model? We should always have a timeregistration entry
-			if (this.ExpandLoaded) { //this.getView().getBindingContext().getObject()) {
+			// //do we have this context loaded in our model? We should always have a timeregistration entry
+			// if (this.ExpandLoaded) { //this.getView().getBindingContext().getObject()) {
 
-				//if yes, refresh the model to reflect in memory model any changes done remotely to the order
-				this.getView().getBindingContext().getModel().refresh(); //using true as argument got strange errors to arise
+			// 	//if yes, refresh the model to reflect in memory model any changes done remotely to the order
+			// 	this.getView().getBindingContext().getModel().refresh(); //using true as argument got strange errors to arise
 
-				//Set edit mode
-				this.updateEditModeModel(this.getView().getBindingContext().getObject().OrderStatus);
+			// 	//Set edit mode
+			// 	this.updateEditModeModel(this.getView().getBindingContext().getObject().OrderStatus);
 
-			} else {
-				var that = this;
-				//if not, create the binding context with all the expands we need in this view
-				var aExpand = ["OrderOperation", "OrderComponent", "OrderObject", "OrderAttachments", "OrderGoodsMovements"];
+			// } else {
+			// 	var that = this;
+			// 	//if not, create the binding context with all the expands we need in this view
+			// 	var aExpand = ["OrderOperation", "OrderComponent", "OrderObject", "OrderAttachments", "OrderGoodsMovements"];
 
-				this.getView().getModel().createBindingContext(contextPath, "", {
-						expand: aExpand.toString()
-					},
-					function(oEvent2) {
-						//var f = oEvent2;
-						that.ExpandLoaded = true;
+			// 	this.getView().getModel().createBindingContext(contextPath, "", {
+			// 			expand: aExpand.toString()
+			// 		},
+			// 		function(oEvent2) {
+			// 			//var f = oEvent2;
+			// 			that.ExpandLoaded = true;
 
-						//Set edit mode
-						var orderStatus = that.getView().getBindingContext().getObject().OrderStatus;
-						that.updateEditModeModel(orderStatus);
+			// 			//Set edit mode
+			// 			var orderStatus = that.getView().getBindingContext().getObject().OrderStatus;
+			// 			that.updateEditModeModel(orderStatus);
 
-					}, true);
-			}
+			// 		}, true);
+			// }
 
 			var eventBus = sap.ui.getCore().getEventBus();
 			var data = {
