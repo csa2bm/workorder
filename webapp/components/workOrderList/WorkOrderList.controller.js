@@ -94,9 +94,8 @@ sap.ui.define([
 		},
 
 		getOrderStatusIcon: function(orderStatus, personelNumber, assignedOperation) {
-
 			if (this.getView().getModel("appInfoModel").getData().Persno !== personelNumber && !assignedOperation)
-				return "sap-icon://circle-task-2";
+				return "sap-icon://action";
 
 			if (orderStatus === "INITIAL") 
 				return "sap-icon://circle-task-2";
@@ -110,7 +109,7 @@ sap.ui.define([
 		getOrderStatusIconColor: function(orderStatus, personelNumber, assignedOperation) {
 			
 			if (this.getView().getModel("appInfoModel").getData().Persno !== personelNumber && !assignedOperation)
-				return "#DBDBDB";
+				return "#343434";
 				
 			if (orderStatus === "INITIAL") {
 				return "#DBDBDB";
