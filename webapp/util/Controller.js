@@ -139,7 +139,7 @@ sap.ui.define([
 
 			var orderStatus = oModel.getProperty("OrderStatus", oContext);
 
-			if (orderStatus === this.getI18nText("orderStatusCompleted") || orderStatus === this.getI18nText("orderStatusNotStarted")) {
+			if (orderStatus === "COMPLETED" || orderStatus === "INITIAL") {
 				return true;
 
 			} else {

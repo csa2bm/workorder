@@ -68,8 +68,8 @@ sap.ui.define([
 			// 	//if yes, refresh the model to reflect in memory model any changes done remotely to the order
 			// 	this.getView().getBindingContext().getModel().refresh(); //using true as argument got strange errors to arise
 
-			// 	//Set edit mode
-			// 	this.updateEditModeModel(this.getView().getBindingContext().getObject().OrderStatus);
+			 	//Set edit mode
+			 	this.updateEditModeModel(this.getView().getBindingContext().getObject().OrderStatus);
 
 			// } else {
 			// 	var that = this;
