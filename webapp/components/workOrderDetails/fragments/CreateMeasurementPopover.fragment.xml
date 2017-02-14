@@ -11,6 +11,9 @@
 			<VBox>
 				<Label text="Measuring Point" design="Bold" class="sapUiTinyMarginBottom"/>
 				<Label text="{ViewModel>/Measpoint} - {ViewModel>/Descriptn}" class="sapUiSmallMarginBottom"/>
+				<Label text="Counter" design="Bold" class="sapUiTinyMarginBottom"/>
+				<Label text="{parts:[{path:'ViewModel>/Counter'}],formatter:'.isCounterSet'}"
+					class="sapUiSmallMarginBottom"/>
 				<Label text="Minimum threshold" design="Bold" class="sapUiTinyMarginBottom"/>
 				<Label text="{parts:[{path:'ViewModel>/MinLimit', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}, {path:'ViewModel>/ValueMinLimit'}],formatter:'.showTextForMinValue'}"
 					class="sapUiSmallMarginBottom"/>
