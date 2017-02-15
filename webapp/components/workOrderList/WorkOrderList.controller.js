@@ -65,7 +65,7 @@ sap.ui.define([
 		// Start filter and sorting based on selected.
 		handleOrderFilterConfirm: function(oEvent) {
 			var oView = this.getView();
-			var oTable = oView.byId("workOrderTableId");
+			var oTable = oView.byId("workOrderTable");
 
 			var mParams = oEvent.getParameters();
 			var oBinding = oTable.getBinding("items");
