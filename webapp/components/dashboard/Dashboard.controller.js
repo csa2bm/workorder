@@ -4,109 +4,121 @@ sap.ui.define([
 	"com/twobm/mobileworkorder/util/Formatter",
 	"com/twobm/mobileworkorder/components/offline/SyncStateHandler",
 	"com/twobm/mobileworkorder/components/offline/SyncManager",
-	"sap/m/MessageBox"
-], function(Controller, History, Formatter, SyncStateHandler, SyncManager, MessageBox) {
+	"sap/m/MessageBox",
+	"sap/ui/core/format/NumberFormat"
+], function(Controller, History, Formatter, SyncStateHandler, SyncManager, MessageBox, NumberFormat) {
 	"use strict";
 
 	return Controller.extend("com.twobm.mobileworkorder.components.dashboard.Dashboard", {
-			formatter: Formatter,
+		formatter: Formatter,
 
-			onInit: function() {
-				this.getRouter().attachRoutePatternMatched(this.onRouteMatched, this);
-				//this.getRouter().getRoute("dashboard").attachMatched(this.onRouteMatched, this);
+		onInit: function() {
+			this.getRouter().attachRoutePatternMatched(this.onRouteMatched, this);
+			//this.getRouter().getRoute("dashboard").attachMatched(this.onRouteMatched, this);
 
-				var eventBus = sap.ui.getCore().getEventBus();
-				eventBus.subscribe("OfflineStore", "Updated", this.setContentInTiles, this);
-				
-	
-				eventBus.subscribe("BlockNavigation", this.performNavigationForBlocks, this);
-			},
+			var eventBus = sap.ui.getCore().getEventBus();
+			eventBus.subscribe("OfflineStore", "Updated", this.setContentInTiles, this);
 
-			onRouteMatched: function(oEvent) {
-				if (!this.DashBoardModel) {
-					this.DashBoardModel = new sap.ui.model.json.JSONModel({
-						notificationCount: "0",
-						orderCount: "0"
-					});
-					this.getView().setModel(this.DashBoardModel, "DashBoardModel");
+			eventBus.subscribe("BlockNavigation", this.performNavigationForBlocks, this);
+		},
 
-					this.getUserDetails();
-					
-					//Show Browser and configuration language
-					//sap.m.MessageToast.show("Browser: " + window.navigator.language + " - Core Config: " + sap.ui.getCore().getConfiguration().getLanguage());
-				}
+		onRouteMatched: function(oEvent) {
+			if (!this.DashBoardModel) {
+				this.DashBoardModel = new sap.ui.model.json.JSONModel({
+					notificationCount: "0",
+					orderCount: "0"
+				});
+				this.getView().setModel(this.DashBoardModel, "DashBoardModel");
 
-				this.setContentInTiles();
-			},
+				this.getUserDetails();
 
-			setContentInTiles: function() {
-				var parametersOrder = {
-					success: function(oData, oResponse) {
-						this.DashBoardModel.getData().orderCount = oData;
-						this.DashBoardModel.refresh();
-					}.bind(this),
-					error: this.errorCallBackShowInPopUp
-				};
-				var parametersNotif = {
-					success: function(oData, oResponse) {
-						this.DashBoardModel.getData().notificationCount = oData;
-						this.DashBoardModel.refresh();
-					}.bind(this),
-					error: this.errorCallBackShowInPopUp
-				};
+				//sap.ui.getCore().getConfiguration().setLanguage("en");
 
-				this.getView().getModel().read("/OrderSet/$count", parametersOrder);
-				this.getView().getModel().read("/NotificationsSet/$count", parametersNotif);
-			},
+				var oNumberFormat = NumberFormat.getFloatInstance();
 
-			getUserDetails: function() {
-				var parametersUserDetails = {
-					success: function(oData, oResponse) {
-						this.getView().getModel("appInfoModel").getData().UserFullName = oData.results[0].Fullname;
-						this.getView().getModel("appInfoModel").getData().UserFirstName = oData.results[0].Firstname;
-						this.getView().getModel("appInfoModel").getData().UserName = oData.results[0].Username;
-						this.getView().getModel("appInfoModel").getData().UserPosition = oData.results[0].Position;
-						this.getView().getModel("appInfoModel").getData().Persno = oData.results[0].Persno;
+				//Show Browser and configuration language
+				// sap.m.MessageToast.show(
+				// 	"Browser language: " + window.navigator.language + "\n" +
+				// 	"Core config language: " + sap.ui.getCore().getConfiguration().getLanguage() + "\n" +
+				// 	"Format locale: " + sap.ui.getCore().getConfiguration().getFormatLocale() + "\n" +
+				// 	"SAP Logon language: " + sap.ui.getCore().getConfiguration().getSAPLogonLanguage()
+				// );
 
-						if (sap.hybrid) {
-							this.getView().getModel("appInfoModel").getData().UserImage = oData.results[0].__metadata.media_src;
-						} else {
-							this.getView().getModel("appInfoModel").getData().UserImage = this.getView().getModel().sServiceUrl +
-								"/UserDetailsSet('" + this.getView().getModel("appInfoModel").getData().UserName + "')/$value";
-						}
-						
-						this.getView().getModel("appInfoModel").refresh();
-					}.bind(this),
-					error: this.errorCallBackShowInPopUp
-				};
+				//Show Browser and configuration language
+				//sap.m.MessageToast.show("Browser: " + window.navigator.language + " - Core Config: " + sap.ui.getCore().getConfiguration().getLanguage());
+			}
 
-				this.getView().getModel().read("/UserDetailsSet", parametersUserDetails);
-			},
+			this.setContentInTiles();
+		},
 
-			setNotificationModel: function(oEvent) {
-				var notificationModel = new sap.ui.model.json.JSONModel();
-				notificationModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
-				oEvent.getview().setModel(notificationModel, "NotificationModel");
-			},
+		setContentInTiles: function() {
+			var parametersOrder = {
+				success: function(oData, oResponse) {
+					this.DashBoardModel.getData().orderCount = oData;
+					this.DashBoardModel.refresh();
+				}.bind(this),
+				error: this.errorCallBackShowInPopUp
+			};
+			var parametersNotif = {
+				success: function(oData, oResponse) {
+					this.DashBoardModel.getData().notificationCount = oData;
+					this.DashBoardModel.refresh();
+				}.bind(this),
+				error: this.errorCallBackShowInPopUp
+			};
 
-			onPressOtherWorkorders: function() {
+			this.getView().getModel().read("/OrderSet/$count", parametersOrder);
+			this.getView().getModel().read("/NotificationsSet/$count", parametersNotif);
+		},
 
-				var oHistory = History.getInstance();
-				var sPreviousHash = oHistory.getPreviousHash();
+		getUserDetails: function() {
+			var parametersUserDetails = {
+				success: function(oData, oResponse) {
+					this.getView().getModel("appInfoModel").getData().UserFullName = oData.results[0].Fullname;
+					this.getView().getModel("appInfoModel").getData().UserFirstName = oData.results[0].Firstname;
+					this.getView().getModel("appInfoModel").getData().UserName = oData.results[0].Username;
+					this.getView().getModel("appInfoModel").getData().UserPosition = oData.results[0].Position;
+					this.getView().getModel("appInfoModel").getData().Persno = oData.results[0].Persno;
 
-				if (sPreviousHash !== undefined) {
-					window.history.go(-1);
-				} else {
-					var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-					//var oRouter = this.getRouter();
-					oRouter.navTo("workOrderList", true);
-				}
-			},
+					if (sap.hybrid) {
+						this.getView().getModel("appInfoModel").getData().UserImage = oData.results[0].__metadata.media_src;
+					} else {
+						this.getView().getModel("appInfoModel").getData().UserImage = this.getView().getModel().sServiceUrl +
+							"/UserDetailsSet('" + this.getView().getModel("appInfoModel").getData().UserName + "')/$value";
+					}
 
-			onPressScanObject: function() {
-				var isHybridApp = this.getView().getModel("device").getData().isHybridApp;
-				if(isHybridApp){
-					cordova.plugins.barcodeScanner.scan(
+					this.getView().getModel("appInfoModel").refresh();
+				}.bind(this),
+				error: this.errorCallBackShowInPopUp
+			};
+
+			this.getView().getModel().read("/UserDetailsSet", parametersUserDetails);
+		},
+
+		setNotificationModel: function(oEvent) {
+			var notificationModel = new sap.ui.model.json.JSONModel();
+			notificationModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
+			oEvent.getview().setModel(notificationModel, "NotificationModel");
+		},
+
+		onPressOtherWorkorders: function() {
+
+			var oHistory = History.getInstance();
+			var sPreviousHash = oHistory.getPreviousHash();
+
+			if (sPreviousHash !== undefined) {
+				window.history.go(-1);
+			} else {
+				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+				//var oRouter = this.getRouter();
+				oRouter.navTo("workOrderList", true);
+			}
+		},
+
+		onPressScanObject: function() {
+			var isHybridApp = this.getView().getModel("device").getData().isHybridApp;
+			if (isHybridApp) {
+				cordova.plugins.barcodeScanner.scan(
 					function(result) {
 						if (result.cancelled) {
 							return;
@@ -132,73 +144,72 @@ sap.ui.define([
 						}
 
 					}.bind(this));
-					
-				}
-				else{
-					this.showAlertNotDevice();
-				}
-				
-			},
-			searchFuncLocWithId: function(equipId) {
-				var onDataReceived = {
-					success: function(oData, oResponse) {
-						var equipmentNo = oData.FunctionalLocation;
-						var isFuncLoc = true;
-						this.ShowEquipmentDetailsWithId(equipmentNo, isFuncLoc);
-					}.bind(this),
-					error: function(oData, oResponse) {
-						if (oData.statusCode === "404") {
-							this.showAlertNoObjectFound(equipId);
 
-						} else {
-							this.errorCallBackShowInPopUp();
-						}
-					}.bind(this)
-				};
+			} else {
+				this.showAlertNotDevice();
+			}
 
-				this.getView().getModel().read("/FunctionalLocationsSet('" + equipId + "')", onDataReceived);
-			},
-
-			ShowEquipmentDetailsWithId: function(equipmentId, isFuncLoc) {
-
-				if (!isFuncLoc) {
-					var objectContext = "/EquipmentsSet('" + equipmentId + "')";
-
-					this.getRouter().navTo("equipmentDetails", {
-						objectContext: objectContext.substring(1)
-
-					}, false);
-				} else {
-					var objectContext = "/FunctionalLocationsSet('" + equipmentId + "')";
-					this.getRouter().navTo("functionalLocationDetails", {
-						objectContext: objectContext.substring(1)
-
-					}, false);
-
-				}
-
-			},
-			showAlertNoObjectFound: function(equipmentNo) {
-				var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
-				MessageBox.show(this.getI18nTextReplace1("Dashboard-scanObjectTile-searchObjectNotFoundMsgText",equipmentNo), {
-					icon: MessageBox.Icon.NONE,
-					title: this.getI18nText("Dashboard-scanObjectTile-searchObjectNotFoundMsgTitleText"),
-					actions: [MessageBox.Action.OK],
-					defaultAction: MessageBox.Action.OK,
-					styleClass: bCompact ? "sapUiSizeCompact" : ""
-				});
 		},
-		
-		showAlertNotDevice: function(){
+		searchFuncLocWithId: function(equipId) {
+			var onDataReceived = {
+				success: function(oData, oResponse) {
+					var equipmentNo = oData.FunctionalLocation;
+					var isFuncLoc = true;
+					this.ShowEquipmentDetailsWithId(equipmentNo, isFuncLoc);
+				}.bind(this),
+				error: function(oData, oResponse) {
+					if (oData.statusCode === "404") {
+						this.showAlertNoObjectFound(equipId);
+
+					} else {
+						this.errorCallBackShowInPopUp();
+					}
+				}.bind(this)
+			};
+
+			this.getView().getModel().read("/FunctionalLocationsSet('" + equipId + "')", onDataReceived);
+		},
+
+		ShowEquipmentDetailsWithId: function(equipmentId, isFuncLoc) {
+
+			if (!isFuncLoc) {
+				var objectContext = "/EquipmentsSet('" + equipmentId + "')";
+
+				this.getRouter().navTo("equipmentDetails", {
+					objectContext: objectContext.substring(1)
+
+				}, false);
+			} else {
+				var objectContext = "/FunctionalLocationsSet('" + equipmentId + "')";
+				this.getRouter().navTo("functionalLocationDetails", {
+					objectContext: objectContext.substring(1)
+
+				}, false);
+
+			}
+
+		},
+		showAlertNoObjectFound: function(equipmentNo) {
 			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
-				MessageBox.show(this.getI18nText("Dashboard-scanObjectTile-isNotDeviceMsgText"), {
-					icon: MessageBox.Icon.NONE,
-					title: this.getI18nText("Dashboard-scanObjectTile-isNotDeviceMsgTitleText"),
-					actions: [MessageBox.Action.OK],
-					defaultAction: MessageBox.Action.OK,
-					styleClass: bCompact ? "sapUiSizeCompact" : ""
-				});
-			
+			MessageBox.show(this.getI18nTextReplace1("Dashboard-scanObjectTile-searchObjectNotFoundMsgText", equipmentNo), {
+				icon: MessageBox.Icon.NONE,
+				title: this.getI18nText("Dashboard-scanObjectTile-searchObjectNotFoundMsgTitleText"),
+				actions: [MessageBox.Action.OK],
+				defaultAction: MessageBox.Action.OK,
+				styleClass: bCompact ? "sapUiSizeCompact" : ""
+			});
+		},
+
+		showAlertNotDevice: function() {
+			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+			MessageBox.show(this.getI18nText("Dashboard-scanObjectTile-isNotDeviceMsgText"), {
+				icon: MessageBox.Icon.NONE,
+				title: this.getI18nText("Dashboard-scanObjectTile-isNotDeviceMsgTitleText"),
+				actions: [MessageBox.Action.OK],
+				defaultAction: MessageBox.Action.OK,
+				styleClass: bCompact ? "sapUiSizeCompact" : ""
+			});
+
 		},
 
 		onPressNotifications: function() {

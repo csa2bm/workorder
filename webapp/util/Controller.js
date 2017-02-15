@@ -1,7 +1,9 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"sap/ui/core/UIComponent"
-], function(Controller, UIComponent) {
+	"sap/ui/core/UIComponent",
+	"sap/ui/core/format/NumberFormat",
+	"sap/ui/core/format/DateFormat"
+], function(Controller, UIComponent, NumberFormat, DateFormat) {
 	"use strict";
 
 	return Controller.extend("com.2bm.mobileworkorder.util.Controller", {
@@ -28,10 +30,9 @@ sap.ui.define([
 		 * @returns {sap.ui.model.resource.ResourceModel} the resourceModel of the component
 		 */
 		getResourceBundle: function() {
-			if(sap.ui.getCore().getComponent(window.componentId).getModel("i18n")){
-			return sap.ui.getCore().getComponent(window.componentId).getModel("i18n").getResourceBundle();
-			}
-			else{
+			if (sap.ui.getCore().getComponent(window.componentId).getModel("i18n")) {
+				return sap.ui.getCore().getComponent(window.componentId).getModel("i18n").getResourceBundle();
+			} else {
 				return null;
 			}
 		},
@@ -145,7 +146,18 @@ sap.ui.define([
 			} else {
 				return false;
 			}
+		},
 
+		//Format float to correct localized format
+		formatFloatValue: function(value) {
+			var oNumberFormat = NumberFormat.getFloatInstance();
+			return oNumberFormat.format(value);
+		},
+
+		//Format date to correct localized format
+		formatDateValue: function(value) {
+			var oDateFormat = DateFormat.getDateInstance();
+			return oDateFormat.format(value);
 		}
 	});
 });

@@ -62,8 +62,35 @@ sap.ui.define([
 				}
 			}
 
-		 	//Set edit mode
-		 	this.updateEditModeModel(this.getView().getBindingContext().getObject().OrderStatus);
+			// //do we have this context loaded in our model? We should always have a timeregistration entry
+			// if (this.ExpandLoaded) { //this.getView().getBindingContext().getObject()) {
+
+			// 	//if yes, refresh the model to reflect in memory model any changes done remotely to the order
+			// 	this.getView().getBindingContext().getModel().refresh(); //using true as argument got strange errors to arise
+
+			//Set edit mode
+			if (this.getView().getBindingContext().getObject()) {
+				this.updateEditModeModel(this.getView().getBindingContext().getObject().OrderStatus);
+			}
+
+			// } else {
+			// 	var that = this;
+			// 	//if not, create the binding context with all the expands we need in this view
+			// 	var aExpand = ["OrderOperation", "OrderComponent", "OrderObject", "OrderAttachments", "OrderGoodsMovements"];
+
+			// 	this.getView().getModel().createBindingContext(contextPath, "", {
+			// 			expand: aExpand.toString()
+			// 		},
+			// 		function(oEvent2) {
+			// 			//var f = oEvent2;
+			// 			that.ExpandLoaded = true;
+
+			// 			//Set edit mode
+			// 			var orderStatus = that.getView().getBindingContext().getObject().OrderStatus;
+			// 			that.updateEditModeModel(orderStatus);
+
+			// 		}, true);
+			// }
 
 			var eventBus = sap.ui.getCore().getEventBus();
 			var data = {
@@ -115,11 +142,11 @@ sap.ui.define([
 						// Set the order status to "inProgress" and post it
 						var newStatus = "";
 						if (orderStatus === "INITIAL") {
-							newStatus = that.getI18nText("orderStatusInProgress");
+							newStatus = "INPROGRESS";
 						}
 						// Set the order status to "completed" and post it
 						else if (orderStatus === "INPROGRESS") {
-							newStatus = that.getI18nText("orderStatusCompleted");
+							newStatus = "COMPLETED";
 						} else {
 							return;
 						}
@@ -160,7 +187,7 @@ sap.ui.define([
 
 		updateEditModeModel: function(orderStatus) {
 			var orderStatusBool = false;
-			if (orderStatus === "COMPLETED"|| orderStatus === "INITIAL") {
+			if (orderStatus === "COMPLETED" || orderStatus === "INITIAL") {
 				orderStatusBool = false;
 			} else {
 				orderStatusBool = true;
@@ -256,12 +283,11 @@ sap.ui.define([
 			this._errorsView.open();
 		},
 
-		reAssignVisible : function(personelNumber)
-		{
+		reAssignVisible: function(personelNumber) {
 			if (this.getView().getModel("appInfoModel").getData().Persno === personelNumber)
 				return true;
 
-			return false;	
+			return false;
 		},
 
 		onOrderReAssignToUserButtonPressed: function(oEvent) {
@@ -454,11 +480,17 @@ sap.ui.define([
 
 							var eventBus = that.getEventBus();
 							eventBus.publish("TimeRegistrationTimerStopped", data);
-
+							
+							//Clear timeRegistrationTimerModel
 							that.getView().getModel("timeRegistrationTimerModel").getData().Started = false;
 							that.getView().getModel("timeRegistrationTimerModel").getData().OrderId = "";
 							that.getView().getModel("timeRegistrationTimerModel").getData().StartDateTime = "";
 							that.getView().getModel("timeRegistrationTimerModel").refresh();
+
+							var timeConfirmationsSubSection = that.getView().byId("timeConfirmationsSubSection").getId();
+							if (timeConfirmationsSubSection) {
+								that.getView().byId("ObjectPageLayout").scrollToSection(timeConfirmationsSubSection, 0, 0);
+							}
 						}
 					}
 				});
@@ -473,7 +505,14 @@ sap.ui.define([
 				this.getView().getModel("timeRegistrationTimerModel").getData().StartDateTime = new Date().toString();
 				this.getView().getModel("timeRegistrationTimerModel").refresh();
 
-				//TODO post userstatus change 
+				//Update 
+				var oContext = this.getView().getBindingContext();
+				var currentOrderStatus = oContext.getObject().OrderStatus;
+
+				if (currentOrderStatus === "INITIAL") {
+					this.getView().getModel().setProperty("OrderStatus", "INPROGRESS", oContext);
+					this.updateOrderStatus();
+				}
 
 				sap.m.MessageToast.show(this.getI18nText("WorkOrderDetails-StartWorkMessageToastText"));
 			}
