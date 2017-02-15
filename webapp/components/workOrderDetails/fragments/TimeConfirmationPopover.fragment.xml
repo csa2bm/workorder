@@ -7,10 +7,10 @@
 		<content>
 			<VBox>
 				<Label text="{i18n>WorkOrderDetails-TimeConfirmationPopover-Time}" design="Bold"/>
-				<Input id="WorkTimeConfirmationField" type="Number" placeholder="{i18n>WorkOrderDetails-TimeConfirmationPopover-TimeTextPlaceHolder}"
+				<Input id="WorkTimeConfirmationField" type="Text" placeholder="{i18n>WorkOrderDetails-TimeConfirmationPopover-TimeTextPlaceHolder}"
 					value="{path:'/ActWork' , type:'.typeTimeFormat'}"/>
 				<Label text="{i18n>WorkOrderDetails-TimeConfirmationPopover-Date}" design="Bold"/>
-				<DatePicker dateValue="{/ExecStartDate}"></DatePicker>
+				<DatePicker dateValue="{/ExecStartDate}" maxDate="{path:'/', formatter:'.getTodaysDaysDate' }"></DatePicker>
 				<Label />
 				<Button icon="sap-icon://delete" type="Reject" text="{i18n>WorkOrderDetails-TimeConfirmationPopover-DeleteButton}"
 					press="deleteTimeRegistration" visible="{path:'/type', formatter:'.isDeleteable' }"></Button>

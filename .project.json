@@ -7,7 +7,7 @@
   "build": {
     "targetFolder": "dist",
     "sourceFolder": "webapp",
-    "buildRequired": false,
+    "buildRequired": true,
     "lastBuildDateTime": "Sun, 12 Feb 2017 16:02:47 GMT"
   },
   "generation": [
@@ -192,9 +192,9 @@
         }
       },
       "windows": {
-        "selected": false,
+        "selected": true,
         "preferences": {
-          "Fullscreen": false,
+          "Fullscreen": true,
           "Orientation": "default",
           "ShowTitle": false,
           "LogLevel": ""
