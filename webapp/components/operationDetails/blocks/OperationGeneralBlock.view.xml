@@ -6,8 +6,8 @@
 			<f:content>
 				<Label text="{i18n>WorkOrderDetails-OperationGeneralBlock-AssignedToLabel}"/>
 				<VBox>
-					<Text text="{Fullname} - ({Username})"/>
-					<Text text="{Personresp}"/>
+					<Text text="{parts:[{path:'Fullname'}, {path:'Username'}],formatter:'.getFullname'}"/>
+					<Text text="{parts:[{path:'Personresp'}],formatter:'.checkResponibleValid'}"/>
 				</VBox>
 				<Label text="{i18n>WorkOrderDetails-OperationGeneralBlock-CompletedLabel}"/>
 				<VBox>

@@ -10,6 +10,20 @@ sap.ui.define([
 			} else {
 				return "sap-icon://circle-task";
 			}
+		},
+		checkResponibleValid: function(responsible){
+			var responsibleIntValue = parseInt(responsible);
+			if(responsibleIntValue !== 0){
+				return responsible;
+			}
+		},
+		getFullname:function(fullname, username){
+			if(fullname){
+				return fullname + " (" + username + ")";
+			}
+			else{
+				return this.getI18nText("WorkOrderDetails-OperationBlock-NoResponsibleAssigned");
+			}
 		}
 	});
 });
