@@ -30,7 +30,7 @@
 							<Text
 								text="{ActWork} {=${ActWork} === '1' ? ${i18n>WorkOrderDetails-TimeConfirmationsBlock-Hour} : ${i18n>WorkOrderDetails-TimeConfirmationsBlock-Hours}}"/>
 						</core:ExtensionPoint>
-						<Button id="editButton" visible="{path:'PersNo', formatter:'.editTimeConfirmationEnabled'}" icon="sap-icon://edit"
+						<Button id="editButton" enabled="{path:'PersNo', formatter:'.editTimeConfirmationEnabled'}" icon="sap-icon://edit"
 							press="updateTimeRegistration"/>
 					</cells>
 				</ColumnListItem>
