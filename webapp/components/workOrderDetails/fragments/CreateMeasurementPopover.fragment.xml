@@ -9,17 +9,17 @@
 		<buttons></buttons>
 		<content>
 			<VBox>
-				<Label text="Measuring Point" design="Bold" class="sapUiTinyMarginBottom"/>
+				<Label text="{i18n>WorkOrderDetails-MeasuringPointsBlock-PopOverMeasurementPointLabel}" design="Bold" class="sapUiTinyMarginBottom"/>
 				<Label text="{ViewModel>/Measpoint} - {ViewModel>/Descriptn}" class="sapUiSmallMarginBottom"/>
-				<Label text="Counter" design="Bold" class="sapUiTinyMarginBottom"/>
+				<Label text="{i18n>WorkOrderDetails-MeasuringPointsBlock-PopOverCounterLabel}" design="Bold" class="sapUiTinyMarginBottom"/>
 				<Label text="{parts:[{path:'ViewModel>/Counter'}],formatter:'.isCounterSet'}"
 					class="sapUiSmallMarginBottom"/>
-				<Label text="Minimum threshold" design="Bold" class="sapUiTinyMarginBottom"/>
+				<Label text="{i18n>WorkOrderDetails-MeasuringPointsBlock-PopOverMinimumThresholdLabel}" design="Bold" class="sapUiTinyMarginBottom"/>
 				<Label text="{parts:[{path:'ViewModel>/MinLimit', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}, {path:'ViewModel>/ValueMinLimit'}],formatter:'.showTextForMinValue'}"
 					class="sapUiSmallMarginBottom"/>
-				<Label text="Maximum threshold" design="Bold" class="sapUiTinyMarginBottom"/>
+				<Label text="{i18n>WorkOrderDetails-MeasuringPointsBlock-PopOverMaximumThresholdLabel}" design="Bold" class="sapUiTinyMarginBottom"/>
 				<Label text="{parts:[{path:'ViewModel>/MaxLimit', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}, {path:'ViewModel>/ValueMaxLimit'}],formatter:'.showTextForMaxValue'}" class="sapUiSmallMarginBottom"/>
-				<Label text="Enter reading" design="Bold" class="sapUiTinyMarginBottom"/>
+				<Label text="{i18n>WorkOrderDetails-MeasuringPointsBlock-PopOverReadingValueInputLabel}" design="Bold" class="sapUiTinyMarginBottom"/>
 				<HBox alignItems="Center">
 					<Input type="Number" width="16em"
 						value="{path : 'ViewModel>/RecordedValue', type : 'sap.ui.model.type.Float', formatOptions : {minIntegerDigits: 2}}"/>
