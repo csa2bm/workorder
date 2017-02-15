@@ -7,8 +7,8 @@
 		<content>
 			<VBox>
 				<Label text="{i18n>WorkOrderDetails-TimeConfirmationPopover-Time}" design="Bold"/>
-				<Input id="WorkTimeConfirmationField" type="Number" placeholder="{i18n>WorkOrderDetails-TimeConfirmationPopover-TimeTextPlaceHolder}"
-					value="{path:'/ActWork' , type:'.typeTimeFormat'}"/>
+				<Input id="WorkTimeConfirmationField" type="Text" placeholder="{i18n>WorkOrderDetails-TimeConfirmationPopover-TimeTextPlaceHolder}"
+					value="{path:'/ActWork' , type:'.typeTimeFormat'}" valueStateText="Hours must be between 0 and 24. Max one decimal."/>
 				<Label text="{i18n>WorkOrderDetails-TimeConfirmationPopover-Date}" design="Bold"/>
 				<DatePicker dateValue="{/ExecStartDate}" maxDate="{path:'/', formatter:'.getTodaysDaysDate' }"></DatePicker>
 				<Label />

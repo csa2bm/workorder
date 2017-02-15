@@ -27,9 +27,9 @@
 						<core:ExtensionPoint name="workOrderDetailTimeConfirmationsTableCells">
 							<ObjectIdentifier title="{path:'ExecStartDate', formatter:'.formatDateValue'}"/>
 							<Text text="{Fullname}"/>
-							<Text
-								text="{path:'ActWork', formatter:'.formatFloatValue'} {=${ActWork} === '1' ? ${i18n>WorkOrderDetails-TimeConfirmationsBlock-Hour} : ${i18n>WorkOrderDetails-TimeConfirmationsBlock-Hours}}"/>
-						<!--{path:'ActWork', formatter:'com.twobm.mobileworkorder.util.Formatter.formatFloatvalue'}-->
+							<!--<ObjectIdentifier title="{path:'RegistrationDate', type:'sap.ui.model.type.Date', formatOptions:'short'}"/>-->
+
+							<Text text="{path:'ActWork', formatter:'.formatFloatValue'} {=${ActWork} === '1' ? ${i18n>WorkOrderDetails-TimeConfirmationsBlock-Hour} : ${i18n>WorkOrderDetails-TimeConfirmationsBlock-Hours}}"/>
 						</core:ExtensionPoint>
 						<Button id="editButton" visible="{path:'PersNo', formatter:'.editTimeConfirmationEnabled'}" icon="sap-icon://edit"
 							press="updateTimeRegistration"/>
