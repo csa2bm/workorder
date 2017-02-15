@@ -21,7 +21,7 @@ sap.ui.define([
 
 			window.componentId = this.getId();
 			
-			//sap.ui.getCore().getConfiguration().setLanguage("da");
+			sap.ui.getCore().getConfiguration().setLanguage("da");
 			
 			// set the device model
 			this.setModel(models.createDeviceModel(), "device");
