@@ -332,6 +332,10 @@ sap.ui.define([
 				}, false);
 			}
 		},
+		
+		getDashBoardLogo : function(){
+			return jQuery.sap.getModulePath("com.twobm.mobileworkorder")  + "/images/DashboardLogo.png";
+		},
 
 		getLanguageFlag: function(uiLanguageCode) {
 			switch (uiLanguageCode) {

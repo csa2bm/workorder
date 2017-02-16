@@ -23,7 +23,7 @@
 					<FlexBox alignItems="Start" justifyContent="Start">
 						<items>
 							<core:ExtensionPoint name="dashboardAppNameTile">
-								<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" backgroundImage="images/DashboardLogo.png" frameType="TwoByOne">
+								<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" backgroundImage="{path: '', formatter:'.getDashBoardLogo' }" frameType="TwoByOne">
 									<tileContent>
 										<TileContent footer="" class="sapUiSmallMargin">
 											<content>

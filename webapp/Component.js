@@ -8,7 +8,10 @@ sap.ui.define([
 
 	return UIComponent.extend("com.twobm.mobileworkorder.Component", {
 		metadata: {
-			manifest: "json"
+			manifest: "json",
+			includes :[
+				"css/style.css"
+				]
 		},
 
 		/**
