@@ -331,6 +331,11 @@ sap.ui.define([
 					measurementContext: data.measurementContext
 				}, false);
 			}
+			else if('functionalLocation'.localeCompare(data.block) === 0){
+				this.getRouter().navTo("functionalLocationDetails", {
+					objectContext: data.objectContext
+				}, false);
+			}
 		},
 		
 		getDashBoardLogo : function(){
