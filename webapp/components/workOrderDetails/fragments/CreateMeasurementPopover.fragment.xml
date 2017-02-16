@@ -22,7 +22,7 @@
 				<Label text="{i18n>WorkOrderDetails-MeasuringPointsBlock-PopOverReadingValueInputLabel}" design="Bold" class="sapUiTinyMarginBottom"/>
 				<HBox alignItems="Center">
 					<Input type="Number" width="16em"
-						value="{path : 'ViewModel>/RecordedValue', type : 'sap.ui.model.type.Float', formatOptions : {minIntegerDigits: 2}}"/>
+						value="{ViewModel>/RecordedValue}"/>
 					<Label text="{ViewModel>/MeasUnit}" width="3em" class="sapUiSmallMarginBegin"/>
 				</HBox>
 			</VBox>
