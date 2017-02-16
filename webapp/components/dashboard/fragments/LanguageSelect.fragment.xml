@@ -1,0 +1,15 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<SelectDialog
+		title="Select Language"
+		class="sapUiPopupWithPadding"
+		items="{languagesModel>/Languages}"
+		search="handleTaskCodeSearch"
+		confirm="handleLanguageChanged"
+		cancel="handleValueHelpCloseCode">
+		<StandardListItem
+			title="{languagesModel>LanguageText}"
+			icon="{languagesModel>Image}" />
+	</SelectDialog>
+</core:FragmentDefinition>

@@ -21,7 +21,7 @@ sap.ui.define([
 
 			window.componentId = this.getId();
 			
-			sap.ui.getCore().getConfiguration().setLanguage("da");
+			//sap.ui.getCore().getConfiguration().setLanguage("da");
 			
 			// set the device model
 			this.setModel(models.createDeviceModel(), "device");
@@ -35,6 +35,9 @@ sap.ui.define([
 			
 			// set createTimeRegistrationTimerModel
 			this.setModel(models.createTimeRegistrationTimerModel(), "timeRegistrationTimerModel");
+			
+			// set createLanguagesModel
+			this.setModel(models.createLanguagesModel(), "languagesModel");
 
 			var appInfoModel = this.getModel("appInfoModel");
 			var syncStatusModel = this.getModel("syncStatusModel");

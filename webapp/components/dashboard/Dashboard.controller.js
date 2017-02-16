@@ -32,20 +32,13 @@ sap.ui.define([
 
 				this.getUserDetails();
 
-				//sap.ui.getCore().getConfiguration().setLanguage("en");
-
-				var oNumberFormat = NumberFormat.getFloatInstance();
-
-				//Show Browser and configuration language
+				// //Show Browser and configuration language
 				// sap.m.MessageToast.show(
 				// 	"Browser language: " + window.navigator.language + "\n" +
 				// 	"Core config language: " + sap.ui.getCore().getConfiguration().getLanguage() + "\n" +
 				// 	"Format locale: " + sap.ui.getCore().getConfiguration().getFormatLocale() + "\n" +
 				// 	"SAP Logon language: " + sap.ui.getCore().getConfiguration().getSAPLogonLanguage()
 				// );
-
-				//Show Browser and configuration language
-				//sap.m.MessageToast.show("Browser: " + window.navigator.language + " - Core Config: " + sap.ui.getCore().getConfiguration().getLanguage());
 			}
 
 			this.setContentInTiles();
@@ -338,6 +331,74 @@ sap.ui.define([
 					measurementContext: data.measurementContext
 				}, false);
 			}
+		},
+
+		getLanguageFlag: function(uiLanguageCode) {
+			switch (uiLanguageCode) {
+				case "cs-CZ":
+					return "images/flags/cz.png";
+				case "da":
+				case "da-DK":
+					return "images/flags/da.png";
+				case "de-DE":
+					return "images/flags/de.png";
+				case "en-UK":
+					return "images/flags/uk.png";
+				case "en-US":
+					return "images/flags/us.png";
+				case "es":
+				case "es-MX":
+					return "images/flags/es.png";
+				case "hu-HU":
+					return "images/flags/hu.png";
+				case "nn-NO":
+					return "images/flags/no.png";
+				case "sv-SE":
+					return "images/flags/se.png";
+				case "zh": //Chinese simplified
+					return "images/flags/zh.png";
+				default:
+					return "";
+			}
+		},
+
+		changeLanguage: function() {
+			// Create value help dialog if we dont have one
+			if (!this.changeLanguageDialog) {
+				this.changeLanguageDialog = sap.ui.xmlfragment(this.createId("ChangeLanguageDialog"),
+					"com.twobm.mobileworkorder.components.dashboard.fragments.LanguageSelect",
+					this
+				);
+				// Attach to view
+				this.getView().addDependent(this.changeLanguageDialog);
+			}
+			// Bind to parent code group so we show the correct codes
+			//this.changeLanguageDialog.bindElement(this.codeGroupBindingContext);
+			// Show dialog
+			this.changeLanguageDialog.open();
+		},
+
+		handleLanguageChanged: function(oEvent) {
+			// Get selected item
+			var selectedItem = oEvent.getParameter("selectedItem");
+			if (selectedItem) {
+
+				var langCode = selectedItem.getBindingContext("languagesModel").getObject().LanguageCode;
+
+				sap.ui.getCore().getConfiguration().setLanguage(langCode);
+
+				// Update values on model
+				this.getView().getModel("appInfoModel").setProperty("/UILanguage", langCode);
+
+				//Show Browser and configuration language
+				sap.m.MessageToast.show(
+					"Browser language: " + window.navigator.language + "\n" +
+					"Core config language: " + sap.ui.getCore().getConfiguration().getLanguage() + "\n" +
+					"Format locale: " + sap.ui.getCore().getConfiguration().getFormatLocale() + "\n" +
+					"SAP Logon language: " + sap.ui.getCore().getConfiguration().getSAPLogonLanguage()
+				);
+			}
 		}
+
 	});
 });

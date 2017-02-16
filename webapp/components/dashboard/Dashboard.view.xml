@@ -5,7 +5,13 @@
 		<Page title="{i18n>Dashboard-Title}" class="myBackgroundStyle">
 			<headerContent>
 				<core:ExtensionPoint name="dashboardHeaderItems">
+					<l:HorizontalLayout>
+						<Image visible="false" src="{path: 'appInfoModel>/UILanguage', formatter:'.getLanguageFlag' }" width="2em" height="2em" press="changeLanguage"
+							class="sapUiTinyMarginTop sapUiTinyMarginEnd"></Image>
+					</l:HorizontalLayout>
 					<l:HorizontalLayout visible="{device>/isHybridApp}">
+						<Image src="{path: 'appInfoModel>/UILanguage', formatter:'.getLanguageFlag' }" width="2em" height="2em" press="changeLanguage"
+							class="circular sapUiTinyMarginTop sapUiTinyMarginEnd"></Image>
 						<Image visible="{device>/isPhone}" src="{appInfoModel>/UserImage}" width="2em" height="2em" press="onSettings"
 							class="circular sapUiTinyMarginTop sapUiTinyMarginEnd"></Image>
 						<core:Icon visible="{device>/isNotPhone}" width="3em" height="3em" noTabStop="true" press="onSettings" src="sap-icon://action-settings"/>
