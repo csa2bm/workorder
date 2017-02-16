@@ -182,7 +182,7 @@ sap.ui.define([
 
 			var updatePath = "/OrderSet(Orderid='" + orderNo + "')";
 
-			this.getView().getModel().update(updatePath, dataUpdate, parameters);
+			this.getView().getModel().update(this.getView().getBindingContext().getPath(), dataUpdate, parameters);
 		},
 
 		updateEditModeModel: function(orderStatus) {
