@@ -9,10 +9,10 @@
 			noDataText="{i18n>WorkOrderDetails-TimeConfirmationsBlock-NoTimeRegistrations}">
 			<columns>
 				<core:ExtensionPoint name="workOrderDetailsTimeConfirmationsTableColumns">
-					<Column demandPopin="true" popinDisplay="Inline">
+					<Column demandPopin="true" popinDisplay="Inline" vAlign="Middle">
 						<Text text="{i18n>WorkOrderDetails-TimeConfirmationsBlock-DateColumn}"/>
 					</Column>
-					<Column demandPopin="true" popinDisplay="WithoutHeader">
+					<Column demandPopin="true" popinDisplay="WithoutHeader" vAlign="Middle">
 						<Text text="{i18n>WorkOrderDetails-TimeConfirmationsBlock-PersonColumn}"/>
 					</Column>
 					<Column demandPopin="true" popinDisplay="Inline" width="5em" vAlign="Middle">
@@ -25,13 +25,13 @@
 				<ColumnListItem type="Inactive">
 					<cells>
 						<core:ExtensionPoint name="workOrderDetailTimeConfirmationsTableCells">
-							<ObjectIdentifier title="{path:'ExecStartDate', formatter:'.formatDateValue'}"/>
+							<Text text="{path:'ExecStartDate', formatter:'.formatDateValue'}" />
 							<Text text="{Fullname}"/>
 							<!--<ObjectIdentifier title="{path:'RegistrationDate', type:'sap.ui.model.type.Date', formatOptions:'short'}"/>-->
 
 							<Text text="{path:'ActWork', formatter:'.formatFloatValue'} {=${ActWork} === '1' ? ${i18n>WorkOrderDetails-TimeConfirmationsBlock-Hour} : ${i18n>WorkOrderDetails-TimeConfirmationsBlock-Hours}}"/>
 						</core:ExtensionPoint>
-						<Button id="editButton" visible="{path:'PersNo', formatter:'.editTimeConfirmationEnabled'}" icon="sap-icon://edit"
+						<Button id="editButton" enabled="{path:'PersNo', formatter:'.editTimeConfirmationEnabled'}" icon="sap-icon://edit"
 							press="updateTimeRegistration"/>
 					</cells>
 				</ColumnListItem>
