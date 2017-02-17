@@ -9,9 +9,9 @@ sap.ui.define([
 	return UIComponent.extend("com.twobm.mobileworkorder.Component", {
 		metadata: {
 			manifest: "json",
-			includes :[
+			includes: [
 				"css/style.css"
-				]
+			]
 		},
 
 		/**
@@ -23,22 +23,22 @@ sap.ui.define([
 			UIComponent.prototype.init.apply(this, arguments);
 
 			window.componentId = this.getId();
-			
+
 			//sap.ui.getCore().getConfiguration().setLanguage("da");
-			
+
 			// set the device model
 			this.setModel(models.createDeviceModel(), "device");
 			// set sync model
 			this.setModel(models.createSyncModel(), "syncStatusModel");
 			// set settings model
 			this.setModel(models.createAppInfoModel(), "appInfoModel");
-			
+
 			// set createSelectObjectForNewNotificationModel model
 			this.setModel(models.createSelectObjectForNewNotificationModel(), "selectObjectForNewNotificationModel");
-			
+
 			// set createTimeRegistrationTimerModel
 			this.setModel(models.createTimeRegistrationTimerModel(), "timeRegistrationTimerModel");
-			
+
 			// set createLanguagesModel
 			this.setModel(models.createLanguagesModel(), "languagesModel");
 
@@ -85,6 +85,28 @@ sap.ui.define([
 
 				// Set value in htlm5 storage 
 				return oStorage.get("LastSyncTime");
+			} else {
+				return "";
+			}
+		},
+
+		getTimerRunningInfoInBrowserCache: function() {
+			jQuery.sap.require("jquery.sap.storage");
+			//Get Storage object to use
+			if (jQuery.sap.storage.isSupported()) {
+				var oStorage = jQuery.sap.storage(jQuery.sap.storage.Type.local);
+
+				var timerRunningInfo = oStorage.get("OrderTimer");
+				
+				if(!timerRunningInfo){
+					return "";
+				}
+				else{
+					return timerRunningInfo;
+				}
+				
+				// Set value in htlm5 storage 
+				return ;
 			} else {
 				return "";
 			}
