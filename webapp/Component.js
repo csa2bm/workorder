@@ -44,6 +44,11 @@ sap.ui.define([
 
 			var appInfoModel = this.getModel("appInfoModel");
 			var syncStatusModel = this.getModel("syncStatusModel");
+			var timeRegistrationTimerModel = this.getModel("timeRegistrationTimerModel");
+
+			//Set running timer info
+			timeRegistrationTimerModel.getData().OrderTimer = this.getTimerRunningInfoInBrowserCache();
+			timeRegistrationTimerModel.refresh();
 
 			if (sap.hybrid) {
 				// Configure status bar
@@ -97,16 +102,15 @@ sap.ui.define([
 				var oStorage = jQuery.sap.storage(jQuery.sap.storage.Type.local);
 
 				var timerRunningInfo = oStorage.get("OrderTimer");
-				
-				if(!timerRunningInfo){
+
+				if (!timerRunningInfo) {
 					return "";
-				}
-				else{
+				} else {
 					return timerRunningInfo;
 				}
-				
+
 				// Set value in htlm5 storage 
-				return ;
+				return;
 			} else {
 				return "";
 			}
