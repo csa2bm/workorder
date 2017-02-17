@@ -14,7 +14,7 @@
 						<Text text="{parts:[{path:'OrderStatus'}],formatter:'.getOrderStatusIconText'}"/>
 					</HBox>
 					<Label text="{i18n>WorkOrderDetails-GeneralBlock-AssignedTo}"/>
-					<Text text="{AssignedTo} ({Personresp})"/>
+					<Text text="{AssignedTo}\r\n({Personresp})"/>
 					<Label text="{i18n>WorkOrderDetails-GeneralBlock-Type}"/>
 					<Text text="{OrderType}"/>
 					<Label text="{i18n>WorkOrderDetails-GeneralBlock-Priority}"/>

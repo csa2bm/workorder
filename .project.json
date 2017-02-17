@@ -8,7 +8,7 @@
     "targetFolder": "dist",
     "sourceFolder": "webapp",
     "buildRequired": true,
-    "lastBuildDateTime": "Fri, 17 Feb 2017 09:04:42 GMT"
+    "lastBuildDateTime": "Fri, 17 Feb 2017 12:22:02 GMT"
   },
   "generation": [
     {
@@ -318,7 +318,7 @@
           "cloudBuild": true
         },
         "statusbar": {
-          "selected": true,
+          "selected": false,
           "registry": "cordova-plugin-statusbar",
           "localBuild": false,
           "cloudBuild": true
@@ -446,12 +446,6 @@
         }
       },
       "custom": {
-        "cordova-plugin-statusbar": {
-          "selected": true,
-          "registry": "cordova-plugin-statusbar",
-          "localBuild": true,
-          "registered": true
-        },
         "AppVersion": {
           "selected": true,
           "registry": "cordova-plugin-app-version",
@@ -462,6 +456,11 @@
           "registry": "phonegap-plugin-barcodescanner",
           "localBuild": true,
           "registered": true
+        },
+        "StatusBar": {
+          "selected": true,
+          "registry": "cordova-plugin-statusbar",
+          "localBuild": true
         }
       }
     }
