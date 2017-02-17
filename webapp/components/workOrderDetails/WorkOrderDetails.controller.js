@@ -480,12 +480,15 @@ sap.ui.define([
 
 							var eventBus = that.getEventBus();
 							eventBus.publish("TimeRegistrationTimerStopped", data);
-							
+
 							//Clear timeRegistrationTimerModel
 							that.getView().getModel("timeRegistrationTimerModel").getData().Started = false;
 							that.getView().getModel("timeRegistrationTimerModel").getData().OrderId = "";
 							that.getView().getModel("timeRegistrationTimerModel").getData().StartDateTime = "";
 							that.getView().getModel("timeRegistrationTimerModel").refresh();
+
+							//Update local storage variable
+							that.saveTimerRunningInfoInBrowserCache(false);
 
 							var timeConfirmationsSubSection = that.getView().byId("timeConfirmationsSubSection").getId();
 							if (timeConfirmationsSubSection) {
@@ -505,6 +508,9 @@ sap.ui.define([
 				this.getView().getModel("timeRegistrationTimerModel").getData().StartDateTime = new Date().toString();
 				this.getView().getModel("timeRegistrationTimerModel").refresh();
 
+				//Update local storage variable
+				this.saveTimerRunningInfoInBrowserCache(true);
+
 				//Update 
 				var oContext = this.getView().getBindingContext();
 				var currentOrderStatus = oContext.getObject().OrderStatus;
@@ -515,6 +521,22 @@ sap.ui.define([
 				}
 
 				sap.m.MessageToast.show(this.getI18nText("WorkOrderDetails-StartWorkMessageToastText"));
+			}
+		},
+
+		saveTimerRunningInfoInBrowserCache: function(started) {
+			jQuery.sap.require("jquery.sap.storage");
+
+			if (jQuery.sap.storage.isSupported()) {
+				//Get Storage object to use
+				var oStorage = jQuery.sap.storage(jQuery.sap.storage.Type.local);
+
+				if (started) {
+					// Set value in htlm5 storage 
+					oStorage.put("OrderTimer", this.getView().getModel("timeRegistrationTimerModel").getData());
+				} else {
+					oStorage.put("OrderTimer", null);
+				}
 			}
 		},
 
