@@ -11,6 +11,8 @@
 			<VBox>
 				<Label text="{i18n>WorkOrderDetails-MeasuringPointsBlock-PopOverMeasurementPointLabel}" design="Bold" class="sapUiTinyMarginBottom"/>
 				<Label text="{ViewModel>/Measpoint} - {ViewModel>/Descriptn}" class="sapUiSmallMarginBottom"/>
+				<Label text="{i18n>WorkOrderDetails-MeasuringPointsBlock-PopOverMeasurementPreviousReadingLabel}" design="Bold" class="sapUiTinyMarginBottom"/>
+				<Label text="{ViewModel>/LastReading} {ViewModel>/MeasUnit} ({ViewModel>/LastReadingBy})" class="sapUiSmallMarginBottom"/>
 				<Label text="{i18n>WorkOrderDetails-MeasuringPointsBlock-PopOverCounterLabel}" design="Bold" class="sapUiTinyMarginBottom"/>
 				<Label text="{parts:[{path:'ViewModel>/Counter'}],formatter:'.isCounterSet'}"
 					class="sapUiSmallMarginBottom"/>
