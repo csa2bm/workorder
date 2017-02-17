@@ -56,9 +56,9 @@ sap.ui.define([
 			if (sap.hybrid) {
 				// Configure status bar
 				if (window.cordova.require("cordova/platform").id === "ios") {
-					cordova.StatusBar.backgroundColorByName("white");
-					cordova.StatusBar.styleDefault();
-					cordova.StatusBar.overlaysWebView(false);
+					StatusBar.backgroundColorByName("white");
+					StatusBar.styleDefault();
+					StatusBar.overlaysWebView(false);
 				}
 
 				//Get appversion and app name

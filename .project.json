@@ -7,8 +7,8 @@
   "build": {
     "targetFolder": "dist",
     "sourceFolder": "webapp",
-    "buildRequired": true,
-    "lastBuildDateTime": "Fri, 17 Feb 2017 12:22:02 GMT"
+    "buildRequired": false,
+    "lastBuildDateTime": "Fri, 17 Feb 2017 14:18:51 GMT"
   },
   "generation": [
     {
@@ -320,8 +320,8 @@
         "statusbar": {
           "selected": false,
           "registry": "cordova-plugin-statusbar",
-          "localBuild": false,
-          "cloudBuild": true
+          "localBuild": true,
+          "cloudBuild": false
         },
         "compass": {
           "selected": false,
@@ -461,6 +461,12 @@
           "selected": true,
           "registry": "cordova-plugin-statusbar",
           "localBuild": true
+        },
+        "cordova-plugin-statusbar": {
+          "selected": false,
+          "registry": "cordova-plugin-statusbar",
+          "localBuild": true,
+          "registered": true
         }
       }
     }
