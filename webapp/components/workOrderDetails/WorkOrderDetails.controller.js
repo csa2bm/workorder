@@ -524,19 +524,15 @@ sap.ui.define([
 			}
 		},
 
-		saveTimerRunningInfoInBrowserCache: function(started) {
+		saveTimerRunningInfoInBrowserCache: function() {
 			jQuery.sap.require("jquery.sap.storage");
 
 			if (jQuery.sap.storage.isSupported()) {
 				//Get Storage object to use
 				var oStorage = jQuery.sap.storage(jQuery.sap.storage.Type.local);
 
-				if (started) {
-					// Set value in htlm5 storage 
-					oStorage.put("OrderTimer", this.getView().getModel("timeRegistrationTimerModel").getData());
-				} else {
-					oStorage.put("OrderTimer", null);
-				}
+				// Set value in htlm5 storage 
+				oStorage.put("OrderTimer", this.getView().getModel("timeRegistrationTimerModel").getData());
 			}
 		},
 
