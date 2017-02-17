@@ -47,8 +47,11 @@ sap.ui.define([
 			var timeRegistrationTimerModel = this.getModel("timeRegistrationTimerModel");
 
 			//Set running timer info
-			timeRegistrationTimerModel.setData(this.getTimerRunningInfoInBrowserCache());
-			timeRegistrationTimerModel.refresh();
+			var timerRunningCache = this.getTimerRunningInfoInBrowserCache();
+			if (timerRunningCache) {
+				timeRegistrationTimerModel.setData(timerRunningCache);
+				timeRegistrationTimerModel.refresh();
+			}
 
 			if (sap.hybrid) {
 				// Configure status bar
@@ -104,7 +107,7 @@ sap.ui.define([
 				var timerRunningInfo = oStorage.get("OrderTimer");
 
 				if (!timerRunningInfo) {
-					return "";
+					return null;
 				} else {
 					return timerRunningInfo;
 				}
