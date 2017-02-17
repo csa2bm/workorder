@@ -47,7 +47,7 @@ sap.ui.define([
 			var timeRegistrationTimerModel = this.getModel("timeRegistrationTimerModel");
 
 			//Set running timer info
-			timeRegistrationTimerModel.getData().OrderTimer = this.getTimerRunningInfoInBrowserCache();
+			timeRegistrationTimerModel.setData(this.getTimerRunningInfoInBrowserCache());
 			timeRegistrationTimerModel.refresh();
 
 			if (sap.hybrid) {

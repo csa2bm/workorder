@@ -488,6 +488,7 @@ sap.ui.define([
 							that.getView().getModel("timeRegistrationTimerModel").refresh();
 
 							//Update local storage variable
+							that.saveTimerRunningInfoInBrowserCache(false);
 
 							var timeConfirmationsSubSection = that.getView().byId("timeConfirmationsSubSection").getId();
 							if (timeConfirmationsSubSection) {
@@ -506,6 +507,9 @@ sap.ui.define([
 				this.getView().getModel("timeRegistrationTimerModel").getData().OrderId = currentOrderId;
 				this.getView().getModel("timeRegistrationTimerModel").getData().StartDateTime = new Date().toString();
 				this.getView().getModel("timeRegistrationTimerModel").refresh();
+
+				//Update local storage variable
+				this.saveTimerRunningInfoInBrowserCache(true);
 
 				//Update 
 				var oContext = this.getView().getBindingContext();
