@@ -160,29 +160,26 @@ sap.ui.define([
 		},
 
 		updateOrderStatus: function() {
-			var orderNo = this.getView().getBindingContext().getObject().Orderid;
-			var that = this;
-
-			var parameters = {
+			this.getView().setBusy(true);
+			this.getView().getModel().update(this.getView().getBindingContext().getPath(), {
+				OrderStatus: this.getView().getBindingContext().getObject().OrderStatus
+			}, {
 				success: function(oData, response) {
-					var orderStatus = that.getView().getBindingContext().getObject().OrderStatus;
+					var orderStatus = this.getView().getBindingContext().getObject().OrderStatus;
 
-					that.updateEditModeModel(orderStatus);
+					this.updateEditModeModel(orderStatus);
 
 					if (orderStatus === "COMPLETED") {
-						that.navigateBack();
+						this.navigateBack();
 					}
-				},
-				error: that.errorCallBackShowInPopUp
-			};
-
-			var dataUpdate = {
-				OrderStatus: this.getView().getBindingContext().getObject().OrderStatus
-			};
-
-			var updatePath = "/OrderSet(Orderid='" + orderNo + "')";
-
-			this.getView().getModel().update(this.getView().getBindingContext().getPath(), dataUpdate, parameters);
+					
+					this.getView().setBusy(false);
+				}.bind(this),
+				error: function(oError){
+					this.errorCallBackShowInPopUp(oError);
+					this.getView().setBusy(false);
+				}.bind(this)
+			});
 		},
 
 		updateEditModeModel: function(orderStatus) {
@@ -369,13 +366,19 @@ sap.ui.define([
 		},
 
 		assignOrderToPersonelNumber: function(personelNumber) {
+			this.getView().setBusy(true);
 			this.getView().getModel().update(this.getView().getBindingContext().getPath(), {
 				Personresp: personelNumber
 			}, {
 				success: function(oData, response) {
 					this.navigateBack();
+					this.getView().setBusy(false);
 				}.bind(this),
-				error: this.errorCallBackShowInPopUp
+				error: function (oError)
+				{
+					this.errorCallBackShowInPopUp(oError);
+					this.getView().setBusy(false);
+				}.bind(this)
 			});
 		},
 
