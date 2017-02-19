@@ -1,0 +1,13 @@
+[{
+	"ID": "ID 1",
+	"collection": "collection 1",
+	"title": "title 1",
+	"updated": "/Date(1458486276000)/",
+	"changeType": "changeType 1",
+	"entriesOfInterest": 3212,
+	"recipient": "recipient 1",
+	"__metadata": {
+		"uri": "NotificationCollection('ID%201')",
+		"type": "/TOBMAS/WORKORDER_SRV.Notification"
+	}
+}]

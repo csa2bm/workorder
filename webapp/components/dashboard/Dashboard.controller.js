@@ -330,27 +330,29 @@ sap.ui.define([
 				this.getRouter().navTo("measurementPointDetails", {
 					measurementContext: data.measurementContext
 				}, false);
-			}
-			else if('functionalLocation'.localeCompare(data.block) === 0){
+			} else if ('functionalLocation'.localeCompare(data.block) === 0) {
 				this.getRouter().navTo("functionalLocationDetails", {
 					objectContext: data.objectContext
 				}, false);
 			}
 		},
-		
-		getDashBoardLogo : function(){
-			return jQuery.sap.getModulePath("com.twobm.mobileworkorder")  + "/images/DashboardLogo.png";
+
+		getDashBoardLogo: function() {
+			return jQuery.sap.getModulePath("com.twobm.mobileworkorder") + "/images/DashboardLogo.png";
 		},
 
 		getLanguageFlag: function(uiLanguageCode) {
 			switch (uiLanguageCode) {
+				case "cs":
 				case "cs-CZ":
 					return "images/flags/cz.png";
 				case "da":
 				case "da-DK":
 					return "images/flags/da.png";
+				case "de":
 				case "de-DE":
 					return "images/flags/de.png";
+				case "en":
 				case "en-UK":
 					return "images/flags/uk.png";
 				case "en-US":
@@ -358,10 +360,13 @@ sap.ui.define([
 				case "es":
 				case "es-MX":
 					return "images/flags/es.png";
+				case "hu":
 				case "hu-HU":
 					return "images/flags/hu.png";
+				case "no":
 				case "nn-NO":
 					return "images/flags/no.png";
+				case "sv":
 				case "sv-SE":
 					return "images/flags/se.png";
 				case "zh": //Chinese simplified

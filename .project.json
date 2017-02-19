@@ -480,9 +480,9 @@
     "bFacade": true
   },
   "mockpreview": {
-    "mockUri": "/ID3/sap/opu/odata/tobmas/WORKORDER_SRV",
-    "metadataFilePath": "",
-    "loadJSONFiles": false,
+    "mockUri": "/ID3/sap/opu/odata/tobmas/WORKORDER_SRV/",
+    "metadataFilePath": "localService/metadata.xml",
+    "loadJSONFiles": true,
     "loadCustomRequests": false,
     "mockRequestsFilePath": ""
   },

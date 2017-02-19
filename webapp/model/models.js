@@ -80,7 +80,7 @@ sap.ui.define([
 			var oModel = new JSONModel({
 				Languages: [{
 					LanguageText: "Český",
-					LanguageCode: "cs-CZ",
+					LanguageCode: "cs",
 					Image: "images/flags/cz.png"
 				}, {
 					LanguageText: "中国传统",
@@ -88,11 +88,11 @@ sap.ui.define([
 					Image: "images/flags/zh.png"
 				}, {
 					LanguageText: "Dansk",
-					LanguageCode: "da-DK",
+					LanguageCode: "da",
 					Image: "images/flags/da.png"
 				}, {
 					LanguageText: "Deutsch",
-					LanguageCode: "de-DE",
+					LanguageCode: "de",
 					Image: "images/flags/de.png"
 				}, {
 					LanguageText: "English (UK)",
@@ -112,15 +112,15 @@ sap.ui.define([
 					Image: "images/flags/es.png"
 				}, {
 					LanguageText: "Magyar",
-					LanguageCode: "hu-HU",
+					LanguageCode: "hu",
 					Image: "images/flags/hu.png"
 				}, {
 					LanguageText: "Norsk",
-					LanguageCode: "nn-NO",
+					LanguageCode: "no",
 					Image: "images/flags/no.png"
 				}, {
 					LanguageText: "Svenska",
-					LanguageCode: "sv-SE",
+					LanguageCode: "sv",
 					Image: "images/flags/se.png"
 				}]
 			});
