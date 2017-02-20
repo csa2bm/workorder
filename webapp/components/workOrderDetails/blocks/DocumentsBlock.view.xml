@@ -15,17 +15,17 @@
 				<core:ExtensionPoint name="workOrderDetailsDocumentsTableColumns">
 					<Column demandPopin="true" popinDisplay="WithoutHeader" vAlign="Middle">
 						<header>
-							<Label text="Filename"/>
+							<Label text="{i18n>WorkOrderDetails-DocumentsBlock-FilenameColumn}"/>
 						</header>
 					</Column>
 					<Column demandPopin="true" popinDisplay="WithoutHeader" vAlign="Middle" minScreenWidth="Small" width="8rem">
 						<header>
-							<Label text="Created Date"/>
+							<Label text="{i18n>WorkOrderDetails-DocumentsBlock-LastUpdatedDateTimeColumn}"/>
 						</header>
 					</Column>
 					<Column demandPopin="true" popinDisplay="WithoutHeader" vAlign="Middle" minScreenWidth="Small" width="8rem">
 						<header>
-							<Label text="Created By"/>
+							<Label text="{i18n>WorkOrderDetails-DocumentsBlock-LastUpdatedByColumn}"/>
 						</header>
 					</Column>
 				</core:ExtensionPoint>
