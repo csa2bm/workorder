@@ -1,0 +1,73 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
+	<Dialog stretch="{device>/isPhone}" contentWidth="100%" contentHeight="100%" showHeader="false">
+		<NavContainer id="navCon">
+			<Page id="master" showNavButton="false" title="{i18n>ComponentSearchPageHeaderLabel}">
+				<content>
+					<SearchField liveChange="searchComponentLive" search="searchComponentPress" placeholder="{i18n>ComponentSearchFieldPlaceHolder}"/>
+					<List id="componentSearchResultsList" items="{/MaterialsSet}">
+						<StandardListItem title="{Description}" description="{Matnr}" info="{Quantity} {UOM}" type="Active"
+							press="onProductSelectedFromSearchResult"/>
+					</List>
+				</content>
+				<footer>
+					<Toolbar>
+						<content>
+							<ToolbarSpacer></ToolbarSpacer>
+							<Button ariaDescribedBy="genericButtonDescription" press="onClose" text="{i18n>ComponentIssueDialogClose}"></Button>
+						</content>
+					</Toolbar>
+				</footer>
+			</Page>
+			<Page id="detail" showNavButton="true" navButtonPress="onNavBackMaterialSelectPopUp"
+				title="{i18n>ComponentSearchSelectionPageHeaderLabel}">
+				<content>
+					<l:BlockLayout id="BlockLayout">
+						<l:BlockLayoutRow>
+							<l:BlockLayoutCell width="50%">
+								<VBox>
+									<Label text="{i18n>ComponentSearchResultMaterialDesription}"/>
+									<Text id="inpMatDescription" text="{ComponentDetailsModel>/SelectedMaterial/Description}" class="sapUiSmallMarginBottom"/>
+									<Label text="{i18n>ComponentSearchResultMatNumberLabel}"/>
+									<Text text="{ComponentDetailsModel>/SelectedMaterial/Matnr}" class="sapUiSmallMarginBottom"/>
+								</VBox>
+							</l:BlockLayoutCell>
+							<l:BlockLayoutCell width="50%" visible="true">
+								<Image id="componentImage" src="{parts:[{path:'ComponentDetailsModel>/SelectedMaterial/Matnr'}],formatter:'.formatMaterialImageUrl'}"
+									visible="true" width="150px"/>
+							</l:BlockLayoutCell>
+						</l:BlockLayoutRow>
+					</l:BlockLayout>
+					<Panel>
+						<headerToolbar>
+							<Toolbar >
+								
+							</Toolbar>
+						</headerToolbar>
+						<Input id="inpPreviousQuantity" visible="false"/>
+						<VBox class="sapUiSmallMarginBegin">
+							<Label text="{i18n>ComponentIssuePanelTotalQuantity}"/>
+							<HBox>
+								<Input id="inpQuantity" type="Number"
+									value="{ path : 'ReqQuantity', type : 'sap.ui.model.type.Integer', formatOptions : { groupingEnabled : true }, constraints : { minimum : 0, maximum : 1000000 }}"
+								    valueStateText="{i18n>ComponentQuantityMustBeMoreThanZero}" change="recalculateTotal"/>
+								<Label text="" class="sapUiSmallMarginEnd"/>
+								<Button icon="sap-icon://less" press="decreaseComponentToOrder" class="sapUiSmallMarginEnd"></Button>
+								<Button icon="sap-icon://add" press="increaseComponentToOrder"></Button>
+							</HBox>
+						</VBox>
+					</Panel>
+				</content>
+				<footer>
+					<Toolbar>
+						<content>
+							<ToolbarSpacer></ToolbarSpacer>
+							<Button press="onOK"
+								text="OK" type="Emphasized"></Button>
+							<Button ariaDescribedBy="genericButtonDescription" press="onClose" text="{i18n>ComponentIssueDialogClose}"></Button>
+						</content>
+					</Toolbar>
+				</footer>
+			</Page>
+		</NavContainer>
+	</Dialog>
+</core:FragmentDefinition>
