@@ -8,7 +8,7 @@
 			<Button visible="true" class="sapUiSmallMarginEnd" icon="sap-icon://add" press="uploadPhotoFromFileSystem"></Button>
 			<!--<Button id="cameraButton" visible="true" class="sapUiSmallMarginEnd" icon="sap-icon://camera" press="capturePhoto"></Button>-->
 		</l:HorizontalLayout>
-		<Table id="attachmentsList" items="{path: 'viewModel>/items'}" noDataText="No Documents">
+		<Table id="attachmentsList" items="{path: '/DocumentsSet'}" noDataText="No Documents">
 			<columns>
 				<!-- Icon column -->
 				<Column demandPopin="true" popinDisplay="WithoutHeader" vAlign="Middle" width="2rem"/>
@@ -36,10 +36,10 @@
 					<cells>
 						<core:Icon id="documentListImageIcon" class="sapUiSmallMarginEnd" noTabStop="true" size="2em" src="sap-icon://document"/>
 						<core:ExtensionPoint name="workOrderDetailsDocumentsTableCells">
-							<ObjectIdentifier text="{viewModel>Description}"/>
+							<ObjectIdentifier text="{Description}" title="{Filename}"/>
 							<!--<Link text="{Filename}" press="clickPreviewAttachment"/>-->
-							<ObjectIdentifier text="{parts:[{path:'viewModel>CreateDate'}]}"/>
-							<ObjectIdentifier text="{viewModel>CreatedBy}"/>
+							<ObjectIdentifier text="{parts:[{path:'Chnageby'}]}" title="{Fullname}"/>
+							<ObjectIdentifier text="{Changedate}"/>
 						</core:ExtensionPoint>
 						<Button id="downloadButton" class="sapUiMediumMarginEnd" text="Download" icon="sap-icon://download" press="downloadDocument"></Button>
 					</cells>
