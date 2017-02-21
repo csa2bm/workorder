@@ -38,8 +38,8 @@
 						<core:ExtensionPoint name="workOrderDetailsDocumentsTableCells">
 							<ObjectIdentifier text="{Description}" title="{Filename}"/>
 							<!--<Link text="{Filename}" press="clickPreviewAttachment"/>-->
+							<ObjectIdentifier text="{path: 'Changedate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"/>
 							<ObjectIdentifier text="{parts:[{path:'Chnageby'}]}" title="{Fullname}"/>
-							<ObjectIdentifier text="{Changedate}"/>
 						</core:ExtensionPoint>
 						<Button id="downloadButton" class="sapUiMediumMarginEnd" text="Download" icon="sap-icon://download" press="downloadDocument"></Button>
 					</cells>

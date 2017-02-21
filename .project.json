@@ -415,7 +415,7 @@
           "cloudBuild": true
         },
         "attachmentviewer": {
-          "selected": false,
+          "selected": true,
           "registry": "kapsel-plugin-attachmentviewer",
           "localBuild": false,
           "cloudBuild": true
