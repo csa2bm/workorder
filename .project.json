@@ -7,8 +7,8 @@
   "build": {
     "targetFolder": "dist",
     "sourceFolder": "webapp",
-    "buildRequired": true,
-    "lastBuildDateTime": "Fri, 17 Feb 2017 14:18:51 GMT"
+    "buildRequired": false,
+    "lastBuildDateTime": "Wed, 22 Feb 2017 09:52:25 GMT"
   },
   "generation": [
     {
@@ -264,13 +264,13 @@
           "cloudBuild": true
         },
         "file": {
-          "selected": false,
+          "selected": true,
           "registry": "cordova-plugin-file",
           "localBuild": true,
           "cloudBuild": true
         },
         "transfer": {
-          "selected": false,
+          "selected": true,
           "registry": "cordova-plugin-file-transfer",
           "localBuild": true,
           "cloudBuild": true
