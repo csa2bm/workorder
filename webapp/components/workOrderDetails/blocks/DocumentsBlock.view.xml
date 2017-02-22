@@ -30,6 +30,7 @@
 					</Column>
 				</core:ExtensionPoint>
 				<Column demandPopin="true" popinDisplay="WithoutHeader" vAlign="Middle" width="8rem"/>
+				<Column demandPopin="true" popinDisplay="WithoutHeader" vAlign="Middle" width="5rem"/>
 			</columns>
 			<items>
 				<ColumnListItem type="Inactive" press="clickPreviewDocument">
@@ -42,6 +43,7 @@
 							<ObjectIdentifier text="{parts:[{path:'Chnageby'}]}" title="{Fullname}"/>
 						</core:ExtensionPoint>
 						<Button id="downloadButton" class="sapUiMediumMarginEnd" text="Download" icon="sap-icon://download" press="downloadDocument"></Button>
+						<Button id="viewButton" class="sapUiMediumMarginEnd" text="View" icon="sap-icon://show" press="viewDocument"></Button>
 					</cells>
 				</ColumnListItem>
 			</items>
