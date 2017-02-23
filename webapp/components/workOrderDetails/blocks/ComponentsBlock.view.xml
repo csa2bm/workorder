@@ -22,6 +22,7 @@
 					<Text text="{i18n>WorkOrderDetails-ComponentsBlock-WithdrawnColumn}"/>
 				</Column>
 			</core:ExtensionPoint>
+			<Column demandPopin="false" width="3.5em" vAlign="Middle"></Column>
 		</columns>
 		<items>
 			<ColumnListItem>
@@ -31,6 +32,8 @@
 						<Text text="{ReqQuantity}"/>
 						<Text text="{WithdQuan}"/>
 					</core:ExtensionPoint>
+					<Button id="editButton" enabled="{path:'PersNo', formatter:'.editTimeConfirmationEnabled'}" icon="sap-icon://edit"
+							press="onEdit"/>
 				</cells>
 			</ColumnListItem>
 		</items>

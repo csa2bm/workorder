@@ -18,7 +18,7 @@
 					</Toolbar>
 				</footer>
 			</Page>
-			<Page id="detail" showNavButton="true" navButtonPress="onNavBackMaterialSelectPopUp"
+			<Page id="detail" showNavButton="{ComponentDetailsModel>/IsCreate}" navButtonPress="onNavBackMaterialSelectPopUp"
 				title="{i18n>ComponentSearchSelectionPageHeaderLabel}">
 				<content>
 					<l:BlockLayout id="BlockLayout">
@@ -48,11 +48,11 @@
 							<Label text="{i18n>ComponentIssuePanelTotalQuantity}"/>
 							<HBox>
 								<Input id="inpQuantity" type="Number"
-									value="{ path : 'ReqQuantity', type : 'sap.ui.model.type.Integer', formatOptions : { groupingEnabled : true }, constraints : { minimum : 0, maximum : 1000000 }}"
+									value="{ path : 'ReqQuantity', type : 'sap.ui.model.type.String', formatOptions : { groupingEnabled : true }, constraints : { minimum : 0, maximum : 1000000 }}"
 								    valueStateText="{i18n>ComponentQuantityMustBeMoreThanZero}" change="recalculateTotal"/>
 								<Label text="" class="sapUiSmallMarginEnd"/>
-								<Button icon="sap-icon://less" press="decreaseComponentToOrder" class="sapUiSmallMarginEnd"></Button>
-								<Button icon="sap-icon://add" press="increaseComponentToOrder"></Button>
+								<Button icon="sap-icon://less" press="onDecreaseQuantity" class="sapUiSmallMarginEnd"></Button>
+								<Button icon="sap-icon://add" press="onIncreaseQuantity"></Button>
 							</HBox>
 						</VBox>
 					</Panel>
@@ -60,6 +60,8 @@
 				<footer>
 					<Toolbar>
 						<content>
+							<Button icon="sap-icon://delete" type="Reject" text="{i18n>NotificationDetails-ActivityPopover-DeleteButton}" press="onDelete"
+				visible="!{ViewModel>/IsCreate}"></Button>
 							<ToolbarSpacer></ToolbarSpacer>
 							<Button press="onOK"
 								text="OK" type="Emphasized"></Button>
