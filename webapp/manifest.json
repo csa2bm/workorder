@@ -361,7 +361,12 @@
 			"EmployeesSet": {
 				"dataSource": "WORKORDER_SRV",
 				"path": "/EmployeesSet"
+			},
+			"DocumentsSet":{
+				"dataSource": "WORKORDER_SRV",
+				"path": "/DocumentsSet"
 			}
+			
 		}
 	},
 	"sap.platform.hcp": {

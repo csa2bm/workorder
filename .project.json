@@ -8,7 +8,7 @@
     "targetFolder": "dist",
     "sourceFolder": "webapp",
     "buildRequired": true,
-    "lastBuildDateTime": "Fri, 17 Feb 2017 14:18:51 GMT"
+    "lastBuildDateTime": "Wed, 22 Feb 2017 10:38:15 GMT"
   },
   "generation": [
     {
@@ -264,13 +264,13 @@
           "cloudBuild": true
         },
         "file": {
-          "selected": false,
+          "selected": true,
           "registry": "cordova-plugin-file",
           "localBuild": true,
           "cloudBuild": true
         },
         "transfer": {
-          "selected": false,
+          "selected": true,
           "registry": "cordova-plugin-file-transfer",
           "localBuild": true,
           "cloudBuild": true
@@ -415,7 +415,7 @@
           "cloudBuild": true
         },
         "attachmentviewer": {
-          "selected": false,
+          "selected": true,
           "registry": "kapsel-plugin-attachmentviewer",
           "localBuild": false,
           "cloudBuild": true
