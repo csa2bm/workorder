@@ -56,8 +56,8 @@
 		"dependencies": {
 			"minUI5Version": "1.38.8",
 			"libs": {
-				"sap.ui.core": {},
 				"sap.m": {},
+				"sap.ui.core": {},
 				"sap.ui.layout": {},
 				"sap.ushell": {}
 			}
@@ -362,11 +362,10 @@
 				"dataSource": "WORKORDER_SRV",
 				"path": "/EmployeesSet"
 			},
-			"DocumentsSet":{
+			"DocumentsSet": {
 				"dataSource": "WORKORDER_SRV",
 				"path": "/DocumentsSet"
 			}
-			
 		}
 	},
 	"sap.platform.hcp": {
