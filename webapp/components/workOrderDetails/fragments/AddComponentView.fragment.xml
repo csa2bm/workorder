@@ -1,18 +1,80 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
 	<Dialog stretch="{device>/isPhone}" contentWidth="100%" contentHeight="100%" showHeader="false">
 		<NavContainer id="navCon">
-			<Page id="bom" showNavButton="false" title="{i18n>ComponentSearchPageHeaderLabel}">
+			<Page id="selectObject" showNavButton="false" title="Select object">
 				<content>
-					<SearchField liveChange="searchComponentLive" search="searchComponentPress" placeholder="{i18n>ComponentSearchFieldPlaceHolder}"/>
-					<List id="bomList" items="{/MaterialsSet}">
-						<StandardListItem title="{Description}" description="{Matnr}" info="{Quantity} {UOM}" type="Active"
-							press="onProductSelectedFromSearchResult"/>
-					</List>
+					<Table id="idProductsTable" items="{ path: 'OrderObject', sorter: { path: 'FunclocDisp', descending: false}}"
+						noDataText="{i18n>WorkOrderDetails-ObjectsBlock-NoEquipment}">
+						<columns>
+							<core:ExtensionPoint name="workOrderDetailsObjectTableColumns">
+								<Column>
+								</Column>
+								<Column>
+								</Column>
+							</core:ExtensionPoint>
+							<Column width="1.5em" vAlign="Middle"></Column>
+						</columns>
+						<items>
+							<ColumnListItem type="Active" press="onSelectObject">
+								<cells>
+									<core:ExtensionPoint name="workOrderDetailObjectTableCells">
+											<VBox>
+											<Text text="{Funcldescr}" class="sapUiTinyMarginBottom" />
+											<Text text="{FunclocDisp}"/>
+										</VBox>
+											<VBox>
+											<Text text="{Equidescr}" class="sapUiTinyMarginBottom"/>
+											<Text text="{Equipment}"/>
+										</VBox>
+									</core:ExtensionPoint>
+									<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
 				</content>
 				<footer>
 					<Toolbar>
 						<content>
-							<Button ariaDescribedBy="genericButtonDescription" press="onGoToMaterialMaster" text="Search Material Master"></Button>
+							<Button ariaDescribedBy="genericButtonDescription" press="onSearchMaterialMaster" text="Search Material Master"></Button>
+							<ToolbarSpacer></ToolbarSpacer>
+							<Button ariaDescribedBy="genericButtonDescription" press="onClose" text="{i18n>ComponentIssueDialogClose}"></Button>
+						</content>
+					</Toolbar>
+				</footer>
+			</Page>
+			<Page id="bom" showNavButton="true" title="Bill of Materials" navButtonPress="onNavBackFromBom">
+				<content>
+					<Table id="idBomTable" items="{ path: 'EquipmentBomsSet'}" noDataText="{i18n>WorkOrderDetails-ObjectsBlock-NoEquipment}">
+						<columns>
+							<core:ExtensionPoint name="workOrderDetailsObjectTableColumns">
+								<Column></Column>
+								<Column width="10em" vAlign="Middle"></Column>
+								<Column width="5em" vAlign="Middle"></Column>
+							</core:ExtensionPoint>
+							<Column width="1.5em" vAlign="Middle"></Column>
+						</columns>
+						<items>
+							<ColumnListItem type="Active" press="onProductSelectedFromSearchResult">
+								<cells>
+									<core:ExtensionPoint name="workOrderDetailObjectTableCells">
+										<VBox>
+											<Text text="{Description}" class="sapUiTinyMarginBottom"/>
+											<Text text="{Matnr}"/>
+										</VBox>
+										<Text text="N - Non stock" />
+										<Text text="{Quantity} {UOM}"/>
+									</core:ExtensionPoint>
+									<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+				<footer>
+					<Toolbar>
+						<content>
+							<Button ariaDescribedBy="genericButtonDescription" press="onSearchMaterialMaster" text="Search Material Master"></Button>
 							<ToolbarSpacer></ToolbarSpacer>
 							<Button ariaDescribedBy="genericButtonDescription" press="onClose" text="{i18n>ComponentIssueDialogClose}"></Button>
 						</content>
@@ -22,10 +84,29 @@
 			<Page id="materialMaster" showNavButton="true" title="{i18n>ComponentSearchPageHeaderLabel}" navButtonPress="onNavBackMaterialSelectPopUp">
 				<content>
 					<SearchField liveChange="searchComponentLive" search="searchComponentPress" placeholder="{i18n>ComponentSearchFieldPlaceHolder}"/>
-					<List id="componentSearchResultsList" items="{/MaterialsSet}">
-						<StandardListItem title="{Description}" description="{Matnr}" info="{Quantity} {UOM}" type="Active"
-							press="onProductSelectedFromSearchResult"/>
-					</List>
+					<Table id="idMaterialMasterTable" items="{ path: '/MaterialsSet'}" noDataText="{i18n>WorkOrderDetails-ObjectsBlock-NoEquipment}">
+						<columns>
+							<core:ExtensionPoint name="workOrderDetailsObjectTableColumns">
+								<Column></Column>
+								<Column width="10em" vAlign="Middle"></Column>
+							</core:ExtensionPoint>
+							<Column width="1.5em" vAlign="Middle"></Column>
+						</columns>
+						<items>
+							<ColumnListItem type="Active" press="onProductSelectedFromSearchResult">
+								<cells>
+									<core:ExtensionPoint name="workOrderDetailObjectTableCells">
+										<VBox>
+											<Text text="{Description}" class="sapUiTinyMarginBottom"/>
+											<Text text="{Matnr}"/>
+										</VBox>
+										<Text text="N - Non stock" />
+									</core:ExtensionPoint>
+									<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
 				</content>
 				<footer>
 					<Toolbar>
@@ -36,7 +117,6 @@
 					</Toolbar>
 				</footer>
 			</Page>
-		
 			<Page id="detail" showNavButton="{ComponentDetailsModel>/IsCreate}" navButtonPress="onNavBackMaterialSelectPopUp"
 				title="{i18n>ComponentSearchSelectionPageHeaderLabel}">
 				<content>
@@ -58,9 +138,7 @@
 					</l:BlockLayout>
 					<Panel>
 						<headerToolbar>
-							<Toolbar >
-								
-							</Toolbar>
+							<Toolbar ></Toolbar>
 						</headerToolbar>
 						<Input id="inpPreviousQuantity" visible="false"/>
 						<VBox class="sapUiSmallMarginBegin">
@@ -68,7 +146,7 @@
 							<HBox>
 								<Input id="inpQuantity" type="Number"
 									value="{ path : 'ReqQuantity', type : 'sap.ui.model.type.String', formatOptions : { groupingEnabled : true }, constraints : { minimum : 0, maximum : 1000000 }}"
-								    valueStateText="{i18n>ComponentQuantityMustBeMoreThanZero}" change="recalculateTotal"/>
+									valueStateText="{i18n>ComponentQuantityMustBeMoreThanZero}" change="recalculateTotal"/>
 								<Label text="" class="sapUiSmallMarginEnd"/>
 								<Button icon="sap-icon://less" press="onDecreaseQuantity" class="sapUiSmallMarginEnd"></Button>
 								<Button icon="sap-icon://add" press="onIncreaseQuantity"></Button>
@@ -80,10 +158,9 @@
 					<Toolbar>
 						<content>
 							<Button icon="sap-icon://delete" type="Reject" text="{i18n>NotificationDetails-ActivityPopover-DeleteButton}" press="onDelete"
-			visible="{parts:[{path:'ComponentDetailsModel>/IsCreate'}],formatter:'.deleteVisibleFormatter'}"></Button>
+								visible="{parts:[{path:'ComponentDetailsModel>/IsCreate'}],formatter:'.deleteVisibleFormatter'}"></Button>
 							<ToolbarSpacer></ToolbarSpacer>
-							<Button press="onOK"
-								text="OK" type="Emphasized"></Button>
+							<Button press="onOK" text="OK" type="Emphasized"></Button>
 							<Button ariaDescribedBy="genericButtonDescription" press="onClose" text="{i18n>ComponentIssueDialogClose}"></Button>
 						</content>
 					</Toolbar>
