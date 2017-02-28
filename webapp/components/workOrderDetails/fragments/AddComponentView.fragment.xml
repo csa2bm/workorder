@@ -1,12 +1,12 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
 	<Dialog stretch="{device>/isPhone}" contentWidth="100%" contentHeight="100%" showHeader="false">
 		<NavContainer id="navCon">
-			<Page id="selectObject" showNavButton="false" title="Select object">
+			<Page id="selectObject" showNavButton="false" title="{i18n>ComponentAdd-ObjectSelect-Title}">
 				<content>
 					<Table id="idProductsTable" items="{ path: 'OrderObject', sorter: { path: 'FunclocDisp', descending: false}}"
-						noDataText="{i18n>WorkOrderDetails-ObjectsBlock-NoEquipment}">
+						noDataText="{i18n>ComponentAdd-ObjectSelect-NoData}">
 						<columns>
-							<core:ExtensionPoint name="workOrderDetailsObjectTableColumns">
+							<core:ExtensionPoint name="componentAddObjectTableColumns">
 								<Column>
 								</Column>
 								<Column>
@@ -17,7 +17,7 @@
 						<items>
 							<ColumnListItem type="Active" press="onSelectObject">
 								<cells>
-									<core:ExtensionPoint name="workOrderDetailObjectTableCells">
+									<core:ExtensionPoint name="componentAddObjectTableCells">
 											<VBox>
 											<Text text="{Funcldescr}" class="sapUiTinyMarginBottom" />
 											<Text text="{FunclocDisp}"/>
@@ -36,20 +36,19 @@
 				<footer>
 					<Toolbar>
 						<content>
-							<Button ariaDescribedBy="genericButtonDescription" press="onSearchMaterialMaster" text="Search Material Master"></Button>
+							<Button ariaDescribedBy="genericButtonDescription" press="onSearchMaterialMaster" text="{i18n>ComponentAdd-ObjectSelect-SearchMaterialMaster}"></Button>
 							<ToolbarSpacer></ToolbarSpacer>
-							<Button ariaDescribedBy="genericButtonDescription" press="onClose" text="{i18n>ComponentIssueDialogClose}"></Button>
+							<Button ariaDescribedBy="genericButtonDescription" press="onClose" text="{i18n>ComponentAdd-ObjectSelect-Close}"></Button>
 						</content>
 					</Toolbar>
 				</footer>
 			</Page>
-			<Page id="bom" showNavButton="true" title="Bill of Materials" navButtonPress="onNavBackFromBom">
+			<Page id="bom" showNavButton="true" title="{i18n>ComponentAdd-BOM-Title}" navButtonPress="onNavBackFromBom">
 				<content>
-					<Table id="idBomTable" items="{ path: 'EquipmentBomsSet'}" noDataText="{i18n>WorkOrderDetails-ObjectsBlock-NoEquipment}">
+					<Table id="idBomTable" items="{ path: 'EquipmentBomsSet'}" noDataText="{i18n>ComponentAdd-BOM-NoData}">
 						<columns>
-							<core:ExtensionPoint name="workOrderDetailsObjectTableColumns">
+							<core:ExtensionPoint name="componentAddBOMTableColumns">
 								<Column></Column>
-								<Column width="10em" vAlign="Middle"></Column>
 								<Column width="5em" vAlign="Middle"></Column>
 							</core:ExtensionPoint>
 							<Column width="1.5em" vAlign="Middle"></Column>
@@ -57,12 +56,11 @@
 						<items>
 							<ColumnListItem type="Active" press="onProductSelectedFromSearchResult">
 								<cells>
-									<core:ExtensionPoint name="workOrderDetailObjectTableCells">
+									<core:ExtensionPoint name="componentAddBOMTableCells">
 										<VBox>
 											<Text text="{Description}" class="sapUiTinyMarginBottom"/>
 											<Text text="{Matnr}"/>
 										</VBox>
-										<Text text="N - Non stock" />
 										<Text text="{Quantity} {UOM}"/>
 									</core:ExtensionPoint>
 									<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
@@ -74,9 +72,9 @@
 				<footer>
 					<Toolbar>
 						<content>
-							<Button ariaDescribedBy="genericButtonDescription" press="onSearchMaterialMaster" text="Search Material Master"></Button>
+							<Button ariaDescribedBy="genericButtonDescription" press="onSearchMaterialMaster" text="{i18n>ComponentAdd-ObjectSelect-SearchMaterialMaster}"></Button>
 							<ToolbarSpacer></ToolbarSpacer>
-							<Button ariaDescribedBy="genericButtonDescription" press="onClose" text="{i18n>ComponentIssueDialogClose}"></Button>
+							<Button ariaDescribedBy="genericButtonDescription" press="onClose" text="{i18n>ComponentAdd-ObjectSelect-Close}"></Button>
 						</content>
 					</Toolbar>
 				</footer>
@@ -84,23 +82,21 @@
 			<Page id="materialMaster" showNavButton="true" title="{i18n>ComponentSearchPageHeaderLabel}" navButtonPress="onNavBackMaterialSelectPopUp">
 				<content>
 					<SearchField liveChange="searchComponentLive" search="searchComponentPress" placeholder="{i18n>ComponentSearchFieldPlaceHolder}"/>
-					<Table id="idMaterialMasterTable" items="{ path: '/MaterialsSet'}" noDataText="{i18n>WorkOrderDetails-ObjectsBlock-NoEquipment}">
+					<Table id="idMaterialMasterTable" items="{ path: '/MaterialsSet'}" noDataText="{i18n>ComponentSearchNoData}">
 						<columns>
-							<core:ExtensionPoint name="workOrderDetailsObjectTableColumns">
+							<core:ExtensionPoint name="componentAddMaterialTableColumns">
 								<Column></Column>
-								<Column width="10em" vAlign="Middle"></Column>
 							</core:ExtensionPoint>
 							<Column width="1.5em" vAlign="Middle"></Column>
 						</columns>
 						<items>
 							<ColumnListItem type="Active" press="onProductSelectedFromSearchResult">
 								<cells>
-									<core:ExtensionPoint name="workOrderDetailObjectTableCells">
+									<core:ExtensionPoint name="componentAddMaterialTableCells">
 										<VBox>
 											<Text text="{Description}" class="sapUiTinyMarginBottom"/>
 											<Text text="{Matnr}"/>
 										</VBox>
-										<Text text="N - Non stock" />
 									</core:ExtensionPoint>
 									<core:Icon src="sap-icon://slim-arrow-right" color="Gray"/>
 								</cells>
