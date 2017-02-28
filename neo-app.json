@@ -7,7 +7,7 @@
 			"name": "ID3",
 			"entryPath": "/sap/opu/odata"
 		},
-		"description": "skovtest"
+		"description": "ID3"
 	}, {
 		"path": "/resources",
 		"target": {
