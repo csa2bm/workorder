@@ -136,6 +136,20 @@ sap.ui.define([
 				}
 			}
 		},
+		
+		errorBatchCallBackShowInPopUp: function(oError) {
+
+			if (oError) {
+				if (oError.body) {
+					var errorCode = JSON.parse(oError.body).error.code;
+					var errorMessage = JSON.parse(oError.body).error.message.value;
+
+					sap.m.MessageBox.error("Error: " + errorCode + " - " + errorMessage);
+				} else {
+					sap.m.MessageBox.error("Error: " + oError.message);
+				}
+			}
+		},
 		readOnly: function(oContext, oModel) {
 
 			var orderStatus = oModel.getProperty("OrderStatus", oContext);

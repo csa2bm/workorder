@@ -1,14 +1,13 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout"
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:u="sap.ui.unified"
 	controllerName="com.twobm.mobileworkorder.components.workOrderDetails.blocks.DocumentsBlock" xmlns:html="http://www.w3.org/1999/xhtml">
 	<l:VerticalLayout class="sapUiSmallMarginEnd" width="100%">
 		<l:HorizontalLayout >
 			<!--<u:FileUploader id="customFileUploader" icon="sap-icon://add" iconOnly="true"
 				buttonOnly="true" uploadStart="uploadStartedFileUploader" uploadOnChange="false" uploadComplete="onUploadCompleteFileUploader" 
 				class="sapUiSmallMarginEnd" change="onChangeFileUploader" />-->
-			<Button visible="true" class="sapUiSmallMarginEnd" icon="sap-icon://add" press="uploadPhotoFromFileSystem"></Button>
-			<!--<Button id="cameraButton" visible="true" class="sapUiSmallMarginEnd" icon="sap-icon://camera" press="capturePhoto"></Button>-->
+			<u:FileUploader class="sapUiSmallMarginEnd" id="customFileUploader" iconOnly="true" icon="sap-icon://add" buttonOnly="true" change="onFileSelected" useMultipart ="false"/>
 		</l:HorizontalLayout>
-		<Table id="attachmentsList" items="{path: '/DocumentsSet'}" noDataText="No Documents">
+		<Table id="attachmentsList" items="{path: 'DocumentsSet'}" noDataText="No Documents">
 			<columns>
 				<!-- Icon column -->
 				<Column demandPopin="true" popinDisplay="WithoutHeader" vAlign="Middle" width="2rem"/>
@@ -30,6 +29,7 @@
 					</Column>
 				</core:ExtensionPoint>
 				<Column demandPopin="true" popinDisplay="WithoutHeader" vAlign="Middle" width="8rem"/>
+				<Column demandPopin="true" popinDisplay="WithoutHeader" vAlign="Middle" width="5rem"/>
 			</columns>
 			<items>
 				<ColumnListItem type="Inactive" press="clickPreviewDocument">
@@ -38,10 +38,11 @@
 						<core:ExtensionPoint name="workOrderDetailsDocumentsTableCells">
 							<ObjectIdentifier text="{Description}" title="{Filename}"/>
 							<!--<Link text="{Filename}" press="clickPreviewAttachment"/>-->
+							<ObjectIdentifier text="{path: 'Changedate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"/>
 							<ObjectIdentifier text="{parts:[{path:'Chnageby'}]}" title="{Fullname}"/>
-							<ObjectIdentifier text="{Changedate}"/>
 						</core:ExtensionPoint>
-						<Button id="downloadButton" class="sapUiMediumMarginEnd" text="Download" icon="sap-icon://download" press="downloadDocument"></Button>
+						<Button id="downloadButton" class="sapUiMediumMarginEnd" text="Download" icon="sap-icon://download" press="downloadDocument" visible="true"></Button>
+						<Button id="viewButton" class="sapUiMediumMarginEnd" text="View" icon="sap-icon://show" press="viewDocument" visible="true"></Button>
 					</cells>
 				</ColumnListItem>
 			</items>
