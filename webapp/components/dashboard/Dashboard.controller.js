@@ -67,17 +67,19 @@ sap.ui.define([
 		getUserDetails: function() {
 			var parametersUserDetails = {
 				success: function(oData, oResponse) {
-					this.getView().getModel("appInfoModel").getData().UserFullName = oData.results[0].Fullname;
-					this.getView().getModel("appInfoModel").getData().UserFirstName = oData.results[0].Firstname;
-					this.getView().getModel("appInfoModel").getData().UserName = oData.results[0].Username;
-					this.getView().getModel("appInfoModel").getData().UserPosition = oData.results[0].Position;
-					this.getView().getModel("appInfoModel").getData().Persno = oData.results[0].Persno;
+					if (oData.results.length > 0) {
+						this.getView().getModel("appInfoModel").getData().UserFullName = oData.results[0].Fullname;
+						this.getView().getModel("appInfoModel").getData().UserFirstName = oData.results[0].Firstname;
+						this.getView().getModel("appInfoModel").getData().UserName = oData.results[0].Username;
+						this.getView().getModel("appInfoModel").getData().UserPosition = oData.results[0].Position;
+						this.getView().getModel("appInfoModel").getData().Persno = oData.results[0].Persno;
 
-					if (sap.hybrid) {
-						this.getView().getModel("appInfoModel").getData().UserImage = oData.results[0].__metadata.media_src;
-					} else {
-						this.getView().getModel("appInfoModel").getData().UserImage = this.getView().getModel().sServiceUrl +
-							"/UserDetailsSet('" + this.getView().getModel("appInfoModel").getData().UserName + "')/$value";
+						if (sap.hybrid) {
+							this.getView().getModel("appInfoModel").getData().UserImage = oData.results[0].__metadata.media_src;
+						} else {
+							this.getView().getModel("appInfoModel").getData().UserImage = this.getView().getModel().sServiceUrl +
+								"/UserDetailsSet('" + this.getView().getModel("appInfoModel").getData().UserName + "')/$value";
+						}
 					}
 
 					this.getView().getModel("appInfoModel").refresh();
