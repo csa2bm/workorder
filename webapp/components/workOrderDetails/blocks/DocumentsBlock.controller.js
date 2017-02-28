@@ -76,6 +76,27 @@ sap.ui.define([
 					});
 
 			}
+		},
+		onFileSelected: function(oEvent) {
+
+			var oFileUploader = this.getView().byId("customFileUploader");
+
+			var serviceUrl = this.getView().getModel().sServiceUrl + this.getView().getBindingContext().getPath() + "/DocumentsSet";
+
+			oFileUploader.addHeaderParameter(new sap.ui.unified.FileUploaderParameter({
+				name: "x-csrf-token",
+				value: this.getView().getModel().getSecurityToken()
+			}));
+
+			oFileUploader.addHeaderParameter(new sap.ui.unified.FileUploaderParameter({
+				name: "slug",
+				value: oFileUploader.getValue()
+			}));
+
+			oFileUploader.setSendXHR(true);
+			oFileUploader.setUploadUrl(serviceUrl);
+			oFileUploader.upload();
+			oFileUploader.destroyHeaderParameters();
 		}
 
 		/*
@@ -103,4 +124,4 @@ sap.ui.define([
 		*/
 
 	});
-}); 
+});
