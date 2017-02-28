@@ -81,7 +81,7 @@
 			</Page>
 			<Page id="materialMaster" showNavButton="true" title="{i18n>ComponentSearchPageHeaderLabel}" navButtonPress="onNavBackMaterialSelectPopUp">
 				<content>
-					<SearchField liveChange="searchComponentLive" search="searchComponentPress" placeholder="{i18n>ComponentSearchFieldPlaceHolder}"/>
+					<SearchField liveChange="searchMaterialLive" search="searchMaterialPress" placeholder="{i18n>ComponentSearchFieldPlaceHolder}"/>
 					<Table id="idMaterialMasterTable" items="{ path: '/MaterialsSet'}" noDataText="{i18n>ComponentSearchNoData}">
 						<columns>
 							<core:ExtensionPoint name="componentAddMaterialTableColumns">
