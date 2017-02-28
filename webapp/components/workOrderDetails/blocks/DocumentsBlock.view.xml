@@ -1,12 +1,11 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout"
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:u="sap.ui.unified"
 	controllerName="com.twobm.mobileworkorder.components.workOrderDetails.blocks.DocumentsBlock" xmlns:html="http://www.w3.org/1999/xhtml">
 	<l:VerticalLayout class="sapUiSmallMarginEnd" width="100%">
 		<l:HorizontalLayout >
 			<!--<u:FileUploader id="customFileUploader" icon="sap-icon://add" iconOnly="true"
 				buttonOnly="true" uploadStart="uploadStartedFileUploader" uploadOnChange="false" uploadComplete="onUploadCompleteFileUploader" 
 				class="sapUiSmallMarginEnd" change="onChangeFileUploader" />-->
-			<Button visible="true" class="sapUiSmallMarginEnd" icon="sap-icon://add" press="uploadPhotoFromFileSystem"></Button>
-			<!--<Button id="cameraButton" visible="true" class="sapUiSmallMarginEnd" icon="sap-icon://camera" press="capturePhoto"></Button>-->
+			<u:FileUploader class="sapUiSmallMarginEnd" id="customFileUploader" iconOnly="true" icon="sap-icon://add" buttonOnly="true" change="onFileSelected"/>
 		</l:HorizontalLayout>
 		<Table id="attachmentsList" items="{path: '/DocumentsSet'}" noDataText="No Documents">
 			<columns>
