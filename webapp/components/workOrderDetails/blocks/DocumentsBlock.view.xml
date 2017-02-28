@@ -5,7 +5,7 @@
 			<!--<u:FileUploader id="customFileUploader" icon="sap-icon://add" iconOnly="true"
 				buttonOnly="true" uploadStart="uploadStartedFileUploader" uploadOnChange="false" uploadComplete="onUploadCompleteFileUploader" 
 				class="sapUiSmallMarginEnd" change="onChangeFileUploader" />-->
-			<u:FileUploader class="sapUiSmallMarginEnd" id="customFileUploader" iconOnly="true" icon="sap-icon://add" buttonOnly="true" change="onFileSelected"/>
+			<u:FileUploader class="sapUiSmallMarginEnd" id="customFileUploader" iconOnly="true" icon="sap-icon://add" buttonOnly="true" change="onFileSelected" useMultipart ="false"/>
 		</l:HorizontalLayout>
 		<Table id="attachmentsList" items="{path: 'DocumentsSet'}" noDataText="No Documents">
 			<columns>
