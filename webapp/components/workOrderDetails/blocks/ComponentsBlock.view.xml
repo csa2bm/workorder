@@ -15,6 +15,9 @@
 				<Column>
 					<Text text="{i18n>WorkOrderDetails-ComponentsBlock-ComponentColumn}"/>
 				</Column>
+				<Column width="10em" vAlign="Middle">
+					<Text text="{i18n>WorkOrderDetails-ComponentsBlock-StatusColumn}"/>
+				</Column>
 				<Column width="5em" vAlign="Middle" hAlign="Center">
 					<Text text="{i18n>WorkOrderDetails-ComponentsBlock-ReservedColumn}"/>
 				</Column>
@@ -29,6 +32,7 @@
 				<cells>
 					<core:ExtensionPoint name="workOrderDetailsComponentTableCells">
 						<ObjectIdentifier text="{Material}" title="{MaterialDescription}"/>
+						<Text text="{parts:[{path:'Status'}],formatter:'.formatComponentStatus'}"/>
 						<Text text="{ReqQuantity}"/>
 						<Text text="{WithdQuan}"/>
 					</core:ExtensionPoint>

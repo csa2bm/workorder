@@ -17,7 +17,7 @@
 		"ach": "ach",
 		"dataSources": {
 			"WORKORDER_SRV": {
-				"uri": "/ID3/sap/opu/odata/tobmas/WORKORDER_SRV/",
+				"uri": "/sap/opu/odata/tobmas/WORKORDER_SRV/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0",

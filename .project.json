@@ -53,7 +53,7 @@
         },
         "originOdata": {
           "name": "WORKORDER_SRV",
-          "serviceUrl": "/ID3/sap/opu/odata/tobmas/WORKORDER_SRV/"
+          "serviceUrl": "/sap/opu/odata/tobmas/WORKORDER_SRV/"
         },
         "oDataType": "smpodata"
       }
@@ -485,7 +485,7 @@
     "bFacade": true
   },
   "mockpreview": {
-    "mockUri": "/ID3/sap/opu/odata/tobmas/WORKORDER_SRV/",
+    "mockUri": "/sap/opu/odata/tobmas/WORKORDER_SRV/",
     "metadataFilePath": "localService/metadata.xml",
     "loadJSONFiles": true,
     "loadCustomRequests": false,
@@ -494,6 +494,6 @@
   "hcpdeploy": {
     "account": "a2b30ffcb",
     "name": "comtwobmmobileworkorder",
-    "lastVersionWeTriedToDeploy": "1.0.14"
+    "lastVersionWeTriedToDeploy": "1.1.4"
   }
 }
