@@ -6,7 +6,7 @@
 			<headerContent>
 				<core:ExtensionPoint name="dashboardHeaderItems">
 					<l:HorizontalLayout>
-						<Image visible="false" src="{path: 'appInfoModel>/UILanguage', formatter:'.getLanguageFlag' }" width="2em" height="2em" press="changeLanguage"
+						<Image visible="true" src="{path: 'appInfoModel>/UILanguage', formatter:'.getLanguageFlag' }" width="2em" height="2em" press="changeLanguage"
 							class="sapUiTinyMarginTop sapUiTinyMarginEnd"></Image>
 					</l:HorizontalLayout>
 					<l:HorizontalLayout visible="{device>/isHybridApp}">
