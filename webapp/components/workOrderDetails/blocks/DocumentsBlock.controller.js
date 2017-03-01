@@ -92,7 +92,11 @@ sap.ui.define([
 				name: "slug",
 				value: oFileUploader.getValue()
 			}));
-
+			
+			oFileUploader.addHeaderParameter(new sap.ui.unified.FileUploaderParameter({
+				name: "content-type",
+				value: oEvent.getParameters().files[0].type
+			}));
 			oFileUploader.setSendXHR(true);
 			oFileUploader.setUploadUrl(serviceUrl);
 			oFileUploader.upload();
