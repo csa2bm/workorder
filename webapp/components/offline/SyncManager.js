@@ -5,7 +5,9 @@ sap.ui.define([
 	"use strict";
 	return {
 		needsSync: false,
-
+        isSyncing: false,
+        extraSyncNeeded: false,
+        
 		start: function(router) {
 			// Attach online / offline events
 			document.addEventListener("online", this.onConnected.bind(this), false);
@@ -65,6 +67,15 @@ sap.ui.define([
 		sync: function() {
 			// Only sync when there is a connection
 			if (sap.hybrid.SMP.isOnline) {
+                
+                if (this.isSyncing)
+                {
+                    this.extraSyncNeeded = true;
+                    return;
+                }
+                
+                this.isSyncing = true;
+                
 				// Show sync indicator
 				this.setSyncIndicators(true);
 				// Start sync
@@ -83,6 +94,14 @@ sap.ui.define([
 
 						this.saveLastSyncTimeInBrowserCache(syncStatusModel.getData().LastSyncTime);
 
+                        this.isSyncing = false;
+                    
+                        if (this.extraSyncNeeded)
+                        {
+                            this.extraSyncNeeded = false;
+                            this.syncIfNeeded();
+                        }
+                    
 						// Hide sync indicator
 						this.setSyncIndicators(false);
 
@@ -96,6 +115,8 @@ sap.ui.define([
 							this.showMessage("Error during sync: " + error);
 						}
 
+                        this.isSyncing = false;
+                    
 						// Hide sync indicator
 						this.setSyncIndicators(false);
 					}.bind(this),

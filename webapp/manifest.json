@@ -365,6 +365,10 @@
 			"DocumentsSet": {
 				"dataSource": "WORKORDER_SRV",
 				"path": "/DocumentsSet"
+			},
+			"EquipmentBomSet": {
+				"dataSource": "WORKORDER_SRV",
+				"path": "/EquipmentBomSet"
 			}
 		}
 	},
