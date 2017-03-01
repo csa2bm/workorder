@@ -33,27 +33,32 @@ sap.ui.define([
 			var directoryUrl;
 
 			if (isHybridApp) {
-
-				var platformName = window.cordova.require("cordova/platform").id;
-				if (platformName === "ios") {
-					directoryUrl = cordova.file.documentsDirectory;
-				} else if (platformName === "windows") {
-					directoryUrl = cordova.file.dataDirectory;
+				//Check device is online
+				if (sap.hybrid.SMP.isOnline) {
+					var platformName = window.cordova.require("cordova/platform").id;
+					if (platformName === "ios") {
+						directoryUrl = cordova.file.documentsDirectory;
+					} else if (platformName === "windows") {
+						directoryUrl = cordova.file.dataDirectory;
+					}
+					var fullpath = directoryUrl + encodeURI(currentObject.Filename);
+					fileTransfer.download(
+						uri,
+						fullpath,
+						function(entry) {
+							console.log("download complete: " + entry.toURL());
+						},
+						function(error) {
+							console.log("download error source " + error.source);
+							console.log("download error target " + error.target);
+							console.log("download error code" + error.code);
+						},
+						false, {}
+					);
+				} else {
+					sap.m.MessageToast.show("Device is offline. Try again later");
+					return;
 				}
-				var fullpath = directoryUrl + encodeURI(currentObject.Filename);
-				fileTransfer.download(
-					uri,
-					fullpath,
-					function(entry) {
-						console.log("download complete: " + entry.toURL());
-					},
-					function(error) {
-						console.log("download error source " + error.source);
-						console.log("download error target " + error.target);
-						console.log("download error code" + error.code);
-					},
-					false, {}
-				);
 			} else {
 				window.open(uri);
 			}
@@ -78,31 +83,19 @@ sap.ui.define([
 			}
 		},
 		onFileSelected: function(oEvent) {
-			//Check device is online
-			if (sap.hybrid.SMP.isOnline) {
-				var oFileUploader = this.getView().byId("customFileUploader");
+			var isHybridApp = this.getView().getModel("device").getData().isHybridApp;
+			var contentType = oEvent.getParameters().files[0].type;
 
-				var serviceUrl = this.getView().getModel().sServiceUrl + this.getView().getBindingContext().getPath() + "/DocumentsSet";
-
-				oFileUploader.addHeaderParameter(new sap.ui.unified.FileUploaderParameter({
-					name: "x-csrf-token",
-					value: this.getView().getModel().getSecurityToken()
-				}));
-
-				oFileUploader.addHeaderParameter(new sap.ui.unified.FileUploaderParameter({
-					name: "slug",
-					value: oFileUploader.getValue()
-				}));
-
-				oFileUploader.addHeaderParameter(new sap.ui.unified.FileUploaderParameter({
-					name: "content-type",
-					value: oEvent.getParameters().files[0].type
-				}));
-				oFileUploader.setSendXHR(true);
-				oFileUploader.setUploadUrl(serviceUrl);
-				oFileUploader.upload();
+			if (isHybridApp) {
+				//Check device is online
+				if (sap.hybrid.SMP.isOnline) {
+					this.sendUploadRequest(contentType);
+				} else {
+					sap.m.MessageToast.show("Device is offline. Try again later");
+					return;
+				}
 			} else {
-				sap.m.MessageToast.show("Device is offline. Try again later");
+				this.sendUploadRequest(contentType);
 			}
 		},
 		//Before upload started
@@ -117,6 +110,31 @@ sap.ui.define([
 
 			this.getView().byId("attachmentsList").getBinding("items").refresh(true);
 
+		},
+
+		sendUploadRequest: function(contentType) {
+			var oFileUploader = this.getView().byId("customFileUploader");
+
+			var serviceUrl = this.getView().getModel().sServiceUrl + this.getView().getBindingContext().getPath() + "/DocumentsSet";
+
+			oFileUploader.addHeaderParameter(new sap.ui.unified.FileUploaderParameter({
+				name: "x-csrf-token",
+				value: this.getView().getModel().getSecurityToken()
+			}));
+
+			oFileUploader.addHeaderParameter(new sap.ui.unified.FileUploaderParameter({
+				name: "slug",
+				value: oFileUploader.getValue()
+			}));
+
+			oFileUploader.addHeaderParameter(new sap.ui.unified.FileUploaderParameter({
+				name: "content-type",
+				value: contentType
+			}));
+
+			oFileUploader.setSendXHR(true);
+			oFileUploader.setUploadUrl(serviceUrl);
+			oFileUploader.upload();
 		}
 
 		/*
