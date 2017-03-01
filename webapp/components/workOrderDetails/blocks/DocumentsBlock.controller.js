@@ -33,32 +33,27 @@ sap.ui.define([
 			var directoryUrl;
 
 			if (isHybridApp) {
-				//Check device is online
-				if (sap.hybrid.SMP.isOnline) {
-					var platformName = window.cordova.require("cordova/platform").id;
-					if (platformName === "ios") {
-						directoryUrl = cordova.file.documentsDirectory;
-					} else if (platformName === "windows") {
-						directoryUrl = cordova.file.dataDirectory;
-					}
-					var fullpath = directoryUrl + encodeURI(currentObject.Filename);
-					fileTransfer.download(
-						uri,
-						fullpath,
-						function(entry) {
-							console.log("download complete: " + entry.toURL());
-						},
-						function(error) {
-							console.log("download error source " + error.source);
-							console.log("download error target " + error.target);
-							console.log("download error code" + error.code);
-						},
-						false, {}
-					);
-				} else {
-					sap.m.MessageToast.show("Device is offline. Try again later");
-					return;
+				var platformName = window.cordova.require("cordova/platform").id;
+				if (platformName === "ios") {
+					directoryUrl = cordova.file.documentsDirectory;
+				} else if (platformName === "windows") {
+					directoryUrl = cordova.file.dataDirectory;
 				}
+				var fullpath = directoryUrl + encodeURI(currentObject.Filename);
+				fileTransfer.download(
+					uri,
+					fullpath,
+					function(entry) {
+						console.log("download complete: " + entry.toURL());
+					},
+					function(error) {
+						console.log("download error source " + error.source);
+						console.log("download error target " + error.target);
+						console.log("download error code" + error.code);
+					},
+					false, {}
+				);
+
 			} else {
 				window.open(uri);
 			}
@@ -86,17 +81,7 @@ sap.ui.define([
 			var isHybridApp = this.getView().getModel("device").getData().isHybridApp;
 			var contentType = oEvent.getParameters().files[0].type;
 
-			if (isHybridApp) {
-				//Check device is online
-				if (sap.hybrid.SMP.isOnline) {
-					this.sendUploadRequest(contentType);
-				} else {
-					sap.m.MessageToast.show("Device is offline. Try again later");
-					return;
-				}
-			} else {
-				this.sendUploadRequest(contentType);
-			}
+			this.sendUploadRequest(contentType);
 		},
 		//Before upload started
 		onUploadStarted: function(oControlEvent) {
