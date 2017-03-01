@@ -78,42 +78,45 @@ sap.ui.define([
 			}
 		},
 		onFileSelected: function(oEvent) {
+			//Check device is online
+			if (sap.hybrid.SMP.isOnline) {
+				var oFileUploader = this.getView().byId("customFileUploader");
 
-			var oFileUploader = this.getView().byId("customFileUploader");
+				var serviceUrl = this.getView().getModel().sServiceUrl + this.getView().getBindingContext().getPath() + "/DocumentsSet";
 
-			var serviceUrl = this.getView().getModel().sServiceUrl + this.getView().getBindingContext().getPath() + "/DocumentsSet";
+				oFileUploader.addHeaderParameter(new sap.ui.unified.FileUploaderParameter({
+					name: "x-csrf-token",
+					value: this.getView().getModel().getSecurityToken()
+				}));
 
-			oFileUploader.addHeaderParameter(new sap.ui.unified.FileUploaderParameter({
-				name: "x-csrf-token",
-				value: this.getView().getModel().getSecurityToken()
-			}));
+				oFileUploader.addHeaderParameter(new sap.ui.unified.FileUploaderParameter({
+					name: "slug",
+					value: oFileUploader.getValue()
+				}));
 
-			oFileUploader.addHeaderParameter(new sap.ui.unified.FileUploaderParameter({
-				name: "slug",
-				value: oFileUploader.getValue()
-			}));
-			
-			oFileUploader.addHeaderParameter(new sap.ui.unified.FileUploaderParameter({
-				name: "content-type",
-				value: oEvent.getParameters().files[0].type
-			}));
-			oFileUploader.setSendXHR(true);
-			oFileUploader.setUploadUrl(serviceUrl);
-			oFileUploader.upload();
-			
+				oFileUploader.addHeaderParameter(new sap.ui.unified.FileUploaderParameter({
+					name: "content-type",
+					value: oEvent.getParameters().files[0].type
+				}));
+				oFileUploader.setSendXHR(true);
+				oFileUploader.setUploadUrl(serviceUrl);
+				oFileUploader.upload();
+			} else {
+				sap.m.MessageToast.show("Device is offline. Try again later");
+			}
 		},
-		
-		onUploadStarted: function(){
+		//Before upload started
+		onUploadStarted: function(oControlEvent) {
 			sap.ui.core.BusyIndicator.show();
 		},
-		
-		onUploadComplete: function(){
+
+		onUploadComplete: function(oControlEvent) {
 			sap.ui.core.BusyIndicator.hide();
 			var oFileUploader = this.getView().byId("customFileUploader");
 			oFileUploader.destroyHeaderParameters();
-			
+
 			this.getView().byId("attachmentsList").getBinding("items").refresh(true);
-			
+
 		}
 
 		/*
