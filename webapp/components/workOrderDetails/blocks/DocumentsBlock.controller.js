@@ -100,7 +100,20 @@ sap.ui.define([
 			oFileUploader.setSendXHR(true);
 			oFileUploader.setUploadUrl(serviceUrl);
 			oFileUploader.upload();
+			
+		},
+		
+		onUploadStarted: function(){
+			sap.ui.core.BusyIndicator.show();
+		},
+		
+		onUploadComplete: function(){
+			sap.ui.core.BusyIndicator.hide();
+			var oFileUploader = this.getView().byId("customFileUploader");
 			oFileUploader.destroyHeaderParameters();
+			
+			this.getView().byId("attachmentsList").getBinding("items").refresh(true);
+			
 		}
 
 		/*

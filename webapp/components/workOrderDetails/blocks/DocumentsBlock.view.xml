@@ -5,9 +5,9 @@
 			<!--<u:FileUploader id="customFileUploader" icon="sap-icon://add" iconOnly="true"
 				buttonOnly="true" uploadStart="uploadStartedFileUploader" uploadOnChange="false" uploadComplete="onUploadCompleteFileUploader" 
 				class="sapUiSmallMarginEnd" change="onChangeFileUploader" />-->
-			<u:FileUploader class="sapUiSmallMarginEnd" id="customFileUploader" iconOnly="true" icon="sap-icon://add" buttonOnly="true" change="onFileSelected" useMultipart ="false"/>
+			<u:FileUploader class="sapUiSmallMarginEnd" id="customFileUploader" iconOnly="true" icon="sap-icon://add" buttonOnly="true" change="onFileSelected" useMultipart ="false" uploadComplete="onUploadComplete" uploadStart="onUploadStarted"/>
 		</l:HorizontalLayout>
-		<Table id="attachmentsList" items="{path: 'DocumentsSet'}" noDataText="No Documents">
+		<Table id="attachmentsList" items="{path: 'DocumentsSet', sorter: { path: 'Changedate', descending: true}}" noDataText="No Documents">
 			<columns>
 				<!-- Icon column -->
 				<Column demandPopin="true" popinDisplay="WithoutHeader" vAlign="Middle" width="2rem"/>
@@ -42,7 +42,7 @@
 							<ObjectIdentifier text="{parts:[{path:'Chnageby'}]}" title="{Fullname}"/>
 						</core:ExtensionPoint>
 						<Button id="downloadButton" class="sapUiMediumMarginEnd" text="Download" icon="sap-icon://download" press="downloadDocument" visible="true"></Button>
-						<Button id="viewButton" class="sapUiMediumMarginEnd" text="View" icon="sap-icon://show" press="viewDocument" visible="true"></Button>
+						<Button id="viewButton" class="sapUiMediumMarginEnd" text="View" icon="sap-icon://show" press="viewDocument" visible="{device>/isHybridApp}"></Button>
 					</cells>
 				</ColumnListItem>
 			</items>
