@@ -364,7 +364,10 @@
 			},
 			"DocumentsSet": {
 				"dataSource": "WORKORDER_SRV",
-				"path": "/DocumentsSet"
+				"path": {
+					"url": "/DocumentsSet",
+					"retrieveStreams": true
+				}
 			}
 		}
 	},
