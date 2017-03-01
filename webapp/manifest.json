@@ -17,7 +17,7 @@
 		"ach": "ach",
 		"dataSources": {
 			"WORKORDER_SRV": {
-				"uri": "/ID3/sap/opu/odata/tobmas/WORKORDER_SRV/",
+				"uri": "/sap/opu/odata/tobmas/WORKORDER_SRV/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0",
@@ -364,11 +364,18 @@
 			},
 			"DocumentsSet": {
 				"dataSource": "WORKORDER_SRV",
+<<<<<<< HEAD
 				"path": "/DocumentsSet"
 			},
 			"EquipmentBomSet": {
 				"dataSource": "WORKORDER_SRV",
 				"path": "/EquipmentBomSet"
+=======
+				"path": {
+					"url": "/DocumentsSet",
+					"retrieveStreams": true
+				}
+>>>>>>> branch 'development' of https://t0PPy@bitbucket.org/2bm/com.twobm.mobileworkorder.git
 			}
 		}
 	},

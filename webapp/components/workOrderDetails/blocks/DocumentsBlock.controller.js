@@ -33,7 +33,6 @@ sap.ui.define([
 			var directoryUrl;
 
 			if (isHybridApp) {
-
 				var platformName = window.cordova.require("cordova/platform").id;
 				if (platformName === "ios") {
 					directoryUrl = cordova.file.documentsDirectory;
@@ -54,6 +53,7 @@ sap.ui.define([
 					},
 					false, {}
 				);
+
 			} else {
 				window.open(uri);
 			}
@@ -78,7 +78,26 @@ sap.ui.define([
 			}
 		},
 		onFileSelected: function(oEvent) {
+			var isHybridApp = this.getView().getModel("device").getData().isHybridApp;
+			var contentType = oEvent.getParameters().files[0].type;
 
+			this.sendUploadRequest(contentType);
+		},
+		//Before upload started
+		onUploadStarted: function(oControlEvent) {
+			sap.ui.core.BusyIndicator.show();
+		},
+
+		onUploadComplete: function(oControlEvent) {
+			sap.ui.core.BusyIndicator.hide();
+			var oFileUploader = this.getView().byId("customFileUploader");
+			oFileUploader.destroyHeaderParameters();
+
+			this.getView().byId("attachmentsList").getBinding("items").refresh(true);
+
+		},
+
+		sendUploadRequest: function(contentType) {
 			var oFileUploader = this.getView().byId("customFileUploader");
 
 			var serviceUrl = this.getView().getModel().sServiceUrl + this.getView().getBindingContext().getPath() + "/DocumentsSet";
@@ -93,10 +112,14 @@ sap.ui.define([
 				value: oFileUploader.getValue()
 			}));
 
+			oFileUploader.addHeaderParameter(new sap.ui.unified.FileUploaderParameter({
+				name: "content-type",
+				value: contentType
+			}));
+
 			oFileUploader.setSendXHR(true);
 			oFileUploader.setUploadUrl(serviceUrl);
 			oFileUploader.upload();
-			oFileUploader.destroyHeaderParameters();
 		}
 
 		/*
