@@ -44,9 +44,11 @@ sap.ui.define([
 					uri,
 					fullpath,
 					function(entry) {
+						sap.m.MessageToast.show("File downloaded: " + entry.toURL());
 						console.log("download complete: " + entry.toURL());
 					},
 					function(error) {
+						sap.m.MessageToast.show("File download failed");
 						console.log("download error source " + error.source);
 						console.log("download error target " + error.target);
 						console.log("download error code" + error.code);

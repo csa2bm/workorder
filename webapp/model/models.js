@@ -46,7 +46,8 @@ sap.ui.define([
 				UserPosition: "",
 				UserImage: "",
 				Persno: "",
-				UILanguage: sap.ui.getCore().getConfiguration().getLanguage()
+				UILanguage: sap.ui.getCore().getConfiguration().getLanguage(),
+				UILanguageText: ""
 			});
 
 			oModel.setDefaultBindingMode("OneWay");
@@ -79,48 +80,48 @@ sap.ui.define([
 		createLanguagesModel: function() {
 			var oModel = new JSONModel({
 				Languages: [{
+					LanguageCode: ["cs", "cs-CZ"],
 					LanguageText: "Český",
-					LanguageCode: "cs",
 					Image: "images/flags/cz.png"
 				}, {
+					LanguageCode: ["zh", "zh-CN"],
 					LanguageText: "中国传统",
-					LanguageCode: "zh",
 					Image: "images/flags/zh.png"
 				}, {
+					LanguageCode: ["da", "da-DK"],
 					LanguageText: "Dansk",
-					LanguageCode: "da",
 					Image: "images/flags/da.png"
 				}, {
+					LanguageCode: ["de", "de-DE"],
 					LanguageText: "Deutsch",
-					LanguageCode: "de",
 					Image: "images/flags/de.png"
 				}, {
+					LanguageCode: ["en", "en-GB"],
 					LanguageText: "English (UK)",
-					LanguageCode: "en-UK",
 					Image: "images/flags/uk.png"
 				}, {
+					LanguageCode: ["en-US"],
 					LanguageText: "English (US)",
-					LanguageCode: "en-US",
 					Image: "images/flags/us.png"
 				}, {
+					LanguageCode: ["es", "es-ES"],
 					LanguageText: "España (Spain)",
-					LanguageCode: "es",
 					Image: "images/flags/es.png"
 				}, {
+					LanguageCode: ["es-MX"],
 					LanguageText: "España (México)",
-					LanguageCode: "es-MX",
 					Image: "images/flags/es.png"
 				}, {
+					LanguageCode: ["hu", "hu-HU"],
 					LanguageText: "Magyar",
-					LanguageCode: "hu",
 					Image: "images/flags/hu.png"
 				}, {
+					LanguageCode: ["no", "nb-NO"],
 					LanguageText: "Norsk",
-					LanguageCode: "no",
 					Image: "images/flags/no.png"
 				}, {
+					LanguageCode: ["sv", "sv-SE"],
 					LanguageText: "Svenska",
-					LanguageCode: "sv",
 					Image: "images/flags/se.png"
 				}]
 			});

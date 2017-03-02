@@ -5,9 +5,8 @@
 		title="Select Language"
 		class="sapUiPopupWithPadding"
 		items="{languagesModel>/Languages}"
-		search="handleTaskCodeSearch"
-		confirm="handleLanguageChanged"
-		cancel="handleValueHelpCloseCode">
+		search="handleLanguageSearch"
+		confirm="handleLanguageChanged">
 		<StandardListItem
 			title="{languagesModel>LanguageText}"
 			icon="{languagesModel>Image}" />

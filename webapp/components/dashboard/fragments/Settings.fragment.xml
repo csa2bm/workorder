@@ -1,0 +1,32 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:f="sap.ui.layout.form">
+	<ResponsivePopover class="sapUiPopupWithPadding" placement="PreferredTopOrFlip" title="{i18n>App-Info}">
+		<endButton>
+			<Button visible="{device>/isHybridApp}" text="{i18n>SettingsPopup-ResetClient}" press="onResetClient"></Button>
+		</endButton>
+		<content>
+			<l:VerticalLayout>
+				<Panel class="sapUiSmallMarginBottom" visible="{path:'device>/isPhone'}">
+					<l:VerticalLayout>
+						<Image src="{appInfoModel>/UserImage}" press="onSettings" class="circular"></Image>
+						<Label class="syncStatusTextBold" text="{appInfoModel>/UserFullName} ({appInfoModel>/UserName})"/>
+						<Label class="syncStatusText" text="{appInfoModel>/UserPosition}"/>
+					</l:VerticalLayout>
+				</Panel>
+				<Panel>
+					<l:VerticalLayout>
+						<Image src="images/LoginLogo.png" width="5em"></Image>
+						<Label class="syncStatusTextBold" text="{appInfoModel>/AppName} v.{appInfoModel>/AppVersion}" visible="{device>/isHybridApp}"/>
+						<Link href="{appInfoModel>/WebSite}" text="{i18n>SettingsPopup-2BMWebsiteLink}" target="_blank" class="sapUiTinyMarginTop"></Link>
+					</l:VerticalLayout>
+				</Panel>
+				<Panel>
+					<l:VerticalLayout>
+						<Image visible="true" src="{path: 'appInfoModel>/UILanguage/Image'}" width="2em" height="2em"
+							press="changeLanguage" class="sapUiTinyMarginTop sapUiTinyMarginEnd"></Image>
+						<Label text="{path: 'appInfoModel>/UILanguage/LanguageText'}"/>
+					</l:VerticalLayout>
+				</Panel>
+			</l:VerticalLayout>
+		</content>
+	</ResponsivePopover>
+</core:FragmentDefinition>
