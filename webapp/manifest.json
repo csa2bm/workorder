@@ -364,18 +364,11 @@
 			},
 			"DocumentsSet": {
 				"dataSource": "WORKORDER_SRV",
-<<<<<<< HEAD
 				"path": "/DocumentsSet"
 			},
 			"EquipmentBomSet": {
 				"dataSource": "WORKORDER_SRV",
 				"path": "/EquipmentBomSet"
-=======
-				"path": {
-					"url": "/DocumentsSet",
-					"retrieveStreams": true
-				}
->>>>>>> branch 'development' of https://t0PPy@bitbucket.org/2bm/com.twobm.mobileworkorder.git
 			}
 		}
 	},
