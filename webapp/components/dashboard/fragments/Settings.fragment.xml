@@ -21,7 +21,7 @@
 				</Panel>
 				<Panel>
 					<l:VerticalLayout>
-						<Image visible="true" src="{path: 'appInfoModel>/UILanguage/Image'}" width="2em" height="2em"
+						<Image visible="true" src="{path: 'appInfoModel>/UILanguage/Image'}" width="3em"
 							press="changeLanguage" class="sapUiTinyMarginTop sapUiTinyMarginEnd"></Image>
 						<Label text="{path: 'appInfoModel>/UILanguage/LanguageText'}"/>
 					</l:VerticalLayout>

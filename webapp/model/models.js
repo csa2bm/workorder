@@ -110,7 +110,7 @@ sap.ui.define([
 				}, {
 					LanguageCode: ["es-MX"],
 					LanguageText: "España (México)",
-					Image: "images/flags/es.png"
+					Image: "images/flags/mx.png"
 				}, {
 					LanguageCode: ["hu", "hu-HU"],
 					LanguageText: "Magyar",
