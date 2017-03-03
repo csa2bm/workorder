@@ -83,7 +83,13 @@ sap.ui.define([
 			var isHybridApp = this.getView().getModel("device").getData().isHybridApp;
 			var contentType = oEvent.getParameters().files[0].type;
 
-			this.sendUploadRequest(contentType);
+			if (isHybridApp) {
+				var file = oEvent.getParameters().files[0];
+				this.sendUploadRequestOffline(file);
+			} else {
+				this.sendUploadRequest(contentType);
+			}
+
 		},
 		//Before upload started
 		onUploadStarted: function(oControlEvent) {
@@ -122,6 +128,43 @@ sap.ui.define([
 			oFileUploader.setSendXHR(true);
 			oFileUploader.setUploadUrl(serviceUrl);
 			oFileUploader.upload();
+		},
+
+		sendUploadRequestOffline: function(file) {
+            var that = this;
+			var xhr = new XMLHttpRequest();
+			var serviceUrl = sap.hybrid.getOfflineStore().serviceRoot;
+			var serviceUrlsubstring = serviceUrl.substring(0,serviceUrl.length-1); // remove the "/" in the end of the url
+			
+            var url = serviceUrlsubstring + this.getView().getBindingContext().getPath() + "/DocumentsSet";
+                             
+            /*this.getView().getModel().refreshSecurityToken(function(response, odata){
+                                                                            console.log("token received");
+                                                                            var token = that.getView().getModel().getSecurityToken();
+                                                                            console.log(token);
+                                                                            }, function(){
+                                                                            console.log("token not received. Error");
+                                                                            }, false);
+                             
+             */
+          
+			xhr.open("POST", url, true);
+			xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("x-csrf-token", sap.ui.getCore().getModel().getSecurityToken());
+            //xhr.setRequestHeader("prevent_xsrf", false);
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState === 4) {
+					if (xhr.status === 201) {
+						var data = JSON.parse(xhr.responseText);
+						console.log("Media created." + "Src: " + data.d.__metadata.media_src);
+					} else {
+						console.log("Request failed! Status: " + xhr.status);
+					}
+				}
+			}
+
+			xhr.send(file);
+
 		}
 
 		/*
