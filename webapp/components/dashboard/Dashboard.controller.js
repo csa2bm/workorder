@@ -333,6 +333,10 @@ sap.ui.define([
 		getDashBoardLogo: function() {
 			return jQuery.sap.getModulePath("com.twobm.mobileworkorder") + "/images/DashboardLogo.png";
 		},
+		
+		getSettingsAppLogo: function() {
+			return jQuery.sap.getModulePath("com.twobm.mobileworkorder") + "/images/LoginLogo.png";
+		},
 
 		onResetClient: function() {
 			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
@@ -367,40 +371,9 @@ sap.ui.define([
 
 		// Change language handling start
 
-		// getLanguageFlag: function(languageObject) {
-		// 	switch (languageObject.LanguageCode) {
-		// 		case "cs":
-		// 		case "cs-CZ":
-		// 			return "images/flags/cz.png";
-		// 		case "da":
-		// 		case "da-DK":
-		// 			return "images/flags/da.png";
-		// 		case "de":
-		// 		case "de-DE":
-		// 			return "images/flags/de.png";
-		// 		case "en":
-		// 		case "en-UK":
-		// 			return "images/flags/uk.png";
-		// 		case "en-US":
-		// 			return "images/flags/us.png";
-		// 		case "es":
-		// 		case "es-MX":
-		// 			return "images/flags/es.png";
-		// 		case "hu":
-		// 		case "hu-HU":
-		// 			return "images/flags/hu.png";
-		// 		case "no":
-		// 		case "nn-NO":
-		// 			return "images/flags/no.png";
-		// 		case "sv":
-		// 		case "sv-SE":
-		// 			return "images/flags/se.png";
-		// 		case "zh": //Chinese simplified
-		// 			return "images/flags/zh.png";
-		// 		default:
-		// 			return "";
-		// 	}
-		// },
+		 getLanguageFlag: function(imagePath) {
+		 	return jQuery.sap.getModulePath("com.twobm.mobileworkorder") + imagePath;
+		 },
 
 		changeLanguage: function() {
 			if (this.settingsDialog) {

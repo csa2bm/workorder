@@ -14,14 +14,14 @@
 				</Panel>
 				<Panel>
 					<l:VerticalLayout>
-						<Image src="images/LoginLogo.png" width="5em"></Image>
+						<Image src="{path: '', formatter:'.getSettingsAppLogo'}" width="5em"></Image>
 						<Label class="syncStatusTextBold" text="{appInfoModel>/AppName} v.{appInfoModel>/AppVersion}" visible="{device>/isHybridApp}"/>
 						<Link href="{appInfoModel>/WebSite}" text="{i18n>SettingsPopup-2BMWebsiteLink}" target="_blank" class="sapUiTinyMarginTop"></Link>
 					</l:VerticalLayout>
 				</Panel>
 				<Panel>
 					<l:VerticalLayout>
-						<Image visible="true" src="{path: 'appInfoModel>/UILanguage/Image'}" width="3em"
+						<Image visible="true" src="{path: 'appInfoModel>/UILanguage/Image', formatter:'.getLanguageFlag'}" width="3em"
 							press="changeLanguage" class="sapUiTinyMarginTop sapUiTinyMarginEnd"></Image>
 						<Label text="{path: 'appInfoModel>/UILanguage/LanguageText'}"/>
 					</l:VerticalLayout>

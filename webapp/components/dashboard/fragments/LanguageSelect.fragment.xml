@@ -9,6 +9,6 @@
 		confirm="handleLanguageChanged">
 		<StandardListItem
 			title="{languagesModel>LanguageText}"
-			icon="{languagesModel>Image}" />
+			icon="{path: 'languagesModel>Image', formatter:'.getLanguageFlag' }" />
 	</SelectDialog>
 </core:FragmentDefinition>
