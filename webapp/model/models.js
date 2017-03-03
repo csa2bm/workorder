@@ -82,47 +82,47 @@ sap.ui.define([
 				Languages: [{
 					LanguageCode: ["cs", "cs-CZ"],
 					LanguageText: "Český",
-					Image: "images/flags/cz.png"
+					Image: "/images/flags/cz.png"
 				}, {
 					LanguageCode: ["zh", "zh-CN"],
 					LanguageText: "中国传统",
-					Image: "images/flags/zh.png"
+					Image: "/images/flags/zh.png"
 				}, {
 					LanguageCode: ["da", "da-DK"],
 					LanguageText: "Dansk",
-					Image: "images/flags/da.png"
+					Image: "/images/flags/da.png"
 				}, {
 					LanguageCode: ["de", "de-DE"],
 					LanguageText: "Deutsch",
-					Image: "images/flags/de.png"
+					Image: "/images/flags/de.png"
 				}, {
 					LanguageCode: ["en", "en-GB"],
 					LanguageText: "English (UK)",
-					Image: "images/flags/uk.png"
+					Image: "/images/flags/uk.png"
 				}, {
 					LanguageCode: ["en-US"],
 					LanguageText: "English (US)",
-					Image: "images/flags/us.png"
+					Image: "/images/flags/us.png"
 				}, {
 					LanguageCode: ["es", "es-ES"],
 					LanguageText: "España (Spain)",
-					Image: "images/flags/es.png"
+					Image: "/images/flags/es.png"
 				}, {
 					LanguageCode: ["es-MX"],
 					LanguageText: "España (México)",
-					Image: "images/flags/mx.png"
+					Image: "/images/flags/mx.png"
 				}, {
 					LanguageCode: ["hu", "hu-HU"],
 					LanguageText: "Magyar",
-					Image: "images/flags/hu.png"
+					Image: "/images/flags/hu.png"
 				}, {
 					LanguageCode: ["no", "nb-NO"],
 					LanguageText: "Norsk",
-					Image: "images/flags/no.png"
+					Image: "/images/flags/no.png"
 				}, {
 					LanguageCode: ["sv", "sv-SE"],
 					LanguageText: "Svenska",
-					Image: "images/flags/se.png"
+					Image: "/images/flags/se.png"
 				}]
 			});
 
