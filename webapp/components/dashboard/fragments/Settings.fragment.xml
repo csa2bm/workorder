@@ -14,7 +14,7 @@
 				</Panel>
 				<Panel>
 					<l:VerticalLayout>
-						<Image src="{path: '', formatter:'.getSettingsAppLogo'}" width="5em"></Image>
+						<Image src="{path: 'appInfoModel>/UserFullName', formatter:'.getSettingsAppLogo'}" width="5em"></Image>
 						<Label class="syncStatusTextBold" text="{appInfoModel>/AppName} v.{appInfoModel>/AppVersion}" visible="{device>/isHybridApp}"/>
 						<Link href="{appInfoModel>/WebSite}" text="{i18n>SettingsPopup-2BMWebsiteLink}" target="_blank" class="sapUiTinyMarginTop"></Link>
 					</l:VerticalLayout>
