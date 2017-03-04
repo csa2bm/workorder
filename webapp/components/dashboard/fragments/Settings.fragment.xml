@@ -1,7 +1,7 @@
 <core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:f="sap.ui.layout.form">
 	<ResponsivePopover class="sapUiPopupWithPadding" placement="PreferredTopOrFlip" title="{i18n>App-Info}">
 		<endButton>
-			<Button visible="{device>/isHybridApp}" text="{i18n>SettingsPopup-ResetClient}" press="onResetClient"></Button>
+			<Button visible="{device>/isHybridApp}" text="{i18n>SettingsPopup-ResetClient}" press="onResetClientClicked"></Button>
 		</endButton>
 		<content>
 			<l:VerticalLayout>

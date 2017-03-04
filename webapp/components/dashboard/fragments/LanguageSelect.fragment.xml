@@ -2,7 +2,7 @@
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core">
 	<SelectDialog
-		title="Select Language"
+		title="{i18n>Dashboard-SelectLanguageDialogHeader}"
 		class="sapUiPopupWithPadding"
 		items="{languagesModel>/Languages}"
 		search="handleLanguageSearch"

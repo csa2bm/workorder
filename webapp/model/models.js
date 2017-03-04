@@ -80,23 +80,23 @@ sap.ui.define([
 		createLanguagesModel: function() {
 			var oModel = new JSONModel({
 				Languages: [{
-					LanguageCode: ["cs", "cs-CZ"],
+					LanguageCode: ["cs-CZ"],
 					LanguageText: "Český",
 					Image: "/images/flags/cz.png"
 				}, {
-					LanguageCode: ["zh", "zh-CN"],
+					LanguageCode: ["zh-CN"],
 					LanguageText: "中国传统",
 					Image: "/images/flags/zh.png"
 				}, {
-					LanguageCode: ["da", "da-DK"],
+					LanguageCode: ["da-DK"],
 					LanguageText: "Dansk",
 					Image: "/images/flags/da.png"
 				}, {
-					LanguageCode: ["de", "de-DE"],
+					LanguageCode: ["de-DE"],
 					LanguageText: "Deutsch",
 					Image: "/images/flags/de.png"
 				}, {
-					LanguageCode: ["en", "en-GB"],
+					LanguageCode: ["en-GB"],
 					LanguageText: "English (UK)",
 					Image: "/images/flags/uk.png"
 				}, {
@@ -104,7 +104,7 @@ sap.ui.define([
 					LanguageText: "English (US)",
 					Image: "/images/flags/us.png"
 				}, {
-					LanguageCode: ["es", "es-ES"],
+					LanguageCode: ["es-ES"],
 					LanguageText: "España (Spain)",
 					Image: "/images/flags/es.png"
 				}, {
@@ -112,15 +112,15 @@ sap.ui.define([
 					LanguageText: "España (México)",
 					Image: "/images/flags/mx.png"
 				}, {
-					LanguageCode: ["hu", "hu-HU"],
+					LanguageCode: ["hu-HU"],
 					LanguageText: "Magyar",
 					Image: "/images/flags/hu.png"
 				}, {
-					LanguageCode: ["no", "nb-NO"],
-					LanguageText: "Norsk",
+					LanguageCode: ["nb-NO"],
+					LanguageText: "Norsk bokmål",
 					Image: "/images/flags/no.png"
 				}, {
-					LanguageCode: ["sv", "sv-SE"],
+					LanguageCode: ["sv-SE"],
 					LanguageText: "Svenska",
 					Image: "/images/flags/se.png"
 				}]

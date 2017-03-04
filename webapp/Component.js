@@ -24,8 +24,6 @@ sap.ui.define([
 
 			window.componentId = this.getId();
 
-			//sap.ui.getCore().getConfiguration().setLanguage("es-mx");
-
 			// set the device model
 			this.setModel(models.createDeviceModel(), "device");
 			// set sync model
@@ -91,6 +89,18 @@ sap.ui.define([
 			if (selectedUILanguage) {
 				appInfoModel.getData().UILanguage = selectedUILanguage;
 				sap.ui.getCore().getConfiguration().setLanguage(selectedUILanguage.LanguageCode[0]);
+
+				var metadataUrlParams = {
+					"sap-language": selectedUILanguage.LanguageCode[0]
+				};
+
+				var oModel= new sap.ui.model.odata.v2.ODataModel(this.getModel().sServiceUrl, {
+					metadataUrlParams: metadataUrlParams,
+					header: this.getModel().getHeaders(),
+					defaultBindingMode: this.getModel().getDefaultBindingMode()
+				});
+				
+				this.setModel(oModel);
 			} else {
 				//This is when the user has never selected a preferred UI language (Browser default is OK)
 
@@ -115,9 +125,9 @@ sap.ui.define([
 					var englishDefault = {
 						LanguageCode: ["en"],
 						LanguageText: "English",
-						Image: "images/flags/uk.png"
+						Image: "/images/flags/uk.png"
 					};
-					
+
 					appInfoModel.getData().UILanguage = englishDefault;
 				}
 			}
