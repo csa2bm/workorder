@@ -13,8 +13,8 @@ sap.ui.define([
 		formatter: Formatter,
 
 		onInit: function() {
-			this.getRouter().attachRoutePatternMatched(this.onRouteMatched, this);
-			//this.getRouter().getRoute("dashboard").attachMatched(this.onRouteMatched, this);
+			//this.getRouter().attachRoutePatternMatched(this.onRouteMatched, this);
+			this.getRouter().getRoute("dashboard").attachMatched(this.onRouteMatched, this);
 
 			//Subscribe to events
 			var eventBus = this.getEventBus();
@@ -35,6 +35,8 @@ sap.ui.define([
 			}
 
 			this.setContentInTiles();
+			
+			this.showAppLanguageSettings();
 		},
 
 		setContentInTiles: function() {
@@ -259,7 +261,7 @@ sap.ui.define([
 
 		onSettings: function(oEvent) {
 			if (!this.settingsDialog) {
-				this.settingsDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.dashboard.fragments.Settings",this );
+				this.settingsDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.dashboard.fragments.Settings", this);
 			}
 			// toggle compact style
 			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this.settingsDialog);
@@ -333,7 +335,7 @@ sap.ui.define([
 		getDashBoardLogo: function() {
 			return jQuery.sap.getModulePath("com.twobm.mobileworkorder") + "/images/DashboardLogo.png";
 		},
-		
+
 		getSettingsAppLogo: function() {
 			return jQuery.sap.getModulePath("com.twobm.mobileworkorder") + "/images/LoginLogo.png";
 		},
@@ -371,9 +373,9 @@ sap.ui.define([
 
 		// Change language handling start
 
-		 getLanguageFlag: function(imagePath) {
-		 	return jQuery.sap.getModulePath("com.twobm.mobileworkorder") + imagePath;
-		 },
+		getLanguageFlag: function(imagePath) {
+			return jQuery.sap.getModulePath("com.twobm.mobileworkorder") + imagePath;
+		},
 
 		changeLanguage: function() {
 			if (this.settingsDialog) {
@@ -394,7 +396,7 @@ sap.ui.define([
 			// Show dialog
 			this.changeLanguageDialog.open();
 		},
-		
+
 		handleLanguageSearch: function(oEvent) {
 			var sValue = oEvent.getParameter("value");
 			var oFilter = new sap.ui.model.Filter("LanguageText", sap.ui.model.FilterOperator.Contains, sValue);
@@ -410,23 +412,27 @@ sap.ui.define([
 				//var languageText = selectedItem.getBindingContext("languagesModel").getObject().LanguageText;
 
 				sap.ui.getCore().getConfiguration().setLanguage(languageObject.LanguageCode[0]);
-				
+
 				//Save to browser local storage
 				this.saveSelectedUILanguageInBrowserCache(languageObject);
 
 				// Update values on model
 				this.getView().getModel("appInfoModel").setProperty("/UILanguage", languageObject);
 
-				//Show Browser and configuration language
-				sap.m.MessageToast.show(
-					"Browser language: " + window.navigator.language + "\n" +
-					"Core config language: " + sap.ui.getCore().getConfiguration().getLanguage() + "\n" +
-					"Format locale: " + sap.ui.getCore().getConfiguration().getFormatLocale() + "\n" +
-					"SAP Logon language: " + sap.ui.getCore().getConfiguration().getSAPLogonLanguage()
-				);
+				this.showAppLanguageSettings();
 			}
 		},
-		
+
+		showAppLanguageSettings: function() {
+			//Show Browser and configuration language
+			sap.m.MessageToast.show(
+				"Browser language: " + window.navigator.language + "\n" +
+				"Core config language: " + sap.ui.getCore().getConfiguration().getLanguage() + "\n" +
+				"Format locale: " + sap.ui.getCore().getConfiguration().getFormatLocale() + "\n" +
+				"SAP Logon language: " + sap.ui.getCore().getConfiguration().getSAPLogonLanguage()
+			);
+		},
+
 		saveSelectedUILanguageInBrowserCache: function(languageObject) {
 			jQuery.sap.require("jquery.sap.storage");
 
@@ -438,9 +444,9 @@ sap.ui.define([
 				oStorage.put("SelectedUILanguage", languageObject);
 			}
 		},
-		
-		getLanguageText : function(languageObject){
-			return languageObject.LanguageText;                         
+
+		getLanguageText: function(languageObject) {
+			return languageObject.LanguageText;
 		}
 
 		// Change language handling start

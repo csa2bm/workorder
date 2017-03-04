@@ -9,7 +9,8 @@ sap.ui.define([
 
 	return Controller.extend("com.twobm.mobileworkorder.components.notificationList.NotificationList", {
 		onInit: function() {
-			this.getRouter().attachRoutePatternMatched(this.onRouteMatched, this);
+			//this.getRouter().attachRoutePatternMatched(this.onRouteMatched, this);
+			this.getRouter().getRoute("notificationList").attachMatched(this.onRouteMatched, this);
 
 			//Function used for sorting order list
 			// this.orderGroupFunctions = {
