@@ -2,13 +2,13 @@
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core">
 	<ActionSheet
-		title="Choose Your Action"
+		title="{i18n>WorkOrderDetails-ReassignOrderActionSheetSelectAction}"
 		showCancelButton="true"
 		placement="Top">
 		<buttons>
-			<Button text="To other user.." icon="sap-icon://group" press="onOrderReAssignToUserButtonPressed" />
-			<Button text="To me" icon="sap-icon://customer" press="onOrderReAssignToMePressed" enabled="{path:'Personresp',formatter:'.allowAssignToMe'}" />
-			<Button text="Unassign me" icon="sap-icon://cancel" press="onOrderReAssignUnassignPressed" enabled="{path:'Personresp',formatter:'.allowUnassign'}"/>
+			<Button text="{i18n>WorkOrderDetails-ReassignOrderActionSheetToOtherUser}" icon="sap-icon://group" press="onOrderReAssignToUserButtonPressed" />
+			<Button text="{i18n>WorkOrderDetails-ReassignOrderActionSheetToMe}" icon="sap-icon://customer" press="onOrderReAssignToMePressed" enabled="{path:'Personresp',formatter:'.allowAssignToMe'}" />
+			<Button text="{i18n>WorkOrderDetails-ReassignOrderActionSheetUnassignMe}" icon="sap-icon://cancel" press="onOrderReAssignUnassignPressed" enabled="{path:'Personresp',formatter:'.allowUnassign'}"/>
 		</buttons>
 	</ActionSheet>
 </core:FragmentDefinition>

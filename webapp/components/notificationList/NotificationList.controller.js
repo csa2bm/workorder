@@ -165,8 +165,6 @@ sap.ui.define([
 		},
 
 		isInErrorStateNotification: function(errorsArray, notificationId) {
-			//console.log("isInErrorStateNotification");
-
 			if ($.inArray(notificationId, errorsArray) >= 0) {
 				return true;
 			} else {

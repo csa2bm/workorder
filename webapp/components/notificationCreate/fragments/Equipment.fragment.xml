@@ -3,7 +3,7 @@
 	xmlns:core="sap.ui.core">
 	<SelectDialog
 		id = "EquipmentsLocationsDialog"
-		title="Equipments"
+		title="{i18n>NotificationCreate-Equipments}"
 		class="sapUiPopupWithPadding"
 		items="{/EquipmentsSet}"
 		search="_handleValueHelpSearchEquipment"

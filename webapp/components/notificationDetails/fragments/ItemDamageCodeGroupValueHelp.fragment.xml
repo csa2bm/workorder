@@ -3,7 +3,7 @@
 	xmlns:core="sap.ui.core">
 	<SelectDialog
 		id = "CodeDamageGroupValueHelpDialog"
-		title="Damage Code Groups"
+		title="{i18n>NotificationDetails-ItemDamageCodeGroupValueHelp}"
 		class="sapUiPopupWithPadding"
 		items="{ path: '/CodeGroupsSet', filters: [{
         path: 'CatalogType', 

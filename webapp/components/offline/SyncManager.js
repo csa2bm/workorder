@@ -21,7 +21,8 @@ sap.ui.define([
 
 				}.bind(this),
 				function(message) {
-					this.showMessage("Failed to register for push: " + message);
+					var pushregisterFailedText = sap.ui.getCore().getComponent(window.componentId).getModel("i18n").getResourceBundle().getText("SyncManager-PushRegisterFailed");
+					this.showMessage(pushregisterFailedText + ": " + message);
 				}.bind(this),
 				function(message) {
 					this.sync();
@@ -111,8 +112,9 @@ sap.ui.define([
 					function(error) {
 						// Error during sync - most likely the device went offline during a sync
 						if (sap.hybrid.SMP.isOnline) {
+							var text = sap.ui.getCore().getComponent(window.componentId).getModel("i18n").getResourceBundle().getText("SyncManager-SyncError"); 
 							// If this was not due to the device beeing offline, show the error
-							this.showMessage("Error during sync: " + error);
+							this.showMessage(text + ": " + error);
 						}
 
                         this.isSyncing = false;
@@ -125,9 +127,11 @@ sap.ui.define([
 		},
 
 		showMessage: function(message) {
+			var title = sap.ui.getCore().getComponent(window.componentId).getModel("i18n").getResourceBundle().getText("SyncManager-MessageTitle");
+			
 			sap.m.MessageBox.show(message, {
 				icon: sap.m.MessageBox.Icon.None,
-				title: "Message",
+				title: title,
 				actions: [sap.m.MessageBox.Action.OK],
 				defaultAction: sap.m.MessageBox.Action.NO,
 				onClose: function(oAction, object) {}

@@ -9,7 +9,7 @@
 			</headerContent>
 			<content>
 				<Table id="notificationTableId" items="{path: '/NotificationsSet', sorter: [{path: 'NotifDate', descending: true}]}"
-					noDataText="No Notifications" showSeparators="All" class="notificationListTableClass">
+					noDataText="{i18n>NotificationList-NoNotifications}" showSeparators="All" class="notificationListTableClass">
 					<columns>
 						<core:ExtensionPoint name="notificationListTableColumns">
 							<Column id="dataColumn">

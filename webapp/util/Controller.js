@@ -130,9 +130,9 @@ sap.ui.define([
 					var errorCode = JSON.parse(oError.responseText).error.code;
 					var errorMessage = JSON.parse(oError.responseText).error.message.value;
 
-					sap.m.MessageBox.error("Error: " + errorCode + " - " + errorMessage);
+					sap.m.MessageBox.error(this.getI18nText("Controller-Error-Prefix") + ": " + errorCode + " - " + errorMessage);
 				} else {
-					sap.m.MessageBox.error("Error: " + oError.message);
+					sap.m.MessageBox.error(this.getI18nText("Controller-Error-Prefix") + ": " + oError.message);
 				}
 			}
 		},
@@ -144,9 +144,9 @@ sap.ui.define([
 					var errorCode = JSON.parse(oError.body).error.code;
 					var errorMessage = JSON.parse(oError.body).error.message.value;
 
-					sap.m.MessageBox.error("Error: " + errorCode + " - " + errorMessage);
+					sap.m.MessageBox.error(this.getI18nText("Controller-Error-Prefix") + ": " + errorCode + " - " + errorMessage);
 				} else {
-					sap.m.MessageBox.error("Error: " + oError.message);
+					sap.m.MessageBox.error(this.getI18nText("Controller-Error-Prefix") + ": " + oError.message);
 				}
 			}
 		},
