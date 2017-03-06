@@ -130,28 +130,15 @@ sap.ui.define([
 			oFileUploader.upload();
 		},
 
-		sendUploadRequestOffline: function(file) {
-            var that = this;
+	sendUploadRequestOffline: function(file) {
 			var xhr = new XMLHttpRequest();
-			var serviceUrl = sap.hybrid.getOfflineStore().serviceRoot;
+			var serviceUrl = sap.hybrid.getOfflineStore().offlineServiceRoot;
 			var serviceUrlsubstring = serviceUrl.substring(0,serviceUrl.length-1); // remove the "/" in the end of the url
 			
             var url = serviceUrlsubstring + this.getView().getBindingContext().getPath() + "/DocumentsSet";
-                             
-            /*this.getView().getModel().refreshSecurityToken(function(response, odata){
-                                                                            console.log("token received");
-                                                                            var token = that.getView().getModel().getSecurityToken();
-                                                                            console.log(token);
-                                                                            }, function(){
-                                                                            console.log("token not received. Error");
-                                                                            }, false);
-                             
-             */
-          
+
 			xhr.open("POST", url, true);
 			xhr.setRequestHeader("Accept", "application/json");
-            xhr.setRequestHeader("x-csrf-token", this.getView().getModel().getSecurityToken());
-            //xhr.setRequestHeader("prevent_xsrf", false);
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState === 4) {
 					if (xhr.status === 201) {
@@ -166,6 +153,7 @@ sap.ui.define([
 			xhr.send(file);
 
 		}
+
 
 		/*
 		doFileExist: function(fileName){
