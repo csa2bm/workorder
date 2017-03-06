@@ -150,7 +150,7 @@ sap.ui.define([
           
 			xhr.open("POST", url, true);
 			xhr.setRequestHeader("Accept", "application/json");
-            xhr.setRequestHeader("x-csrf-token", sap.ui.getCore().getModel().getSecurityToken());
+            xhr.setRequestHeader("x-csrf-token", this.getView().getModel().getSecurityToken());
             //xhr.setRequestHeader("prevent_xsrf", false);
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState === 4) {
