@@ -1,0 +1,78 @@
+<mvc:View controllerName="com.twobm.mobileworkorder.components.workOrdersFromWorkCenter.WorkOrdersFromWorkCenter" xmlns:core="sap.ui.core"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+	<App class="wordOrderListClass">
+		<Page showNavButton="true" navButtonPress="onNavigationButtonPress" title="All Work Orders">
+			<headerContent>
+				<l:HorizontalLayout>
+					<!--<core:Icon width="3em" height="3em" noTabStop="true" color="green" src="sap-icon://fob-watch"/>-->
+					<core:Icon width="3em" height="3em" noTabStop="true" press="handleViewSettingsDialogButtonPressed" src="sap-icon://drop-down-list"/>
+				</l:HorizontalLayout>
+			</headerContent>
+			<content>
+				<Table id="workOrderTable" items="{path: '/OrderSet', sorter: [{path: 'StartDate', descending: false}]}" noDataText="No Work Orders"
+					showSeparators="All" class="workOrderListTableClass">
+					<columns>
+						<Column width="2rem" hAlign="Center" vAlign="Middle">
+							<header>
+								<Label text="Status"/>
+							</header>
+						</Column>
+						<core:ExtensionPoint name="workOrderTableColumns">
+							<Column width="3rem">
+								<header>
+									<Label text="{i18n>WorkOrderList-DateHeader}"/>
+								</header>
+							</Column>
+							<Column width="6rem">
+								<header>
+									<Label text="{i18n>WorkOrderList-WorkOrderHeader}"/>
+								</header>
+							</Column>
+							<Column width="6rem" minScreenWidth="Tablet">
+								<header>
+									<Label text="{i18n>WorkOrderList-FunctionalLocationHeader}"/>
+								</header>
+							</Column>
+							<Column width="6rem" minScreenWidth="Tablet">
+								<header>
+									<Label text="{i18n>WorkOrderList-EquipmentHeader}"/>
+								</header>
+							</Column>
+						</core:ExtensionPoint>
+						<Column demandPopin="false" id="navigationColumn" width="0.5rem"/>
+					</columns>
+					<items>
+						<ColumnListItem type="Active" press="onWorkOrderItemPress">
+							<cells>
+								<core:Icon src="{parts:[{path:'OrderStatus'},  {path: 'Personresp'}, {path: 'AssignedOperation'}],formatter:'.getOrderStatusIcon'}" color="{parts:[{path:'OrderStatus'},  {path: 'Personresp'}, {path: 'AssignedOperation'}],formatter:'.getOrderStatusIconColor'}"/>
+								<core:ExtensionPoint name="workOrderTableCells">
+									<ObjectIdentifier text="{path: 'FinishDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"
+										title="{path: 'StartDate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"/>
+									<ObjectIdentifier text="{Orderid}" title="{ShortText}"/>
+									<ObjectIdentifier text="{FunctLoc}" title="{Funcldescr}"/>
+									<ObjectIdentifier text="{Equipment}" title="{Equidescr}"/>
+								</core:ExtensionPoint>
+								<core:Icon class="sapUiTinyMarginTop"
+									src="{parts:[{path:'syncStatusModel>/OrderErrors'},{path:'Orderid'}],formatter:'.isInErrorStateIconWorkOrder'}"
+									color="{parts:[{path:'syncStatusModel>/OrderErrors'},{path:'Orderid'}],formatter:'.isInErrorStateColorWorkOrder'}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</content>
+			<footer>
+				<Toolbar id="detailToolbar">
+					<content>
+						<mvc:XMLView viewName="com.twobm.mobileworkorder.components.offline.Status"/>
+						<core:ExtensionPoint name="workOrderListFooter">
+							<ToolbarSpacer></ToolbarSpacer>
+							<Button id="filterAssignedTo" text="Assigned to: Only unassigned" icon="sap-icon://filter" press="onFilterAssigned"/>
+							<Button id="filterWorkCenter" text="Work center: 2 selected" icon="sap-icon://filter" press="onFilterWorkCenter"/>
+							<Button id="goToNotificationButton" icon="sap-icon://refresh" press="onRefresh" visible="{path:'',formatter:'.isOnline'}"/>
+						</core:ExtensionPoint>
+					</content>
+				</Toolbar>
+			</footer>
+		</Page>
+	</App>
+</mvc:View>

@@ -106,6 +106,11 @@
 					"name": "workOrderList",
 					"target": "workOrderList"
 				},
+					{
+					"pattern": "workOrdersFromWorkCenter",
+					"name": "workOrdersFromWorkCenter",
+					"target": "workOrdersFromWorkCenter"
+				},
 				{
 					"pattern": "workOrderDetails/{workOrderContext}",
 					"name": "workOrderDetails",
@@ -152,6 +157,12 @@
 					"name": "itemDetails",
 					"target": "itemDetails"
 				},
+					{
+					"pattern": "structureSearch",
+					"name": "structureSearch",
+					"target": "structureSearch"
+				},
+				
 				{
 					"pattern": "notificationCreate/:equipmentNo:/:functionalLoc:/:funcLocDesc:/:equipmentDesc:/:argAvailable:",
 					"name": "notificationCreate",
@@ -179,6 +190,11 @@
 				"workOrderList": {
 					"viewPath": "com.twobm.mobileworkorder.components.workOrderList",
 					"viewName": "WorkOrderList",
+					"viewLevel": 2
+				},
+				"workOrdersFromWorkCenter": {
+					"viewPath": "com.twobm.mobileworkorder.components.workOrdersFromWorkCenter",
+					"viewName": "WorkOrdersFromWorkCenter",
 					"viewLevel": 2
 				},
 				"workOrderDetails": {
@@ -245,6 +261,14 @@
 					"viewName": "StructureBrowser",
 					"viewLevel": "3",
 					"viewPath": "com.twobm.mobileworkorder.components.structureBrowser"
+				},
+				"structureSearch": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewName": "StructureSearch",
+					"viewLevel": "3",
+					"viewPath": "com.twobm.mobileworkorder.components.structureSearch"
 				}
 			}
 		}

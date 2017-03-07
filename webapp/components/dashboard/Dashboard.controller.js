@@ -110,6 +110,20 @@ sap.ui.define([
 			}
 		},
 
+		onWorkOrdersFromWorkCenter: function() {
+
+			var oHistory = History.getInstance();
+			var sPreviousHash = oHistory.getPreviousHash();
+
+			if (sPreviousHash !== undefined) {
+				window.history.go(-1);
+			} else {
+				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+				//var oRouter = this.getRouter();
+				oRouter.navTo("workOrdersFromWorkCenter", true);
+			}
+		},
+
 		onPressScanObject: function() {
 			var isHybridApp = this.getView().getModel("device").getData().isHybridApp;
 			if (isHybridApp) {
