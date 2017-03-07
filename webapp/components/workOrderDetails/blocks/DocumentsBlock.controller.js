@@ -154,6 +154,7 @@ sap.ui.define([
 
 			xhr.open("POST", url, true);
 			xhr.setRequestHeader("Accept", "application/json");
+			xhr.setRequestHeader("content-type", file.type);
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState === 4) {
 					if (xhr.status === 201) {
