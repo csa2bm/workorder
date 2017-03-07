@@ -7,12 +7,10 @@ sap.ui.define([
 
 	return Controller.extend("com.twobm.mobileworkorder.components.workOrderDetails.WorkOrderDetails", {
 		onInit: function() {
-			var oRouter = this.getRouter();
-			oRouter.getRoute("workOrderDetails").attachMatched(this.onRouteMatched, this);
+			this.getRouter().getRoute("workOrderDetails").attachMatched(this.onRouteMatched, this);
 
 			//Subscribe to events
-			var eventBus = this.getEventBus();
-			eventBus.subscribe("BlockNavigation", this.performNavigationForBlocks, this);
+			this.getEventBus().subscribe("BlockNavigation", this.performNavigationForBlocks, this);
 
 			this.createEditModeModel();
 		},

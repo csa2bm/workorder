@@ -24,8 +24,6 @@ sap.ui.define([
 
 			window.componentId = this.getId();
 
-			//sap.ui.getCore().getConfiguration().setLanguage("en");
-
 			// set the device model
 			this.setModel(models.createDeviceModel(), "device");
 			// set sync model
@@ -53,6 +51,8 @@ sap.ui.define([
 				timeRegistrationTimerModel.refresh();
 			}
 
+			this.handlePreferedUILanguage(appInfoModel);
+
 			if (sap.hybrid) {
 				// Configure status bar
 				if (window.cordova.require("cordova/platform").id === "ios") {
@@ -78,11 +78,62 @@ sap.ui.define([
 
 				// Strat the sync manager
 				SyncManager.start(this.getRouter());
-
 			}
 
 			// Start the router
 			this.getRouter().initialize();
+		},
+
+		handlePreferedUILanguage: function(appInfoModel) {
+			var selectedUILanguage = this.getSelectedUILanguageInBrowserCache();
+			if (selectedUILanguage) {
+				appInfoModel.getData().UILanguage = selectedUILanguage;
+				sap.ui.getCore().getConfiguration().setLanguage(selectedUILanguage.LanguageCode[0]);
+
+				//FORCE THE ODATA SERVICE TO LOGIN IN DEFINED LANGUAGE
+				// var metadataUrlParams = {
+				// 	"sap-language": selectedUILanguage.LanguageCode[0]
+				// };
+
+				// var oModel= new sap.ui.model.odata.v2.ODataModel(this.getModel().sServiceUrl, {
+				// 	metadataUrlParams: metadataUrlParams,
+				// 	header: this.getModel().getHeaders(),
+				// 	defaultBindingMode: this.getModel().getDefaultBindingMode()
+				// });
+				
+				// this.setModel(oModel);
+			} else {
+				//This is when the user has never selected a preferred UI language (Browser default is OK)
+
+				//Get the browser default language 
+				var browserLanguage = sap.ui.getCore().getConfiguration().getLanguage();
+
+				//Find whether browser language is supported by application i18n files
+				var languagesModel = this.getModel("languagesModel");
+
+				var found = false;
+				for (var i = 0; i < languagesModel.getData().Languages.length; i++) {
+					var language = languagesModel.getData().Languages[i];
+					if (language.LanguageCode.indexOf(browserLanguage) > -1) {
+						found = true;
+						appInfoModel.getData().UILanguage = language;
+						break;
+					}
+				}
+
+				if (!found) {
+					//If language is not found set the language to english
+					var englishDefault = {
+						LanguageCode: ["en"],
+						LanguageText: "English",
+						Image: "/images/flags/uk.png"
+					};
+
+					appInfoModel.getData().UILanguage = englishDefault;
+				}
+			}
+
+			appInfoModel.refresh();
 		},
 
 		getLastSyncTimeInBrowserCache: function() {
@@ -111,9 +162,19 @@ sap.ui.define([
 				} else {
 					return timerRunningInfo;
 				}
+			} else {
+				return "";
+			}
+		},
+
+		getSelectedUILanguageInBrowserCache: function() {
+			jQuery.sap.require("jquery.sap.storage");
+			//Get Storage object to use
+			if (jQuery.sap.storage.isSupported()) {
+				var oStorage = jQuery.sap.storage(jQuery.sap.storage.Type.local);
 
 				// Set value in htlm5 storage 
-				return;
+				return oStorage.get("SelectedUILanguage");
 			} else {
 				return "";
 			}

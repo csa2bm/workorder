@@ -4,8 +4,8 @@
 		<buttons>
 			<Button icon="sap-icon://delete" type="Reject" text="{i18n>NotificationDetails-TaskPopover-DeleteButton}" press="onDeleteTask"
 				visible="{ViewModel>/isEditing}"></Button>
-			<Button type="Emphasized" text="OK" press="onSubmitTask"></Button>
-			<Button text="Close" press="onPopopoverClose"/>
+			<Button type="Emphasized" text="{i18n>NotificationDetails-TaskPopover-OKButton}" press="onSubmitTask"></Button>
+			<Button text="{i18n>NotificationDetails-TaskPopover-CloseButton}" press="onPopopoverClose"/>
 		</buttons>
 		<content>
 			<VBox>

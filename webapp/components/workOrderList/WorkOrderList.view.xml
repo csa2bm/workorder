@@ -9,7 +9,7 @@
 				</l:HorizontalLayout>
 			</headerContent>
 			<content>
-				<Table id="workOrderTable" items="{path: '/OrderSet', sorter: [{path: 'StartDate', descending: false}]}" noDataText="No Work Orders"
+				<Table id="workOrderTable" items="{path: '/OrderSet', sorter: [{path: 'StartDate', descending: false}]}" noDataText="{i18n>WorkOrderList-NoWorkOrders}"
 					showSeparators="All" class="workOrderListTableClass">
 					<columns>
 						<Column width="2rem" hAlign="Center" vAlign="Middle">

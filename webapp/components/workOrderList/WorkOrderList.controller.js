@@ -8,16 +8,17 @@ sap.ui.define([
 
 	return Controller.extend("com.twobm.mobileworkorder.components.workOrderList.WorkOrderList", {
 		onInit: function() {
-			this.getRouter().attachRoutePatternMatched(this.onRouteMatched, this);
+			this.getRouter().getRoute("workOrderList").attachMatched(this.onRouteMatched, this);
+			//this.getRouter().attachRoutePatternMatched(this.onRouteMatched, this);
 		},
 
 		onRouteMatched: function(oEvent) {
-			var sName = oEvent.getParameter("name");
+			// var sName = oEvent.getParameter("name");
 
-			//Is it this page we have navigated to?
-			if (sName !== "workOrderList") {
-				return;
-			}
+			// //Is it this page we have navigated to?
+			// if (sName !== "workOrderList") {
+			// 	return;
+			// }
 		},
 
 		onNavigationButtonPress: function(oEvent) {

@@ -1,10 +1,10 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
 	<Dialog title="{i18n>WorkOrderDetails-MeasuringPointsBlock-PopOverTitle}" class="sapUiPopupWithPadding" stretch="false" showHeader="true">
 		<beginButton>
-			<Button type="Emphasized" text="OK" press="onSubmitMeasurement"></Button>
+			<Button type="Emphasized" text="{i18n>WorkOrderDetails-MeasuringPointsBlock-PopOverOKButton}" press="onSubmitMeasurement"></Button>
 		</beginButton>
 		<endButton>
-			<Button text="Close" press="closeAddMeasurement"/>
+			<Button text="{i18n>WorkOrderDetails-MeasuringPointsBlock-PopOverCloseButton}" press="closeAddMeasurement"/>
 		</endButton>
 		<buttons></buttons>
 		<content>

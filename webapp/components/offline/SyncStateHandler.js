@@ -90,27 +90,30 @@ sap.ui.define([
 		},
 
 		setNetworkConnectionStatusText: function(syncStatusModel, isOnline) {
+			var i18nModel = sap.ui.getCore().getComponent(window.componentId).getModel("i18n").getResourceBundle();
 			if (isOnline) {
-				syncStatusModel.getData().NetworkConnectionText = "Online";
+				syncStatusModel.getData().NetworkConnectionText = i18nModel.getText("SyncStateHandler-Online");
 			} else {
-				syncStatusModel.getData().NetworkConnectionText = "Offline";
+				syncStatusModel.getData().NetworkConnectionText = i18nModel.getText("SyncStateHandler-Offline");
 			}
 		},
 
 		setSyncStateText: function(syncStatusModel, isOnline) {
+			var i18nModel = sap.ui.getCore().getComponent(window.componentId).getModel("i18n").getResourceBundle();
 			if (syncStatusModel.getData().InErrorState) {
-				syncStatusModel.getData().SyncStateText = "Errors from SAP";
+				syncStatusModel.getData().SyncStateText = i18nModel.getText("SyncStateHandler-Text-ErrorsFromSAP");
 			} else if (syncStatusModel.getData().PendingLocalData) {
-				syncStatusModel.getData().SyncStateText = "Pending Changes";
+				syncStatusModel.getData().SyncStateText = i18nModel.getText("SyncStateHandler-Text-PendingChanges");
 			} else if (isOnline) {
-				syncStatusModel.getData().SyncStateText = "OK";
+				syncStatusModel.getData().SyncStateText = i18nModel.getText("SyncStateHandler-Text-DataSyncOK");
 			} else {
-				syncStatusModel.getData().SyncStateText = "Offline";
+				syncStatusModel.getData().SyncStateText = i18nModel.getText("SyncStateHandler-Offline");
 			}
 		},
 
 		errorCallback: function(e) {
-			sap.m.MessageToast.show("SyncStateHandler: An error occurred " + JSON.stringify(e));
+			var i18nModel = sap.ui.getCore().getComponent(window.componentId).getModel("i18n").getResourceBundle();
+			sap.m.MessageToast.show(i18nModel.getText("SyncStateHandler-ErrorOccured") + ": " + JSON.stringify(e));
 		}
 	};
 });

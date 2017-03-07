@@ -13,13 +13,14 @@ sap.ui.define([
 		formatter: Formatter,
 
 		onInit: function() {
-			this.getRouter().attachRoutePatternMatched(this.onRouteMatched, this);
-			//this.getRouter().getRoute("dashboard").attachMatched(this.onRouteMatched, this);
+			//this.getRouter().attachRoutePatternMatched(this.onRouteMatched, this);
+			this.getRouter().getRoute("dashboard").attachMatched(this.onRouteMatched, this);
 
-			var eventBus = sap.ui.getCore().getEventBus();
+			//Subscribe to events
+			var eventBus = this.getEventBus();
 			eventBus.subscribe("OfflineStore", "Updated", this.setContentInTiles, this);
-
 			eventBus.subscribe("BlockNavigation", this.performNavigationForBlocks, this);
+			eventBus.subscribe("ChangeLanguage", this.changeLanguage, this);
 		},
 
 		onRouteMatched: function(oEvent) {
@@ -31,17 +32,11 @@ sap.ui.define([
 				this.getView().setModel(this.DashBoardModel, "DashBoardModel");
 
 				this.getUserDetails();
-
-				// //Show Browser and configuration language
-				// sap.m.MessageToast.show(
-				// 	"Browser language: " + window.navigator.language + "\n" +
-				// 	"Core config language: " + sap.ui.getCore().getConfiguration().getLanguage() + "\n" +
-				// 	"Format locale: " + sap.ui.getCore().getConfiguration().getFormatLocale() + "\n" +
-				// 	"SAP Logon language: " + sap.ui.getCore().getConfiguration().getSAPLogonLanguage()
-				// );
 			}
 
 			this.setContentInTiles();
+
+			this.showAppLanguageSettings();
 		},
 
 		setContentInTiles: function() {
@@ -105,7 +100,6 @@ sap.ui.define([
 				window.history.go(-1);
 			} else {
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-				//var oRouter = this.getRouter();
 				oRouter.navTo("workOrderList", true);
 			}
 		},
@@ -159,6 +153,7 @@ sap.ui.define([
 			}
 
 		},
+
 		searchFuncLocWithId: function(equipId) {
 			var onDataReceived = {
 				success: function(oData, oResponse) {
@@ -182,22 +177,21 @@ sap.ui.define([
 		ShowEquipmentDetailsWithId: function(equipmentId, isFuncLoc) {
 
 			if (!isFuncLoc) {
-				var objectContext = "/EquipmentsSet('" + equipmentId + "')";
+				var objectContextEquip = "/EquipmentsSet('" + equipmentId + "')";
 
 				this.getRouter().navTo("equipmentDetails", {
-					objectContext: objectContext.substring(1)
+					objectContext: objectContextEquip.substring(1)
 
 				}, false);
 			} else {
-				var objectContext = "/FunctionalLocationsSet('" + equipmentId + "')";
+				var objectContextFuncLoc = "/FunctionalLocationsSet('" + equipmentId + "')";
 				this.getRouter().navTo("functionalLocationDetails", {
-					objectContext: objectContext.substring(1)
+					objectContext: objectContextFuncLoc.substring(1)
 
 				}, false);
-
 			}
-
 		},
+
 		showAlertNoObjectFound: function(equipmentNo) {
 			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
 			MessageBox.show(this.getI18nTextReplace1("Dashboard-scanObjectTile-searchObjectNotFoundMsgText", equipmentNo), {
@@ -218,7 +212,6 @@ sap.ui.define([
 				defaultAction: MessageBox.Action.OK,
 				styleClass: bCompact ? "sapUiSizeCompact" : ""
 			});
-
 		},
 
 		onPressNotifications: function() {
@@ -229,7 +222,6 @@ sap.ui.define([
 				window.history.go(-1);
 			} else {
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-				//var oRouter = this.getRouter();
 				oRouter.navTo("notificationList", true);
 			}
 		},
@@ -247,7 +239,6 @@ sap.ui.define([
 				selectObjectForNewNotificationModel.setData({});
 
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-				//var oRouter = this.getRouter();
 				oRouter.navTo("notificationCreate", {
 					entity: bindingPath.substr(1)
 				});
@@ -281,11 +272,10 @@ sap.ui.define([
 
 		onSettings: function(oEvent) {
 			if (!this.settingsDialog) {
-				this.settingsDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.settings.fragments.Settings", sap.ui.controller(
-					"com.twobm.mobileworkorder.components.settings.Settings"));
+				this.settingsDialog = sap.ui.xmlfragment("com.twobm.mobileworkorder.components.dashboard.fragments.Settings", this);
 			}
 			// toggle compact style
-			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);
+			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this.settingsDialog);
 			this.settingsDialog.setModel(this.getView().getModel("i18n"), "i18n");
 			this.settingsDialog.setModel(this.getView().getModel("appInfoModel"), "appInfoModel");
 			this.settingsDialog.setModel(this.getView().getModel("device"), "device");
@@ -301,9 +291,7 @@ sap.ui.define([
 
 		dbHasBeenReinitialized: function() {
 			sap.ui.getCore().byId("appShell").setVisible(true); //Show data with the new downloaded data
-
 			this.getView().getModel().refresh(true);
-
 			this.getEventBus().publish("UpdateSyncState");
 		},
 
@@ -328,7 +316,6 @@ sap.ui.define([
 				window.history.go(-1);
 			} else {
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-				//var oRouter = this.getRouter();
 				oRouter.navTo("structureBrowser", true);
 			}
 		},
@@ -357,42 +344,73 @@ sap.ui.define([
 			return jQuery.sap.getModulePath("com.twobm.mobileworkorder") + "/images/DashboardLogo.png";
 		},
 
-		getLanguageFlag: function(uiLanguageCode) {
-			switch (uiLanguageCode) {
-				case "cs":
-				case "cs-CZ":
-					return "images/flags/cz.png";
-				case "da":
-				case "da-DK":
-					return "images/flags/da.png";
-				case "de":
-				case "de-DE":
-					return "images/flags/de.png";
-				case "en":
-				case "en-UK":
-					return "images/flags/uk.png";
-				case "en-US":
-					return "images/flags/us.png";
-				case "es":
-				case "es-MX":
-					return "images/flags/es.png";
-				case "hu":
-				case "hu-HU":
-					return "images/flags/hu.png";
-				case "no":
-				case "nn-NO":
-					return "images/flags/no.png";
-				case "sv":
-				case "sv-SE":
-					return "images/flags/se.png";
-				case "zh": //Chinese simplified
-					return "images/flags/zh.png";
-				default:
-					return "";
+		getSettingsAppLogo: function() {
+			return jQuery.sap.getModulePath("com.twobm.mobileworkorder") + "/images/LoginLogo.png";
+		},
+
+		onResetClientClicked: function() {
+			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+			sap.m.MessageBox.show(this.getI18nText("Dashboard-ResetDatabaseConfirmMessage"), {
+				icon: sap.m.MessageBox.Icon.None,
+				title: this.getI18nText("Dashboard-ResetDatabaseConfirmHeader"),
+				actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+				defaultAction: sap.m.MessageBox.Action.NO,
+				styleClass: bCompact ? "sapUiSizeCompact" : "",
+				onClose: function(oAction, object) {
+					if (oAction === sap.m.MessageBox.Action.YES) {
+						this.resetClient();
+					}
+				}.bind(this)
+			});
+		},
+
+		resetClient: function() {
+			//Check whether there is pending changes in local db
+			var syncStatusModel = this.getView().getModel("syncStatusModel");
+			if (syncStatusModel.getData().PendingLocalData) {
+
+				var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+				sap.m.MessageBox.show(this.getI18nText("Dashboard-ResetDatabasePendingChangesConfirmMessage"), {
+					icon: sap.m.MessageBox.Icon.None,
+					title: this.getI18nText("Dashboard-ResetDatabasePendingChangesConfirmHeader"),
+					actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+					defaultAction: sap.m.MessageBox.Action.NO,
+					styleClass: bCompact ? "sapUiSizeCompact" : "",
+					onClose: function(oAction, object) {
+						if (oAction === sap.m.MessageBox.Action.YES) {
+							this.performResetOfDatabase();
+						}
+					}.bind(this)
+				});
+			} else {
+				this.performResetOfDatabase();
 			}
 		},
 
+		performResetOfDatabase: function() {
+			sap.m.MessageToast.show(this.getI18nText("Dashboard-ResettingDatabaseMessage"));
+
+			sap.hybrid.OData.offlineStore.appOfflineStore.store.close(function() {
+				sap.OData.removeHttpClient();
+				sap.hybrid.OData.offlineStore.appOfflineStore.store.clear(function() {
+					sap.hybrid.OData.offlineStore.appOfflineStore.store = null;
+					sap.hybrid.kapsel.doDeleteRegistration();
+					sap.Logon.core.loadStartPage();
+				});
+			});
+		},
+
+		// Change language handling start
+
+		getLanguageFlag: function(imagePath) {
+			return jQuery.sap.getModulePath("com.twobm.mobileworkorder") + imagePath;
+		},
+
 		changeLanguage: function() {
+			if (this.settingsDialog) {
+				this.settingsDialog.close();
+			}
+
 			// Create value help dialog if we dont have one
 			if (!this.changeLanguageDialog) {
 				this.changeLanguageDialog = sap.ui.xmlfragment(this.createId("ChangeLanguageDialog"),
@@ -402,33 +420,104 @@ sap.ui.define([
 				// Attach to view
 				this.getView().addDependent(this.changeLanguageDialog);
 			}
-			// Bind to parent code group so we show the correct codes
-			//this.changeLanguageDialog.bindElement(this.codeGroupBindingContext);
 			// Show dialog
 			this.changeLanguageDialog.open();
+		},
+
+		handleLanguageSearch: function(oEvent) {
+			var sValue = oEvent.getParameter("value");
+			var oFilter = new sap.ui.model.Filter("LanguageText", sap.ui.model.FilterOperator.Contains, sValue);
+			var oBinding = oEvent.getSource().getBinding("items");
+			oBinding.filter([oFilter]);
 		},
 
 		handleLanguageChanged: function(oEvent) {
 			// Get selected item
 			var selectedItem = oEvent.getParameter("selectedItem");
-			if (selectedItem) {
+			
+			var languageObject = selectedItem.getBindingContext("languagesModel").getObject();
 
-				var langCode = selectedItem.getBindingContext("languagesModel").getObject().LanguageCode;
+			//Set language in UI
+			sap.ui.getCore().getConfiguration().setLanguage(languageObject.LanguageCode[0]);
 
-				sap.ui.getCore().getConfiguration().setLanguage(langCode);
+			//Save to browser local storage
+			this.saveSelectedUILanguageInBrowserCache(languageObject);
 
-				// Update values on model
-				this.getView().getModel("appInfoModel").setProperty("/UILanguage", langCode);
+			// Update values on model
+			this.getView().getModel("appInfoModel").setProperty("/UILanguage", languageObject);
 
-				//Show Browser and configuration language
-				sap.m.MessageToast.show(
-					"Browser language: " + window.navigator.language + "\n" +
-					"Core config language: " + sap.ui.getCore().getConfiguration().getLanguage() + "\n" +
-					"Format locale: " + sap.ui.getCore().getConfiguration().getFormatLocale() + "\n" +
-					"SAP Logon language: " + sap.ui.getCore().getConfiguration().getSAPLogonLanguage()
-				);
+
+			// var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+
+			// var messageText = this.getI18nText("Dashboard-ChangeLanguageConfirmMessageMain");
+
+			// if (sap.hybrid) {
+			// 	messageText = messageText + " " + this.getI18nText("Dashboard-ChangeLanguageConfirmMessageOffline");
+			// } else {
+			// 	messageText = messageText + " " + this.getI18nText("Dashboard-ChangeLanguageConfirmMessageOnline");
+			// }
+
+			// MessageBox.show(messageText, {
+			// 	icon: MessageBox.Icon.WARNING,
+			// 	title: this.getI18nText("Dashboard-ChangeLanguageConfirmHeader"),
+			// 	actions: [MessageBox.Action.YES, MessageBox.Action.NO],
+			// 	defaultAction: MessageBox.Action.YES,
+			// 	styleClass: bCompact ? "sapUiSizeCompact" : "",
+			// 	onClose: function(oAction, object) {
+			// 		if (oAction === sap.m.MessageBox.Action.YES) {
+			// 			if (selectedItem) {
+			// 				var languageObject = selectedItem.getBindingContext("languagesModel").getObject();
+
+			// 				//Set language in UI
+			// 				sap.ui.getCore().getConfiguration().setLanguage(languageObject.LanguageCode[0]);
+
+			// 				//Save to browser local storage
+			// 				this.saveSelectedUILanguageInBrowserCache(languageObject);
+
+			// 				// Update values on model
+			// 				this.getView().getModel("appInfoModel").setProperty("/UILanguage", languageObject);
+
+			// 				//USE THIS WE WE NEED TO RELOAD WEBSITE/OFFLINEDATABASE AND GET DATA FROM SAP AGAIN IN CORREACT LANGUAGE
+			// 				// if (sap.hybrid) {
+			// 				// 	this.resetClient();
+			// 				// } else {
+			// 				// 	window.location.reload();
+			// 				// }
+
+			// 				//this.showAppLanguageSettings();
+			// 			}
+			// 		}
+			// 	}.bind(this)
+			// });
+		},
+
+		showAppLanguageSettings: function() {
+			//Show Browser and configuration language
+			sap.m.MessageToast.show(
+				"Browser language: " + window.navigator.language + "\n" +
+				"Core config language: " + sap.ui.getCore().getConfiguration().getLanguage() + "\n" +
+				"Format locale: " + sap.ui.getCore().getConfiguration().getFormatLocale() + "\n" +
+				"SAP Logon language: " + sap.ui.getCore().getConfiguration().getSAPLogonLanguage()
+			);
+		},
+
+		saveSelectedUILanguageInBrowserCache: function(languageObject) {
+			jQuery.sap.require("jquery.sap.storage");
+
+			if (jQuery.sap.storage.isSupported()) {
+				//Get Storage object to use
+				var oStorage = jQuery.sap.storage(jQuery.sap.storage.Type.local);
+
+				// Set value in htlm5 storage 
+				oStorage.put("SelectedUILanguage", languageObject);
 			}
+		},
+
+		getLanguageText: function(languageObject) {
+			return languageObject.LanguageText;
 		}
+
+		// Change language handling start
 
 	});
 });

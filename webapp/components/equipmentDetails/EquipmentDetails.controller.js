@@ -11,7 +11,6 @@ sap.ui.define([
 		onInit: function() {
 			//this.getRouter("objectDetails").attachMatched(this.onRouteMatched, this);
 			this.getRouter().getRoute("equipmentDetails").attachMatched(this.onRouteMatched, this);
-
 		},
 
 		onRouteMatched: function(oEvent) {

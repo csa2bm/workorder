@@ -3,7 +3,7 @@
 	xmlns:core="sap.ui.core">
 	<SelectDialog
 		id = "DamageCodeValueHelpDialog"
-		title="Code"
+		title="{i18n>NotificationDetails-ItemDamageCodeValueHelp}"
 		class="sapUiPopupWithPadding"
 		items="{CodeCatalogSet}"
 		
@@ -16,3 +16,4 @@
 			description="{Code}" />
 	</SelectDialog>
 </core:FragmentDefinition>
+NotificationDetails-ItemDamageCodeValueHelp

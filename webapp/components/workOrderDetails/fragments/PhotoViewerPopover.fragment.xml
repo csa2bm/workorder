@@ -4,7 +4,7 @@
 			<Button icon="sap-icon://delete" type="Reject" text="{i18n>WorkOrderDetails-DeletePhotoButton}" press="onDeletePhoto" visible="{parts:[{path:'ImageModel>/AttachmentID'}],formatter:'.photoPopUpShowDeleteButton'}" enabled="{parts:[{path:'OrderStatus'}],formatter:'.orderStatusValid'}"></Button>
 		</beginButton>
 		<endButton>
-			<Button text="Close" press="closePhotoPopupButton"/>
+			<Button text="{i18n>WorkOrderDetails-DeletePhotoCloseButton}" press="closePhotoPopupButton"/>
 		</endButton>
 		<buttons></buttons>
 		<content>

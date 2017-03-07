@@ -2,20 +2,20 @@
 	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
 	<Button class="sapUiSmallMarginEnd" icon="sap-icon://add" press="onCreateTask"/>
 	<Table id="tasksList" items="{ path: 'NotifTasksSet', sorter: { path: 'TaskSortNo', descending: false}}"
-		noDataText="{i18n>NotificationDetails-TasksBlock-NoData}">
+		noDataText="{i18n>ItemDetails-TasksBlock-NoData}">
 		<columns>
 			<core:ExtensionPoint name="itemDetailsTaskTableColumns">
 				<Column id="sortNumberColumn" minScreenWidth="Tablet">
-					<Text text="{i18n>NotificationDetails-TasksBlock-SortNumberHeader}"/>
+					<Text text="{i18n>ItemDetails-TasksBlock-SortNumberHeader}"/>
 				</Column>
 				<Column id="codeGroupColumn" minScreenWidth="Tablet">
-					<Text text="{i18n>NotificationDetails-TasksBlock-CodeGroupHeader}"/>
+					<Text text="{i18n>ItemDetails-TasksBlock-CodeGroupHeader}"/>
 				</Column>
 				<Column id="codeColumn">
-					<Text text="{i18n>NotificationDetails-TasksBlock-CodeHeader}"/>
+					<Text text="{i18n>ItemDetails-TasksBlock-CodeHeader}"/>
 				</Column>
 				<Column id="textColumn">
-					<Text text="{i18n>NotificationDetails-TasksBlock-TextHeader}"/>
+					<Text text="{i18n>ItemDetails-TasksBlock-TextHeader}"/>
 				</Column>
 			</core:ExtensionPoint>
 			<Column id ="editBtnColumn" vAlign="Middle" width="2.5em"></Column>
