@@ -87,12 +87,16 @@ sap.ui.define([
 			}
 		},
 		viewDocument: function(oEvent) {
+			//This method is only called if the solution is running in Hybrid mode. This is controlled by 
+			
 			var currentObject = oEvent.getSource().getBindingContext().getObject();
 
 			var platformName = window.cordova.require("cordova/platform").id;
 			if (platformName === "ios") {
-				var directoryUrl = cordova.file.documentsDirectory;
-				window.open(directoryUrl + encodeURI(currentObject.Filename));
+		//		var directoryUrl = cordova.file.documentsDirectory;
+		//		window.open(directoryUrl + encodeURI(currentObject.Filename));
+				//window.open(currentObject.__metadata.media_src);
+				window.open(currentObject['@com.sap.vocabularies.Offline.v1.serverMediaReadLink']);
 			} else if (platformName === "windows") {
 				var applicationData = Windows.Storage.ApplicationData.current;
 				var localFolder = applicationData.localFolder;
