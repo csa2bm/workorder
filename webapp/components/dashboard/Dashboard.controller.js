@@ -36,7 +36,7 @@ sap.ui.define([
 
 			this.setContentInTiles();
 
-			this.showAppLanguageSettings();
+			//this.showAppLanguageSettings();
 		},
 
 		setContentInTiles: function() {
