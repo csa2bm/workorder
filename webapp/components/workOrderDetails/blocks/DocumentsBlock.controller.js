@@ -33,20 +33,31 @@ sap.ui.define([
 			var directoryUrl;
 
 			if (isHybridApp) {
-				sap.hybrid.getOfflineStore().registerStreamRequest("stream", oEvent.getSource().getBindingContext().getPath(),
+				sap.hybrid.getOfflineStore().registerStreamRequest(currentObject.Objky + currentObject.Docnumber, oEvent.getSource().getBindingContext()
+					.getPath(),
 					function() {
-						sap.m.MessageToast.show("Downloading");
+						//oEvent.getSource().setBusy(true);
 						sap.hybrid.getOfflineStore().refresh(function(data) {
-								sap.m.MessageBox.show("Download complete");
+								//oEvent.getSource().setBusy(false);
+								this.getView().getModel().refresh();
+								this.getView().byId("documentsList").getBinding("items").refresh(true);
+							}.bind(this),
+							function(error) {
+								alert("Failed to download stream");
+							}, ["DocumentsSet"]);
+					}.bind(this),
+					function(error) {
+						alert("Failed to register stream");
+						sap.hybrid.getOfflineStore().unregisterStreamRequest(
+							currentObject.Objky + currentObject.Docnumber,
+							function(data) {
+								alert("Stream unregistered");
 							},
 							function(error) {
-								sap.m.MessageBox.show("Failed to download stream");
-							},
-							["/DocumentsSet"]);
-					},
-					function() {
-						sap.m.MessageBox.show("Failed to register stream");
-					});
+								alert("Stream unregister error");
+							});
+
+					}.bind(currentObject));
 
 				// var platformName = window.cordova.require("cordova/platform").id;
 				// if (platformName === "ios") {
@@ -168,35 +179,32 @@ sap.ui.define([
 
 			xhr.send(file);
 		},
-		
-		showDownloadButton : function(mediaIsOffline, isHybridApp){
-			if(isHybridApp){
-				if(mediaIsOffline){
+
+		showDownloadButton: function(mediaIsOffline, isHybridApp) {
+			if (isHybridApp) {
+				if (mediaIsOffline) {
 					return false;
-				}else{
+				} else {
 					return true;
 				}
-			}
-			else{
+			} else {
 				//If online solution always show download button
 				return true;
 			}
 		},
-		
-		showViewButton : function(mediaIsOffline, isHybridApp){
-			if(isHybridApp){
-				if(mediaIsOffline){
+
+		showViewButton: function(mediaIsOffline, isHybridApp) {
+			if (isHybridApp) {
+				if (mediaIsOffline) {
 					return true;
-				}else{
+				} else {
 					return false;
 				}
-			}
-			else{
+			} else {
 				//If online solution never show view button
 				return false;
 			}
 		}
-		
 
 		/*
 		doFileExist: function(fileName){
