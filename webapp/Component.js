@@ -90,17 +90,18 @@ sap.ui.define([
 				appInfoModel.getData().UILanguage = selectedUILanguage;
 				sap.ui.getCore().getConfiguration().setLanguage(selectedUILanguage.LanguageCode[0]);
 
-				var metadataUrlParams = {
-					"sap-language": selectedUILanguage.LanguageCode[0]
-				};
+				//FORCE THE ODATA SERVICE TO LOGIN IN DEFINED LANGUAGE
+				// var metadataUrlParams = {
+				// 	"sap-language": selectedUILanguage.LanguageCode[0]
+				// };
 
-				var oModel= new sap.ui.model.odata.v2.ODataModel(this.getModel().sServiceUrl, {
-					metadataUrlParams: metadataUrlParams,
-					header: this.getModel().getHeaders(),
-					defaultBindingMode: this.getModel().getDefaultBindingMode()
-				});
+				// var oModel= new sap.ui.model.odata.v2.ODataModel(this.getModel().sServiceUrl, {
+				// 	metadataUrlParams: metadataUrlParams,
+				// 	header: this.getModel().getHeaders(),
+				// 	defaultBindingMode: this.getModel().getDefaultBindingMode()
+				// });
 				
-				this.setModel(oModel);
+				// this.setModel(oModel);
 			} else {
 				//This is when the user has never selected a preferred UI language (Browser default is OK)
 

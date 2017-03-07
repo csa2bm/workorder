@@ -41,8 +41,8 @@
 							<ObjectIdentifier text="{path: 'Changedate', type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd-MM-yyyy'}}"/>
 							<ObjectIdentifier text="{parts:[{path:'Chnageby'}]}" title="{Fullname}"/>
 						</core:ExtensionPoint>
-						<Button id="downloadButton" class="sapUiMediumMarginEnd" text="Download" icon="sap-icon://download" press="downloadDocument" visible="true"></Button>
-						<Button id="viewButton" class="sapUiMediumMarginEnd" text="View" icon="sap-icon://show" press="viewDocument" visible="{device>/isHybridApp}"></Button>
+						<Button id="downloadButton" class="sapUiMediumMarginEnd" text="Download" icon="sap-icon://download" press="downloadDocument" visible="{parts:[{path:'@com.sap.vocabularies.Offline.v1.mediaIsOffline'}, {path: 'device>/isHybridApp'}],formatter:'.showDownloadButton'}"></Button>
+						<Button id="viewButton" class="sapUiMediumMarginEnd" text="View" icon="sap-icon://show" press="viewDocument" visible="{parts:[{path:'@com.sap.vocabularies.Offline.v1.mediaIsOffline'}, {path: 'device>/isHybridApp'}],formatter:'.showViewButton'}"></Button>
 					</cells>
 				</ColumnListItem>
 			</items>

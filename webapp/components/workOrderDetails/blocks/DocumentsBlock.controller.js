@@ -33,28 +33,43 @@ sap.ui.define([
 			var directoryUrl;
 
 			if (isHybridApp) {
-				var platformName = window.cordova.require("cordova/platform").id;
-				if (platformName === "ios") {
-					directoryUrl = cordova.file.documentsDirectory;
-				} else if (platformName === "windows") {
-					directoryUrl = cordova.file.dataDirectory;
-				}
-				var fullpath = directoryUrl + encodeURI(currentObject.Filename);
-				fileTransfer.download(
-					uri,
-					fullpath,
-					function(entry) {
-						sap.m.MessageToast.show("File downloaded: " + entry.toURL());
-						console.log("download complete: " + entry.toURL());
+				sap.hybrid.getOfflineStore().registerStreamRequest("stream", oEvent.getSource().getBindingContext().getPath(),
+					function() {
+						sap.m.MessageToast.show("Downloading");
+						sap.hybrid.getOfflineStore().refresh(function(data) {
+								sap.m.MessageBox.show("Download complete");
+							},
+							function(error) {
+								sap.m.MessageBox.show("Failed to download stream");
+							},
+							["/DocumentsSet"]);
 					},
-					function(error) {
-						sap.m.MessageToast.show("File download failed");
-						console.log("download error source " + error.source);
-						console.log("download error target " + error.target);
-						console.log("download error code" + error.code);
-					},
-					false, {}
-				);
+					function() {
+						sap.m.MessageBox.show("Failed to register stream");
+					});
+
+				// var platformName = window.cordova.require("cordova/platform").id;
+				// if (platformName === "ios") {
+				// 	directoryUrl = cordova.file.documentsDirectory;
+				// } else if (platformName === "windows") {
+				// 	directoryUrl = cordova.file.dataDirectory;
+				// }
+				// var fullpath = directoryUrl + encodeURI(currentObject.Filename);
+				// fileTransfer.download(
+				// 	uri,
+				// 	fullpath,
+				// 	function(entry) {
+				// 		sap.m.MessageToast.show("File downloaded: " + entry.toURL());
+				// 		console.log("download complete: " + entry.toURL());
+				// 	},
+				// 	function(error) {
+				// 		sap.m.MessageToast.show("File download failed");
+				// 		console.log("download error source " + error.source);
+				// 		console.log("download error target " + error.target);
+				// 		console.log("download error code" + error.code);
+				// 	},
+				// 	false, {}
+				// );
 
 			} else {
 				window.open(uri);
@@ -130,12 +145,12 @@ sap.ui.define([
 			oFileUploader.upload();
 		},
 
-	sendUploadRequestOffline: function(file) {
+		sendUploadRequestOffline: function(file) {
 			var xhr = new XMLHttpRequest();
 			var serviceUrl = sap.hybrid.getOfflineStore().offlineServiceRoot;
-			var serviceUrlsubstring = serviceUrl.substring(0,serviceUrl.length-1); // remove the "/" in the end of the url
-			
-            var url = serviceUrlsubstring + this.getView().getBindingContext().getPath() + "/DocumentsSet";
+			var serviceUrlsubstring = serviceUrl.substring(0, serviceUrl.length - 1); // remove the "/" in the end of the url
+
+			var url = serviceUrlsubstring + this.getView().getBindingContext().getPath() + "/DocumentsSet";
 
 			xhr.open("POST", url, true);
 			xhr.setRequestHeader("Accept", "application/json");
@@ -148,12 +163,39 @@ sap.ui.define([
 						console.log("Request failed! Status: " + xhr.status);
 					}
 				}
-			}
+			};
 
 			xhr.send(file);
-
+		},
+		
+		showDownloadButton : function(mediaIsOffline, isHybridApp){
+			if(isHybridApp){
+				if(mediaIsOffline){
+					return false;
+				}else{
+					return true;
+				}
+			}
+			else{
+				//If online solution always show download button
+				return true;
+			}
+		},
+		
+		showViewButton : function(mediaIsOffline, isHybridApp){
+			if(isHybridApp){
+				if(mediaIsOffline){
+					return true;
+				}else{
+					return false;
+				}
+			}
+			else{
+				//If online solution never show view button
+				return false;
+			}
 		}
-
+		
 
 		/*
 		doFileExist: function(fileName){

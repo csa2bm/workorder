@@ -364,11 +364,11 @@ sap.ui.define([
 					styleClass: bCompact ? "sapUiSizeCompact" : "",
 					onClose: function(oAction, object) {
 						if (oAction === sap.m.MessageBox.Action.YES) {
-							this.rperformResetOfDatabase();
+							this.performResetOfDatabase();
 						}
 					}.bind(this)
 				});
-			}else{
+			} else {
 				this.performResetOfDatabase();
 			}
 		},
@@ -420,47 +420,61 @@ sap.ui.define([
 		handleLanguageChanged: function(oEvent) {
 			// Get selected item
 			var selectedItem = oEvent.getParameter("selectedItem");
+			
+			var languageObject = selectedItem.getBindingContext("languagesModel").getObject();
 
-			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+			//Set language in UI
+			sap.ui.getCore().getConfiguration().setLanguage(languageObject.LanguageCode[0]);
 
-			var messageText = this.getI18nText("Dashboard-ChangeLanguageConfirmMessageMain");
+			//Save to browser local storage
+			this.saveSelectedUILanguageInBrowserCache(languageObject);
 
-			if (sap.hybrid) {
-				messageText = messageText + " " + this.getI18nText("Dashboard-ChangeLanguageConfirmMessageOffline");
-			} else {
-				messageText = messageText + " " + this.getI18nText("Dashboard-ChangeLanguageConfirmMessageOnline");
-			}
+			// Update values on model
+			this.getView().getModel("appInfoModel").setProperty("/UILanguage", languageObject);
 
-			MessageBox.show(messageText, {
-				icon: MessageBox.Icon.WARNING,
-				title: this.getI18nText("Dashboard-ChangeLanguageConfirmHeader"),
-				actions: [MessageBox.Action.YES, MessageBox.Action.NO],
-				defaultAction: MessageBox.Action.YES,
-				styleClass: bCompact ? "sapUiSizeCompact" : "",
-				onClose: function(oAction, object) {
-					if (oAction === sap.m.MessageBox.Action.YES) {
-						if (selectedItem) {
-							var languageObject = selectedItem.getBindingContext("languagesModel").getObject();
 
-							//Set language in 
-							//sap.ui.getCore().getConfiguration().setLanguage(languageObject.LanguageCode[0]);
+			// var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
 
-							//Save to browser local storage
-							this.saveSelectedUILanguageInBrowserCache(languageObject);
+			// var messageText = this.getI18nText("Dashboard-ChangeLanguageConfirmMessageMain");
 
-							// Update values on model
-							this.getView().getModel("appInfoModel").setProperty("/UILanguage", languageObject);
+			// if (sap.hybrid) {
+			// 	messageText = messageText + " " + this.getI18nText("Dashboard-ChangeLanguageConfirmMessageOffline");
+			// } else {
+			// 	messageText = messageText + " " + this.getI18nText("Dashboard-ChangeLanguageConfirmMessageOnline");
+			// }
 
-							if (sap.hybrid) {
-								this.resetClient();
-							} else {
-								window.location.reload();
-							}
-							//this.showAppLanguageSettings();
-						}
-					}
-				}.bind(this)
-			});
+			// MessageBox.show(messageText, {
+			// 	icon: MessageBox.Icon.WARNING,
+			// 	title: this.getI18nText("Dashboard-ChangeLanguageConfirmHeader"),
+			// 	actions: [MessageBox.Action.YES, MessageBox.Action.NO],
+			// 	defaultAction: MessageBox.Action.YES,
+			// 	styleClass: bCompact ? "sapUiSizeCompact" : "",
+			// 	onClose: function(oAction, object) {
+			// 		if (oAction === sap.m.MessageBox.Action.YES) {
+			// 			if (selectedItem) {
+			// 				var languageObject = selectedItem.getBindingContext("languagesModel").getObject();
+
+			// 				//Set language in UI
+			// 				sap.ui.getCore().getConfiguration().setLanguage(languageObject.LanguageCode[0]);
+
+			// 				//Save to browser local storage
+			// 				this.saveSelectedUILanguageInBrowserCache(languageObject);
+
+			// 				// Update values on model
+			// 				this.getView().getModel("appInfoModel").setProperty("/UILanguage", languageObject);
+
+			// 				//USE THIS WE WE NEED TO RELOAD WEBSITE/OFFLINEDATABASE AND GET DATA FROM SAP AGAIN IN CORREACT LANGUAGE
+			// 				// if (sap.hybrid) {
+			// 				// 	this.resetClient();
+			// 				// } else {
+			// 				// 	window.location.reload();
+			// 				// }
+
+			// 				//this.showAppLanguageSettings();
+			// 			}
+			// 		}
+			// 	}.bind(this)
+			// });
 		},
 
 		showAppLanguageSettings: function() {
