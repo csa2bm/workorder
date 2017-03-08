@@ -33,7 +33,11 @@ sap.ui.define([
 							success: function(oData, response) {
 								this.getView().byId("attachmentsList").getBinding("items").refresh();
 							}.bind(this),
-							error: this.errorCallBackShowInPopUp
+
+							error: function(error) {
+								this.errorCallBackShowInPopUp(error);
+							}.bind(this)
+
 						};
 
 						var dataCreate = {
@@ -90,7 +94,10 @@ sap.ui.define([
 							success: function(oData, response) {
 								this.getView().byId("attachmentsList").getBinding("items").refresh(true);
 							}.bind(this),
-							error: this.errorCallBackShowInPopUp
+							error: function(error) {
+								this.errorCallBackShowInPopUp(error);
+							}.bind(this)
+
 						};
 
 						this.getView().getModel().remove(deletePath, parameters);
