@@ -6,8 +6,9 @@
 				buttonOnly="true" uploadStart="uploadStartedFileUploader" uploadOnChange="false" uploadComplete="onUploadCompleteFileUploader" 
 				class="sapUiSmallMarginEnd" change="onChangeFileUploader" />-->
 			<u:FileUploader class="sapUiSmallMarginEnd" id="customFileUploader" iconOnly="true" icon="sap-icon://add" buttonOnly="true" change="onFileSelected" useMultipart ="false" uploadComplete="onUploadComplete" uploadStart="onUploadStarted"/>
+			<Button text="Download All" visible="{device>/isHybridApp}" press="downloadAllFiles"></Button>
 		</l:HorizontalLayout>
-		<Table id="attachmentsList" items="{path: 'DocumentsSet', sorter: { path: 'Changedate', descending: true}}" noDataText="{i18n>WorkOrderDetails-DocumentsBlock-NoDocuments}">
+		<Table id="documentsList" items="{path: 'DocumentsSet', sorter: { path: 'Changedate', descending: true}}" noDataText="{i18n>WorkOrderDetails-DocumentsBlock-NoDocuments}">
 			<columns>
 				<!-- Icon column -->
 			<Column demandPopin="false" popinDisplay="WithoutHeader" vAlign="Middle" width="2rem"/>
@@ -28,7 +29,7 @@
 						</header>
 					</Column>
 				</core:ExtensionPoint>
-				<Column demandPopin="true" vAlign="Right"  popinDisplay="WithoutHeader" width="6rem"/>
+				<Column demandPopin="true" vAlign="Middle" popinDisplay="WithoutHeader" width="6rem"/>
 			</columns>
 			<items>
 				<ColumnListItem type="Inactive" press="clickPreviewDocument">

@@ -22,8 +22,70 @@ sap.ui.define([
 			}
 		},
 
-		downloadDocument: function(oEvent) {
+		downloadAllFiles: function(oEvent) {
+			var downloadButtonAll = oEvent.getSource();
+			var documentsPath = this.getView().byId("documentsList").getBindingContext().getPath();
 
+			if (!sap.hybrid.SMP.isOnline) {
+				sap.m.MessageToast.show("No network connection: Download not possible");
+				return;
+			}
+			
+			//set buy cursor and disable documents list
+			downloadButtonAll.setBusy(true);
+			this.getView().byId("documentsList").setShowOverlay(false);
+
+			var parameters = {
+
+				success: function(oData, response) {
+					var newStreamsRegistered = false;
+					oData.results.some(function myFunction(item) {
+						if (item['@com.sap.vocabularies.Offline.v1.mediaIsOffline']) {
+							//Nothing
+						} else {
+							var path = "/DocumentsSet(Doctype='" + item.Doctype + "',Objky='" + item.Objky + "',Docnumber='" + item.Docnumber +
+								"',Docpart='" + item.Docpart + "',Docversion='" + item.Docversion + "')";
+
+							newStreamsRegistered = true;
+
+							sap.hybrid.getOfflineStore().registerStreamRequest(item.Objky + item.Docnumber, path,
+								function() {}.bind(this),
+								function(error) {
+									//Stream has probably already been registered for offline handling
+								});
+						}
+					});
+
+					if (newStreamsRegistered) {
+						//Call store.refresh
+						sap.hybrid.getOfflineStore().refresh(function(data) {
+								//this.getView().byId("documentsList").setBusy(false);
+								this.getView().byId("documentsList").setShowOverlay(true);
+								downloadButtonAll.setBusy(false);
+								sap.m.MessageToast.show("All files are Downloaded");
+							}.bind(this),
+							function(error) {
+								downloadButtonAll.setBusy(false);
+								this.getView().byId("documentsList").setShowOverlay(true);
+								console.log("Failed to download stream");
+							}.bind(this));
+					} else {
+						downloadButtonAll.setBusy(false);
+						this.getView().byId("documentsList").setShowOverlay(true);
+						//this.getView().byId("documentsList").setBusy(false);
+						sap.m.MessageToast.show("All files are Downloaded");
+					}
+
+				}.bind(this),
+				error: this.errorCallBackShowInPopUp
+			};
+
+			this.getView().getModel().read(documentsPath + "/DocumentsSet", parameters);
+		},
+
+		downloadDocument: function(oEvent) {
+			var downloadButton = oEvent.getSource();
+			//var documentsList = this.getView().byId("documentsList");
 			var currentObject = oEvent.getSource().getBindingContext().getObject();
 			var fileUrl = currentObject.__metadata.media_src;
 
@@ -39,26 +101,17 @@ sap.ui.define([
 				sap.hybrid.getOfflineStore().registerStreamRequest(currentObject.Objky + currentObject.Docnumber, oEvent.getSource().getBindingContext()
 					.getPath(),
 					function() {
-						oEvent.getSource().setBusy(true);
+						downloadButton.setBusy(true);
 						sap.hybrid.getOfflineStore().refresh(function(data) {
-								//oEvent.getSource().setBusy(false);
-								this.getView().getModel().refresh();
+								downloadButton.setBusy(false);
 								this.getView().byId("documentsList").getBinding("items").refresh(true);
 							}.bind(this),
 							function(error) {
 								alert("Failed to download stream");
-							}, ["DocumentsSet","OrderSet"]);
+							});
 					}.bind(this),
 					function(error) {
-						alert("Failed to register stream");
-						// sap.hybrid.getOfflineStore().unregisterStreamRequest(
-						// 	currentObject.Objky + currentObject.Docnumber,
-						// 	function(data) {
-						// 		alert("Stream unregistered");
-						// 	},
-						// 	function(error) {
-						// 		alert("Stream unregister error");
-						// 	});
+						//Stream has probably already been registered for offline handling
 					});
 			} else {
 				// Online in browser - just open the file link and the file will be downloaded by browser
@@ -72,10 +125,12 @@ sap.ui.define([
 			var platformName = window.cordova.require("cordova/platform").id;
 			var directoryUrl;
 			if (platformName === "ios") {
-				directoryUrl = cordova.file.tempDirectory;
+				directoryUrl = cordova.file.dataDirectory + "/TempFiles/";
 			} else if (platformName === "windows") {
 				directoryUrl = cordova.file.dataDirectory;
 			}
+
+			//TODO?:CLEAR directoryUrl
 
 			var fileTransfer = new FileTransfer();
 			var uri = encodeURI(currentObject.__metadata.media_src);
@@ -130,7 +185,7 @@ sap.ui.define([
 			var oFileUploader = this.getView().byId("customFileUploader");
 			oFileUploader.destroyHeaderParameters();
 
-			this.getView().byId("attachmentsList").getBinding("items").refresh(true);
+			this.getView().byId("documentsList").getBinding("items").refresh(true);
 
 		},
 
