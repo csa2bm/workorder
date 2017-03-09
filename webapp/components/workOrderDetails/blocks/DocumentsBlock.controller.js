@@ -33,7 +33,7 @@ sap.ui.define([
 			
 			//set buy cursor and disable documents list
 			downloadButtonAll.setBusy(true);
-			this.getView().byId("documentsList").setShowOverlay(false);
+			this.getView().byId("documentsList").setShowOverlay(true);
 
 			var parameters = {
 
@@ -60,18 +60,18 @@ sap.ui.define([
 						//Call store.refresh
 						sap.hybrid.getOfflineStore().refresh(function(data) {
 								//this.getView().byId("documentsList").setBusy(false);
-								this.getView().byId("documentsList").setShowOverlay(true);
+								this.getView().byId("documentsList").setShowOverlay(false);
 								downloadButtonAll.setBusy(false);
 								sap.m.MessageToast.show("All files are Downloaded");
 							}.bind(this),
 							function(error) {
 								downloadButtonAll.setBusy(false);
-								this.getView().byId("documentsList").setShowOverlay(true);
+								this.getView().byId("documentsList").setShowOverlay(false);
 								console.log("Failed to download stream");
 							}.bind(this));
 					} else {
 						downloadButtonAll.setBusy(false);
-						this.getView().byId("documentsList").setShowOverlay(true);
+						this.getView().byId("documentsList").setShowOverlay(false);
 						//this.getView().byId("documentsList").setBusy(false);
 						sap.m.MessageToast.show("All files are Downloaded");
 					}
