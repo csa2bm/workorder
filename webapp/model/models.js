@@ -92,18 +92,18 @@ sap.ui.define([
 					LanguageText: "Dansk",
 					Image: "/images/flags/da.png"
 				}, {
-					LanguageCode: ["de-DE"],
-					LanguageText: "Deutsch",
-					Image: "/images/flags/de.png"
-				}, {
+				// 	LanguageCode: ["de-DE"],
+				// 	LanguageText: "Deutsch",
+				// 	Image: "/images/flags/de.png"
+				// }, {
 					LanguageCode: ["en-GB"],
 					LanguageText: "English (UK)",
 					Image: "/images/flags/uk.png"
 				}, {
-					LanguageCode: ["en-US"],
-					LanguageText: "English (US)",
-					Image: "/images/flags/us.png"
-				}, {
+				// 	LanguageCode: ["en-US"],
+				// 	LanguageText: "English (US)",
+				// 	Image: "/images/flags/us.png"
+				// }, {
 					LanguageCode: ["es-ES"],
 					LanguageText: "España (Spain)",
 					Image: "/images/flags/es.png"
@@ -115,15 +115,16 @@ sap.ui.define([
 					LanguageCode: ["hu-HU"],
 					LanguageText: "Magyar",
 					Image: "/images/flags/hu.png"
-				}, {
-					LanguageCode: ["nb-NO"],
-					LanguageText: "Norsk bokmål",
-					Image: "/images/flags/no.png"
-				}, {
-					LanguageCode: ["sv-SE"],
-					LanguageText: "Svenska",
-					Image: "/images/flags/se.png"
-				}]
+				// }, {
+				// 	LanguageCode: ["nb-NO"],
+				// 	LanguageText: "Norsk bokmål",
+				// 	Image: "/images/flags/no.png"
+				// }, {
+				// 	LanguageCode: ["sv-SE"],
+				// 	LanguageText: "Svenska",
+				// 	Image: "/images/flags/se.png"
+				}
+				]
 			});
 
 			oModel.setDefaultBindingMode("OneWay");
