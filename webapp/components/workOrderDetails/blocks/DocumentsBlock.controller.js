@@ -30,7 +30,7 @@ sap.ui.define([
 				sap.m.MessageToast.show("No network connection: Download not possible");
 				return;
 			}
-			
+
 			//set buy cursor and disable documents list
 			downloadButtonAll.setBusy(true);
 			this.getView().byId("documentsList").setShowOverlay(true);
@@ -59,20 +59,20 @@ sap.ui.define([
 					if (newStreamsRegistered) {
 						//Call store.refresh
 						sap.hybrid.getOfflineStore().refresh(function(data) {
-								//this.getView().byId("documentsList").setBusy(false);
 								this.getView().byId("documentsList").setShowOverlay(false);
+								this.getView().byId("documentsList").getBinding("items").refresh(true);
 								downloadButtonAll.setBusy(false);
-								sap.m.MessageToast.show("All files are Downloaded");
+								sap.m.MessageToast.show("All files are downloaded");
 							}.bind(this),
 							function(error) {
 								downloadButtonAll.setBusy(false);
+								this.getView().byId("documentsList").getBinding("items").refresh(true);
 								this.getView().byId("documentsList").setShowOverlay(false);
 								console.log("Failed to download stream");
 							}.bind(this));
 					} else {
 						downloadButtonAll.setBusy(false);
 						this.getView().byId("documentsList").setShowOverlay(false);
-						//this.getView().byId("documentsList").setBusy(false);
 						sap.m.MessageToast.show("All files are Downloaded");
 					}
 
@@ -221,19 +221,48 @@ sap.ui.define([
 
 			var url = serviceUrlsubstring + this.getView().getBindingContext().getPath() + "/DocumentsSet";
 
+			var userFullName = this.getView().getModel("appInfoModel").getData().UserFullName;
+			var userName = this.getView().getModel("appInfoModel").getData().UserName;
+
 			xhr.open("POST", url, true);
 			xhr.setRequestHeader("Accept", "application/json");
 			xhr.setRequestHeader("content-type", file.type);
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState === 4) {
 					if (xhr.status === 201) {
-						var data = JSON.parse(xhr.responseText);
-						console.log("Media created." + "Src: " + data.d.__metadata.media_src);
+						var data = JSON.parse(xhr.response);
+						if (data) {
+							console.log("Document created in offline db - " + "Src: " + data.d.__metadata.media_src);
+
+							var documentObjectUrl = data.d.__metadata.uri;
+
+							var updateRequest = {
+								Filename: file.name,
+								Changedate: new Date(),
+								Fullname: userFullName,
+								Createdby: userName,
+								Chnageby: userName
+							};
+
+							var parameters = {
+								success: function() {
+									this.getView().byId("documentsList").getBinding("items").refresh(true);
+								}.bind(this),
+								error: function(error) {
+									this.errorCallBackShowInPopUp(error);
+								}.bind(this),
+								eTag : data.d.__metadata.etag
+							};
+
+							var updatePostUrl = documentObjectUrl.replace(this.getView().getModel().sServiceUrl, "");
+
+							this.getView().getModel().update(updatePostUrl, updateRequest, parameters);
+						}
 					} else {
-						console.log("Request failed! Status: " + xhr.status);
+						console.log("Document create failed" + xhr.status);
 					}
 				}
-			};
+			}.bind(this);
 
 			xhr.send(file);
 		},
