@@ -36,7 +36,7 @@
 						<Text text="{ReqQuantity}"/>
 						<Text text="{WithdQuan}"/>
 					</core:ExtensionPoint>
-					<Button id="editButton" enabled="{path:'PersNo', formatter:'.editTimeConfirmationEnabled'}" icon="sap-icon://edit"
+					<Button id="editButton" icon="sap-icon://edit"
 							press="onEdit"/>
 				</cells>
 			</ColumnListItem>
