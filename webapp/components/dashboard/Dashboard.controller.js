@@ -45,14 +45,20 @@ sap.ui.define([
 					this.DashBoardModel.getData().orderCount = oData;
 					this.DashBoardModel.refresh();
 				}.bind(this),
-				error: this.errorCallBackShowInPopUp
+
+				error: function(error) {
+					this.errorCallBackShowInPopUp(error);
+				}.bind(this)
 			};
 			var parametersNotif = {
 				success: function(oData, oResponse) {
 					this.DashBoardModel.getData().notificationCount = oData;
 					this.DashBoardModel.refresh();
 				}.bind(this),
-				error: this.errorCallBackShowInPopUp
+
+				error: function(error) {
+					this.errorCallBackShowInPopUp(error);
+				}.bind(this)
 			};
 
 			this.getView().getModel().read("/OrderSet/$count", parametersOrder);
@@ -79,7 +85,10 @@ sap.ui.define([
 
 					this.getView().getModel("appInfoModel").refresh();
 				}.bind(this),
-				error: this.errorCallBackShowInPopUp
+
+				error: function(error) {
+					this.errorCallBackShowInPopUp(error);
+				}.bind(this)
 			};
 
 			this.getView().getModel().read("/UserDetailsSet", parametersUserDetails);
@@ -434,7 +443,7 @@ sap.ui.define([
 		handleLanguageChanged: function(oEvent) {
 			// Get selected item
 			var selectedItem = oEvent.getParameter("selectedItem");
-			
+
 			var languageObject = selectedItem.getBindingContext("languagesModel").getObject();
 
 			//Set language in UI
@@ -445,7 +454,6 @@ sap.ui.define([
 
 			// Update values on model
 			this.getView().getModel("appInfoModel").setProperty("/UILanguage", languageObject);
-
 
 			// var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
 

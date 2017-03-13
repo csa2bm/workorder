@@ -124,6 +124,10 @@ sap.ui.define([
 			if (orderStatus === "INITIAL") {
 				message = this.getI18nText("WorkOrderDetails-orderStatusMessageNotStarted");
 			} else if (orderStatus === "INPROGRESS") {
+
+				if (this.timerIsRunningForOrder("completeorder")) {
+					return;
+				}
 				message = this.getI18nText("WorkOrderDetails-orderStatusMessageInProgress");
 			}
 
@@ -170,10 +174,10 @@ sap.ui.define([
 					if (orderStatus === "COMPLETED") {
 						this.navigateBack();
 					}
-					
+
 					this.getView().setBusy(false);
 				}.bind(this),
-				error: function(oError){
+				error: function(oError) {
 					this.errorCallBackShowInPopUp(oError);
 					this.getView().setBusy(false);
 				}.bind(this)
@@ -372,15 +376,36 @@ sap.ui.define([
 					this.navigateBack();
 					this.getView().setBusy(false);
 				}.bind(this),
-				error: function (oError)
-				{
+				error: function(oError) {
 					this.errorCallBackShowInPopUp(oError);
 					this.getView().setBusy(false);
 				}.bind(this)
 			});
 		},
 
+		timerIsRunningForOrder: function(type) {
+			var timeRegistrationTimerModel = this.getView().getModel("timeRegistrationTimerModel").getData();
+
+			if (timeRegistrationTimerModel.Started) {
+				if (this.getView().getBindingContext().getObject().Orderid === timeRegistrationTimerModel.OrderId) {
+					var text = "";
+					if (type === "reassign") {
+						text = this.getI18nText("WorkOrderDetails-StopTimerReassignWarning");
+					} else if (type === "completeorder") {
+						text = this.getI18nText("WorkOrderDetails-StopTimerCompleteOrderWarning");
+					}
+					sap.m.MessageBox.information(text);
+					return true;
+				}
+			}
+			return false;
+		},
+
 		onOrderReAssignButtonPressed: function(oEvent) {
+			if (this.timerIsRunningForOrder("reassign")) {
+				return;
+			}
+
 			var oButton = oEvent.getSource();
 
 			// create action sheet only once
