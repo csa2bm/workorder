@@ -2,16 +2,12 @@
 	controllerName="com.twobm.mobileworkorder.components.structureBrowser.StructureBrowser" xmlns:html="http://www.w3.org/1999/xhtml">
 	<App>
 		<pages>
-<<<<<<< HEAD
 			<Page title="Browse Structure" showNavButton="true" navButtonPress="navigateBack">
 			<headerContent>
 				<l:HorizontalLayout>
 					<core:Icon width="3em" height="3em" noTabStop="true" press="onSearch" src="sap-icon://search"/>
 				</l:HorizontalLayout>
 			</headerContent>
-=======
-			<Page title="{i18n>StructureBrowser-Title}" showNavButton="true" navButtonPress="navigateBack">
->>>>>>> branch 'development' of https://t0PPy@bitbucket.org/2bm/com.twobm.mobileworkorder.git
 				<content>
 					<Table id="workOrderTableId" items="{path: 'viewModel>/items'}" noDataText="{i18n>StructureBrowser-NoStructures}"
 						class="workOrderListTableClass">
