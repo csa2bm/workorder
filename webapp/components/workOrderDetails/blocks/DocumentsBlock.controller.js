@@ -136,7 +136,7 @@ sap.ui.define([
 			var uri = encodeURI(currentObject.__metadata.media_src);
 
 			var fullpath = directoryUrl + encodeURI(currentObject.Filename);
-			fullpath = fullpath.replace("", "%20"); //Replace spaces or else the file cannot open locally
+			fullpath = fullpath.replace(new RegExp("%20", 'g'), ""); //Replace spaces or else the file cannot open locally
 			fileTransfer.download(
 				uri,
 				fullpath,
