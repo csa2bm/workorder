@@ -5,7 +5,7 @@ sap.ui.define([
 ], function(Controller, JSONModel, History) {
 	"use strict";
 
-	return Controller.extend("com.twobm.mobileworkorder.components.structureBrowser.StructureBrowser", {
+	return Controller.extend("com.twobm.mobileworkorder.components.structureSearch.StructureSearch", {
 
 		/**
 		 * Called when a controller is instantiated and its View controls (if available) are already created.
@@ -202,9 +202,7 @@ sap.ui.define([
 
 			this.structureData = new JSONModel(this.data);
 
-			this.viewModel = this.data.FunctionalLocations.filter(function(fl) {
-				return fl.parentId === "";
-			});
+			this.viewModel = this.data.FunctionalLocations;
 
 			this.getView().setModel(new JSONModel({
 				items: this.viewModel
@@ -397,7 +395,7 @@ sap.ui.define([
 
 			this.navigateBack();
 		},
-
+		
 		//formatter function to either show or hide the button
 		EnableButtonVisbleCheck: function(str) {
 			if (str === "notificationCreate") {
@@ -405,10 +403,6 @@ sap.ui.define([
 			} else {
 				return false;
 			}
-		},
-		
-		onSearch : function(){
-				this.getRouter().navTo("structureSearch");
 		}
 	});
 });

@@ -1,20 +1,17 @@
 <mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout"
-	controllerName="com.twobm.mobileworkorder.components.structureBrowser.StructureBrowser" xmlns:html="http://www.w3.org/1999/xhtml">
+	controllerName="com.twobm.mobileworkorder.components.structureSearch.StructureSearch" xmlns:html="http://www.w3.org/1999/xhtml">
 	<App>
 		<pages>
-			<Page title="Browse Structure" showNavButton="true" navButtonPress="navigateBack">
-			<headerContent>
-				<l:HorizontalLayout>
-					<core:Icon width="3em" height="3em" noTabStop="true" press="onSearch" src="sap-icon://search"/>
-				</l:HorizontalLayout>
-			</headerContent>
+			<Page title="Search Structure" showNavButton="true" navButtonPress="navigateBack">
+				<headerContent></headerContent>
+				<subHeader>
+					<Toolbar>
+						<SearchField width="100%"/>
+					</Toolbar>
+				</subHeader>
 				<content>
-					<Table id="workOrderTableId" items="{path: 'viewModel>/items'}" noDataText="{i18n>StructureBrowser-NoStructures}"
-						class="workOrderListTableClass">
+					<Table id="workOrderTableId" items="{path: 'viewModel>/items'}" noDataText="No Work Orders" class="workOrderListTableClass">
 						<columns>
-							<Column width="1rem" hAlign="Center" vAlign="Middle">
-								<header></header>
-							</Column>
 							<Column width="1.5rem" hAlign="Center" vAlign="Middle">
 								<header></header>
 							</Column>
@@ -31,7 +28,6 @@
 						<items>
 							<ColumnListItem type="Active" press="onPressItem">
 								<cells>
-									<core:Icon class="sapUiTinyMarginTop" src="{parts:[{path:'viewModel>leaf'},{path:'viewModel>expanded'}],formatter:'.isLeaf'}"/>
 									<core:Icon class="sapUiTinyMarginTop" src="{parts:[{path:'viewModel>type'}],formatter:'.typeIcon'}"/>
 									<ObjectIdentifier text="{parts:[{path:'viewModel>level'}, {path:'viewModel>name'}],formatter:'.indentForLevel'}"
 										title="{parts:[{path:'viewModel>level'}, {path:'viewModel>description'}],formatter:'.indentForLevel'}"/>
@@ -43,6 +39,13 @@
 						</items>
 					</Table>
 				</content>
+							<footer>
+					<Toolbar>
+						<ToolbarSpacer></ToolbarSpacer>
+						<Button id="orderReAssignButton" text="Filter" press="onOrderReAssignButtonPressed"
+							icon="sap-icon://filter" visible="{parts:[{path: 'Personresp'}],formatter:'.reAssignVisible'}"/>
+				</Toolbar>
+			</footer>
 			</Page>
 		</pages>
 	</App>

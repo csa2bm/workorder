@@ -60,6 +60,16 @@
 							</TileContent>
 						</tileContent>
 					</GenericTile>
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="All Work Orders" subheader=""
+						frameType="OneByOne" press="onWorkOrdersFromWorkCenter" visible="false">
+						<tileContent>
+							<TileContent footer="">
+								<content>
+									<NumericContent value="54" icon="sap-icon://eam-work-order"/>
+								</content>
+							</TileContent>
+						</tileContent>
+					</GenericTile>
 					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>Dashboard-NotificationsTile-Header}" subheader=""
 						frameType="OneByOne" press="onPressNotifications">
 						<tileContent>
