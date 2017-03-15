@@ -13,7 +13,7 @@
 				<!-- Icon column -->
 			<Column demandPopin="false" popinDisplay="WithoutHeader" vAlign="Middle" width="2rem"/>
 				<core:ExtensionPoint name="workOrderDetailsDocumentsTableColumns">
-					<Column demandPopin="true" popinDisplay="WithoutHeader" vAlign="Middle" width="4rem">
+					<Column demandPopin="true" popinDisplay="WithoutHeader" vAlign="Middle">
 						<header>
 							<Label text="{i18n>WorkOrderDetails-DocumentsBlock-FilenameColumn}"/>
 						</header>
@@ -29,7 +29,7 @@
 						</header>
 					</Column>
 				</core:ExtensionPoint>
-				<Column demandPopin="true" vAlign="Middle" popinDisplay="WithoutHeader" width="6rem"/>
+				<Column demandPopin="true" vAlign="Middle" popinDisplay="WithoutHeader" width="7.5rem"/>
 			</columns>
 			<items>
 				<ColumnListItem type="Inactive" press="clickPreviewDocument">
@@ -42,8 +42,8 @@
 							<ObjectIdentifier  text="{Fullname} ({Chnageby})"/>
 						</core:ExtensionPoint>
 						<l:HorizontalLayout>
-						<Button id="downloadButton" class="sapUiMediumMarginEnd" text="Download" icon="sap-icon://download" press="downloadDocument" visible="{parts:[{path:'@com.sap.vocabularies.Offline.v1.mediaIsOffline'}, {path: 'device>/isHybridApp'}],formatter:'.showDownloadButton'}"></Button>
-						<Button id="viewButton" class="sapUiMediumMarginEnd" text="View" icon="sap-icon://show" press="viewDocument" visible="{parts:[{path:'@com.sap.vocabularies.Offline.v1.mediaIsOffline'}, {path: 'device>/isHybridApp'}],formatter:'.showViewButton'}"></Button>
+						<Button id="downloadButton" class="sapUiMediumMarginEnd" text="Download" icon="sap-icon://download" press="downloadDocument" visible="{parts:[{path:'@com.sap.vocabularies.Offline.v1.mediaIsOffline'}, {path: 'device>/isHybridApp'}, {path: 'Isurl'}],formatter:'.showDownloadButton'}"></Button>
+						<Button id="viewButton" class="sapUiMediumMarginEnd" text="View" icon="sap-icon://show" press="viewDocument" visible="{parts:[{path:'@com.sap.vocabularies.Offline.v1.mediaIsOffline'}, {path: 'device>/isHybridApp'}, {path: 'Isurl'}],formatter:'.showViewButton'}"></Button>
 						</l:HorizontalLayout>
 					</cells>
 				</ColumnListItem>
