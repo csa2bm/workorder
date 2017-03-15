@@ -40,9 +40,10 @@ sap.ui.define([
 				success: function(oData, response) {
 					var newStreamsRegistered = false;
 					oData.results.some(function myFunction(item) {
-						if (item['@com.sap.vocabularies.Offline.v1.mediaIsOffline']) {
+						if (item['@com.sap.vocabularies.Offline.v1.mediaIsOffline']|| item.Isurl) {
 							//Nothing
-						} else {
+						} 
+						else {
 							var path = "/DocumentsSet(Doctype='" + item.Doctype + "',Objky='" + item.Objky + "',Docnumber='" + item.Docnumber +
 								"',Docpart='" + item.Docpart + "',Docversion='" + item.Docversion + "')";
 
@@ -121,6 +122,12 @@ sap.ui.define([
 		viewDocument: function(oEvent) {
 			//This method is only called if the solution is running in Hybrid mode. This is controlled by view formatter
 			var currentObject = oEvent.getSource().getBindingContext().getObject();
+			
+			//If currentObject is only a URL link just open in window.open
+			if(currentObject.Isurl){
+				window.open(currentObject.Filename);
+				return;
+			}
 
 			var platformName = window.cordova.require("cordova/platform").id;
 			var directoryUrl;
@@ -275,7 +282,11 @@ sap.ui.define([
 			xhr.send(file);
 		},
 
-		showDownloadButton: function(mediaIsOffline, isHybridApp) {
+		showDownloadButton: function(mediaIsOffline, isHybridApp, isUrl) {
+			if(isUrl){
+				return false;
+			}
+			
 			if (isHybridApp) {
 				if (mediaIsOffline) {
 					return false;
@@ -288,7 +299,11 @@ sap.ui.define([
 			}
 		},
 
-		showViewButton: function(mediaIsOffline, isHybridApp) {
+		showViewButton: function(mediaIsOffline, isHybridApp, isUrl) {
+			if(isUrl){
+				return true;
+			}
+			
 			if (isHybridApp) {
 				if (mediaIsOffline) {
 					return true;
