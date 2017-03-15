@@ -27,7 +27,7 @@ sap.ui.define([
 			var documentsPath = this.getView().byId("documentsList").getBindingContext().getPath();
 
 			if (!sap.hybrid.SMP.isOnline) {
-				sap.m.MessageToast.show("No network connection: Download not possible");
+				sap.m.MessageToast.show(this.getI18nText("WorkOrderDetails-DocumentsBlock-DownloadNotPossible"));
 				return;
 			}
 
@@ -62,7 +62,7 @@ sap.ui.define([
 								this.getView().byId("documentsList").setShowOverlay(false);
 								this.getView().byId("documentsList").getBinding("items").refresh(true);
 								downloadButtonAll.setBusy(false);
-								sap.m.MessageToast.show("All files are downloaded");
+								sap.m.MessageToast.show(this.getI18nText("WorkOrderDetails-DocumentsBlock-AllFilesDownloaded"));
 							}.bind(this),
 							function(error) {
 								downloadButtonAll.setBusy(false);
@@ -73,7 +73,7 @@ sap.ui.define([
 					} else {
 						downloadButtonAll.setBusy(false);
 						this.getView().byId("documentsList").setShowOverlay(false);
-						sap.m.MessageToast.show("All files are Downloaded");
+						sap.m.MessageToast.show(this.getI18nText("WorkOrderDetails-DocumentsBlock-AllFilesDownloaded"));
 					}
 
 				}.bind(this),
@@ -85,7 +85,6 @@ sap.ui.define([
 
 		downloadDocument: function(oEvent) {
 			var downloadButton = oEvent.getSource();
-			//var documentsList = this.getView().byId("documentsList");
 			var currentObject = oEvent.getSource().getBindingContext().getObject();
 			var fileUrl = currentObject.__metadata.media_src;
 
@@ -94,7 +93,7 @@ sap.ui.define([
 
 			if (this.getView().getModel("device").getData().isHybridApp) {
 				if (!sap.hybrid.SMP.isOnline) {
-					sap.m.MessageToast.show("No network connection: Download not possible");
+					sap.m.MessageToast.show(this.getI18nText("WorkOrderDetails-DocumentsBlock-DownloadNotPossible"));
 					return;
 				}
 
@@ -112,7 +111,8 @@ sap.ui.define([
 					}.bind(this),
 					function(error) {
 						//Stream has probably already been registered for offline handling
-					});
+						this.getView().byId("documentsList").getBinding("items").refresh(true);
+					}.bind(this));
 			} else {
 				// Online in browser - just open the file link and the file will be downloaded by browser
 				window.open(uri);
@@ -125,7 +125,7 @@ sap.ui.define([
 			var platformName = window.cordova.require("cordova/platform").id;
 			var directoryUrl;
 			if (platformName === "ios") {
-				directoryUrl = cordova.file.dataDirectory + "/TempFiles/";
+				directoryUrl = cordova.file.dataDirectory; // + "TempFiles/";
 			} else if (platformName === "windows") {
 				directoryUrl = cordova.file.dataDirectory;
 			}
@@ -136,6 +136,7 @@ sap.ui.define([
 			var uri = encodeURI(currentObject.__metadata.media_src);
 
 			var fullpath = directoryUrl + encodeURI(currentObject.Filename);
+			fullpath = fullpath.replace(new RegExp("%20", 'g'), ""); //Replace spaces or else the file cannot open locally
 			fileTransfer.download(
 				uri,
 				fullpath,
@@ -155,11 +156,11 @@ sap.ui.define([
 					}
 				},
 				function(error) {
-					sap.m.MessageToast.show("Opening file failed");
+					sap.m.MessageToast.show(this.getI18nText("WorkOrderDetails-DocumentsBlock-OpenDocumentFailed"));
 					console.log("download error source " + error.source);
 					console.log("download error target " + error.target);
 					console.log("download error code" + error.code);
-				},
+				}.bind(this),
 				false, {}
 			);
 		},
@@ -208,6 +209,11 @@ sap.ui.define([
 				name: "content-type",
 				value: contentType
 			}));
+			
+			oFileUploader.addHeaderParameter(new sap.ui.unified.FileUploaderParameter({
+				name: "Accept",
+				value: "application/json"
+			}));
 
 			oFileUploader.setSendXHR(true);
 			oFileUploader.setUploadUrl(serviceUrl);
@@ -227,6 +233,8 @@ sap.ui.define([
 			xhr.open("POST", url, true);
 			xhr.setRequestHeader("Accept", "application/json");
 			xhr.setRequestHeader("content-type", file.type);
+			xhr.setRequestHeader("slug", file.name);
+			
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState === 4) {
 					if (xhr.status === 201) {
@@ -292,30 +300,5 @@ sap.ui.define([
 				return false;
 			}
 		}
-
-		/*
-		doFileExist: function(fileName){
-			var isHybridApp = this.getView().getModel("device").getData().isHybridApp;
-			
-			var platformName = window.cordova.require("cordova/platform").id;
-			
-			if(isHybridApp){
-				if(platformName === "ios"){
-					storagePath = cordova.file.documentsDirectory + fileName;
-					
-					var successCallback = function(data){
-						
-					}
-					
-					window.resolveLocalFileSystemURL(storagePath, successCallback, downloadAsset);
-				}
-				
-				
-				
-			}
-			
-		}
-		*/
-
 	});
 });

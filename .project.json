@@ -8,7 +8,7 @@
     "targetFolder": "dist",
     "sourceFolder": "webapp",
     "buildRequired": true,
-    "lastBuildDateTime": "Wed, 22 Feb 2017 13:26:58 GMT"
+    "lastBuildDateTime": "Tue, 14 Mar 2017 09:17:44 GMT"
   },
   "generation": [
     {
@@ -62,7 +62,7 @@
     "appid": "com.twobm.mobileworkorder",
     "appdesc": "Mobile Work Order by 2BM",
     "appversion": "1.1.3",
-    "debugMode": true,
+    "debugMode": false,
     "appIcon": {
       "defaultIcon": "",
       "ios": {
@@ -494,6 +494,6 @@
   "hcpdeploy": {
     "account": "a2b30ffcb",
     "name": "comtwobmmobileworkorder",
-    "lastVersionWeTriedToDeploy": "1.1.4"
+    "lastVersionWeTriedToDeploy": "1.1.7"
   }
 }

@@ -54,12 +54,14 @@
 			"type": "XML"
 		},
 		"dependencies": {
-			"minUI5Version": "1.38.8",
+			"minUI5Version": "1.40.12",
 			"libs": {
 				"sap.m": {},
 				"sap.ui.core": {},
 				"sap.ui.layout": {},
-				"sap.ushell": {}
+				"sap.ushell": {},
+				"sap.uxap": {},
+				"sap.ui.unified": {}
 			}
 		},
 		"contentDensities": {
