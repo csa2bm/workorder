@@ -49,24 +49,24 @@ sap.ui.define([
 			// Are we navigating to a page that should trigger sync?
 			if (sName === "dashboard" || sName === "workOrderList" || sName === "notificationList") {
 				// Sync
-				this.syncIfNeeded();
+				this.syncIfNeeded(false);
 				// Update state that drives the sync UI
 				SyncStateHandler.handleSyncState();
 			}
 		},
 
-		syncIfNeeded: function() {
+		syncIfNeeded: function(refresh) {
 			// Are there any pending changes?
 			sap.hybrid.getOfflineStore().getRequestQueueStatus(
 				function(status) {
 					if (!status.isEmpty) {
 						// Then sync
-						this.sync();
+						this.sync(refresh);
 					}
 				}.bind(this));
 		},
 
-		sync: function() {
+		sync: function(refresh) {
 			// Only sync when there is a connection
 			if (sap.hybrid.SMP.isOnline) {
                 
@@ -101,7 +101,7 @@ sap.ui.define([
                         if (this.extraSyncNeeded)
                         {
                             this.extraSyncNeeded = false;
-                            this.syncIfNeeded();
+                            this.syncIfNeeded(false);
                         }
                     
 						// Hide sync indicator
@@ -123,7 +123,7 @@ sap.ui.define([
 						// Hide sync indicator
 						this.setSyncIndicators(false);
 					}.bind(this),
-					false);
+					!refresh);
 			}
 		},
 
@@ -152,7 +152,7 @@ sap.ui.define([
 			var syncStatusModel = sap.ui.getCore().getComponent(window.componentId).getModel("syncStatusModel");
 			syncStatusModel.getData().Online = true;
 			// Synchronize
-			this.sync();
+			this.sync(true);
 			// Update sync state
 			SyncStateHandler.handleSyncState();
 		},
