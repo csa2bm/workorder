@@ -15,13 +15,13 @@
 				<Column>
 					<Text text="{i18n>WorkOrderDetails-ComponentsBlock-ComponentColumn}"/>
 				</Column>
-				<Column width="10em" vAlign="Middle">
+				<Column width="10em" vAlign="Middle" minScreenWidth="Tablet">
 					<Text text="{i18n>WorkOrderDetails-ComponentsBlock-StatusColumn}"/>
 				</Column>
 				<Column width="5em" vAlign="Middle" hAlign="Center">
 					<Text text="{i18n>WorkOrderDetails-ComponentsBlock-ReservedColumn}"/>
 				</Column>
-				<Column width="5em" vAlign="Middle" hAlign="Center">
+				<Column width="5em" vAlign="Middle" hAlign="Center" minScreenWidth="Tablet">
 					<Text text="{i18n>WorkOrderDetails-ComponentsBlock-WithdrawnColumn}"/>
 				</Column>
 			</core:ExtensionPoint>
