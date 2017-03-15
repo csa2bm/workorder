@@ -1,0 +1,14 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="Offline Development" class="sapUiPopupWithPadding" stretch="{device>/isPhone}" showHeader="true">
+		<buttons>
+			<Button text="Cancel" press="onCancel"></Button>
+			<Button type="Emphasized" text="Flush" press="onStartFlush"></Button>
+			<Button type="Emphasized" text="Refresh selected" press="onStartRefresh"></Button>
+		</buttons>
+		<content>
+			<List id="drList" mode="SingleSelectMaster">
+				<StandardListItem title="{Fullname}" description="{Username}" info="{Persno}" type="Active"/>
+			</List>
+		</content>
+	</Dialog>
+</core:FragmentDefinition>
