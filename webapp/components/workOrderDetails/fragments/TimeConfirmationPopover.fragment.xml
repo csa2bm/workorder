@@ -10,7 +10,7 @@
 				<Input id="WorkTimeConfirmationField" type="Text" placeholder="{i18n>WorkOrderDetails-TimeConfirmationPopover-TimeTextPlaceHolder}"
 					value="{path:'/ActWork' , type:'.typeTimeFormat'}" valueStateText="{i18n>WorkOrderDetails-TimeConfirmationPopover-TimeInputValidationError}"/>
 				<Label text="{i18n>WorkOrderDetails-TimeConfirmationPopover-Date}" design="Bold"/>
-				<DatePicker dateValue="{/ExecStartDate}" maxDate="{path:'/', formatter:'.getTodaysDaysDate' }"></DatePicker>
+				<DatePicker dateValue="{/Startdatetime}" maxDate="{path:'/', formatter:'.getTodaysDaysDate' }" ></DatePicker>
 				<Label />
 				<Button icon="sap-icon://delete" type="Reject" text="{i18n>WorkOrderDetails-TimeConfirmationPopover-DeleteButton}"
 					press="deleteTimeRegistration" visible="{path:'/type', formatter:'.isDeleteable' }"></Button>
