@@ -32,7 +32,7 @@
 					<Text text="{Street}\r\n{City}"/>
 					
 					<Label text="{i18n>WorkOrderDetails-GeneralBlock-PurchasingStatus}"/>
-					<Text text="{path:'PurchasingStatus', formatter: '.formatPurchasingStatus'}"/>
+					<Text text="{path:'Postatus', formatter: '.formatPurchasingStatus'}"/>
 					
 					
 					
