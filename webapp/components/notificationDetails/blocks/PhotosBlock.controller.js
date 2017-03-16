@@ -3,7 +3,7 @@ sap.ui.define([
 ], function(Controller) {
 	"use strict";
 
-	return Controller.extend("com.twobm.mobileworkorder.components.notificationDetails.blocks.AttachmentsBlock", {
+	return Controller.extend("com.twobm.mobileworkorder.components.notificationDetails.blocks.PhotosBlock", {
 
 		/**
 		 * Called when a controller is instantiated and its View controls (if available) are already created.
