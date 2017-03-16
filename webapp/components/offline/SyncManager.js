@@ -5,7 +5,9 @@ sap.ui.define([
 	"use strict";
 	return {
 		needsSync: false,
-
+        isSyncing: false,
+        extraSyncNeeded: false,
+        
 		start: function(router) {
 			// Attach online / offline events
 			document.addEventListener("online", this.onConnected.bind(this), false);
@@ -13,17 +15,19 @@ sap.ui.define([
 			// Attach to router so we can start sync when certain pages are shown
 			router.attachRoutePatternMatched(this.onRouteMatched, this);
 
-			sap.Push.registerForNotificationTypes(sap.Push.notificationType.badge | sap.Push.notificationType.sound | sap.Push.notificationType
-				.alert,
-				function(message) {
+			//07032017 - PUSH NOT YET WORKING - OUTCOMMENTED
+			// sap.Push.registerForNotificationTypes(sap.Push.notificationType.badge | sap.Push.notificationType.sound | sap.Push.notificationType
+			// 	.alert,
+			// 	function(message) {
 
-				}.bind(this),
-				function(message) {
-					this.showMessage("Failed to register for push: " + message);
-				}.bind(this),
-				function(message) {
-					this.sync();
-				}.bind(this), "");
+			// 	}.bind(this),
+			// 	function(message) {
+			// 		var pushregisterFailedText = sap.ui.getCore().getComponent(window.componentId).getModel("i18n").getResourceBundle().getText("SyncManager-PushRegisterFailed");
+			// 		this.showMessage(pushregisterFailedText + ": " + message);
+			// 	}.bind(this),
+			// 	function(message) {
+			// 		this.sync();
+			// 	}.bind(this), "");
 		},
 
 		saveLastSyncTimeInBrowserCache: function(lastSyncTime) {
@@ -45,26 +49,35 @@ sap.ui.define([
 			// Are we navigating to a page that should trigger sync?
 			if (sName === "dashboard" || sName === "workOrderList" || sName === "notificationList") {
 				// Sync
-				this.syncIfNeeded();
+				this.syncIfNeeded(false);
 				// Update state that drives the sync UI
 				SyncStateHandler.handleSyncState();
 			}
 		},
 
-		syncIfNeeded: function() {
+		syncIfNeeded: function(refresh) {
 			// Are there any pending changes?
 			sap.hybrid.getOfflineStore().getRequestQueueStatus(
 				function(status) {
 					if (!status.isEmpty) {
 						// Then sync
-						this.sync();
+						this.sync(refresh);
 					}
 				}.bind(this));
 		},
 
-		sync: function() {
+		sync: function(refresh) {
 			// Only sync when there is a connection
 			if (sap.hybrid.SMP.isOnline) {
+                
+                if (this.isSyncing)
+                {
+                    this.extraSyncNeeded = true;
+                    return;
+                }
+                
+                this.isSyncing = true;
+                
 				// Show sync indicator
 				this.setSyncIndicators(true);
 				// Start sync
@@ -83,6 +96,14 @@ sap.ui.define([
 
 						this.saveLastSyncTimeInBrowserCache(syncStatusModel.getData().LastSyncTime);
 
+                        this.isSyncing = false;
+                    
+                        if (this.extraSyncNeeded)
+                        {
+                            this.extraSyncNeeded = false;
+                            this.syncIfNeeded(false);
+                        }
+                    
 						// Hide sync indicator
 						this.setSyncIndicators(false);
 
@@ -92,21 +113,26 @@ sap.ui.define([
 					function(error) {
 						// Error during sync - most likely the device went offline during a sync
 						if (sap.hybrid.SMP.isOnline) {
+							var text = sap.ui.getCore().getComponent(window.componentId).getModel("i18n").getResourceBundle().getText("SyncManager-SyncError"); 
 							// If this was not due to the device beeing offline, show the error
-							this.showMessage("Error during sync: " + error);
+							this.showMessage(text + ": " + error);
 						}
 
+                        this.isSyncing = false;
+                    
 						// Hide sync indicator
 						this.setSyncIndicators(false);
 					}.bind(this),
-					false);
+					!refresh);
 			}
 		},
 
 		showMessage: function(message) {
+			var title = sap.ui.getCore().getComponent(window.componentId).getModel("i18n").getResourceBundle().getText("SyncManager-MessageTitle");
+			
 			sap.m.MessageBox.show(message, {
 				icon: sap.m.MessageBox.Icon.None,
-				title: "Message",
+				title: title,
 				actions: [sap.m.MessageBox.Action.OK],
 				defaultAction: sap.m.MessageBox.Action.NO,
 				onClose: function(oAction, object) {}
@@ -126,7 +152,7 @@ sap.ui.define([
 			var syncStatusModel = sap.ui.getCore().getComponent(window.componentId).getModel("syncStatusModel");
 			syncStatusModel.getData().Online = true;
 			// Synchronize
-			this.sync();
+			this.sync(true);
 			// Update sync state
 			SyncStateHandler.handleSyncState();
 		},

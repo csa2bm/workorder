@@ -1,17 +1,13 @@
 <core:View controllerName="com.twobm.mobileworkorder.components.dashboard.Dashboard" xmlns:core="sap.ui.core"
 	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
-	xmlns:mic="sap.suite.ui.microchart" height="100%">
+	height="100%">
 	<App class="dashboardClass" id="mobileWorkOrderApp">
 		<Page title="{i18n>Dashboard-Title}" class="myBackgroundStyle">
 			<headerContent>
 				<core:ExtensionPoint name="dashboardHeaderItems">
 					<l:HorizontalLayout>
-						<Image visible="false" src="{path: 'appInfoModel>/UILanguage', formatter:'.getLanguageFlag' }" width="2em" height="2em" press="changeLanguage"
-							class="sapUiTinyMarginTop sapUiTinyMarginEnd"></Image>
-					</l:HorizontalLayout>
-					<l:HorizontalLayout visible="{device>/isHybridApp}">
-						<Image src="{path: 'appInfoModel>/UILanguage', formatter:'.getLanguageFlag' }" width="2em" height="2em" press="changeLanguage"
-							class="circular sapUiTinyMarginTop sapUiTinyMarginEnd"></Image>
+						<!--<Image src="{path: 'appInfoModel>/UILanguage', formatter:'.getLanguageFlag' }" width="2em" height="2em" press="changeLanguage"-->
+						<!--	class="circular sapUiTinyMarginTop sapUiTinyMarginEnd"></Image>-->
 						<Image visible="{device>/isPhone}" src="{appInfoModel>/UserImage}" width="2em" height="2em" press="onSettings"
 							class="circular sapUiTinyMarginTop sapUiTinyMarginEnd"></Image>
 						<core:Icon visible="{device>/isNotPhone}" width="3em" height="3em" noTabStop="true" press="onSettings" src="sap-icon://action-settings"/>
@@ -60,6 +56,16 @@
 							<TileContent footer="">
 								<content>
 									<NumericContent value="{DashBoardModel>/orderCount}" icon="sap-icon://eam-work-order"/>
+								</content>
+							</TileContent>
+						</tileContent>
+					</GenericTile>
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="All Work Orders" subheader=""
+						frameType="OneByOne" press="onWorkOrdersFromWorkCenter" visible="false">
+						<tileContent>
+							<TileContent footer="">
+								<content>
+									<NumericContent value="54" icon="sap-icon://eam-work-order"/>
 								</content>
 							</TileContent>
 						</tileContent>

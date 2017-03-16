@@ -1,0 +1,52 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout"
+	controllerName="com.twobm.mobileworkorder.components.structureSearch.StructureSearch" xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page title="Search Structure" showNavButton="true" navButtonPress="navigateBack">
+				<headerContent></headerContent>
+				<subHeader>
+					<Toolbar>
+						<SearchField width="100%"/>
+					</Toolbar>
+				</subHeader>
+				<content>
+					<Table id="workOrderTableId" items="{path: 'viewModel>/items'}" noDataText="No Work Orders" class="workOrderListTableClass">
+						<columns>
+							<Column width="1.5rem" hAlign="Center" vAlign="Middle">
+								<header></header>
+							</Column>
+							<Column width="auto">
+								<header></header>
+							</Column>
+							<Column width="2.5rem">
+								<header></header>
+							</Column>
+							<Column width="2.7rem">
+								<header></header>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem type="Active" press="onPressItem">
+								<cells>
+									<core:Icon class="sapUiTinyMarginTop" src="{parts:[{path:'viewModel>type'}],formatter:'.typeIcon'}"/>
+									<ObjectIdentifier text="{parts:[{path:'viewModel>level'}, {path:'viewModel>name'}],formatter:'.indentForLevel'}"
+										title="{parts:[{path:'viewModel>level'}, {path:'viewModel>description'}],formatter:'.indentForLevel'}"/>
+									<Button icon="sap-icon://hint" press="onDetailsPress"/>
+									<Button icon="sap-icon://accept" visible="{path:'visibleSelectButtonModel>/parentView',formatter:'.EnableButtonVisbleCheck'}"
+										press="onSelectBtnPress"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+							<footer>
+					<Toolbar>
+						<ToolbarSpacer></ToolbarSpacer>
+						<Button id="orderReAssignButton" text="Filter" press="onOrderReAssignButtonPressed"
+							icon="sap-icon://filter" visible="{parts:[{path: 'Personresp'}],formatter:'.reAssignVisible'}"/>
+				</Toolbar>
+			</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

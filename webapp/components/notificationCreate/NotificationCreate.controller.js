@@ -119,16 +119,16 @@ sap.ui.define([
 		},
 
 		handleSaveNotification: function() {
-
 			if (!this.getView().getBindingContext().getObject().ShortText) {
-				sap.m.MessageToast.show("Description missing");
+				
+				sap.m.MessageToast.show(this.getI18nText("NotificationCreate-SaveValidationDescriptionMissing"));
 				return;
 			}
 
-			if (!this.getView().getBindingContext().getObject().LongText) {
-				sap.m.MessageToast.show("Notes missing");
-				return;
-			}
+			// if (!this.getView().getBindingContext().getObject().LongText) {
+			// 	sap.m.MessageToast.show("Notes missing");
+			// 	return;
+			// }
 
 			this.getView().setBusy(true);
 			this.getView().getModel().submitChanges({
@@ -214,7 +214,7 @@ sap.ui.define([
 			if (isFuncLoc) {
 				this.getView().getModel().setProperty(this.newEntry.getPath() + "/FunctionalLoc", equipmentObject.FunctionalLocation);
 				this.getView().getModel().setProperty(this.newEntry.getPath() + "/FuncLocDesc", equipmentObject.Description);
-				
+
 			} else {
 				this.getView().getModel().setProperty(this.newEntry.getPath() + "/FunctionalLoc", equipmentObject.Funcloc);
 				this.getView().getModel().setProperty(this.newEntry.getPath() + "/FuncLocDesc", equipmentObject.Funclocdesc);
@@ -249,7 +249,7 @@ sap.ui.define([
 			this.getView().getModel().setProperty(this.newEntry.getPath() + "/FuncLocDesc", "");
 			this.getView().getModel().setProperty(this.newEntry.getPath() + "/Equipment", "");
 			this.getView().getModel().setProperty(this.newEntry.getPath() + "/EquipmentDesc", "");
-			
+
 			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
 			MessageBox.show(this.getI18nTextReplace1("Dashboard-scanObjectTile-searchObjectNotFoundMsgText", equipmentNo), {
 				icon: MessageBox.Icon.NONE,
@@ -269,8 +269,6 @@ sap.ui.define([
 				defaultAction: MessageBox.Action.OK,
 				styleClass: bCompact ? "sapUiSizeCompact" : ""
 			});
-
-		},
-
+		}
 	});
 });

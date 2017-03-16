@@ -100,7 +100,7 @@
 							<subSections>
 								<ObjectPageSubSection id="photosSubSection" title="{i18n>WorkOrderDetails-PhotosSubSection}">
 									<blocks>
-										<blocks:AttachmentsBlock/>
+										<blocks:PhotosBlock/>
 									</blocks>
 								</ObjectPageSubSection>
 							</subSections>

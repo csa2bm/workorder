@@ -12,9 +12,3 @@
 		<!--<Button id="saveButton" visible="false" class="sapUiMediumMarginEnd" icon="sap-icon://save" press="SaveLongText"></Button>-->
 	</VBox>
 </core:View>
-<!--	<l:VerticalLayout class="sapUiSmallMarginEnd" width="100%">
-		<FlexBox id="NotesLayoutId" items="{ path: 'NotificationAttachments', factory: '.itemFactory'}" wrap="Wrap" />
-		<l:HorizontalLayout >
-			<Button id="cameraButton" visible="{parts:[{path:'SysStatus'}],formatter:'.isNotificationStatusNotCompleted'}" class="sapUiMediumMarginEnd" icon="sap-icon://camera" press="capturePhoto"></Button>
-		</l:HorizontalLayout>
-	</l:VerticalLayout>-->

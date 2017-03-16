@@ -397,7 +397,7 @@ sap.ui.define([
 
 			this.navigateBack();
 		},
-		
+
 		//formatter function to either show or hide the button
 		EnableButtonVisbleCheck: function(str) {
 			if (str === "notificationCreate") {
@@ -405,6 +405,10 @@ sap.ui.define([
 			} else {
 				return false;
 			}
+		},
+		
+		onSearch : function(){
+				this.getRouter().navTo("structureSearch");
 		}
 	});
 });

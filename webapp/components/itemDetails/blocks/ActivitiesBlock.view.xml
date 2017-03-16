@@ -2,20 +2,20 @@
 	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
 	<Button class="sapUiSmallMarginEnd" icon="sap-icon://add" press="onCreateActivity"/>
 	<Table id="activitiesList" items="{ path: 'NotifActivitiesSet', sorter: { path: 'ActSortNo', descending: false}}"
-		noDataText="{i18n>NotificationDetails-ActivitiesBlock-NoData}">
+		noDataText="{i18n>ItemDetails-ActivitiesBlock-NoData}">
 		<columns>
 			<core:ExtensionPoint name="itemDetailsActivitiesTableColumns">
 				<Column id="sortNumberColumn" minScreenWidth="Tablet">
-					<Text text="{i18n>NotificationDetails-ActivitiesBlock-SortNumberHeader}"/>
+					<Text text="{i18n>ItemDetails-ActivitiesBlock-SortNumberHeader}"/>
 				</Column>
 				<Column id="codeGroupColumn" minScreenWidth="Tablet">
-					<Text text="{i18n>NotificationDetails-ActivitiesBlock-CodeGroupHeader}"/>
+					<Text text="{i18n>ItemDetails-ActivitiesBlock-CodeGroupHeader}"/>
 				</Column>
 				<Column id="codeColumn">
-					<Text text="{i18n>NotificationDetails-ActivitiesBlock-CodeHeader}"/>
+					<Text text="{i18n>ItemDetails-ActivitiesBlock-CodeHeader}"/>
 				</Column>
 				<Column id="textColumn">
-					<Text text="{i18n>NotificationDetails-ActivitiesBlock-TextHeader}"/>
+					<Text text="{i18n>ItemDetails-ActivitiesBlock-TextHeader}"/>
 				</Column>
 				<Column id="editBtnColumn" vAlign="Middle" width="2.5em"></Column>
 			</core:ExtensionPoint>

@@ -284,10 +284,10 @@ sap.ui.define([
 			}
 		},
 
-		handleValueHelpAfterCloseCode: function() {
-			//Destroy the ValueHelpDialog
-			//this.valueDamageHelpCodeDialog.destroy();
-		},
+		// handleValueHelpAfterCloseCode: function() {
+		// 	//Destroy the ValueHelpDialog
+		// 	//this.valueDamageHelpCodeDialog.destroy();
+		// },
 		// formatter function for enable/disable Code input in popover
 		isItemCodeGrpEmpty: function(itemGroupValue) {
 			if (itemGroupValue !== undefined && itemGroupValue !== "") {

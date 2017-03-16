@@ -17,7 +17,7 @@
 		"ach": "ach",
 		"dataSources": {
 			"WORKORDER_SRV": {
-				"uri": "/ID3/sap/opu/odata/tobmas/WORKORDER_SRV/",
+				"uri": "/sap/opu/odata/tobmas/WORKORDER_SRV/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0",
@@ -54,12 +54,14 @@
 			"type": "XML"
 		},
 		"dependencies": {
-			"minUI5Version": "1.38.8",
+			"minUI5Version": "1.40.12",
 			"libs": {
-				"sap.ui.core": {},
 				"sap.m": {},
+				"sap.ui.core": {},
 				"sap.ui.layout": {},
-				"sap.ushell": {}
+				"sap.ushell": {},
+				"sap.uxap": {},
+				"sap.ui.unified": {}
 			}
 		},
 		"contentDensities": {
@@ -105,6 +107,11 @@
 					"pattern": "workOrderList",
 					"name": "workOrderList",
 					"target": "workOrderList"
+				},
+					{
+					"pattern": "workOrdersFromWorkCenter",
+					"name": "workOrdersFromWorkCenter",
+					"target": "workOrdersFromWorkCenter"
 				},
 				{
 					"pattern": "workOrderDetails/{workOrderContext}",
@@ -152,6 +159,12 @@
 					"name": "itemDetails",
 					"target": "itemDetails"
 				},
+					{
+					"pattern": "structureSearch",
+					"name": "structureSearch",
+					"target": "structureSearch"
+				},
+				
 				{
 					"pattern": "notificationCreate/:equipmentNo:/:functionalLoc:/:funcLocDesc:/:equipmentDesc:/:argAvailable:",
 					"name": "notificationCreate",
@@ -179,6 +192,11 @@
 				"workOrderList": {
 					"viewPath": "com.twobm.mobileworkorder.components.workOrderList",
 					"viewName": "WorkOrderList",
+					"viewLevel": 2
+				},
+				"workOrdersFromWorkCenter": {
+					"viewPath": "com.twobm.mobileworkorder.components.workOrdersFromWorkCenter",
+					"viewName": "WorkOrdersFromWorkCenter",
 					"viewLevel": 2
 				},
 				"workOrderDetails": {
@@ -245,6 +263,14 @@
 					"viewName": "StructureBrowser",
 					"viewLevel": "3",
 					"viewPath": "com.twobm.mobileworkorder.components.structureBrowser"
+				},
+				"structureSearch": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewName": "StructureSearch",
+					"viewLevel": "3",
+					"viewPath": "com.twobm.mobileworkorder.components.structureSearch"
 				}
 			}
 		}
@@ -361,6 +387,14 @@
 			"EmployeesSet": {
 				"dataSource": "WORKORDER_SRV",
 				"path": "/EmployeesSet"
+			},
+			"DocumentsSet": {
+				"dataSource": "WORKORDER_SRV",
+				"path": "/DocumentsSet"
+			},
+			"EquipmentBomSet": {
+				"dataSource": "WORKORDER_SRV",
+				"path": "/EquipmentBomSet"
 			}
 		}
 	},

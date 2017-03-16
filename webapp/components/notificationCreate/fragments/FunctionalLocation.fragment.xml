@@ -3,7 +3,7 @@
 	xmlns:core="sap.ui.core">
 	<SelectDialog
 		id = "FunctionalsLocationsDialog"
-		title="Functional Locations"
+		title="{i18n>NotificationCreate-FunctionalLocations}"
 		class="sapUiPopupWithPadding"
 		items="{/FunctionalLocationsSet}"
 		search="_handleValueHelpSearchFunctionalLocation"

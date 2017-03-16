@@ -3,15 +3,16 @@
 		<buttons>
 			<Button icon="sap-icon://delete" type="Reject" text="{i18n>NotificationDetails-ActivityPopover-DeleteButton}" press="onDeleteActivity"
 				visible="{ViewModel>/isEditing}"></Button>
-			<Button type="Emphasized" text="OK" press="onSubmitActivity"></Button>
-			<Button text="Close" press="onPopopoverClose"/>
+			<Button type="Emphasized" text="{i18n>NotificationDetails-ActivityPopover-OKButton}" press="onSubmitActivity"></Button>
+			<Button text="{i18n>NotificationDetails-ActivityPopover-CloseButton}" press="onPopopoverClose"/>
 		</buttons>
 		<content>
 			<VBox>
 				<Label text="{i18n>NotificationDetails-ActivityPopover-CodeGroup}" design="Bold" class="sapUiTinyMarginBottom"/>
 				<Input type="Text" value="{ActCodegrp}" showValueHelp="true" valueHelpRequest="handleValueHelpCodeGroup" valueHelpOnly="true"/>
 				<Label text="{i18n>NotificationDetails-ActivityPopover-Code}" design="Bold" class="sapUiTinyMarginBottom sapUiTinyMarginTop"/>
-				<Input type="Text" value="{ActCode}" showValueHelp="true" valueHelpRequest="handleValueHelpCode" valueHelpOnly="true" enabled="{parts:[{path:'ActCodegrp'}],formatter:'.isActCodeGrpEmpty'}"/>
+				<Input type="Text" value="{ActCode}" showValueHelp="true" valueHelpRequest="handleValueHelpCode" valueHelpOnly="true"
+					enabled="{parts:[{path:'ActCodegrp'}],formatter:'.isActCodeGrpEmpty'}"/>
 				<Label text="{i18n>NotificationDetails-ActivityPopover-Text}" design="Bold" class="sapUiTinyMarginBottom sapUiTinyMarginTop"/>
 				<Input type="Text" value="{Acttext}" maxLength="40"/>
 			</VBox>

@@ -2,14 +2,13 @@
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core">
 	<SelectDialog
-		title="Select Language"
+		title="{i18n>Dashboard-SelectLanguageDialogHeader}"
 		class="sapUiPopupWithPadding"
 		items="{languagesModel>/Languages}"
-		search="handleTaskCodeSearch"
-		confirm="handleLanguageChanged"
-		cancel="handleValueHelpCloseCode">
+		search="handleLanguageSearch"
+		confirm="handleLanguageChanged">
 		<StandardListItem
 			title="{languagesModel>LanguageText}"
-			icon="{languagesModel>Image}" />
+			icon="{path: 'languagesModel>Image', formatter:'.getLanguageFlag' }" />
 	</SelectDialog>
 </core:FragmentDefinition>

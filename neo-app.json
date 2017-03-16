@@ -2,11 +2,21 @@
   "welcomeFile": "/webapp/index.html",
   "routes": [
     {
+      "path": "/sap/opu/odata",
+      "target": {
+        "type": "destination",
+        "name": "ID3",
+        "entryPath": "/sap/opu/odata"
+      },
+      "description": "ID3"
+    },
+    {
       "path": "/resources",
       "target": {
         "type": "service",
         "name": "sapui5",
-        "entryPath": "/resources"
+        "entryPath": "/resources",
+        "version": "1.40.12"
       },
       "description": "SAPUI5 Resources"
     },
@@ -15,17 +25,10 @@
       "target": {
         "type": "service",
         "name": "sapui5",
-        "entryPath": "/test-resources"
+        "entryPath": "/test-resources",
+        "version": "1.40.12"
       },
       "description": "SAPUI5 Test Resources"
-    },
-    {
-      "path": "/ID3",
-      "target": {
-        "type": "destination",
-        "name": "ID3"
-      },
-      "description": "ID3 OData Services"
     }
   ],
   "sendWelcomeFileRedirect": true,

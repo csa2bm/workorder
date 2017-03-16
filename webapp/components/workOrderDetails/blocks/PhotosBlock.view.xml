@@ -1,10 +1,10 @@
 <mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout"
-	controllerName="com.twobm.mobileworkorder.components.workOrderDetails.blocks.AttachmentsBlock" xmlns:html="http://www.w3.org/1999/xhtml">
+	controllerName="com.twobm.mobileworkorder.components.workOrderDetails.blocks.PhotosBlock" xmlns:html="http://www.w3.org/1999/xhtml">
 	<l:VerticalLayout class="sapUiSmallMarginEnd" width="100%">
-		<FlexBox id="attachmentsList" items="{ path: 'OrderAttachments', factory: '.itemFactory'}" wrap="Wrap"/>
 		<l:HorizontalLayout >
 			<Button id="cameraButton" visible="{parts:[{path:'OrderStatus'}],formatter:'.orderStatusValid'}" class="sapUiMediumMarginEnd"
 				icon="sap-icon://camera" press="capturePhoto"></Button>
 		</l:HorizontalLayout>
+		<FlexBox id="attachmentsList" items="{ path: 'OrderAttachments', factory: '.itemFactory'}" wrap="Wrap"/>
 	</l:VerticalLayout>
 </mvc:View>

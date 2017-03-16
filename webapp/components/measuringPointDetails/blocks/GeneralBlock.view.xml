@@ -8,6 +8,14 @@
 				<Text text="{EquipmentDesc}\r\n({Equipment})"/>
 				<Label text="{i18n>MeasuringPointDetails-GeneralBlock-Unit}"/>
 				<Text text="{MeasUnit} "/>
+				<Label text="{i18n>WorkOrderDetails-MeasuringPointsBlock-PopOverCounterLabel}"/>
+				<Text text="{parts:[{path:'Counter'}],formatter:'.isCounterSet'}"/>
+				<Label text="{i18n>MeasuringPointDetails-GeneralBlock-MinimumThreshold}"/>
+				<Text
+					text="{parts:[{path:'MinLimit', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}, {path:'ValueMinLimit'}],formatter:'.showTextForMinValue'}"/>
+				<Label text="{i18n>MeasuringPointDetails-GeneralBlock-MaximumThreshold}"/>
+				<Text
+					text="{parts:[{path:'MaxLimit', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}, {path:'ValueMaxLimit'}],formatter:'.showTextForMaxValue'}"/>
 			</f:content>
 		</f:SimpleForm>
 	</VBox>

@@ -25,7 +25,7 @@
 				<ColumnListItem type="Inactive">
 					<cells>
 						<core:ExtensionPoint name="workOrderDetailTimeConfirmationsTableCells">
-							<Text text="{path:'ExecStartDate', formatter:'.formatDateValue'}" />
+							<Text text="{path:'Startdatetime', formatter:'.convertStartDateStringToDate'}" />
 							<Text text="{Fullname}"/>
 							<!--<ObjectIdentifier title="{path:'RegistrationDate', type:'sap.ui.model.type.Date', formatOptions:'short'}"/>-->
 

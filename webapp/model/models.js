@@ -46,7 +46,8 @@ sap.ui.define([
 				UserPosition: "",
 				UserImage: "",
 				Persno: "",
-				UILanguage: sap.ui.getCore().getConfiguration().getLanguage()
+				UILanguage: sap.ui.getCore().getConfiguration().getLanguage(),
+				UILanguageText: ""
 			});
 
 			oModel.setDefaultBindingMode("OneWay");
@@ -79,50 +80,51 @@ sap.ui.define([
 		createLanguagesModel: function() {
 			var oModel = new JSONModel({
 				Languages: [{
+					LanguageCode: ["cs-CZ"],
 					LanguageText: "Český",
-					LanguageCode: "cs",
-					Image: "images/flags/cz.png"
+					Image: "/images/flags/cz.png"
 				}, {
+					LanguageCode: ["zh-CN"],
 					LanguageText: "中国传统",
-					LanguageCode: "zh",
-					Image: "images/flags/zh.png"
+					Image: "/images/flags/zh.png"
 				}, {
+					LanguageCode: ["da-DK"],
 					LanguageText: "Dansk",
-					LanguageCode: "da",
-					Image: "images/flags/da.png"
+					Image: "/images/flags/da.png"
 				}, {
-					LanguageText: "Deutsch",
-					LanguageCode: "de",
-					Image: "images/flags/de.png"
-				}, {
+				// 	LanguageCode: ["de-DE"],
+				// 	LanguageText: "Deutsch",
+				// 	Image: "/images/flags/de.png"
+				// }, {
+					LanguageCode: ["en-GB"],
 					LanguageText: "English (UK)",
-					LanguageCode: "en-UK",
-					Image: "images/flags/uk.png"
+					Image: "/images/flags/uk.png"
 				}, {
-					LanguageText: "English (US)",
-					LanguageCode: "en-US",
-					Image: "images/flags/us.png"
+				// 	LanguageCode: ["en-US"],
+				// 	LanguageText: "English (US)",
+				// 	Image: "/images/flags/us.png"
+				// }, {
+				// 	LanguageCode: ["es-ES"],
+				// 	LanguageText: "España (Spain)",
+				// 	Image: "/images/flags/es.png"
+				// }, {
+					LanguageCode: ["es-MX"],
+					LanguageText: "Español (México)",
+					Image: "/images/flags/mx.png"
 				}, {
-					LanguageText: "España (Spain)",
-					LanguageCode: "es",
-					Image: "images/flags/es.png"
-				}, {
-					LanguageText: "España (México)",
-					LanguageCode: "es-MX",
-					Image: "images/flags/es.png"
-				}, {
+					LanguageCode: ["hu-HU"],
 					LanguageText: "Magyar",
-					LanguageCode: "hu",
-					Image: "images/flags/hu.png"
-				}, {
-					LanguageText: "Norsk",
-					LanguageCode: "no",
-					Image: "images/flags/no.png"
-				}, {
-					LanguageText: "Svenska",
-					LanguageCode: "sv",
-					Image: "images/flags/se.png"
-				}]
+					Image: "/images/flags/hu.png"
+				// }, {
+				// 	LanguageCode: ["nb-NO"],
+				// 	LanguageText: "Norsk bokmål",
+				// 	Image: "/images/flags/no.png"
+				// }, {
+				// 	LanguageCode: ["sv-SE"],
+				// 	LanguageText: "Svenska",
+				// 	Image: "/images/flags/se.png"
+				}
+				]
 			});
 
 			oModel.setDefaultBindingMode("OneWay");

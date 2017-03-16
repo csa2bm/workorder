@@ -30,6 +30,14 @@
 					<Text text="{Equidescr}\r\n({Equipment})"/>
 					<Label text="{i18n>WorkOrderDetails-GeneralBlock-Address}"/>
 					<Text text="{Street}\r\n{City}"/>
+					
+					<Label text="{i18n>WorkOrderDetails-GeneralBlock-PurchasingStatus}"/>
+					<Text text="{path:'Postatus', formatter: '.formatPurchasingStatus'}"/>
+					
+					
+					
+					
+					
 				</core:ExtensionPoint>
 			</f:content>
 		</f:SimpleForm>
