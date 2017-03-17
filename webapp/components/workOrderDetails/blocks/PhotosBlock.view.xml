@@ -4,6 +4,8 @@
 		<l:HorizontalLayout >
 			<Button id="cameraButton" visible="{parts:[{path:'OrderStatus'}],formatter:'.orderStatusValid'}" class="sapUiMediumMarginEnd"
 				icon="sap-icon://camera" press="capturePhoto"></Button>
+			<Button id="videoButton" visible="false" class="sapUiMediumMarginEnd"
+				icon="sap-icon://video" press="captureVideo"></Button>
 		</l:HorizontalLayout>
 		<FlexBox id="attachmentsList" items="{ path: 'OrderAttachments', factory: '.itemFactory'}" wrap="Wrap"/>
 	</l:VerticalLayout>

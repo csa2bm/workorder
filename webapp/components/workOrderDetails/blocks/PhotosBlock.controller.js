@@ -62,6 +62,18 @@ sap.ui.define([
 			}
 		},
 
+		captureVideo: function() {
+			navigator.device.capture.captureVideo(
+				function captureSuccess(s) {
+					console.log("Success");
+				},
+				function captureError(e) {
+					console.log("capture error: " + JSON.stringify(e));
+				}, {
+					limit: 1
+				});
+		},
+
 		onDeletePhoto: function(oEvent) {
 			var context = oEvent.getSource().getBindingContext();
 			var message = this.getI18nText("WorkOrderDetails-DeletePhotoMessageText");

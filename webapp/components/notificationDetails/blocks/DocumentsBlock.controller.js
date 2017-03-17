@@ -4,23 +4,7 @@ sap.ui.define([
 ], function(Controller, JSONModel) {
 	"use strict";
 
-	return Controller.extend("com.twobm.mobileworkorder.components.workOrderDetails.blocks.DocumentsBlock", {
-
-		onInit: function() {},
-
-		// formatDateTimeShort: function(oValue) {
-		// 	var dateFormat = sap.ui.core.format.DateFormat.getDateInstance({
-		// 		pattern: "dd/MM/yyyy"
-		// 	});
-
-		// 	if (oValue) {
-		// 		// timezoneOffset is in hours convert to milliseconds  
-		// 		var TZOffsetMs = new Date(0).getTimezoneOffset() * 60 * 1000;
-		// 		return dateFormat.format(new Date(oValue.getTime() + TZOffsetMs)); //05-12-2012  
-		// 	} else {
-		// 		return "";
-		// 	}
-		// },
+	return Controller.extend("com.twobm.mobileworkorder.components.notificationDetails.blocks.DocumentsBlock", {
 
 		downloadAllFiles: function(oEvent) {
 			var downloadButtonAll = oEvent.getSource();
@@ -256,10 +240,10 @@ sap.ui.define([
 					var month = ((date.getMonth() + 1) < 10 ? "0" : "") + (date.getMonth() + 1);
 					var day = (date.getDate() < 10 ? "0" : "") + date.getDate();
 					var hour = (date.getHours() < 10 ? "0" : "") + date.getHours();
-    				var min = (date.getMinutes() < 10 ? "0" : "") + date.getMinutes();
-    				var sec = (date.getSeconds() < 10 ? "0" : "") + date.getSeconds();
-					var dateStr = day + month + date.getFullYear() + "_" +  hour + min + sec;
-					
+					var min = (date.getMinutes() < 10 ? "0" : "") + date.getMinutes();
+					var sec = (date.getSeconds() < 10 ? "0" : "") + date.getSeconds();
+					var dateStr = day + month + date.getFullYear() + "_" + hour + min + sec;
+
 					fileName = "Video_" + userName + "_" + dateStr + "." + fileExtension;
 				}
 			}

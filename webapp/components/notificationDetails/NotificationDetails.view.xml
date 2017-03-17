@@ -69,6 +69,15 @@
 								</ObjectPageSubSection>
 							</subSections>
 						</ObjectPageSection>
+						<ObjectPageSection>
+							<subSections>
+								<ObjectPageSubSection id="notificationDetails-documentsSubSection" title="{i18n>NotificationDetails_DocumentsSubSection}">
+									<blocks>
+										<blocks:DocumentsBlock/>
+									</blocks>
+								</ObjectPageSubSection>
+							</subSections>
+						</ObjectPageSection>
 						<core:ExtensionPoint name="notificationDetailsAdditionalSections"/>
 					</core:ExtensionPoint>
 				</sections>
@@ -79,8 +88,7 @@
 				<core:ExtensionPoint name="itemDetailsFooter">
 					<m:ToolbarSpacer></m:ToolbarSpacer>
 					<m:Button id="editNotificationButton" icon="sap-icon://sap-icon://edit" ariaDescribedBy="genericButtonDescription"
-						press="editNotificationPressed">
-					</m:Button>
+						press="editNotificationPressed"></m:Button>
 				</core:ExtensionPoint>
 			</m:Toolbar>
 		</m:footer>
