@@ -6,22 +6,6 @@ sap.ui.define([
 
 	return Controller.extend("com.twobm.mobileworkorder.components.workOrderDetails.blocks.DocumentsBlock", {
 
-		onInit: function() {},
-
-		// formatDateTimeShort: function(oValue) {
-		// 	var dateFormat = sap.ui.core.format.DateFormat.getDateInstance({
-		// 		pattern: "dd/MM/yyyy"
-		// 	});
-
-		// 	if (oValue) {
-		// 		// timezoneOffset is in hours convert to milliseconds  
-		// 		var TZOffsetMs = new Date(0).getTimezoneOffset() * 60 * 1000;
-		// 		return dateFormat.format(new Date(oValue.getTime() + TZOffsetMs)); //05-12-2012  
-		// 	} else {
-		// 		return "";
-		// 	}
-		// },
-
 		downloadAllFiles: function(oEvent) {
 			var downloadButtonAll = oEvent.getSource();
 			var documentsPath = this.getView().byId("documentsList").getBindingContext().getPath();
@@ -109,7 +93,7 @@ sap.ui.define([
 							}.bind(this),
 							function(error) {
 								alert("Failed to download stream");
-							}.bind(this), ["DocumentsSet"]);
+							}.bind(this));
 					}.bind(this),
 					function(error) {
 						//Stream has probably already been registered for offline handling

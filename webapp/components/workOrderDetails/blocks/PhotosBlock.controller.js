@@ -37,7 +37,6 @@ sap.ui.define([
 							error: function(error) {
 								this.errorCallBackShowInPopUp(error);
 							}.bind(this)
-
 						};
 
 						var dataCreate = {
