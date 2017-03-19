@@ -7,8 +7,8 @@
   "build": {
     "targetFolder": "dist",
     "sourceFolder": "webapp",
-    "buildRequired": true,
-    "lastBuildDateTime": "Tue, 14 Mar 2017 09:17:44 GMT"
+    "buildRequired": false,
+    "lastBuildDateTime": "Sun, 19 Mar 2017 18:25:51 GMT"
   },
   "generation": [
     {
@@ -252,7 +252,7 @@
           "cloudBuild": true
         },
         "capture": {
-          "selected": false,
+          "selected": true,
           "registry": "cordova-plugin-media-capture",
           "localBuild": true,
           "cloudBuild": true
@@ -318,7 +318,7 @@
           "cloudBuild": true
         },
         "statusbar": {
-          "selected": false,
+          "selected": true,
           "registry": "cordova-plugin-statusbar",
           "localBuild": true,
           "cloudBuild": false
@@ -343,13 +343,13 @@
           "cloudBuild": false
         },
         "logger": {
-          "selected": false,
+          "selected": true,
           "registry": "kapsel-plugin-logger",
           "localBuild": true,
           "cloudBuild": false
         },
         "settings": {
-          "selected": false,
+          "selected": true,
           "registry": "kapsel-plugin-settings",
           "localBuild": true,
           "cloudBuild": false
@@ -373,7 +373,7 @@
           "cloudBuild": false
         },
         "barcode": {
-          "selected": false,
+          "selected": true,
           "registry": "kapsel-plugin-barcodescanner",
           "localBuild": true,
           "cloudBuild": true
@@ -452,13 +452,13 @@
           "localBuild": true
         },
         "phonegap-plugin-barcodescanner": {
-          "selected": true,
+          "selected": false,
           "registry": "phonegap-plugin-barcodescanner",
           "localBuild": true,
           "registered": true
         },
         "StatusBar": {
-          "selected": true,
+          "selected": false,
           "registry": "cordova-plugin-statusbar",
           "localBuild": true
         },
