@@ -409,6 +409,14 @@ sap.ui.define([
 		
 		onSearch : function(){
 				this.getRouter().navTo("structureSearch");
+		},
+		
+		formatIndentWidth: function(level)
+		{
+			if (level === undefined)
+				level = 0;
+				
+			return (level * 2) + "em";
 		}
 	});
 });

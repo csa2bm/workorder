@@ -16,18 +16,18 @@ sap.ui.define([
 			router.attachRoutePatternMatched(this.onRouteMatched, this);
 
 			//07032017 - PUSH NOT YET WORKING - OUTCOMMENTED
-			// sap.Push.registerForNotificationTypes(sap.Push.notificationType.badge | sap.Push.notificationType.sound | sap.Push.notificationType
-			// 	.alert,
-			// 	function(message) {
+			sap.Push.registerForNotificationTypes(sap.Push.notificationType.badge | sap.Push.notificationType.sound | sap.Push.notificationType
+				.alert,
+				function(message) {
 
-			// 	}.bind(this),
-			// 	function(message) {
-			// 		var pushregisterFailedText = sap.ui.getCore().getComponent(window.componentId).getModel("i18n").getResourceBundle().getText("SyncManager-PushRegisterFailed");
-			// 		this.showMessage(pushregisterFailedText + ": " + message);
-			// 	}.bind(this),
-			// 	function(message) {
-			// 		this.sync();
-			// 	}.bind(this), "");
+				}.bind(this),
+				function(message) {
+					var pushregisterFailedText = sap.ui.getCore().getComponent(window.componentId).getModel("i18n").getResourceBundle().getText("SyncManager-PushRegisterFailed");
+					this.showMessage(pushregisterFailedText + ": " + message);
+				}.bind(this),
+				function(message) {
+					this.sync(true);
+				}.bind(this), "");
 		},
 
 		saveLastSyncTimeInBrowserCache: function(lastSyncTime) {

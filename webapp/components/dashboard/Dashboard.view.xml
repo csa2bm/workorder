@@ -61,7 +61,7 @@
 						</tileContent>
 					</GenericTile>
 						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="All Work Orders" subheader=""
-						frameType="OneByOne" press="onWorkOrdersFromWorkCenter" visible="false">
+						frameType="OneByOne" press="onWorkOrdersFromWorkCenter">
 						<tileContent>
 							<TileContent footer="">
 								<content>

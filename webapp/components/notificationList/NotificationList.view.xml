@@ -4,7 +4,7 @@
 		<Page showNavButton="true" navButtonPress="onNavigationButtonPress" title="{i18n>NotificationList-Title}">
 			<headerContent>
 				<l:HorizontalLayout>
-					<core:Icon width="3em" height="3em" noTabStop="true" press="handleViewSettingsDialogButtonPressed" src="sap-icon://drop-down-list"/>
+					<Button press="handleViewSettingsDialogButtonPressed" icon="sap-icon://drop-down-list"/>
 				</l:HorizontalLayout>
 			</headerContent>
 			<content>
