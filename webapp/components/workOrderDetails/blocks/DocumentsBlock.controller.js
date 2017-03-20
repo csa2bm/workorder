@@ -82,8 +82,10 @@ sap.ui.define([
 					sap.m.MessageToast.show(this.getI18nText("WorkOrderDetails-DocumentsBlock-DownloadNotPossible"));
 					return;
 				}
+				
+				var streamID = currentObject.Objky + currentObject.Docnumber;
 
-				sap.hybrid.getOfflineStore().registerStreamRequest(currentObject.Objky + currentObject.Docnumber, oEvent.getSource().getBindingContext()
+				sap.hybrid.getOfflineStore().registerStreamRequest(streamID, oEvent.getSource().getBindingContext()
 					.getPath(),
 					function() {
 						downloadButton.setBusy(true);
@@ -93,7 +95,7 @@ sap.ui.define([
 							}.bind(this),
 							function(error) {
 								alert("Failed to download stream");
-							}.bind(this));
+							}.bind(this), [streamID]);
 					}.bind(this),
 					function(error) {
 						//Stream has probably already been registered for offline handling
