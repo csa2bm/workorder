@@ -403,8 +403,15 @@ sap.ui.define([
 				sap.OData.removeHttpClient();
 				sap.hybrid.OData.offlineStore.appOfflineStore.store.clear(function() {
 					sap.hybrid.OData.offlineStore.appOfflineStore.store = null;
-					sap.hybrid.kapsel.doDeleteRegistration();
-					sap.Logon.core.loadStartPage();
+
+					sap.Logon.core.deleteRegistration(
+						function(res) {
+							sap.Logon.core.loadStartPage();
+						},
+						function(errObj) {
+							console.log("doDeleteRegistration() Error");
+							console.log(JSON.stringify(errObj));
+						});
 				});
 			});
 		},

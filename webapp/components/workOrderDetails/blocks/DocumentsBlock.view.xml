@@ -34,7 +34,7 @@
 			<items>
 				<ColumnListItem type="Inactive" press="clickPreviewDocument">
 					<cells>
-						<core:Icon id="documentListImageIcon" class="sapUiSmallMarginEnd" noTabStop="true" size="2em" src="sap-icon://document"/>
+						<core:Icon id="documentListImageIcon" class="sapUiSmallMarginEnd" noTabStop="true" size="2em" src="{parts:[{path:'Mimetype'}],formatter:'.getDocumentIcon'}"/>
 						<core:ExtensionPoint name="workOrderDetailsDocumentsTableCells">
 							<ObjectIdentifier text="{Description}" title="{Filename}"/>
 							<!--<Link text="{Filename}" press="clickPreviewAttachment"/>-->

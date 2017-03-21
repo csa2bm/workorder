@@ -83,17 +83,19 @@ sap.ui.define([
 					return;
 				}
 
-				sap.hybrid.getOfflineStore().registerStreamRequest(currentObject.Objky + currentObject.Docnumber, oEvent.getSource().getBindingContext()
+				var streamID = currentObject.Objky + currentObject.Docnumber;
+
+				sap.hybrid.getOfflineStore().registerStreamRequest(streamID, oEvent.getSource().getBindingContext()
 					.getPath(),
 					function() {
 						downloadButton.setBusy(true);
 						sap.hybrid.getOfflineStore().refresh(function(data) {
 								downloadButton.setBusy(false);
-								this.getView().byId("documentsList").getBinding("items").refresh(true);
+								this.getView().byId("documentsList").getBinding("items").refresh();
 							}.bind(this),
 							function(error) {
 								alert("Failed to download stream");
-							}.bind(this));
+							}.bind(this), [streamID]);
 					}.bind(this),
 					function(error) {
 						//Stream has probably already been registered for offline handling
@@ -240,10 +242,10 @@ sap.ui.define([
 					var month = ((date.getMonth() + 1) < 10 ? "0" : "") + (date.getMonth() + 1);
 					var day = (date.getDate() < 10 ? "0" : "") + date.getDate();
 					var hour = (date.getHours() < 10 ? "0" : "") + date.getHours();
-    				var min = (date.getMinutes() < 10 ? "0" : "") + date.getMinutes();
-    				var sec = (date.getSeconds() < 10 ? "0" : "") + date.getSeconds();
-					var dateStr = day + month + date.getFullYear() + "_" +  hour + min + sec;
-					
+					var min = (date.getMinutes() < 10 ? "0" : "") + date.getMinutes();
+					var sec = (date.getSeconds() < 10 ? "0" : "") + date.getSeconds();
+					var dateStr = day + month + date.getFullYear() + "_" + hour + min + sec;
+
 					fileName = "Video_" + userName + "_" + dateStr + "." + fileExtension;
 				}
 			}
@@ -324,6 +326,15 @@ sap.ui.define([
 			} else {
 				//If online solution never show view button
 				return false;
+			}
+		},
+
+		getDocumentIcon: function(mimetype) {
+			switch (mimetype) {
+				case "video/quicktime":
+					return "sap-icon://attachment-video";
+				default:
+					return "sap-icon://document";
 			}
 		}
 	});
