@@ -1,0 +1,310 @@
+sap.ui.define([
+	"com/twobm/mobileworkorder/util/Controller",
+	"sap/ui/core/routing/History",
+	'sap/m/MessageBox'
+], function(Controller, History, MessageBox) {
+	"use strict";
+
+	return Controller.extend("com.twobm.mobileworkorder.components.workOrderDetailsSummary.WorkOrderDetailsSummary", {
+		onInit: function() {
+			this.getRouter().getRoute("workOrderDetailsSummary").attachMatched(this.onRouteMatched, this);
+
+			//Subscribe to events
+			this.getEventBus().subscribe("BlockNavigation", this.performNavigationForBlocks, this);
+
+			this.createEditModeModel();
+		},
+
+		createEditModeModel: function() {
+			var editModeModel = this.getView().getModel("EditModeModel");
+
+			if (!editModeModel) {
+				editModeModel = new sap.ui.model.json.JSONModel();
+				editModeModel.setDefaultBindingMode(sap.ui.model.BindingMode.OneWay);
+				this.getView().setModel(editModeModel, "EditModeModel");
+			}
+
+			this.clearEditModeModel();
+		},
+
+		clearEditModeModel: function() {
+			var editModeModel = this.getView().getModel("EditModeModel");
+
+			var data = {
+				EditMode: false
+			};
+
+			editModeModel.setData(data);
+		},
+
+		onRouteMatched: function(oEvent) {
+			//Are we navigating to this view??
+			//if not do nothing
+			var oArguments = oEvent.getParameter("arguments");
+			var contextPath = '/' + oArguments.workOrderContext;
+			var givenContext = new sap.ui.model.Context(this.getView().getModel(), contextPath);
+
+			//this.oContext is the current context of the view
+			//this context is the context that was set when the view was shown the last time
+			//therefore the new contextPath can be different from the contextPath/context
+			//that was shown the last time the view was shown
+			if (!this.getView().getBindingContext() || this.getView().getBindingContext().getPath() !== contextPath) {
+				//Reset model to the new context
+				this.ExpandLoaded = false;
+				//this.oContext = givenContext;
+				this.getView().setBindingContext(givenContext);
+				this.getView().bindElement(contextPath);
+
+				if (!this.getView().getBindingContext()) {
+					this.scrollToTop();
+				}
+			}
+		},
+
+		navigateBack: function(oEvent) {
+			var oHistory = History.getInstance();
+			var sPreviousHash = oHistory.getPreviousHash();
+
+			if (sPreviousHash !== undefined) {
+				window.history.go(-1);
+			} else {
+				var oRouter = this.getRouter();
+				oRouter.navTo("workOrderList", true);
+			}
+
+			this.scrollToTop();
+		},
+
+		performNavigationForBlocks: function(a, b, data) {
+
+			if ('operation'.localeCompare(data.block) === 0) {
+				this.getRouter().navTo("operationDetails", {
+					operationContext: data.operationContext
+				}, false);
+			} else if ('equipment'.localeCompare(data.block) === 0) {
+				this.getRouter().navTo("equipmentDetails", {
+					objectContext: data.objectContext
+				}, false);
+			} else if ("measurement".localeCompare(data.block) === 0) {
+				this.getRouter().navTo("measurementPointDetails", {
+					measurementContext: data.measurementContext
+				}, false);
+			}
+		},
+
+		scrollToTop: function() {
+			var generalSection = this.getView().byId("generalSubSection").getId();
+			if (generalSection) {
+				this.getView().byId("ObjectPageLayout").scrollToSection(generalSection, 0, -500);
+			}
+		},
+
+		isInErrorStateWorkOrder: function(errorsArray, orderId) {
+			if ($.inArray(orderId, errorsArray) >= 0) {
+				return true;
+			} else {
+				return false;
+			}
+		},
+
+		openErrorsView: function(oEvent) {
+			var orderId = oEvent.getSource().getBindingContext().getObject().Orderid;
+
+			this.getView().getModel("syncStatusModel").getData().ErrorListContextObject = "Order";
+			this.getView().getModel("syncStatusModel").getData().ErrorListContextID = orderId;
+			this.getView().getModel("syncStatusModel").refresh();
+
+			if (!this._errorsView) {
+
+				var idPrefix = this.getView().createId("errorList");
+				var controller = sap.ui.controller("com.twobm.mobileworkorder.components.offline.ErrorListControl");
+				this._errorsView = sap.ui.xmlfragment(idPrefix,
+					"com.twobm.mobileworkorder.components.offline.fragments.ErrorsListPopover", controller);
+				this._errorsView.setModel(this.getView().getModel());
+				controller.dialog = this._errorsView;
+				controller.idPrefix = idPrefix;
+				this.getView().addDependent(this._errorsView);
+			}
+
+			// delay because addDependent will do a async rerendering and the actionSheet will immediately close without it.
+			// var oButton = oEvent.getSource();
+			// jQuery.sap.delayedCall(0, this, function() {
+			this._errorsView.open();
+		},
+
+		reAssignVisible: function(personelNumber) {
+			if (this.getView().getModel("appInfoModel").getData().Persno === personelNumber)
+				return true;
+
+			return false;
+		},
+
+		onOrderReAssignToUserButtonPressed: function(oEvent) {
+			if (!this._reAssignPopover) {
+				this._reAssignPopover = sap.ui.xmlfragment("ReAssignPopover",
+					"com.twobm.mobileworkorder.components.workOrderDetails.fragments.ReAssignPopover",
+					this);
+
+				this._reAssignPopover.setModel(this.readingModel, "ViewModel");
+
+				//this._oPopover.attachAfterOpen(this.resizePopup);
+
+				this._reAssignPopover.attachBeforeClose(function() {
+					//Just make sure that the control minimized
+					//sap.ui.getCore().byId("popupImageControl").setWidth(null);
+				});
+
+				this.getView().addDependent(this._reAssignPopover);
+			}
+
+			this._reAssignPopover.open();
+		},
+
+		onReAssignOKButtonPressed: function() {
+			var list = sap.ui.core.Fragment.byId("ReAssignPopover", "reAssignEmployeeList");
+
+			if (list.getSelectedContextPaths().length < 1) {
+				MessageBox.show(
+					this.getI18nText("WorkOrderDetails-ReassignOrderSelectAUser"), {
+						icon: MessageBox.Icon.INFORMATION,
+						title: this.getI18nText("WorkOrderDetails-ReassignOrderSelectAUserHeader"),
+						actions: [MessageBox.Action.OK]
+					}
+				);
+				return;
+			}
+
+			var pernr = this.getView().getModel().getData(list.getSelectedContextPaths()[0]).Persno;
+
+			this.assignOrderToPersonelNumber(pernr);
+
+			this._reAssignPopover.close();
+		},
+
+		closeReAssignPopover: function() {
+			this._reAssignPopover.close();
+		},
+
+		onOrderReAssignToMePressed: function() {
+			sap.m.MessageBox.show(this.getI18nText("WorkOrderDetails-ReassignOrderAssignToMePopupMessage"), {
+				icon: sap.m.MessageBox.Icon.None,
+				title: this.getI18nText("WorkOrderDetails-ReassignOrderPopupTitle"),
+				actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+				defaultAction: sap.m.MessageBox.Action.NO,
+				onClose: function(oAction, object) {
+					if (oAction === sap.m.MessageBox.Action.YES) {
+						this.assignOrderToPersonelNumber(this.getView().getModel("appInfoModel").getData().Persno);
+					} else {
+						return;
+					}
+				}.bind(this)
+			});
+		},
+
+		onOrderReAssignUnassignPressed: function() {
+			sap.m.MessageBox.show(this.getI18nText("WorkOrderDetails-ReassignOrderUnassignPopupMessage"), {
+				icon: sap.m.MessageBox.Icon.None,
+				title: this.getI18nText("WorkOrderDetails-ReassignOrderPopupTitle"),
+				actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+				defaultAction: sap.m.MessageBox.Action.NO,
+				onClose: function(oAction, object) {
+					if (oAction === sap.m.MessageBox.Action.YES) {
+						this.assignOrderToPersonelNumber("");
+					} else {
+						return;
+					}
+				}.bind(this)
+			});
+		},
+
+		assignOrderToPersonelNumber: function(personelNumber) {
+			this.getView().setBusy(true);
+			this.getView().getModel().update(this.getView().getBindingContext().getPath(), {
+				Personresp: personelNumber
+			}, {
+				success: function(oData, response) {
+					this.navigateBack();
+					this.getView().setBusy(false);
+				}.bind(this),
+				error: function(oError) {
+					this.errorCallBackShowInPopUp(oError);
+					this.getView().setBusy(false);
+				}.bind(this)
+			});
+		},
+
+		onOrderReAssignButtonPressed: function(oEvent) {
+			var oButton = oEvent.getSource();
+
+			// create action sheet only once
+			if (!this._actionSheet) {
+				this._actionSheet = sap.ui.xmlfragment(
+					"com.twobm.mobileworkorder.components.workOrderDetails.fragments.ReAssignActionSheet",
+					this
+				);
+				this.getView().addDependent(this._actionSheet);
+			}
+
+			this._actionSheet.openBy(oButton);
+		},
+
+		allowAssignToMe: function(personelNumber) {
+			if (this.getView().getModel("appInfoModel").getData().Persno === personelNumber)
+				return false;
+
+			return true;
+		},
+
+		allowUnassign: function(personelNumber) {
+			if (this.getView().getModel("appInfoModel").getData().Persno === personelNumber)
+				return true;
+
+			return false;
+		},
+
+		searchEmployeePress: function(oEvent) {
+			var sValue = oEvent.getParameter("query");
+			var searchString = sValue.toLowerCase();
+
+			this.searchEmployee(searchString);
+		},
+
+		searchEmployeeLive: function(oEvent) {
+			var sValue = oEvent.getParameter("newValue");
+			var searchString = sValue.toLowerCase();
+
+			this.searchEmployee(searchString);
+		},
+
+		searchEmployee: function(sValue) {
+			var aFilters = [];
+			var searchString = sValue.toLowerCase();
+
+			aFilters.push(new sap.ui.model.Filter("Searchstring", sap.ui.model.FilterOperator.Contains, searchString));
+
+			// update list binding
+			var list = sap.ui.core.Fragment.byId("ReAssignPopover", "reAssignEmployeeList");
+			var itemsBinding = list.getBinding("items");
+
+			if (itemsBinding) {
+				itemsBinding.aApplicationFilters = [];
+
+				if (aFilters.length > 0) {
+
+					var filter = new sap.ui.model.Filter({
+						filters: aFilters,
+						and: true
+					});
+
+					itemsBinding.filter(filter);
+				} else {
+					itemsBinding.filter(aFilters);
+				}
+			}
+		}
+
+	
+
+	
+	});
+});

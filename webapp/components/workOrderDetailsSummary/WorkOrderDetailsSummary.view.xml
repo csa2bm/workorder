@@ -1,0 +1,59 @@
+<mvc:View controllerName="com.twobm.mobileworkorder.components.workOrderDetailsSummary.WorkOrderDetailsSummary" xmlns:core="sap.ui.core" xmlns="sap.uxap"
+	xmlns:l="sap.ui.layout" xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:blocks="com.twobm.mobileworkorder.components.workOrderDetailsSummary.blocks.configuration" height="100%">
+	<m:Page showNavButton="true" navButtonPress="navigateBack" title="{i18n>WorkOrderDetails-Title}">
+		<m:headerContent>
+			<l:HorizontalLayout>
+				<core:Icon width="3em" height="3em" color="red" noTabStop="true" press="openErrorsView" src="sap-icon://circle-task-2"
+					visible="{parts:[{path:'syncStatusModel>/OrderErrors'},{path:'Orderid'}],formatter:'.isInErrorStateWorkOrder'}"/>
+			</l:HorizontalLayout>
+		</m:headerContent>
+		<m:content>
+			<ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="false">
+				<headerTitle>
+					<ObjectPageHeader objectTitle="{path:'ShortText'}" objectSubtitle="{path:'Orderid'}"></ObjectPageHeader>
+				</headerTitle>
+				<sections>
+					<core:ExtensionPoint name="workOrderDetailsSections">
+						<ObjectPageSection>
+							<subSections>
+								<ObjectPageSubSection id="generalSubSection" title="{i18n>WorkOrderDetails-GeneralSubSection}">
+									<blocks>
+										<blocks:GeneralBlock/>
+									</blocks>
+								</ObjectPageSubSection>
+							</subSections>
+						</ObjectPageSection>
+						<ObjectPageSection>
+							<subSections>
+								<ObjectPageSubSection id="notesSubSection" title="{i18n>WorkOrderDetails-NotesSubSection}">
+									<blocks>
+										<blocks:NotesBlock/>
+									</blocks>
+								</ObjectPageSubSection>
+							</subSections>
+						</ObjectPageSection>
+						<ObjectPageSection>
+							<subSections>
+								<ObjectPageSubSection id="operationsSubSection" title="{i18n>WorkOrderDetails-OperationsSubSection}">
+									<blocks>
+										<blocks:OperationsBlock/>
+									</blocks>
+								</ObjectPageSubSection>
+							</subSections>
+						</ObjectPageSection>
+						<core:ExtensionPoint name="workOrderDetailsAdditionalSections"/>
+					</core:ExtensionPoint>
+				</sections>
+			</ObjectPageLayout>
+		</m:content>
+		<m:footer>
+			<m:Toolbar>
+				<core:ExtensionPoint name="workOrderDetailsFooter">
+					<m:ToolbarSpacer></m:ToolbarSpacer>
+					<m:Button id="orderReAssignButton" text="{i18n>WorkOrderDetails-ReassignOrderButtonText}" press="onOrderReAssignButtonPressed" icon="sap-icon://action" visible="{parts:[{path: 'Personresp'}],formatter:'.reAssignVisible'}" />
+				</core:ExtensionPoint>
+			</m:Toolbar>
+		</m:footer>
+	</m:Page>
+</mvc:View>

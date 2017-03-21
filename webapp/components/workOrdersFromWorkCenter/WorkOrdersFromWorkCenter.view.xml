@@ -11,8 +11,8 @@
 					<contentMiddle>
 				<SegmentedButton selectedKey="kids" class="veryTinyMarginTop" width="20em">
 					<items>
-						<SegmentedButtonItem text="My Work Orders"/>
-						<SegmentedButtonItem text="Other"/>
+						<SegmentedButtonItem text="Mine"/>
+						<SegmentedButtonItem text="All"/>
 					</items>
 				</SegmentedButton>
 				</contentMiddle>

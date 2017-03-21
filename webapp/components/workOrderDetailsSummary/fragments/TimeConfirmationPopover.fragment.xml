@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="{path:'/type', formatter:'.getPopOverTitle' }" class="sapUiPopupWithPadding" stretch="{device>/isPhone}" showHeader="true">
+		<buttons>
+			<Button type="Emphasized" text="{i18n>WorkOrderDetails-TimeConfirmationPopover-SaveButton}" press="postTimeRegistration"></Button>
+			<Button text="{i18n>WorkOrderDetails-TimeConfirmationPopover-CloseButton}" press="closeAddTimeRegistrationPopover"/>
+		</buttons>
+		<content>
+			<VBox>
+				<Label text="{i18n>WorkOrderDetails-TimeConfirmationPopover-Time}" design="Bold"/>
+				<Input id="WorkTimeConfirmationField" type="Text" placeholder="{i18n>WorkOrderDetails-TimeConfirmationPopover-TimeTextPlaceHolder}"
+					value="{path:'/ActWork' , type:'.typeTimeFormat'}" valueStateText="{i18n>WorkOrderDetails-TimeConfirmationPopover-TimeInputValidationError}"/>
+				<Label text="{i18n>WorkOrderDetails-TimeConfirmationPopover-Date}" design="Bold"/>
+				<DatePicker dateValue="{/Startdatetime}" maxDate="{path:'/', formatter:'.getTodaysDaysDate' }" ></DatePicker>
+				<Label />
+				<Button icon="sap-icon://delete" type="Reject" text="{i18n>WorkOrderDetails-TimeConfirmationPopover-DeleteButton}"
+					press="deleteTimeRegistration" visible="{path:'/type', formatter:'.isDeleteable' }"></Button>
+			</VBox>
+		</content>
+	</Dialog>
+</core:FragmentDefinition>
