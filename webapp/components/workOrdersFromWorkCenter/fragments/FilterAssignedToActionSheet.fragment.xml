@@ -4,7 +4,7 @@
 	<ActionSheet
 		title="Choose Your Action"
 		showCancelButton="true"
-		placement="Bottom">
+		placement="Top">
 		<buttons>
 			<Button text="All" icon="sap-icon://group" press="onOrderReAssignToUserButtonPressed" />
 			<Button text="Only unassigned" icon="sap-icon://question-mark" press="onOrderReAssignToMePressed" />

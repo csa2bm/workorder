@@ -11,7 +11,7 @@
 				<content>
 					<List id="workOrderTableId" items="{path: 'viewModel>/items'}" noDataText="{i18n>StructureBrowser-NoStructures}"
 						class="workOrderListTableClass">
-					<CustomListItem type="Active" press="onPressItem">
+					<CustomListItem type="Active" press="onPressItem" busy="{viewModel>busy}">
 						<HBox width="100%" class="sapUiTinyMarginTop sapUiTinyMarginBottom sapUiTinyMarginBegin sapUiSmallMarginEnd">
 									<HBox width="{parts:[{path:'viewModel>level'}],formatter:'.formatIndentWidth'}"></HBox>
 			
