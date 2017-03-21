@@ -37,7 +37,6 @@ sap.ui.define([
 							error: function(error) {
 								this.errorCallBackShowInPopUp(error);
 							}.bind(this)
-
 						};
 
 						var dataCreate = {
@@ -60,6 +59,18 @@ sap.ui.define([
 			} else {
 				sap.m.MessageToast.show(this.getI18nText("WorkOrderDetails-CameraNotAvailable"));
 			}
+		},
+
+		captureVideo: function() {
+			navigator.device.capture.captureVideo(
+				function captureSuccess(s) {
+					console.log("Success");
+				},
+				function captureError(e) {
+					console.log("capture error: " + JSON.stringify(e));
+				}, {
+					limit: 1
+				});
 		},
 
 		onDeletePhoto: function(oEvent) {

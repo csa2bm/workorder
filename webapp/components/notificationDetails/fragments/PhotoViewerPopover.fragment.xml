@@ -2,11 +2,11 @@
 	<Dialog class="sapUiPopupWithPadding" stretch="{device>/isPhone}" showHeader="true"
 		title="{i18n>NotificationDetails-AttachmentPopover-Title}">
 		<beginButton>
-			<Button icon="sap-icon://delete" type="Reject" text="{i18n>NotificationDetails-AttachmentPopover-DeleteButton}" press="onDeleteFile"
-				visible="{parts:[{path:'ImageModel>/AttachmentID'}],formatter:'.attachmentPopUpShowDeleteButton'}"></Button>
+			<Button icon="sap-icon://delete" type="Reject" text="{i18n>NotificationDetails-AttachmentPopover-DeleteButton}" press="onDeletePhoto"
+				visible="{parts:[{path:'ImageModel>/AttachmentID'}],formatter:'.photoPopUpShowDeleteButton'}"></Button>
 		</beginButton>
 		<endButton>
-			<Button text="{i18n>NotificationDetails-AttachmentPopover-CloseButton}" press="closeAttachmentPopupButton"/>
+			<Button text="{i18n>NotificationDetails-AttachmentPopover-CloseButton}" press="closePhotoPopupButton"/>
 		</endButton>
 		<buttons></buttons>
 		<content>

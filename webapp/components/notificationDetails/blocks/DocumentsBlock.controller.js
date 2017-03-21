@@ -4,7 +4,7 @@ sap.ui.define([
 ], function(Controller, JSONModel) {
 	"use strict";
 
-	return Controller.extend("com.twobm.mobileworkorder.components.workOrderDetails.blocks.DocumentsBlock", {
+	return Controller.extend("com.twobm.mobileworkorder.components.notificationDetails.blocks.DocumentsBlock", {
 
 		downloadAllFiles: function(oEvent) {
 			var downloadButtonAll = oEvent.getSource();
@@ -93,7 +93,7 @@ sap.ui.define([
 							}.bind(this),
 							function(error) {
 								alert("Failed to download stream");
-							}.bind(this));
+							}.bind(this), ["DocumentsSet"]);
 					}.bind(this),
 					function(error) {
 						//Stream has probably already been registered for offline handling
@@ -240,10 +240,10 @@ sap.ui.define([
 					var month = ((date.getMonth() + 1) < 10 ? "0" : "") + (date.getMonth() + 1);
 					var day = (date.getDate() < 10 ? "0" : "") + date.getDate();
 					var hour = (date.getHours() < 10 ? "0" : "") + date.getHours();
-    				var min = (date.getMinutes() < 10 ? "0" : "") + date.getMinutes();
-    				var sec = (date.getSeconds() < 10 ? "0" : "") + date.getSeconds();
-					var dateStr = day + month + date.getFullYear() + "_" +  hour + min + sec;
-					
+					var min = (date.getMinutes() < 10 ? "0" : "") + date.getMinutes();
+					var sec = (date.getSeconds() < 10 ? "0" : "") + date.getSeconds();
+					var dateStr = day + month + date.getFullYear() + "_" + hour + min + sec;
+
 					fileName = "Video_" + userName + "_" + dateStr + "." + fileExtension;
 				}
 			}
