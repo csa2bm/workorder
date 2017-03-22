@@ -15,8 +15,10 @@
 					</HBox>
 					<Label text="{i18n>WorkOrderDetails-GeneralBlock-AssignedTo}"/>
 					<Text text="{AssignedTo}\r\n({Personresp})"/>
+					<Label text="{i18n>WorkOrderDetails-GeneralBlock-AssignedBy}"/>
+					<Text text="{AssignedBy}"/>
 					<Label text="{i18n>WorkOrderDetails-GeneralBlock-Type}"/>
-					<Text text="{OrderType}"/>
+					<Text text="{OrderTypeTxt}"/>
 					<Label text="{i18n>WorkOrderDetails-GeneralBlock-Priority}"/>
 					<Text text="{Priority} "/>
 					<Label text="{i18n>WorkOrderDetails-GeneralBlock-Start}"/>
