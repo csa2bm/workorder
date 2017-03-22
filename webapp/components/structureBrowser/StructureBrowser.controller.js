@@ -7,14 +7,15 @@ sap.ui.define([
 
 	return Controller.extend("com.twobm.mobileworkorder.components.structureBrowser.StructureBrowser", {
 
+		 
+
 		/**
 		 * Called when a controller is instantiated and its View controls (if available) are already created.
 		 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
 		 * @memberOf com.twobm.mobileworkorder.components.structureBrowser.view.structureBrowser
 		 */
 		onInit: function() {
-			// Create demo data
-			this.createDemoData();
+			
 
 			this.getView().setModel(new JSONModel({
 				parentView: ""
@@ -34,236 +35,204 @@ sap.ui.define([
 				model.setProperty("/parentView", "");
 			}
 			model.refresh();
-			/*
-						var oHistory = History.getInstance();
-						var sPreviousHash = oHistory.getPreviousHash();
-
-						var str = "notifi"; //strutureBrowser
-
-						if (sPreviousHash !== undefined) {
-							if (sPreviousHash.substring(0, str.length) === str) {
-								oHistory.aHistory.pop();
-							}
-							else {
-								for (var i = 0; i < oHistory.aHistory.length; i++) {
-									var strStructure = "struct";
-
-									if (oHistory.aHistory[i].substring(0, strStructure.length) === strStructure) {
-										oHistory.aHistory.splice(i, 1);
-									}
-									else if(oHistory.aHistory[i].substring(0, str.length) === str){
-										oHistory.aHistory.splice(i, 1);
-									}
-								}
-							}
-						}*/
-		},
-
-		createDemoData: function() {
-			this.data = {
-				FunctionalLocations: [{
-					name: "2BM--LIV",
-					description: "Livjægergade",
-					id: 1,
-					parentId: "",
-					leaf: false,
-					type: "FUNCTIONAL_LOCATION"
-				}, {
-					name: "2BM--LIV-CA",
-					description: "Livjægergade - Cars",
-					id: 2,
-					parentId: 1,
-					leaf: false,
-					type: "FUNCTIONAL_LOCATION"
-				}, {
-					name: "DK",
-					description: "Denmark",
-					id: 3,
-					parentId: "",
-					leaf: false,
-					type: "FUNCTIONAL_LOCATION"
-				}, {
-					name: "DK-BU",
-					description: "Business Unit",
-					id: 5,
-					parentId: 3,
-					leaf: false,
-					type: "FUNCTIONAL_LOCATION"
-				}, {
-					name: "DK-BU-ST",
-					description: "Stations",
-					id: 6,
-					parentId: 5,
-					leaf: false,
-					type: "FUNCTIONAL_LOCATION"
-				}, {
-					name: "DK-BU-ST-S1",
-					description: "Station 1",
-					id: 10,
-					parentId: 6,
-					leaf: false,
-					type: "FUNCTIONAL_LOCATION"
-				}, {
-					name: "DK-BU-ST-S2",
-					description: "Station 2",
-					id: 11,
-					parentId: 6,
-					leaf: false,
-					type: "FUNCTIONAL_LOCATION"
-				}, {
-					name: "DK-BU-ST-S3",
-					description: "Station 3",
-					id: 12,
-					parentId: 6,
-					leaf: false,
-					type: "FUNCTIONAL_LOCATION"
-				}, {
-					name: "DK-BU-ST-S4",
-					description: "Station 4",
-					id: 13,
-					parentId: 6,
-					leaf: true,
-					type: "FUNCTIONAL_LOCATION"
-				}, {
-					name: "DK-BU-ST-S5",
-					description: "Station 5",
-					id: 14,
-					parentId: 6,
-					leaf: true,
-					type: "FUNCTIONAL_LOCATION"
-				}],
-				Equipment: [{
-					name: "10000000",
-					description: "VW Golf 1.6 diesel",
-					id: 7,
-					parentFunctionalLocationId: 2,
-					parentFunctionalLocationName: "2BM--LIV-CA",
-					parentFunctionalLocationdescription: "Livjægergade - Cars",
-					leaf: false,
-					type: "EQUIPMENT"
-				}, {
-					name: "10000001",
-					description: "1.6 R4 16v TDI CR 55-85kW (engine)",
-					id: 8,
-					parentFunctionalLocationId: 2,
-					parentFunctionalLocationName: "2BM--LIV-CA",
-					parentFunctionalLocationdescription: "Livjægergade - Cars",
-					parentEquipmentId: 7,
-					leaf: true,
-					type: "EQUIPMENT"
-				}, {
-					name: "10000002",
-					description: "TomTom GPS",
-					id: 9,
-					parentFunctionalLocationId: 7,
-					parentFunctionalLocationName: "2BM--LIV-CA",
-					parentFunctionalLocationdescription: "Livjægergade - Cars",
-					parentEquipmentId: 7,
-					leaf: true,
-					type: "EQUIPMENT"
-				}, {
-					name: "10000003",
-					description: "Machine A",
-					id: 15,
-					parentFunctionalLocationId: 10,
-					parentFunctionalLocationName: "DK-BU-ST-S1",
-					parentFunctionalLocationdescription: "Station 1",
-					leaf: true,
-					type: "EQUIPMENT"
-				}, {
-					name: "10000004",
-					description: "Machine B",
-					id: 15,
-					parentFunctionalLocationId: 10,
-					parentFunctionalLocationName: "DK-BU-ST-S1",
-					parentFunctionalLocationdescription: "Station 1",
-					leaf: true,
-					type: "EQUIPMENT"
-				}, {
-					name: "10000005",
-					description: "Machine C",
-					id: 15,
-					parentFunctionalLocationId: 11,
-					parentFunctionalLocationName: "DK-BU-ST-S2",
-					parentFunctionalLocationdescription: "Station 2",
-					leaf: true,
-					type: "EQUIPMENT"
-				}, {
-					name: "10000006",
-					description: "Machine D",
-					id: 15,
-					parentFunctionalLocationId: 12,
-					parentFunctionalLocationName: "DK-BU-ST-S3",
-					parentFunctionalLocationdescription: "Station 3",
-					leaf: true,
-					type: "EQUIPMENT"
-				}]
-			};
-
-			this.structureData = new JSONModel(this.data);
-
-			this.viewModel = this.data.FunctionalLocations.filter(function(fl) {
-				return fl.parentId === "";
-			});
-
+			
+			this.viewModel = [];
+			
 			this.getView().setModel(new JSONModel({
 				items: this.viewModel
 			}), "viewModel");
+					
+			this.getFunctionalLocationswithoutParewnt();
 		},
+
+	
 
 		onPressItem: function(oEvent) {
 			var bindingContext = oEvent.getSource().getBindingContextPath();
 			var item = this.getView().getModel("viewModel").getProperty(bindingContext);
 
 			if (!item.expanded && !item.leaf) {
-				var children = [];
-
-				if (item.type === "FUNCTIONAL_LOCATION") {
-					children = children.concat(this.getFunctionalLocationsByParent(item.id));
-					children = children.concat(this.getEquipmentByParentFunctionalLocation(item.id));
-				} else {
-					children = children.concat(this.getEquipmentByParentEquipment(item.id));
-				}
-
-				var itemIndex = this.viewModel.findIndex(function(currentItem) {
-					return currentItem.id === item.id;
-				});
+				item.expanded = true;
 
 				if (item.parentId === "") {
 					item.level = 0;
 				}
 
-				for (var i = 0; i < children.length; i++) {
-					children[i].level = item.level + 1;
-					this.viewModel.splice(itemIndex + 1, 0, children[i]);
+				//	var children = [];
+
+				if (item.type === "FUNCTIONAL_LOCATION") {
+					this.getFunctionalLocationsByParent(item);
+					//children = children.concat(this.getFunctionalLocationsByParent(item.id));
+					//children = children.concat(this.getEquipmentByParentFunctionalLocation(item.id));
+				} else {
+					//	children = children.concat(this.getEquipmentByParentEquipment(item.id));
+					this.getEquipmentByParentEquipment(item);
 				}
 
-				item.expanded = true;
 			} else {
 				this.closeItem(item);
 			}
 
-			this.getView().getModel("viewModel").refresh();
 		},
 
-		getFunctionalLocationsByParent: function(parentId) {
-			// Get functional locations that are decendants of functional location
-			return this.data.FunctionalLocations.filter(function(fl) {
-				return fl.parentId === parentId;
+	getFunctionalLocationswithoutParewnt: function() {
+			this.getView().setBusy(true);
+			var filters = new Array();
+			var filterByName = new sap.ui.model.Filter("ParentFuncLoc", sap.ui.model.FilterOperator.EQ, "");
+			filters.push(filterByName);
+			var url = "/FunctionalLocationsSet";
+			this.getView().getModel().read(url, {
+				filters: filters,
+				success: function(result) {
+					var results = result.results;
+					var children = [];
+
+					for (var i = 0; i < results.length; i++) {
+						var currentResult = results[i];
+
+						children[children.length] = {
+							name: currentResult.FunctionalLocation,
+							description: currentResult.Description,
+							id: currentResult.FunctionalLocation,
+							parentId: currentResult.ParentFuncLoc,
+							leaf: currentResult.Isleaf,
+							type: "FUNCTIONAL_LOCATION",
+							level: 0
+						};
+
+						this.viewModel.splice(i, 0, children[i]);
+					}
+					
+			
+					
+					this.getView().getModel("viewModel").refresh();
+					this.getView().setBusy(false);
+				}.bind(this),
+				error: function(error) {
+					this.getView().setBusy(false);
+				}
 			});
 		},
 
-		getEquipmentByParentFunctionalLocation: function(parentId) {
-			// Get equipment that are direct decendants of functional location (has no equipment id)
-			return this.data.Equipment.filter(function(eq) {
-				return eq.parentFunctionalLocationId === parentId && !eq.parentEquipmentId;
+		getFunctionalLocationsByParent: function(item) {
+			var itemIndex = this.viewModel.findIndex(function(currentItem) {
+				return currentItem.id === item.id;
+			});
+
+			var filters = new Array();
+			var filterByName = new sap.ui.model.Filter("ParentFuncLoc", sap.ui.model.FilterOperator.EQ, item.id);
+			filters.push(filterByName);
+			var url = "/FunctionalLocationsSet";
+			item.busy = true;
+			this.getView().getModel().read(url, {
+				filters: filters,
+				success: function(result) {
+					var results = result.results;
+					var children = [];
+
+					for (var i = 0; i < results.length; i++) {
+						var currentResult = results[i];
+
+						children[children.length] = {
+							name: currentResult.FunctionalLocation,
+							description: currentResult.Description,
+							id: currentResult.FunctionalLocation,
+							parentId: currentResult.ParentFuncLoc,
+							leaf: currentResult.Isleaf,
+							type: "FUNCTIONAL_LOCATION",
+							level: item.level + 1
+						};
+
+						this.viewModel.splice(itemIndex + 1 + i, 0, children[i]);
+					}
+					
+					this.getEquipmentByParentFunctionalLocation(item);
+				}.bind(this),
+				error: function(error) {
+					item.busy = false;
+				}
 			});
 		},
 
-		getEquipmentByParentEquipment: function(parentId) {
-			// Get equipment that are decendants of equipment
-			return this.data.Equipment.filter(function(fl) {
-				return fl.parentEquipmentId === parentId;
+		getEquipmentByParentFunctionalLocation: function(item) {
+		var itemIndex = this.viewModel.findIndex(function(currentItem) {
+				return currentItem.id === item.id;
+			});
+
+			var filters = new Array();
+			var filterByFLParent = new sap.ui.model.Filter("Funcloc", sap.ui.model.FilterOperator.EQ, item.id);
+			filters.push(filterByFLParent);
+			var filterByNoEQUParent = new sap.ui.model.Filter("ParentEquipment", sap.ui.model.FilterOperator.EQ, "");
+			filters.push(filterByNoEQUParent);
+			var url = "/EquipmentsSet";
+			this.getView().getModel().read(url, {
+				filters: filters,
+				success: function(result) {
+					var results = result.results;
+					var children = [];
+
+					for (var i = 0; i < results.length; i++) {
+						var currentResult = results[i];
+
+						children[children.length] = {
+							name: currentResult.Equipment,
+							description: currentResult.Description,
+							id: currentResult.Equipment,
+							parentId: currentResult.Funcloc,
+							leaf: currentResult.Isleaf,
+							type: "EQUIPMENT",
+							level: item.level + 1
+						};
+
+						this.viewModel.splice(itemIndex + 1 + i, 0, children[i]);
+					}
+					
+					item.busy = false;
+					this.getView().getModel("viewModel").refresh();
+				}.bind(this),
+				error: function(error) {
+					item.busy = false;
+				}
+			});
+		},
+
+		getEquipmentByParentEquipment: function(item) {
+			var itemIndex = this.viewModel.findIndex(function(currentItem) {
+				return currentItem.id === item.id;
+			});
+
+			var filters = new Array();
+			var filterByEQParent = new sap.ui.model.Filter("ParentEquipment", sap.ui.model.FilterOperator.EQ, item.id);
+			filters.push(filterByEQParent);
+			var url = "/EquipmentsSet";
+			this.getView().getModel().read(url, {
+				filters: filters,
+				success: function(result) {
+					var results = result.results;
+					var children = [];
+
+					for (var i = 0; i < results.length; i++) {
+						var currentResult = results[i];
+
+						children[children.length] = {
+							name: currentResult.Equipment,
+							description: currentResult.Description,
+							id: currentResult.Equipment,
+							parentId: currentResult.Funcloc,
+							leaf: currentResult.Isleaf,
+							type: "EQUIPMENT",
+							level: item.level + 1
+						};
+
+						this.viewModel.splice(itemIndex + 1 + i, 0, children[i]);
+					}
+					
+					item.busy = false;
+					this.getView().getModel("viewModel").refresh();
+				}.bind(this),
+				error: function(error) {
+					item.busy = false;
+				}
 			});
 		},
 
@@ -283,6 +252,8 @@ sap.ui.define([
 				this.viewModel.splice(itemIndex, 1);
 				item.expanded = false;
 			}
+
+			this.getView().getModel("viewModel").refresh();
 		},
 
 		isLeaf: function(isLeaf, expanded) {
@@ -406,9 +377,16 @@ sap.ui.define([
 				return false;
 			}
 		},
-		
-		onSearch : function(){
-				this.getRouter().navTo("structureSearch");
+
+		onSearch: function() {
+			this.getRouter().navTo("structureSearch");
+		},
+
+		formatIndentWidth: function(level) {
+			if (level === undefined)
+				level = 0;
+
+			return (level * 2) + "em";
 		}
 	});
 });

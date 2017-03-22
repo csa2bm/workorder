@@ -46,3 +46,7 @@
 	width:22.5rem !important;
 	outline: 0 !important;
 }
+
+.veryTinyMarginTop {
+	margin-top: 0.3rem !important;
+}

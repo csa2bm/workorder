@@ -34,7 +34,7 @@ sap.ui.define([
 
 		onWorkOrderItemPress: function(oEvent) {
 			var oBindingContext = oEvent.getSource().getBindingContext();
-			this.getRouter().navTo("workOrderDetails", {
+			this.getRouter().navTo("workOrderDetailsSummary", {
 				workOrderContext: oBindingContext.getPath().substr(1)
 			});
 		},
